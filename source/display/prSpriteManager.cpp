@@ -1,0 +1,542 @@
+/**
+ * prSpriteManager.cpp
+ * Copyright Paul Michael McNab. All rights reserved.
+ */
+
+
+#include "../prConfig.h"
+
+
+// ----------------------------------------------------------------------------
+// Platform specifics
+// ----------------------------------------------------------------------------
+#if defined(PLATFORM_PC)
+  #include <Windows.h>
+  #include <gl/gl.h>
+  #include <gl/glu.h>
+
+#elif defined(PLATFORM_IOS)
+  #include <OpenGLES/ES1/gl.h>
+  #include <string.h>
+
+#elif defined(PLATFORM_BADA)
+  #include <string.h>
+  #include <FGraphicsOpengl.h>
+  using namespace Osp::Graphics::Opengl;
+
+#elif defined(PLATFORM_ANDROID)
+  #include <GLES/gl.h>
+  #include <string.h>
+
+#else
+  #error No platform defined.
+
+#endif
+
+
+#include "prSpriteManager.h"
+#include "prSprite.h"
+#include "prSpriteAnimation.h"
+#include "prSpriteAnimationSequence.h"
+#include "prOglUtils.h"
+#include "../core/prCore.h"
+#include "../core/prMacros.h"
+#include "../core/prResourceManager.h"
+#include "../core/prStringUtil.h"
+#include "../debug/prAssert.h"
+#include "../debug/prDebug.h"
+#include "../debug/prTrace.h"
+#include "../display/prRenderer.h"
+#include "../display/prTexture.h"
+#include "../tinyxml/tinyxml.h"
+
+
+/// ---------------------------------------------------------------------------
+/// Constructs the background manager.
+/// ---------------------------------------------------------------------------
+prSpriteManager::prSpriteManager() : prCoreSystem(PRSYSTEM_SPRITEMANAGER, "prSpriteManager")
+{
+    m_correctFileType = false;
+    m_sprite          = NULL;
+    m_texture         = NULL;
+    m_exp0            = false;
+    m_exp1            = false;
+    m_exp2            = false;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Dtor
+/// ---------------------------------------------------------------------------
+prSpriteManager::~prSpriteManager()
+{
+    ReleaseAll();
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Updates all the active sprites.
+/// ---------------------------------------------------------------------------
+void prSpriteManager::Update(f32 dt)
+{
+    if (!m_activeSprites.empty())
+    {
+        std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
+        std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+
+        for (; it != end; ++it)
+        {
+            (*it).sprite->Update(dt);
+        }
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Draws all the visible sprites.
+/// ---------------------------------------------------------------------------
+void prSpriteManager::Draw()
+{
+    if (!m_activeSprites.empty())
+    {
+        std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
+        std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+
+        for (; it != end; ++it)
+        {
+            // Shall we draw?
+            if ((*it).draw)
+            {
+                (*it).sprite->Draw();
+            }
+        }
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Creates a sprites.
+/// ---------------------------------------------------------------------------
+prSprite *prSpriteManager::Create(const char *filename, bool draw)
+{
+    PRASSERT(filename && *filename);
+
+    // Create sprite.
+    m_sprite          = NULL;
+    m_texture         = NULL;
+    m_correctFileType = false;
+
+
+    Load(filename);
+
+
+    if (m_sprite && m_texture)
+    {
+        // Store
+        //if (imp.activeSprites.size() > 0)
+        {
+            prActiveSprite as;
+            as.sprite  = m_sprite;
+            as.texture = m_texture;
+            as.draw    = draw;
+
+            // Insert sprite according to priority.
+            std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
+            std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+            bool inserted = false;
+
+            for (; it != end; ++it)
+            {
+                TODO("Fix")
+                //if ((*it).sprite->GetPriority() >= 0)
+                {
+                    m_activeSprites.insert(it, as);
+                    inserted = true;
+                    break;
+                }
+            }
+
+            // Else add last
+            if (!inserted)
+            {
+                m_activeSprites.push_back(as);
+            }
+        }
+        /*else
+        {
+            prActiveSprite as;
+            as.sprite  = imp.sprite;
+            as.texture = imp.texture;
+            as.draw    = draw;
+            imp.activeSprites.push_back(as);
+        }//*/
+    }
+    else
+    {
+        PRSAFE_DELETE(m_sprite);
+    }
+
+    return m_sprite;
+}
+
+
+//#if defined(PROTEUS_TOOL)
+#if defined(PROTEUS_TOOL) || defined(PLATFORM_PC)
+/// ---------------------------------------------------------------------------
+/// Creates a sprite.
+/// ---------------------------------------------------------------------------
+prSprite *prSpriteManager::ToolCreate(prTexture *pTex, s32 width, s32 height)
+{
+    PRASSERT(pTex);
+
+    if (pTex)
+    {
+        m_texture = pTex;
+        m_sprite  = new prSprite(pTex, "sprite", width, height);
+    }
+
+    return m_sprite;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Releases a sprite and any asssociated assets.
+/// ---------------------------------------------------------------------------
+void prSpriteManager::ToolRelease(prSprite *sprite)
+{
+    PRSAFE_DELETE(sprite);
+}
+#endif
+
+
+/// ---------------------------------------------------------------------------
+/// Releases a sprite and any asssociated assets.
+/// ---------------------------------------------------------------------------
+void prSpriteManager::Release(prSprite *sprite)
+{
+    if (sprite)
+    {
+        if (!m_activeSprites.empty())
+        {
+            std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
+            std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+
+            for (; it != end; ++it)
+            {
+                if ((*it).sprite == sprite)
+                {
+                    PRSAFE_DELETE(sprite);
+
+                    // Release the sprites texture
+                    prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
+                    if (pRM)
+                    {
+                        pRM->Unload((*it).texture);
+                    }            
+
+                    m_activeSprites.erase(it);
+                    return;
+                }
+            }
+        }
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Releases all sprites and their asssociated assets. 
+/// ---------------------------------------------------------------------------
+void prSpriteManager::ReleaseAll()
+{
+    if (!m_activeSprites.empty())
+    {
+        std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
+        std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+
+        for (; it != end; ++it)
+        {
+            PRSAFE_DELETE((*it).sprite);
+
+            // Release the sprites texture
+            prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
+            if (pRM)
+            {
+                pRM->Unload((*it).texture);
+            }            
+        }
+
+        m_activeSprites.clear();
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Debug assist code to show all sprites.
+/// ---------------------------------------------------------------------------
+void prSpriteManager::DisplayUsage()
+{
+    if (!m_activeSprites.empty())
+    {
+        std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
+        std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+
+        for (; it != end; ++it)
+        {
+            prTrace("Name: %s, TexID: %ul\n", (*it).sprite->Name(), (*it).texture->GetTexID());
+        }
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Starts batch sprite rendering
+/// ---------------------------------------------------------------------------
+void prSpriteManager::BatchBegin()
+{
+    // Enable blending
+    glEnable(GL_BLEND);
+    ERR_CHECK();
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    ERR_CHECK();
+
+    // Enable textures
+    //glEnable(GL_TEXTURE_2D);
+    //ERR_CHECK();
+
+    // Set states
+    glEnableClientState(GL_VERTEX_ARRAY);
+    ERR_CHECK();
+    glEnableClientState(GL_COLOR_ARRAY);
+    ERR_CHECK();
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    ERR_CHECK();
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Ends batch sprite rendering
+/// ---------------------------------------------------------------------------
+void prSpriteManager::BatchEnd()
+{    
+    // Reset states
+    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+    ERR_CHECK();
+    glDisableClientState(GL_COLOR_ARRAY);
+    ERR_CHECK();
+    glDisableClientState(GL_VERTEX_ARRAY);
+    ERR_CHECK();
+
+    // Disable textures
+    //glEnable(GL_TEXTURE_2D);
+    //ERR_CHECK();
+
+    // Disable blending
+    glDisable(GL_BLEND);
+    ERR_CHECK();
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Loads a sprite file.
+/// ---------------------------------------------------------------------------
+bool prSpriteManager::Load(const char *filename)
+{
+    PRASSERT(filename && *filename);
+
+    TiXmlDocument* doc = new TiXmlDocument(filename);
+    
+    bool result = false;
+
+    if (doc)
+    {
+        bool loaded = doc->LoadFile();
+      
+        if (loaded)
+        {
+            ParseSpriteFile(doc);
+            result = true;
+        }
+        else
+        {
+            PRWARN("Failed to Load %s\n", filename);
+        }
+
+        delete doc;
+    }
+
+    return result;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Parses a sprite file.
+/// ---------------------------------------------------------------------------
+void prSpriteManager::ParseSpriteFile(TiXmlNode* pParent)
+{
+    switch (pParent->Type())
+    {
+    case TiXmlNode::TINYXML_ELEMENT:
+        {
+            // File data
+            if (strcmp(pParent->Value(), "sprite_file") == 0)
+            {
+                ParseAttribs_SpriteFile(pParent->ToElement());
+            }
+            // Sprite data
+            else if (strcmp(pParent->Value(), "sprite") == 0)
+            {
+                ParseAttribs_Sprite(pParent->ToElement());
+            }
+            // Sequence data
+            else if (strcmp(pParent->Value(), "sequence") == 0)
+            {
+                ParseAttribs_Sequence(pParent->ToElement());
+            }
+
+    
+            // The first element should set the file type.
+            // So lets validate it
+            if (m_correctFileType == false)
+            {
+                PRPANIC("Incorrect file type!");
+            }
+        }
+        break;
+
+    default:
+        break;
+    } 
+
+
+    for (TiXmlNode *pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling()) 
+    {
+        ParseSpriteFile(pChild);
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Attribute parser - Used to get information from the file like the version
+/// number.
+/// ---------------------------------------------------------------------------
+void prSpriteManager::ParseAttribs_SpriteFile(TiXmlElement* pElement)
+{
+    PRASSERT(pElement);
+
+    if (pElement)
+    {
+        PRASSERT(pElement->Attribute("version"));
+    }
+
+    // Indicate correct file type.
+    m_correctFileType = true;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Attribute parser - Used to get information about the sprite like its name,
+/// frame width, frame height, etc.
+/// ---------------------------------------------------------------------------
+void prSpriteManager::ParseAttribs_Sprite(TiXmlElement* pElement)
+{
+    PRASSERT(pElement);
+
+    if (pElement)
+    {
+        // Sanity checks
+        PRASSERT(pElement->Attribute("name"));
+        PRASSERT(pElement->Attribute("width"));
+        PRASSERT(pElement->Attribute("height"));
+
+
+        // Create the animation
+        const char *name        = pElement->Attribute("name");
+        int         frameWidth  = atoi(pElement->Attribute("width"));
+        int         frameHeight = atoi(pElement->Attribute("height"));
+
+
+        // Acquire the child data.
+        TiXmlHandle root(pElement);
+        TiXmlElement *pElem  = root.FirstChild("texture").Element();
+        if (pElem)
+        {
+            // Get the sprites texture data
+            PRASSERT(pElem->Attribute("data"));
+
+            // Create the sprites texture and the sprite.
+            prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
+            PRASSERT(pRM)
+            m_texture = pRM->Load<prTexture>(pElem->Attribute("data"));
+            PRASSERT(m_texture);
+
+            if (m_texture)
+            {
+                m_sprite = new prSprite(m_texture, name, frameWidth, frameHeight);
+            }
+        }
+        else
+        {
+            PRPANIC("Sprite '%s' has no texture.", name);
+        }
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Attribute parser
+/// ---------------------------------------------------------------------------
+void prSpriteManager::ParseAttribs_Sequence(TiXmlElement* pElement)
+{
+    PRASSERT(pElement);
+
+    if (pElement)
+    {
+        // Sanity checks
+        PRASSERT(pElement->Attribute("name"));
+        PRASSERT(pElement->Attribute("anim"));
+
+
+        // Get animation name.
+        const char *name = pElement->Attribute("name");
+
+
+        // Get animation type
+        const char *animType = pElement->Attribute("anim");
+        s32 type;
+
+        if (prStringCompare(animType, "loop") == CMP_EQUALTO)
+        {
+            type = ANIM_TYPE_LOOP;
+        }
+        else if (prStringCompare(animType, "once") == CMP_EQUALTO)
+        {
+            type = ANIM_TYPE_ONCE;
+        }
+        else if (prStringCompare(animType, "yoyo") == CMP_EQUALTO)
+        {
+            type = ANIM_TYPE_YOYO;
+        }
+        else
+        {
+            PRWARN("Unrecognised animation type.");
+            type = ANIM_TYPE_NONE;
+        }
+
+        
+        // Create the animation sequence
+        prSpriteAnimationSequence* sequence = new prSpriteAnimationSequence
+        (
+            name,
+            atoi(pElement->Attribute("count")),
+            type
+        );
+
+
+        // Add the sequence
+        m_sprite->AddSequence(sequence, name);
+
+
+        // Acquire the child frame data.
+        sequence->ParseFrameData(pElement);
+    }
+}

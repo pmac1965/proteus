@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C28EBEF3-77A3-4EDF-9853-71F1128606D7}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>proteus</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\source\Box2D\Box2D.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\b2BroadPhase.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\b2Collision.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\b2Distance.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\b2DynamicTree.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\b2TimeOfImpact.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\Shapes\b2ChainShape.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\Shapes\b2CircleShape.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\Shapes\b2EdgeShape.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\Shapes\b2PolygonShape.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\Shapes\b2Shape.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Common\b2BlockAllocator.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Common\b2Draw.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Common\b2GrowableStack.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Common\b2Math.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Common\b2Settings.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Common\b2StackAllocator.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Common\b2Timer.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\b2Body.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\b2ContactManager.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\b2Fixture.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\b2Island.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\b2TimeStep.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\b2World.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\b2WorldCallbacks.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2ChainAndCircleContact.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2ChainAndPolygonContact.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2CircleContact.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2Contact.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2ContactSolver.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2EdgeAndCircleContact.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2EdgeAndPolygonContact.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2PolygonContact.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2DistanceJoint.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2FrictionJoint.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2GearJoint.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2Joint.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2MotorJoint.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2MouseJoint.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2PrismaticJoint.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2PulleyJoint.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2RevoluteJoint.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2RopeJoint.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2WeldJoint.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2WheelJoint.h" />
+    <ClInclude Include="..\..\..\..\source\Box2D\Rope\b2Rope.h" />
+    <ClInclude Include="..\..\..\..\source\core\prApplication.h" />
+    <ClInclude Include="..\..\..\..\source\core\prApplication_PC.h" />
+    <ClInclude Include="..\..\..\..\source\core\prCore.h" />
+    <ClInclude Include="..\..\..\..\source\core\prCoreSystem.h" />
+    <ClInclude Include="..\..\..\..\source\core\prDefines.h" />
+    <ClInclude Include="..\..\..\..\source\core\prMacros.h" />
+    <ClInclude Include="..\..\..\..\source\core\prMessage.h" />
+    <ClInclude Include="..\..\..\..\source\core\prMessageManager.h" />
+    <ClInclude Include="..\..\..\..\source\core\prRegistry.h" />
+    <ClInclude Include="..\..\..\..\source\core\prResource.h" />
+    <ClInclude Include="..\..\..\..\source\core\prResourceManager.h" />
+    <ClInclude Include="..\..\..\..\source\core\prString.h" />
+    <ClInclude Include="..\..\..\..\source\core\prStringShared.h" />
+    <ClInclude Include="..\..\..\..\source\core\prStringUtil.h" />
+    <ClInclude Include="..\..\..\..\source\core\prTypes.h" />
+    <ClInclude Include="..\..\..\..\source\core\prVersion.h" />
+    <ClInclude Include="..\..\..\..\source\core\prVertex.h" />
+    <ClInclude Include="..\..\..\..\source\core\prWaypoint.h" />
+    <ClInclude Include="..\..\..\..\source\core\prWindow.h" />
+    <ClInclude Include="..\..\..\..\source\core\prWindowProcedure.h" />
+    <ClInclude Include="..\..\..\..\source\core\prWindow_PC.h" />
+    <ClInclude Include="..\..\..\..\source\debug\prAssert.h" />
+    <ClInclude Include="..\..\..\..\source\debug\prConsoleWindow.h" />
+    <ClInclude Include="..\..\..\..\source\debug\prDebug.h" />
+    <ClInclude Include="..\..\..\..\source\debug\prTrace.h" />
+    <ClInclude Include="..\..\..\..\source\display\prBackground.h" />
+    <ClInclude Include="..\..\..\..\source\display\prBackgroundManager.h" />
+    <ClInclude Include="..\..\..\..\source\display\prColour.h" />
+    <ClInclude Include="..\..\..\..\source\display\prFixedWidthFont.h" />
+    <ClInclude Include="..\..\..\..\source\display\prGLFont.h" />
+    <ClInclude Include="..\..\..\..\source\display\prOglUtils.h" />
+    <ClInclude Include="..\..\..\..\source\display\prPvr.h" />
+    <ClInclude Include="..\..\..\..\source\display\prRenderer.h" />
+    <ClInclude Include="..\..\..\..\source\display\prRenderer_DX9.h" />
+    <ClInclude Include="..\..\..\..\source\display\prRenderer_GL11.h" />
+    <ClInclude Include="..\..\..\..\source\display\prRenderer_GL20.h" />
+    <ClInclude Include="..\..\..\..\source\display\prSprite.h" />
+    <ClInclude Include="..\..\..\..\source\display\prSpriteAnimation.h" />
+    <ClInclude Include="..\..\..\..\source\display\prSpriteAnimationSequence.h" />
+    <ClInclude Include="..\..\..\..\source\display\prSpriteManager.h" />
+    <ClInclude Include="..\..\..\..\source\display\prTexture.h" />
+    <ClInclude Include="..\..\..\..\source\file\prFile.h" />
+    <ClInclude Include="..\..\..\..\source\file\prFileManager.h" />
+    <ClInclude Include="..\..\..\..\source\file\prFileShared.h" />
+    <ClInclude Include="..\..\..\..\source\input\prMouse.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lapi.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lauxlib.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lcode.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lctype.h" />
+    <ClInclude Include="..\..\..\..\source\lua\ldebug.h" />
+    <ClInclude Include="..\..\..\..\source\lua\ldo.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lfunc.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lgc.h" />
+    <ClInclude Include="..\..\..\..\source\lua\llex.h" />
+    <ClInclude Include="..\..\..\..\source\lua\llimits.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lmem.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lobject.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lopcodes.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lparser.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lstate.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lstring.h" />
+    <ClInclude Include="..\..\..\..\source\lua\ltable.h" />
+    <ClInclude Include="..\..\..\..\source\lua\ltm.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lua.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lua.hpp" />
+    <ClInclude Include="..\..\..\..\source\lua\luaconf.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lualib.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lundump.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lvm.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lzio.h" />
+    <ClInclude Include="..\..\..\..\source\math\prMathsUtil.h" />
+    <ClInclude Include="..\..\..\..\source\math\prPoint.h" />
+    <ClInclude Include="..\..\..\..\source\math\prRect.h" />
+    <ClInclude Include="..\..\..\..\source\math\prRectF.h" />
+    <ClInclude Include="..\..\..\..\source\math\prVector2.h" />
+    <ClInclude Include="..\..\..\..\source\math\prVector3.h" />
+    <ClInclude Include="..\..\..\..\source\prConfig.h" />
+    <ClInclude Include="..\..\..\..\source\proteus.h" />
+    <ClInclude Include="..\..\..\..\source\tinyxml\tinystr.h" />
+    <ClInclude Include="..\..\..\..\source\tinyxml\tinyxml.h" />
+    <ClInclude Include="..\..\..\..\source\tool\AntTweakBar.h" />
+    <ClInclude Include="..\..\..\..\source\zlib\crc32.h" />
+    <ClInclude Include="..\..\..\..\source\zlib\deflate.h" />
+    <ClInclude Include="..\..\..\..\source\zlib\inffast.h" />
+    <ClInclude Include="..\..\..\..\source\zlib\inffixed.h" />
+    <ClInclude Include="..\..\..\..\source\zlib\inflate.h" />
+    <ClInclude Include="..\..\..\..\source\zlib\inftrees.h" />
+    <ClInclude Include="..\..\..\..\source\zlib\trees.h" />
+    <ClInclude Include="..\..\..\..\source\zlib\zconf.h" />
+    <ClInclude Include="..\..\..\..\source\zlib\zlib.h" />
+    <ClInclude Include="..\..\..\..\source\zlib\zutil.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2BroadPhase.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2CollideCircle.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2CollideEdge.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2CollidePolygon.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2Collision.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2Distance.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2DynamicTree.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2TimeOfImpact.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\Shapes\b2ChainShape.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\Shapes\b2CircleShape.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\Shapes\b2EdgeShape.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\Shapes\b2PolygonShape.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Common\b2BlockAllocator.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Common\b2Draw.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Common\b2Math.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Common\b2Settings.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Common\b2StackAllocator.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Common\b2Timer.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\b2Body.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\b2ContactManager.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\b2Fixture.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\b2Island.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\b2World.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\b2WorldCallbacks.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2ChainAndCircleContact.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2ChainAndPolygonContact.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2CircleContact.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2Contact.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2ContactSolver.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2EdgeAndCircleContact.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2EdgeAndPolygonContact.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2PolygonContact.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2DistanceJoint.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2FrictionJoint.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2GearJoint.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2Joint.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2MotorJoint.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2MouseJoint.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2PrismaticJoint.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2PulleyJoint.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2RevoluteJoint.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2RopeJoint.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2WeldJoint.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2WheelJoint.cpp" />
+    <ClCompile Include="..\..\..\..\source\Box2D\Rope\b2Rope.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prApplication.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prApplication_PC.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prCore.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prCoreSystem.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prMessageManager.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prRegistry.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prResource.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prResourceManager.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prString.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prStringUtil.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prVersion.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prWindow.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prWindowProcedure.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prWindow_PC.cpp" />
+    <ClCompile Include="..\..\..\..\source\debug\prAssert.cpp" />
+    <ClCompile Include="..\..\..\..\source\debug\prConsoleWindow.cpp" />
+    <ClCompile Include="..\..\..\..\source\debug\prDebug.cpp" />
+    <ClCompile Include="..\..\..\..\source\debug\prTrace.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prBackground.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prBackgroundManager.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prColour.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prFixedWidthFont.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prGLFont.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prOglUtils.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prRenderer .cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prRenderer_DX9.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prRenderer_GL11.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prRenderer_GL20.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prSprite.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prSpriteAnimation.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prSpriteAnimationSequence.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prSpriteManager.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prTexture.cpp" />
+    <ClCompile Include="..\..\..\..\source\file\prFile.cpp" />
+    <ClCompile Include="..\..\..\..\source\file\prFileManager.cpp" />
+    <ClCompile Include="..\..\..\..\source\file\prFileShared.cpp" />
+    <ClCompile Include="..\..\..\..\source\input\prMouse.cpp" />
+    <ClCompile Include="..\..\..\..\source\lua\lapi.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lauxlib.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lbaselib.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lbitlib.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lcode.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lcorolib.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lctype.c" />
+    <ClCompile Include="..\..\..\..\source\lua\ldblib.c" />
+    <ClCompile Include="..\..\..\..\source\lua\ldebug.c" />
+    <ClCompile Include="..\..\..\..\source\lua\ldo.c" />
+    <ClCompile Include="..\..\..\..\source\lua\ldump.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lfunc.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lgc.c" />
+    <ClCompile Include="..\..\..\..\source\lua\linit.c" />
+    <ClCompile Include="..\..\..\..\source\lua\liolib.c" />
+    <ClCompile Include="..\..\..\..\source\lua\llex.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lmathlib.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lmem.c" />
+    <ClCompile Include="..\..\..\..\source\lua\loadlib.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lobject.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lopcodes.c" />
+    <ClCompile Include="..\..\..\..\source\lua\loslib.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lparser.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lstate.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lstring.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lstrlib.c" />
+    <ClCompile Include="..\..\..\..\source\lua\ltable.c" />
+    <ClCompile Include="..\..\..\..\source\lua\ltablib.c" />
+    <ClCompile Include="..\..\..\..\source\lua\ltm.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lundump.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lvm.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lzio.c" />
+    <ClCompile Include="..\..\..\..\source\math\prMathsUtil.cpp" />
+    <ClCompile Include="..\..\..\..\source\math\prRect.cpp" />
+    <ClCompile Include="..\..\..\..\source\math\prRectF.cpp" />
+    <ClCompile Include="..\..\..\..\source\math\prVector2.cpp" />
+    <ClCompile Include="..\..\..\..\source\math\prVector3.cpp" />
+    <ClCompile Include="..\..\..\..\source\tinyxml\tinystr.cpp" />
+    <ClCompile Include="..\..\..\..\source\tinyxml\tinyxml.cpp" />
+    <ClCompile Include="..\..\..\..\source\tinyxml\tinyxmlerror.cpp" />
+    <ClCompile Include="..\..\..\..\source\tinyxml\tinyxmlparser.cpp" />
+    <ClCompile Include="..\..\..\..\source\zlib\adler32.c" />
+    <ClCompile Include="..\..\..\..\source\zlib\compress.c" />
+    <ClCompile Include="..\..\..\..\source\zlib\crc32.c" />
+    <ClCompile Include="..\..\..\..\source\zlib\deflate.c" />
+    <ClCompile Include="..\..\..\..\source\zlib\infback.c" />
+    <ClCompile Include="..\..\..\..\source\zlib\inffast.c" />
+    <ClCompile Include="..\..\..\..\source\zlib\inflate.c" />
+    <ClCompile Include="..\..\..\..\source\zlib\inftrees.c" />
+    <ClCompile Include="..\..\..\..\source\zlib\trees.c" />
+    <ClCompile Include="..\..\..\..\source\zlib\uncompr.c" />
+    <ClCompile Include="..\..\..\..\source\zlib\zutil.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\source\license.txt" />
+    <None Include="..\..\..\..\source\math\prVector2.inl" />
+    <None Include="..\..\..\..\source\math\prVector3.inl" />
+    <None Include="..\..\..\..\source\read.me" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

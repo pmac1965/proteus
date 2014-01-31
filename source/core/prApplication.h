@@ -135,8 +135,8 @@ public:
 
 protected:
     
-    prWindow   *m_pWindow;
-    PRBOOL      m_running;
+    prWindow   *m_pWindow;              ///< The applications window
+    PRBOOL      m_running;              ///< Whether than app is running or not
 };
 
 
