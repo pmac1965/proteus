@@ -1,4 +1,8 @@
 /**
+ * @file    prApplication.h 
+ * @brief   Interface class for all the application type classes.
+ */
+/**
  * Copyright 2014 Paul Michael McNab
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,11 +31,10 @@ class prWindow;
 
 
 /** 
- * Interface class for all the application type classes.
+ * @brief   Interface class for all the application type classes.
  *
- * The class for a specification application type should implement,
- *
- * DisplayCreate and Run. The game class should implement the rest
+ * @note    The class for a specification application type should implement,
+ * @note    DisplayCreate and Run. The game class should implement the rest
  *
  * @see    DisplayCreate
  * @see    Run

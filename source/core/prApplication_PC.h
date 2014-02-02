@@ -1,4 +1,8 @@
 /**
+ * @file    prApplication_PC.h 
+ * @brief   Application class for the PC.
+ */
+/**
  * Copyright 2014 Paul Michael McNab
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,12 +37,13 @@
 class prConsoleWindow;
 
 
-/** Application class for the PC
+/** 
+ * @brief   Application class for the PC
  *
- * @note   Overrides DisplayCreate and Run
+ * @note    Overrides DisplayCreate and Run
  *
- * @see    DisplayCreate
- * @see    Run
+ * @see     DisplayCreate
+ * @see     Run
  */
 class prApplication_PC : public prApplication
 {

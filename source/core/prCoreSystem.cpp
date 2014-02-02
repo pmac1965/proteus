@@ -1,8 +1,6 @@
 /**
-* prCoreSystem.cpp
-* Contains the base class used by all the engines core systems.
-* Copyright Paul Michael McNab. All rights reserved.
-*/
+ * prCoreSystem.cpp
+ */
 
 
 #include "prCoreSystem.h"

@@ -1,4 +1,8 @@
 /**
+ * @file       prCore.h
+ * @brief      Contains the code used to initialise the engine core systems
+ */
+/**
  * Copyright 2014 Paul Michael McNab
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,18 +30,19 @@
 class prCoreSystem;
 
 
-/// @enum   prRendererType
-/// @brief  The types of renderer supported
+/**
+ * The types of renderer supported
+ */
 typedef enum prRendererType
 {
     PRRENDERER_OPENGL,              ///< Use OpenGL
     PRRENDERER_DIRECTX,             ///< Use DirectX
+};
 
-} prRendererType;
 
-
-/// @enum   prVerType
-/// @brief  The version of renderer required
+/**
+ * The version of renderer required
+ */
 typedef enum prVerType
 {
     PRGLVER_11,                     ///< OpenGL Version 1.1
@@ -46,12 +51,12 @@ typedef enum prVerType
     PRDXVER_9,                      ///< DirectX Version 9
     PRDXVER_10,                     ///< DirectX Version 10
     PRDXVER_11,                     ///< DirectX Version 11
+};
 
-} prVerType;
 
-
-/// @enum   prSystems
-/// @brief  Also contains all the optional systems
+/**
+ * Contains core systems define as well the optional systems
+ */
 enum prSystems
 {
     // Core systems
@@ -84,46 +89,73 @@ enum prSystems
 };
 
 
-/// @brief      Creates the engine core components
-/// @param      rendererType - The type of renderer. DirectX or OpenGL
-/// @param      version - Which version of the renderer
-/// @note       This function must be the first call made during game construction
-/// @see        prRendererType
-/// @see        prVerType
-/// @return     PRTRUE if the core was constructed, PRFALSE if the core already exists 
+/**
+ * @brief      Creates the engine core components
+ *
+ * @param      rendererType - The type of renderer. DirectX or OpenGL
+ * @param      version - Which version of the renderer
+ *
+ * @note       This function must be the first call made during game construction
+ *
+ * @see        prRendererType
+ * @see        prVerType
+ *
+ * @return     PRTRUE if the core was constructed
+ * @return     PRFALSE if the core already exists 
+ */
 PRBOOL prCoreCreate(prRendererType rendererType, prVerType version);
 
 
-/// @brief      Creates optional engine core components
-/// @param      optionalSystems - A pointer to an array of the systems to create
-/// @note       This function should called just after prCoreCreate
-/// @see        prCoreCreate
+/**
+ * @brief      Creates optional engine core components
+ *
+ * @param      optionalSystems - A pointer to an array of the systems to create
+ *
+ * @note       This function should called just after prCoreCreate
+ *
+ * @see        prCoreCreate
+ */
 void prCoreCreateOptional(s32 *optionalSystems);
 
 
-/// @brief      Destroys the engine core.
-/// @note       This is handled by the engine. Do not call
+/**
+ * @brief      Destroys the engine core.
+ *
+ * @note       This is handled by the engine. Do not call
+ */
 void prCoreDestroy();
 
 
-/// @brief      Does the core exist.
-/// @return     PRTRUE or PRFALSE
+/**
+ * @brief      Does the core exist.
+ *
+ * @return     PRTRUE or PRFALSE
+ */
 PRBOOL prCoreExist();
 
 
-/// @brief      Does a core component exist
-/// @param      systemID - The unique ID of the system
-/// @note       The core must exist as well for this function to work
-/// @return     PRTRUE or PRFALSE
+/**
+ * @brief      Does a core component exist
+ *
+ * @param      systemID - The unique ID of the system
+ *
+ * @note       The core must exist as well for this function to work
+ *
+ * @return     PRTRUE or PRFALSE
+ */
 PRBOOL prCoreComponentExist(s32 systemID);
 
 
-/// @brief      Fetches a core system component pointer, Includes optional 
-/// @n          components.
-/// @param      systemID - The unique ID of the system
-/// @note       The core must exist for this function to work correctly
-/// @return     A prCoreSystem pointer.
-/// @return     May return NULL.
+/**
+ * @brief      Fetches a core system component pointer, Includes optional components
+ *
+ * @param      systemID - The unique ID of the system
+ *
+ * @note       The core must exist for this function to work correctly
+ *
+ * @return     A prCoreSystem pointer.
+ * @return     May return NULL.
+ */
 prCoreSystem *prCoreGetComponent(u32 systemID);
 
 

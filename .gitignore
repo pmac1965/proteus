@@ -1,0 +1,16 @@
+# VS2010 output   #
+###################
+*.log
+*.tlog
+*.obj
+*.opensdf
+*.sdf
+*.user
+*.ipch
+*.suo
+*.filters
+*.lastbuildstate
+*.idb
+*.pdb
+*.lib
+*.cache
