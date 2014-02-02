@@ -82,7 +82,8 @@ public:
      */
     PRBOOL Run();
 
-    /** Passes along windows commands
+    /**
+     * Passes along windows commands
      *
      * @param      command  - Windows command.
      *
