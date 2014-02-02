@@ -1,7 +1,5 @@
 /**
  * prMessageManager.cpp
- * Contains the message management class for game and system messaging.
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 #include "prMessageManager.h"

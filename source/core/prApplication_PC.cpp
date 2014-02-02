@@ -73,11 +73,13 @@ namespace
         memset(&osvi, 0, sizeof(osvi));
         osvi.dwOSVersionInfoSize = sizeof(osvi);
 
-// Removes this warning - 'GetVersionExW': was declared deprecated
-#ifdef _MSC_VER
-#pragma warning( push )
-#pragma warning( disable : 4996 )
-#endif
+
+        // Removes this warning - 'GetVersionExW': was declared deprecated
+        #ifdef _MSC_VER
+        #pragma warning( push )
+        #pragma warning( disable : 4996 )
+        #endif
+
 
         if (GetVersionEx((LPOSVERSIONINFO)&osvi) == 0)
         {
@@ -98,9 +100,11 @@ namespace
             }
         }
 
-#ifdef _MSC_VER
-#pragma warning( pop )
-#endif
+
+        // Restores warning
+        #ifdef _MSC_VER
+        #pragma warning( pop )
+        #endif
 
 
         // Couldn't get info about windows?
@@ -176,30 +180,32 @@ prApplication_PC::prApplication_PC() : prApplication()
         m_pCW = NULL;
     #endif
 
-    //System::Init();
-
 #if defined(_DEBUG) || defined(DEBUG)
     // Write startup info.
-    //if (System::Verbose())
-    {    
-        prTrace("-------------------------------------------------------------------------------\n");
-        prTrace("Engine version : %s\n", prGetVersionAsString());
-        prTrace("-------------------------------------------------------------------------------\n");
-        prTrace("Components:\n");
-        prTrace("Lua            : 5.2.3 - Copyright (C) 1994-2013 Lua.org, PUC-Rio.\n");
-        prTrace("Box2D          : 2.3.0 - Copyright (c) 2006-2013 Erin Catto\n");
-        prTrace("TinyXML        : 2.6.2 - Copyright (c) 2000-2006 Lee Thomason.\n");
-        prTrace("Zlib           : 1.2.8 - Copyright (C) 1995-2013 Jean-loup Gailly and Mark Adler.\n");
-//        prTrace("Ogg            : 1.2.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
-//        prTrace("Vorbis         : 1.3.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
-        prTrace("AntTweakBar    : 1.16  - Copyright (C) 2005-2013 Philippe Decaudin.\n");        
-        prTrace("-------------------------------------------------------------------------------\n");
-        prTrace("Config         : %s - PC - Debug\n", BuildType());
-        prTrace("-------------------------------------------------------------------------------\n");
-//        prTrace("Options   : Verbose      %s\n", System::Verbose()     ? "true" : "false");
-//        prTrace("          : Use archives %s\n", System::UseArchives() ? "true" : "false");
-//        prTrace("          : Log to file  %s\n", System::LogToFile()   ? "true" : "false");
-//        prTrace("-------------------------------------------------------------------------------\n");
+    prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+    if (reg)
+    {
+        // if (strcmp(reg->GetValue("Verbose"), "true") == 0)
+        {
+            prTrace("-------------------------------------------------------------------------------\n");
+            prTrace("Engine version : %s\n", prGetVersionAsString());
+            prTrace("-------------------------------------------------------------------------------\n");
+            prTrace("Components:\n");
+            prTrace("Lua            : 5.2.3 - Copyright (C) 1994-2013 Lua.org, PUC-Rio.\n");
+            prTrace("Box2D          : 2.3.0 - Copyright (c) 2006-2013 Erin Catto\n");
+            prTrace("TinyXML        : 2.6.2 - Copyright (c) 2000-2006 Lee Thomason.\n");
+            prTrace("Zlib           : 1.2.8 - Copyright (C) 1995-2013 Jean-loup Gailly and Mark Adler.\n");
+    //        prTrace("Ogg            : 1.2.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
+    //        prTrace("Vorbis         : 1.3.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
+            prTrace("AntTweakBar    : 1.16  - Copyright (C) 2005-2013 Philippe Decaudin.\n");        
+            prTrace("-------------------------------------------------------------------------------\n");
+            prTrace("Config         : %s - PC - Debug\n", BuildType());
+            prTrace("-------------------------------------------------------------------------------\n");
+    //        prTrace("Options   : Verbose      %s\n", System::Verbose()     ? "true" : "false");
+    //        prTrace("          : Use archives %s\n", System::UseArchives() ? "true" : "false");
+    //        prTrace("          : Log to file  %s\n", System::LogToFile()   ? "true" : "false");
+    //        prTrace("-------------------------------------------------------------------------------\n");
+        }
     }
     
 /*    if (System::ShowHelp())
@@ -220,17 +226,6 @@ prApplication_PC::prApplication_PC() : prApplication()
     //Trace("-------------------------------------------------------------------------------\n");
 
 
-    // Create the systems.    
-/*    Renderer            ::GetInstance()->SingletonCreate();
-    Fps                 ::GetInstance()->SingletonCreate();
-    Input               ::GetInstance()->SingletonCreate();
-    GameTime            ::GetInstance()->SingletonCreate();
-    prMouse             ::GetInstance()->SingletonCreate();
-    prTouch             ::GetInstance()->SingletonCreate();
-    FileManager         ::GetInstance()->SingletonCreate();
-    SoundManager        ::GetInstance()->SingletonCreate();
-    prTextureManager    ::GetInstance()->SingletonCreate();*/
-
     // Access the embedded data, so it'll stay linked into the game.
     for (int j=0; j<PRARRAY_SIZE(embedded); j++)
     {
@@ -244,6 +239,7 @@ prApplication_PC::prApplication_PC() : prApplication()
             }
         }
     }
+
 
     // Give the window procedure a pointer to the application.
     prSetApplicationForWindowProcedure(this);

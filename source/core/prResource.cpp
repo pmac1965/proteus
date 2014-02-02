@@ -1,7 +1,5 @@
 /**
  * prResource.cpp
- * This class represents an entry in the resource manager.
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 

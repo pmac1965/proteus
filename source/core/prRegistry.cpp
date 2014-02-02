@@ -1,7 +1,5 @@
 /**
  * prRegistry.cpp
- * Contains the registry class
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 
@@ -31,6 +29,7 @@ prRegistry::prRegistry() : prCoreSystem(PRSYSTEM_REGISTRY, "prRegistry")
         {"Platform",        "Unknown"},
         {"AppName",         "Proteus"},
         {"WindowName",      "Proteus"},
+        {"Verbose",         "false"},
 //        {"PhysicalWidth",   "-1"},
 //        {"PhysicalHeight",  "-1"},
     };
