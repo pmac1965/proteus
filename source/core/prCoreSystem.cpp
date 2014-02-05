@@ -15,7 +15,7 @@
 prCoreSystem::prCoreSystem(u32 id, const char *pName) : m_id  (id)
                                                       , m_name(pName)
 {
-    prTrace("Init : %s - ID: %i\n", (pName && *pName) ? pName : "Unnamed", id);
+    prTrace("Init : %*s - ID: %i\n", 24, (pName && *pName) ? pName : "Unnamed", id);
 }
 
 

@@ -249,7 +249,7 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
 
 
     prStringReplaceChar(dataPath, '\\', '/');
-    prTrace("App data path: %s\n", dataPath);
+    //prTrace("App data path: %s\n", dataPath);
 }
 
 

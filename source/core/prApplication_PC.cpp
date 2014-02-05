@@ -195,8 +195,8 @@ prApplication_PC::prApplication_PC() : prApplication()
             prTrace("Box2D          : 2.3.0 - Copyright (c) 2006-2013 Erin Catto\n");
             prTrace("TinyXML        : 2.6.2 - Copyright (c) 2000-2006 Lee Thomason.\n");
             prTrace("Zlib           : 1.2.8 - Copyright (C) 1995-2013 Jean-loup Gailly and Mark Adler.\n");
-    //        prTrace("Ogg            : 1.2.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
-    //        prTrace("Vorbis         : 1.3.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
+            prTrace("Ogg            : 1.2.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
+            prTrace("Vorbis         : 1.3.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
             prTrace("AntTweakBar    : 1.16  - Copyright (C) 2005-2013 Philippe Decaudin.\n");        
             prTrace("-------------------------------------------------------------------------------\n");
             prTrace("Config         : %s - PC - Debug\n", BuildType());

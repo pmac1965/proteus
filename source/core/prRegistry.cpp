@@ -30,6 +30,9 @@ prRegistry::prRegistry() : prCoreSystem(PRSYSTEM_REGISTRY, "prRegistry")
         {"AppName",         "Proteus"},
         {"WindowName",      "Proteus"},
         {"Verbose",         "false"},
+        {"LogToFile",       "false"},
+        {"UseArchives",     "true"},
+        {"Help",            "false"},
 //        {"PhysicalWidth",   "-1"},
 //        {"PhysicalHeight",  "-1"},
     };

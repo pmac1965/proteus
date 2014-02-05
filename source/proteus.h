@@ -28,6 +28,7 @@
 
 #include "core/prApplication.h"
 #include "core/prApplication_PC.h"
+#include "core/prArgs.h"
 #include "core/prCore.h"
 #include "core/prCoreSystem.h"
 #include "core/prDefines.h"
