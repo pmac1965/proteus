@@ -124,35 +124,37 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
 /// ---------------------------------------------------------------------------
 /// Creates optional engine core components.
 /// ---------------------------------------------------------------------------
-void prCoreCreateOptional(s32 *optionalSystems)
+void prCoreCreateOptional(s32 *optionalSystems, u32 count)
 {
     PRASSERT(optionalSystems);
+    PRASSERT(count > 0);
+
     if (optionalSystems)
     {
-        s32 index = 0;
-        for (;;)
+        for (u32 index = 0; index < count; index++)
         {
-            s32 id = optionalSystems[index++];
-            if (id == PRSYSTEM_LISTEND)
+            s32 id = optionalSystems[index];
+
+            switch (id)
             {
+            case PRSYSTEM_BACKGROUNDMANAGER:
+                systems[id] = new prBackgroundManager();
                 break;
-            }
-            else
-            {
-                switch (id)
+
+            case PRSYSTEM_SPRITEMANAGER:
+                systems[id] = new prSpriteManager();
+                break;
+
+            default:
+                if (id < 0 || id >= PRSYSTEM_MAX)
                 {
-                case PRSYSTEM_BACKGROUNDMANAGER:
-                    systems[id] = new prBackgroundManager();
-                    break;
-
-                case PRSYSTEM_SPRITEMANAGER:
-                    systems[id] = new prSpriteManager();
-                    break;
-
-                default:
-                    prTrace("Yet to implement %i\n", id);
-                    break;
+                    prTrace("Invalid ID: %i\n", id);
                 }
+                else
+                {
+                    prTrace("Yet to implement %i\n", id);
+                }
+                break;
             }
         }
     }

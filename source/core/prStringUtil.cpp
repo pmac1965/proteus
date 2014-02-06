@@ -542,6 +542,45 @@ prStringResult prStringCompare(const char *firstString, const char *secondString
 /// ---------------------------------------------------------------------------
 /// Compares two strings
 /// ---------------------------------------------------------------------------
+prStringResult prStringCompareW(const wchar_t *firstString, const wchar_t *secondString)
+{
+    if (firstString && secondString)
+    {
+        bool loop = true;
+
+        do
+        {
+            wchar_t first  = *firstString  ++;
+            wchar_t second = *secondString ++;
+
+            // First string greater than?
+            if (first > second)
+            {
+                return CMP_GREATERTHAN;
+            }
+
+            // First string less than?
+            if (first < second)
+            {
+                return CMP_LESSTHAN;
+            }
+
+            // Equals test.
+            if (first == (char)NULL && second == (char)NULL)
+            {
+                return CMP_EQUALTO;
+            }
+        }
+        while(loop);
+    }
+
+    return CMP_ERROR;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Compares two strings
+/// ---------------------------------------------------------------------------
 prStringResult prStringCompareNoCase(const char *firstString, const char *secondString)
 {
     if (firstString && secondString)

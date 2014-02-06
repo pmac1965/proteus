@@ -121,6 +121,7 @@ void prStringRemoveNewLines(char *string);
 /// @see        prStringResult
 /// @return     Comparison result
 prStringResult prStringCompare(const char *firstString, const char *secondString);
+prStringResult prStringCompareW(const wchar_t *firstString, const wchar_t *secondString);
 
 /// @brief      Compares two strings
 /// @param      firstString  - String to compare

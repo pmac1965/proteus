@@ -11,9 +11,16 @@
 
 namespace
 {
+#if defined(PLATFORM_PC)
+    LPWSTR         *pArgv           = NULL;
+#else
+    char          **pArgv           = NULL;
+#endif
+
     UnknownParamCB  pUnknownParamCB = NULL;
-    s32             paramIndex      = 0;
-    s32             paramTotal      = 0;
+    s32             paramIndex      = -1;
+    s32             paramTotal      = -1;
+    bool            parseFailed     = false;
 }
 
 
@@ -23,22 +30,22 @@ namespace
 /// ---------------------------------------------------------------------------
 namespace
 {
-    static void UnknownCommand(const _TCHAR* argv);
-    static void UnknownCommand(const _TCHAR* argv)
+    bool UnknownCommand(const _TCHAR* argv);
+    bool UnknownCommand(const _TCHAR* argv)
     {
-        PRASSERT(argv);
         if (argv && *argv)
         {
             if (pUnknownParamCB)
             {
-                pUnknownParamCB(argv, paramIndex);
+                parseFailed = pUnknownParamCB(argv, paramIndex);
             }
-
-            prTrace("Unknown command line parameter: %ls\n", argv);
-		    return;
+        }
+        else
+        {
+	        prTrace("Unknown command line parameter was null or empty\n");
         }
 
-	    prTrace("Unknown command line parameter was null or empty\n");
+        return parseFailed;
     }
 }
 
@@ -51,13 +58,16 @@ void prArgsParseCommandLine(LPTSTR lpCmdLine)
     // Init control data
     paramIndex  = 0;
     paramTotal  = 0;
+    parseFailed = false;
+
 
     if (lpCmdLine && *lpCmdLine)
     {
-        LPWSTR     *argv = CommandLineToArgvW(lpCmdLine, &paramTotal);
+        pArgv = CommandLineToArgvW(lpCmdLine, &paramTotal);
+
         prRegistry *reg  = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
 
-        if (argv && reg)
+        if (pArgv && reg)
         {
             if (paramTotal > 0)
             {
@@ -65,102 +75,114 @@ void prArgsParseCommandLine(LPTSTR lpCmdLine)
                 for (; paramIndex < paramTotal; paramIndex++)
                 {
                     // Is command?
-                    if (argv[paramIndex][0] == L'-')
+                    if (pArgv[paramIndex][0] == L'-')
                     {
-                        switch(argv[paramIndex][1])
+                        switch(pArgv[paramIndex][1])
                         {
-                        // n
-                        case L'n':
-                            if (_tcsicmp(L"-noarc", argv[paramIndex]) == 0)
+                        // p
+                        case L'p':
+                            // Disable archives?
+                            if (_tcsicmp(L"-prnoarc", pArgv[paramIndex]) == 0)
                             {
                                 reg->SetValue("UseArchives", "false");
                             }
-                            else
-                            {
-                                UnknownCommand(argv[paramIndex]);
-                            }
-                            break;
-
-                        // v
-                        case L'v':
-                            if (_tcsicmp(L"-verb", argv[paramIndex]) == 0)
+                            // Turn on verbose logging?
+                            else if (_tcsicmp(L"-prverb", pArgv[paramIndex]) == 0)
                             {
                                 reg->SetValue("Verbose", "true");
                             }
-                            else
-                            {
-                                UnknownCommand(argv[paramIndex]);
-                            }
-                            break;
-
-                        // l
-                        case L'l':
-                            if (_tcsicmp(L"-logfile", argv[paramIndex]) == 0)
+                            // Turn on file logging?
+                            else if (_tcsicmp(L"-prlogfile", pArgv[paramIndex]) == 0)
                             {
                                 reg->SetValue("LogToFile", "true");
                             }
-                            else
-                            {
-                                UnknownCommand(argv[paramIndex]);
-                            }
-                            break;
-
-                        // h
-                        case L'h':
-                            if (_tcsicmp(L"-help", argv[paramIndex]) == 0)
+                            // Show help?
+                            else if (_tcsicmp(L"-prhelp", pArgv[paramIndex]) == 0)
                             {
                                 reg->SetValue("Help", "true");
+                                prArgsShowHelp();
                             }
                             else
                             {
-                                UnknownCommand(argv[paramIndex]);
+                                UnknownCommand(pArgv[paramIndex]);
+                                break;
                             }
                             break;
 
                         default:
-                            UnknownCommand(argv[paramIndex]);
+                            UnknownCommand(pArgv[paramIndex]);
                             break;
                         }
                     }
                     else
                     {
-                        UnknownCommand(argv[paramIndex]);
+                        UnknownCommand(pArgv[paramIndex]);
+                        break;
                     }
+                
+                    if (parseFailed)
+                        break;
                 }
             }
 
-            LocalFree(argv);
+            LocalFree(pArgv);
         }
     }
 
     // Reset handler
     pUnknownParamCB = NULL;
-    
+
     // Init control data
-    paramIndex  = 0;
-    paramTotal  = 0;
+    pArgv       = NULL;
+    paramIndex  = -1;
+    paramTotal  = -1;
 }
 
 
 /// ---------------------------------------------------------------------------
-/// 
+/// Retrieves an argument if there is one
 /// ---------------------------------------------------------------------------
-const _TCHAR *prArgsPopArg(s32 index)
+const _TCHAR *prArgsPopNextArg()
 {
+    if (pArgv && paramIndex > -1 &&
+                 paramTotal > -1)
+    {
+        if (paramIndex < (paramTotal - 1))
+        {
+            return pArgv[++paramIndex];
+        }
+    }
+
     return NULL;
 }
 
-#else
+#else//PLATFORM_PC
+/// ---------------------------------------------------------------------------
+/// Processes command line args
+/// ---------------------------------------------------------------------------
+void prArgsParseCommandLine(int argc, char *[]args);
+{
+}
+
 
 /// ---------------------------------------------------------------------------
-/// 
+/// Retrieves an argument if there is one
 /// ---------------------------------------------------------------------------
-const char *prArgsPopArg(s32 index)
+const char *prArgsPopNextArg()
 {
+    if (pArgv && paramIndex > -1 &&
+                 paramTotal > -1)
+    {
+        if (paramIndex < (paramTotal - 1))
+        {
+            return pArgv[++paramIndex];
+        }
+    }
+
     return NULL;
 }
 
-#endif
+#endif//PLATFORM_PC
 
 
 /// ---------------------------------------------------------------------------
@@ -173,18 +195,53 @@ void prArgsRegisterUnknownParamHandler(UnknownParamCB cb)
 
 
 /// ---------------------------------------------------------------------------
-/// Return the total number of arguments
+/// Returns the total number of arguments
 /// ---------------------------------------------------------------------------
 s32 prArgsGetTotalArgCount()
 {
-    return paramTotal;
+    if (pArgv)
+    {
+        return paramTotal;
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 
 /// ---------------------------------------------------------------------------
-/// Return the total number of arguments remaing to be processed
+/// Returns the total number of arguments remaining to be processed
 /// ---------------------------------------------------------------------------
 s32 prArgsGetRemainingArgCount()
 {
-    return (paramTotal - paramIndex) - 1;
+    if (pArgv)
+    {
+        return (paramTotal - paramIndex) - 1;
+    }
+    else
+    {
+        return -1;
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Determines if command line parsing failed
+/// ---------------------------------------------------------------------------
+bool prArgsParseFailed()
+{
+    return parseFailed;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Shows the default help file
+/// ---------------------------------------------------------------------------
+void prArgsShowHelp()
+{
+    prTrace("-prverb        = Turns on verbose engine logging\n");
+    prTrace("-prlogfile     = Turns on logging to a disk file\n");
+    prTrace("-prhelp        = Displays the help text\n");
+    prTrace("-prnoarc       = Disables archives\n");
 }

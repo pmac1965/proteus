@@ -50,3 +50,11 @@ REM ---------------------------------------------------------------------------
     @REM @rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\proteus\android
     @REM @rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\proteus\libpng
     @REM @rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\proteus\libzip
+
+
+REM ---------------------------------------------------------------------------
+REM Update engine docs
+REM ---------------------------------------------------------------------------
+echo Updating docs
+cd D:\NaturalDocs-1.52
+doc_engine.bat
