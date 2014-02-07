@@ -408,6 +408,25 @@ s32 prStringLength(const char *string)
 
 
 /// ---------------------------------------------------------------------------
+/// Returns the length of a passed string.
+/// ---------------------------------------------------------------------------
+s32 prStringLengthW(const wchar_t *string)
+{
+    PRASSERT(string);
+
+    // Set default return value
+    s32 length = 0;
+
+    if (string)
+    {
+        while (*string++) length++;
+    }
+
+    return length;
+}
+
+
+/// ---------------------------------------------------------------------------
 /// Function places '\n' in a string to indicate where word wrapping should take place.
 /// ---------------------------------------------------------------------------
 s32 prStringWordWrap(char *string, u32 max_string_width)

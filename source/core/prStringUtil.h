@@ -104,6 +104,7 @@ void prStringToUpper(char* string);
 /// @param      string - The string of count
 /// @return     The strings length. Zero if null or empty
 s32 prStringLength(const char *string);
+s32 prStringLengthW(const wchar_t *string);
 
 /// @brief      Function places '\\n' in a string to indicate where word wrapping should take place.
 /// @param      string           - The string of convert

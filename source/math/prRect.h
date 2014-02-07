@@ -1,8 +1,4 @@
-// File:
-//      prRect.h
-//
-// Contents:
-//      Contains a rectangle class.
+// File: prRect.h
 /*
     Copyright 2014 Paul Michael McNab
 
@@ -34,94 +30,149 @@ class prRect
 {
 public:
         
-    // method: prRect
-    //      Constructor.
+    // Method: prRect
+    //      Constructor
     prRect();
 
-    /// Constructor.
-    /// @param      top    - Rectangle coordinate 
-    /// @param      left   - Rectangle coordinate 
-    /// @param      bottom - Rectangle coordinate
-    /// @param      right  - Rectangle coordinate
+    // Method: prRect
+    //      Constructor
+    //
+    // Parameters:
+    //      top    - Rectangle coordinate 
+    //      left   - Rectangle coordinate 
+    //      bottom - Rectangle coordinate
+    //      right  - Rectangle coordinate
     prRect(s32 top, s32 left, s32 bottom, s32 right);
 
-    /// Constructor.
-    /// @param      top    - Rectangle coordinate 
-    /// @param      left   - Rectangle coordinate 
-    /// @param      bottom - Rectangle coordinate
-    /// @param      right  - Rectangle coordinate
+    // Method: prRect
+    //      Constructor
+    //
+    // Parameters:
+    //      top    - Rectangle coordinate 
+    //      left   - Rectangle coordinate 
+    //      bottom - Rectangle coordinate
+    //      right  - Rectangle coordinate
     prRect(f32 top, f32 left, f32 bottom, f32 right);
 
-    /// Constructor.
-    /// @param      topLeft     - Rectangle coordinate 
-    /// @param      bottomRight - Rectangle coordinate 
+    // Method: prRect
+    //      Constructor
+    //
+    // Parameters:
+    //      topLeft     - Rectangle coordinate 
+    //      bottomRight - Rectangle coordinate 
     prRect(const prPoint3& topLeft, const prPoint3& bottomRight);
 
-    /// Dtor.
+    // Method: Dtor
+    //      Destructor
     ~prRect()
     {}
                     
-    /// Determines if the passed coordinates are within the rectangle.
-    /// @param      x    - X coordinate 
-    /// @param      y    - Y coordinate 
-    /// @return     true or false
+    // Method: PointInside
+    //       Determines if the passed coordinates are within the rectangle.
+    //
+    // Parameters:
+    //      x    - X coordinate 
+    //      y    - Y coordinate 
+    //
+    // Returns:
+    //      true or false
     bool PointInside(s32 x, s32 y) const;
-
-    /// Determines if the passed coordinates are within the rectangle.
-    /// @param      point    - XY coordinates
-    /// @return     true or false
+    
+    // Method: PointInside
+    //      Determines if the passed coordinates are within the rectangle.
+    //
+    // Parameters:
+    //      point    - XY coordinates
+    //
+    // Returns:
+    //      true or false
     bool PointInside(const prPoint3& point) const;
 
-    /// Resizes the rectangle.
-    /// @param      top    - Adjustment value 
-    /// @param      left   - Adjustment value
-    /// @param      bottom - Adjustment value
-    /// @param      right  - Adjustment value
+    // Method: Resize
+    //      Resizes the rectangle.
+    //
+    // Parameters:
+    //      top    - Adjustment value 
+    //      left   - Adjustment value
+    //      bottom - Adjustment value
+    //      right  - Adjustment value
     void Resize(s32 top, s32 left, s32 bottom, s32 right);                    
 
-    /// Sets the size of the rectangle.
-    /// @param      top    - Rectangle coordinate 
-    /// @param      left   - Rectangle coordinate 
-    /// @param      bottom - Rectangle coordinate
-    /// @param      right  - Rectangle coordinate
+    // Method: Set
+    //      Sets the size of the rectangle.
+    //
+    // Parameters:
+    //      top    - Rectangle coordinate 
+    //      left   - Rectangle coordinate 
+    //      bottom - Rectangle coordinate
+    //      right  - Rectangle coordinate
     void Set(s32 top, s32 left, s32 bottom, s32 right);
                    
-    /// Determines if the rectangle has zero width and height.
-    /// @return     true or false
+    // Method: IsEmpty
+    //      Determines if the rectangle has zero width and height.
+    //
+    // Returns:
+    //      true or false
     bool IsEmpty() const { return ((m_left - m_right) == 0  &&  (m_top - m_bottom) == 0); }
                     
-    /// Gets rectangle coordinate.
-    /// @return     Rectangle coordinate
+    // Method: GetTop
+    //      Gets rectangle coordinate.
+    //
+    // Returns:
+    //      Rectangle coordinate
     s32 GetTop() const { return m_top; }            
     
-    /// Gets rectangle coordinate.
-    /// @return     Rectangle coordinate
+    // Method: GetBottom
+    //      Gets rectangle coordinate.
+    //
+    // Returns:
+    //      Rectangle coordinate
     s32 GetBottom() const { return m_bottom; }
     
-    /// Gets rectangle coordinate.
-    /// @return     Rectangle coordinate
+    // Method: GetLeft
+    //      Gets rectangle coordinate.
+    //
+    // Returns:
+    //      Rectangle coordinate
     s32 GetLeft() const { return m_left; }
         
-    /// Gets rectangle coordinate.
-    /// @return     Rectangle coordinate
+    // Method: GetRight
+    //      Gets rectangle coordinate.
+    //
+    // Returns:
+    //      Rectangle coordinate
     s32 GetRight() const { return m_right; }
         
-    /// Gets rectangles width.
-    /// @return     Rectangle coordinate
+    // Method: GetWidth
+    //      Gets rectangle coordinate.
+    //
+    // Returns:
+    //      Rectangle width
     s32 GetWidth() const { return m_width; }
         
-    /// Gets rectangles height.
-    /// @return     Rectangle coordinate
+    // Method: GetHeight
+    //      Gets rectangle coordinate.
+    //
+    // Returns:
+    //      Rectangle height
     s32 GetHeight() const { return m_height; }
                 
-    /// Determine whether the passed rectangle intersects this rectangle.
-    /// @param      rect - A rectangle
-    /// @return     true or false
+    // Method: Intersect
+    //      Determine whether the passed rectangle intersects this rectangle.
+    //
+    // Parameters:
+    //      rect - A rectangle
+    //
+    // Returns:
+    //      true or false
     bool Intersect(const prRect& rect) const;            
     
-    /// Changes the position of the rectangle.
-    /// @param      x    - Adjustment value
-    /// @param      y    - Adjustment value
+    // Method: Move
+    //      Changes the position of the rectangle.
+    //
+    // Parameters:
+    //      x    - Adjustment value
+    //      y    - Adjustment value
     void Move(s32 x, s32 y);
     
 
@@ -137,7 +188,7 @@ private:
 
 private:
 
-    /// This method ensures that left is less than right and top greater than botton.
+    // This method ensures that left is less than right and top greater than botton.
     void VerifyCoords();    
 };
 

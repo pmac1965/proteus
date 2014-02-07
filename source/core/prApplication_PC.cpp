@@ -20,6 +20,7 @@
 #include "../debug/prConsoleWindow.h"
 #include "../input/prMouse.h"
 #include "../display/prRenderer.h"
+#include "../core/prStringUtil.h"
 
 
 // ----------------------------------------------------------------------------
@@ -33,142 +34,6 @@ static const char *embedded[] =
 };
 
 
-// ----------------------------------------------------------------------------
-// Local functions
-// ----------------------------------------------------------------------------
-namespace
-{
-    const char *BuildType();
-    BOOL CheckPlatform();
-    bool RunningAlready(const char *pWindowName);
-    bool IsRemoteSession();
-
-
-    #if defined(_DEBUG) || defined(DEBUG)
-    // ----------------------------------------------------------------------------
-    // Returns the build
-    // ----------------------------------------------------------------------------
-    const char *BuildType()
-    {
-        #if defined(PROTEUS_TOOL)
-            return "Tool";
-        #else
-            return "Game";
-        #endif
-    }
-    #endif
-
-
-    // ------------------------------------------------------------------------
-    // Acquire some info about the PC we're running on.
-    // ------------------------------------------------------------------------
-    BOOL CheckPlatform()
-    {
-        bool isOSInvalid = false;
-        bool initFailed = false;
-
-
-        // Lets get the OS we're running on.
-        OSVERSIONINFOEX osvi;
-        memset(&osvi, 0, sizeof(osvi));
-        osvi.dwOSVersionInfoSize = sizeof(osvi);
-
-
-        // Removes this warning - 'GetVersionExW': was declared deprecated
-        #ifdef _MSC_VER
-        #pragma warning( push )
-        #pragma warning( disable : 4996 )
-        #endif
-
-
-        if (GetVersionEx((LPOSVERSIONINFO)&osvi) == 0)
-        {
-            prDebugShowLastError();
-            initFailed = true;
-        }
-        else
-        {
-            // Is the operating system is Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003, Windows XP, or Windows 2000?
-            if (osvi.dwPlatformId == VER_PLATFORM_WIN32_NT)
-            {
-                prTrace("Windows version %i.%i\n", osvi.dwMajorVersion, osvi.dwMinorVersion);
-                prTrace("%ls\n", osvi.szCSDVersion);
-            }
-            else
-            {
-                isOSInvalid = true;
-            }
-        }
-
-
-        // Restores warning
-        #ifdef _MSC_VER
-        #pragma warning( pop )
-        #endif
-
-
-        // Couldn't get info about windows?
-        if (initFailed)
-        {
-            MessageBoxW(HWND_DESKTOP, L"Unable to acquire information about your version of windows.", L"Error", MB_ICONERROR | MB_OK);
-            return FALSE;
-        }
-
-
-        // Wrong version of windows?
-        if (isOSInvalid)
-        {
-            MessageBoxW(HWND_DESKTOP, L"You cannot run this application as you do not have the correct version of Windows.", L"Error", MB_ICONERROR | MB_OK);
-            return FALSE;
-        }
-
-        return TRUE;
-    }
-
-
-    // ------------------------------------------------------------------------
-    // Current only context... 
-    // This needs to allow switching of users, so no global stuff,
-    // therefore we search for the window.
-    // ------------------------------------------------------------------------
-    bool RunningAlready(const char *pWindowName)
-    {
-        HWND hwnd = FindWindowA("Proteus Class", pWindowName);
-        if (hwnd)
-        {
-            ShowWindow(hwnd, SW_SHOW);
-            SetFocus(hwnd);
-            SetForegroundWindow(hwnd);
-            return true;
-        }
-
-        return false;
-    }
-
-
-    // ------------------------------------------------------------------------
-    // Check if user is trying to run the game remotely
-    // ------------------------------------------------------------------------
-    bool IsRemoteSession()
-    {
-        bool remote = (GetSystemMetrics(SM_REMOTESESSION) != 0);
-        if (remote)
-        {
-            prMouse *pMouse = (prMouse *)prCoreGetComponent(PRSYSTEM_MOUSE);
-            if (pMouse)
-            {
-                pMouse->ShowSystemCursor(true);
-            }
-
-            MessageBoxW(HWND_DESKTOP, L"This game cannot be run remotely.", L"Error", MB_OK | MB_ICONERROR | MB_APPLMODAL);
-            return true;
-        }
-
-        return false;
-    }
-}
-
-
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
@@ -180,12 +45,17 @@ prApplication_PC::prApplication_PC() : prApplication()
         m_pCW = NULL;
     #endif
 
+
+    // Init data
+    m_hAccel   = NULL;
+
+
 #if defined(_DEBUG) || defined(DEBUG)
     // Write startup info.
     prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
     if (reg)
     {
-        // if (strcmp(reg->GetValue("Verbose"), "true") == 0)
+        if (prStringCompare(reg->GetValue("Verbose"), "true") == CMP_EQUALTO)
         {
             prTrace("-------------------------------------------------------------------------------\n");
             prTrace("Engine version : %s\n", prGetVersionAsString());
@@ -201,29 +71,19 @@ prApplication_PC::prApplication_PC() : prApplication()
             prTrace("-------------------------------------------------------------------------------\n");
             prTrace("Config         : %s - PC - Debug\n", BuildType());
             prTrace("-------------------------------------------------------------------------------\n");
-    //        prTrace("Options   : Verbose      %s\n", System::Verbose()     ? "true" : "false");
-    //        prTrace("          : Use archives %s\n", System::UseArchives() ? "true" : "false");
-    //        prTrace("          : Log to file  %s\n", System::LogToFile()   ? "true" : "false");
-    //        prTrace("-------------------------------------------------------------------------------\n");
+            prTrace("Options        : Verbose      %s\n", reg->GetValue("Verbose"));
+            prTrace("               : Use archives %s\n", reg->GetValue("UseArchives"));
+            prTrace("               : Log to file  %s\n", reg->GetValue("LogToFile"));
+            prTrace("               : Help         %s\n", reg->GetValue("Help"));
+            prTrace("-------------------------------------------------------------------------------\n");
         }
     }
-    
-/*    if (System::ShowHelp())
-    {
-        Trace("-------------------------------------------------------------------------------\n");
-        Trace("Command line options\n");
-        Trace("-verb      = Verbose startup. Startup logs everything\n");
-        Trace("-noarc     = Don't use archives. All data is read from local storage.\n");
-        Trace("-logfile   = Logs all debug output to a text file.\n");
-        Trace("-help      = Logs the command line options.\n");
-        Trace("-------------------------------------------------------------------------------\n");
-    }*/
 #endif
 
 
-    //Trace("-------------------------------------------------------------------------------\n");
-    //Trace("Build number %0.4f\n", BUILD_NUMBER);
-    //Trace("-------------------------------------------------------------------------------\n");
+    //prTrace("-------------------------------------------------------------------------------\n");
+    //prTrace("Build number %0.4f\n", BUILD_NUMBER);
+    //prTrace("-------------------------------------------------------------------------------\n");
 
 
     // Access the embedded data, so it'll stay linked into the game.
@@ -300,6 +160,7 @@ PRBOOL prApplication_PC::DisplayCreate(u32 width, u32 height, const char *pWindo
     // Create.
     PRSAFE_DELETE(m_pWindow);
     m_pWindow = new prWindow_PC();
+    PRASSERT(m_pWindow);
 
 
     // Create the window
@@ -317,18 +178,26 @@ PRBOOL prApplication_PC::DisplayCreate(u32 width, u32 height, const char *pWindo
             pRenderer->Init();
         }
 
-        // Set/Reset input
-/*        ASSERT(Input::SingletonExists());        
-        Input::GetInstance()->Deinit();
-        Input::GetInstance()->Init(imp.pWindow);*/
-
+        // Set registry
         prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
         if (reg)
         {
+            // Set title here
+            static_cast<prWindow_PC *>(m_pWindow)->SetTitle(pWindowName);
+
             reg->SetValue("WindowName", pWindowName);
             reg->SetValue("ScreenWidth", width);
             reg->SetValue("ScreenHeight", height);
-            reg->ShowKeyValuePairs();
+            
+            // Show startup entries
+            prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+            if (reg)
+            {
+                if (prStringCompare(reg->GetValue("Verbose"), "true") == CMP_EQUALTO)
+                {
+                   reg->ShowKeyValuePairs();
+                }
+            }
         }
     }
     else
@@ -339,6 +208,111 @@ PRBOOL prApplication_PC::DisplayCreate(u32 width, u32 height, const char *pWindo
 
 
     return result;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Creates the application display.
+/// ---------------------------------------------------------------------------
+PRBOOL prApplication_PC::DisplayCreateTool(u32 width, u32 height, u32 menuID, u32 iconID, u32 accelID, const TCHAR *pWindowName)
+{
+    PRBOOL result = PRFALSE;
+
+
+    // Check window name is not null
+    if (pWindowName == NULL)
+    {
+        MessageBoxW(HWND_DESKTOP, L"The window name cannot NULL.", L"Error", MB_ICONERROR | MB_OK);
+        return result;
+    }
+
+    // Check window name is not empty
+    if (pWindowName && prStringLengthW(pWindowName) == 0)
+    {
+        MessageBoxW(HWND_DESKTOP, L"The window name is empty.", L"Error", MB_ICONERROR | MB_OK);
+        return result;
+    }
+
+    // Check platform
+    if (!CheckPlatform())
+    {
+        return result;
+    }
+
+    // Running, then switch to running app.
+    if (RunningAlreadyW(pWindowName))
+    {
+        return result;
+    }
+
+    // Don't allow remote sessions.
+    if (IsRemoteSession())
+    {
+        return result;
+    }
+
+
+    // Create.
+    PRSAFE_DELETE(m_pWindow);
+    m_pWindow = new prWindow_PC();
+
+
+    // Create the window
+    bool success = static_cast<prWindow_PC *>(m_pWindow)->CreateTool(width, height, menuID, iconID, pWindowName);
+    if (success)
+    {
+        m_running = true;
+
+        // Set window.
+        m_running = PRTRUE;
+        result    = PRTRUE;
+
+        // Set window.
+        prRenderer *pRenderer = (prRenderer *)prCoreGetComponent(PRSYSTEM_RENDERER);
+        if (pRenderer)
+        {
+            pRenderer->SetWindow(m_pWindow);
+            pRenderer->Init();
+        }
+
+		// Let system know the screen size.
+        prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+        if (reg)
+        {
+            //reg->SetValue("WindowName", pWindowName);
+            reg->SetValue("ScreenWidth", width);
+            reg->SetValue("ScreenHeight", height);
+
+            // Show startup entries
+            prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+            if (reg)
+            {
+                if (prStringCompare(reg->GetValue("Verbose"), "true") == CMP_EQUALTO)
+                {
+                   reg->ShowKeyValuePairs();
+                }
+            }
+        }
+
+        // Load accelarator?
+        if (accelID > 0)
+        {
+            m_hAccel = LoadAccelerators(GetModuleHandle(NULL), MAKEINTRESOURCE(accelID));
+            if (m_hAccel == NULL)
+            {
+                prTrace("Failed to load accelerator");
+            }
+        }
+    }
+    else
+    {
+        // Exit app.
+        m_running = false;
+    }
+
+
+    return result;
+
 }
 
 
@@ -367,16 +341,15 @@ PRBOOL prApplication_PC::Run()
                 OnExit();
             }
 
-
-/*            if (imp.hasAccel && imp.hAccel)
+            if (m_hAccel)
             {
-                if (!TranslateAccelerator(imp.pWindow->GetWindowHandle(), imp.hAccel, &msg))
+                if (!TranslateAccelerator(static_cast<prWindow_PC*>(m_pWindow)->GetWindowHandle(), m_hAccel, &msg))
                 {
                     TranslateMessage(&msg);
                     DispatchMessage(&msg);
                 }
             }
-            else//*/
+            else
             {
                 TranslateMessage(&msg);
                 DispatchMessage(&msg);
@@ -419,6 +392,148 @@ PRBOOL prApplication_PC::Run()
 
 
     return PRFALSE;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Returns the build
+/// ---------------------------------------------------------------------------
+const char *prApplication_PC::BuildType()
+{
+    #if defined(PROTEUS_TOOL)
+        return "Tool";
+    #else
+        return "Game";
+    #endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Acquire some info about the PC we're running on.
+/// ---------------------------------------------------------------------------
+BOOL prApplication_PC::CheckPlatform()
+{
+    bool isOSInvalid = false;
+    bool initFailed = false;
+
+
+    // Lets get the OS we're running on.
+    OSVERSIONINFOEX osvi;
+    memset(&osvi, 0, sizeof(osvi));
+    osvi.dwOSVersionInfoSize = sizeof(osvi);
+
+
+    // Removes this warning - 'GetVersionExW': was declared deprecated
+    #ifdef _MSC_VER
+    #pragma warning( push )
+    #pragma warning( disable : 4996 )
+    #endif
+
+
+    if (GetVersionEx((LPOSVERSIONINFO)&osvi) == 0)
+    {
+        prDebugShowLastError();
+        initFailed = true;
+    }
+    else
+    {
+        // Is the operating system is Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003, Windows XP, or Windows 2000?
+        if (osvi.dwPlatformId == VER_PLATFORM_WIN32_NT)
+        {
+            prTrace("Windows version %i.%i\n", osvi.dwMajorVersion, osvi.dwMinorVersion);
+            prTrace("%ls\n", osvi.szCSDVersion);
+        }
+        else
+        {
+            isOSInvalid = true;
+        }
+    }
+
+
+    // Restores warning
+    #ifdef _MSC_VER
+    #pragma warning( pop )
+    #endif
+
+
+    // Couldn't get info about windows?
+    if (initFailed)
+    {
+        MessageBoxW(HWND_DESKTOP, L"Unable to acquire information about your version of windows.", L"Error", MB_ICONERROR | MB_OK);
+        return FALSE;
+    }
+
+
+    // Wrong version of windows?
+    if (isOSInvalid)
+    {
+        MessageBoxW(HWND_DESKTOP, L"You cannot run this application as you do not have the correct version of Windows.", L"Error", MB_ICONERROR | MB_OK);
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Current only context... 
+/// This needs to allow switching of users, so no global stuff,
+/// therefore we search for the window.
+/// ---------------------------------------------------------------------------
+bool prApplication_PC::RunningAlready(const char *pWindowName)
+{
+    HWND hwnd = FindWindowA("Proteus Class", pWindowName);
+    if (hwnd)
+    {
+        ShowWindow(hwnd, SW_SHOW);
+        SetFocus(hwnd);
+        SetForegroundWindow(hwnd);
+        return true;
+    }
+
+    return false;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Current only context... 
+/// This needs to allow switching of users, so no global stuff,
+/// therefore we search for the window.
+/// ---------------------------------------------------------------------------
+bool prApplication_PC::RunningAlreadyW(const TCHAR *pWindowName)
+{
+    HWND hwnd = FindWindow(L"Proteus Class", pWindowName);
+    if (hwnd)
+    {
+        ShowWindow(hwnd, SW_SHOW);
+        SetFocus(hwnd);
+        SetForegroundWindow(hwnd);
+        return true;
+    }
+
+    return false;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Check if user is trying to run the game remotely
+/// ---------------------------------------------------------------------------
+bool prApplication_PC::IsRemoteSession()
+{
+    bool remote = (GetSystemMetrics(SM_REMOTESESSION) != 0);
+    if (remote)
+    {
+        prMouse *pMouse = (prMouse *)prCoreGetComponent(PRSYSTEM_MOUSE);
+        if (pMouse)
+        {
+            pMouse->ShowSystemCursor(true);
+        }
+
+        MessageBoxW(HWND_DESKTOP, L"This game cannot be run remotely.", L"Error", MB_OK | MB_ICONERROR | MB_APPLMODAL);
+        return true;
+    }
+
+    return false;
 }
 
 

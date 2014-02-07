@@ -1,7 +1,5 @@
 /**
  * prWindow_PC.cpp
- * Contains the PC window class
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 
@@ -17,7 +15,9 @@
 #include "../debug/prAssert.h"
 #include "../debug/prDebug.h"
 #include "../display/prOglUtils.h"
-//#include "renderer.h"
+#include "../core/prCore.h"
+#include "../core/prRegistry.h"
+#include "../core/prStringUtil.h"
 
 
 // Local data
@@ -57,46 +57,6 @@ static const TCHAR *g_ClassName = TEXT("Proteus Class");
                              PR_MAXIMIZEBOX)
 
 
-// ----------------------------------------------------------------------------
-// Debug
-// ----------------------------------------------------------------------------
-/*#if defined(_DEBUG) || defined(DEBUG)
-    void RendererErrorCheck(const char *file, const char *func, int line);
-    #define ERR_CHECK() RendererErrorCheck(__FILE__, __FUNCTION__, __LINE__)
-#else*/
-//    #define ERR_CHECK()
-//#endif
-
-
-// ----------------------------------------------------------------------------
-// Centers the window
-// ----------------------------------------------------------------------------
-static void CenterWindow(HWND hwnd);
-static void CenterWindow(HWND hwnd)
-{
-    RECT rect;
-    int width, height;      
-    int screenwidth, screenheight;
-    int x, y;
-
-    // Get windows width and height
-    GetWindowRect(hwnd, &rect);        
-    width  = rect.right  - rect.left;
-    height = rect.bottom - rect.top;
-
-
-    // Get desktop width and height
-    screenwidth  = GetSystemMetrics(SM_CXSCREEN);
-    screenheight = GetSystemMetrics(SM_CYSCREEN);
-
-    // Windows position
-    x = (screenwidth  / 2) - (width / 2);
-    y = (screenheight / 2) - (height / 2);
-  
-    MoveWindow(hwnd, x, y, width, height, FALSE);
-}
-
-
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
@@ -118,9 +78,10 @@ prWindow_PC::~prWindow_PC()
 }
 
 
-// Creates the application window.
-//
-bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)// , const TCHAR *title)
+/// ---------------------------------------------------------------------------
+/// Creates the application window.
+/// ---------------------------------------------------------------------------
+bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
 {
     // Ensure the previous window is destroyed.
     Destroy();
@@ -128,7 +89,7 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)// , c
 
     // Init data
     m_fullScreen = fullScreen;
-    m_title      = L"Proteus";// title;
+    m_title      = L"Proteus";
     m_width      = width;
     m_height     = height;
     m_bits       = bits;
@@ -203,16 +164,17 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)// , c
 
     // Store a pointer to the window class in the windows user data.
     SetWindowLong(m_hwnd, GWL_USERDATA, (long)(__int64)this);
+    SetTitle(m_title);
 
 
     return true;
 }
 
 
-// ----------------------------------------------------------------------------
-// Creates the application window.
-// ----------------------------------------------------------------------------
-bool prWindow_PC::Create(u32 width, u32 height, u32 menuID, u32 iconID, const TCHAR *title)
+/// ---------------------------------------------------------------------------
+/// Creates the application window.
+/// ---------------------------------------------------------------------------
+bool prWindow_PC::CreateTool(u32 width, u32 height, u32 menuID, u32 iconID, const TCHAR *title)
 {
     PRUNUSED(menuID);
     PRUNUSED(iconID);
@@ -288,12 +250,16 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 menuID, u32 iconID, const TC
 
     // Store a pointer to the window class in the windows user data.
     SetWindowLong(m_hwnd, GWL_USERDATA, (long)(__int64)this);
+    SetTitle(m_title);
 
 
     return true;
 }
 
 
+/// ---------------------------------------------------------------------------
+/// Destroys the PC application window.
+/// ------------------------------ ---------------------------------------------
 void prWindow_PC::Destroy()
 {
     // Release rendering context.
@@ -374,8 +340,9 @@ void prWindow_PC::Destroy()
 }
 
 
-// Resizes the window
-//
+/// ---------------------------------------------------------------------------
+/// Resizes the window
+/// ---------------------------------------------------------------------------
 void prWindow_PC::Resize(u32 width, u32 height)
 {
     // Prevent possible divide by zero.
@@ -396,7 +363,6 @@ void prWindow_PC::Resize(u32 width, u32 height)
 
     // Calculate the aspect ratio of the window
     gluPerspective(45.0f, (GLfloat)width/(GLfloat)height, 0.5f, 2000.0f);
-//    gluPerspective(45.0f, 1.5f, 0.5f, 2000.0f);
     ERR_CHECK();
 
 
@@ -408,31 +374,90 @@ void prWindow_PC::Resize(u32 width, u32 height)
 }
 
 
-// ----------------------------------------------------------------------------
-// Sets the windows title.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Sets the windows title.
+/// ---------------------------------------------------------------------------
 void prWindow_PC::SetTitle(const TCHAR *title)
 {
-#if defined(PROTEUS_FULL) || defined(PROTEUS_TOOL)
-
     if (title && *title)
     {
         if (m_hwnd)
         {
             SetWindowText(m_hwnd, title);
+
+            // Set registry
+            prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+            if (reg)
+            {
+                s32 size = prStringLengthW(title) + 1;
+                PRASSERT(size > 0);
+
+                char *buffer = new char [prStringLengthW(title) + 1];
+                PRASSERT(buffer);
+
+                prStringSprintf(buffer, size, "%s", title);
+                reg->SetValue("WindowName", buffer);
+                
+                PRSAFE_DELETE_ARRAY(buffer);
+            }
         }
     }
-
-#else
-
-    PRUNUSED(title);
-
-#endif
 }
 
 
-// Switches to full screen display.
-//
+/// ---------------------------------------------------------------------------
+/// Sets the windows title.
+/// ---------------------------------------------------------------------------
+void prWindow_PC::SetTitle(const char *title)
+{
+    if (title && *title)
+    {
+        if (m_hwnd)
+        {
+            SetWindowTextA(m_hwnd, title);
+
+            // Set registry
+            prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+            if (reg)
+            {
+                reg->SetValue("WindowName", title);
+            }
+        }
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Centers the window
+/// ---------------------------------------------------------------------------
+void prWindow_PC::CenterWindow(HWND hwnd)
+{
+    RECT rect;
+    int width, height;      
+    int screenwidth, screenheight;
+    int x, y;
+
+    // Get windows width and height
+    GetWindowRect(hwnd, &rect);        
+    width  = rect.right  - rect.left;
+    height = rect.bottom - rect.top;
+
+
+    // Get desktop width and height
+    screenwidth  = GetSystemMetrics(SM_CXSCREEN);
+    screenheight = GetSystemMetrics(SM_CYSCREEN);
+
+    // Windows position
+    x = (screenwidth  / 2) - (width / 2);
+    y = (screenheight / 2) - (height / 2);
+  
+    MoveWindow(hwnd, x, y, width, height, FALSE);
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Switches to full screen display.
+/// ---------------------------------------------------------------------------
 bool prWindow_PC::ChangeToFullScreen()
 {
     DEVMODE dmScreenSettings;
@@ -458,8 +483,9 @@ bool prWindow_PC::ChangeToFullScreen()
 }
 
 
-// Creates the window.
-//
+/// ---------------------------------------------------------------------------
+/// Creates the window.
+/// ---------------------------------------------------------------------------
 bool prWindow_PC::CreateOpenGLWindow(u32 menuID, u32 iconID)
 {
     DWORD       dwExStyle;              // Window extended style
@@ -533,9 +559,9 @@ bool prWindow_PC::CreateOpenGLWindow(u32 menuID, u32 iconID)
 }
 
 
-// ----------------------------------------------------------------------------
-// Registers the windows class.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Registers the windows class.
+/// ---------------------------------------------------------------------------
 bool prWindow_PC::RegisterWindowClass(u32 menuID, u32 iconID)
 {
     WNDCLASSEX  wc;
@@ -563,9 +589,9 @@ bool prWindow_PC::RegisterWindowClass(u32 menuID, u32 iconID)
 }
 
 
-// ----------------------------------------------------------------------------
-// Sets the pixel format.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Sets the pixel format.
+/// ---------------------------------------------------------------------------
 bool prWindow_PC::SetOpenGLPixelFormat()
 {
     PIXELFORMATDESCRIPTOR pfd =

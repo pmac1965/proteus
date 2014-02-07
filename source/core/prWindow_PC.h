@@ -1,29 +1,26 @@
-/**
- * @file       prWindow_PC.h
- * @brief      Contains the PC window class
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
- *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+// File: prWindow_PC.h
+/*
+    Copyright 2014 Paul Michael McNab
 
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
-#include "../prConfig.h"
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
 
 
 #ifndef __PRWINDOWPC_H
 #define __PRWINDOWPC_H
+
+
+#include "../prConfig.h"
 
 
 #if defined(PLATFORM_PC)
@@ -45,62 +42,92 @@
 #include "prWindow.h"
 
 
-/// @brief  Class for the PC classes.
-/// @note   The class is designed to allow for the window to be recreated by
-/// @note   using Destroy followed by Create
+// Class: prWindow_PC
+//      Class for the PC.
 class prWindow_PC : public prWindow
 {
 public:
-    /// @brief      Ctor
+    // Method: prWindow_PC
+    //      Ctor    
     prWindow_PC();
 
-    /// @brief      Dtor
+    // Method: ~prWindow_PC
+    //      Dtor    
     ~prWindow_PC();
 
-    /// @brief      Creates the PC application window.
-    /// @param      width      - Desired window width.
-    /// @param      height     - Desired window height.
-    /// @param      bits       - Window bit depth.
-    /// @param      fullScreen - Fullscreen or windowed.
-    /// @return     true on success, false on failure.
-    bool Create(u32 width, u32 height, u32 bits, bool fullScreen);// , const TCHAR *title);
+    // Method: Create
+    //      Creates the PC application window.
+    //
+    // Parameters:
+    //      width      - Desired window width.
+    //      height     - Desired window height.
+    //      bits       - Window bit depth.
+    //      fullScreen - Fullscreen or windowed.
+    //
+    // Returns:
+    //      Window created true or false.
+    bool Create(u32 width, u32 height, u32 bits, bool fullScreen);
 
-    /// @brief      Creates the PC application window.
-    /// @param      width      - Desired window width.
-    /// @param      height     - Desired window height.
-    /// @param      menuID     - The ID if a menu is used. Sets the apps menu
-    /// @param      iconID     - The ID if an icon is used. Sets the app icon
-    /// @param      title      - The windows title.
-    /// @return     true on success, false on failure.
-    bool Create(u32 width, u32 height, u32 menuID, u32 iconID, const TCHAR *title);
+    // Method: CreateTool
+    //      Creates the PC application window for engine tools.
+    //
+    // Parameters:
+    //      width      - Desired window width.
+    //      height     - Desired window height.
+    //      menuID     - The ID if a menu is used. Sets the apps menu
+    //      iconID     - The ID if an icon is used. Sets the app icon
+    //      title      - The windows title.
+    //
+    // Returns:
+    //      Window created true or false.
+    bool CreateTool(u32 width, u32 height, u32 menuID, u32 iconID, const TCHAR *title);
 
-    /// @brief      Destroys the PC application window.
+    // Method: Destroy
+    //      Destroys the PC application window.
     void Destroy();
 
-    /// @brief      Resizes the PC application window.
-    /// @param      width      - Desired window width.
-    /// @param      height     - Desired window height.
+    // Method: Resize
+    //      Resizes the application window.
+    //
+    // Parameters:
+    //      width  - New window width.
+    //      height - New window height.
+    //
+    // Notes:
+    //      Called by engine. *DO NOT USE*
     void Resize(u32 width, u32 height);
 
-    /// @brief      Sets the PC application window title.
-    /// @param      title      - The windows title.
+    // Method: SetTitle
+    //      Sets the PC application window title.
+    //
+    // Parameters:
+    //      title      - The windows title.
     void SetTitle(const TCHAR *title);
 
-    /// @brief      Gets the PC applications window handle.
-    /// @return     The windows handle.
+    // Method: SetTitle
+    //      Sets the PC application window title.
+    //
+    // Parameters:
+    //      title      - The windows title.
+    void SetTitle(const char *title);
+
+    // Method: GetWindowHandle
+    //      Gets the PC applications window handle.
     HWND GetWindowHandle() { return m_hwnd; }
 
-    /// @brief      Gets the PC applications device context.
-    /// @return     The applications device context.
+    // Method: GetDeviceContext
+    //      Gets the PC applications device context.
     HDC  GetDeviceContext() { return m_hdc; }
 
 
 private:
 
+    void CenterWindow(HWND hwnd);
     bool ChangeToFullScreen();
     bool CreateOpenGLWindow(u32 menuID, u32 iconID);
     bool RegisterWindowClass(u32 menuID, u32 iconID);
     bool SetOpenGLPixelFormat();
+
 
 private:
 

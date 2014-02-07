@@ -1,7 +1,5 @@
 /**
  * prWindow.cpp
- * Contains the base window class
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 
