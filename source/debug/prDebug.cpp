@@ -95,7 +95,7 @@ void prOutputString(const char *text)
     {
 #if defined(PLATFORM_PC)
         #if defined(PROTEUS_ALLOW_CONSOLE)
-        printf("%s", text);
+        fprintf(stderr, "%s", text);
         #endif
         
         OutputDebugStringA(text);

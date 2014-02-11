@@ -19,13 +19,16 @@
 #define __PROTEUS_H
 
 
+// The config file
 #include "prConfig.h"
 
+// External code
 #include "Box2D/Box2D.h"
 #include "tinyxml/tinyxml.h"
 #include "tool/AntTweakBar.h"
 #include "zlib/zlib.h"
 
+// Engine includes
 #include "core/prApplication.h"
 #include "core/prApplication_PC.h"
 #include "core/prArgs.h"
@@ -104,7 +107,11 @@
 
     // Engine libs
     #if defined(PROTEUS_TOOL)
-        #pragma comment(lib, "proteus_t.lib")
+        #if defined(_DEBUG)
+            #pragma comment(lib, "proteus_td.lib")
+        #else
+            #pragma comment(lib, "proteus_tr.lib")
+        #endif
     #else
         #if defined(_DEBUG)
             #pragma comment(lib, "proteus_d.lib")

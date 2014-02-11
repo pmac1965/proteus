@@ -13,8 +13,10 @@ REM ---------------------------------------------------------------------------
 REM - Copy libs
 REM ---------------------------------------------------------------------------
 
-    if exist ..\Debug\proteus_d.lib   copy /B /V /Y ..\Debug\proteus_d.lib   %PROTEUS_ENGINE_DIR%\libs\proteus_d.lib
-    if exist ..\Release\proteus_r.lib copy /B /V /Y ..\Release\proteus_r.lib %PROTEUS_ENGINE_DIR%\libs\proteus_r.lib
+    if exist ..\Debug\proteus_d.lib           copy /B /V /Y ..\Debug\proteus_d.lib           %PROTEUS_ENGINE_DIR%\libs\proteus_d.lib
+    if exist ..\Release\proteus_r.lib         copy /B /V /Y ..\Release\proteus_r.lib         %PROTEUS_ENGINE_DIR%\libs\proteus_r.lib
+    if exist "..\Tool debug\proteus_td.lib"   copy /B /V /Y "..\Tool debug\proteus_td.lib"   %PROTEUS_ENGINE_DIR%\libs\proteus_td.lib
+    if exist "..\Tool release\proteus_tr.lib" copy /B /V /Y "..\Tool release\proteus_tr.lib" %PROTEUS_ENGINE_DIR%\libs\proteus_tr.lib
 
 
 REM ---------------------------------------------------------------------------
