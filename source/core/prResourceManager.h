@@ -1,21 +1,18 @@
+// File: prResourceManager.h
 /**
- * @file       prResourceManager.h
- * @brief      Contains a resource management class.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -31,22 +28,33 @@
 #define RESOURCE_TABLE_SIZE     64
 
 
-/// @brief      Resource management class
-/// @n          There will always be at least one resource manager.
+// Class: prResourceManager
+//      Resource management class
+//
+// Notes:
+//      There will always be at least one resource manager, you
+//      can however add more if you see fit
 class prResourceManager : public prCoreSystem
 {
 public:
 
-    /// @brief      Ctor
+    // Method: prResourceManager
+    //      Ctor
     prResourceManager();
 
-    /// @brief      Dtor
+    // Method: ~prResourceManager
+    //      Dtor
     ~prResourceManager();
 
-    /// @brief      Loads a resource into the resource manager.
-    /// @param      filename - A char pointer to a filename string
-    /// @param      locked   - Is this a locked resource?
-    /// @return     A resource
+    // Method: Load
+    //      Loads a resource into the resource manager.
+    //
+    // Parameters:
+    //      filename - A char pointer to a filename string
+    //      locked   - Is this a locked resource?
+    //
+    // Returns:
+    //      A resource
     template<typename T>
     T* Load(const char *filename, bool locked = false)
     {
@@ -70,11 +78,16 @@ public:
         return resource;
     }
 
-    /// @brief      Creates a resource from data in memory.
-    /// @param      name   - A name for the resource
-    /// @param      pData  - A pointer to the resource
-    /// @param      size   - Size of the resource
-    /// @return     A resource
+    // Method: LoadFromMemory
+    //      Creates a resource from data in memory.
+    //
+    // Parameters:
+    //      name   - A name for the resource
+    //      pData  - A pointer to the resource
+    //      size   - Size of the resource
+    //
+    // Returns:
+    //      A resource
     template<typename T>
     T* LoadFromMemory(const char *name, void *pData, u32 size)
     {
@@ -97,29 +110,46 @@ public:
         return resource;
     }
 
-    /// @brief      Unloads a resource
-    /// @param      resource - A pointer to a resource
+    // Method: Unload
+    //      Unloads a resource
+    //
+    // Parameters:
+    //      resource - A pointer to a resource
     void Unload(prResource *resource);
 
-    /// @brief      Finds a resource by name.
-    /// @param      filename - A char pointer to a filename string
-    /// @return     A resource or NULL
+    // Method: Find
+    //      Finds a resource by name.
+    //
+    // Parameters:
+    //      filename - A char pointer to a filename string
+    //
+    // Returns:
+    //      A resource or NULL
     prResource *Find(const char *filename);
     
-    /// @brief      Debug assist
+    // Method: DisplayUsage
+    //      Shows all entries
     void DisplayUsage();
 
-    /// @brief      Gets the number of entries
-    /// @return     The number of resources stored
+    // Method: Count
+    //      Gets the number of entries
+    //
+    // Returns:
+    //      The number of resources stored
     u32 Count() const;
 
-    /// @brief      Clears the resource manager of all entries
+    // Method: Clear
+    //      Clears the resource manager of all entries
+    //
+    // Notes:
+    //      This will clear locked resources, so beware
     void Clear();
 
 
 private:
 
-    /// @brief      Adds a resource
+    // Method: Add
+    //      Adds a resource
     void Add(prResource *resource);
 
     /// @brief      Adds a resource

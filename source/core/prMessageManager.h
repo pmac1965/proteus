@@ -1,7 +1,4 @@
-/**
- * @file       prMessageManager.h
- * @brief      Contains the message management class for game and system messaging.
- */
+// File: prMessageManager.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -28,44 +25,50 @@
 #include "prCoreSystem.h"
 
 
-/**
- * @brief       The message manager. Allows for global message passing.
- * @note        Can be used locally as well
- */
+// Class: prMessageManager
+//          The message manager, which allows for global message passing.
+//
+// Motes:
+//      Can be used locally as well
 class prMessageManager : public prCoreSystem
 {
 public:
 
-    /** 
-     * Ctor
-     */
+    // Method: prMessageManager
+    //      Ctor
     prMessageManager();
 
-    /**
-     * Dtor
-     */
+    // Method: ~prMessageManager
+    //      Dtor
     virtual ~prMessageManager();
 
-    /**
-     * @brief      Registers a handler with the message manager.
-     * @param      handler - The handler
-     * @note       The passed handler must not be NULL.
-     * @n          This will assert in the debug build.
-     */
+    // Method: Register
+    //      Registers a handler with the message manager.
+    //
+    // Parameters:
+    //      handler - The handler
+    //
+    // Notes:
+    //      The passed handler must not be NULL.
+    //      This will assert in the debug build.
     void Register(prMessageHandler *handler);
 
-    /**
-     * @brief      Unregisters a handler with the message manager.
-     * @param      handler - The handler
-     * @note       The passed handler must not be NULL.
-     * @n          This will assert in the debug build.
-     */
+    // Method: Unregister
+    //      Unregisters a handler with the message manager.
+    //
+    // Parameters:
+    //      handler - The handler
+    //
+    // Notes:
+    //      The passed handler must not be NULL.
+    //      This will assert in the debug build.
     void Unregister(prMessageHandler *handler);
 
-    /**
-     * @brief      Instantly sends a message to all registered receivers.
-     * @param      msg - The message
-     */
+    // Method: Send
+    //      Instantly sends a message to all registered receivers.
+    //
+    // Parameters:
+    //      msg - The message
     void Send(prGameMessage &msg);
 
 

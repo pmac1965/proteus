@@ -1,7 +1,5 @@
 /**
  * prResourceManager.cpp
- * Contains a resource management class.
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 

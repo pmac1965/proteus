@@ -1,7 +1,4 @@
-/**
- * @file       prResource.h
- * @brief      This class represents an entry in the resource manager.
- */
+// File: prResource.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -29,11 +26,11 @@
 #define RESOURCE_FILENAME_SIZE      260
 
 
-/**
- * @brief      Class which represents an engine resource.
- *
- * @n          All resources need to be derived from this class
- */
+// Class: prResource
+//      Class which represents an engine resource.
+//
+// Notes:
+//      All resources need to be derived from this class
 class prResource
 {
 public:
@@ -41,93 +38,75 @@ public:
     friend class prResourceManager;
 
 
-    /**
-     * @brief      Ctor
-     *
-     * @param      filename - A char pointer to the filename
-     */
+    // Method: prResource
+    //      Ctor
+    //
+    // Parameters:
+    //      filename - A char pointer to the filename
     prResource(const char *filename);
 
-    /**
-     * @brief      Dtor
-     */
+    // Method: ~prResource
+    //      Dtor
     virtual ~prResource();
 
-    /**
-     * @brief      Gets the resource filename
-     *
-     * @return     The filename as a char pointer
-     */
+    // Method: Filename
+    //      Gets the resources filename
     const char *Filename() const { return m_filename; }
 
-    /**
-     * @brief      Gets the resouces locked status
-     *
-     * @return     true or false
-     */
+    // Method: Filename
+    //      Gets the resouces locked status
     bool IsLocked() const { return m_locked; }
     
-    /**
-     * @brief      Gets the resouces hash value
-     *
-     * @return     The filename as a number
-     */
+    // Method: Hash
+    //      Gets the resouces hash value
     const u32 Hash() const { return m_hash; }
 
-    /**
-     * @brief      Gets the resouces file size
-     *
-     * @return     The resouces size
-     */
+    // Method: Size
+    //      Gets the resouces file size
     const u32 Size() const { return m_size; }
 
 
 private:
 
-    /**
-     * @brief      Load resource
-     */
+    // Method: Load
+    //      Load resource
     virtual void Load()   = 0;
 
-    /**
-     * @brief      Unload resource
-     */
+    // Method: Unload
+    //      Unload resource
     virtual void Unload() = 0;
 
-    /**
-     * @brief      Gets the number of references to this resource
-     *
-     * @return     The reference count for this resource
-     */
+    // Method: References
+    //      Gets the number of references to this resource
     const u32 References() const { return m_references; }
 
-    /**
-     * @brief      Sets reference count up
-     */
+    // Method: IncrementReferenceCount
+    //      Sets reference count up
     void IncrementReferenceCount() { m_references++; }
 
-    /**
-     * @brief      Sets reference count down
-     */
+    // Method: DecrementReferenceCount
+    //      Sets reference count down
     void DecrementReferenceCount() { m_references--; }
 
-    /**
-     * @brief      Used to lock a resource. 
-     * @n          A locked resource cannot be deleted with unload when the reference count
-     * @n          is zero. Useful for when you need a resource to be loaded permanently
-     *
-     * @param      state - true or false
-     */
+    // Method: Lock
+    //      Used to lock a resource. 
+    //
+    // Notes:
+    //      A locked resource cannot be deleted with <Unload> when the reference count
+    //      reaches zero. Useful for when you need a resource to be loaded permanently
+    //
+    // Parameters:
+    //      state - true or false
     void Lock(bool state) { m_locked = state; }
 
 
 protected:
 
-    /**
-     * @brief      Used to set the resources size.
-     *
-     * @param      size - The size in bytes
-     */
+    // Method: SetSize
+    //      Used to set the resources size.
+    //
+    // Parameters:
+    //      size - The size in bytes
     void SetSize(u32 size) { m_size = size; }
 
 

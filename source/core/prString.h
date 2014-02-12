@@ -1,21 +1,18 @@
+// File: prString.h
 /**
- * @file       prString.h
- * @brief      Contains basic fixed size string class.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -31,86 +28,127 @@
 #define STRING_BUFFER_SIZE  256
 
 
-/// @brief      Fixed size string class. This class is designed not to
-/// @n          allocate memory during usage. Use where you know string size
-/// @n          will be limited.
+// Class: prString
+//      Fixed size string class. This class is designed not to
+//      allocate memory during usage. Use where you know string size
+//      will be limited.
 class prString
 {
 public:
 
-    /// @brief      Ctor
+    // Method: prString
+    //      Default construtor
     prString();
 
-    /// @brief      Ctor
-    /// @param      text - The string to set
+    // Method: prString
+    //      Construtor
+    //
+    // Parameters:
+    //      text - The string to set
     prString(const char *text);
 
-    /// @brief      Copy ctor
-    /// @param      str - String to copy
+    // Method: prString
+    //      Copy construtor
+    //
+    // Parameters:
+    //      str - String to copy
     prString(const prString &str);
 
-    /// @brief      Sets the string as empty, but not NULL
+    // Method: Clear
+    //      Sets the string as empty, but not NULL
     void Clear();
 
-    /// @brief      Sets the strings text
-    /// @param      text - The string to set
-    /// @note       The passed text can be NULL or empty ""
+    // Method: Set
+    //      Sets the strings text
+    //
+    // Parameters:
+    //      text - The string to set
+    //
+    // Notes:
+    //      The passed text can be NULL or empty ""
     void Set(const char *text);
 
-    /// @brief      Adds to the string.
-    /// @param      str - String to add
+    // Method: Append
+    //      Adds to the string.
+    //
+    // Parameters:
+    //      str - String to add
     void Append(const prString &str);
 
-    /// @brief      Adds to the string.
-    /// @param      text - Text to add
-    /// @note       The passed text can be NULL or empty ""
+    // Method: Append
+    //      Adds to the string.
+    //
+    // Parameters:
+    //      text - Text to add
+    //
+    // Notes:
+    //      The passed text can be NULL or empty ""
     void Append(const char *text);
 
-    /// @brief      Removes any leading spaces.
+    // Method: TrimFront
+    //      Removes any leading spaces.
     void TrimFront();
 
-    /// @brief      Removes any trailing spaces.
+    // Method: TrimBack
+    //      Removes any trailing spaces.
     void TrimBack();
 
-    /// @brief      Removes any leading/trailing spaces.
+    // Method: Trim
+    //      Removes any leading/trailing spaces.
     void Trim();
 
-    /// @brief      Compares string for equality.
-    /// @param      text - Text to compare
-    /// @return     CMP_ERROR
-    /// @return     CMP_LESSTHAN
-    /// @return     CMP_EQUALTO
-    /// @return     CMP_GREATERTHAN
-    /// @see        prStringResult
+    // Method: Compare
+    //  Compares string for equality.
+    //
+    // Parameters
+    //      text - Text to compare
+    //
+    // Returns:
+    //      prStringResult
+    //
+    // See Also:
+    //      <prStringResult>
     prStringResult Compare(const char *text);
 
-    /// @brief      Compares string for equality.
-    /// @param      str - String to compare
-    /// @return     CMP_ERROR
-    /// @return     CMP_LESSTHAN
-    /// @return     CMP_EQUALTO
-    /// @return     CMP_GREATERTHAN
-    /// @see        prStringResult
+    // Method: Compare
+    //  Compares string for equality.
+    //
+    // Parameters
+    //      str - String to compare
+    //
+    // Returns:
+    //      prStringResult
+    //
+    // See Also:
+    //      <prStringResult>
     prStringResult Compare(const prString &str);
 
-    /// @brief      Replaces all occurences of 'findChar' with 'replaceChar'
+    // Method: Replace
+    //      Replaces all occurences of 'findChar' with 'replaceChar'
     void Replace(char findChar, char replaceChar);
 
-    /// @brief      Makes the string uppercase
+    // Method: ToUpper
+    //      Makes the string uppercase
     void ToUpper();
 
-    /// @brief      Makes the string lowercase
+    // Method: ToLower
+    //      Makes the string lowercase
     void ToLower();
 
-    /// @brief      Creates a string using a standard C format string
-    /// @param      fmt - The format string
-    /// @param      ... - Optional parameters
+    // Method: Sprintf
+    //      Creates a string using a standard C format string
+    //
+    // Parameters:
+    //      fmt - The format string
+    //      ... - Optional parameters
     void Sprintf(const char *fmt, ...);
 
-    /// @brief      Gets the length of the string
+    // Method: Length
+    //      Gets the length of the string
     s32 Length() const { return m_length; }
 
-    /// @brief      Gets the strings text
+    // Method: Text
+    //      Gets the strings text
     const char *Text() const { return m_text; }
 
     //bool Contains(const char *text);

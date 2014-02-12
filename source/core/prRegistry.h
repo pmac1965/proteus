@@ -1,7 +1,4 @@
-/**
- * @file       prRegistry.h
- * @brief      Contains the registry class
- */
+// File: prRegistry.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -29,68 +26,69 @@
 #include <map>
 
 
-/**
- * @brief      The registry class stores global data used by the engine,
- * @n          such as screen width and height.
- */
+// Class: prRegistry
+//      The registry class stores global data used by the engine,
+//      such as screen width and height.
 class prRegistry : public prCoreSystem
 {
 public:
 
-    /**
-     * @brief      Ctor.
-     */
+    // Method: prRegistry
+    //      Ctor.
     prRegistry();
 
-    /**
-     * @brief      Dtor.
-     */
+    // Method: ~prRegistry
+    //      Dtor.
     virtual ~prRegistry();
 
-    /**
-     * @brief      Adds a new key to the registry
-     *
-     * @param      key   - The keys name
-     * @param      value - The keys value
-     */
+    // Method: AddKey
+    //      Adds a new key to the registry
+    //
+    // Parameters:
+    //      key   - The keys name
+    //      value - The keys value
     void AddKey(std::string key, std::string value);
     
-    /**
-     * @brief      Sets the value of a key in the registry.
-     *
-     * @param      key   - The keys name
-     * @param      value - The keys value
-     *
-     * @return     true if value set, false otherwise
-     */
+    // Method: SetValue
+    //      Sets the value of a key in the registry.
+    //
+    // Parameters:
+    //      key   - The keys name
+    //      value - The keys value
+    //
+    // Returns:
+    //      true if value set, false otherwise
     bool SetValue(std::string key, std::string value);
     
-    /**
-     * @brief      Sets the value of a key in the registry.
-     *
-     * @param      key   - The keys name
-     * @param      value - The keys value
-     *
-     * @return     true if value set, false otherwise
-     */
+    // Method: SetValue
+    //      Sets the value of a key in the registry.
+    //
+    // Parameters:
+    //      key   - The keys name
+    //      value - The keys value
+    //
+    // Returns:
+    //      true if value set, false otherwise
     bool SetValue(std::string key, s32 value);
     
-    /**
-     * @brief      Gets the value of a key in the registry.
-     *
-     * @param      key   - The keys name
-     *
-     * @return     The keys value as a string, or
-     * @return     NULL if the key does not exist
-     */
+    // Method: GetValue
+    //      Gets the value of a key in the registry.
+    //
+    // Parameters:
+    //      key   - The keys name
+    //
+    // Returns:
+    //          The keys value as a string, or
+    //          NULL if the key does not exist
     const char *GetValue(std::string key);
     
-    /**
-     * @brief      Shows all the key/value pairs in the registry.
-     *
-     * @note       Only works in debug mode.
-     */
+    // Method: ShowKeyValuePairs
+    //      Shows all the key/value pairs in the registry.
+    //
+    // Notes:
+    //      Only works in debug mode.
     void ShowKeyValuePairs();
+
 
 private:
     
