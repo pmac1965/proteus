@@ -1,7 +1,5 @@
 /**
  * prWindowProcedure.cpp
- * Contains the default windows message handler.
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 #include "../prConfig.h"

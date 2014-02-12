@@ -1,7 +1,5 @@
 /**
  * prString.cpp
- * Contains basic fixed size string class.
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 

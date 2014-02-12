@@ -1,21 +1,18 @@
+// File: prWaypoint.h
 /**
- * @file       prWaypoint.h
- * @brief      Contains a basic waypoint.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -26,12 +23,13 @@
 #include "prTypes.h"
 
 
-/// A basic way point
+// Class: prWaypoint
+//      A basic way point
 class prWaypoint
 {
 public:
-
-    /// @brief      Constructor.
+    // Method: prWaypoint
+    //      Constructor.
     prWaypoint()
     {
         x     = 0;
@@ -39,10 +37,13 @@ public:
         index = 0;
     }
     
-    /// @brief      Constructor.
-    /// @param      _x     - X coordinate
-    /// @param      _y     - Y coordinate
-    /// @param      _index - Waypoints index
+    // Method: prWaypoint
+    //      Constructor.
+    //
+    // Parameters:
+    //      _x     - X coordinate
+    //      _y     - Y coordinate
+    //      _index - Waypoints index
     prWaypoint(s32 _x, s32 _y, s32 _index)
     {
         x     = _x;
@@ -50,8 +51,11 @@ public:
         index = _index;
     }
 
-    /// @brief      Copy constructor.
-    /// @param      a - Waypoint to copy
+    // Method: prWaypoint
+    //      Copy constructor.
+    //
+    // Parameters:
+    //      a - Waypoint to copy
     prWaypoint(const prWaypoint &a)
     {
         x     = a.x;

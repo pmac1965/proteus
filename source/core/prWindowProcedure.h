@@ -1,22 +1,19 @@
-/**
- * @file       prWindowProcedure.h
- * @brief      Contains the default windows message handler.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
- *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+// File: prWindowProcedure.h
+/*
+    Copyright 2014 Paul Michael McNab
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
 
 
 #ifndef __PRWINDOWPROCEDURE_H
@@ -29,9 +26,7 @@
 #if defined(PLATFORM_PC)
 
 
-// ----------------------------------------------------------------------------
 // Exclude MFC
-// ----------------------------------------------------------------------------
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
@@ -43,24 +38,29 @@
 #include <windows.h>
 
 
-// ----------------------------------------------------------------------------
 //  Forward declarations
-// ----------------------------------------------------------------------------
 class prApplication;
 
-
-/// @brief      Pointer to allow game to receive specific messages like Activate and Deactivate.
-/// @param      app - A pointer to the current application
+// Function: prSetApplicationForWindowProcedure
+//      Pointer to allow game to receive specific messages like Activate and Deactivate.
+//
+// Parameters:
+//      app - A pointer to the current application
 void prSetApplicationForWindowProcedure(prApplication *app);
 
 
-/// @brief      The default window message handler.
-/// @param      hwnd    - Handle to the application window
-/// @param      msg     - A windows message
-/// @param      wParam  - Message data
-/// @param      lParam  - Message data
-/// @return     Returns zero if a message is handled, otherwise the function returns the value returned
-/// @return     by the default window procedure
+// Function: prWindowProcedure
+//      The default window message handler.
+//
+// Parameters:
+//      hwnd    - Handle to the application window
+//      msg     - A windows message
+//      wParam  - Message data
+//      lParam  - Message data
+//
+// Returns:
+//      Returns zero if a message is handled, otherwise the function returns the value returned
+//      by the default window procedure
 LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 

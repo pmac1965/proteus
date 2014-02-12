@@ -1,10 +1,5 @@
+// File: prVersion.h
 /**
- * @file       prVersion.h
- * @brief      Contains code to acquire the engine version number.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
- *
- *//*
- *
  * Copyright 2014 Paul Michael McNab
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,14 +20,20 @@
 #define __PRVERSION_H
 
 
-/// @brief      Acquire engine version number.
-/// @param      major    - Variable to receive version number
-/// @param      minor    - Variable to receive version number
-/// @param      revision - Variable to receive version number
+// Function: prGetVersion
+//      Acquire engine version number.
+//
+// Parameters:
+//      major    - Variable to receive version number
+//      minor    - Variable to receive version number
+//      revision - Variable to receive version number
 void prGetVersion(int &major, int &minor, int &revision);
 
-/// @brief      Acquire engine version number as a string.
-/// @return     A string in the format of "major.minor.revision"
+// Function: prGetVersionAsString
+//      Acquire engine version number as a string.
+//
+// Returns:
+//      A string in the format of "major.minor.revision"
 const char *prGetVersionAsString();
 
 

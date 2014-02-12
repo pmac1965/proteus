@@ -1,8 +1,5 @@
 /**
- * @file       prStringUtil.h
- * @brief      Contains string functions.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
- *
+ * prStringUtil.cpp
  */
 
 

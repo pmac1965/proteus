@@ -1,7 +1,5 @@
 /**
  * prVersion.cpp
- * Contains code to acquire the engine version number.
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 
