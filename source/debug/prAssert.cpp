@@ -1,7 +1,5 @@
 /**
  * prAssert.cpp
- * Contains assertion and error message macros.
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 

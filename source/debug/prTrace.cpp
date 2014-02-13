@@ -1,7 +1,5 @@
 /**
  * prTrace.cpp
- * Contains tracing functions.
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 

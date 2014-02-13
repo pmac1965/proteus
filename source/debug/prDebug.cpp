@@ -1,7 +1,5 @@
 /**
  * prDebug.cpp
- * Contains debug assistance code.
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 

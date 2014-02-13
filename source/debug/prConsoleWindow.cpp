@@ -1,7 +1,5 @@
 /**
  * prConsoleWindow.cpp
- * Contains a class to represent a console window.
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 

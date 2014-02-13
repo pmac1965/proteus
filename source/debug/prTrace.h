@@ -1,23 +1,18 @@
+// File: prTrace.h
 /**
- * @file       prTrace.h
- * @brief      Contains tracing functions. The functions come in two flavours. <br>
- *             Trace functions which are removed in release builds. <br>
- *             Log functions which remain in release builds.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -27,30 +22,44 @@
 
 #if defined(_DEBUG) || defined(DEBUG)
 
-/// @brief   Outputs a debug string to an error log window.
-/// @brief   The actual location is platform dependant, but will generally be the debuggers output window.
-/// @note    The release version of this function compiles to nothing.
-/// @param   fmt - The format string.
-/// @param   ... - Format string parameters.
-/// <br>
+// Function: prTrace 
+//      Outputs a debug string to an error log window.
+//      The actual location is platform dependant, but will generally be the debuggers output window.
+//
+// Notes:
+//      The release version of this function compiles to nothing.
+//
+// Parameters:
+//      fmt - The format string.
+//      param   ... - Format string parameters.
 void prTrace(const char* fmt, ...);
 
-/// @brief  Allows tracing to be enabled/disabled. By default tracing is enabled
-/// @param  state - true or false.
-/// @note   The release version of this function compiles to nothing.
-/// <br>
+// Function: prTraceEnable 
+//      Allows tracing to be enabled/disabled. By default tracing is enabled
+//
+// Parameters:
+//      state - true or false.
+//
+// Notes:
+//      The release version of this function compiles to nothing.
 void prTraceEnable(bool state);
 
-/// @brief  Enables or disables duplicate string output. This prevents logging from spamming the debug output window.
-/// @param  state - true or false.
-/// @note   The release version of this function compiles to nothing.
-/// <br>
+// Function: prTraceRemoveDuplicates 
+//      Enables or disables duplicate string output. This prevents logging from spamming the debug output window.
+//
+// Parameters:
+//      state - true or false.
+//
+// Notes:
+//      The release version of this function compiles to nothing.
 void prTraceRemoveDuplicates(bool state);
 
-/// @brief  Deletes the old file log.
-/// @brief  This function is called by the engine on startup. You do not need to call.
-/// @note   The release version of this function compiles to nothing.
-/// <br>
+// Function: prTraceLogClear 
+//      Deletes the old file log.
+//      *This function is called by the engine on startup. You do not need to call*
+//
+// Notes:
+//      The release version of this function compiles to nothing.
 void prTraceLogClear();
 
 #else
@@ -64,11 +73,13 @@ void prTraceLogClear();
 #endif
 
 
-/// @brief   Outputs a debug string to an error log window.
-/// @brief   The actual location is platform dependant, but will generally be the debuggers output window.
-/// @param   fmt - The format string.
-/// @param   ... - Format string parameters.
-/// <br>
+// Function: prLog 
+//      Outputs a debug string to an error log window.
+//      The actual location is platform dependant, but will generally be the debuggers output window.
+//
+// Parameters:
+//      fmt - The format string.
+//      ... - Format string parameters.
 void prLog(const char* fmt, ...);
 
 
