@@ -1,22 +1,18 @@
+// File: prColour.h
 /**
- * @file       prColour.h
- * @brief      Contains a class to represent a colour with
- * @n          red, green, blue and alpha properties.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -27,23 +23,25 @@
 #include "../core/prTypes.h"
 
 
-/// @brief      A struct to represent RGBA colour
+// Typedef: prRGBA
+//      A struct to represent RGBA colour
 typedef struct prRGBA
 {
-    u8  r;      ///<    The red component
-    u8  g;      ///<    The green component
-    u8  b;      ///<    The blue component
-    u8  a;      ///<    The alpha component
+    u8  r;
+    u8  g;
+    u8  b;
+    u8  a;
 
 } prRGBA;
 
 
-/// @brief      A class represent an RGBA colour
+// Class: prColour
+//      A class represent an RGBA colour
 class prColour
 {
 public:
-
-    /// @brief      Ctor
+    // Method: prColour
+    //      Ctor
     prColour()
     {
         red   = 1.0f;
@@ -52,12 +50,17 @@ public:
         alpha = 1.0f;
     }
     
-    /// @brief      Ctor
-    /// @note       Value range should be between 0.0f and 1.0f
-    /// @param      r - The red component
-    /// @param      g - The green component
-    /// @param      b - The blue component
-    /// @param      a - The alpha component
+    // Method: prColour
+    //      Ctor
+    //
+    // Notes:
+    //      Value range should be between 0.0f and 1.0f
+    //
+    // Parameters:
+    //      r - The red component
+    //      g - The green component
+    //      b - The blue component
+    //      a - The alpha component
     prColour(f32 r, f32 g, f32 b, f32 a = 1.0f)
     {
         red   = r;
@@ -91,9 +94,12 @@ public:
 };
 
 
-/// @brief      Switches RGBA to BGRA 
-/// @param      pData - A pointer to the colour data
-/// @param      size  - Size of the colour data
+// Function: prSwitchRGBAToBGRA
+//      Switches RGBA to BGRA 
+//
+// Parameters:
+//      pData - A pointer to the colour data
+//      size  - Size of the colour data
 void prSwitchRGBAToBGRA(u8 *pData, u32 size);
 
 

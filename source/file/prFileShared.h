@@ -1,21 +1,18 @@
+// File: prFileShared.h
 /**
- * @file       prFileShared.h
- * @brief      Contains shared file system data.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -63,8 +60,8 @@
 #define PRFILE_TYPE_SV      PRMAKE4('S', 'a', 'v', 'e')
 
 
-/// @struct     prFileHeader
-/// @brief      The standard file header for all binary files made by the proteus engine tools.
+// Typedef: prFileHeader
+//      The standard file header for all binary files made by the proteus engine tools.
 typedef struct prFileHeader
 {
     u32     magic1;         ///< File identifer.
@@ -79,8 +76,8 @@ typedef struct prFileHeader
 } prFileHeader;
 
 
-/// @struct     prChunkHeader
-/// @brief      Main header for chunked files
+// Typedef: prChunkHeader
+//      Main header for chunked files
 typedef struct prChunkHeader
 {
     u32     magic1;         ///< File identifer.
@@ -91,8 +88,8 @@ typedef struct prChunkHeader
 } prChunkHeader;
 
 
-/// @struct     prFileChunk
-/// @brief      A chunk header for chunked files.
+// Typedef: prFileChunk
+//      A chunk header for chunked files.
 typedef struct prFileChunk
 {
     u32     type;           ///< Chunk type.
@@ -103,8 +100,8 @@ typedef struct prFileChunk
 } prFileChunk;
 
 
-/// @struct     prSaveHeader
-/// @brief      The standard save header for all game save files.
+// Typedef: prSaveHeader
+//      The standard save header for all game save files.
 typedef struct prSaveHeader
 {
     prSaveHeader()
@@ -161,10 +158,15 @@ typedef struct prArcEntry
 } prArcEntry;
 
 
-/// @brief      Calculates a checksum.
-/// @param      data     - A pointer to the data to checksum
-/// @param      datasize - The data size in bytes
-/// @return     The checksum value
+// Function: prCalculateChecksum
+//      Calculates a checksum.
+//
+// Parameters:
+//      data     - A pointer to the data to checksum
+//      datasize - The data size in bytes
+//
+// Returns:
+//      The checksum value
 u32 prCalculateChecksum(u8 *data, u32 datasize);
 
 

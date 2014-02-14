@@ -1,6 +1,5 @@
 /**
  * prColour.cpp
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 
@@ -28,9 +27,11 @@ const prColour  prColour::LiteGray      (0.750f, 0.750f, 0.750f);
 void prSwitchRGBAToBGRA(u8 *pData, u32 size)
 {
     // Add size check 
-    TODO("Add size check")
+    PRASSERT(pData);
+    PRASSERT(size > 0);
+    PRASSERT(PRSIZE4(size));
 
-    if (pData)
+    if (pData && size > 0 && PRSIZE4(size))
     {
         prRGBA *p = (prRGBA *)pData;
 

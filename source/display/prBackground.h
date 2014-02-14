@@ -1,22 +1,18 @@
+// File: prBackground.h
 /**
- * @file       prBackground.h
- * @brief      Contains 2D background class designed to handle simple
- * @n          and scrolling screens
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -35,43 +31,54 @@ class TiXmlElement;
 class prTexture;
 
 
-/// @brief      Background class designed to handle simple and scrolling screens
-/// @note       Intended for title, menu and other types of 2D screens.
+// Class: prBackground
+//      Background class designed to handle simple and scrolling screens.
+//      Intended for title, menu and other types of 2D screens.
 class prBackground
 {
 public:
 
-    /**
-     * The background type
-     */
+    // Enum: prBackgroundType
+    //      The background type
+    //
+    //      UNKNOWN - Default type
+    //      IMAGE   - A single background image. Generally these are title, loading and menu screens
+    //      TILEMAP - A tile mapped background. Generally large scrolling levels
+    //
     enum prBackgroundType
     {
-        UNKNOWN = -1,           ///< Defaults to unknown
-        IMAGE   = 0,            ///< A single background image - Generally these are title, loading and menu screens
-        TILEMAP = 1,            ///< A tile mapped background - Generally large scrolling levels
+        UNKNOWN = -1,
+        IMAGE   = 0,
+        TILEMAP = 1,
     };
 
 
 public:
 
-    /// @brief      Returns the width of the background.
-    /// @return     The width
+    // Method: GetWidth
+    //      Returns the width of the background.
     s32 GetWidth() const { return m_width; }
 
-    /// @brief      Returns the height of the background.
-    /// @return     The height
+    // Method: GetHeight
+    //      Returns the height of the background.
     s32 GetHeight() const { return m_height; }
 
-    /// @brief      Returns the type of the background.
-    /// @return     The background type
-    /// @see        prBackgroundType
+    // Method: GetType
+    //      Returns the type of the background.
+    //
+    // See Also:
+    //      <prBackgroundType>
     s32 GetType() const { return m_type; }
 
-    /// @brief      Draws the background.
+    // Method: Draw
+    //      Draws the background.
     void Draw();
 
-    /// @brief      Sets a tint colour.
-    /// @param      c - The tint colour
+    // Method: SetColour
+    //      Sets the tint colour.
+    //
+    // Parameters:
+    //      c - The tint colour
     void SetColour(prColour c);
 
 
@@ -84,28 +91,39 @@ private:
 
     friend class prBackgroundManager;
 
-    /// @brief      Ctor.
-    /// @param      filename - A background file
+    // Method: prBackground
+    //      Ctor
+    //
+    // Parameters:
+    //      filename - A background file
     prBackground(const char *filename);
 
-    /// @brief      Dtor.
+    // Method: ~prBackground
+    //      Dtor
     ~prBackground();
 
 
 private:
 
-    /// @brief      Parses the xml file.
-    /// @param      pParent - A node pointer
+    // Method: ParseFile
+    //      Parses the xml file.
+    //
+    // Parameters:
+    //      pParent - A node pointer
     void ParseFile(TiXmlNode* pParent);
     
-    /// @brief      Attribute parser
-    /// @n          Used to get information about the file.
-    /// @param      pElement - An element pointer
+    // Method: ParseAttribs_File
+    //      Attribute parser used to get information about the file.
+    //
+    // Parameters:
+    //      pElement - An element pointer
     void ParseAttribs_File(TiXmlElement* pElement);
 
-    /// @brief      Attribute parser
-    /// @n          Used to get information about the background like its name, type, etc.
-    /// @param      pElement - An element pointer
+    // Method: ParseAttribs_Background
+    //      Attribute parser used to get information about the background like its name, type, etc.
+    //
+    // Parameters:
+    //      pElement - An element pointer
     void ParseAttribs_Background(TiXmlElement* pElement);
 
 
