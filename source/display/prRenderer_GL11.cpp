@@ -213,8 +213,8 @@ void prRenderer_GL11::SetOrthographicView()
         ERR_CHECK();
 
         // Displacement trick for exact pixelization
-        glTranslatef(0.375f, 0.375f, 0.0f);
-        ERR_CHECK();
+/*        glTranslatef(0.375f, 0.375f, 0.0f);
+        ERR_CHECK();//*/
     }
 }
 

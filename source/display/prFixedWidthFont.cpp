@@ -1,6 +1,5 @@
 /**
  * prFixedWidthFont.cpp
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 
@@ -38,9 +37,9 @@
 #include <stdarg.h>
 #include "prFixedWidthFont.h"
 #include "prOglUtils.h"
+#include "../core/prCore.h"
 #include "../core/prMacros.h"
 #include "../core/prResourceManager.h"
-//#include "../core/prSystemResourceManager.h"
 #include "../display/prTexture.h"
 #include "../display/prRenderer.h"
 #include "../display/prColour.h"
@@ -59,10 +58,12 @@ prFixedWidthFont::prFixedWidthFont(const char *filename, u32 width, u32 height, 
     PRASSERT(height);
     PRASSERT(offset);
 
-    // Create the sprites texture and the sprite.
-    TODO("Fix")
-    m_pTexture = 0;// prSystemResourceManager::Get()->Load<Texture>(filename);
+    // Create the texture.
+    prResourceManager *pRM = (prResourceManager *)prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER);
+    PRASSERT(pRM)
+    m_pTexture = pRM->Load<prTexture>(filename);
     PRASSERT(m_pTexture);
+
     m_width  = width;
     m_height = height;
     m_offset = offset;
@@ -74,7 +75,6 @@ prFixedWidthFont::prFixedWidthFont(const char *filename, u32 width, u32 height, 
     m_framesDown   = m_pTexture->GetHeight() / height;
     m_framesTotal  = m_framesAcross * m_framesDown;
     m_frame        = 0;
-    m_alignment    = 0;
 
     float pw = 1.0f / m_pTexture->GetWidth();
     float ph = 1.0f / m_pTexture->GetHeight();
@@ -82,12 +82,12 @@ prFixedWidthFont::prFixedWidthFont(const char *filename, u32 width, u32 height, 
     m_fh = ph * height;
 
     // Init
-    m_u0    = 0.0f;
-    m_u1    = 0.0f;
-    m_v0    = 0.0f;
-    m_v1    = 0.0f;
-    m_scale = 1.0f;
-    m_alignment = ALIGN_LEFT;
+    m_u0        = 0.0f;
+    m_u1        = 0.0f;
+    m_v0        = 0.0f;
+    m_v1        = 0.0f;
+    m_scale     = 1.0f;
+    m_alignment = FW_ALIGN_LEFT;
 }
 
 
@@ -115,7 +115,6 @@ prFixedWidthFont::prFixedWidthFont(prTexture *pTexture, u32 width, u32 height, u
     m_framesDown   = m_pTexture->GetHeight() / height;
     m_framesTotal  = m_framesAcross * m_framesDown;
     m_frame        = 0;
-    m_alignment    = 0;
 
     float pw = 1.0f / m_pTexture->GetWidth();
     float ph = 1.0f / m_pTexture->GetHeight();
@@ -123,11 +122,12 @@ prFixedWidthFont::prFixedWidthFont(prTexture *pTexture, u32 width, u32 height, u
     m_fh = ph * height;
 
     // Init
-    m_u0    = 0.0f;
-    m_u1    = 0.0f;
-    m_v0    = 0.0f;
-    m_v1    = 0.0f;
-    m_scale = 1.0f;
+    m_u0        = 0.0f;
+    m_u1        = 0.0f;
+    m_v0        = 0.0f;
+    m_v1        = 0.0f;
+    m_scale     = 1.0f;
+    m_alignment = FW_ALIGN_LEFT;
 }
 
 
@@ -138,8 +138,9 @@ prFixedWidthFont::~prFixedWidthFont()
 {
     if (m_pTexture)
     {
-        TODO("Fix")
-        //prSystemResourceManager::Get()->Unload(m_pTexture);
+        prResourceManager *pRM = (prResourceManager *)prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER);
+        PRASSERT(pRM)
+        pRM->Unload(m_pTexture);
         m_pTexture = NULL;
     }
 }
@@ -183,32 +184,32 @@ void prFixedWidthFont::Draw(f32 x, f32 y, const char *fmt, ...)
         ERR_CHECK();
 
         // Check alignment
-        if (m_alignment == ALIGN_RIGHT)
+        if (m_alignment == FW_ALIGN_RIGHT)
         {
-            //Trace("R: %f, '%s'\n", PixelWidth(message), message, strlen(message), m_width);
             x -= PixelWidth(message);
         }
+        else if (m_alignment == FW_ALIGN_CENTRE)
+        {
+            x -= (PixelWidth(message) / 2);
+        }
 
-        char c;
-        int      index = 0;
-        float    dist  = 0;
 
         m_pTexture->Bind();
 
+
+        char     c;
+        int      index = 0;
+        float    dist  = 0;
         do
         {
             c = message[index++];
 
             if (c == ' ')
             {
-//                dist += m_offset;
                 dist += (float)m_offset * m_scale;
-                //y += m_frameHeight;
             }
             else if (c != '\0')
             {
-                c -= 32;
-
                 // Set the frame source rect position indices
                 s32 xpos = c % m_framesAcross;
                 s32 ypos = c / m_framesAcross;
@@ -232,8 +233,11 @@ void prFixedWidthFont::Draw(f32 x, f32 y, const char *fmt, ...)
                 glScalef((float)m_frameWidth * m_scale, (float)m_frameHeight * m_scale, 0);
                 ERR_CHECK();
 
-                TODO("Fix")
-                //Renderer::GetInstance()->BatchDrawQuad(m_u0, m_v0, m_u1, m_v1, Colour::White);
+                prRenderer *pRenderer = (prRenderer *)prCoreGetComponent(PRSYSTEM_RENDERER);
+                if (pRenderer)
+                {
+                    pRenderer->BatchDrawQuad(m_u0, m_v0, m_u1, m_v1, prColour::White);
+                }
             
                 glPopMatrix();
                 ERR_CHECK();
@@ -280,9 +284,14 @@ void prFixedWidthFont::SetAlignment(u32 alignment)
 {
     switch(alignment)
     {
-    case ALIGN_LEFT:
-    case ALIGN_RIGHT:
+    case FW_ALIGN_LEFT:
+    case FW_ALIGN_RIGHT:
+    case FW_ALIGN_CENTER:
         m_alignment = alignment;
+        break;
+
+    default:
+        prTrace("prFixedWidthFont error: Invalid alignment");
         break;
     }
 }

@@ -1,23 +1,18 @@
+// File: prFixedWidthFont.h
 /**
- * @file        prFixedWidthFont.h
- * @brief       Contains a fixed width font class. This font is a lot
- * @n           faster than the standard bitmap font.
- * @note        This font is intended for debug use as it only supports ASCII
- * @copyright   Copyright Paul Michael McNab. All rights reserved.
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -32,59 +27,92 @@
 class prTexture;
 
 
-/// Fixed width font class. This font is a lot
-/// faster than the standard bitmap font.
+// Class: prFixedWidthFont
+//      Fixed width font class. This font is a lot
+//      faster than the standard bitmap font.
+//
+// Notes:
+//      This font is intended for debug use as it only supports ASCII
 class prFixedWidthFont
 {
 public:
-
+    // Enum: prFixedWidthAlignment
     // Simple alignment
-    enum
+    //
+    //      FW_ALIGN_LEFT   - Align left
+    //      FW_ALIGN_RIGHT  - Align right
+    //      FW_ALIGN_CENTER - Align center
+    //      FW_ALIGN_CENTRE - Alternate center spelling
+    enum prFixedWidthAlignment
     {
-        ALIGN_LEFT   = 0x00000000,
-        ALIGN_RIGHT  = 0x00000001,
-        //ALIGN_CENTER = 0x00000020,
-        //ALIGN_CENTRE = ALIGN_CENTER,
+        FW_ALIGN_LEFT   = 0x00000000,
+        FW_ALIGN_RIGHT  = 0x00000001,
+        FW_ALIGN_CENTER = 0x00000020,
+        FW_ALIGN_CENTRE = FW_ALIGN_CENTER,
     };
 
 
 public:
 
-    /// Ctor
-    /// @param      filename - A texture to load
-    /// @param      width    - Width of a character cell
-    /// @param      height   - Height of a character  cell
-    /// @param      offset   - Optional offset to bring cells closer.
+    // Method: prFixedWidthFont
+    //      Ctor
+    //
+    // Parameters:
+    //      filename - A texture to load
+    //      width    - Width of a character cell
+    //      height   - Height of a character  cell
+    //      offset   - Optional offset to bring cells closer.
     explicit prFixedWidthFont(const char *filename, u32 width, u32 height, u32 offset);
 
-    /// Ctor
-    /// @param      pTexture - A texture to load
-    /// @param      width    - Width of a character cell
-    /// @param      height   - Height of a character  cell
-    /// @param      offset   - Optional offset to bring cells closer.
+    // Method: prFixedWidthFont
+    //      Ctor
+    //
+    // Parameters:
+    //      pTexture - A texture to load
+    //      width    - Width of a character cell
+    //      height   - Height of a character  cell
+    //      offset   - Optional offset to bring cells closer.
     explicit prFixedWidthFont(prTexture *pTexture, u32 width, u32 height, u32 offset);
 
-    /// Dtor
+    // Method: ~prFixedWidthFont
+    //      Dtor
     ~prFixedWidthFont();
 
-    /// Draw text
-    /// @param      x      - X coordinate
-    /// @param      y      - Y coordinate
-    /// @param      fmt    - Format string
-    /// @param      ...    - Optional parameters
+    // Method: Draw
+    //      Draw text
+    //
+    // Parameters:
+    //      x      - X coordinate
+    //      y      - Y coordinate
+    //      fmt    - Format string
+    //      ...    - Optional parameters
     void Draw(f32 x, f32 y, const char *fmt, ...);
 
-    /// Added scale as the font can look small
-    /// @param      scale    - A scale value
+    // Method: SetScale
+    //      Sets the font scale
+    //
+    // Parameters:
+    //      scale    - A scale value
     void SetScale(f32 scale) { m_scale = scale; }
 
-    /// Get the width of the passed string.
-    /// @param      pText - The string to check
-    /// @return     String width in pixels
+    // Method: PixelWidth
+    //      Get the width of the passed string.
+    //
+    // Parameters:
+    //      pText - The string to check
+    //
+    // Returns:
+    //      String width in pixels
     f32 PixelWidth(const char *pText) const;
 
-    /// Set the text alignment.
-    /// @param      alignment - The required alignment
+    // Method: SetAlignment
+    //      Set the text alignment.
+    //
+    // Parameters:
+    //      alignment - The required alignment
+    //
+    // See Also:
+    //      <prFixedWidthAlignment>
     void SetAlignment(u32 alignment);
 
 
