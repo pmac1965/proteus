@@ -64,17 +64,13 @@ prFixedWidthFont::prFixedWidthFont(const char *filename, u32 width, u32 height, 
     m_pTexture = pRM->Load<prTexture>(filename);
     PRASSERT(m_pTexture);
 
-    m_width  = width;
-    m_height = height;
-    m_offset = offset;
-
     // Create the width data
     m_frameWidth   = width;
     m_frameHeight  = height;
     m_framesAcross = m_pTexture->GetWidth()  / width;
     m_framesDown   = m_pTexture->GetHeight() / height;
     m_framesTotal  = m_framesAcross * m_framesDown;
-    m_frame        = 0;
+    m_offset       = offset;
 
     float pw = 1.0f / m_pTexture->GetWidth();
     float ph = 1.0f / m_pTexture->GetHeight();
@@ -104,8 +100,6 @@ prFixedWidthFont::prFixedWidthFont(prTexture *pTexture, u32 width, u32 height, u
 
     // Create the sprites texture and the sprite.
     m_pTexture = pTexture;
-    m_width    = width;
-    m_height   = height;
     m_offset   = offset;
 
     // Create the width data
@@ -114,7 +108,6 @@ prFixedWidthFont::prFixedWidthFont(prTexture *pTexture, u32 width, u32 height, u
     m_framesAcross = m_pTexture->GetWidth()  / width;
     m_framesDown   = m_pTexture->GetHeight() / height;
     m_framesTotal  = m_framesAcross * m_framesDown;
-    m_frame        = 0;
 
     float pw = 1.0f / m_pTexture->GetWidth();
     float ph = 1.0f / m_pTexture->GetHeight();

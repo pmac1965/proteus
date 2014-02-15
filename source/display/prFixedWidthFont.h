@@ -115,19 +115,28 @@ public:
     //      <prFixedWidthAlignment>
     void SetAlignment(u32 alignment);
 
+    // Method: GetFrameWidth
+    //      Get the frame width
+    u32 GetFrameWidth() const { return m_frameWidth; }
+
+    // Method: GetFrameHeight
+    //      Get the frame height
+    u32 GetFrameHeight() const { return m_frameHeight; }
+
+    // Method: GetFrameCount
+    //      Get the frame count
+    u32 GetFrameCount() const { return m_framesTotal; }
+
 
 private:
 
     prTexture  *m_pTexture;
-    u32         m_width;
-    u32         m_height;
     u32         m_offset;
     s32         m_frameWidth;
     s32         m_frameHeight;
     s32         m_framesAcross;
     s32         m_framesDown;
     s32         m_framesTotal;
-    s32         m_frame;
     f32         m_fw;
     f32         m_fh;
     f32         m_u0;

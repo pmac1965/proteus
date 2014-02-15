@@ -5,6 +5,8 @@
 
 #include "prApplication.h"
 #include "prDefines.h"
+#include "prCore.h"
+#include "../debug/prTrace.h"
 
 
 /// ---------------------------------------------------------------------------
@@ -22,4 +24,5 @@ prApplication::prApplication()
 /// ---------------------------------------------------------------------------
 prApplication::~prApplication()
 {
+    prCoreDestroy();
 }

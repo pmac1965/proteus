@@ -20,6 +20,7 @@
 #include "../display/prRenderer_DX9.h"
 #include "../display/prBackgroundManager.h"
 #include "../display/prSpriteManager.h"
+#include "../debug/prOnScreenLogger.h"
 
 
 #if defined(PLATFORM_PC)
@@ -137,12 +138,40 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
 
             switch (id)
             {
+            // The background manager.
             case PRSYSTEM_BACKGROUNDMANAGER:
-                systems[id] = new prBackgroundManager();
+                if (systems[id] == NULL)
+                {
+                    systems[id] = new prBackgroundManager();
+                }
+                else
+                {
+                    prTrace("Engine system '%s' already exists\n", systems[id]->Name());
+                }
                 break;
 
+            // The sprite manager.
             case PRSYSTEM_SPRITEMANAGER:
-                systems[id] = new prSpriteManager();
+                if (systems[id] == NULL)
+                {
+                    systems[id] = new prSpriteManager();
+                }
+                else
+                {
+                    prTrace("Engine system '%s' already exists\n", systems[id]->Name());
+                }
+                break;
+
+            // The on screen logger.
+            case PRSYSTEM_ONSCREENLOGGER:
+                if (systems[id] == NULL)
+                {
+                    systems[id] = new prOnScreenLogger();
+                }
+                else
+                {
+                    prTrace("Engine system '%s' already exists\n", systems[id]->Name());
+                }
                 break;
 
             default:
