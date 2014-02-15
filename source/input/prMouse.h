@@ -1,3 +1,19 @@
+// File: prMouse.h
+/**
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 /**
  * @file       prMouse.h
  * @brief      Contains basic mouse access class.
@@ -49,116 +65,175 @@
 #include "../math/prPoint.h"
 
 
-/// @enum   prMouseButton
-/// @brief  The mouse buttons.
+// Enum: prMouseButton
+//      The mouse buttons.
+//
+//      MOUSE_BUTTON_LEFT   - Left button
+//      MOUSE_BUTTON_RIGHT  - Right button
+//      MOUSE_BUTTON_MIDDLE - Middle button
+//      MOUSE_BUTTON_X1     - Extra 1 button (Side buttons)
+//      MOUSE_BUTTON_X2     - Extra 2 button (Side buttons)
 typedef enum prMouseButton
 {
-    MOUSE_BUTTON_LEFT   = MK_LBUTTON,           ///< Left button
-    MOUSE_BUTTON_RIGHT  = MK_RBUTTON,           ///< Right button
-    MOUSE_BUTTON_MIDDLE = MK_MBUTTON,           ///< Middle button
+    MOUSE_BUTTON_LEFT   = MK_LBUTTON,
+    MOUSE_BUTTON_RIGHT  = MK_RBUTTON,
+    MOUSE_BUTTON_MIDDLE = MK_MBUTTON,
 
     #if (_WIN32_WINNT >= 0x0500)
-        MOUSE_BUTTON_X1 = MK_XBUTTON1,          ///< Extra 1 button (Side buttons)
-        MOUSE_BUTTON_X2 = MK_XBUTTON2           ///< Extra 2 button (Side buttons)
+        MOUSE_BUTTON_X1 = MK_XBUTTON1,
+        MOUSE_BUTTON_X2 = MK_XBUTTON2,
     #else
-        MOUSE_BUTTON_X1 = 0x0020,               ///< Extra 1 button (Side buttons)
-        MOUSE_BUTTON_X2 = 0x0040,               ///< Extra 2 button (Side buttons)
+        MOUSE_BUTTON_X1 = 0x0020,
+        MOUSE_BUTTON_X2 = 0x0040,
     #endif
 
 } prMouseButton;
 
 
-/// @brief      Basic class which represents the mouse.
-/// @note       This class is best suited for tools, and other
-/// @n          standard desktop applications.
-/// @note       For games use the prTouch class.
-/// @see        prTouch
+// Class: prMouse
+//      Basic class which represents the mouse.
+//
+// Notes:
+//      This class is best suited for tools, and other
+//      standard desktop applications.
+//      For games use the prTouch class.
+//
+// See Also
+//      <prTouch>
 class prMouse :  public prCoreSystem
 {
 public:
-    /// @brief      Ctor.
+    // Constructor: prMouse
+    //      Ctor
     prMouse();
 
-    /// @brief      Dtor.
+    // Destructor: ~prMouse
+    //      Dtor
     ~prMouse();
 
-    /// @brief      Resets all the data which is useful when the mouse is outside the client rect.
+    // Method: Reset
+    //      Resets all the data which is useful when the mouse is outside the client rect.
     void Reset();
 
-    /// Brief       Updates the mouse.
-    /// @note       This method is called by the application. you should not call it.
+    // Method: Update
+    //      Updates the mouse.
+    //
+    // Notes:
+    //      This method is called by the engine. *You should not call it*
     void Update();
 
-    /// @brief      Determines if one or more mouse buttons have been pressed.
-    /// @note       The buttons must all have been pressed.
-    /// @param      buttons - The buttons to test for
-    /// @see        prMouseButton
-    /// @return     true or false
+    // Method: ButtonPressed
+    //      Determines if one or more mouse buttons have been pressed.
+    //
+    // Notes:
+    //      The buttons must all have been pressed.
+    //
+    // Parameters:
+    //      buttons - The buttons to test for
+    //
+    // See Also:
+    //      <prMouseButton>
     bool ButtonPressed(prMouseButton buttons) const { return ((m_buttonsPressed & buttons) == (u32)buttons); }
 
-    /// @brief      Determines if one or more mouse buttons have been released.
-    /// @note       The buttons must all have been released.
-    /// @param      buttons - The buttons to test for
-    /// @see        prMouseButton
-    /// @return     true or false
+    // Method: ButtonReleased
+    //      Determines if one or more mouse buttons have been released.
+    //
+    // Notes:
+    //      The buttons must all have been released.
+    //
+    // Parameters:
+    //      buttons - The buttons to test for
+    //
+    // See Also:
+    //      <prMouseButton>
     bool ButtonReleased(prMouseButton buttons) const { return ((m_buttonsReleased & buttons) == (u32)buttons); }
 
-    /// @brief      Determines if one or more mouse buttons are down.
-    /// @note       All buttons must be down
-    /// @param      buttons - The buttons to test for
-    /// @see        prMouseButton
-    /// @return     true or false
+    // Method: ButtonDown
+    //      Determines if one or more mouse buttons are down.
+    //
+    // Notes:
+    //      All buttons must be down.
+    //
+    // Parameters:
+    //      buttons - The buttons to test for
+    //
+    // See Also:
+    //      <prMouseButton>
     bool ButtonDown(prMouseButton buttons) const { return ((m_buttonsDown & buttons) == (u32)buttons); }
 
-    /// @brief      Returns the mouse position.
+    // Method: GetPosition
+    //      Returns the mouse position.
     prPoint3 GetPosition() const { return prPoint3(x, y, 0); }
 
-    /// @brief      Receives mouse data messages from the application message handler.
+    // Method: GetPosition
+    //      Receives mouse data messages from the application message handler.
+    //
+    // Notes:
+    //      This method is called by the engine. *You should not call it*
     void SetMouseData(s32 x, s32 y, u32 flags);
 
-    /// @brief      Sets whether the mouse cursor is in the client rect.
+    // Method: SetInRect
+    //      Sets whether the mouse cursor is in the client rect.
+    //
+    // Notes:
+    //      This method is called by the engine. *You should not call it*
     void SetInRect(bool state) { m_inrect = state; }
 
-    /// @brief      Shows the system cursor.
+    // Method: ShowSystemCursor
+    //      Shows the system cursor.
     void ShowSystemCursor(bool show);
 
-    /// @brief      Updates the wheel mouse
+    // Method: MouseWheelUpdate
+    //      Updates the wheel mouse
+    //
+    // Notes:
+    //      This method is called by the engine. *You should not call it*
     void MouseWheelUpdate(s32 dir, s32 clicks);
 
-    /// @brief      Determines if the system cursor is hidden.
-    /// @return     true or false
+    // Method: IsVisible
+    //      Determines if the system cursor is hidden.
     bool IsVisible() const { return m_visible; }
 
-    /// @brief      Determines if the mouse cursor in the client rect.
-    /// @return     true or false
+    // Method: IsInRect
+    //      Determines if the mouse cursor in the client rect.
     bool IsInRect() const { return m_inrect; }
 
-    /// @brief      Determines if a 'shift' key is being pressed
-    /// @note       Will only be set if the key is being held before a mouse key is pressed.
-    /// @return     true or false
+    // Method: IsPressingShift
+    // @brief      Determines if the 'shift' key is being pressed
+    //
+    // Notes:
+    //      Will only be set if the key is being held before a mouse key is pressed.
     bool IsPressingShift() const { return m_shift; }
 
-    /// @brief      Determines if a 'control' key is being pressed
-    /// @note       Will only be set if the key is being held before a mouse key is pressed.
-    /// @return     true or false
+    // Method: IsPressingControl
+    //      Determines if the 'control' key is being pressed
+    //
+    // Notes:
+    //      Will only be set if the key is being held before a mouse key is pressed.
     bool IsPressingControl() const { return m_control; }
 
-    /// @brief      Determines if the mouse wheel has moved.
-    /// @return     true or false
+    // Method: HasMouseWheelMoved
+    //      Determines if the mouse wheel has moved.
     bool HasMouseWheelMoved() const { return m_mouseWheelMoved; }
 
-    /// @brief      Gets the direction the wheel mouse moved in.
+    // Method: GetMouseWheelDir
+    //      Gets the direction the wheel mouse moved in.
     s32 GetMouseWheelDir() const { return m_wheelDir; }
 
-    /// @brief      Gets the number of clicks moved in the specified direction.
+    // Method: GetMouseWheelClicks
+    //      Gets the number of clicks moved in the specified direction.
     s32 GetMouseWheelClicks() const { return m_wheelClicks; }
 
 
 public:
 
-    s32     x;                      ///< Mouse X position.
-    s32     y;                      ///< Mouse Y position.
-
+    // Variable: x
+    //      Public mouse X position.
+    s32     x;
+                                    
+    // Variable: y
+    //      Public mouse Y position.
+    s32     y;
 
 private:
 

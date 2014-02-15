@@ -281,6 +281,17 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
         }
         break;
 
+    case WM_SIZE:
+    case WM_SIZING:
+        if (pApp)
+        {
+            pApp->OnDeactivate();
+        }
+//RECT r;
+//GetClientRect(hWnd, &r);
+//TwWindowSize(r.right - r.left, r.bottom - r.top);
+        break;
+
     //
     case WM_EXITSIZEMOVE:
         if (pApp)

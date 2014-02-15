@@ -112,7 +112,6 @@ void prRenderer_GL11::Init()
     //imp.pTexture = NULL;
     //#endif
     TODO("Fix")
-    TODO("Fix the window name")
 
 
     // Show extensions.
