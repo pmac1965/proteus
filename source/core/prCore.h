@@ -62,11 +62,11 @@ typedef enum prVerType
 // Enum: prSystems
 //      Contains core systems as well the optional systems
 //
+//  PRSYSTEM_RESOURCEMANAGER       - The resource handling system. (Core system)
 //  PRSYSTEM_RENDERER              - The rendering system. (Core system)
 //  PRSYSTEM_TOUCH                 - The touch system. (Core system)
 //  PRSYSTEM_MESSAGEMANAGER        - The message passing system. (Core system)
 //  PRSYSTEM_REGISTRY              - The registry system. (Core system)
-//  PRSYSTEM_RESOURCEMANAGER       - The resource handling system. (Core system)
 //  PRSYSTEM_FILEMANAGER           - The file system. (Core system)
 //  PRSYSTEM_MOUSE                 - Mouse system. (Core system for Desktops)
 //  PRSYSTEM_KEYBOARD              - Keyboard system. (Core system for Desktops)
@@ -81,11 +81,11 @@ typedef enum prVerType
 enum prSystems
 {
     // Core systems
+    PRSYSTEM_RESOURCEMANAGER,  
     PRSYSTEM_RENDERER,         
     PRSYSTEM_TOUCH,            
     PRSYSTEM_MESSAGEMANAGER,   
     PRSYSTEM_REGISTRY,         
-    PRSYSTEM_RESOURCEMANAGER,  
     PRSYSTEM_FILEMANAGER,      
 
     // Desktop only

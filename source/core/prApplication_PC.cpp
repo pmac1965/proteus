@@ -18,6 +18,7 @@
 #include "../debug/prDebug.h"
 #include "../debug/prTrace.h"
 #include "../debug/prConsoleWindow.h"
+#include "../debug/prOnScreenLogger.h"
 #include "../input/prMouse.h"
 #include "../display/prRenderer.h"
 #include "../core/prStringUtil.h"
@@ -387,8 +388,17 @@ PRBOOL prApplication_PC::Run()
     }
 
 
+    // Clear here as this system allocates memory
+    prOnScreenLogger *pOSL = (prOnScreenLogger *)prCoreGetComponent(PRSYSTEM_ONSCREENLOGGER);
+    if (pOSL)
+    {
+        pOSL->Clear();
+    }
+
+
     // Clear app pointer.
     prSetApplicationForWindowProcedure(NULL);
+    prCoreDestroy();
 
 
     return PRFALSE;
@@ -440,8 +450,16 @@ BOOL prApplication_PC::CheckPlatform()
         // Is the operating system is Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003, Windows XP, or Windows 2000?
         if (osvi.dwPlatformId == VER_PLATFORM_WIN32_NT)
         {
-            prTrace("Windows version %i.%i\n", osvi.dwMajorVersion, osvi.dwMinorVersion);
-            prTrace("%ls\n", osvi.szCSDVersion);
+            // Write startup info.
+            prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+            if (reg)
+            {
+                if (prStringCompare(reg->GetValue("Verbose"), "true") == CMP_EQUALTO)
+                {
+                    prTrace("Windows version %i.%i\n", osvi.dwMajorVersion, osvi.dwMinorVersion);
+                    prTrace("%ls\n", osvi.szCSDVersion);
+                }
+            }
         }
         else
         {

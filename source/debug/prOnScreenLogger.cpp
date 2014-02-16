@@ -1,32 +1,17 @@
-// ----------------------------------------------------------------------------
-//
-// File: prOnScreenLogger.cpp
-//
-//      Description     - Contains a helper class for platforms without easy
-//                        access to IDE debug logging.
-//      Author          - Paul Michael McNab.
-//      Copyright       - Copyright Paul Michael McNab. All rights reserved.
-//
-// Disclaimer:
-//
-//      THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-//      "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-//      TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-//      PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-//      CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-//      EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-//      PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-//      PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//      LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//      NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-//      SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// ----------------------------------------------------------------------------
+/**
+ * prOnScreenLogger.cpp
+ */
 
 
 #include "prOnScreenLogger.h"
+#include "prDebugFont.h"
+#include "prTrace.h"
 #include "../core/prCore.h"
-#include "../display/prFixedWidthFont.h"
+#include "../core/prMacros.h"
+#include "../core/prResourceManager.h"
+#include "../core/prRegistry.h"
+#include "../display/prTexture.h"
+#include "../debug/prDebug.h"
 #include <stdarg.h>
 #include <stdio.h>
 
@@ -36,6 +21,8 @@
 /// ----------------------------------------------------------------------------
 prOnScreenLogger::prOnScreenLogger() : prCoreSystem(PRSYSTEM_ONSCREENLOGGER, "prOnScreenLogger")
 {
+    m_pTexture        = NULL;
+    m_pFixedWidthFont = NULL;
 }
 
 
@@ -44,105 +31,128 @@ prOnScreenLogger::prOnScreenLogger() : prCoreSystem(PRSYSTEM_ONSCREENLOGGER, "pr
 /// ----------------------------------------------------------------------------
 prOnScreenLogger::~prOnScreenLogger()
 {
+    // Delete the font
+    PRSAFE_DELETE(m_pFixedWidthFont);
+
+    // Release the fonts texture
+    prResourceManager *pRM = (prResourceManager *)prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER);
+    if (pRM && m_pTexture)
+    {
+        pRM->Unload(m_pTexture);
+        m_pTexture = NULL;
+    }
+
+    // And clear the strings
+    Clear();
 }
 
 
-// ----------------------------------------------------------------------------
-// Adds a message.
-// ----------------------------------------------------------------------------
+/// ----------------------------------------------------------------------------
+/// Adds a message.
+/// ----------------------------------------------------------------------------
 void prOnScreenLogger::Add(const char *message, ...)
 {
     if (message && *message)
     {
-        char buffer[256];
+        char buffer[512];
 
 		// Format the message.
         va_list args;
         va_start(args, message);        
         vsprintf(buffer, message, args);
         va_end(args);
+        TODO("Make safer");
 
-        m_messages.push_front(std::string(buffer));
+        // Store
+        m_messages.push_front(strdup(buffer));
 
-        if (m_messages.size() > 64)
+        // Release old
+        if (m_messages.size() >= MAX_MESSAGE_COUNT)
         {
+            char *p = m_messages.back();
+            PRSAFE_DELETE(p);
             m_messages.pop_back();
         }
     }
 }
 
 
-// ----------------------------------------------------------------------------
-// Draw all the messages.
-// ----------------------------------------------------------------------------
-void prOnScreenLogger::Draw(prFixedWidthFont *font, u32 xpos, u32 yOffset, bool right)
+/// ----------------------------------------------------------------------------
+/// Draw all the messages.
+/// ----------------------------------------------------------------------------
+void prOnScreenLogger::Draw(u32 xpos, u32 ypos, prFixedWidthFont::prFixedWidthAlignment alignment)
 {
-    if (font)
+    if (m_pFixedWidthFont == NULL)
     {
-        std::list<std::string>::iterator itr = m_messages.begin();
-        std::list<std::string>::iterator end = m_messages.end();
+        // Create a texture
+        prResourceManager *pRM = (prResourceManager *)prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER);
+        PRASSERT(pRM)
 
-        f32 ypos = 0;
+        m_pTexture = pRM->LoadFromMemory<prTexture>("debugfont", debugFont, sizeof(debugFont));
+        PRASSERT(m_pTexture);
 
-        // Right aligned?
-        if (right)
+        // Create the font
+        m_pFixedWidthFont = new prFixedWidthFont(m_pTexture, 16, 16, 10);
+        PRASSERT(m_pFixedWidthFont)
+    }
+
+
+    if (m_pFixedWidthFont)
+    {
+        // Set alignment
+        switch (alignment)
         {
-            font->SetAlignment(prFixedWidthFont::FW_ALIGN_RIGHT);
+        case prFixedWidthFont::FW_ALIGN_LEFT:
+        case prFixedWidthFont::FW_ALIGN_RIGHT:
+        case prFixedWidthFont::FW_ALIGN_CENTER:
+            m_pFixedWidthFont->SetAlignment(alignment);
+            break;
+
+        default:
+            prTrace("prOnScreenLogger - Invalid alignment");
+            m_pFixedWidthFont->SetAlignment(prFixedWidthFont::FW_ALIGN_LEFT);
+            break;
         }
+
+        // Get screen height
+        prRegistry *pReg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+        PRASSERT(pReg)        
+        u32 scrnHeight = (u32)atoi(pReg->GetValue("ScreenHeight"));
 
         // Draw.
-        for (;itr != end;++itr)
+        std::list<char *>::iterator itr = m_messages.begin();
+        std::list<char *>::iterator end = m_messages.end();
+        for (;itr != end; ++itr)
         {
-            font->Draw((f32)xpos, ypos, (*itr).c_str());            
-            ypos += yOffset;
-        }
+            m_pFixedWidthFont->Draw((f32)xpos, (f32)ypos, (*itr));            
+            ypos += m_pFixedWidthFont->GetFrameHeight();
 
-        // Restore alignment.
-        font->SetAlignment(prFixedWidthFont::FW_ALIGN_LEFT);
+            // Early exit?
+            if (ypos >= scrnHeight)
+                break;
+        }
     }
 }
 
 
-// ----------------------------------------------------------------------------
-// Remove all the messages.
-// ----------------------------------------------------------------------------
+/// ----------------------------------------------------------------------------
+/// Remove all the messages.
+/// ----------------------------------------------------------------------------
 void prOnScreenLogger::Clear()
 {
-    m_messages.clear();
+    while (!m_messages.empty())
+    {
+        char *p = m_messages.back();
+        PRSAFE_DELETE(p);
+        m_messages.pop_back();
+    }
 }
 
-//
-//#if defined(PLATFORM_ANDROID)
-//namespace
-//{
-//    prOnScreenLogger *instance = NULL;
-//}
-//
-//prOnScreenLogger *prOnScreenLogger::GetInstance()
-//{
-//    if (instance == NULL)
-//    {
-//        instance = new prOnScreenLogger();
-//    }
-//
-//    return instance;
-//}
-//
-//void prOnScreenLogger::SingletonCreate()
-//{
-//    if (instance == NULL)
-//    {
-//        instance = new prOnScreenLogger();
-//    }
-//}
-//
-//void prOnScreenLogger::SingletonDestroy()
-//{
-//    SAFE_DELETE(instance);
-//}
-//
-//bool prOnScreenLogger::SingletonExists()
-//{
-//    return (instance != NULL);
-//}
-//#endif
+
+/// ----------------------------------------------------------------------------
+/// Returns the number of messages.
+/// ----------------------------------------------------------------------------
+s32 prOnScreenLogger::Count()
+{
+    return m_messages.size();
+}

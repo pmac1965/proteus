@@ -53,9 +53,9 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
         result = PRTRUE;
 
         // Create the core systems
+        systems[PRSYSTEM_RESOURCEMANAGER]   = new prResourceManager();
         systems[PRSYSTEM_MESSAGEMANAGER]    = new prMessageManager();
         systems[PRSYSTEM_REGISTRY]          = new prRegistry();
-        systems[PRSYSTEM_RESOURCEMANAGER]   = new prResourceManager();
         systems[PRSYSTEM_FILEMANAGER]       = new prFileManager();
 
         #if defined(PLATFORM_PC)
@@ -195,10 +195,13 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
 /// ---------------------------------------------------------------------------
 void prCoreDestroy()
 {
-    for (s32 i = 0; i < PRSYSTEM_MAX; i++)
+    // Release in reverse, so systems which use textures
+    // can get to release them first.
+    for (s32 i = (PRSYSTEM_MAX - 1); i >= 0; i--)
     {
         if (systems[i])
         {
+            prTrace("Destroying %s - %i\n", systems[i]->Name(), systems[i]->ID());
             PRSAFE_DELETE(systems[i]);
         }
     }

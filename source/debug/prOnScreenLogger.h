@@ -1,85 +1,85 @@
-// ----------------------------------------------------------------------------
-//
 // File: prOnScreenLogger.h
-//
-//      Description     - Contains a helper class for platforms without easy
-//                        access to IDE debug logging.
-//      Author          - Paul Michael McNab.
-//      Copyright       - Copyright Paul Michael McNab. All rights reserved.
-//
-// Disclaimer:
-//
-//      THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-//      "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-//      TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-//      PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-//      CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-//      EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-//      PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-//      PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//      LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//      NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-//      SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// ----------------------------------------------------------------------------
+/*
+    Copyright 2014 Paul Michael McNab
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
 
 
 #ifndef __PRONSCREENLOGGER_H
 #define __PRONSCREENLOGGER_H
 
 
-#include <string>
+//#include <string>
 #include <list>
 #include "../core/prTypes.h"
 #include "../core/prCoreSystem.h"
-
-
-//#include "../core/singleton.h"
+#include "../display/prFixedWidthFont.h"
 
 
 // Forward declarations
-class prFixedWidthFont;
+class prTexture;
 
 
-// ----------------------------------------------------------------------------
-// Simple on screen logging class.
-// Useful when the debugger isn't very good.
-// ----------------------------------------------------------------------------
-//#if defined(PLATFORM_ANDROID)
-//class OnScreenLogger
-//#else
-class prOnScreenLogger  : public prCoreSystem//: public Singleton<OnScreenLogger>
-//#endif
+// Defines
+#define MAX_MESSAGE_COUNT   64
+
+
+// Class: prOnScreenLogger
+//      Simple on screen logging class.
+//      Useful when the debugger isn't very good, or for when you want to
+//      log on test devices
+class prOnScreenLogger  : public prCoreSystem
 {
 public:
-
+    // Method: prOnScreenLogger
+    //      Ctor
     prOnScreenLogger();
+
+    // Method: ~prOnScreenLogger
+    //      Dtor
     ~prOnScreenLogger();
 
-
-    // Adds a message.
+    // Method: Add
+    //      Adds a message.
     void Add(const char *message, ...);
 
-    // Draw all the messages.
-    void Draw(prFixedWidthFont *font, u32 xpos, u32 yOffset, bool right = false);
+    // Method: Draw
+    //      Draw all the messages.
+    //
+    // Parameters:
+    //      xpos      - The initial x position
+    //      ypos      - The initial y position
+    //      alignment - Text alignment
+    //
+    // See Also:
+    //      <prFixedWidthFont::prFixedWidthAlignment>
+    void Draw(u32 xpos, u32 ypos, prFixedWidthFont::prFixedWidthAlignment alignment);
 
-    // Remove all the messages.
+    // Method: Clear
+    //      Remove all the messages.
     void Clear();
 
-    //#if defined(PLATFORM_ANDROID)
-    //static OnScreenLogger *GetInstance();
-    //static void SingletonCreate();
-    //static void SingletonDestroy();
-    //static bool SingletonExists();
-    //#endif
+    // Method: Count
+    //      Returns the number of messages.
+    s32 Count();
+
 
 private:
 
-    std::list<std::string>  m_messages;
-
-//private:
-    
-    //MAKE_SINGLETON(OnScreenLogger)
+    prTexture          *m_pTexture;
+    prFixedWidthFont   *m_pFixedWidthFont;
+    std::list<char *>   m_messages;
 };
 
 
