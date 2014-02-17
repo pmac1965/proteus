@@ -10,6 +10,7 @@
 #include "../core/prMacros.h"
 #include "../core/prResourceManager.h"
 #include "../core/prRegistry.h"
+#include "../core/prStringUtil.h"
 #include "../display/prTexture.h"
 #include "../debug/prDebug.h"
 #include <stdarg.h>
@@ -66,7 +67,7 @@ void prOnScreenLogger::Add(const char *message, ...)
         TODO("Make safer");
 
         // Store
-        m_messages.push_front(strdup(buffer));
+        m_messages.push_front(prStringDup(buffer));
 
         // Release old
         if (m_messages.size() >= MAX_MESSAGE_COUNT)

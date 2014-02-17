@@ -238,7 +238,7 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
     // Bada
     #elif defined(PLATFORM_BADA)
         // Copy the app path.
-        strcpy(imp.dataPath, "/Home");
+        strcpy(dataPath, "/Home");
 
     // Android
     #elif defined(PLATFORM_ANDROID)
@@ -492,14 +492,14 @@ const char *prFileManager::GetSystemPath(const char *filename)
             }
 
         #elif defined(PLATFORM_BADA)
-            strcpy(imp.path, "/Home/");
+            strcpy(path, "/Home/");
             // Bypass data/
-            strcat(imp.path, &filename[5]);
+            strcat(path, &filename[5]);
 
         #elif defined(PLATFORM_ANDROID)
             // Make path
-            strcpy(imp.path, "assets/");
-            strcat(imp.path, filename);
+            strcpy(path, "assets/");
+            strcat(path, filename);
 
         #elif defined(PLATFORM_LINUX)
             // Make path

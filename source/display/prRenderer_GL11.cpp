@@ -22,6 +22,10 @@
   #include <GL/glu.h>
   #include "../core/prWindow_PC.h"
 
+#elif defined(PLATFORM_BADA)
+  #include <FGraphicsOpengl.h>
+  using namespace Osp::Graphics::Opengl;
+
 #else
   #error No platform defined.
 
@@ -101,8 +105,13 @@ void prRenderer_GL11::Init()
     ERR_CHECK();
     
     // Depth buffer
+#if defined(PLATFORM_BADA)
+    glClearDepthf(1.0f);                                // Depth buffer setup
+    ERR_CHECK();
+#else
     glClearDepth(1.0f);                                 // Depth buffer setup
     ERR_CHECK();
+#endif
     glEnable(GL_DEPTH_TEST);                            // Enables depth testing
     ERR_CHECK();
     glDepthFunc(GL_LEQUAL);                             // The type of depth test to do
@@ -209,8 +218,13 @@ void prRenderer_GL11::SetOrthographicView()
         glLoadIdentity();
         ERR_CHECK();
         
+#if defined(PLATFORM_BADA)
+        glOrthof(0, m_pWindow->GetWidth(), m_pWindow->GetHeight(), 0, 0, 1);
+        ERR_CHECK();
+#else
         glOrtho(0, m_pWindow->GetWidth(), m_pWindow->GetHeight(), 0, 0, 1);
         ERR_CHECK();
+#endif
 
         glMatrixMode(GL_MODELVIEW);
         ERR_CHECK();
@@ -522,7 +536,7 @@ void prRenderer_GL11::DrawQuad()
     //glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
     //ERR_CHECK();
 
-    glBegin(GL_QUADS);
+    /*glBegin(GL_QUADS);
 
         glTexCoord2f(0.0f, 1.0f);
         glVertex2f(0.0f, 1.0f);
@@ -537,7 +551,7 @@ void prRenderer_GL11::DrawQuad()
         glVertex2f(0.0f, 0.0f);
 
     glEnd();
-    ERR_CHECK();
+    ERR_CHECK();*/
 }
 
 

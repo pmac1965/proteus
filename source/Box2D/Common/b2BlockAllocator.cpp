@@ -18,7 +18,11 @@
 
 #include <Box2D/Common/b2BlockAllocator.h>
 #include <limits.h>
+
+#if defined(SHP)// PMAC - FIX
+#else
 #include <memory.h>
+#endif
 #include <stddef.h>
 
 int32 b2BlockAllocator::s_blockSizes[b2_blockSizes] = 
@@ -60,8 +64,11 @@ b2BlockAllocator::b2BlockAllocator()
 	m_chunkCount = 0;
 	m_chunks = (b2Chunk*)b2Alloc(m_chunkSpace * sizeof(b2Chunk));
 	
+#if defined(SHP)// PMAC - FIX
+#else
 	memset(m_chunks, 0, m_chunkSpace * sizeof(b2Chunk));
 	memset(m_freeLists, 0, sizeof(m_freeLists));
+#endif
 
 	if (s_blockSizeLookupInitialized == false)
 	{
@@ -122,15 +129,23 @@ void* b2BlockAllocator::Allocate(int32 size)
 			b2Chunk* oldChunks = m_chunks;
 			m_chunkSpace += b2_chunkArrayIncrement;
 			m_chunks = (b2Chunk*)b2Alloc(m_chunkSpace * sizeof(b2Chunk));
+
+#if defined(SHP)// PMAC - FIX
+#else
 			memcpy(m_chunks, oldChunks, m_chunkCount * sizeof(b2Chunk));
 			memset(m_chunks + m_chunkCount, 0, b2_chunkArrayIncrement * sizeof(b2Chunk));
+#endif
 			b2Free(oldChunks);
 		}
 
 		b2Chunk* chunk = m_chunks + m_chunkCount;
 		chunk->blocks = (b2Block*)b2Alloc(b2_chunkSize);
-#if defined(_DEBUG)
+
+#if defined(SHP)// PMAC - FIX
+#else
+    #if defined(_DEBUG)
 		memset(chunk->blocks, 0xcd, b2_chunkSize);
+    #endif
 #endif
 		int32 blockSize = s_blockSizes[index];
 		chunk->blockSize = blockSize;
@@ -193,7 +208,10 @@ void b2BlockAllocator::Free(void* p, int32 size)
 
 	b2Assert(found);
 
-	memset(p, 0xfd, blockSize);
+    #if defined(SHP)// PMAC - FIX
+    #else
+	  memset(p, 0xfd, blockSize);
+    #endif
 #endif
 
 	b2Block* block = (b2Block*)p;
@@ -209,7 +227,10 @@ void b2BlockAllocator::Clear()
 	}
 
 	m_chunkCount = 0;
-	memset(m_chunks, 0, m_chunkSpace * sizeof(b2Chunk));
 
+#if defined(SHP)// PMAC - FIX
+#else
+	memset(m_chunks, 0, m_chunkSpace * sizeof(b2Chunk));
 	memset(m_freeLists, 0, sizeof(m_freeLists));
+#endif
 }

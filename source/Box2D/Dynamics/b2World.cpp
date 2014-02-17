@@ -60,7 +60,10 @@ b2World::b2World(const b2Vec2& gravity)
 
 	m_contactManager.m_allocator = &m_blockAllocator;
 
+#if defined(SHP)// PMAC - FIX
+#else
 	memset(&m_profile, 0, sizeof(b2Profile));
+#endif
 }
 
 b2World::~b2World()

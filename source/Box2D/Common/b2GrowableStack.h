@@ -19,7 +19,12 @@
 #ifndef B2_GROWABLE_STACK_H
 #define B2_GROWABLE_STACK_H
 #include <Box2D/Common/b2Settings.h>
+
+#if defined(SHP)            // PMAC - Fix
+//
+#else
 #include <memory.h>
+#endif
 
 /// This is a growable LIFO stack with an initial capacity of N.
 /// If the stack size exceeds the initial capacity, the heap is used
@@ -51,7 +56,11 @@ public:
 			T* old = m_stack;
 			m_capacity *= 2;
 			m_stack = (T*)b2Alloc(m_capacity * sizeof(T));
+#if defined(SHP)            // PMAC - Fix
+//
+#else
 			memcpy(m_stack, old, m_count * sizeof(T));
+#endif
 			if (old != m_array)
 			{
 				b2Free(old);

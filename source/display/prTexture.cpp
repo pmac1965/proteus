@@ -835,7 +835,7 @@ bool prTexture::GetTextureFormat(u32 texFormat, int &internalFormat, int &format
         internalFormat = GL_RGBA;
         format         = GL_RGBA;
         type           = GL_UNSIGNED_SHORT_4_4_4_4;
-        alpha          = true;
+        m_alpha        = true;
         compressed     = false;
         break;
 
@@ -843,7 +843,7 @@ bool prTexture::GetTextureFormat(u32 texFormat, int &internalFormat, int &format
         internalFormat = GL_RGBA;
         format         = GL_RGBA;
         type           = GL_UNSIGNED_SHORT_5_5_5_1;
-        alpha          = true;
+        m_alpha        = true;
         compressed     = false;
         break;
 
@@ -851,7 +851,7 @@ bool prTexture::GetTextureFormat(u32 texFormat, int &internalFormat, int &format
         internalFormat = GL_RGB;
         format         = GL_RGB;
         type           = GL_UNSIGNED_SHORT_5_6_5;
-        alpha          = false;
+        m_alpha        = false;
         compressed     = false;
         break;
 
@@ -898,7 +898,8 @@ bool prTexture::GetTextureFormat(u32 texFormat, int &internalFormat, int &format
 
         // So we see on other releases
         #if defined(PLATFORM_BADA)
-        OnScreenLogger::GetInstance()->Add(StringPrintf("Unknown texture format: %08x\n", texFormat));
+        TODO("Fix");
+        //OnScreenLogger::GetInstance()->Add(StringPrintf("Unknown texture format: %08x\n", texFormat));
         #endif
 
         //// So we see on iphone release.

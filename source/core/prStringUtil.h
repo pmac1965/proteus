@@ -273,7 +273,7 @@ char *prStringFindSubString(char *string, char *search);
 //
 // Returns:
 //      The number of characters copied
-s32 prStringCopy(char *src, char *dst);
+s32 prStringCopy(const char *src, char *dst);
 
 // Function: prStringAddString
 //      Adds one string to another.
@@ -397,6 +397,21 @@ void prStringParseControls(const char *text, char *buffer);
 //      fmt        - The format string
 //      ...        - Optional parameters
 void prSprintf(char *buffer, const char* fmt, ...);
+
+
+// Function: prStringDup
+//      Duplicates a string
+//
+// Parameters:
+//      str - The string to copy
+// 
+// Notes:
+//      The user is responsible for deleting the returned string.
+//
+// Notes:
+//      Can return NULL if the passed string is NULL or empty
+//
+char *prStringDup(const char* str);
 
 
 #endif//__PRSTRINGUTIL_H

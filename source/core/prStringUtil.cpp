@@ -757,7 +757,7 @@ char *prStringFindSubString(char *string, char *search)
 /// ---------------------------------------------------------------------------
 /// Copies one string to another.
 /// ---------------------------------------------------------------------------
-s32 prStringCopy(char *src, char *dst)
+s32 prStringCopy(const char *src, char *dst)
 {
     s32 count= 0;
 
@@ -1156,4 +1156,28 @@ void prSprintf(char *buffer, const char* fmt, ...)
     {
         buffer[0] = 0;
     }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Duplicates a string
+/// ---------------------------------------------------------------------------
+char *prStringDup(const char* str)
+{
+    char *newString = NULL;
+
+    if (str && *str)
+    {
+        s32 len = prStringLength(str);
+        if (len > 0)
+        {
+            newString = new char [len + 1];
+            if (newString)
+            {
+                prStringCopy(str, newString);
+            }
+        }
+    }
+
+    return newString;
 }

@@ -199,6 +199,10 @@
     <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2WheelJoint.h" />
     <ClInclude Include="..\..\..\..\source\Box2D\Rope\b2Rope.h" />
     <ClInclude Include="..\..\..\..\source\core\prApplication.h" />
+    <ClInclude Include="..\..\..\..\source\core\prApplication_Android.h" />
+    <ClInclude Include="..\..\..\..\source\core\prApplication_Bada.h" />
+    <ClInclude Include="..\..\..\..\source\core\prApplication_IOS.h" />
+    <ClInclude Include="..\..\..\..\source\core\prApplication_Linux.h" />
     <ClInclude Include="..\..\..\..\source\core\prApplication_PC.h" />
     <ClInclude Include="..\..\..\..\source\core\prArgs.h" />
     <ClInclude Include="..\..\..\..\source\core\prCore.h" />
@@ -219,6 +223,9 @@
     <ClInclude Include="..\..\..\..\source\core\prWaypoint.h" />
     <ClInclude Include="..\..\..\..\source\core\prWindow.h" />
     <ClInclude Include="..\..\..\..\source\core\prWindowProcedure.h" />
+    <ClInclude Include="..\..\..\..\source\core\prWindow_Android.h" />
+    <ClInclude Include="..\..\..\..\source\core\prWindow_Bada.h" />
+    <ClInclude Include="..\..\..\..\source\core\prWindow_Linux.h" />
     <ClInclude Include="..\..\..\..\source\core\prWindow_PC.h" />
     <ClInclude Include="..\..\..\..\source\debug\prAssert.h" />
     <ClInclude Include="..\..\..\..\source\debug\prConsoleWindow.h" />
@@ -342,6 +349,10 @@
     <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2WheelJoint.cpp" />
     <ClCompile Include="..\..\..\..\source\Box2D\Rope\b2Rope.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prApplication.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prApplication_Android.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prApplication_Bada.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prApplication_IOS.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prApplication_Linux.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prApplication_PC.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prArgs.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prCore.cpp" />
@@ -355,6 +366,9 @@
     <ClCompile Include="..\..\..\..\source\core\prVersion.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prWindow.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prWindowProcedure.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prWindow_Android.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prWindow_Bada.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prWindow_Linux.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prWindow_PC.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prAssert.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prConsoleWindow.cpp" />
