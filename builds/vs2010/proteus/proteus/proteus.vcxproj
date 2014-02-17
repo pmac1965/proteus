@@ -285,6 +285,7 @@
     <ClInclude Include="..\..\..\..\source\math\prRectF.h" />
     <ClInclude Include="..\..\..\..\source\math\prVector2.h" />
     <ClInclude Include="..\..\..\..\source\math\prVector3.h" />
+    <ClInclude Include="..\..\..\..\source\memory\prMemory.h" />
     <ClInclude Include="..\..\..\..\source\prConfig.h" />
     <ClInclude Include="..\..\..\..\source\proteus.h" />
     <ClInclude Include="..\..\..\..\source\tinyxml\tinystr.h" />
@@ -381,7 +382,7 @@
     <ClCompile Include="..\..\..\..\source\display\prFixedWidthFont.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prGLFont.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prOglUtils.cpp" />
-    <ClCompile Include="..\..\..\..\source\display\prRenderer .cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prRenderer.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer_DX9.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer_GL11.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer_GL20.cpp" />
@@ -431,6 +432,7 @@
     <ClCompile Include="..\..\..\..\source\math\prRectF.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prVector2.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prVector3.cpp" />
+    <ClCompile Include="..\..\..\..\source\memory\prMemory.cpp" />
     <ClCompile Include="..\..\..\..\source\tinyxml\tinystr.cpp" />
     <ClCompile Include="..\..\..\..\source\tinyxml\tinyxml.cpp" />
     <ClCompile Include="..\..\..\..\source\tinyxml\tinyxmlerror.cpp" />

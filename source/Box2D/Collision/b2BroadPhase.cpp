@@ -18,6 +18,12 @@
 
 #include <Box2D/Collision/b2BroadPhase.h>
 
+#if defined(SHP)        // PMAC - Bada uses a different include for memcpy, etc
+  #include <cstring>
+#else
+  #include <memory.h>
+#endif
+
 b2BroadPhase::b2BroadPhase()
 {
 	m_proxyCount = 0;
@@ -73,10 +79,7 @@ void b2BroadPhase::BufferMove(int32 proxyId)
 		int32* oldBuffer = m_moveBuffer;
 		m_moveCapacity *= 2;
 		m_moveBuffer = (int32*)b2Alloc(m_moveCapacity * sizeof(int32));
-#if defined(SHP)// PMAC - FIX
-#else
 		memcpy(m_moveBuffer, oldBuffer, m_moveCount * sizeof(int32));
-#endif
 		b2Free(oldBuffer);
 	}
 
@@ -110,10 +113,7 @@ bool b2BroadPhase::QueryCallback(int32 proxyId)
 		b2Pair* oldBuffer = m_pairBuffer;
 		m_pairCapacity *= 2;
 		m_pairBuffer = (b2Pair*)b2Alloc(m_pairCapacity * sizeof(b2Pair));
-#if defined(SHP)// PMAC - FIX
-#else
 		memcpy(m_pairBuffer, oldBuffer, m_pairCount * sizeof(b2Pair));
-#endif
 		b2Free(oldBuffer);
 	}
 

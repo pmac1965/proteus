@@ -34,6 +34,13 @@
 #include <Box2D/Common/b2Timer.h>
 #include <new>
 
+#if defined(SHP)        // PMAC - Bada uses a different include for memcpy, etc
+  #include <cstring>
+#else
+  #include <memory.h>
+#endif
+
+
 b2World::b2World(const b2Vec2& gravity)
 {
 	m_destructionListener = NULL;
@@ -60,10 +67,7 @@ b2World::b2World(const b2Vec2& gravity)
 
 	m_contactManager.m_allocator = &m_blockAllocator;
 
-#if defined(SHP)// PMAC - FIX
-#else
 	memset(&m_profile, 0, sizeof(b2Profile));
-#endif
 }
 
 b2World::~b2World()

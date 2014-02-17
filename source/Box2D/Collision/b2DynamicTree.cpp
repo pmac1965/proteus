@@ -18,9 +18,10 @@
 
 #include <Box2D/Collision/b2DynamicTree.h>
 
-#if defined(SHP)// PMAC - FIX
+#if defined(SHP)        // PMAC - Bada uses a different include for memcpy, etc
+  #include <cstring>
 #else
-#include <memory.h>
+  #include <memory.h>
 #endif
 
 b2DynamicTree::b2DynamicTree()
@@ -31,10 +32,7 @@ b2DynamicTree::b2DynamicTree()
 	m_nodeCount = 0;
 	m_nodes = (b2TreeNode*)b2Alloc(m_nodeCapacity * sizeof(b2TreeNode));
 
-#if defined(SHP)// PMAC - FIX
-#else
 	memset(m_nodes, 0, m_nodeCapacity * sizeof(b2TreeNode));
-#endif
 
 	// Build a linked list for the free list.
 	for (int32 i = 0; i < m_nodeCapacity - 1; ++i)
@@ -69,10 +67,7 @@ int32 b2DynamicTree::AllocateNode()
 		b2TreeNode* oldNodes = m_nodes;
 		m_nodeCapacity *= 2;
 		m_nodes = (b2TreeNode*)b2Alloc(m_nodeCapacity * sizeof(b2TreeNode));
-#if defined(SHP)// PMAC - FIX
-#else
 		memcpy(m_nodes, oldNodes, m_nodeCount * sizeof(b2TreeNode));
-#endif
 		b2Free(oldNodes);
 
 		// Build a linked list for the free list. The parent

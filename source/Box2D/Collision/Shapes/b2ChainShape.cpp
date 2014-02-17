@@ -19,9 +19,11 @@
 #include <Box2D/Collision/Shapes/b2ChainShape.h>
 #include <Box2D/Collision/Shapes/b2EdgeShape.h>
 #include <new>
-#if defined(SHP)// PMAC - FIX
+
+#if defined(SHP)        // PMAC - Bada uses a different include for memcpy, etc
+  #include <cstring>
 #else
-#include <memory.h>
+  #include <memory.h>
 #endif
 
 b2ChainShape::~b2ChainShape()
@@ -45,10 +47,7 @@ void b2ChainShape::CreateLoop(const b2Vec2* vertices, int32 count)
 
 	m_count = count + 1;
 	m_vertices = (b2Vec2*)b2Alloc(m_count * sizeof(b2Vec2));
-#if defined(SHP)// PMAC - FIX
-#else
 	memcpy(m_vertices, vertices, count * sizeof(b2Vec2));
-#endif
 	m_vertices[count] = m_vertices[0];
 	m_prevVertex = m_vertices[m_count - 2];
 	m_nextVertex = m_vertices[1];
@@ -70,10 +69,7 @@ void b2ChainShape::CreateChain(const b2Vec2* vertices, int32 count)
 
 	m_count = count;
 	m_vertices = (b2Vec2*)b2Alloc(count * sizeof(b2Vec2));
-#if defined(SHP)// PMAC - FIX
-#else
 	memcpy(m_vertices, vertices, m_count * sizeof(b2Vec2));
-#endif
 	m_hasPrevVertex = false;
 	m_hasNextVertex = false;
 
