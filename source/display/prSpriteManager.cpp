@@ -209,7 +209,10 @@ prSprite *prSpriteManager::ToolCreate(prTexture *pTex, s32 width, s32 height)
 /// ---------------------------------------------------------------------------
 void prSpriteManager::ToolRelease(prSprite *sprite)
 {
-    PRSAFE_DELETE(sprite);
+    if (sprite)
+    {
+        delete sprite;
+    }
 }
 #endif
 

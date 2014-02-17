@@ -65,7 +65,7 @@ prFixedWidthFont::prFixedWidthFont(const char *filename, u32 width, u32 height, 
     PRASSERT(offset);
 
     // Create the texture.
-    prResourceManager *pRM = (prResourceManager *)prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER);
+    prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
     PRASSERT(pRM)
     m_pTexture = pRM->Load<prTexture>(filename);
     PRASSERT(m_pTexture);
@@ -137,7 +137,7 @@ prFixedWidthFont::~prFixedWidthFont()
 {
     if (m_pTexture)
     {
-        prResourceManager *pRM = (prResourceManager *)prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER);
+        prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
         PRASSERT(pRM)
         pRM->Unload(m_pTexture);
         m_pTexture = NULL;
@@ -232,7 +232,7 @@ void prFixedWidthFont::Draw(f32 x, f32 y, const char *fmt, ...)
                 glScalef((float)m_frameWidth * m_scale, (float)m_frameHeight * m_scale, 0);
                 ERR_CHECK();
 
-                prRenderer *pRenderer = (prRenderer *)prCoreGetComponent(PRSYSTEM_RENDERER);
+                prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
                 if (pRenderer)
                 {
                     pRenderer->BatchDrawQuad(m_u0, m_v0, m_u1, m_v1, prColour::White);

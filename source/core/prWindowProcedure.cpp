@@ -77,7 +77,7 @@ namespace
             int height = rect.bottom - rect.top;
             if (p.x < 0 || p.y < 0 || p.x >= width || p.y >= height)
             {
-                prMouse *pMouse = (prMouse *)prCoreGetComponent(PRSYSTEM_MOUSE);
+                prMouse *pMouse = static_cast<prMouse *>(prCoreGetComponent(PRSYSTEM_MOUSE));
                 if (pMouse)
                 {
                     pMouse->SetInRect(false);
@@ -99,7 +99,7 @@ namespace
     // ----------------------------------------------------------------------------
     void MouseUpdate(s32 x, s32 y, u32 flags)
     {
-        prMouse *pMouse = (prMouse *)prCoreGetComponent(PRSYSTEM_MOUSE);
+        prMouse *pMouse = static_cast<prMouse *>(prCoreGetComponent(PRSYSTEM_MOUSE));
         if (pMouse)
         {
             pMouse->SetMouseData(x, y, flags);
@@ -113,7 +113,7 @@ namespace
     // ----------------------------------------------------------------------------
     void MouseWheelUpdate(float delta)
     {
-        prMouse *pMouse = (prMouse *)prCoreGetComponent(PRSYSTEM_MOUSE);
+        prMouse *pMouse = static_cast<prMouse *>(prCoreGetComponent(PRSYSTEM_MOUSE));
         if (pMouse)
         {
             s32 dir    = (delta < 0.0f) ? -1 : 1;
@@ -318,7 +318,7 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 
             // Send the command.
             int command = LOWORD(wParam);
-            ((prApplication_PC *)pApp)->WindowsCommand(command);
+            static_cast<prApplication_PC *>(pApp)->WindowsCommand(command);
         }
         break;
 
@@ -327,7 +327,7 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
         if (pApp)
         {
             // Handled?
-            if (((prApplication_PC *)pApp)->WindowsCommand(msg) == true)
+            if (static_cast<prApplication_PC *>(pApp)->WindowsCommand(msg) == true)
             {
                 break;
             }

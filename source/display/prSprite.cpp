@@ -183,7 +183,7 @@ void prSprite::Draw()
 #else
             m_pTexture->Bind();
 
-            prRenderer *pRenderer = (prRenderer *)prCoreGetComponent(PRSYSTEM_RENDERER);
+            prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
             if (pRenderer)
             {
                 pRenderer->DrawQuad(m_u0, m_v0, m_u1, m_v1, m_colour);
@@ -248,7 +248,7 @@ void prSprite::BatchDraw()
 #else
             m_pTexture->Bind();
 
-            prRenderer *pRenderer = (prRenderer *)prCoreGetComponent(PRSYSTEM_RENDERER);
+            prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
             if (pRenderer)
             {
                 pRenderer->DrawQuad(m_u0, m_v0, m_u1, m_v1, m_colour);

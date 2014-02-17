@@ -567,7 +567,7 @@ bool prFileManager::Exists(const char *filename, u32 &size)
 
 #if !defined(PLATFORM_ANDROID)
     
-    u32  hash   = prStringHash(filename);
+    //u32  hash   = prStringHash(filename);
     bool result = false; // imp.Exists(hash, size);
         TODO("Fix")
     if (!result)
@@ -633,7 +633,7 @@ u32 prFileManager::Read(u8 *pDataBuffer, u32 size, u32 hash)
     // Do we need to locate the file? Or can we use the last search results?
     if (hash != filehash)
     {
-        u32 filesize = 0;
+        //u32 filesize = 0;
         //if (!Exists(hash, filesize))
         {
             PRPANIC("Archive internal read failed. Failed to find file");

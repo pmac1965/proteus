@@ -386,7 +386,7 @@ void prWindow_PC::SetTitle(const TCHAR *title)
             SetWindowText(m_hwnd, title);
 
             // Set registry
-            prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+            prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
             if (reg)
             {
                 s32 size = prStringLengthW(title) + 1;
@@ -417,7 +417,7 @@ void prWindow_PC::SetTitle(const char *title)
             SetWindowTextA(m_hwnd, title);
 
             // Set registry
-            prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+            prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
             if (reg)
             {
                 reg->SetValue("WindowName", title);

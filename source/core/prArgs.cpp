@@ -65,7 +65,7 @@ void prArgsParseCommandLine(LPTSTR lpCmdLine)
     {
         pArgv = CommandLineToArgvW(lpCmdLine, &paramTotal);
 
-        prRegistry *reg  = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+        prRegistry *reg  = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
 
         if (pArgv && reg)
         {
@@ -156,7 +156,7 @@ const _TCHAR *prArgsPopNextArg()
     return NULL;
 }
 
-#else//PLATFORM_PC
+#else //PLATFORM_PC
 
 /// ---------------------------------------------------------------------------
 /// Processes command line args

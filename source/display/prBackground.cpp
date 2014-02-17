@@ -98,7 +98,7 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
     // Load the texture - filename acquired from the xml
     if (m_filename)
     {
-        prResourceManager *pRM = (prResourceManager *)prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER);
+        prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
         PRASSERT(pRM)
         m_texture = pRM->Load<prTexture>(m_filename);
         PRASSERT(m_texture);
@@ -112,7 +112,7 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
         m_pixelHeight = 1.0f / m_height;
 
         // Actual screen size.
-        prRegistry *pReg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+        prRegistry *pReg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
         PRASSERT(pReg)
         m_scrnWidth  = (float)atof(pReg->GetValue("ScreenWidth"));
         m_scrnHeight = (float)atof(pReg->GetValue("ScreenHeight"));
@@ -137,7 +137,7 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
 /// ---------------------------------------------------------------------------
 prBackground::~prBackground()
 {
-    prResourceManager *pRM = (prResourceManager *)prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER);
+    prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
     if (pRM && m_texture)
     {
         pRM->Unload(m_texture);
@@ -188,7 +188,7 @@ void prBackground::Draw()
 #else
             if (m_texture->Bind())
             {
-                prRenderer *pRenderer = (prRenderer *)prCoreGetComponent(PRSYSTEM_RENDERER);
+                prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
                 if (pRenderer)
                 {
                     pRenderer->DrawQuad(0.0f, m_v0, m_u1, 1.0f, m_colour);

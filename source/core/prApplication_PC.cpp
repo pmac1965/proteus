@@ -172,7 +172,7 @@ PRBOOL prApplication_PC::DisplayCreate(u32 width, u32 height, const char *pWindo
         result    = PRTRUE;
 
         // Set window.
-        prRenderer *pRenderer = (prRenderer *)prCoreGetComponent(PRSYSTEM_RENDERER);
+        prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
         if (pRenderer)
         {
             pRenderer->SetWindow(m_pWindow);
@@ -180,7 +180,7 @@ PRBOOL prApplication_PC::DisplayCreate(u32 width, u32 height, const char *pWindo
         }
 
         // Set registry
-        prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+        prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
         if (reg)
         {
             // Set title here
@@ -191,7 +191,7 @@ PRBOOL prApplication_PC::DisplayCreate(u32 width, u32 height, const char *pWindo
             reg->SetValue("ScreenHeight", height);
             
             // Show startup entries
-            prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+            prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
             if (reg)
             {
                 if (prStringCompare(reg->GetValue("Verbose"), "true") == CMP_EQUALTO)
@@ -269,7 +269,7 @@ PRBOOL prApplication_PC::DisplayCreateTool(u32 width, u32 height, u32 menuID, u3
         result    = PRTRUE;
 
         // Set window.
-        prRenderer *pRenderer = (prRenderer *)prCoreGetComponent(PRSYSTEM_RENDERER);
+        prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
         if (pRenderer)
         {
             pRenderer->SetWindow(m_pWindow);
@@ -277,7 +277,7 @@ PRBOOL prApplication_PC::DisplayCreateTool(u32 width, u32 height, u32 menuID, u3
         }
 
 		// Let system know the screen size.
-        prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+        prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
         if (reg)
         {
             //reg->SetValue("WindowName", pWindowName);
@@ -285,7 +285,7 @@ PRBOOL prApplication_PC::DisplayCreateTool(u32 width, u32 height, u32 menuID, u3
             reg->SetValue("ScreenHeight", height);
 
             // Show startup entries
-            prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+            prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
             if (reg)
             {
                 if (prStringCompare(reg->GetValue("Verbose"), "true") == CMP_EQUALTO)
@@ -323,7 +323,7 @@ PRBOOL prApplication_PC::DisplayCreateTool(u32 width, u32 height, u32 menuID, u3
 PRBOOL prApplication_PC::Run()
 {
     // Get systems
-    prMouse *pMouse = (prMouse *)prCoreGetComponent(PRSYSTEM_MOUSE);
+    prMouse *pMouse = static_cast<prMouse *>(prCoreGetComponent(PRSYSTEM_MOUSE));
 
 
     // Game loop
@@ -389,7 +389,7 @@ PRBOOL prApplication_PC::Run()
 
 
     // Clear here as this system allocates memory
-    prOnScreenLogger *pOSL = (prOnScreenLogger *)prCoreGetComponent(PRSYSTEM_ONSCREENLOGGER);
+    prOnScreenLogger *pOSL = static_cast<prOnScreenLogger *>(prCoreGetComponent(PRSYSTEM_ONSCREENLOGGER));
     if (pOSL)
     {
         pOSL->Clear();
@@ -451,7 +451,7 @@ BOOL prApplication_PC::CheckPlatform()
         if (osvi.dwPlatformId == VER_PLATFORM_WIN32_NT)
         {
             // Write startup info.
-            prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+            prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
             if (reg)
             {
                 if (prStringCompare(reg->GetValue("Verbose"), "true") == CMP_EQUALTO)
@@ -541,7 +541,7 @@ bool prApplication_PC::IsRemoteSession()
     bool remote = (GetSystemMetrics(SM_REMOTESESSION) != 0);
     if (remote)
     {
-        prMouse *pMouse = (prMouse *)prCoreGetComponent(PRSYSTEM_MOUSE);
+        prMouse *pMouse = static_cast<prMouse *>(prCoreGetComponent(PRSYSTEM_MOUSE));
         if (pMouse)
         {
             pMouse->ShowSystemCursor(true);

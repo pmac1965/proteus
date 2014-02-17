@@ -190,7 +190,7 @@ void prRenderer_GL11::Present()
         #endif
 
         #if defined(PLATFORM_PC)
-        SwapBuffers(((prWindow_PC*)m_pWindow)->GetDeviceContext());
+        SwapBuffers(static_cast<prWindow_PC*>(m_pWindow)->GetDeviceContext());
         #endif
     }
 }

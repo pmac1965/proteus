@@ -37,7 +37,7 @@ prOnScreenLogger::~prOnScreenLogger()
     PRSAFE_DELETE(m_pFixedWidthFont);
 
     // Release the fonts texture
-    prResourceManager *pRM = (prResourceManager *)prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER);
+    prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
     if (pRM && m_pTexture)
     {
         pRM->Unload(m_pTexture);
@@ -87,7 +87,7 @@ void prOnScreenLogger::Draw(u32 xpos, u32 ypos, prFixedWidthFont::prFixedWidthAl
     if (m_pFixedWidthFont == NULL)
     {
         // Create a texture
-        prResourceManager *pRM = (prResourceManager *)prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER);
+        prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
         PRASSERT(pRM)
 
         m_pTexture = pRM->LoadFromMemory<prTexture>("debugfont", debugFont, sizeof(debugFont));
@@ -117,7 +117,7 @@ void prOnScreenLogger::Draw(u32 xpos, u32 ypos, prFixedWidthFont::prFixedWidthAl
         }
 
         // Get screen height
-        prRegistry *pReg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+        prRegistry *pReg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
         PRASSERT(pReg)        
         u32 scrnHeight = (u32)atoi(pReg->GetValue("ScreenHeight"));
 

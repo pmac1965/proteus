@@ -141,7 +141,7 @@ prFile::prFile(const char *filename) : pImpl (new FileImplementation())
     PRASSERT(strlen(filename) > 5);
 
     // Ensures we have a filemanager
-    prFileManager *pFM = (prFileManager *)prCoreGetComponent(PRSYSTEM_FILEMANAGER);
+    prFileManager *pFM = static_cast<prFileManager *>(prCoreGetComponent(PRSYSTEM_FILEMANAGER));
     PRASSERT(pFM)
     
 
@@ -203,7 +203,7 @@ bool prFile::Exists()
 
     if (imp.filenameDisk[0] != 0 && imp.filenameArch[0] != 0 )
     {
-        u32 size = 0;
+        //u32 size = 0;
 
         // Check archive
         if (false//FileManager::GetInstance()->Ready()                     &&
