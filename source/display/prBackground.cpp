@@ -24,6 +24,10 @@
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
 
+#elif defined(PLATFORM_LINUX)
+  #include <GL/gl.h>
+  #include <GL/glu.h>
+
 #else
   #error No platform defined.
 

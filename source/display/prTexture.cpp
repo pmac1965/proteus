@@ -26,6 +26,11 @@
   #include <GLES/gl.h>
   #include <GLES/glext.h>
 
+#elif defined(PLATFORM_LINUX)
+  #include <GL/gl.h>
+  #include <GL/glu.h>
+  #include <string.h>
+
 #else
   #error No platform defined.
 
@@ -68,7 +73,7 @@
 // ----------------------------------------------------------------------------
 // prTexture formats.
 // ----------------------------------------------------------------------------
-#if defined(PLATFORM_PC)
+#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
 enum
 {
     TEX_FMT_OGL888          = 0x00000015,
@@ -505,7 +510,7 @@ void prTexture::Load()
                 #if defined(PLATFORM_PC)
                     PRPANIC("Compressed textures not supported by this platform");
                 #else
-                    glCompressedTexImage2D(GL_TEXTURE_2D, 0, internalFormat, header->dwWidth, header->dwHeight, 0, size - sizeof(PVRTextureHeader), ((u8*)header + sizeof(PVRTextureHeader)));
+                    glCompressedTexImage2D(GL_TEXTURE_2D, 0, internalFormat, header->dwWidth, header->dwHeight, 0, size - sizeof(prPVRTextureHeader), ((u8*)header + sizeof(prPVRTextureHeader)));
                     ERR_CHECK();
                 #endif
                 }
@@ -652,7 +657,7 @@ void prTexture::LoadFromMemory(void *pData, u32 size)
                 #if defined(PLATFORM_PC)
                     PRPANIC("Compressed textures not supported by this platform");
                 #else
-                    glCompressedTexImage2D(GL_TEXTURE_2D, 0, internalFormat, header->dwWidth, header->dwHeight, 0, size - sizeof(prPVRTextureHeader), ((u8*)header + sizeof(PVRTextureHeader)));
+                    glCompressedTexImage2D(GL_TEXTURE_2D, 0, internalFormat, header->dwWidth, header->dwHeight, 0, size - sizeof(prPVRTextureHeader), ((u8*)header + sizeof(prPVRTextureHeader)));
                     ERR_CHECK();
                 #endif
                 }

@@ -32,6 +32,9 @@
 #elif defined(PLATFORM_BADA)
   #include <stdlib.h>
 
+#elif defined(PLATFORM_LINUX)
+  #include <stdlib.h>
+
 #elif defined(PLATFORM_ANDROID)
   #include <stdlib.h>
   #include <libzip\zip.h>
@@ -237,10 +240,15 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
         // Copy the app path.
         strcpy(imp.dataPath, "/Home");
 
-    // Bada
+    // Android
     #elif defined(PLATFORM_ANDROID)
         // Copy the app path.
         strcpy(imp.dataPath, "assets");
+
+    // Linux
+    #elif defined(PLATFORM_LINUX)
+        // Copy the app path.
+        strcpy(dataPath, "assets");
 
     #else
         #error No platform defined.
@@ -492,6 +500,11 @@ const char *prFileManager::GetSystemPath(const char *filename)
             // Make path
             strcpy(imp.path, "assets/");
             strcat(imp.path, filename);
+
+        #elif defined(PLATFORM_LINUX)
+            // Make path
+            strcpy(path, "assets/");
+            strcat(path, filename);
 
         #else
             #error No platform defined.

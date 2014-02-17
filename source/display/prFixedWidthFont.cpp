@@ -3,7 +3,7 @@
  */
 
 
-#include "../prconfig.h"
+#include "../prConfig.h"
 
 
 // ----------------------------------------------------------------------------
@@ -27,6 +27,12 @@
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
   #include <string.h>
+
+#elif defined(PLATFORM_LINUX)
+  #include <GL/gl.h>
+  #include <GL/glu.h>
+  #include <string.h>
+  #include <stdio.h>
 
 #else
   #error No platform defined.

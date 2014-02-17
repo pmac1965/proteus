@@ -28,6 +28,11 @@
   #include <GLES/gl.h>
   #include <string.h>
 
+#elif defined(PLATFORM_LINUX)
+  #include <GL/gl.h>
+  #include <GL/glu.h>
+  #include <string.h>
+
 #else
   #error No platform defined.
 

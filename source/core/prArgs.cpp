@@ -157,10 +157,11 @@ const _TCHAR *prArgsPopNextArg()
 }
 
 #else//PLATFORM_PC
+
 /// ---------------------------------------------------------------------------
 /// Processes command line args
 /// ---------------------------------------------------------------------------
-void prArgsParseCommandLine(int argc, char *[]args);
+void prArgsParseCommandLine(int argc, char ** args)
 {
 }
 

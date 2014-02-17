@@ -28,6 +28,9 @@
 #elif defined(PLATFORM_BADA)
     #include <FBase.h>
 
+#elif defined(PLATFORM_LINUX)
+    #include <stdio.h>
+
 #else
     #error Undefined platform
 
@@ -99,6 +102,9 @@ void prOutputString(const char *text)
         OutputDebugStringA(text);
 
 #elif defined(PLATFORM_IOS)
+        printf("%s", text);
+
+#elif defined(PLATFORM_LINUX)
         printf("%s", text);
 
 #elif defined(PLATFORM_BADA)

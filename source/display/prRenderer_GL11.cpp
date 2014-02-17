@@ -17,6 +17,14 @@
   #include <gl/glu.h>
   #include "../core/prWindow_PC.h"
 
+#elif defined(PLATFORM_LINUX)
+  #include <GL/gl.h>
+  #include <GL/glu.h>
+  #include "../core/prWindow_PC.h"
+
+#else
+  #error No platform defined.
+
 #endif
 
 

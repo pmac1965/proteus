@@ -67,7 +67,7 @@
     // Parameters:
     //      argc - The number of args
     //      args - The arguments array
-    void prArgsParseCommandLine(int argc, char *[]args);
+    void prArgsParseCommandLine(int argc, char ** args);
 
     // Function: prArgsPopNextArg
     //      Retrieves an argument if there is one
