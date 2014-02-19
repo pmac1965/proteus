@@ -1,6 +1,5 @@
 /**
  * prFileManager.cpp
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 
@@ -19,9 +18,7 @@
 #include "../zlib/zlib.h"
 
 
-// ----------------------------------------------------------------------------
 // Platform specific includes.
-// ----------------------------------------------------------------------------
 #if defined(PLATFORM_PC)  
   #include <windows.h>
 

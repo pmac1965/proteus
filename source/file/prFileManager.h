@@ -1,21 +1,18 @@
+// File: prFileManager.h
 /**
- * @file       prFileManager.h
- * @brief      Contains a class used to abstract file management.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -33,36 +30,48 @@
 class prFile;
 
 
-/// @brief      Class used to abstract file management.
-/// @note       
+// Class: prFileManager
+//      Class used to abstract file management.
 class prFileManager : public prCoreSystem
 {
 public:
-    /// Ctor
+    // Method: prFileManager
+    //      Ctor
     prFileManager();
 
-    /// Dtor
+    // Method: ~prFileManager
+    //      Dtor
     ~prFileManager();
 
-    /// Register an archive.
+    // Method: RegisterArchive
+    //      Registers an archive.
     void RegisterArchive(const char *filename);
 
-    /// Returns the filepath for the current platform.
+    // Method: GetSystemPath
+    //      Returns the filepath for the current platform.
+    //
+    // Parameters:
+    //      filename - A filename to convert
     const char *GetSystemPath(const char *filename);
 
-    /// Let the file system know we're done registering archives.
+    // Method: SetRegistrationComplete
+    //      Let the file system know we're done registering archives.
     void SetRegistrationComplete();
 
-    /// Ready to use?
+    // Method: Ready
+    //      Ready to use?
     bool Ready() const;
 
-    /// How many archives loaded.
+    // Method: ArchiveCount
+    //      How many archives loaded?
     int ArchiveCount() const;
 
-    /// Does the file exist
+    // Method: Exists
+    //      Does the file exist?
     bool Exists(const char *filename, u32 &size);
 
-    /// Read a file.
+    // Method: Read
+    //      Read a file.
     u32 Read(u8 *pDataBuffer, u32 size, u32 hash);
 
 private:
@@ -84,16 +93,32 @@ private:
 
 
 #if defined(PLATFORM_ANDROID)
-/// Sets the APK path.
+// Method: SetAPKPath
+//      Sets the APK path.
+//
+// Notes:
+//      *Android only*
 void SetAPKPath(const char *path);
 
-/// Sets the card path.
+// Method: SetCardPath
+//      Sets the card path.
+//
+// Notes:
+//      *Android only*
 void SetCardPath(const char *path);
 
-/// Gets the card path.
+// Method: GetCardPath
+//      Gets the card path.
+//
+// Notes:
+//      *Android only*
 const char *GetCardPath();
 
-/// Get access to the android data zip file.
+// Method: GetAPKArchive
+//      Get access to the android data zip file.
+//
+// Notes:
+//      *Android only*
 zip *GetAPKArchive();
 #endif
 

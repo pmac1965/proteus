@@ -1,21 +1,18 @@
+// File: prFile.h
 /**
- * @file       prFile.h
- * @brief      Contains a class used to represent a file.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -30,67 +27,68 @@
 struct FileImplementation;
 
 
-/**
- * Class used to represent a file in a cross platform manner
- */
+// Class: prFile
+//      Class used to represent a file in a cross platform manner
 class prFile
 {
 public:
-
+    // Friends
     friend class prFileManager;
 
-    /**
-     * Ctor
-     */
+    // Method: prFile
+    //      Ctor
     prFile(const char *filename);
 
-    /**
-     *  Dtor
-     */
+    // Method: ~prFile
+    //      Dtor
     ~prFile();
 
-    /// Gets the size of the file.
+    // Method: Size
+    //      Gets the size of the file.
     u32 Size() const;
 
-    /// Determines if the file exists
+    // Method: Exists
+    //      Determines if the file exists
     bool Exists();
 
-    /// Opens a file for reading.
+    // Method: Open
+    //      Opens a file for reading.
     bool Open();
     
-    /// Closes a file
+    // Method: Close
+    //      Closes a file
     void Close();
     
-    /// Reads data from an open file
+    // Method: Read
+    //      Reads data from an open file
     u32 Read(void *pDataBuffer, u32 size);
 
-    /// Seek within an open file.
+    // Method: Seek
+    //      Seek within an open file.
     void Seek(s32 offset, s32 origin);
 
-    /// Returns the file pointers position.
+    // Method: Tell
+    //      Returns the file pointers position.
     s32 Tell() const;
 
-    /// Sets the file pointer back to the start of the file.
+    // Method: Rewind
+    //      Sets the file pointer back to the start of the file.
     void Rewind();
 
 
 private:
-
     // For engine use.
     void Internal_Rewind();
     void Internal_Seek(s32 offset, s32 origin);
     s32  Internal_Tell() const;
-    //bool Internal_FileDataLoaded();
-    //void Internal_SetFileData(u8 *pData);
 
-
+private:
     // Stops passing by value and assignment.
     prFile(const prFile&);
     const prFile& operator = (const prFile&);
 
 
 private:
-
     // Don't change order.
     FileImplementation  *pImpl;
     FileImplementation  &imp;
