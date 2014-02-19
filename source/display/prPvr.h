@@ -1,8 +1,4 @@
-/**
- * @file       prPvr.h
- * @brief      Contains data related to using PVR files.
- *
- */
+// File: prPvr.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -27,23 +23,23 @@
 #include "../core/prTypes.h"
 
 
-/// @struct     prPVRTextureHeader
-/// @brief      The PVR header structure
+// Typedef: prPVRTextureHeader
+//      The PVR header structure
 typedef struct prPVRTextureHeader
 {
-    u32     dwHeaderSize;           ///< Size of the structure 
-    u32     dwHeight;               ///< Height of surface to be created 
-    u32     dwWidth;                ///< Width of input surface 
-    u32     dwMipMapCount;          ///< Number of MIP-map levels requested 
-    u32     dwpfFlags;              ///< Pixel format flags 
-    u32     dwDataSize;             ///< Size of the compress data 
-    u32     dwBitCount;             ///< Number of bits per pixel 
-    u32     dwRBitMask;             ///< Mask for red bit 
-    u32     dwGBitMask;             ///< Mask for green bits 
-    u32     dwBBitMask;             ///< Mask for blue bits 
-    u32     dwAlphaBitMask;         ///< Mask for alpha channel 
-    u32     dwPVR;                  ///< Should be 'P' 'V' 'R' '!' 
-    u32     dwNumSurfs;             ///< Number of slices for volume textures or skyboxes
+    u32     dwHeaderSize;           // Size of the structure 
+    u32     dwHeight;               // Height of surface to be created 
+    u32     dwWidth;                // Width of input surface 
+    u32     dwMipMapCount;          // Number of MIP-map levels requested 
+    u32     dwpfFlags;              // Pixel format flags 
+    u32     dwDataSize;             // Size of the compress data 
+    u32     dwBitCount;             // Number of bits per pixel 
+    u32     dwRBitMask;             // Mask for red bit 
+    u32     dwGBitMask;             // Mask for green bits 
+    u32     dwBBitMask;             // Mask for blue bits 
+    u32     dwAlphaBitMask;         // Mask for alpha channel 
+    u32     dwPVR;                  // Should be 'P' 'V' 'R' '!' 
+    u32     dwNumSurfs;             // Number of slices for volume textures or skyboxes
 
 } prPVRTextureHeader;
 

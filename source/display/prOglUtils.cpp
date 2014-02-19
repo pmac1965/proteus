@@ -1,6 +1,5 @@
 /**
  * prOglUtils.cpp
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 
@@ -36,12 +35,14 @@
 
 
 #include "../core/prTypes.h"
+#include "../core/prCore.h"
+#include "../core/prRegistry.h"
 #include "../core/prMacros.h"
 #include "../debug/prTrace.h"
 #include "../debug/prDebug.h"
 #include "prOglUtils.h"
-//#include "Renderer.h"
-//#include "Texture.h"
+#include "prRenderer.h"
+#include "prTexture.h"
 
 
 /// ---------------------------------------------------------------------------
@@ -91,33 +92,37 @@ void prOpenGLShowExtensions()
 /// ---------------------------------------------------------------------------
 /// Draws the engine water mark.
 /// ---------------------------------------------------------------------------
-void prDrawWaterMark(Texture *pTexture)
+void prDrawWaterMark(prTexture *pTexture)
 {
-/*    if (pTexture)
+    if (pTexture)
     {
-        Renderer::GetInstance()->SetOrthographicView(true);
+        prRenderer *pRenderer = (prRenderer *)prCoreGetComponent(PRSYSTEM_RENDERER);
+        if (pRenderer)
+        {
+            pRenderer->SetOrthographicView();
 
-        glEnable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_TEXTURE_2D);
 
-            glPushMatrix();            
-            //glEnable(GL_TEXTURE_2D);
+                // Set ortho
+                prRegistry *pReg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+                PRASSERT(pReg)
+                float width  = (float)atof(pReg->GetValue("ScreenWidth"));
+                float height = (float)atof(pReg->GetValue("ScreenHeight"));
 
-            glColor4f(1, 1, 1, 0.1f);
-            glTranslatef(8, 8, 0);
-            glScalef(64, 24, 0);
+                glTranslatef(width - 32, height - 12, 0);
+                glScalef(64, 24, 0);
 
-            pTexture->Bind();
-            Renderer::GetInstance()->DrawQuad();
+                pTexture->Bind();
+                pRenderer->DrawQuad();
 
-            glColor4f(1, 1, 1, 1);            
-            glPopMatrix();
+            glDisable(GL_TEXTURE_2D);
+            glDisable(GL_BLEND);
 
-        //glDisable(GL_TEXTURE_2D);
-        glDisable(GL_BLEND);
-
-        Renderer::GetInstance()->RestorePerspectiveView();
-    }*/
+            pRenderer->RestorePerspectiveView();
+        }
+    }
 }
 
 

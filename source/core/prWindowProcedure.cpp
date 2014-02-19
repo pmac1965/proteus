@@ -15,34 +15,29 @@
 #include "prApplication_PC.h"
 #include "prWindow.h"
 #include "prCore.h"
+#include "prATB.h"
+#include "prRegistry.h"
+#include "prStringUtil.h"
 #include "prCoreSystem.h"
 #include "../debug/prDebug.h"
 #include "../input/prMouse.h"
-//#include "../core/system.h"
 
 
-// ----------------------------------------------------------------------------
 // Use ant tweak bar.
-// ----------------------------------------------------------------------------
 #if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)
-  #include "../tool/AntTweakBar.h"
+#include "../tool/AntTweakBar.h"
 #endif
 
 
-// ----------------------------------------------------------------------------
 // Local data
-// ----------------------------------------------------------------------------
 namespace
 {
     bool            mouseCaptured   = false;
-    bool            antTweakBarInit = false;
     prApplication  *pApp = NULL;
 }
 
 
-// ----------------------------------------------------------------------------
 // Local functions
-// ----------------------------------------------------------------------------
 namespace 
 {
     void MouseMove(HWND hwnd, WPARAM wParam, LPARAM lParam);
@@ -204,13 +199,7 @@ void prSetApplicationForWindowProcedure(prApplication *app)
 
     // Initialize AntTweakBar?
     #if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)
-    {
-        if (!antTweakBarInit)
-        {
-            TwInit(TW_OPENGL, NULL);
-            antTweakBarInit = true;
-        }
-    }
+    prATBInit();
     #endif
 }
 
@@ -226,13 +215,9 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 
     // Send event message to AntTweakBar
     #if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)
-    //if (System::ShowAntTweakBar())
+    if (prATBUpdate(hwnd, msg, wParam, lParam))
     {
-        TODO("Fix")
-        if (TwEventWin(hwnd, msg, wParam, lParam))
-        {
-            return 0;
-        }
+        return 0;
     }
     #endif
 
@@ -335,7 +320,8 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
         return DefWindowProc(hwnd, msg, wParam, lParam);
 #endif
 
-#if !defined(PROTEUS_TOOL)    
+    // This lot is bad for tool apps
+    #if !defined(PROTEUS_TOOL)    
     case WM_SYSCOMMAND:     
         if ((wParam & 0xFFF0) == SC_SCREENSAVE   ||   // Stops screen saver from starting up.
             (wParam & 0xFFF0) == SC_MONITORPOWER ||   // Stops monitor power save mode from interfering.
@@ -349,7 +335,7 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
             return DefWindowProc(hwnd, msg, wParam, lParam);
         }
         break;
-#endif
+    #endif
 
     default:
         return DefWindowProc(hwnd, msg, wParam, lParam);

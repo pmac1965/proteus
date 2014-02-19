@@ -138,8 +138,10 @@ prFixedWidthFont::~prFixedWidthFont()
     if (m_pTexture)
     {
         prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
-        PRASSERT(pRM)
-        pRM->Unload(m_pTexture);
+        if (pRM)
+        {
+            pRM->Unload(m_pTexture);
+        }
         m_pTexture = NULL;
     }
 }
@@ -166,6 +168,9 @@ void prFixedWidthFont::Draw(f32 x, f32 y, const char *fmt, ...)
         vsprintf(message, fmt, args);
         #endif
         va_end(args);
+
+
+        glEnable(GL_TEXTURE_2D);
 
 
         // Enable blending
@@ -256,6 +261,8 @@ void prFixedWidthFont::Draw(f32 x, f32 y, const char *fmt, ...)
         // Disable blending
         glDisable(GL_BLEND);
         ERR_CHECK();
+
+        glDisable(GL_TEXTURE_2D);
     }
 }
 

@@ -33,30 +33,18 @@ REM ---------------------------------------------------------------------------
     xcopy .\..\..\..\..\source\*.inl %PROTEUS_ENGINE_DIR%\include\proteus /E /Q
 
 
-REM ---------------------------------------------------------------------------
-REM Delete files/folders which shouldn't be public
-REM ---------------------------------------------------------------------------
-@REM    IF "%~1"=="FULL" (
-@REM    echo FULL VERSION
-@REM    GOTO :EOF
-@REM    )
+REM --------------------------------------
+REM Delete files which you aren't needed
+REM --------------------------------------
+    del %PROTEUS_ENGINE_DIR%\include\proteus\display\prSplash.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prDebugFont.h
 
-
-    @REM --------------------------------------
-    @REM Delete dirs which you don't get in the
-    @REM full version.
-    @REM --------------------------------------
     @REM @rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\proteus\gui
-    @REM @rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\proteus\xyz
-    @REM @rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\proteus\network
-    @REM @rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\proteus\android
-    @REM @rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\proteus\libpng
-    @REM @rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\proteus\libzip
 
 
 REM ---------------------------------------------------------------------------
 REM Update engine docs
 REM ---------------------------------------------------------------------------
-echo Updating docs
-cd D:\NaturalDocs-1.52
-doc_engine.bat
+    echo Updating docs
+    cd D:\NaturalDocs-1.52
+    doc_engine.bat

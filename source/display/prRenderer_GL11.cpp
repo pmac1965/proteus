@@ -1,6 +1,5 @@
 /**
  * prRenderer_GL11.cpp
- * Copyright Paul Michael McNab. All rights reserved.
  *
  * http://www.opengl.org/wiki/Platform_specifics:_Windows
  * http://www.realtimerendering.com/intersections.html
@@ -42,14 +41,23 @@
 #include "../math/prVector3.h"
 #include "../core/prWindow.h"
 #include "../core/prVertex.h"
+#include "../core/prCore.h"
+#include "../core/prRegistry.h"
+#include "../core/prStringUtil.h"
+#include "../core/prResourceManager.h"
 #include "../display/prOglUtils.h"
+#include "../display/prTexture.h"
 
 
-// ----------------------------------------------------------------------------
+// Splash image
+#if defined(PLATFORM_PC)
+#include "prSplash.h"
+#endif
+
+
 // Use ant tweak bar.
-// ----------------------------------------------------------------------------
 #if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)
-  #include "../tool/AntTweakBar.h"
+#include "../core/prATB.h"
 #endif
 
 
@@ -122,13 +130,17 @@ void prRenderer_GL11::Init()
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
     ERR_CHECK();
 
-    //// Load watermark
-    //#if !defined(PROTEUS_FULL) && !defined(PROTEUS_TOOL)
-    //imp.pTexture = imp.rm.LoadFromMemory<Texture>("ProteusLogo", protPvr, sizeof(protPvr));
-    //#else
-    //imp.pTexture = NULL;
-    //#endif
-    TODO("Fix")
+    // Load watermark
+    #if defined(PLATFORM_PC)
+    prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
+    PRASSERT(pRM)
+    m_pWatermark = pRM->LoadFromMemory<prTexture>("proteusImg", proteusImg, sizeof(proteusImg));
+    PRASSERT(m_pWatermark);
+    
+    #else
+    m_pWatermark = NULL;
+
+    #endif
 
 
     // Show extensions.
@@ -181,21 +193,21 @@ void prRenderer_GL11::Present()
     if (m_pWindow)
     {
         // Draw watermark
-        #if !defined(PROTEUS_FULL) && !defined(PROTEUS_TOOL) && defined(PROTEUS_USE_ENGINE_NAME)
-        DrawWaterMark(imp.pTexture);
-        TODO("Fix")
-#endif
+        #if defined(PLATFORM_PC)
+        prDrawWaterMark(m_pWatermark);
+        #endif
 
-            // Draw tweak bars
-#if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)
-            //if (System::ShowAntTweakBar())
-            TODO("Fix")
-            static int s = 0;
-        if (s++ > 200)
-        {
-            TODO("Fix")
-            TwDraw();
-        }
+        // Draw tweak bars
+        #if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)
+        //prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+        //if (reg)
+        //{
+        //    if (prStringCompare(reg->GetValue("ATB"), "true") == CMP_EQUALTO)
+        //    {
+        //        TwDraw();
+        //    }
+        //}
+        prATBDraw();
         #endif
 
         #if defined(PLATFORM_PC)
@@ -214,6 +226,9 @@ void prRenderer_GL11::SetOrthographicView()
     {
         glMatrixMode(GL_PROJECTION);
         ERR_CHECK();
+        
+        glPushMatrix();
+        ERR_CHECK();
 
         glLoadIdentity();
         ERR_CHECK();
@@ -228,15 +243,12 @@ void prRenderer_GL11::SetOrthographicView()
 
         glMatrixMode(GL_MODELVIEW);
         ERR_CHECK();
+
         glLoadIdentity();
         ERR_CHECK();
 
         glDisable(GL_DEPTH_TEST);
         ERR_CHECK();
-
-        // Displacement trick for exact pixelization
-/*        glTranslatef(0.375f, 0.375f, 0.0f);
-        ERR_CHECK();//*/
     }
 }
 
@@ -246,14 +258,8 @@ void prRenderer_GL11::SetOrthographicView()
 /// ---------------------------------------------------------------------------
 void prRenderer_GL11::RestorePerspectiveView()
 {
-    TODO("Fix")
-    /*if (imp.preserve)
+    if (m_pWindow)
     {
-        PRASSERT(imp.saveCount == 1);
-
-        imp.preserve  = false;
-        imp.saveCount = 0;
-
         glMatrixMode(GL_PROJECTION);
         ERR_CHECK();
 
@@ -262,7 +268,7 @@ void prRenderer_GL11::RestorePerspectiveView()
 
         glMatrixMode(GL_MODELVIEW);
         ERR_CHECK();
-    }*/
+    }
 }
 
 
@@ -532,26 +538,7 @@ void prRenderer_GL11::SetClearColour(const prColour &colour)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL11::DrawQuad()
 {
-    TODO("Change to use less calls")
-    //glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-    //ERR_CHECK();
-
-    /*glBegin(GL_QUADS);
-
-        glTexCoord2f(0.0f, 1.0f);
-        glVertex2f(0.0f, 1.0f);
-
-        glTexCoord2f(1.0f, 1.0f);
-        glVertex2f(1.0f, 1.0f);
-
-        glTexCoord2f(1.0f, 0.0f);
-        glVertex2f(1.0f, 0.0f);
-
-        glTexCoord2f(0.0f, 0.0f);
-        glVertex2f(0.0f, 0.0f);
-
-    glEnd();
-    ERR_CHECK();*/
+    DrawQuad(0.0f, 0.0f, 1.0f, 1.0f);
 }
 
 
@@ -570,7 +557,6 @@ void prRenderer_GL11::DrawQuad(float u0, float v0, float u1, float v1)
         1.0f, 1.0f, 1.0f, 1.0f
     };
 
-
     QuadData quadData[] =
     {
         {-0.5f,  0.5f, u0, v0, },
@@ -578,6 +564,7 @@ void prRenderer_GL11::DrawQuad(float u0, float v0, float u1, float v1)
         { 0.5f,  0.5f, u1, v0, },
         { 0.5f, -0.5f, u1, v1, },
     };
+
 
     // Stops static analyzer moan.
     PRUNUSED(quadData->v);

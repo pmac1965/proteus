@@ -1,15 +1,12 @@
 /**
  * prSprite.cpp
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 
 #include "../prConfig.h"
 
 
-// ----------------------------------------------------------------------------
 // Platform specifics
-// ----------------------------------------------------------------------------
 #if defined(PLATFORM_PC)
   #include <Windows.h>
   #include <gl/gl.h>
@@ -51,9 +48,7 @@
 #include "../debug/prTrace.h"
 
 
-// ----------------------------------------------------------------------------
 // Defines
-// ----------------------------------------------------------------------------
 #define DEFAULT_SCALE       1.0f
 
 

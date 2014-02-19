@@ -1,23 +1,18 @@
+// File: prSprite.h
 /**
- * @file       prSprite.h
- * @brief      Contains an animated sprite class.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
- * @note       A sprite must be created and destroyed using the sprite manager, as
- *             they cannot be used alone
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -40,15 +35,21 @@ class  prSpriteAnimation;
 #define MAX_USER_VALUES     4
 
 
-/// Basic 2D sprite entity
+// Class: prSprite
+//      Basic 2D sprite entity
+//
+// Notes:
+//      A sprite must be created and destroyed using the sprite manager, as
+//      they cannot be used alone
 class prSprite
 {
 public:
-
-    /// @enum       prFlipType
-    /// @brief      Sprite bitfield flip flags
-    /// @see        SetFlip
-    /// @see        ClearFlip
+    // enum: prFlipType
+    //      Sprite bitfield flip flags
+    //
+    // See Also:
+    //      <SetFlip>
+    //      <ClearFlip>
     enum prFlipType
     {
         FLIP_NONE      = 0x00000000,        ///< No flips. Default value
@@ -58,17 +59,25 @@ public:
 
 
 public:
-
-    /// @brief      Updates the sprites animation.
-    /// @param      dt - Delta time
+    // Method: Update
+    //      Updates the sprites animation.
+    //
+    // Parameters:
+    //      dt - Delta time
     void Update(float dt);
 
-    /// @brief      Draws the sprite.
-    /// @note       This is the normal version used most often
+    // Method: Draws
+    //      Draws the sprite.
+    //
+    // Notes:
+    //      This is the normal version used most often
     void Draw();
 
-    /// @brief       Draws the sprite (Batch call)
-    /// @note        Batch draw version. Does less state switching
+    // Method: BatchDraw
+    //      Draws the sprite (Batch call)
+    //
+    // Notes:
+    //      Batch draw version. Does less state switching
     void BatchDraw();
 
     /// @brief      Gets the sprite visible state.

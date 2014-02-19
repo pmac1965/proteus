@@ -1,6 +1,5 @@
 /**
  * prGLFont.cpp
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 
@@ -14,7 +13,10 @@
 #include <gl/gl.h>
 #include <gl/glu.h>
 #include "prGLFont.h"
+#include "prOglUtils.h"
 #include "../debug/prDebug.h"
+#include "../core/prCore.h"
+#include "../core/prRegistry.h"
 
 
 #define FONT_CHARACTER_COUNT    256
@@ -25,11 +27,15 @@
 /// ---------------------------------------------------------------------------
 prGLFont::prGLFont(HDC dc, s32 fontSize, const char *fontName)
 {
+    // Set colour
+    m_red   = 1.0f;
+    m_green = 1.0f;
+    m_blue  = 1.0f;
+
     // Create display lists.
     m_base = glGenLists(FONT_CHARACTER_COUNT);
 
     HFONT font;
-
     if (_stricmp(fontName, "symbol") == 0)
     {    
         font = CreateFontA
@@ -87,11 +93,8 @@ prGLFont::prGLFont(HDC dc, s32 fontSize, const char *fontName)
 
     // Set up the font
     HFONT oldFont = (HFONT)SelectObject(dc, font);
-
     wglUseFontBitmaps(dc, 0, 256, m_base);
-
     SelectObject(dc, oldFont);
-
     DeleteObject(font);
 }
 
@@ -126,18 +129,22 @@ void prGLFont::Draw(float x, float y, const char *text)
     if (glIsList(m_base) && text && *text)
     {
         // Disable textures, so we use the colour.
-        glDisable(GL_TEXTURE_2D);
+        GLboolean state = glIsEnabled(GL_TEXTURE_2D);
+        if (state)
+        {
+            glDisable(GL_TEXTURE_2D);
+        }
 
         // Set the color of the text.
-        glColor3f(1.0f, 1.0f, 1.0f);
+        glColor3f(m_red, m_green, m_blue);
+        
+        // Set ortho
+        prRegistry *pReg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+        PRASSERT(pReg)
+        float width  = (float)atof(pReg->GetValue("ScreenWidth"));
+        float height = (float)atof(pReg->GetValue("ScreenHeight"));
 
-        TODO("Fix")
-        SetOrthographicProjection
-        (
-            800, 600
-            //(float)System::GetInstance().Get(SVT_DISPLAY_WIDTH),
-            //(float)System::GetInstance().Get(SVT_DISPLAY_HEIGHT)
-        );
+        SetOrthographicProjection(width, height);
         
         // Draw the text.
         {
@@ -158,7 +165,10 @@ void prGLFont::Draw(float x, float y, const char *text)
 
         ResetPerspectiveProjection();
 
-        glEnable(GL_TEXTURE_2D);
+        if (state)
+        {
+            glEnable(GL_TEXTURE_2D);
+        }
     }
 }
 
@@ -195,8 +205,13 @@ void prGLFont::SetOrthographicProjection(float w, float h)
 void prGLFont::ResetPerspectiveProjection() 
 {
     glMatrixMode(GL_PROJECTION);
+    ERR_CHECK();
+    
     glPopMatrix();
+    ERR_CHECK();
+
     glMatrixMode(GL_MODELVIEW);
+    ERR_CHECK();
 }
 
 

@@ -205,6 +205,7 @@
     <ClInclude Include="..\..\..\..\source\core\prApplication_Linux.h" />
     <ClInclude Include="..\..\..\..\source\core\prApplication_PC.h" />
     <ClInclude Include="..\..\..\..\source\core\prArgs.h" />
+    <ClInclude Include="..\..\..\..\source\core\prATB.h" />
     <ClInclude Include="..\..\..\..\source\core\prCore.h" />
     <ClInclude Include="..\..\..\..\source\core\prCoreSystem.h" />
     <ClInclude Include="..\..\..\..\source\core\prDefines.h" />
@@ -356,6 +357,7 @@
     <ClCompile Include="..\..\..\..\source\core\prApplication_Linux.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prApplication_PC.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prArgs.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prATB.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prCore.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prCoreSystem.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prMessageManager.cpp" />

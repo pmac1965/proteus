@@ -1,6 +1,5 @@
 /**
  * prRenderer.cpp
- * Contains the renderer base class * Copyright Paul Michael McNab. All rights reserved.
  */
 
 
@@ -14,7 +13,8 @@
 /// ---------------------------------------------------------------------------
 prRenderer::prRenderer() : prCoreSystem(PRSYSTEM_RENDERER, "prRenderer")
 {
-    m_pWindow = NULL;
+    m_pWindow    = NULL;
+    m_pWatermark = NULL;
 }
 
 

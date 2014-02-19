@@ -33,6 +33,7 @@ prRegistry::prRegistry() : prCoreSystem(PRSYSTEM_REGISTRY, "prRegistry")
         {"LogToFile",       "false"},
         {"UseArchives",     "true"},
         {"Help",            "false"},
+        {"Exit",            "false"},
 //        {"PhysicalWidth",   "-1"},
 //        {"PhysicalHeight",  "-1"},
     };

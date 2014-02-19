@@ -1,23 +1,18 @@
+// File: prGLFont.h
 /**
- * @file       prGLFont.h
- * @brief      Contains a basic font class.
- * @note       Intended for PC only used during engine construction/update/testing
- * @n          as its relatively slow.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -35,50 +30,63 @@
 #include "../core/prTypes.h"
 
 
-/// @brief      Class which wraps the OpenGL font system.
-/// @note       Intended for PC only use during engine construction/update/testing
-/// @n          as its relatively slow, only writes in white and doesn't support
-/// @n          non ascii characters. So DON'T use this one
+// Class: prGLFont
+//      Class which wraps the OpenGL font system.
+//
+// Notes:
+//      Intended for PC only use during engine construction/update/testing
+//      as its relatively slow, only writes in white and doesn't support
+//      non ascii characters. So DON'T use this one
 class prGLFont
 {
 public:
-
-    /// @brief      Constructor.
-    /// @param      dc       - A windows device context
-    /// @param      fontSize - The required font size
-    /// @param      fontName - A font name like 'arial'
+    // Method: prGLFont
+    //      Constructor.
+    //
+    // Parameters:
+    //      dc       - A windows device context
+    //      fontSize - The required font size
+    //      fontName - A font name like 'arial'
     prGLFont(HDC dc, s32 fontSize, const char *fontName);
 
-    /// @brief      Destructor.
+    // Method: ~prGLFont
+    //      Destructor.
     ~prGLFont();
 
-    /// Draws text to the display.
-    /// @param      x - X coordinate
-    /// @param      y - Y coordinate
-    /// @param      text - The text to write
+    // Method: Draw
+    //      Draws text to the display.
+    //
+    // Parameters:
+    //      x    - X coordinate
+    //      y    - Y coordinate
+    //      text - The text to write
     void Draw(s32 x, s32 y, const char *text);
 
-    /// Draws text to the display.
-    /// @param      x - X coordinate
-    /// @param      y - Y coordinate
-    /// @param      text - The text to write
+    // Method: Draw
+    //      Draws text to the display.
+    //
+    // Parameters:
+    //      x    - X coordinate
+    //      y    - Y coordinate
+    //      text - The text to write
     void Draw(float x, float y, const char *text);
 
 
 private:
 
-    /// Sets othographic perspective.
-    /// @param      w - Width
-    /// @param      h - Height
+    // Sets othographic perspective.
     void SetOrthographicProjection(float w, float h);
 
-    /// Resets perpective.
+    // Resets perpective.
     void ResetPerspectiveProjection();
 
 
 private:
 
     u32 m_base;
+    f32 m_red;
+    f32 m_green;
+    f32 m_blue;
 };
 
 
