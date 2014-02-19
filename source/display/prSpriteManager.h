@@ -1,24 +1,24 @@
+// File: prSpriteManager.h
+// About:
+//      This system class is the only way to correctly create a sprite and
+//
+//      assign the animation data to that sprite. This class uses the system
+//
+//      resource manager to ensure textures are only ever loaded once
 /**
- * @file        prSpriteManager.h
- * @brief       Contains the sprite manager class.
- * @copyright   Copyright Paul Michael McNab. All rights reserved.
- * @note        This system class is the only way to correctly create a sprite and
- * @n           assign the animation data to the sprite. This class uses the system
- * @n           resource manager to ensure textures are only ever loaded once
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -38,8 +38,8 @@ class TiXmlElement;
 class prTexture;
 
 
-
-// Active sprite
+// Struct: prActiveSprite
+//      Active sprite
 typedef struct prActiveSprite
 {
     prSprite  *sprite;            // The sprite.
@@ -49,136 +49,121 @@ typedef struct prActiveSprite
 } prActiveSprite;
 
 
-/**
- * Manages all sprite creation and destruction.
- */
+// Class: prSpriteManager
+//      Manages all sprite creation and destruction.
 class prSpriteManager : public prCoreSystem
 {
 public:
 
-    /**
-     * Constructs the sprite manager.
-     */
+    // Method: prSpriteManager
+    //      Constructs the sprite manager.
     prSpriteManager();
 
-    /**
-     * Destructor.
-     */
+    // Method: ~prSpriteManager
+    //      Destructor.
     ~prSpriteManager();
 
-    /**
-     * Updates all the active sprites.
-     *
-     * @param   dt - Delta time
-     */
+    // Method: Update
+    //      Updates all the active sprites.
+    //
+    // Parameters:
+    //      dt - Delta time
     void Update(f32 dt);
 
-    /** 
-     * Draws all the visible sprites.
-     *
-     * @note    This is an optional call.
-     */
+    // Method: Draw
+    //      Draws all the visible sprites.
+    //
+    // Notes:
+    //      This is an optional call.
     void Draw();
 
-    /**
-     * Creates a sprite.
-     *
-     * @param   filename - The sprite filename
-     * @param   draw     - Should the sprite manager draw routine draw this sprite?
-     *
-     * @return  Returns the created sprite or NULL on failure
-     */
+    // Method: Create
+    //      Creates a sprite.
+    //
+    // Parameters:
+    //      filename - The sprite filename
+    //      draw     - Should the sprite manager draw routine draw this sprite?
+    //
+    // Returns:
+    //      Returns the created sprite or NULL on failure
     prSprite *Create(const char *filename, bool draw = true);
 
 #if defined(PROTEUS_TOOL) || defined(PLATFORM_PC)
-    /**
-     * Creates a sprite.
-     *
-     * @param   pTex   - A texture pointer
-     * @param   width  - Frame width
-     * @param   height - Frame height
-     *
-     * @return  Returns the created sprite or NULL on failure
-     * 
-     * @note    This call only exists in the tool build
-     */
+    // Method: ToolCreate
+    //      Creates a sprite.
+    //
+    // Parameters:
+    //      pTex   - A texture pointer
+    //      width  - Frame width
+    //      height - Frame height
+    //
+    // Returns:
+    //      Returns the created sprite or NULL on failure
+    // 
+    // Notes:
+    //      This call only exists in the tool build
     prSprite *ToolCreate(prTexture *pTex, s32 width, s32 height);
 
-    /**
-     * Releases a sprite and any asssociated assets.
-     *
-     * @param   sprite - The sprite to release
-     * 
-     * @note    This call only exists in the tool build
-     */
+    // Method: ToolRelease
+    //      Releases a sprite and any asssociated assets.
+    //
+    // Parameters:
+    //      sprite - The sprite to release
+    // 
+    // Notes:
+    //      This call only exists in the tool build
     void ToolRelease(prSprite *sprite);
 #endif
 
-    /**
-     * Releases a sprite and any asssociated assets.
-     *
-     * @param   sprite - The sprite to release
-     */
+    // Method: Release
+    //      Releases a sprite and any asssociated assets.
+    //
+    // Parameters:
+    //      sprite - The sprite to release
     void Release(prSprite *sprite);
     
-    /**
-     * Releases all sprites and their asssociated assets. 
-     */
+    // Method: ReleaseAll
+    //      Releases all sprites and their asssociated assets. 
     void ReleaseAll();
 
-    /**
-     * Debug assist code to show all sprites.
-     */
+    // Method: DisplayUsage
+    //      Debug assist code to show all sprites.
     void DisplayUsage();
 
-    /**
-     * Starts batch sprite rendering
-     */
+    // Method: BatchBegin
+    //      Starts batch sprite rendering
     void BatchBegin();
     
-    /**
-     * Ends batch sprite rendering
-     */
+    // Method: BatchEnd
+    //      Ends batch sprite rendering
     void BatchEnd();
 
 
 private:
 
-    /**
-     * Loads a sprite file.
-     *
-     * @param   filename - Name of the file to load
-     *
-     * @return  true if loaded, false otherwise
-     */
+    // Loads a sprite file.
+    //
+    //      filename - Name of the file to load
     bool Load(const char *filename);
 
-    /**
-     * Parses a sprite file.
-     *
-     * @param   pParent - Pointer to a parent XML node
-     */
+    // Parses a sprite file.
+    //
+    //      pParent - Pointer to a parent XML node
     void ParseSpriteFile(TiXmlNode* pParent);
 
-    /**
-     * Parses a sprite file.
-     *
-     * @param   pElement - Pointer to an XML element
-     */
+    // Parses a sprite file.
+    //
+    //      pElement - Pointer to an XML element
     void ParseAttribs_SpriteFile(TiXmlElement* pElement);
 
-    /**
-     * Parses a sprite file.
-     *
-     * @param   pElement - Pointer to an XML element
-     */
+    // Parses a sprite file.
+    //
+    //      pElement - Pointer to an XML element
     void ParseAttribs_Sprite(TiXmlElement* pElement);
 
-    /**
-     * Parses a sprite file.
-     *
-     * @param   pElement - Pointer to an XML element
-     */
+    // Parses a sprite file.
+    //
+    //      pElement - Pointer to an XML element
     void ParseAttribs_Sequence(TiXmlElement* pElement);
 
 

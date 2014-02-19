@@ -79,7 +79,8 @@ public:
     }
 
     // Method: LoadFromMemory
-    //      Creates a resource from data in memory.
+    //      Creates a resource from data in memory. This is to
+    //      allow embedded textures to be used
     //
     // Parameters:
     //      name   - A name for the resource
@@ -104,6 +105,33 @@ public:
         if (resource)
         {
             resource->LoadFromMemory(pData, size);
+            Add(resource);
+        }
+
+        return resource;
+    }
+
+    // Method: LoadFromRaw
+    //      Creates a resource from raw data. This is to
+    //      allow loaded images to be converted to textures
+    //
+    // Parameters:
+    //      name   - A name for the resource
+    //      pData  - A pointer to the resource
+    //      size   - Size of the resource
+    //      width  - Width of the raw image
+    //      height - Height of the raw iamge
+    //
+    // Returns:
+    //      A resource
+    template<typename T>
+    T* LoadFromRaw(const char *name, void *pData, u32 size, u32 width, u32 height)
+    {
+        // Create new resource and store it.
+        T *resource = new T(name);
+        if (resource)
+        {
+            resource->LoadFromRaw(pData, size, width, height);
             Add(resource);
         }
 

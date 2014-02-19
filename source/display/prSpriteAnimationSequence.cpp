@@ -1,6 +1,5 @@
 /**
  * prSpriteAnimationSequence.cpp
- * Copyright Paul Michael McNab. All rights reserved.
  */
 
 

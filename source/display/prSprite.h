@@ -49,6 +49,8 @@ public:
     //
     // See Also:
     //      <SetFlip>
+    //
+    // See Also:
     //      <ClearFlip>
     enum prFlipType
     {
@@ -80,166 +82,217 @@ public:
     //      Batch draw version. Does less state switching
     void BatchDraw();
 
-    /// @brief      Gets the sprite visible state.
-    /// @return     true or false
+    // Method: GetVisible
+    //      Gets the sprite visible state.
     bool GetVisible() const;
 
-    /// @brief      Sets the sprite visible state.
-    /// @param      value - true or false
+    // Method: SetVisible
+    //      Sets the sprite visible state.
+    //
+    // Parameters:
+    //      value - true or false
     void SetVisible(bool value);
 
-    /// @brief      Returns the sprite frame width.
-    /// @return     Returns the width of the frame
+    // Method: GetFrameWidth
+    //      Returns the sprite frame width.
     s32 GetFrameWidth() const;
 
-    /// @brief      Returns the sprite frame height.
-    /// @return     Returns the height of the frame
+    // Method: GetFrameHeight
+    //      Returns the sprite frame height.
     s32 GetFrameHeight() const;
 
-    /// @brief      Returns the sprites name.
-    /// @return     Returns the sprites name.
+    // Method: Name
+    //      Returns the sprites name.
     const char *Name() const;
 
-    /// @brief      Sets the frame.
-    /// @param      frame - The frame to set
-    /// @note       Must be between 0 and the max frame count
+    // Method: SetFrame
+    //      Sets the frame.
+    //
+    // Parameters:
+    //      frame - The frame to set
+    //
+    // Notes:
+    //      Must be between 0 and the max frame count
     void SetFrame(s32 frame);
 
-    /// @brief      Gets the frame.
-    /// @return     Returns the current frame
+    // Method: GetFrame
+    //      Gets the current frame.
     s32 GetFrame() const;
 
-    /// @brief      Play an animation.
-    /// @param      name - The animations name
+    // Method: PlayAnim
+    //      Play an animation.
+    //
+    // Parameters:
+    //      name - The animations name
     void PlayAnim(const char* name);
 
-    /// @brief      Sets horizontal/vertical flips.
-    /// @param      flip - the flips to set
-    /// @note       flip is or'd onto flip mask use ClearFlip to remove flips
-    /// @see        ClearFlip
+    // Method: SetFlip
+    //       Sets horizontal/vertical flips.
+    //
+    // Parameters:
+    //      flip - the flips to set
+    //
+    // Notes:
+    //      flip is or'd onto flip mask use ClearFlip to remove flips
+    //
+    // See Also:
+    //      <ClearFlip>
     void SetFlip(u32 flip);
 
-    /// @brief      Clears horizontal/vertical flips.
-    /// @param      flip - the flips to remove
-    /// @see        SetFlip
+    // Method: ClearFlip
+    //      Clears horizontal/vertical flips.
+    //
+    // Parameters:
+    //      flip - the flips to remove
+    //
+    // See Also:
+    //      <SetFlip>
     void ClearFlip(u32 flip);
 
-    /// @brief      Set scale
-    /// @param      scale - The scale to set
+    // Method: SetScale
+    //      Set scale
+    //
+    // Parameters:
+    //      scale - The scale to set
     void SetScale(f32 scale);
 
-    /// @brief      Set scale
-    /// @param      scaleX - The scale to set
-    /// @param      scaleY - The scale to set
+    // Method: SetScale
+    //      Set scale
+    //
+    // Parameters:
+    //      scaleX - The scale to set
+    //      scaleY - The scale to set
     void SetScale(f32 scaleX, f32 scaleY);
 
-    /// @brief      Set scale
-    /// @param      x - Receives the X scale
-    /// @param      y - Receives the Y scale
+    // Method: GetScale
+    //      Get scale
+    //
+    // Parameters:
+    //      x - Receives the X scale
+    //      y - Receives the Y scale
     void GetScale(f32 &x, f32 &y) const;
     
-    /// @brief      Get scale
-    /// @return     Returns the scale
+    // Method: GetScale
+    //      Get scale
     f32 GetScale() const;
 
-    /// @brief      Get scale
-    /// @return     Returns the scale X component
+    // Method: GetScaleX
+    //      Returns the scale X component
     f32 GetScaleX() const;
 
-    /// @brief      Get scale
-    /// @return     Returns the scale Y component
+    // Method: GetScaleY
+    //      Returns the scale Y component
     f32 GetScaleY() const;
 
-    /// @brief      Sets rotation
-    /// @param      rot - The rotation value
+    // Method: SetRotation
+    //      Sets rotation
+    //
+    // Parameters:
+    //      rot - The rotation value
     void SetRotation(f32 rot);
 
-    /// @brief      Gets rotation
-    /// @return     Returns the current rotation
+    // Method: GetRotation
+    //      Returns the current rotation
     f32 GetRotation() const;
 
-    /// @brief      User data support.
-    /// @param      index - 0 to 3
-    /// @param      value - Required value
+    // Method: SetUser
+    //      User data support.
+    //
+    // Parameters:
+    //      index - 0 to 3
+    //      value - Required value
     void SetUser(s32 index, s32 value);
 
-    /// @brief      User data support.
-    /// @param      index - 0 to 3
-    /// @return     Returns a user value
+    // Method: GetUser
+    //      User data support.
+    //
+    // Parameters:
+    //      index - 0 to 3
+    //
+    // Returns:
+    //      Returns a user value
     s32 GetUser(s32 index) const;
 
-    /// @brief      Gets the user data for the current frame.
-    /// @param      index - The frame index
-    /// @return     Returns the value or -1 if it doesn't exist
+    // Method: GetUserDataForCurrentFrame
+    //      Gets the user data for the current frame.
+    //
+    // Parameters:
+    //      index - The frame index
+    //
+    // Returns:
+    //      Returns the value or -1 if it doesn't exist
     s32 GetUserDataForCurrentFrame(s32 index);
 
-    /// @brief      Is this sprite animated?
-    /// @return     true or false
+    // Method: IsAnimated
+    //      Is this sprite animated?
     bool IsAnimated() const;
 
-    /// @brief      Has the current animation stopped.
-    /// @return     true or false
+    // Method: HasAnimationStopped
+    //      Has the current animation stopped.
     bool HasAnimationStopped();
 
-    /// @brief      Has any animation been played and animation is not in its default state.
-    /// @return     true or false
+    // Method: HasAnimationStarted
+    //      Has any animation been played and animation is not in its default state.
     bool HasAnimationStarted();
 
-    /// @brief      Sets the tint colour.
-    /// @param      col - The colour
+    // Method: SetColour
+    //      Sets the tint colour.
+    //
+    // Parameters:
+    //      col - The colour
     void SetColour(prColour col);
 
-    /// @brief      Is sprite in a sprite pool
-    /// @return     true or false
+    // Method: InPool
+    //      Is sprite in a sprite pool?
     bool InPool() const { return (pool != -1); }
 
-    /// @brief      Pool index
-    /// @return     The index of the sprite pool
+    // Method: PoolIndex
+    //      Returns pool index
     s32 PoolIndex() const { return pool; }
 
 
 public:
 
-    prVector2 pos;          ///< Sprite position.
+    prVector2 pos;          // Sprite position.
 
-    s32     user0;          ///< This is free for game programmer use.
-    s32     user1;          ///< This is free for game programmer use.
-    s32     user2;          ///< This is free for game programmer use.
-    s32     user3;          ///< This is free for game programmer use.
+    s32     user0;          // This is free for game programmer use.
+    s32     user1;          // This is free for game programmer use.
+    s32     user2;          // This is free for game programmer use.
+    s32     user3;          // This is free for game programmer use.
 
 
 private:
 
-    s32     pool;           ///< Sprite pool index
+    s32     pool;           // Sprite pool index
 
 
 private:
 
     // Friends
     friend class prSpriteManager;
-    //friend class SpritePointerPool;
+    //friend class prSpritePointerPool;
 
 
-    /// @brief      Ctor.
-    /// @param      pTexture    - The sprites texture
-    /// @param      name        - The sprites name
-    /// @param      frameWidth  - The sprites width
-    /// @param      frameHeight - The sprites height
+    // Ctor
+    //      pTexture    - The sprites texture
+    //      name        - The sprites name
+    //      frameWidth  - The sprites width
+    //      frameHeight - The sprites height
     prSprite(prTexture *pTexture, const char *name, s32 frameWidth, s32 frameHeight);
 
-    /// @brief      Dtor.
+    // Dtor
     ~prSprite();
 
 
 private:
 
-    /// @brief      Sets the sprite name
-    /// @param      spriteName  - The name
+    // Sets the sprite name
+    //      spriteName  - The name
     void SetName(const char *spriteName);
 
-    /// @brief      Adds an animation sequence.
-    /// @param      sequence    - The sequence to add
-    /// @param      name        - The sequence name
+    // Adds an animation sequence.
+    //      sequence    - The sequence to add
+    //      name        - The sequence name
     void AddSequence(prSpriteAnimationSequence* sequence, const char *name);
 
 

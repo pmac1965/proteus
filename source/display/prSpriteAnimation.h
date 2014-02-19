@@ -1,21 +1,18 @@
+// File: prSpriteAnimation.h
 /**
- * @file       prSpriteAnimation.h
- * @brief      Contains types for sprite animation support.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -27,35 +24,49 @@
 #include "../core/prTypes.h"
 
 
-/// @enum       prAnimState
-/// @brief      The status of the animation.
+// Enum: prAnimState
+//      The status of the animation.
+//
+// ANIM_STATE_NONE        - This is used when no animation exists for a sprite.
+// ANIM_STATE_PLAYING     - The animation is playing.
+// ANIM_STATE_STOPPED     - The animation has stopped.
+// ANIM_STATE_PAUSED      - The animation playback has been paused.
 enum prAnimState
 {
-    ANIM_STATE_NONE,            ///< This is used when no animation exists for a sprite.
-    ANIM_STATE_PLAYING,         ///< The animation is playing.
-    ANIM_STATE_STOPPED,         ///< The animation has stopped.
-    ANIM_STATE_PAUSED           ///< The animation playback has been paused.
+    ANIM_STATE_NONE,   
+    ANIM_STATE_PLAYING,
+    ANIM_STATE_STOPPED,
+    ANIM_STATE_PAUSED  
 };
 
 
-/// @enum       prAnimDir
-/// @brief      Direction that the animation plays in.
+// Enum: prAnimDir
+//      Direction that the animation plays in.
+//
+// ANIM_DIR_NONE           - Used when sprite is not animated.
+// ANIM_DIR_FORWARD        - Indicates frame numbers go up on frame change.
+// ANIM_DIR_BACKWARD       - Indicates frame numbers go down on frame change.
 enum prAnimDir
 {
-    ANIM_DIR_NONE,              ///< Used when sprite is not animated.
-    ANIM_DIR_FORWARD,           ///< Indicates frame numbers go up on frame change.
-    ANIM_DIR_BACKWARD           ///< Indicates frame numbers go down on frame change.
+    ANIM_DIR_NONE,   
+    ANIM_DIR_FORWARD,
+    ANIM_DIR_BACKWARD
 };
 
 
-/// @enum       prAnimType
-/// @brief      The animation type determines what happens when the frame bypasses the start/end frame.
+// Enum: prAnimType
+//      The animation type determines what happens when the frame bypasses the start/end frame.
+//
+// ANIM_TYPE_NONE          - Used when sprite is not animated.
+// ANIM_TYPE_ONCE          - When we hit the last frame we turn off the animation.
+// ANIM_TYPE_LOOP          - When we hit the last frame we restart the animation.
+// ANIM_TYPE_YOYO          - When we hit the first/last frame we reverse the animation.
 enum prAnimType
 {
-    ANIM_TYPE_NONE,             ///< Used when sprite is not animated.
-    ANIM_TYPE_ONCE,             ///< When we hit the last frame we turn off the animation.
-    ANIM_TYPE_LOOP,             ///< When we hit the last frame we restart the animation.
-    ANIM_TYPE_YOYO              ///< When we hit the first/last frame we reverse the animation.
+    ANIM_TYPE_NONE,
+    ANIM_TYPE_ONCE,
+    ANIM_TYPE_LOOP,
+    ANIM_TYPE_YOYO 
 };
 
 
@@ -64,50 +75,68 @@ class prSprite;
 class prSpriteAnimationSequence;
 
 
-/// @class      prSpriteAnimation
-/// @brief      Class to handle sprite animation.
+// Class: prSpriteAnimation
+//      Class to handle sprite animation.
 class prSpriteAnimation
 {
 public:
 
-    /// @brief      Constructor.
-    /// @param      sprite - The parent sprite
+    // Method: prSpriteAnimation
+    //      Constructor.
+    //
+    // Parameters:
+    //      sprite - The parent sprite
     prSpriteAnimation(prSprite *sprite);
 
-    /// @brief      Destructor.
+    // Method: ~prSpriteAnimation
+    //      Destructor.
     ~prSpriteAnimation();
 
-    /// @brief      Updates the sprites animation.
-    /// @param      dt - Delta time
+    // Method: Update
+    //      Updates the sprites animation.
+    //
+    // Parameters:
+    //      dt - Delta time
     void Update(float dt);
 
-    /// @brief      Adds an animation sequence.
-    /// @param      sequence - An animation sequence
+    // Method: AddSequence
+    //      Adds an animation sequence.
+    //
+    // Parameters:
+    //      sequence - An animation sequence
     void AddSequence(prSpriteAnimationSequence* sequence);
 
-    /// @brief      Plays a named animation sequence.
-    /// @param      name - Name of the sequence to play
+    // Method: PlaySequence
+    //      Plays a named animation sequence.
+    //
+    // Parameters:
+    //      name - Name of the sequence to play
     void PlaySequence(const char *name);
 
-    /// @brief      Gets the user data for the current frame.
-    /// @param      index - Index of the user data for this frame (0 to 3)
-    /// @return     The user data for a specific frame
+    // Method: GetUserDataForCurrentFrame
+    //      Gets the user data for the current frame.
+    //
+    // Parameters:
+    //      index - Index of the user data for this frame (0 to 3)
+    //
+    // Returns:
+    //      The user data for a specific frame
     s32 GetUserDataForCurrentFrame(s32 index);
 
-    /// @brief      Has the current animation stopped.
-    /// @return     true or false
+    // Method: HasAnimationStopped
+    //      Has the current animation stopped.
     bool HasAnimationStopped();
 
-    /// @brief      Has any animation been played and animation is not in its default state.
-    /// @return     true or false
+    // Method: HasAnimationStarted
+    //      Has any animation been played and animation is not in its default state.
     bool HasAnimationStarted();
 
 
 private:
 
-    prSprite                               &m_sprite;         ///< Reference to the parent sprite.
-    std::list<prSpriteAnimationSequence*>   m_sequences;      ///< List of the animation sequences.
-    prSpriteAnimationSequence              *m_currSequence;   ///< The current animation sequence.
+    prSprite                               &m_sprite;         // Reference to the parent sprite.
+    std::list<prSpriteAnimationSequence*>   m_sequences;      // List of the animation sequences.
+    prSpriteAnimationSequence              *m_currSequence;   // The current animation sequence.
 
 
 private:

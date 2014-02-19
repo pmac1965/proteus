@@ -1,21 +1,18 @@
+// File: prTexture.h
 /**
- * @file        prTexture.h
- * @brief       Contains a class that represents a texture.
- * @copyright   Copyright Paul Michael McNab. All rights reserved.
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -31,27 +28,33 @@
 struct prPVRTextureHeader;
 
 
-/// Class that represents a texture.
+// Class: prTexture
+//      Class that represents a texture.
 class prTexture : public prResource
 {
 public:
-
-    /// Bind the texture.
+    // Method: Bind
+    //      Bind the texture.
     bool Bind();
 
-    /// Unbind the texture.
+    // Method: Unbind
+    //      Unbind the texture.
     void Unbind();
 
-    /// Gets the textures width.
+    // Method: GetWidth
+    //      Gets the textures width.
     s32 GetWidth() const { return m_width; }
 
-    /// Gets the textures height.
+    // Method: GetHeight
+    //      Gets the textures height.
     s32 GetHeight() const { return m_height; }
 
-    /// Gets the textures alpha state.
+    // Method: GetHasAlpha
+    //      Gets the textures alpha state.
     bool GetHasAlpha() const { return m_alpha; }
 
-    /// Get the texture ID.
+    // Method: GetTexID
+    //      Gets the textures ID.
     u32 GetTexID() const { return m_texID; }
 
 
@@ -61,33 +64,33 @@ private:
     friend class prResourceManager;
 
 
-    /// Keep  ctor/dtor private so only the resource manager can create/destroy.
+    // Keep ctor/dtor private so only the resource manager can create/destroy.
     prTexture(const char *filename);
 
-    /// Dtor
+    // Dtor
     ~prTexture();
 
-    /// Load texture.
+    // Load texture.
     void Load();
 
-    /// Unload texture.
+    // Unload texture.
     void Unload();
 
-    /// Allows embedded data to be used.
+    // Allows embedded data to be used.
     void LoadFromMemory(void *pData, u32 size);
 
-    /// Allows raw data to be used
-    //void LoadFromRaw(void *pData, u32 size, u32 width, u32 height);
+    // Allows raw data to be used
+    void LoadFromRaw(void *pData, u32 size, u32 width, u32 height);
 
-    /// Checks for power of two compliance.
-    /// @param      size - A texture width/height
-    /// @return     true or false
+    // Checks for power of two compliance.
+    //
+    //      size - A texture width/height
     bool ValidateSize(s32 size);
 
-    /// Acquires the texture format
+    // Acquires the texture format
     bool GetTextureFormat(u32 texFormat, int &internalFormat, int &format, int &type, bool &compressed);
 
-    /// Validates the header
+    // Validates the header
     bool ValidateHeader(prPVRTextureHeader *header);
 
 
@@ -105,7 +108,7 @@ private:
     s32     m_height;
     u32     m_texID;
     bool    m_alpha;
-    bool    m_duplicate;
+    bool    m_exp0;
     bool    m_exp1;
     bool    m_exp2;
 };
