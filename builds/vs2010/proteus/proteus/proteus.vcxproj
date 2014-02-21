@@ -63,19 +63,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;C:\Program Files\OpenAL 1.1 SDK\include;$(IncludePath);C:\Program Files\OpenAL 1.1 SDK\include</IncludePath>
     <TargetName>$(ProjectName)_d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tool debug|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath);C:\Program Files\OpenAL 1.1 SDK\include</IncludePath>
     <TargetName>$(ProjectName)_td</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath);C:\Program Files\OpenAL 1.1 SDK\include</IncludePath>
     <TargetName>$(ProjectName)_r</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tool release|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath);C:\Program Files\OpenAL 1.1 SDK\include</IncludePath>
     <TargetName>$(ProjectName)_tr</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -151,6 +151,17 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\source\audio\external\codec.h" />
+    <ClInclude Include="..\..\..\..\source\audio\external\ogg.h" />
+    <ClInclude Include="..\..\..\..\source\audio\external\os_types.h" />
+    <ClInclude Include="..\..\..\..\source\audio\external\vorbisenc.h" />
+    <ClInclude Include="..\..\..\..\source\audio\external\vorbisfile.h" />
+    <ClInclude Include="..\..\..\..\source\audio\prOpenALDeviceList.h" />
+    <ClInclude Include="..\..\..\..\source\audio\prOpenALErrors.h" />
+    <ClInclude Include="..\..\..\..\source\audio\prSoundManager.h" />
+    <ClInclude Include="..\..\..\..\source\audio\prSoundManagerShared.h" />
+    <ClInclude Include="..\..\..\..\source\audio\prSoundManager_PC.h" />
+    <ClInclude Include="..\..\..\..\source\audio\prWaves.h" />
     <ClInclude Include="..\..\..\..\source\Box2D\Box2D.h" />
     <ClInclude Include="..\..\..\..\source\Box2D\Collision\b2BroadPhase.h" />
     <ClInclude Include="..\..\..\..\source\Box2D\Collision\b2Collision.h" />
@@ -322,6 +333,12 @@
     <ClInclude Include="..\..\..\..\source\zlib\zutil.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\source\audio\prOpenALDeviceList.cpp" />
+    <ClCompile Include="..\..\..\..\source\audio\prOpenALErrors.cpp" />
+    <ClCompile Include="..\..\..\..\source\audio\prSoundManager.cpp" />
+    <ClCompile Include="..\..\..\..\source\audio\prSoundManagerShared.cpp" />
+    <ClCompile Include="..\..\..\..\source\audio\prSoundManager_PC.cpp" />
+    <ClCompile Include="..\..\..\..\source\audio\prWaves.cpp" />
     <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2BroadPhase.cpp" />
     <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2CollideCircle.cpp" />
     <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2CollideEdge.cpp" />

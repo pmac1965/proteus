@@ -22,6 +22,7 @@
 #include "../input/prMouse.h"
 #include "../display/prRenderer.h"
 #include "../core/prStringUtil.h"
+#include "../audio/prSoundManager.h"
 
 
 // ----------------------------------------------------------------------------
@@ -322,10 +323,6 @@ PRBOOL prApplication_PC::DisplayCreateTool(u32 width, u32 height, u32 menuID, u3
 /// ---------------------------------------------------------------------------
 PRBOOL prApplication_PC::Run()
 {
-    // Get systems
-    prMouse *pMouse = static_cast<prMouse *>(prCoreGetComponent(PRSYSTEM_MOUSE));
-
-
     // Game loop
     MSG msg;
     while(m_running)
@@ -338,6 +335,13 @@ PRBOOL prApplication_PC::Run()
             // Quit?
             if (msg.message == WM_QUIT)
             {
+                // Notify engine.
+                prRegistry *pReg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+                if (pReg)
+                {
+                    pReg->SetValue("Exit", "true");
+                }
+
                 m_running = PRFALSE;
                 OnExit();
             }
@@ -358,6 +362,11 @@ PRBOOL prApplication_PC::Run()
         }
         else
         {
+            // Get systems
+            prMouse         *pMouse = static_cast<prMouse *>(prCoreGetComponent(PRSYSTEM_MOUSE));
+            prSoundManager  *pSM    = static_cast<prSoundManager *>(prCoreGetComponent(PRSYSTEM_AUDIO));
+
+
 //            GameTime::GetInstance()->Update();
 //            Fps::GetInstance()->Begin();
 
@@ -368,10 +377,7 @@ PRBOOL prApplication_PC::Run()
 
                 // System updates
                 if (pMouse) { pMouse->Update(); }
-                //Input       ::GetInstance()->Update();
-                //prMouse     ::GetInstance()->Update();
-                //prTouch     ::GetInstance()->Update();
-                //SoundManager::GetInstance()->Update(dt);
+                if (pSM)    { pSM->Update(16.0f); }
 
                 // Update and draw the game
                 Update(16.0f);// dt);

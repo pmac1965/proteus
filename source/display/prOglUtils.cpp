@@ -19,6 +19,7 @@
 
 #elif defined(PLATFORM_BADA)
   #include <FGraphicsOpengl.h>
+  #include <cstdlib>
   using namespace Osp::Graphics::Opengl;
 
 #elif defined(PLATFORM_ANDROID)
@@ -38,6 +39,7 @@
 #include "../core/prCore.h"
 #include "../core/prRegistry.h"
 #include "../core/prMacros.h"
+#include "../core/prStringUtil.h"
 #include "../debug/prTrace.h"
 #include "../debug/prDebug.h"
 #include "prOglUtils.h"
@@ -136,10 +138,22 @@ void prOpenGLErrorCheck(const char *file, const char *func, int line)
     PRASSERT(file && *file);
     PRASSERT(func && *func);
 
+
     // Don't print error messages if game is exiting
-//    if (System::GameExitInProgress())
- //       return;
-    TODO("fix")
+    prRegistry *pReg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+    if (pReg)
+    {
+        if (prStringCompare(pReg->GetValue("Exit"), "true") == 0)
+        {
+            return;
+        }
+    }
+    else
+    {
+        // No registry? Then lets get the hell out of here.
+        return;
+    }
+
 
     // Write message
     GLenum error = glGetError();

@@ -29,6 +29,13 @@
 #include "zlib/zlib.h"
 
 // Engine includes
+//#include "audio/prOpenALDeviceList.h"
+//#include "audio/prOpenALErrors.h"
+#include "audio/prSoundManager.h"
+#include "audio/prSoundManagerShared.h"
+#include "audio/prSoundManager_PC.h"
+//#include "audio/prWaves.h"
+
 #include "core/prApplication.h"
 #include "core/prApplication_PC.h"
 #include "core/prArgs.h"

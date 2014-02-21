@@ -39,7 +39,7 @@ REM --------------------------------------
     del %PROTEUS_ENGINE_DIR%\include\proteus\display\prSplash.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prDebugFont.h
 
-    @REM @rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\proteus\gui
+    rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\libzip
 
 
 REM ---------------------------------------------------------------------------

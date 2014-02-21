@@ -21,6 +21,7 @@
 #include "../display/prBackgroundManager.h"
 #include "../display/prSpriteManager.h"
 #include "../debug/prOnScreenLogger.h"
+#include "../audio/prSoundManager_PC.h"
 
 
 #if defined(PLATFORM_PC)
@@ -167,6 +168,30 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 if (systems[id] == NULL)
                 {
                     systems[id] = new prOnScreenLogger();
+                }
+                else
+                {
+                    prTrace("Engine system '%s' already exists\n", systems[id]->Name());
+                }
+                break;
+
+            // The sound manager
+            case PRSYSTEM_AUDIO:
+                if (systems[id] == NULL)
+                {
+                #if defined(PLATFORM_PC)
+                    systems[id] = new prSoundManager_PC();
+                #elif defined(PLATFORM_ANDROID)
+                    systems[id] = NULL;
+                #elif defined(PLATFORM_IOS)
+                    systems[id] = NULL;
+                #elif defined(PLATFORM_LINUX)
+                    systems[id] = NULL;
+                #elif defined(PLATFORM_BADA)
+                    systems[id] = NULL;
+                #else
+                    #error Platform undefined
+                #endif
                 }
                 else
                 {

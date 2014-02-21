@@ -66,7 +66,7 @@
 // Use these defines to configure the engine setup
 // ----------------------------------------------------------------------------
 #ifndef SOUND_ALLOW                                     // Use the sound system. Can be removed for debugging.
-//#define SOUND_ALLOW
+#define SOUND_ALLOW
 #endif
 
 #ifndef REMOVE_EXCEPTIONS                               // Allows try/catch code to be removed. For example bada doesn't allow try/catch code.
