@@ -136,7 +136,7 @@ char *prOpenALDeviceList::GetDeviceName(s32 index)
 
 #else
 
-    UNUSED(index);
+    PRUNUSED(index);
 
 #endif
 

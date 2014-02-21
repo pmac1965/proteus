@@ -17,6 +17,7 @@
 #include "prOpenALErrors.h"
 #include "prOpenALDeviceList.h"
 #include "../core/prMacros.h"
+#include "../core/prStringUtil.h"
 #include "../debug/prTrace.h"
 #include "../debug/prDebug.h"
 #include "external/vorbisfile.h"
@@ -31,6 +32,9 @@
 // Locals
 namespace
 {
+    ov_callbacks callbacks;
+
+
     // OggVorbis callback
     size_t ov_read_func(void *ptr, size_t size, size_t nmemb, void *datasource)
     {
@@ -69,6 +73,17 @@ prSoundManager_PC::prSoundManager_PC()
     ov_clear            = NULL;
     ov_read             = NULL;
     dll                 = NULL;
+    frequency           = 0;
+    channels            = 0;
+    format              = 0;
+    songSource          = 0;
+    songBuffers[0]      = 0xFFFFFFFF;
+    songBuffers[1]      = 0xFFFFFFFF;
+    pOggFile            = NULL;
+
+
+    memset(&oggStream, 0, sizeof(oggStream));
+
 
 	// Try and load Vorbis DLLs. vorbisfile.dll will load ogg.dll and vorbis.dll
     dll = LoadLibrary(TEXT("vorbisfile.dll"));
@@ -100,8 +115,7 @@ prSoundManager_PC::~prSoundManager_PC()
 {
 #ifdef SOUND_ALLOW
     // Stop the music
-    //SongStop();
-    TODO("Put back")
+    SongStop();
         
     // Delete the SFX sources
     for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
@@ -298,8 +312,6 @@ void prSoundManager_PC::Release()
 /// ---------------------------------------------------------------------------
 void prSoundManager_PC::Update(f32 dt)
 {
-    //ASSERT(pImpl);    
-
 #ifdef SOUND_ALLOW
 
     if (initialised)
@@ -327,22 +339,23 @@ void prSoundManager_PC::Update(f32 dt)
         }
 
         // Update music
-        /*if (imp.playingSong)
+        if (songPlaying)
         {
+            // Loop song?
             if (!SongUpdate())
             {
-                int index = imp.songIndex;
+                int index = songIndex;
                 SongStop();
                 SongPlay(index);
-                SongSetVolume(imp.songVolume);
+                SongSetVolume(songVolume);
                 return;
             }
 
-            if (imp.songFade > 0)
+            if (songFade > 0)
             {
-                float v = (LERP(imp.songFade, 0.0f, imp.songTime) / imp.songFade); 
-                v = (v / imp.songFade);
-                imp.songTime -= (dt / 1000.0f);
+                float v = (PRLERP(songFade, 0.0f, songTime) / songFade); 
+                v = (v / songFade);
+                songTime -= (dt / 1000.0f);
     
                 if (v > 0.0f)
                 {
@@ -353,11 +366,12 @@ void prSoundManager_PC::Update(f32 dt)
                     SongStop();
                 }
             }
-        }//*/
+        }
     }
 
 #else
-    UNUSED(dt);
+
+    PRUNUSED(dt);
 
 #endif
 }
@@ -445,8 +459,8 @@ void prSoundManager_PC::LoadSFX(const prSFXInfo *sfx, s32 count)
 
 #else
 
-    UNUSED(count);
-    UNUSED(sfx);
+    PRUNUSED(count);
+    PRUNUSED(sfx);
 
 #endif
 }
@@ -457,6 +471,282 @@ void prSoundManager_PC::LoadSFX(const prSFXInfo *sfx, s32 count)
 /// ---------------------------------------------------------------------------
 void prSoundManager_PC::SongPlayByName(const char *filename)
 {
+#ifdef SOUND_ALLOW
+
+    SongStop();
+    
+    // Open file.
+    PRASSERT(filename && *filename);
+    pOggFile = fopen(filename, "rb");
+    if (pOggFile == NULL)
+    {
+        prTrace("Couldn't open .ogg file: %s\n", filename);
+        return;
+    }
+
+    // Find track index
+    PRASSERT(numTracks > 0);
+    s32 index = -1;
+    for (s32 i = 0; i < numTracks; i++)
+    {
+        if (strcmp(filename, pMusicTracks[i]) == 0)
+        {
+            index = i;
+            break;
+        }
+    }
+
+    if (index == -1)
+    {
+        prTrace("Failed to find registered music track %s\n", filename);
+        return;
+    }
+
+
+	// Ogg stream support
+    callbacks.read_func  = ov_read_func;
+	callbacks.seek_func  = ov_seek_func;
+	callbacks.close_func = ov_close_func;
+	callbacks.tell_func  = ov_tell_func;
+
+    // Reset
+    frequency      = 0;
+    channels       = 0;
+    format         = 0;
+    songSource     = 0;
+    songBuffers[0] = 0xFFFFFFFF;
+    songBuffers[1] = 0xFFFFFFFF;
+    songPlaying    = false;
+    songState      = SONG_STATE_FREE;
+    songIndex      = -1;
+    songFade       = 0.0f;
+    songTime       = 0.0f;
+
+
+    // Create an OggVorbis file stream
+    PRASSERT(ov_open_callbacks);
+    if (ov_open_callbacks(pOggFile , &oggStream, NULL, 0, callbacks) == 0)
+	{
+		// Get some information about the file (Channels, Format, and Frequency)
+        PRASSERT(ov_info);
+		vorbis_info *pVorbisInfo = ov_info(&oggStream, -1);
+		if (pVorbisInfo)
+		{
+			frequency = pVorbisInfo->rate;
+			channels  = pVorbisInfo->channels;
+
+			if (pVorbisInfo->channels == 1)
+			{
+				format = AL_FORMAT_MONO16;
+			}
+			else if (pVorbisInfo->channels == 2)
+			{
+				format = AL_FORMAT_STEREO16;
+			}
+			else if (pVorbisInfo->channels == 4)
+			{
+				format = alGetEnumValue("AL_FORMAT_QUAD16");
+			}
+			else if (pVorbisInfo->channels == 6)
+			{
+				format = alGetEnumValue("AL_FORMAT_51CHN16");
+			}
+            else
+            {
+		        // Close OggVorbis stream
+                PRASSERT(ov_clear);
+		        ov_clear(&oggStream);
+                prTrace("Unknown channel count from .ogg file: %s\n", filename);
+                return;
+            }
+		}
+        else
+        {
+		    // Close OggVorbis stream
+            PRASSERT(ov_clear);
+		    ov_clear(&oggStream);
+            prTrace("Failed to get info from .ogg file: %s\n", filename);
+            return;
+        }
+
+
+        alGenBuffers(1, &songBuffers[0]);
+        AL_ERROR_CHECK()
+
+        alGenBuffers(1, &songBuffers[1]);
+        AL_ERROR_CHECK()
+
+        alGenSources(1, &songSource);
+        AL_ERROR_CHECK()
+    
+        alSource3f(songSource, AL_POSITION, 0.0f, 0.0f, 0.0f);
+        AL_ERROR_CHECK()
+
+        alSource3f(songSource, AL_VELOCITY, 0.0f, 0.0f, 0.0f);
+        AL_ERROR_CHECK()
+
+        alSource3f(songSource, AL_DIRECTION, 0.0f, 0.0f, 0.0f);
+        AL_ERROR_CHECK()
+
+        alSourcef(songSource, AL_ROLLOFF_FACTOR, 0.0f);
+        AL_ERROR_CHECK()
+
+        alSourcei(songSource, AL_SOURCE_RELATIVE, AL_TRUE);
+        AL_ERROR_CHECK()
+
+        songPlaying = true;
+        songIndex   = index;
+        songState   = SONG_STATE_PLAYING;
+
+
+        if (!SongStream((unsigned int)songBuffers[0]))
+        {
+            prTrace("stream failed 1\n");
+        }
+
+        if (!SongStream((unsigned int)songBuffers[1]))
+        {
+            prTrace("stream failed 2\n");
+        }
+    
+        alSourceQueueBuffers(songSource, 2, songBuffers);
+        AL_ERROR_CHECK()
+
+        alSourcePlay(songSource);
+        AL_ERROR_CHECK()
+
+        prTrace("Playing song: %s\n", filename);
+        SongSetVolume(songVolume);
+    }
+    else
+    {
+        prTrace("Failed to open .ogg file: %s\n", filename);
+    }
+
+#else
+    
+    PRUNUSED(filename);
+    
+#endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Stops the current song.
+/// ---------------------------------------------------------------------------
+void prSoundManager_PC::SongStop(float time)
+{
+#ifdef SOUND_ALLOW
+
+    if (songPlaying)
+    {
+        if (time > 0)
+        {
+            songFade = PRCLAMP(time, 0.0f, 10.0f);
+            songTime = songFade;
+            return;
+        }
+
+        alSourceStop(songSource);
+        AL_ERROR_CHECK()
+
+        Empty();
+
+        alDeleteSources(1, &songSource);
+        AL_ERROR_CHECK()
+
+        alDeleteBuffers(2, songBuffers);
+        AL_ERROR_CHECK()
+
+        ov_clear(&oggStream);
+
+        // Reset
+        frequency      = 0;
+        channels       = 0;
+        format         = 0;
+        songSource     = 0;
+        songBuffers[0] = 0;
+        songBuffers[1] = 0;
+        songPlaying    = false;
+        songState      = SONG_STATE_FREE;
+        songIndex      = -1;
+        songFade       = 0.0f;
+        songTime       = 0.0f;
+    }
+    
+#endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Pauses the active song.
+/// ---------------------------------------------------------------------------
+void prSoundManager_PC::SongPause(bool pause)
+{
+#ifdef SOUND_ALLOW
+
+    if (initialised)
+    {
+        if (numTracks > 0)
+        {
+            if (songPlaying)
+            {
+                if (pause)
+                {
+                    if (songState == SONG_STATE_PLAYING)
+                    {
+                        songState = SONG_STATE_PAUSED;
+                        alSourcePause(songSource);
+                        AL_ERROR_CHECK()
+                    }
+                }
+                else
+                {
+                    if (songState == SONG_STATE_PAUSED)
+                    {
+                        songState = SONG_STATE_PLAYING;
+                        alSourcePlay(songSource);
+                        AL_ERROR_CHECK()
+                    }
+                }
+            }
+        }
+    }
+
+#else
+
+    PRUNUSED(pause);
+
+#endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Determines if the current song is paused.
+/// ---------------------------------------------------------------------------
+bool prSoundManager_PC::SongGetPaused() const
+{
+    bool result = false;
+
+#ifdef SOUND_ALLOW
+
+    if (initialised)
+    {
+        if (numTracks > 0)
+        {
+            if (songPlaying)
+            {
+                if (songState == SONG_STATE_PAUSED)
+                {
+                    result = true;
+                }
+            }
+        }
+    }
+
+#endif
+
+    return result;
 }
 
 
@@ -465,6 +755,36 @@ void prSoundManager_PC::SongPlayByName(const char *filename)
 /// ---------------------------------------------------------------------------
 void prSoundManager_PC::SongSetVolume(f32 volume)
 {
+#ifdef SOUND_ALLOW
+
+    if (initialised)
+    {
+        if (numTracks > 0)
+        {
+            if (songPlaying)
+            {
+                if (songState == SONG_STATE_PLAYING)
+                {
+                    // Set volume
+                    float vol = PRCLAMP(volume, AUDIO_MUS_MIN_VOLUME, AUDIO_MUS_MAX_VOLUME);
+                    songVolume = vol;
+                    vol *= masterMusVolume;
+                    alSourcef(songSource, AL_GAIN, vol);
+                    AL_ERROR_CHECK()
+                }
+                else
+                {
+                    prTrace("Tried to set the volume of a paused song.\n");
+                }
+            }
+        }
+    }
+
+#else
+
+    PRUNUSED(volume);
+
+#endif
 }
 
 
@@ -524,9 +844,9 @@ s32 prSoundManager_PC::SFXPlay(s32 index, f32 volume, bool loop)
 
 #else
 
-    UNUSED(loop);
-    UNUSED(volume);
-    UNUSED(index);
+    PRUNUSED(loop);
+    PRUNUSED(volume);
+    PRUNUSED(index);
 
 #endif
 
@@ -537,8 +857,33 @@ s32 prSoundManager_PC::SFXPlay(s32 index, f32 volume, bool loop)
 /// ---------------------------------------------------------------------------
 /// Stops the specified effect.
 /// ---------------------------------------------------------------------------
-void prSoundManager_PC::SFXStop(s32 index)
+void prSoundManager_PC::SFXStop(s32 id)
 {
+#ifdef SOUND_ALLOW
+
+    if (initialised)
+    {
+        for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+        {
+            if (soundEffects[i].id == (u32)id)
+            {
+                if (soundEffects[i].state == SFX_STATE_PLAYING)
+                {
+                    soundEffects[i].state = SFX_STATE_FREE;
+                    soundEffects[i].id    = 0;
+                    alSourceStop(soundEffects[i].uiSource);
+                    AL_ERROR_CHECK()
+                    break;
+                }
+            }
+        }
+    }
+
+#else
+
+    PRUNUSED(id);
+
+#endif
 }
 
 
@@ -547,6 +892,33 @@ void prSoundManager_PC::SFXStop(s32 index)
 /// ---------------------------------------------------------------------------
 void prSoundManager_PC::SFXStop(const char *name)
 {
+#ifdef SOUND_ALLOW
+        
+    if (initialised && name && *name)
+    {
+        u32 hash = prStringHash(name);
+
+        for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+        {
+            if (soundEffects[i].hash == hash)
+            {
+                if (soundEffects[i].state == SFX_STATE_PLAYING)
+                {
+                    soundEffects[i].state = SFX_STATE_FREE;
+                    soundEffects[i].id    = 0;
+                    alSourceStop(soundEffects[i].uiSource);
+                    AL_ERROR_CHECK()
+                    break;
+                }
+            }
+        }
+    }
+
+#else
+
+    PRUNUSED(name);
+
+#endif
 }
 
 
@@ -555,6 +927,421 @@ void prSoundManager_PC::SFXStop(const char *name)
 /// ---------------------------------------------------------------------------
 void prSoundManager_PC::SFXStopAll()
 {
+#ifdef SOUND_ALLOW
+
+    if (initialised)
+    {
+        for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+        {
+            if (soundEffects[i].state == SFX_STATE_PLAYING ||
+                soundEffects[i].state == SFX_STATE_PAUSED)
+            {
+                soundEffects[i].state = SFX_STATE_FREE;
+                soundEffects[i].id    = 0;
+                alSourceStop(soundEffects[i].uiSource);
+                AL_ERROR_CHECK()
+            }
+        }
+
+        sfxPaused = false;
+    }
+
+#endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Determines if a particular sound effect is playing.
+/// ---------------------------------------------------------------------------
+bool prSoundManager_PC::SFXIsPlaying(int id) const
+{
+    bool result = false;
+
+#ifdef SOUND_ALLOW
+    
+    if (initialised)
+    {
+        for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+        {
+            if (soundEffects[i].id == (u32)id)
+            {
+                if (soundEffects[i].state == SFX_STATE_PLAYING)
+                {
+                    result = true;
+                    break;
+                }
+            }
+        }
+    }
+
+#else
+
+    PRUNUSED(id);
+
+#endif
+
+    return result;
+}
+    
+
+/// ---------------------------------------------------------------------------
+/// Determines if a particular sound effect is playing.
+/// ---------------------------------------------------------------------------
+bool prSoundManager_PC::SFXIsPlaying(const char *name) const
+{
+    bool result = false;
+
+#ifdef SOUND_ALLOW
+
+    PRASSERT(name && *name);
+
+    if (initialised && name && *name)
+    {
+        u32 hash = prStringHash(name);
+
+        for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+        {
+            if (soundEffects[i].hash == hash)
+            {
+                if (soundEffects[i].state == SFX_STATE_PLAYING)
+                {
+                    result = true;
+                    break;
+                }
+            }
+        }
+    }
+
+#else
+
+    PRUNUSED(name);
+
+#endif
+
+    return result;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Pauses a specific sound effect
+/// ---------------------------------------------------------------------------
+void prSoundManager_PC::SFXPause(int id, bool state)
+{
+#ifdef SOUND_ALLOW
+
+    if (initialised)
+    {
+        for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+        {
+            if (soundEffects[i].id == (u32)id)
+            {
+                if (state)
+                {
+                    if (soundEffects[i].state == SFX_STATE_PLAYING)
+                    {
+                        soundEffects[i].state = SFX_STATE_PAUSED;
+                        alSourcePause(soundEffects[i].uiSource);
+                        AL_ERROR_CHECK()
+                    }
+                }
+                else
+                {
+                    if (soundEffects[i].state == SFX_STATE_PAUSED)
+                    {
+                        soundEffects[i].state = SFX_STATE_PLAYING;
+                        alSourcePlay(soundEffects[i].uiSource);
+                        AL_ERROR_CHECK()
+                    }
+                }
+
+                break;
+            }
+        }
+    }
+
+#else
+
+    PRUNUSED(id);
+    PRUNUSED(state);
+
+#endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Pauses a specific sound effect
+/// ---------------------------------------------------------------------------
+void prSoundManager_PC::SFXPause(const char *name, bool state)
+{
+#ifdef SOUND_ALLOW
+
+    PRASSERT(name && *name);
+
+    if (initialised && name && *name)
+    {
+        u32 hash = prStringHash(name);
+
+        for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+        {
+            if (soundEffects[i].hash == hash)
+            {
+                if (state)
+                {
+                    if (soundEffects[i].state == SFX_STATE_PLAYING)
+                    {
+                        soundEffects[i].state = SFX_STATE_PAUSED;
+                        alSourcePause(soundEffects[i].uiSource);
+                        AL_ERROR_CHECK()
+                    }
+                }
+                else
+                {
+                    if (soundEffects[i].state == SFX_STATE_PAUSED)
+                    {
+                        soundEffects[i].state = SFX_STATE_PLAYING;
+                        alSourcePlay(soundEffects[i].uiSource);
+                        AL_ERROR_CHECK()
+                    }
+                }
+
+                break;
+            }
+        }
+    }
+
+#else
+
+    PRUNUSED(name);
+    PRUNUSED(state);
+
+#endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Pauses all the sound effects
+/// ---------------------------------------------------------------------------
+void prSoundManager_PC::SFXPauseAll(bool state)
+{
+#ifdef SOUND_ALLOW
+
+    if (initialised)
+    {
+        if (sfxPaused != state)
+        {
+            sfxPaused = state;
+
+            if (state)
+            {
+                for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+                {
+                    if (soundEffects[i].state == SFX_STATE_PLAYING)
+                    {
+                        soundEffects[i].state = SFX_STATE_PAUSED;
+                        alSourcePause(soundEffects[i].uiSource);
+                        AL_ERROR_CHECK()
+                    }
+                }
+            }
+            else
+            {
+                for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+                {
+                    if (soundEffects[i].state == SFX_STATE_PAUSED)
+                    {
+                        soundEffects[i].state = SFX_STATE_PLAYING;
+                        alSourcePlay(soundEffects[i].uiSource);
+                        AL_ERROR_CHECK()
+                    }
+                }
+            }
+        }
+    }
+
+#else
+
+    PRUNUSED(state);
+
+#endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Determines if all the sound effects are paused.
+/// ---------------------------------------------------------------------------
+bool prSoundManager_PC::SFXGetPaused() const
+{
+    bool result = false;
+
+#ifdef SOUND_ALLOW
+    
+    if (initialised)
+    {
+        result = sfxPaused;
+    }
+
+#endif
+
+    return result;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Returns the number of active sound effects
+/// ---------------------------------------------------------------------------
+s32 prSoundManager_PC::SFXGetActive() const
+{
+#ifdef SOUND_ALLOW    
+    return active;
+#else
+    return 0;
+#endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Sets the volume of the specified effect.
+/// ---------------------------------------------------------------------------
+void prSoundManager_PC::SFXSetVolume(int id, f32 volume)
+{
+#ifdef SOUND_ALLOW
+    
+    if (initialised)
+    {
+        for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+        {
+            if (soundEffects[i].id == (u32)id)
+            {
+                if (soundEffects[i].state == SFX_STATE_PLAYING)
+                {
+                    // Set volume
+                    float vol = PRCLAMP(volume, AUDIO_SFX_MIN_VOLUME, AUDIO_SFX_MAX_VOLUME);
+                    vol *= masterSfxVolume;
+                    alSourcef(soundEffects[i].uiSource, AL_GAIN, vol);
+                    AL_ERROR_CHECK()
+                    break;
+                }
+            }
+        }
+    }
+
+#else
+
+    PRUNUSED(id);
+    PRUNUSED(volume);
+
+#endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Updates the current song
+/// ---------------------------------------------------------------------------
+bool prSoundManager_PC::SongUpdate()
+{
+    bool active = true;
+
+#ifdef SOUND_ALLOW
+
+    int processed;
+    alGetSourcei(songSource, AL_BUFFERS_PROCESSED, &processed);
+    AL_ERROR_CHECK()
+
+    if (processed > 0)
+    {
+        while(processed--)
+        {
+            unsigned int buffer;
+        
+            alSourceUnqueueBuffers(songSource, 1, &buffer);
+            AL_ERROR_CHECK()
+
+            active = SongStream(buffer);
+
+            alSourceQueueBuffers(songSource, 1, &buffer);
+            AL_ERROR_CHECK()
+        }
+    }
+
+#endif
+
+    return active;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Streams the song data
+/// ---------------------------------------------------------------------------
+bool prSoundManager_PC::SongStream(unsigned int buffer)
+{
+#ifdef SOUND_ALLOW
+
+    char pcm[SONG_BUFFER_SIZE];
+    int  size = 0;
+    int  section;
+
+    while(size < SONG_BUFFER_SIZE)
+    {
+        int result = ov_read(&oggStream, pcm + size, SONG_BUFFER_SIZE - size, 0, 2, 1, &section);    
+        if (result > 0)
+        {
+            size += result;
+        }
+        else
+        {
+            if (result < 0)
+            {
+                prTrace("Stream error\n");
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+    
+    if (size == 0)
+    {
+        return false;
+    }
+        
+    //Trace("buffer %i\n", size);
+    alBufferData(buffer, format, pcm, size, frequency);
+    AL_ERROR_CHECK()
+
+#else
+
+    PRUNUSED(buffer);
+
+#endif
+
+    return true;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Empties the songs unused buffers.
+/// ---------------------------------------------------------------------------
+void prSoundManager_PC::Empty()
+{
+#ifdef SOUND_ALLOW
+
+    int queued;
+    
+    alGetSourcei(songSource, AL_BUFFERS_QUEUED, &queued);
+    AL_ERROR_CHECK()
+    
+    if (queued > 0)
+    {
+        while(queued--)
+        {
+            ALuint buffer;    
+            alSourceUnqueueBuffers(songSource, 1, &buffer);
+            AL_ERROR_CHECK()
+        }
+    }
+
+#endif
 }
 
 

@@ -20,9 +20,12 @@ prSoundManager::prSoundManager() : prCoreSystem(PRSYSTEM_AUDIO, "prSoundManager"
     masterSfxVolume         = AUDIO_SFX_MAX_VOLUME;
     songVolume              = AUDIO_MUS_INITIAL_VOL;
     songIndex               = -1;
-    playingSong             = false;
+    songState               = SONG_STATE_FREE;
+    songFade                = 0.0f;
+    songTime                = 0.0f;
+    songPlaying             = false;
     initialised             = false;
-    exp1                    = false;
+    sfxPaused               = false;
     exp2                    = false;
     pLoadedWaves            = NULL;
     pMusicTracks            = NULL;
@@ -64,9 +67,9 @@ void prSoundManager::LoadSongs(const char **filenames, int count)
 }
 
 
-// ----------------------------------------------------------------------------
-// Starts playing a song.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Starts playing a song.
+/// ---------------------------------------------------------------------------
 void prSoundManager::SongPlay(s32 index)
 {
 #ifdef SOUND_ALLOW    
@@ -80,24 +83,6 @@ void prSoundManager::SongPlay(s32 index)
 
 
 /// ---------------------------------------------------------------------------
-/// Gets the current song.
-/// ---------------------------------------------------------------------------
-s32 prSoundManager::SongGetCurrent() const
-{
-    return songIndex;
-}
-
-
-// ----------------------------------------------------------------------------
-// Gets the current song.
-// ----------------------------------------------------------------------------
-bool prSoundManager::SongIsPlaying() const
-{
-    return playingSong;
-}
-
-
-/// ---------------------------------------------------------------------------
 /// Sets the master volume.
 /// ---------------------------------------------------------------------------
 void prSoundManager::SongSetMasterVolume(f32 volume)
@@ -106,17 +91,8 @@ void prSoundManager::SongSetMasterVolume(f32 volume)
     masterMusVolume = PRCLAMP(volume, AUDIO_MUS_MIN_VOLUME, AUDIO_MUS_MAX_VOLUME);
     SongSetVolume(songVolume);
 #else
-    UNUSED(volume);
+    PRUNUSED(volume);
 #endif
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Gets the master volume.
-/// ---------------------------------------------------------------------------
-float prSoundManager::SongGetMasterVolume() const
-{
-    return masterMusVolume;
 }
 
 
@@ -166,13 +142,4 @@ s32 prSoundManager::SFXPlay(const char *name, f32 volume, bool loop)
 void prSoundManager::SFXSetMasterVolume(f32 volume)
 {
     masterSfxVolume = PRCLAMP(volume, AUDIO_SFX_MIN_VOLUME, AUDIO_SFX_MAX_VOLUME);
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Gets the master volume for the all effects.
-/// ---------------------------------------------------------------------------
-f32 prSoundManager::SFXGetMasterVolume() const
-{
-    return masterSfxVolume;
 }

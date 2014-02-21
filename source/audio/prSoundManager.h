@@ -99,15 +99,15 @@ public:
     //
     // Parameters:
     //      time - The fade time.
-    void SongStop(f32 time = 0.0f);
+    virtual void SongStop(f32 time = 0.0f) = 0;
 
     // Method: SongGetCurrent
     //      Gets the current songs index.
-    s32 SongGetCurrent() const;
+    s32 SongGetCurrent() const { return songIndex; }
 
     // Method: SongIsPlaying
     //      Is a song playing
-    bool SongIsPlaying() const;
+    bool SongIsPlaying() const { return songPlaying; }
 
     // Method: SongSetMasterVolume
     //      Sets the master volume for the currently playing song.
@@ -115,15 +115,15 @@ public:
 
     // Method: SongGetMasterVolume
     //      Gets the master volume for the currently playing song.
-    f32 SongGetMasterVolume() const;
+    f32 SongGetMasterVolume() const { return masterMusVolume; }
 
     // Method: SongPause
     //      Pauses the active song.
-    void SongPause(bool pause);
+    virtual void SongPause(bool pause) = 0;
 
     // Method: SongPause
     //      Determines if the current song is paused.
-    bool SongGetPaused() const;
+    virtual bool SongGetPaused() const = 0;
 
     // Method: SongSetVolume
     //      Sets the volume of the current song.
@@ -139,7 +139,7 @@ public:
 
     // Method: SFXStop
     //      Stops the specified effect.
-    virtual void SFXStop(s32 index) = 0;
+    virtual void SFXStop(s32 id) = 0;
 
     // Method: SFXStop
     //      Stops the specified effect.
@@ -155,39 +155,39 @@ public:
 
     // Method: SFXGetMasterVolume
     //      Gets the master volume for all the effects.
-    f32 SFXGetMasterVolume() const;
+    f32 SFXGetMasterVolume() const { return masterSfxVolume; }
 
     // Method: SFXIsPlaying
     //      Determines if a particular sound effect is playing.
-    bool SFXIsPlaying(s32 index) const;
+    virtual bool SFXIsPlaying(s32 id) const = 0;
 
     // Method: SFXIsPlaying
     //      Determines if a particular sound effect is playing.
-    bool SFXIsPlaying(const char *name) const;
+    virtual bool SFXIsPlaying(const char *name) const = 0;
 
     // Method: SFXPause
     //      Pauses a specific sound effect
-    void SFXPause(s32 index, bool state);
+    virtual void SFXPause(s32 id, bool state) = 0;
 
     // Method: SFXPause
     //      Pauses a specific sound effect
-    void SFXPause(const char *name, bool state);
+    virtual void SFXPause(const char *name, bool state) = 0;
 
     // Method: SFXPause
     //      Pauses all the sound effects
-    void SFXPauseAll(bool state);
+    virtual void SFXPauseAll(bool state) = 0;
 
     // Method: SFXPause
     //      Determines if all the sound effects are paused. This applies for all effects, not individual effects.
-    bool SFXGetPaused() const;
+    virtual bool SFXGetPaused() const = 0;
 
     // Method: SFXGetActive
     //      Returns the number of active sound effects
-    s32 SFXGetActive() const { return active; }
+    virtual s32 SFXGetActive() const = 0;
 
     // Method: SFXSetVolume
     //      Sets the volume of the specified effect.
-    void SFXSetVolume(s32 index, f32 volume);
+    virtual void SFXSetVolume(s32 id, f32 volume) = 0;
 
     // Method: DisplayUsage
     //      Displays debug information on the sound player.
@@ -209,18 +209,22 @@ public:
 protected:
     f32                 masterMusVolume;
     f32                 masterSfxVolume;
+
     f32                 songVolume;
     s32                 songIndex;
+    s32                 songState;
+    f32                 songFade;
+    f32                 songTime;
+
     s32                 active;
     u32                 effectId;
 
-    bool                playingSong;
+    bool                songPlaying;
     bool                initialised;
-    bool                exp1;
+    bool                sfxPaused;
     bool                exp2;
 
     prLoadedWave       *pLoadedWaves;
-
     const char        **pMusicTracks;
     s32                 numTracks;
     s32                 numEffects;

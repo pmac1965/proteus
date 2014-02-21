@@ -72,14 +72,6 @@ public:
     //      This is handled by the engine. *Do_not_call*
     void Update(f32 dt);
 
-    // Method: LoadSongs
-    //      Registers a song list, so we can use play by index.
-    //
-    // Parameters:
-    //      filenames - A list of the songs
-    //      count     - List size
-    //void LoadSongs(const char **filenames, s32 count);
-
     // Method: LoadSFX
     //      Loads the sound effects into sound memory.
     //
@@ -90,13 +82,6 @@ public:
     // See Also:
     //      <prSFXInfo>
     void LoadSFX(const prSFXInfo *sfx, s32 count);
-
-    // Method: SongPlay
-    //      Starts playing a song.
-    //
-    // Parameters:
-    //      index - The song to play
-    //void SongPlay(s32 index);
 
     // Method: SongPlayByName
     //      Starts playing a song.
@@ -110,23 +95,7 @@ public:
     //
     // Parameters:
     //      time - The fade time.
-    /*void SongStop(f32 time = 0.0f);
-
-    // Method: SongGetCurrent
-    //      Gets the current songs index.
-    s32 SongGetCurrent() const;
-
-    // Method: SongIsPlaying
-    //      Is a song playing
-    bool SongIsPlaying() const;
-
-    // Method: SongSetMasterVolume
-    //      Sets the master volume for the currently playing song.
-    void SongSetMasterVolume(f32 volume);
-
-    // Method: SongGetMasterVolume
-    //      Gets the master volume for the currently playing song.
-    f32 SongGetMasterVolume() const;
+    void SongStop(f32 time = 0.0f);
 
     // Method: SongPause
     //      Pauses the active song.
@@ -134,7 +103,7 @@ public:
 
     // Method: SongPause
     //      Determines if the current song is paused.
-    bool SongGetPaused() const;//*/
+    bool SongGetPaused() const;
 
     // Method: SongSetVolume
     //      Sets the volume of the current song.
@@ -144,13 +113,9 @@ public:
     //      Plays a sound effect.
     s32 SFXPlay(s32 index, f32 volume = 1.0f, bool loop = false);
 
-    // Method: SFXPlay
-    //      Plays a sound effect.
-    //s32 SFXPlay(const char *name, f32 volume = 1.0f, bool loop = false);
-
     // Method: SFXStop
     //      Stops the specified effect.
-    void SFXStop(s32 index);
+    void SFXStop(s32 id);
 
     // Method: SFXStop
     //      Stops the specified effect.
@@ -159,14 +124,6 @@ public:
     // Method: SFXStopAll
     //      Stops all the sound effects.
     void SFXStopAll();
-
-    // Method: SFXSetMasterVolume
-    //      Sets the master volume for all the effects.
-/*    void SFXSetMasterVolume(f32 volume);
-
-    // Method: SFXGetMasterVolume
-    //      Gets the master volume for all the effects.
-    f32 SFXGetMasterVolume() const;
 
     // Method: SFXIsPlaying
     //      Determines if a particular sound effect is playing.
@@ -198,9 +155,9 @@ public:
 
     // Method: SFXSetVolume
     //      Sets the volume of the specified effect.
-    void SFXSetVolume(s32 index, f32 volume);
+    void SFXSetVolume(s32 id, f32 volume);
 
-    // Method: DisplayUsage
+/*    // Method: DisplayUsage
     //      Displays debug information on the sound player.
     void DisplayUsage() const;
 
@@ -226,6 +183,28 @@ private:
     LPOVCLEAR           ov_clear;
     LPOVREAD            ov_read;
     prWaves             waves;
+
+    FILE               *pOggFile;
+    OggVorbis_File      oggStream;
+    ALuint              frequency;
+    ALuint              channels;
+    ALuint              format;
+    ALuint              songBuffers[2];
+    ALuint              songSource;
+
+private:
+    
+    // Method: SongUpdate
+    //      Updates the current song
+    bool SongUpdate();
+
+    // Method: SongStream
+    //      Streams the song data
+    bool SongStream(unsigned int buffer);
+
+    // Method: Empty
+    //      Empties the songs unused buffers
+    void Empty();
 };
 
 
