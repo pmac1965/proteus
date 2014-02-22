@@ -19,6 +19,7 @@
 #include "../debug/prTrace.h"
 #include "../debug/prConsoleWindow.h"
 #include "../debug/prOnScreenLogger.h"
+#include "../debug/prFps.h"
 #include "../input/prMouse.h"
 #include "../display/prRenderer.h"
 #include "../core/prStringUtil.h"
@@ -367,10 +368,10 @@ PRBOOL prApplication_PC::Run()
             prMouse         *pMouse = static_cast<prMouse *>       (prCoreGetComponent(PRSYSTEM_MOUSE));
             prSoundManager  *pSound = static_cast<prSoundManager *>(prCoreGetComponent(PRSYSTEM_AUDIO));
             prTouch         *pTouch = static_cast<prTouch *>       (prCoreGetComponent(PRSYSTEM_TOUCH));
+            prFps           *pFps   = static_cast<prFps *>         (prCoreGetComponent(PRSYSTEM_FPS));
 
 
 //            GameTime::GetInstance()->Update();
-//            Fps::GetInstance()->Begin();
 
             // Update game
             if (m_pWindow && m_pWindow->GetActive())
@@ -381,6 +382,7 @@ PRBOOL prApplication_PC::Run()
                 if (pMouse) { pMouse->Update(); }
                 if (pSound) { pSound->Update(16.0f); }
                 if (pTouch) { pTouch->Update(); }
+                if (pFps)   { pFps->Begin(); }
 
                 // Update and draw the game
                 Update(16.0f);// dt);
@@ -392,7 +394,7 @@ PRBOOL prApplication_PC::Run()
             TODO("Needs modified to track game speed!")
             //Sleep(1);
 
-//            Fps::GetInstance()->End();
+            if (pFps)   { pFps->End(); }
         }
     }
 

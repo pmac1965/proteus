@@ -22,6 +22,7 @@
 #include "../display/prFadeManager.h"
 #include "../debug/prOnScreenLogger.h"
 #include "../debug/prTrace.h"
+#include "../debug/prFps_PC.h"
 #include "../audio/prSoundManager_PC.h"
 #include "../input/prTouch.h"
 
@@ -185,6 +186,30 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 {
                 #if defined(PLATFORM_PC)
                     systems[id] = new prSoundManager_PC();
+                #elif defined(PLATFORM_ANDROID)
+                    systems[id] = NULL;
+                #elif defined(PLATFORM_IOS)
+                    systems[id] = NULL;
+                #elif defined(PLATFORM_LINUX)
+                    systems[id] = NULL;
+                #elif defined(PLATFORM_BADA)
+                    systems[id] = NULL;
+                #else
+                    #error Platform undefined
+                #endif
+                }
+                else
+                {
+                    prTrace("Engine system '%s' already exists\n", systems[id]->Name());
+                }
+                break;
+
+            // FPS
+            case PRSYSTEM_FPS:
+                if (systems[id] == NULL)
+                {
+                #if defined(PLATFORM_PC)
+                    systems[id] = new prFps_PC();
                 #elif defined(PLATFORM_ANDROID)
                     systems[id] = NULL;
                 #elif defined(PLATFORM_IOS)

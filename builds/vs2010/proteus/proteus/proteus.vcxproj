@@ -243,6 +243,8 @@
     <ClInclude Include="..\..\..\..\source\debug\prConsoleWindow.h" />
     <ClInclude Include="..\..\..\..\source\debug\prDebug.h" />
     <ClInclude Include="..\..\..\..\source\debug\prDebugFont.h" />
+    <ClInclude Include="..\..\..\..\source\debug\prFps.h" />
+    <ClInclude Include="..\..\..\..\source\debug\prFps_PC.h" />
     <ClInclude Include="..\..\..\..\source\debug\prOnScreenLogger.h" />
     <ClInclude Include="..\..\..\..\source\debug\prTrace.h" />
     <ClInclude Include="..\..\..\..\source\display\prBackground.h" />
@@ -414,6 +416,8 @@
     <ClCompile Include="..\..\..\..\source\debug\prAssert.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prConsoleWindow.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prDebug.cpp" />
+    <ClCompile Include="..\..\..\..\source\debug\prFps.cpp" />
+    <ClCompile Include="..\..\..\..\source\debug\prFps_PC.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prOnScreenLogger.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prTrace.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prBackground.cpp" />
