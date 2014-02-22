@@ -115,7 +115,7 @@ prSoundManager_PC::~prSoundManager_PC()
 {
 #ifdef SOUND_ALLOW
     // Stop the music
-    SongStop();
+    //SongStop();
         
     // Delete the SFX sources
     for (int i=0; i<AUDIO_MAX_ACTIVE; i++)

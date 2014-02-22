@@ -82,11 +82,11 @@ enum prSystems
 {
     // Core systems
     PRSYSTEM_RESOURCEMANAGER,  
-    PRSYSTEM_RENDERER,         
     PRSYSTEM_TOUCH,            
     PRSYSTEM_MESSAGEMANAGER,   
     PRSYSTEM_REGISTRY,         
     PRSYSTEM_FILEMANAGER,      
+    PRSYSTEM_RENDERER,         
 
     // Desktop only
 #if defined(PLATFORM_PC)

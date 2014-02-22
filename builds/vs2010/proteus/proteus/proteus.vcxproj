@@ -248,6 +248,7 @@
     <ClInclude Include="..\..\..\..\source\display\prBackground.h" />
     <ClInclude Include="..\..\..\..\source\display\prBackgroundManager.h" />
     <ClInclude Include="..\..\..\..\source\display\prColour.h" />
+    <ClInclude Include="..\..\..\..\source\display\prFadeManager.h" />
     <ClInclude Include="..\..\..\..\source\display\prFixedWidthFont.h" />
     <ClInclude Include="..\..\..\..\source\display\prGLFont.h" />
     <ClInclude Include="..\..\..\..\source\display\prOglUtils.h" />
@@ -266,6 +267,8 @@
     <ClInclude Include="..\..\..\..\source\file\prFileManager.h" />
     <ClInclude Include="..\..\..\..\source\file\prFileShared.h" />
     <ClInclude Include="..\..\..\..\source\input\prMouse.h" />
+    <ClInclude Include="..\..\..\..\source\input\prTouch.h" />
+    <ClInclude Include="..\..\..\..\source\input\prTouchListener.h" />
     <ClInclude Include="..\..\..\..\source\libzip\config.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -416,6 +419,7 @@
     <ClCompile Include="..\..\..\..\source\display\prBackground.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prBackgroundManager.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prColour.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prFadeManager.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prFixedWidthFont.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prGLFont.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prOglUtils.cpp" />
@@ -432,6 +436,7 @@
     <ClCompile Include="..\..\..\..\source\file\prFileManager.cpp" />
     <ClCompile Include="..\..\..\..\source\file\prFileShared.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prMouse.cpp" />
+    <ClCompile Include="..\..\..\..\source\input\prTouch.cpp" />
     <ClCompile Include="..\..\..\..\source\libzip\mkstemp.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

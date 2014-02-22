@@ -23,6 +23,7 @@
 #include "../display/prRenderer.h"
 #include "../core/prStringUtil.h"
 #include "../audio/prSoundManager.h"
+#include "../input/prTouch.h"
 
 
 // ----------------------------------------------------------------------------
@@ -363,8 +364,9 @@ PRBOOL prApplication_PC::Run()
         else
         {
             // Get systems
-            prMouse         *pMouse = static_cast<prMouse *>(prCoreGetComponent(PRSYSTEM_MOUSE));
-            prSoundManager  *pSM    = static_cast<prSoundManager *>(prCoreGetComponent(PRSYSTEM_AUDIO));
+            prMouse         *pMouse = static_cast<prMouse *>       (prCoreGetComponent(PRSYSTEM_MOUSE));
+            prSoundManager  *pSound = static_cast<prSoundManager *>(prCoreGetComponent(PRSYSTEM_AUDIO));
+            prTouch         *pTouch = static_cast<prTouch *>       (prCoreGetComponent(PRSYSTEM_TOUCH));
 
 
 //            GameTime::GetInstance()->Update();
@@ -377,7 +379,8 @@ PRBOOL prApplication_PC::Run()
 
                 // System updates
                 if (pMouse) { pMouse->Update(); }
-                if (pSM)    { pSM->Update(16.0f); }
+                if (pSound) { pSound->Update(16.0f); }
+                if (pTouch) { pTouch->Update(); }
 
                 // Update and draw the game
                 Update(16.0f);// dt);
@@ -396,10 +399,12 @@ PRBOOL prApplication_PC::Run()
 
     // Clear here as this system allocates memory
     prOnScreenLogger *pOSL = static_cast<prOnScreenLogger *>(prCoreGetComponent(PRSYSTEM_ONSCREENLOGGER));
-    if (pOSL)
-    {
-        pOSL->Clear();
-    }
+    if (pOSL) { pOSL->Clear(); }
+
+
+    // Stop sound
+    prSoundManager  *pSound = static_cast<prSoundManager *>(prCoreGetComponent(PRSYSTEM_AUDIO));
+    if (pSound) { pSound->SongStop(); }
 
 
     // Clear app pointer.

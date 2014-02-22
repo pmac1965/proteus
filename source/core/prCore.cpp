@@ -14,14 +14,16 @@
 #include "prRegistry.h"
 #include "prResourceManager.h"
 #include "../file/prFileManager.h"
-#include "../debug/prTrace.h"
 #include "../display/prRenderer_GL11.h"
 #include "../display/prRenderer_GL20.h"
 #include "../display/prRenderer_DX9.h"
 #include "../display/prBackgroundManager.h"
 #include "../display/prSpriteManager.h"
+#include "../display/prFadeManager.h"
 #include "../debug/prOnScreenLogger.h"
+#include "../debug/prTrace.h"
 #include "../audio/prSoundManager_PC.h"
+#include "../input/prTouch.h"
 
 
 #if defined(PLATFORM_PC)
@@ -55,14 +57,10 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
 
         // Create the core systems
         systems[PRSYSTEM_RESOURCEMANAGER]   = new prResourceManager();
+        systems[PRSYSTEM_TOUCH]             = new prTouch();
         systems[PRSYSTEM_MESSAGEMANAGER]    = new prMessageManager();
         systems[PRSYSTEM_REGISTRY]          = new prRegistry();
         systems[PRSYSTEM_FILEMANAGER]       = new prFileManager();
-
-        #if defined(PLATFORM_PC)
-        systems[PRSYSTEM_MOUSE]     = new prMouse();
-        systems[PRSYSTEM_KEYBOARD]  = NULL;
-        #endif
 
         // Platform specific initialisation
         #if defined(PLATFORM_PC)
@@ -112,6 +110,12 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
         #else
             #error Unsupported platform
 
+        #endif
+
+
+        #if defined(PLATFORM_PC)
+        systems[PRSYSTEM_MOUSE]     = new prMouse();
+        systems[PRSYSTEM_KEYBOARD]  = NULL;
         #endif
     }
     else
@@ -199,6 +203,19 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 }
                 break;
 
+            // The fade manager
+            case PRSYSTEM_FADEMANAGER:
+                if (systems[id] == NULL)
+                {
+                    systems[id] = new prFadeManager();
+                }
+                else
+                {
+                    prTrace("Engine system '%s' already exists\n", systems[id]->Name());
+                }
+                break;
+
+            // Unknown?
             default:
                 if (id < 0 || id >= PRSYSTEM_MAX)
                 {
