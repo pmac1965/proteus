@@ -151,6 +151,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\source\actor\prActor.h" />
+    <ClInclude Include="..\..\..\..\source\actor\prActorManager.h" />
     <ClInclude Include="..\..\..\..\source\audio\external\codec.h" />
     <ClInclude Include="..\..\..\..\source\audio\external\ogg.h" />
     <ClInclude Include="..\..\..\..\source\audio\external\os_types.h" />
@@ -338,6 +340,8 @@
     <ClInclude Include="..\..\..\..\source\zlib\zutil.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\source\actor\prActor.cpp" />
+    <ClCompile Include="..\..\..\..\source\actor\prActorManager.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prOpenALDeviceList.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prOpenALErrors.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prSoundManager.cpp" />
