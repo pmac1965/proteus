@@ -166,16 +166,6 @@ void prSprite::Draw()
             glScalef(width, height, 0);
             ERR_CHECK();
 
-#if defined(PLATFORM_ANDROID)
-            if (imp.pTexture->Bind())
-            {
-                Renderer::GetInstance()->DrawQuad(imp.u0, imp.v0, imp.u1, imp.v1, imp.colour);
-            }
-            else
-            {
-                imp.pTexture->Reload();
-            }
-#else
             m_pTexture->Bind();
 
             prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
@@ -183,8 +173,6 @@ void prSprite::Draw()
             {
                 pRenderer->DrawQuad(m_u0, m_v0, m_u1, m_v1, m_colour);
             }
-
-#endif
             
             glPopMatrix();
             ERR_CHECK();
@@ -231,16 +219,6 @@ void prSprite::BatchDraw()
             glScalef(width, height, 0);
             ERR_CHECK();
 
-#if defined(PLATFORM_ANDROID)
-            if (imp.pTexture->Bind())
-            {
-                Renderer::GetInstance()->DrawQuad(imp.u0, imp.v0, imp.u1, imp.v1, imp.colour);
-            }
-            else
-            {
-                imp.pTexture->Reload();
-            }
-#else
             m_pTexture->Bind();
 
             prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
@@ -248,7 +226,6 @@ void prSprite::BatchDraw()
             {
                 pRenderer->DrawQuad(m_u0, m_v0, m_u1, m_v1, m_colour);
             }
-#endif
             
         glPopMatrix();
         ERR_CHECK();

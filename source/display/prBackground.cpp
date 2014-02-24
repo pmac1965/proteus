@@ -163,38 +163,26 @@ void prBackground::Draw()
         glPushMatrix();
         ERR_CHECK();
 
-            // Translate to center
-            glTranslatef(width, height, 0);
-            ERR_CHECK();
+        // Translate to center
+        glTranslatef(width, height, 0);
+        ERR_CHECK();
 
-            // Move to offset
-            glTranslatef(pos.x - m_xAdjust, pos.y - m_yAdjust, 0);
-            ERR_CHECK();
+        // Move to offset
+        glTranslatef(pos.x - m_xAdjust, pos.y - m_yAdjust, 0);
+        ERR_CHECK();
 
-            // Set scale
-            glScalef(m_scrnWidth, m_scrnHeight, 0);
-            ERR_CHECK();
+        // Set scale
+        glScalef(m_scrnWidth, m_scrnHeight, 0);
+        ERR_CHECK();
 
-#if defined(PLATFORM_ANDROID)
-            if (m_texture->Bind())
+        if (m_texture->Bind())
+        {
+            prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
+            if (pRenderer)
             {
-                //Renderer::GetInstance()->DrawQuad(imp.u0, imp.v0, imp.u1, imp.v1, imp.colour);
-                Renderer::GetInstance()->DrawQuad(0.0f, imp.v0, imp.u1, 1.0f, imp.colour);
+                pRenderer->DrawQuad(0.0f, m_v0, m_u1, 1.0f, m_colour);
             }
-            else
-            {
-                imp.texture->Reload();
-            }
-#else
-            if (m_texture->Bind())
-            {
-                prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
-                if (pRenderer)
-                {
-                    pRenderer->DrawQuad(0.0f, m_v0, m_u1, 1.0f, m_colour);
-                }
-            }
-#endif
+        }
 
         glPopMatrix();
         ERR_CHECK();

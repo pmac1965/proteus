@@ -41,17 +41,13 @@
   #define MAX_PATH    260
   #endif
 
-  static char APKPath[MAX_PATH];
-  static char CardPath[MAX_PATH];
-  static zip *APKArchive = NULL;
-
-  //#define ANDROID_APK_DEBUG
-
-  // Get access to the android data zip file.
-  zip *GetAPKArchive()
+  namespace
   {
-      return APKArchive;
+    char APKPath[MAX_PATH];
+    char CardPath[MAX_PATH];
+    zip *APKArchive = NULL;
   }
+  //#define ANDROID_APK_DEBUG
 
 #else
   #error No platform defined.
@@ -240,7 +236,7 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
     // Android
     #elif defined(PLATFORM_ANDROID)
         // Copy the app path.
-        strcpy(imp.dataPath, "assets");
+        strcpy(dataPath, "assets");
 
     // Linux
     #elif defined(PLATFORM_LINUX)
@@ -409,7 +405,7 @@ void prFileManager::RegisterArchive(const char *filename)
         APKArchive = zip_open(APKPath, 0, NULL);
         if (APKArchive == NULL)
         {
-            PANIC("Error loading APK");
+            PRPANIC("Error loading APK");
         }
  //       else
  //       {
@@ -587,18 +583,18 @@ bool prFileManager::Exists(const char *filename, u32 &size)
             zip_fclose(file);
 
             #if defined(ANDROID_APK_DEBUG)
-            Trace("Size %i -> %s\n", file->bytes_left, GetSystemPath(filename));
-            Trace("Compressed size %i\n", file->cbytes_left);
+            prTrace("Size %i -> %s\n", file->bytes_left, GetSystemPath(filename));
+            prTrace("Compressed size %i\n", file->cbytes_left);
             #endif
         }
         else
         {
-            Trace("Exists: Failed to open file: %s\n", GetSystemPath(filename));
+            prTrace("Exists: Failed to open file: %s\n", GetSystemPath(filename));
         }
     }
     else
     {
-        Trace("Exist test: No archive\n");
+        prTrace("Exist test: No archive\n");
     }
 
 #endif
@@ -683,9 +679,9 @@ u32 prFileManager::Read(u8 *pDataBuffer, u32 size, u32 hash)
 
 #else
 
-    UNUSED(pDataBuffer);
-    UNUSED(size);
-    UNUSED(hash);
+    PRUNUSED(pDataBuffer);
+    PRUNUSED(size);
+    PRUNUSED(hash);
     return 0xFFFFFFFF;
 
 #endif
@@ -738,7 +734,7 @@ void SetAPKPath(const char *path)
 
     if (path && *path)
     {
-        StringCopySafe(APKPath, path, sizeof(APKPath));
+        prStringCopySafe(APKPath, path, sizeof(APKPath));
     }
 }
 
@@ -752,7 +748,7 @@ void SetCardPath(const char *path)
 
     if (path && *path)
     {
-        StringCopySafe(CardPath, path, sizeof(CardPath));
+        prStringCopySafe(CardPath, path, sizeof(CardPath));
     }
 }
 
@@ -767,19 +763,12 @@ const char *GetCardPath()
 
 
 // ----------------------------------------------------------------------------
-// For android we need to put the instance in the class or 
-// we end up with multiple versions as the singleton doesn't work 
-// correctly for android.
+// Get access to the android data zip file.
 // ----------------------------------------------------------------------------
-prFileManager *prFileManager::GetInstance()
+zip *GetAPKArchive()
 {
-    static prFileManager *instance = NULL;
-
-    if (instance == NULL)
-    {
-        instance = new prFileManager();
-    }
-
-    return instance;
+    return APKArchive;
 }
+
+
 #endif

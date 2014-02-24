@@ -213,6 +213,7 @@ static void buffreplace (LexState *ls, char from, char to) {
 ** the one defined in the current locale and check again
 */
 static void trydecpoint (LexState *ls, SemInfo *seminfo) {
+#if !defined(NO_LOCALECONV) // PMAC - Android doesn't have this one
   char old = ls->decpoint;
   ls->decpoint = getlocaledecpoint();
   buffreplace(ls, old, ls->decpoint);  /* try new decimal separator */
@@ -221,6 +222,10 @@ static void trydecpoint (LexState *ls, SemInfo *seminfo) {
     buffreplace(ls, ls->decpoint, '.');  /* undo change (for error message) */
     lexerror(ls, "malformed number", TK_NUMBER);
   }
+#else
+    ((void)(seminfo));
+    lexerror(ls, "malformed number", TK_NUMBER);
+#endif
 }
 
 

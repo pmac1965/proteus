@@ -22,8 +22,8 @@
 
 #if defined(PLATFORM_ANDROID)
 #include <android/log.h>
-#include <libzip\zip.h>
-#include <libzip\zipint.h>
+#include <libzip/zip.h>
+#include <libzip/zipint.h>
 #endif
 
 
@@ -219,7 +219,10 @@ bool prFile::Exists()
             zip* pArchive = GetAPKArchive();
             if (pArchive)
             {
-                imp.pZipFile = zip_fopen(pArchive, FileManager::GetInstance()->GetSystemPath(imp.filenameArch), 0);
+                prFileManager *pFileManager = static_cast<prFileManager*>(prCoreGetComponent(PRSYSTEM_FILEMANAGER));
+                PRASSERT(pFileManager);
+
+                imp.pZipFile = zip_fopen(pArchive, pFileManager->GetSystemPath(imp.filenameArch), 0);
                 if (imp.pZipFile)
                 {
                     result = true;
@@ -228,7 +231,7 @@ bool prFile::Exists()
                 }
                 else
                 {
-                    __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Open: Failed to open file: %s\n", FileManager::GetInstance()->GetSystemPath(imp.filenameArch));
+                    __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Open: Failed to open file: %s\n", pFileManager->GetSystemPath(imp.filenameArch));
                 }
             }
             else
@@ -283,7 +286,10 @@ bool prFile::Open()
     zip* pArchive = GetAPKArchive();
     if (pArchive)
     {
-        imp.pZipFile = zip_fopen(pArchive, FileManager::GetInstance()->GetSystemPath(imp.filenameArch), 0);
+        prFileManager *pFileManager = static_cast<prFileManager*>(prCoreGetComponent(PRSYSTEM_FILEMANAGER));
+        PRASSERT(pFileManager);
+
+        imp.pZipFile = zip_fopen(pArchive, pFileManager->GetSystemPath(imp.filenameArch), 0);
         if (imp.pZipFile)
         {
             imp.filesize  = imp.pZipFile->bytes_left;
@@ -293,7 +299,7 @@ bool prFile::Open()
         }
         else
         {
-            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Open: Failed to open file: %s\n", FileManager::GetInstance()->GetSystemPath(imp.filenameArch));
+            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Open: Failed to open file: %s\n", pFileManager->GetSystemPath(imp.filenameArch));
         }
     }
     else
@@ -540,14 +546,14 @@ void prFile::Internal_Seek(s32 offset, s32 origin)
     PRASSERT(imp.pZipFile != NULL);
 
     // Read to simulate seek
-    if (origin == FILE_SEEK_CUR)
+    if (origin == PRFILE_SEEK_CUR)
     {
         u8 *pData = new u8[offset];
         imp.bytesRead += zip_fread(imp.pZipFile, pData, offset);
-        SAFE_DELETE_ARRAY(pData);
+        PRSAFE_DELETE_ARRAY(pData);
     }
     // Reads from start to simulate seek set.
-    else if (origin == FILE_SEEK_SET)
+    else if (origin == PRFILE_SEEK_SET)
     {
         zip* pArchive = GetAPKArchive();
         if (pArchive)
@@ -557,18 +563,21 @@ void prFile::Internal_Seek(s32 offset, s32 origin)
             imp.pZipFile  = NULL;
             imp.bytesRead = 0;
 
+            prFileManager *pFileManager = static_cast<prFileManager*>(prCoreGetComponent(PRSYSTEM_FILEMANAGER));
+            PRASSERT(pFileManager);
+
             // Reopen file to get back to start!
-            imp.pZipFile = zip_fopen(pArchive, FileManager::GetInstance()->GetSystemPath(imp.filenameArch), 0);
+            imp.pZipFile = zip_fopen(pArchive, pFileManager->GetSystemPath(imp.filenameArch), 0);
             if (imp.pZipFile)
             {
                 // Seek to the point asked.
                 u8 *pData = new u8[offset];
                 imp.bytesRead += zip_fread(imp.pZipFile, pData, offset);
-                SAFE_DELETE_ARRAY(pData);
+                PRSAFE_DELETE_ARRAY(pData);
             }
         }
     }
-    else if (origin == FILE_SEEK_END)
+    else if (origin == PRFILE_SEEK_END)
     {
     }
     else

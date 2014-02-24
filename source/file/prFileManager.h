@@ -28,6 +28,7 @@
 
 // Forward declarations
 class prFile;
+struct zip;
 
 
 // Class: prFileManager

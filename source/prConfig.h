@@ -42,16 +42,19 @@
 #elif defined(__GNUC__)
     // Bada?
     #if defined(SHP)
+        //#error "Its Bada"
         #define PLATFORM_BADA
         #define AUDIO_TYPE  AUDIO_BADA
     
     // Linux
-    #elif defined(linux)
+    #elif (defined(linux) && !defined(__ANDROID__))
+        //#error "Its linux"
         #define PLATFORM_LINUX
         #define AUDIO_TYPE  AUDIO_LINUX
 
     // Android
-    #else
+    #elif (defined(linux) && defined(__ANDROID__))
+        //#error "Its Android"
         #define PLATFORM_ANDROID
         #define AUDIO_TYPE  AUDIO_ANDROID
     #endif

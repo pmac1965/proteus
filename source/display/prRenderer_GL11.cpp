@@ -21,6 +21,10 @@
   #include <GL/glu.h>
   #include "../core/prWindow_PC.h"
 
+#elif defined(PLATFORM_ANDROID)
+  #include <GLES/gl.h>
+  #include "../core/prWindow_PC.h"
+
 #elif defined(PLATFORM_BADA)
   #include <FGraphicsOpengl.h>
   using namespace Osp::Graphics::Opengl;
@@ -85,6 +89,7 @@ static const float INCREMENT = 2.0f * Proteus::Maths::Pi / SEGMENTS;
 /// ---------------------------------------------------------------------------
 prRenderer_GL11::prRenderer_GL11() : prRenderer()
 {
+    TODO("For bada and android add the window code here")
 }
 
 
@@ -113,7 +118,7 @@ void prRenderer_GL11::Init()
     ERR_CHECK();
     
     // Depth buffer
-#if defined(PLATFORM_BADA)
+#if defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
     glClearDepthf(1.0f);                                // Depth buffer setup
     ERR_CHECK();
 #else
@@ -225,7 +230,7 @@ void prRenderer_GL11::SetOrthographicView()
         glLoadIdentity();
         ERR_CHECK();
         
-#if defined(PLATFORM_BADA)
+#if defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
         glOrthof(0, m_pWindow->GetWidth(), m_pWindow->GetHeight(), 0, 0, 1);
         ERR_CHECK();
 #else
