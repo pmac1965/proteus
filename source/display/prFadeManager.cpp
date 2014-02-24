@@ -37,6 +37,7 @@
 #include "prRenderer.h"
 #include "../debug/prAssert.h"
 #include "../debug/prTrace.h"
+#include "../debug/prDebug.h"
 #include "../core/prMacros.h"
 #include "../core/prCore.h"
 #include "../core/prRegistry.h"
@@ -219,10 +220,10 @@ void prFadeManager::Reset()
 /// ---------------------------------------------------------------------------
 /// Set to specific state.
 /// ---------------------------------------------------------------------------
-void prFadeManager::SetBlack()
+void prFadeManager::SetBlack(f32 in)
 {
     colour = FadeColourBlack;
-    alpha  = 255.0f;
+    alpha  = PRCLAMP(in, 0.0f, 255.0f);
 }
 
 
@@ -231,6 +232,8 @@ void prFadeManager::SetBlack()
 /// ---------------------------------------------------------------------------
 void prFadeManager::SetWhite()
 {
+    TODO("Add in colour")
+
     colour = FadeColourWhite;
     alpha  = 255.0f;
 }

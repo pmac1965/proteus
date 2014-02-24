@@ -143,17 +143,19 @@
 #endif//ALLOW_PROTEUS_NAMESPACE
 
 
-// ----------------------------------------------------------------------------
 // Tweakbar
-// ----------------------------------------------------------------------------
 #ifndef PROTEUS_USE_ANT_TWEAK_BAR                       // Use AntTweakBar?
 #define PROTEUS_USE_ANT_TWEAK_BAR
 #endif
 
 
-// ----------------------------------------------------------------------------
+// Watermark?
+#ifndef PROTEUS_ALLOW_WATERMARK                         // Allow watermark
+//#define PROTEUS_ALLOW_WATERMARK
+#endif
+
+
 // Misc debug settings
-// ----------------------------------------------------------------------------
 //#define DEBUG_OPENGL
 
 

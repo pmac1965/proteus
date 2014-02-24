@@ -200,6 +200,13 @@ public:
     // Parameters:
     //      state - true or false
     void TexturesEnabled(bool state);
+
+    // Method: BlendEnabled
+    //      Enables/disables blending.
+    //
+    // Parameters:
+    //      state - true or false
+    void BlendEnabled(bool state);
 };
 
 

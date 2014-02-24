@@ -228,6 +228,14 @@ public:
     //      state - true or false
     virtual void TexturesEnabled(bool state) = 0;
 
+    // Method: BlendEnabled
+    //      Enables/disables blending.
+    //
+    // Parameters:
+    //      state - true or false
+    virtual void BlendEnabled(bool state) = 0;
+
+
 protected:
 
     prWindow    *m_pWindow;

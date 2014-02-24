@@ -111,7 +111,13 @@ public:
 
     // Method: SetBlack
     //      Set to specific state
-    void SetBlack();
+    //
+    // Parameters:
+    //      in - The fade value
+    //
+    // Notes:
+    //      The in value will be clamped to between 0 and 255
+    void SetBlack(f32 in = 255.0f);
 
     // Method: SetWhite
     //      Set to specific state

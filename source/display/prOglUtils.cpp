@@ -98,7 +98,7 @@ void prDrawWaterMark(prTexture *pTexture)
 {
     if (pTexture)
     {
-        prRenderer *pRenderer = (prRenderer *)prCoreGetComponent(PRSYSTEM_RENDERER);
+        prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
         if (pRenderer)
         {
             pRenderer->SetOrthographicView();

@@ -143,3 +143,25 @@ void prSoundManager::SFXSetMasterVolume(f32 volume)
 {
     masterSfxVolume = PRCLAMP(volume, AUDIO_SFX_MIN_VOLUME, AUDIO_SFX_MAX_VOLUME);
 }
+
+
+/// ---------------------------------------------------------------------------
+/// Displays debug information on the sound player.
+/// ---------------------------------------------------------------------------
+void prSoundManager::DisplayUsage() const
+{
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Debug function which determines if the sound system is available.
+/// ---------------------------------------------------------------------------
+bool prSoundManager::IsSoundAvailable() const
+{
+#ifdef SOUND_ALLOW
+    return true;
+#else
+    return false;
+#endif
+}
+

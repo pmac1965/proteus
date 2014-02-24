@@ -131,7 +131,7 @@ void prRenderer_GL11::Init()
     ERR_CHECK();
 
     // Load watermark
-    #if defined(PLATFORM_PC)
+    #if defined(PLATFORM_PC) && defined(PROTEUS_ALLOW_WATERMARK)
     prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
     PRASSERT(pRM)
     m_pWatermark = pRM->LoadFromMemory<prTexture>("proteusImg", proteusImg, sizeof(proteusImg));
@@ -193,20 +193,12 @@ void prRenderer_GL11::Present()
     if (m_pWindow)
     {
         // Draw watermark
-        #if defined(PLATFORM_PC)
+        #if defined(PLATFORM_PC) && defined(PROTEUS_ALLOW_WATERMARK)
         prDrawWaterMark(m_pWatermark);
         #endif
 
         // Draw tweak bars
         #if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)
-        //prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
-        //if (reg)
-        //{
-        //    if (prStringCompare(reg->GetValue("ATB"), "true") == CMP_EQUALTO)
-        //    {
-        //        TwDraw();
-        //    }
-        //}
         prATBDraw();
         #endif
 
@@ -715,4 +707,25 @@ void prRenderer_GL11::TexturesEnabled(bool state)
     }
 
     ERR_CHECK();
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Enables/disables blending.
+/// ---------------------------------------------------------------------------
+void prRenderer_GL11::BlendEnabled(bool state)
+{
+    if (state)
+    {
+        glEnable(GL_BLEND);
+        ERR_CHECK();
+
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        ERR_CHECK();
+    }
+    else
+    {
+        glDisable(GL_BLEND);
+        ERR_CHECK();
+    }
 }

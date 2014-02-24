@@ -26,7 +26,7 @@
 
 
 // Forward declarations
-struct prSFXInfo;
+//struct prSFXInfo;
 class prLoadedWave;
 
 
