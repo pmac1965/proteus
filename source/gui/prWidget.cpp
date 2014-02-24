@@ -21,7 +21,7 @@
 //      SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 // ----------------------------------------------------------------------------
-
+/*
 
 #include "prWidget.h"
 #include "../core/stringUtil.h"
@@ -69,3 +69,4 @@ prWidget::prWidget(WidgetType type, const char *name, SpriteManager *pSpriteMana
 prWidget::~prWidget()
 {
 }
+*/

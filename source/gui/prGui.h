@@ -26,7 +26,7 @@
 #ifndef _PRGUI_H
 #define _PRGUI_H
 
-
+/*
 #include "prWidget.h"
 #include "../input/prITouchListener.h"
 //#include "../core/resourceManager.h"
@@ -75,6 +75,6 @@ private:
     PRBOOL                  m_enabled;
     PRBOOL                  m_visible;
 };
-
+*/
 
 #endif//_PRGUI_H

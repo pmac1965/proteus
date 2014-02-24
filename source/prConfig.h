@@ -81,7 +81,7 @@
 #endif
 
 #ifndef SHOW_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.
-#define SHOW_MESSAGES
+//#define SHOW_MESSAGES
 #endif
 
 #ifndef PROTEUS_ALLOW_CONSOLE                           // Allows the debug console to be optionally removed. (PC only)
@@ -120,7 +120,7 @@
 #endif
 
 #ifndef ALLOW_PROTEUS_NAMESPACE                         // Prevents naming collisions.
-#define ALLOW_PROTEUS_NAMESPACE
+//#define ALLOW_PROTEUS_NAMESPACE
 #endif
 
 #ifndef BADA_SDK_2                                      // Bada SDK version 2 and above have different C library implementations

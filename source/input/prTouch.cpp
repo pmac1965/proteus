@@ -110,7 +110,7 @@ typedef struct TouchImplementation
                     // Callback?
                     {
                         prTouchEvent e;
-                        e.type  = PRNS prTouch::Released;
+                        e.type  = prTouch::Released;
                         e.x     = touchData[i].px;
                         e.y     = touchData[i].py;
                         e.rx    = 0;
@@ -142,7 +142,7 @@ typedef struct TouchImplementation
 					// Callback?
 					{
 						prTouchEvent e;
-						e.type  = PRNS prTouch::Axis;
+						e.type  = prTouch::Axis;
 						e.x     = touchData[i].x;
 						e.y     = touchData[i].y;
 						e.rx    = touchData[i].x - touchData[i].px;
@@ -182,7 +182,7 @@ typedef struct TouchImplementation
                 // Callback?
                 {
                     prTouchEvent e;
-                    e.type  = PRNS prTouch::Pressed;
+                    e.type  = prTouch::Pressed;
                     e.x     = touchLocation.x;
                     e.y     = touchLocation.y;
                     e.rx    = 0;
@@ -199,7 +199,7 @@ typedef struct TouchImplementation
                 // Callback?
                 {
                     prTouchEvent e;
-                    e.type  = PRNS prTouch::Axis;
+                    e.type  = prTouch::Axis;
                     e.x     = touchData[i].x;
                     e.y     = touchData[i].y;
                     e.rx    = touchData[i].px - touchData[i].x;

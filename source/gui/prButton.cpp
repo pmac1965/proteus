@@ -21,7 +21,7 @@
 //      SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 //
 // ----------------------------------------------------------------------------
-
+/*
 
 #include "prButton.h"
 #include "prIButtonListener.h"
@@ -263,3 +263,4 @@ bool prButton::InButtonsRect(s32 x, s32 y)
 
     return rect.PointInside(x, y);
 }
+*/

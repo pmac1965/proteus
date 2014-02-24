@@ -17,6 +17,7 @@
 
 #elif defined(PLATFORM_BADA)
     #include <FGraphicsOpengl.h>
+    #include <cstdlib>
     using namespace Osp::Graphics::Opengl;
 
 #elif defined(PLATFORM_ANDROID)

@@ -27,7 +27,7 @@
 
 
 /// ---------------------------------------------------------------------------
-//// Prints an assertion failure message with additional explanaton text.
+/// Prints an assertion failure message with additional explanaton text.
 /// ---------------------------------------------------------------------------
 bool prAssertPrint(const char *cond, const char *file, const char *function, int line, const char *fmt, ...)
 {

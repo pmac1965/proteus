@@ -25,7 +25,7 @@
 
 #ifndef _PRBUTTON_H
 #define _PRBUTTON_H
-
+/*
 
 #include "../../config.h"
 #include "prWidget.h"
@@ -114,6 +114,6 @@ private:
     Colour                  m_textColour;
     f32                     m_textScale;
 };
-
+*/
 
 #endif//_PRBUTTON_H

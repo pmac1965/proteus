@@ -39,12 +39,13 @@ public:
     typedef void (prActor::*prMethod)();
 
     // An individual entity state.
-    typedef struct prFsmState
+    typedef struct// prFsmState
     {
         prMethod  entry;
         prMethod  update;
         prMethod  exit;
-    };
+
+    } prFsmState;
 
 
 public:

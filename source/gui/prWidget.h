@@ -25,7 +25,7 @@
 
 #ifndef _PRWIDGET_H
 #define _PRWIDGET_H
-
+/*
 
 #include "../../config.h"
 #include "../core/types.h"
@@ -123,5 +123,5 @@ public:
     Vector2     pos;
 };
 
-
+*/
 #endif//_PRWIDGET_H

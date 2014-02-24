@@ -40,7 +40,6 @@ endif
 LOCAL_CFLAGS   += $(DEBUG_FLAGS) -fno-rtti -fno-exceptions
 
 
-#LOCAL_LDLIBS := -ldl -llog -lGLESv1_CM -lstdc++ -lopenal
 LOCAL_LDLIBS := -ldl -llog -lGLESv1_CM -lstdc++
 
 
@@ -115,7 +114,7 @@ LOCAL_SRC_FILES :=	actor/prActor.cpp	\
 	core/prWindow_Bada.cpp	\
 	core/prWindow_Linux.cpp	\
 	core/prWindow_PC.cpp	\
-	debug/prAssert.cpp	\
+	debug/prAssert_Android.cpp	\
 	debug/prConsoleWindow.cpp	\
 	debug/prDebug.cpp	\
 	debug/prFps.cpp	\
