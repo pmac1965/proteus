@@ -93,6 +93,24 @@ public:
     //      Gets the number of actors
     s32 Count();
 
+    // Method: HowMany
+    //      Counts the actors of a specific type
+    //
+    // Parameters:
+    //      type - A user defined type
+    u32 HowMany(s32 type);
+
+    // Method: FindByIndex
+    //      Finds an actor of a specific type an index.
+    //
+    // Parameters:
+    //      type  - A user defined type
+    //      index - 0 to how many you have of the specific type minus 1, as we're zero based
+    //
+    // See Also
+    //      <HowMany>
+    prActor *FindByIndex(s32 type, u32 index);
+
 
 private:
     // Stops passing by value and assignment.

@@ -218,3 +218,53 @@ int prActorManager::Count()
 {
     return actors.size();
 }
+
+
+
+/// ---------------------------------------------------------------------------
+/// Counts the actors of a specific type
+/// ---------------------------------------------------------------------------
+u32 prActorManager::HowMany(s32 type)
+{
+    u32 count = 0;
+
+    std::list<prActor *>::iterator it  = actors.begin();
+    std::list<prActor *>::iterator end = actors.end();
+    for (; it != end; ++it)
+    {
+        if (type == (*it)->m_type)
+        {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+
+/// ---------------------------------------------------------------------------
+///
+/// ---------------------------------------------------------------------------
+prActor *prActorManager::FindByIndex(s32 type, u32 index)
+{
+    prActor *actor = NULL;
+    u32 count = 0;
+
+    std::list<prActor *>::iterator it  = actors.begin();
+    std::list<prActor *>::iterator end = actors.end();
+    for (; it != end; ++it)
+    {
+        if (type == (*it)->m_type)
+        {
+            if (count == index)
+            {
+                actor = (*it);
+                break;
+            }
+
+            count++;
+        }
+    }
+
+    return actor;
+}

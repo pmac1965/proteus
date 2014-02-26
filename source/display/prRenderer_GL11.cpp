@@ -149,7 +149,7 @@ void prRenderer_GL11::Init()
 
 
     // Show extensions.
-    #if defined(DEBUG_OPENGL)
+    #if defined(OPENGL_SHOW_EXTENSIONS)
     prOpenGLShowExtensions();
     #endif
 }

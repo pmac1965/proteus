@@ -1,37 +1,15 @@
-// ----------------------------------------------------------------------------
-//
-// File: prGui.cpp
-//
-//      Description     - Contains ...
-//      Author          - Paul Michael McNab.
-//      Copyright       - Copyright Paul Michael McNab. All rights reserved.
-//
-// Disclaimer:
-//
-//      THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-//      "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-//      TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-//      PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-//      CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-//      EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-//      PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-//      PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//      LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//      NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-//      SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// ----------------------------------------------------------------------------
-/*
+/**
+ * prGui.cpp
+ */
 
-#include "../../config.h"
+
+#include "../prconfig.h"
 #include "prGui.h"
 #include "prButton.h"
-#include "prText.h"
-#include "prImage.h"
-#include "prDialog.h"
-#include "prScrollBox.h"
-#include "../debug/trace.h"
-#include "../core/stringUtil.h"
+#include "../debug/prTrace.h"
+#include "../core/prStringUtil.h"
+#include "../core/prMacros.h"
+#include "../core/prCore.h"
 
 
 #if defined(PLATFORM_BADA)
@@ -39,31 +17,41 @@
 #endif
 
 
-// ----------------------------------------------------------------------------
-// Ctor
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Ctor
+/// ---------------------------------------------------------------------------
 prGui::prGui()
 {
     m_enabled = PRTRUE;
     m_visible = PRTRUE;
-    PRNS prTouch::GetInstance()->RegisterListener(this);
+
+    prTouch *pTouch = static_cast<prTouch *>(prCoreGetComponent(PRSYSTEM_TOUCH));
+    if (pTouch)
+    {
+        pTouch->RegisterListener(this);
+    }
 }
 
 
-// ----------------------------------------------------------------------------
-// Dtor
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Dtor
+/// ---------------------------------------------------------------------------
 prGui::~prGui()
 {
     Clear();
-    PRNS prTouch::GetInstance()->UnregisterListener(this);
+
+    prTouch *pTouch = static_cast<prTouch *>(prCoreGetComponent(PRSYSTEM_TOUCH));
+    if (pTouch)
+    {
+        pTouch->UnregisterListener(this);
+    }
 }
 
 
 // ----------------------------------------------------------------------------
 // 
 // ----------------------------------------------------------------------------
-prWidget *prGui::Create(WidgetType type, const char *name)
+prWidget *prGui::Create(prWidgetType type, const char *name)
 {
     prWidget *widget = NULL;
 
@@ -73,33 +61,8 @@ prWidget *prGui::Create(WidgetType type, const char *name)
         widget = new prButton(name, &m_spriteManager);
         break;
 
-    case WT_Text:
-        break;
-
-    case WT_Image:
-        break;
-
-    case WT_Dialog:
-        {
-        widget = new prDialog(name, &m_spriteManager);
-            
-            // Make all other widgets inactive.
-            std::list<prWidget *>::iterator it  = m_widgets.begin();
-            std::list<prWidget *>::iterator end = m_widgets.end();
-            for (; it != end;)
-            {
-                (*it)->SetActive(false);
-                ++it;
-            }
-        }
-        break;
-
-    case WT_ScrollBox:
-        widget = new prScrollBox(name, &m_spriteManager);
-        break;
-
     default:
-        PANIC("Unknown widget type");
+        PRPANIC("Unknown widget type");
         break;
     }
 
@@ -127,21 +90,21 @@ void prGui::Update(f32 dt)
 
             if (pWidget->GetDestroy())
             {
-                // Make all other widgets active, if we're a dialog.
-                if (pWidget->Type() == WT_Dialog)
-                {
-                    std::list<prWidget *>::iterator it2  = m_widgets.begin();
-                    std::list<prWidget *>::iterator end2 = m_widgets.end();
-                    for (; it2 != end2;)
-                    {
-                        (*it2)->SetActive(true);
-                        ++it2;
-                    }
-                }
+                //// Make all other widgets active, if we're a dialog.
+                //if (pWidget->Type() == WT_Dialog)
+                //{
+                //    std::list<prWidget *>::iterator it2  = m_widgets.begin();
+                //    std::list<prWidget *>::iterator end2 = m_widgets.end();
+                //    for (; it2 != end2;)
+                //    {
+                //        (*it2)->SetActive(true);
+                //        ++it2;
+                //    }
+                //}
 
                 // Remove
                 m_widgets.remove(pWidget);
-                SAFE_DELETE(pWidget);
+                PRSAFE_DELETE(pWidget);
             }
             else
             {
@@ -181,7 +144,7 @@ void prGui::Clear()
     std::list<prWidget *>::iterator end = m_widgets.end();
     for (; it != end;)
     {
-        SAFE_DELETE(*it);
+        PRSAFE_DELETE(*it);
         ++it;
     }
 
@@ -194,7 +157,7 @@ void prGui::Clear()
 // ----------------------------------------------------------------------------
 prWidget *prGui::Find(const char *name)
 {
-    ASSERT(name && *name);
+    PRASSERT(name && *name);
 
     std::list<prWidget *>::iterator it  = m_widgets.begin();
     std::list<prWidget *>::iterator end = m_widgets.end();
@@ -206,7 +169,7 @@ prWidget *prGui::Find(const char *name)
         }
     }
 
-    Trace("Failed to find widget: %s\n", name);
+    prTrace("Failed to find widget: %s\n", name);
     return NULL;
 }
 
@@ -266,4 +229,4 @@ void prGui::InputAxis(const prTouchEvent &e)
         ++it;
     }
 }
-*/
+

@@ -1,44 +1,23 @@
-// ----------------------------------------------------------------------------
-//
-// File: prWidget.cpp
-//
-//      Description     - Contains base GUI widget class
-//      Author          - Paul Michael McNab.
-//      Copyright       - Copyright Paul Michael McNab. All rights reserved.
-//
-// Disclaimer:
-//
-//      THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-//      "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-//      TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-//      PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-//      CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-//      EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-//      PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-//      PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//      LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//      NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-//      SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// ----------------------------------------------------------------------------
-/*
+/**
+ * prWidget.cpp
+ */
+
 
 #include "prWidget.h"
-#include "../core/stringUtil.h"
-#include "../core/macros.h"
+#include "../core/prStringUtil.h"
+#include "../core/prMacros.h"
 #include "../debug/prDebug.h"
-//#include "../display/spriteManager.h"
 
 
-// ----------------------------------------------------------------------------
-// Ctor
-// ----------------------------------------------------------------------------
-prWidget::prWidget(WidgetType type, const char *name, SpriteManager *pSpriteManager) 
+/// ---------------------------------------------------------------------------
+/// Ctor
+/// ---------------------------------------------------------------------------
+prWidget::prWidget(prWidgetType type, const char *name, prSpriteManager *pSpriteManager) 
     : m_type            (type)
     , m_pSpriteManager  (pSpriteManager)
-    , m_colour          (Colour::White)
+    , m_colour          (prColour::White)
 {
-    ASSERT(pSpriteManager);
+    PRASSERT(pSpriteManager);
 
     // Set widget name
     const char *theName = "Unnamed widget";
@@ -63,10 +42,9 @@ prWidget::prWidget(WidgetType type, const char *name, SpriteManager *pSpriteMana
 }
 
 
-// ----------------------------------------------------------------------------
-// Dtor
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Dtor
+/// ---------------------------------------------------------------------------
 prWidget::~prWidget()
 {
 }
-*/

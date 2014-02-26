@@ -270,6 +270,10 @@
     <ClInclude Include="..\..\..\..\source\file\prFile.h" />
     <ClInclude Include="..\..\..\..\source\file\prFileManager.h" />
     <ClInclude Include="..\..\..\..\source\file\prFileShared.h" />
+    <ClInclude Include="..\..\..\..\source\gui\prButton.h" />
+    <ClInclude Include="..\..\..\..\source\gui\prButtonListener.h" />
+    <ClInclude Include="..\..\..\..\source\gui\prGui.h" />
+    <ClInclude Include="..\..\..\..\source\gui\prWidget.h" />
     <ClInclude Include="..\..\..\..\source\input\prMouse.h" />
     <ClInclude Include="..\..\..\..\source\input\prTouch.h" />
     <ClInclude Include="..\..\..\..\source\input\prTouchListener.h" />
@@ -444,6 +448,9 @@
     <ClCompile Include="..\..\..\..\source\file\prFile.cpp" />
     <ClCompile Include="..\..\..\..\source\file\prFileManager.cpp" />
     <ClCompile Include="..\..\..\..\source\file\prFileShared.cpp" />
+    <ClCompile Include="..\..\..\..\source\gui\prButton.cpp" />
+    <ClCompile Include="..\..\..\..\source\gui\prGui.cpp" />
+    <ClCompile Include="..\..\..\..\source\gui\prWidget.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prMouse.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prTouch.cpp" />
     <ClCompile Include="..\..\..\..\source\libzip\mkstemp.c">

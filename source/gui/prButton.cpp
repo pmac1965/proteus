@@ -1,59 +1,37 @@
-// ----------------------------------------------------------------------------
-//
-// File: prButton.cpp
-//
-//      Description     - Contains the GUI button class
-//      Author          - Paul Michael McNab.
-//      Copyright       - Copyright Paul Michael McNab. All rights reserved.
-//
-// Disclaimer:
-//
-//      THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-//      "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
-//      TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-//      PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
-//      CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-//      EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-//      PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-//      PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//      LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//      NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-//      SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// ----------------------------------------------------------------------------
-/*
+/**
+ * prButton.cpp
+ */
+
 
 #include "prButton.h"
-#include "prIButtonListener.h"
-#include "../display/sprite.h"
-#include "../display/bitmapFont.h"
-#include "../math/rect.h"
+#include "prButtonListener.h"
+#include "../display/prSprite.h"
+//#include "../display/bitmapFont.h"
+#include "../math/prRect.h"
 #include "../debug/prDebug.h"
 
 
-// ----------------------------------------------------------------------------
-// Ctor
-// ----------------------------------------------------------------------------
-prButton::prButton(const char *name, SpriteManager *pSpriteManager) : prWidget(WT_Button, name, pSpriteManager)
-                                                                    , m_textColour(Colour::White)
+/// ---------------------------------------------------------------------------
+/// Ctor
+/// ---------------------------------------------------------------------------
+prButton::prButton(const char *name, prSpriteManager *pSpriteManager) : prWidget(WT_Button, name, pSpriteManager)
+                                                                      , m_textColour(prColour::White)
 {
-    //m_pressedCallback   = NULL;
-    //m_releasedCallback  = NULL;
     m_sprite            = NULL;
-    m_font              = NULL;
+//    m_font              = NULL;
     m_width             = 0;
     m_height            = 0;
     m_buttonState       = BS_NORMAL;
     m_prevX             = -1;
     m_prevY             = -1;
-    m_prIButtonListener = NULL;
+    m_prButtonListener  = NULL;
     m_textScale         = 1.0f;
 }
 
 
-// ----------------------------------------------------------------------------
-// Dtor
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Dtor
+/// ---------------------------------------------------------------------------
 prButton::~prButton()
 {
 }
@@ -66,6 +44,10 @@ void prButton::Update(f32 dt)
 {
     if (m_sprite)
     {
+        // Set position
+        m_sprite->pos.x = pos.x;
+        m_sprite->pos.y = pos.y;
+
         // Ensure disabled state always appears
         if (!m_enabled)
         {
@@ -78,10 +60,6 @@ void prButton::Update(f32 dt)
         {
             m_sprite->Update(dt);
         }
-
-        // Set position
-        m_sprite->pos.x = pos.x;
-        m_sprite->pos.y = pos.y;
     }
 }
 
@@ -100,7 +78,7 @@ void prButton::Draw()
         // Draw button
         m_sprite->Draw();
 
-        if (m_font && m_text.Length() > 0)
+/*        if (m_font && m_text.Length() > 0)
         {
             //Vector2 size = m_font->MeasureString(m_text.Text(), m_textScale);
             
@@ -108,7 +86,7 @@ void prButton::Draw()
             f32 y = pos.y;// + (m_sprite->FrameHeight() >> 1);
             
             m_font->Draw(x, y, m_textScale, m_textColour, BitmapFont::ALIGN_CENTRE, m_text.Text());
-        }
+        }//*/
     }
 }
 
@@ -131,12 +109,8 @@ void prButton::OnPressed(prTouchEvent e)
             m_buttonState = BS_HOVER;
             m_sprite->SetFrame(BS_HOVER);
 
-            //TODO("REMOVE THIS");
-            //if (m_pressedCallback)
-            //    m_pressedCallback(Name());
-
-            if (m_prIButtonListener)
-                m_prIButtonListener->OnButtonPressed(Name());
+            if (m_prButtonListener)
+                m_prButtonListener->OnButtonPressed(Name());
         }
     }
 }
@@ -169,7 +143,7 @@ void prButton::OnMove(prTouchEvent e)
 // ----------------------------------------------------------------------------
 void prButton::OnReleased(prTouchEvent e)
 {
-    UNUSED(e);
+    PRUNUSED(e);
 
     if (m_sprite && m_enabled)
     {
@@ -181,12 +155,8 @@ void prButton::OnReleased(prTouchEvent e)
             m_buttonState = BS_SELECTED;
             m_sprite->SetFrame(BS_SELECTED);
 
-            //TODO("REMOVE THIS");
-            //if (m_releasedCallback)
-            //    m_releasedCallback(Name());
-
-            if (m_prIButtonListener)
-                m_prIButtonListener->OnButtonReleased(Name());
+            if (m_prButtonListener)
+                m_prButtonListener->OnButtonReleased(Name());
         }
     }
 }
@@ -195,13 +165,13 @@ void prButton::OnReleased(prTouchEvent e)
 // ----------------------------------------------------------------------------
 // Sets or removes the buttons sprite.
 // ----------------------------------------------------------------------------
-void prButton::SetSprite(Sprite *pSprite)
+void prButton::SetSprite(prSprite *pSprite)
 {
     if (pSprite)
     {
         m_sprite = pSprite;
-        m_width  = pSprite->FrameWidth();
-        m_height = pSprite->FrameHeight();
+        m_width  = pSprite->GetFrameWidth();
+        m_height = pSprite->GetFrameHeight();
     }
     else
     {
@@ -215,10 +185,10 @@ void prButton::SetSprite(Sprite *pSprite)
 // ----------------------------------------------------------------------------
 // Sets or removes the buttons text font.
 // ----------------------------------------------------------------------------
-void prButton::SetFont(BitmapFont *pFont)
-{ 
-    m_font = pFont;
-}
+//void prButton::SetFont(BitmapFont *pFont)
+//{ 
+//    m_font = pFont;
+//}
 
 
 // ----------------------------------------------------------------------------
@@ -230,22 +200,12 @@ void prButton::SetText(const char *text)
 }
 
 
-//// ----------------------------------------------------------------------------
-//// Sets callbacks
-//// ----------------------------------------------------------------------------
-//void prButton::SetCallbacks(ButtonPressedCallback pcb, ButtonReleasedCallback rcb)
-//{
-//    m_pressedCallback  = pcb;
-//    m_releasedCallback = rcb;
-//}
-
-
 // ----------------------------------------------------------------------------
 // Sets callbacks
 // ----------------------------------------------------------------------------
-void prButton::RegisterListener(prIButtonListener *pListener)
+void prButton::RegisterListener(prButtonListener *pListener)
 {
-    m_prIButtonListener = pListener;
+    m_prButtonListener = pListener;
 }
 
 
@@ -259,8 +219,7 @@ void prButton::RegisterListener(prIButtonListener *pListener)
 // ----------------------------------------------------------------------------
 bool prButton::InButtonsRect(s32 x, s32 y)
 {
-    ProRect rect = ProRect((s32)pos.y, (s32)pos.x, (s32)(pos.y + m_height), (s32)(pos.x + m_width));
-
+    prRect rect = prRect((s32)pos.y, (s32)pos.x, (s32)(pos.y + m_height), (s32)(pos.x + m_width));
     return rect.PointInside(x, y);
 }
-*/
+

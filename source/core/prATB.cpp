@@ -55,7 +55,8 @@ bool prATBIsInit()
 /// ---------------------------------------------------------------------------
 bool prATBUpdate(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    if (antTweakBarInit)
+    if (antTweakBarInit &&
+        antTweakBarShow)
     {
         if (TwEventWin(hwnd, msg, wParam, lParam))
         {

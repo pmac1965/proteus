@@ -158,8 +158,9 @@
 #endif
 
 
-// Misc debug settings
-//#define DEBUG_OPENGL
+// OpenGL debug settings
+//#define OPENGL_SHOW_EXTENSIONS
+//#define OPENGL_CHECK_CALLS
 
 
 #endif//__PRCONFIG_H

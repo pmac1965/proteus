@@ -20,6 +20,9 @@
 #define __PROGLUTILS_H
 
 
+#include "../prConfig.h"
+
+
 // Forward declarations
 class prTexture;
 
@@ -46,7 +49,7 @@ void prOpenGLErrorCheck(const char *file, const char *func, int line);
 
 
 // Removeable calls
-#if defined(_DEBUG) || defined(DEBUG)
+#if (defined(_DEBUG) || defined(DEBUG)) && defined(OPENGL_CHECK_CALLS)
     #define ERR_CHECK()     prOpenGLErrorCheck(__FILE__, __FUNCTION__, __LINE__)
 #else
     #define ERR_CHECK()
