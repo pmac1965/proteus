@@ -65,7 +65,7 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
     m_exp0            = false;
     m_exp1            = false;
     m_exp2            = false;
-    m_pixelWidth      = 0.0f;
+    m_pixelHeight     = 0.0f;
     m_pixelWidth      = 0.0f;
     m_scrnWidth       = 0.0f;
     m_scrnHeight      = 0.0f;

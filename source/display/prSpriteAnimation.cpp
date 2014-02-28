@@ -95,7 +95,7 @@ void prSpriteAnimation::PlaySequence(const char *name)
 /// ---------------------------------------------------------------------------
 /// Gets the user data for the current frame.
 /// ---------------------------------------------------------------------------
-s32 prSpriteAnimation::GetUserDataForCurrentFrame(s32 index)
+s32 prSpriteAnimation::GetUserDataForCurrentFrame(s32 index) const
 {
     PRASSERT(PRBETWEEN(index, 0, 3));
 
@@ -111,7 +111,7 @@ s32 prSpriteAnimation::GetUserDataForCurrentFrame(s32 index)
 /// ---------------------------------------------------------------------------
 /// Has the current animation stopped.
 /// ---------------------------------------------------------------------------
-bool prSpriteAnimation::HasAnimationStopped()
+bool prSpriteAnimation::HasAnimationStopped() const
 {
     bool result = false;
 
@@ -130,7 +130,7 @@ bool prSpriteAnimation::HasAnimationStopped()
 /// ---------------------------------------------------------------------------
 /// Has any animation been played and animation is not in its default state.
 /// ---------------------------------------------------------------------------
-bool prSpriteAnimation::HasAnimationStarted()
+bool prSpriteAnimation::HasAnimationStarted() const
 {
     bool result = false;
 

@@ -121,15 +121,15 @@ public:
     //
     // Returns:
     //      The user data for a specific frame
-    s32 GetUserDataForCurrentFrame(s32 index);
+    s32 GetUserDataForCurrentFrame(s32 index) const;
 
     // Method: HasAnimationStopped
     //      Has the current animation stopped.
-    bool HasAnimationStopped();
+    bool HasAnimationStopped() const;
 
     // Method: HasAnimationStarted
     //      Has any animation been played and animation is not in its default state.
-    bool HasAnimationStarted();
+    bool HasAnimationStarted() const;
 
 
 private:

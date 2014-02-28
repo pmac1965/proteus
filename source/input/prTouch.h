@@ -150,7 +150,7 @@ public:
 
     // Method: GetListenerCount
     //      Gets the listener count.
-    s32 GetListenerCount();
+    s32 GetListenerCount() const;
 
 
 private:

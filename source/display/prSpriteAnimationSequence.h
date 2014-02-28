@@ -112,7 +112,7 @@ public:
     //
     // Returns:
     //      The value or -1 if value doesn't exist
-    s32 GetUserDataForCurrentFrame(s32 index);
+    s32 GetUserDataForCurrentFrame(s32 index) const;
 
     // Method: GetAnimState
     //      Returns the animations state.

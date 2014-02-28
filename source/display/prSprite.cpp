@@ -465,7 +465,7 @@ s32 prSprite::GetUser(s32 index) const
 /// ---------------------------------------------------------------------------
 /// Gets the user data for the current frame.
 /// ---------------------------------------------------------------------------
-s32 prSprite::GetUserDataForCurrentFrame(s32 index)
+s32 prSprite::GetUserDataForCurrentFrame(s32 index) const
 {
     if (m_animation)
     {
@@ -495,7 +495,7 @@ bool prSprite::IsAnimated() const
 /// ---------------------------------------------------------------------------
 /// Has the current animation stopped.
 /// ---------------------------------------------------------------------------
-bool prSprite::HasAnimationStopped()
+bool prSprite::HasAnimationStopped() const
 {
     bool result = false;
 
@@ -511,7 +511,7 @@ bool prSprite::HasAnimationStopped()
 /// ---------------------------------------------------------------------------
 /// Has any animation been played and animation is not in its default state.
 /// ---------------------------------------------------------------------------
-bool prSprite::HasAnimationStarted()
+bool prSprite::HasAnimationStarted() const
 {
     bool result = false;
 

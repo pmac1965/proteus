@@ -342,7 +342,7 @@ bool prWaves::IsWaveID(prWaveID id) const
 /// ---------------------------------------------------------------------------
 /// Gets the wave data.
 /// ---------------------------------------------------------------------------
-prWaveResult prWaves::GetWaveData(prWaveID id, void **pAudioData)
+prWaveResult prWaves::GetWaveData(prWaveID id, void **pAudioData) const
 {
     if (!IsWaveID(id))
         return WR_INVALIDWAVEID;
@@ -359,7 +359,7 @@ prWaveResult prWaves::GetWaveData(prWaveID id, void **pAudioData)
 /// ---------------------------------------------------------------------------
 /// Gets the wave size
 /// ---------------------------------------------------------------------------
-prWaveResult prWaves::GetWaveSize(prWaveID id, u32 *size)
+prWaveResult prWaves::GetWaveSize(prWaveID id, u32 *size) const
 {
     if (!IsWaveID(id))
         return WR_INVALIDWAVEID;
@@ -376,7 +376,7 @@ prWaveResult prWaves::GetWaveSize(prWaveID id, u32 *size)
 /// ---------------------------------------------------------------------------
 /// Gets the frequency.
 /// ---------------------------------------------------------------------------
-prWaveResult prWaves::GetWaveFrequency(prWaveID id, u32 *pulFrequency)
+prWaveResult prWaves::GetWaveFrequency(prWaveID id, u32 *pulFrequency) const
 {
     prWaveResult wr = WR_OK;
     
@@ -403,7 +403,7 @@ prWaveResult prWaves::GetWaveFrequency(prWaveID id, u32 *pulFrequency)
 /// ---------------------------------------------------------------------------
 /// Returns the buffer format
 /// ---------------------------------------------------------------------------
-prWaveResult prWaves::GetWaveALBufferFormat(prWaveID id, u32 *pulFormat)
+prWaveResult prWaves::GetWaveALBufferFormat(prWaveID id, u32 *pulFormat) const
 {
     prWaveResult wr = WR_OK;
 

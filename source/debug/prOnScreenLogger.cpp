@@ -155,7 +155,7 @@ void prOnScreenLogger::Clear()
 /// ----------------------------------------------------------------------------
 /// Returns the number of messages.
 /// ----------------------------------------------------------------------------
-s32 prOnScreenLogger::Count()
+s32 prOnScreenLogger::Count() const
 {
     return m_messages.size();
 }

@@ -251,10 +251,12 @@
     <ClInclude Include="..\..\..\..\source\debug\prTrace.h" />
     <ClInclude Include="..\..\..\..\source\display\prBackground.h" />
     <ClInclude Include="..\..\..\..\source\display\prBackgroundManager.h" />
+    <ClInclude Include="..\..\..\..\source\display\prCamera.h" />
     <ClInclude Include="..\..\..\..\source\display\prColour.h" />
     <ClInclude Include="..\..\..\..\source\display\prFadeManager.h" />
     <ClInclude Include="..\..\..\..\source\display\prFixedWidthFont.h" />
     <ClInclude Include="..\..\..\..\source\display\prGLFont.h" />
+    <ClInclude Include="..\..\..\..\source\display\prLookAt.h" />
     <ClInclude Include="..\..\..\..\source\display\prOglUtils.h" />
     <ClInclude Include="..\..\..\..\source\display\prPvr.h" />
     <ClInclude Include="..\..\..\..\source\display\prRenderer.h" />
@@ -431,10 +433,12 @@
     <ClCompile Include="..\..\..\..\source\debug\prTrace.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prBackground.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prBackgroundManager.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prCamera.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prColour.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prFadeManager.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prFixedWidthFont.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prGLFont.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prLookAt.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prOglUtils.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer_DX9.cpp" />

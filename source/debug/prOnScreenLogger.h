@@ -72,7 +72,7 @@ public:
 
     // Method: Count
     //      Returns the number of messages.
-    s32 Count();
+    s32 Count() const;
 
 
 private:

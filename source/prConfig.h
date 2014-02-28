@@ -154,7 +154,7 @@
 
 // Watermark?
 #ifndef PROTEUS_ALLOW_WATERMARK                         // Allow watermark
-//#define PROTEUS_ALLOW_WATERMARK
+#define PROTEUS_ALLOW_WATERMARK
 #endif
 
 

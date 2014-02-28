@@ -262,7 +262,7 @@ typedef struct TouchImplementation
     // ------------------------------------------------------------------------
     // Gets the listener count.
     // ------------------------------------------------------------------------
-    s32 GetListenerCount()
+    s32 GetListenerCount() const
     {
         return listeners.size();
     }
@@ -471,7 +471,7 @@ void prTouch::TouchBegin(u32 id, float x, float y)
 {
     PRASSERT(pImpl);
 
-#if defined(PLATFORM_IPHONE) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
     
     // Test down event duplication
 /*    if (imp.IsDownAlready(id))
@@ -511,7 +511,7 @@ void prTouch::TouchMove(u32 id, float x, float y)
 {
     PRASSERT(pImpl);
 
-#if defined(PLATFORM_IPHONE) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
 
     TouchLocation touch;
     touch.state = TouchState::Down;
@@ -541,7 +541,7 @@ void prTouch::TouchEnd(u32 id, float x, float y)
 {
     PRASSERT(pImpl);
 
-#if defined(PLATFORM_IPHONE) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
 
     imp.touches--;
     imp.down = (imp.touches > 0);
@@ -570,7 +570,7 @@ void prTouch::TouchEnd(u32 id, float x, float y)
 /// ---------------------------------------------------------------------------
 /// Gets the listener count.
 /// ---------------------------------------------------------------------------
-int prTouch::GetListenerCount()
+int prTouch::GetListenerCount() const
 {
     return imp.GetListenerCount();
 }

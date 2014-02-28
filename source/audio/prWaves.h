@@ -105,28 +105,28 @@ public:
     //
     // See Also:
     //      <prWaveResult>
-    prWaveResult GetWaveData(prWaveID id, void **pAudioData);
+    prWaveResult GetWaveData(prWaveID id, void **pAudioData) const;
 
     // Method: GetWaveSize
     //      Gets the wave size
     //
     // See Also:
     //      <prWaveResult>
-    prWaveResult GetWaveSize(prWaveID id, u32 *size);
+    prWaveResult GetWaveSize(prWaveID id, u32 *size) const;
 
     // Method: GetWaveFrequency
     //      Gets the frequency
     //
     // See Also:
     //      <prWaveResult>
-    prWaveResult GetWaveFrequency(prWaveID id, u32 *pulFrequency);
+    prWaveResult GetWaveFrequency(prWaveID id, u32 *pulFrequency) const;
 
     // Method: GetWaveALBufferFormat
     //      Returns the buffer format
     //
     // See Also:
     //      <prWaveResult>
-    prWaveResult GetWaveALBufferFormat(prWaveID id, u32 *pulFormat);
+    prWaveResult GetWaveALBufferFormat(prWaveID id, u32 *pulFormat) const;
 
     // Method: DeleteWaveFile
     //      Deletes a loaded wave file

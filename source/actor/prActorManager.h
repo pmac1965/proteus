@@ -91,7 +91,7 @@ public:
 
     // Method: Count
     //      Gets the number of actors
-    s32 Count();
+    s32 Count() const;
 
     // Method: HowMany
     //      Counts the actors of a specific type

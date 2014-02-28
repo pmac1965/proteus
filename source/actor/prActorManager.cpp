@@ -214,7 +214,7 @@ void prActorManager::SetPriority(prActor *actor, s32 priority)
 /// ---------------------------------------------------------------------------
 /// Gets the number of actors
 /// ---------------------------------------------------------------------------
-int prActorManager::Count()
+int prActorManager::Count() const
 {
     return actors.size();
 }
@@ -243,7 +243,7 @@ u32 prActorManager::HowMany(s32 type)
 
 
 /// ---------------------------------------------------------------------------
-///
+/// Finds an actor of a specific type an index.
 /// ---------------------------------------------------------------------------
 prActor *prActorManager::FindByIndex(s32 type, u32 index)
 {

@@ -225,7 +225,7 @@ void prSpriteAnimationSequence::ParseFrameData(TiXmlElement* pElement)
 /// ---------------------------------------------------------------------------
 /// Gets the user data for the current frame.
 /// ---------------------------------------------------------------------------
-s32 prSpriteAnimationSequence::GetUserDataForCurrentFrame(s32 index)
+s32 prSpriteAnimationSequence::GetUserDataForCurrentFrame(s32 index) const
 {
     PRASSERT(PRBETWEEN(index, 0, MAX_USER_DATA - 1));
     return m_pData[m_currentFrame].userData[index];

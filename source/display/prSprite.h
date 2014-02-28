@@ -221,7 +221,7 @@ public:
     //
     // Returns:
     //      Returns the value or -1 if it doesn't exist
-    s32 GetUserDataForCurrentFrame(s32 index);
+    s32 GetUserDataForCurrentFrame(s32 index) const;
 
     // Method: IsAnimated
     //      Is this sprite animated?
@@ -229,11 +229,11 @@ public:
 
     // Method: HasAnimationStopped
     //      Has the current animation stopped.
-    bool HasAnimationStopped();
+    bool HasAnimationStopped() const;
 
     // Method: HasAnimationStarted
     //      Has any animation been played and animation is not in its default state.
-    bool HasAnimationStarted();
+    bool HasAnimationStarted() const;
 
     // Method: SetColour
     //      Sets the tint colour.
