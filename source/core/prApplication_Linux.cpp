@@ -15,6 +15,7 @@
 #include "prCore.h"
 #include "prRegistry.h"
 #include "prVersion.h"
+#include "prMacros.h"
 #include "../debug/prDebug.h"
 #include "../debug/prTrace.h"
 #include "../debug/prConsoleWindow.h"
@@ -22,6 +23,7 @@
 #include "../input/prMouse.h"
 #include "../display/prRenderer.h"
 #include "../core/prStringUtil.h"
+#include "../linux/prLinux.h"
 
 
 // ----------------------------------------------------------------------------
@@ -77,7 +79,7 @@ prApplication_Linux::prApplication_Linux() : prApplication()
 
 
     // Access the embedded data, so it'll stay linked into the game.
-    for (int j=0; j<PRARRAY_SIZE(embedded); j++)
+    for (u32 j=0; j<PRARRAY_SIZE(embedded); j++)
     {
         const char *text = embedded[j];
 
@@ -105,7 +107,47 @@ prApplication_Linux::~prApplication_Linux()
 /// ---------------------------------------------------------------------------
 PRBOOL prApplication_Linux::DisplayCreate(u32 width, u32 height, const char *pWindowName)
 {
-    PRBOOL result = PRFALSE;
+    PRBOOL result = prCreateLinuxDisplay(width, height);
+    if (result)
+    {
+        m_running = PRTRUE;
+        result    = PRTRUE;
+
+        // Set window.
+        prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
+        if (pRenderer)
+        {
+            //pRenderer->SetWindow(m_pWindow);
+            //pRenderer->Init();
+        }
+
+        // Set registry
+        prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+        if (reg)
+        {
+            // Set title here
+            static_cast<prWindow_Linux *>(m_pWindow)->SetTitle(pWindowName);
+
+            reg->SetValue("WindowName", pWindowName);
+            reg->SetValue("ScreenWidth", width);
+            reg->SetValue("ScreenHeight", height);
+
+            // Show startup entries
+            prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+            if (reg)
+            {
+                if (prStringCompare(reg->GetValue("Verbose"), "true") == CMP_EQUALTO)
+                {
+                   reg->ShowKeyValuePairs();
+                }
+            }
+        }
+    }
+    else
+    {
+        // Exit app.
+        m_running = PRFALSE;
+    }
 
     return result;
 }
@@ -116,6 +158,35 @@ PRBOOL prApplication_Linux::DisplayCreate(u32 width, u32 height, const char *pWi
 /// ---------------------------------------------------------------------------
 PRBOOL prApplication_Linux::Run()
 {
+	  while (1)
+	  {
+		  prLinuxLoop();
+
+/*	    if (recalcModelView)
+	    {
+	      glMatrixMode(GL_MODELVIEW);
+
+	      // reset modelview matrix to the identity matrix
+	      glLoadIdentity();
+
+	      // move the camera back three units
+	      glTranslatef(0.0, 0.0, -3.0);
+
+	      // rotate by X, Y, and Z angles
+	      glRotatef(xAngle, 0.1, 0.0, 0.0);
+	      glRotatef(yAngle, 0.0, 0.1, 0.0);
+	      glRotatef(zAngle, 0.0, 0.0, 1.0);
+
+	      recalcModelView = GL_FALSE;
+	      needRedraw = GL_TRUE;
+	    }
+	    if (needRedraw)
+	    {
+	      redraw();
+	      needRedraw = GL_FALSE;
+	    }//*/
+	  }
+
     return PRFALSE;
 }
 

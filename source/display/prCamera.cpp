@@ -29,6 +29,9 @@
 #elif defined(PLATFORM_ANDROID)
   #include "../display/prLookAt.h"
 
+#elif defined(PLATFORM_LINUX)
+  #include "../display/prLookAt.h"
+
 #else
     #error Platform not defined.
 

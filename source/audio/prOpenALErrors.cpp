@@ -41,6 +41,10 @@
     #include "../android/AL/alc.h"
     //#endif
 
+#elif defined(PLATFORM_LINUX)
+    #include <AL/al.h>
+    #include <AL/alc.h>
+
 #else
     #error Unsupported platform!
 

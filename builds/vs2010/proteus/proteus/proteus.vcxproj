@@ -297,6 +297,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Tool debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Tool release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\source\linux\prLinux.h" />
     <ClInclude Include="..\..\..\..\source\lua\lapi.h" />
     <ClInclude Include="..\..\..\..\source\lua\lauxlib.h" />
     <ClInclude Include="..\..\..\..\source\lua\lcode.h" />
@@ -425,6 +426,7 @@
     <ClCompile Include="..\..\..\..\source\core\prWindow_PC.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prAssert.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prAssert_Android.cpp" />
+    <ClCompile Include="..\..\..\..\source\debug\prAssert_Linux.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prConsoleWindow.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prDebug.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prFps.cpp" />
@@ -781,6 +783,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Tool debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Tool release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\source\linux\prLinux.c" />
     <ClCompile Include="..\..\..\..\source\lua\lapi.c" />
     <ClCompile Include="..\..\..\..\source\lua\lauxlib.c" />
     <ClCompile Include="..\..\..\..\source\lua\lbaselib.c" />

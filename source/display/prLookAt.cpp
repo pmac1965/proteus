@@ -28,6 +28,10 @@
   #include <math.h>
   using namespace Osp::Graphics::Opengl;
 
+#elif defined(PLATFORM_LINUX)
+  #include <GL/gl.h>
+  #include <math.h>
+
 #else
   #error Platform not specified
 

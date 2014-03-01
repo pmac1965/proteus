@@ -43,7 +43,7 @@ LOCAL_CFLAGS   += $(DEBUG_FLAGS) -fno-rtti -fno-exceptions
 LOCAL_LDLIBS := -ldl -llog -lGLESv1_CM -lstdc++
 
 
-LOCAL_SRC_FILES :=	actor/prActor.cpp	\
+LOCAL_SRC_FILES :=		actor/prActor.cpp	\
 	actor/prActorManager.cpp	\
 	Box2D/Collision/b2BroadPhase.cpp	\
 	Box2D/Collision/b2CollideCircle.cpp	\
@@ -114,6 +114,7 @@ LOCAL_SRC_FILES :=	actor/prActor.cpp	\
 	core/prWindow_Bada.cpp	\
 	core/prWindow_Linux.cpp	\
 	core/prWindow_PC.cpp	\
+	debug/prAssert.cpp	\
 	debug/prAssert_Android.cpp	\
 	debug/prConsoleWindow.cpp	\
 	debug/prDebug.cpp	\
@@ -123,10 +124,12 @@ LOCAL_SRC_FILES :=	actor/prActor.cpp	\
 	debug/prTrace.cpp	\
 	display/prBackground.cpp	\
 	display/prBackgroundManager.cpp	\
+	display/prCamera.cpp	\
 	display/prColour.cpp	\
 	display/prFadeManager.cpp	\
 	display/prFixedWidthFont.cpp	\
 	display/prGLFont.cpp	\
+	display/prLookAt.cpp	\
 	display/prOglUtils.cpp	\
 	display/prRenderer.cpp	\
 	display/prRenderer_DX9.cpp	\
@@ -140,6 +143,9 @@ LOCAL_SRC_FILES :=	actor/prActor.cpp	\
 	file/prFile.cpp	\
 	file/prFileManager.cpp	\
 	file/prFileShared.cpp	\
+	gui/prButton.cpp	\
+	gui/prGui.cpp	\
+	gui/prWidget.cpp	\
 	input/prMouse.cpp	\
 	input/prTouch.cpp	\
 	math/prMathsUtil.cpp	\

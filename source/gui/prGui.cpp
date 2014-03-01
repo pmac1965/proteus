@@ -3,7 +3,7 @@
  */
 
 
-#include "../prconfig.h"
+#include "../prConfig.h"
 #include "prGui.h"
 #include "prButton.h"
 #include "../debug/prTrace.h"
@@ -14,6 +14,10 @@
 
 #if defined(PLATFORM_BADA)
 #include <FBase.h>
+
+#elif defined(PLATFORM_LINUX)
+#include <cstring>
+
 #endif
 
 

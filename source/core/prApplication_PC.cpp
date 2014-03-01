@@ -91,7 +91,7 @@ prApplication_PC::prApplication_PC() : prApplication()
 
 
     // Access the embedded data, so it'll stay linked into the game.
-    for (int j=0; j<PRARRAY_SIZE(embedded); j++)
+    for (u32 j=0; j<PRARRAY_SIZE(embedded); j++)
     {
         const char *text = embedded[j];
 

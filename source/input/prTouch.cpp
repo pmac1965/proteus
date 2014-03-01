@@ -82,7 +82,7 @@ typedef struct TouchImplementation
         exp1                = false;
         exp2                = false;
         ClearListeners();
-	}
+    }
 
 
     // ------------------------------------------------------------------------
@@ -124,39 +124,39 @@ typedef struct TouchImplementation
                         Released(e);
                     }
                     
-					touchData[i].id    = 0xFFFFFFFF;
+                    touchData[i].id    = 0xFFFFFFFF;
                     touchData[i].x     = -1;
                     touchData[i].y     = -1;
                     touchData[i].state = TouchState::Released;
                     return;
                 }
-				else if (touchLocation.state == TouchState::Down)
-				{
-					// Its still down.
-					touchData[i].state = TouchState::Down;
-					touchData[i].px    = touchData[i].x;
-					touchData[i].py    = touchData[i].y;
-					touchData[i].x     = touchLocation.x;
-					touchData[i].y     = touchLocation.y;
+                else if (touchLocation.state == TouchState::Down)
+                {
+                    // Its still down.
+                    touchData[i].state = TouchState::Down;
+                    touchData[i].px    = touchData[i].x;
+                    touchData[i].py    = touchData[i].y;
+                    touchData[i].x     = touchLocation.x;
+                    touchData[i].y     = touchLocation.y;
 
-					// Callback?
-					{
-						prTouchEvent e;
-						e.type  = prTouch::Axis;
-						e.x     = touchData[i].x;
-						e.y     = touchData[i].y;
-						e.rx    = touchData[i].x - touchData[i].px;
-						e.ry    = touchData[i].y - touchData[i].py;
-						e.index = i;
+                    // Callback?
+                    {
+                        prTouchEvent e;
+                        e.type  = prTouch::Axis;
+                        e.x     = touchData[i].x;
+                        e.y     = touchData[i].y;
+                        e.rx    = touchData[i].x - touchData[i].px;
+                        e.ry    = touchData[i].y - touchData[i].py;
+                        e.index = i;
 #if defined(PLATFORM_PC)
                         e.index = 0;
 #endif
-						e.id    = touchLocation.id;
+                        e.id    = touchLocation.id;
                         //prLog("Axis: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
-						Axis(e);
-					}
-					return;
-				}
+                        Axis(e);
+                    }
+                    return;
+                }
                 else
                 {
                     return;
@@ -332,7 +332,7 @@ typedef struct TouchImplementation
     // ------------------------------------------------------------------------
     // Data
     // ------------------------------------------------------------------------
-	s32             touches;
+    s32             touches;
     u32             id;
     bool            down;
     bool            exp0;
@@ -490,7 +490,13 @@ void prTouch::TouchBegin(u32 id, float x, float y)
     touch.id    = id;
     imp.UpdateTouchData(touch);
 
-#elif defined(WIN32)
+#elif defined(PLATFORM_PC)
+
+    PRUNUSED(id);
+    PRUNUSED(x);
+    PRUNUSED(y);
+
+#elif defined(PLATFORM_LINUX)
 
     PRUNUSED(id);
     PRUNUSED(x);
@@ -520,7 +526,13 @@ void prTouch::TouchMove(u32 id, float x, float y)
     touch.id    = id;
     imp.UpdateTouchData(touch);
 
-#elif defined(WIN32)
+#elif defined(PLATFORM_PC)
+
+    PRUNUSED(id);
+    PRUNUSED(x);
+    PRUNUSED(y);
+
+#elif defined(PLATFORM_LINUX)
 
     PRUNUSED(id);
     PRUNUSED(x);
@@ -553,7 +565,13 @@ void prTouch::TouchEnd(u32 id, float x, float y)
     touch.id    = id;
     imp.UpdateTouchData(touch);
 
-#elif defined(WIN32)
+#elif defined(PLATFORM_PC)
+
+    PRUNUSED(id);
+    PRUNUSED(x);
+    PRUNUSED(y);
+
+#elif defined(PLATFORM_LINUX)
 
     PRUNUSED(id);
     PRUNUSED(x);

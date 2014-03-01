@@ -99,7 +99,7 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
     if (m_filename)
     {
         prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
-        PRASSERT(pRM)
+        PRASSERT(pRM);
         m_texture = pRM->Load<prTexture>(m_filename);
         PRASSERT(m_texture);
 
@@ -113,7 +113,7 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
 
         // Actual screen size.
         prRegistry *pReg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
-        PRASSERT(pReg)
+        PRASSERT(pReg);
         m_scrnWidth  = (float)atof(pReg->GetValue("ScreenWidth"));
         m_scrnHeight = (float)atof(pReg->GetValue("ScreenHeight"));
 

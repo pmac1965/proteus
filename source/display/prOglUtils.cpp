@@ -28,6 +28,7 @@
 #elif defined(PLATFORM_LINUX)
   #include <GL/gl.h>
   #include <GL/glu.h>
+  #include <cstdlib>
 
 #else
   #error No platform defined.

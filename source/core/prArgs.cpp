@@ -3,10 +3,20 @@
  */
 
 
+#include "../prConfig.h"
+
+
 #include "prArgs.h"
+#include "prTypes.h"
+#include "prDefines.h"
+#include "prCore.h"
+#include "prRegistry.h"
 #include "../debug/prTrace.h"
-#include "../core/prCore.h"
-#include "../core/prRegistry.h"
+
+
+#if defined(PLATFORM_LINUX)
+#include "../linux/prLinux.h"
+#endif
 
 
 namespace
@@ -161,8 +171,12 @@ const _TCHAR *prArgsPopNextArg()
 /// ---------------------------------------------------------------------------
 /// Processes command line args
 /// ---------------------------------------------------------------------------
-void prArgsParseCommandLine(int argc, char ** args)
+void prArgsParseCommandLine(int argc, const char *args[])
 {
+#if defined(PLATFORM_LINUX)
+	prStoreArgs(argc, args);
+#endif
+
 }
 
 

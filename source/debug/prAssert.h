@@ -95,13 +95,19 @@
             *((int*)0) = 0;                                                         \
         }
 
+    #elif defined(PLATFORM_LINUX)
+        #define PRBREAKPOINT()                                                      \
+        {                                                                           \
+            *((int*)0) = 0;                                                         \
+        }
+
     #else
         #error No platform defined.
 
     #endif
 
 
-    #if defined(PLATFORM_BADA) || defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID)
+    #if defined(PLATFORM_BADA) || defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID) || defined(PLATFORM_LINUX)
 
         // Assertion macro which allows additional information to be displayed.
         #define PRASSERT(cond, args...)                                             \
