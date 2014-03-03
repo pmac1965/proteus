@@ -161,7 +161,7 @@ PRBOOL prApplication_PC::DisplayCreate(u32 width, u32 height, const char *pWindo
     }
 
 
-    // Create.
+    // Kill old.
     PRSAFE_DELETE(m_pWindow);
     m_pWindow = new prWindow_PC();
     PRASSERT(m_pWindow);

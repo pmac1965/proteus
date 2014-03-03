@@ -108,6 +108,26 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
             PRASSERT(rendererType == PRRENDERER_OPENGL);
             PRASSERT(version == PRGLVER_11 || version == PRGLVER_20 || version == PRGLVER_30);
 
+            // Check version numbers
+            if (rendererType == PRRENDERER_OPENGL)
+            {
+                PRASSERT(version == PRGLVER_11 || version == PRGLVER_20 || version == PRGLVER_30);
+                switch (version)
+                {
+                case PRGLVER_11:
+                    systems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
+                    break;
+
+                case PRGLVER_20:
+                    PRPANIC("Under construction");
+                    break;
+
+                case PRGLVER_30:
+                    PRPANIC("Under construction");
+                    break;
+                }
+            }
+
         #else
             #error Unsupported platform
 

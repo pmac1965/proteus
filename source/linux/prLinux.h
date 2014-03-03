@@ -32,11 +32,16 @@ extern "C" {
 
 // Function: prStoreArgs
 //		Stores the args for internal use
-void prStoreArgs(int argc, const char *args[]);
+void prLinuxStoreArgs(int argc, const char *args[]);
 
 // Function: prCreateLinuxDisplay
 // 		Creates a linux window
-PRBOOL prCreateLinuxDisplay(u32 width, u32 height);
+PRBOOL prLinuxCreateDisplay(u32 width, u32 height);
+
+
+// Function: prLinuxSwapBuffers
+//      Displays the last buffer drawn
+void prLinuxSwapBuffers();
 
 
 void prLinuxLoop();

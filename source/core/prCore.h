@@ -54,9 +54,11 @@ typedef enum //prVerType
     PRGLVER_11,
     PRGLVER_20,
     PRGLVER_30,
+#if defined(WIN32)
     PRDXVER_9,
     PRDXVER_10,
     PRDXVER_11,
+#endif
 
 } prVerType;
 

@@ -13,6 +13,7 @@
 #include <GL/gl.h>
 #include <X11/X.h>
 #include <X11/keysym.h>
+#include <stdlib.h>
 #include "../core/prTypes.h"
 #include "../core/prDefines.h"
 #include "../debug/prTrace.h"
@@ -35,7 +36,7 @@ static int doubleBuf[] = {GLX_RGBA, GLX_DEPTH_SIZE, 16, GLX_DOUBLEBUFFER, None};
 /// ---------------------------------------------------------------------------
 /// Stores the args
 /// ---------------------------------------------------------------------------
-void prStoreArgs(int argc, const char *args[])
+void prLinuxStoreArgs(int argc, const char *args[])
 {
     argCount  = argc;
     argValues = args;
@@ -45,7 +46,7 @@ void prStoreArgs(int argc, const char *args[])
 /// ---------------------------------------------------------------------------
 /// Creates a linux window
 /// ------------------------------ ---------------------------------------------
-PRBOOL prCreateLinuxDisplay(u32 width, u32 height)
+PRBOOL prLinuxCreateDisplay(u32 width, u32 height)
 {
     PRBOOL               result = PRFALSE;
     int                  dummy;
@@ -134,6 +135,24 @@ PRBOOL prCreateLinuxDisplay(u32 width, u32 height)
 
 
 /// ---------------------------------------------------------------------------
+/// Displays the last buffer drawn
+/// ---------------------------------------------------------------------------
+void prLinuxSwapBuffers()
+{
+    if (doubleBuffer)
+    {
+        // buffer swap does implicit glFlush
+        glXSwapBuffers(display, win);
+    }
+    else
+    {
+        // explicit flush for single buffered case
+        glFlush();
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
 /// The main linux loop
 /// ---------------------------------------------------------------------------
 void prLinuxLoop()
@@ -148,11 +167,11 @@ void prLinuxLoop()
             case KeyPress:
             {
                 KeySym     keysym;
-                XKeyEvent *kevent;
+                //XKeyEvent *kevent;
                 char       buffer[1];
 
                 // It is necessary to convert the keycode to a keysym before checking if it is an escape
-                kevent = (XKeyEvent *)&event;
+                //kevent = (XKeyEvent *)&event;
                 if ((XLookupString((XKeyEvent*)&event, buffer, 1, &keysym,NULL) == 1) && (keysym == (KeySym)XK_Escape))
                 {
                     exit(0);
@@ -180,7 +199,11 @@ void prLinuxLoop()
                 break;
 
             case Expose:
+                {
+                    static int c=0;
+                    prTrace("Expose %i\n", c++);
                 //needRedraw = GL_TRUE;
+                }
                 break;
         }
 

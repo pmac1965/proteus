@@ -4,12 +4,16 @@
 
 
 #include "../prConfig.h"
-#include "prDebug.h"
+
+
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
-//#include "../file/prFileSystem.h"
-//#include "../core/system.h"
+#include "prDebug.h"
+#include "../core/prCore.h"
+#include "../core/prCoreSystem.h"
+#include "../core/prRegistry.h"
+#include "../core/prStringUtil.h"
 
 
 // ----------------------------------------------------------------------------
@@ -101,29 +105,29 @@ void prTrace(const char *fmt, ...)
 
 
             // Write to a file?
-/*            if (System::LogToFile())
+            prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+            if (reg)
             {
-                FILE *fp = NULL;
-                errno_t err = fopen_s(&fp, TRACE_LOG_NAME, "a");
-                if (err == 0)
+                if (prStringCompare(reg->GetValue("LogToFile"), "true") == CMP_EQUALTO)
                 {
+                    FILE *fp = fopen(TRACE_LOG_NAME, "a");
                     if (fp)
                     {
                         if (repeat)
                         {
-                            fprintf(fp, bufferRpt);
-                            fprintf(fp, bufferMsg);
+                            fprintf(fp, "%s", bufferRpt);
+                            fprintf(fp, "%s", bufferMsg);
                         }
                         else
                         {
-                            fprintf(fp, bufferMsg);
+                            fprintf(fp, "%s", bufferMsg);
                         }
 
                         fflush(fp);
                         fclose(fp);
                     }
                 }
-            }*/
+            }
         }
     }
 }

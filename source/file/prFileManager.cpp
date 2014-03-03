@@ -9,11 +9,11 @@
 #include <string.h>
 #include "prFileManager.h"
 #include "prFile.h"
-//#include "prFileShared.h"
 #include "../debug/prAssert.h"
 #include "../debug/prTrace.h"
 #include "../debug/prDebug.h"
 #include "../core/prCore.h"
+#include "../core/prCoreSystem.h"
 #include "../core/prStringUtil.h"
 #include "../zlib/zlib.h"
 
@@ -31,6 +31,11 @@
 
 #elif defined(PLATFORM_LINUX)
   #include <stdlib.h>
+  #include <unistd.h>
+
+  #ifndef MAX_PATH
+  #define MAX_PATH    256
+  #endif
 
 #elif defined(PLATFORM_ANDROID)
   #include <stdlib.h>
@@ -41,13 +46,14 @@
   #define MAX_PATH    260
   #endif
 
+  //#define ANDROID_APK_DEBUG
+
   namespace
   {
     char APKPath[MAX_PATH];
     char CardPath[MAX_PATH];
     zip *APKArchive = NULL;
   }
-  //#define ANDROID_APK_DEBUG
 
 #else
   #error No platform defined.
@@ -241,7 +247,9 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
     // Linux
     #elif defined(PLATFORM_LINUX)
         // Copy the app path.
-        strcpy(dataPath, "assets");
+        char buffer[MAX_PATH];
+        getcwd(buffer, MAX_PATH -1);
+        strcpy(dataPath, buffer);
 
     #else
         #error No platform defined.
@@ -250,7 +258,7 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
 
 
     prStringReplaceChar(dataPath, '\\', '/');
-    //prTrace("App data path: %s\n", dataPath);
+    prTrace("App data path: %s\n", dataPath);
 }
 
 
@@ -495,8 +503,10 @@ const char *prFileManager::GetSystemPath(const char *filename)
             strcat(path, filename);
 
         #elif defined(PLATFORM_LINUX)
-            // Make path
-            strcpy(path, "assets/");
+            // Make filename for current system.
+            // Its the data path + '/' + filepath
+            strcpy(path, dataPath);
+            strcat(path, "/");
             strcat(path, filename);
 
         #else

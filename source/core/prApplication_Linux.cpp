@@ -20,10 +20,13 @@
 #include "../debug/prTrace.h"
 #include "../debug/prConsoleWindow.h"
 #include "../debug/prOnScreenLogger.h"
+#include "../debug/prFps.h"
 #include "../input/prMouse.h"
+#include "../input/prTouch.h"
 #include "../display/prRenderer.h"
 #include "../core/prStringUtil.h"
 #include "../linux/prLinux.h"
+#include "../audio/prSoundManager.h"
 
 
 // ----------------------------------------------------------------------------
@@ -107,8 +110,17 @@ prApplication_Linux::~prApplication_Linux()
 /// ---------------------------------------------------------------------------
 PRBOOL prApplication_Linux::DisplayCreate(u32 width, u32 height, const char *pWindowName)
 {
-    PRBOOL result = prCreateLinuxDisplay(width, height);
-    if (result)
+	PRBOOL result = PRFALSE;
+
+
+    // Kill old.
+    PRSAFE_DELETE(m_pWindow);
+    m_pWindow = new prWindow_Linux();
+
+
+    // Create the window
+    bool success = static_cast<prWindow_Linux *>(m_pWindow)->Create(width, height, 32, pWindowName);
+    if (success)
     {
         m_running = PRTRUE;
         result    = PRTRUE;
@@ -117,8 +129,8 @@ PRBOOL prApplication_Linux::DisplayCreate(u32 width, u32 height, const char *pWi
         prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
         if (pRenderer)
         {
-            //pRenderer->SetWindow(m_pWindow);
-            //pRenderer->Init();
+            pRenderer->SetWindow(m_pWindow);
+            pRenderer->Init();
         }
 
         // Set registry
@@ -161,6 +173,40 @@ PRBOOL prApplication_Linux::Run()
 	  while (1)
 	  {
 		  prLinuxLoop();
+
+          // Get systems
+          //prMouse         *pMouse = static_cast<prMouse *>       (prCoreGetComponent(PRSYSTEM_MOUSE));
+          prSoundManager  *pSound = static_cast<prSoundManager *>(prCoreGetComponent(PRSYSTEM_AUDIO));
+          prTouch         *pTouch = static_cast<prTouch *>       (prCoreGetComponent(PRSYSTEM_TOUCH));
+          prFps           *pFps   = static_cast<prFps *>         (prCoreGetComponent(PRSYSTEM_FPS));
+
+
+//            GameTime::GetInstance()->Update();
+          static int c=0;
+          prTrace("Update: %i\n", c++);
+
+          // Update game
+          if (m_pWindow && m_pWindow->GetActive())
+          {
+//                float dt = GameTime::GetInstance()->ElapsedTime();
+
+              // System updates
+              //if (pMouse) { pMouse->Update(); }
+              if (pSound) { pSound->Update(16.0f); }
+              if (pTouch) { pTouch->Update(); }
+              if (pFps)   { pFps->Begin(); }
+
+              // Update and draw the game
+              Update(16.0f);// dt);
+              Draw();
+          }
+
+          // Needs modified to track game speed!
+//          Sleep(14);
+          TODO("Needs modified to track game speed!")
+          //Sleep(1);
+
+          if (pFps)   { pFps->End(); }
 
 /*	    if (recalcModelView)
 	    {

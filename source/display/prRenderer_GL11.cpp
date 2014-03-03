@@ -20,6 +20,7 @@
   #include <GL/gl.h>
   #include <GL/glu.h>
   #include "../core/prWindow_PC.h"
+  #include "../linux/prLinux.h"
 
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
@@ -209,6 +210,10 @@ void prRenderer_GL11::Present()
 
         #if defined(PLATFORM_PC)
         SwapBuffers(static_cast<prWindow_PC*>(m_pWindow)->GetDeviceContext());
+        #endif
+
+        #if defined(PLATFORM_LINUX)
+        prLinuxSwapBuffers();
         #endif
     }
 }

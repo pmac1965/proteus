@@ -84,6 +84,7 @@ public:
 private:
 
     //
+    const char     *m_title;        // Text displayed in the title bar.
 };
 
 

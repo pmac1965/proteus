@@ -17,6 +17,7 @@
 #include "../core/prCore.h"
 #include "../core/prRegistry.h"
 #include "../core/prStringUtil.h"
+#include "../linux/prLinux.h"
 
 
 /// ---------------------------------------------------------------------------
@@ -41,7 +42,25 @@ prWindow_Linux::~prWindow_Linux()
 /// ---------------------------------------------------------------------------
 bool prWindow_Linux::Create(u32 width, u32 height, u32 bits, bool fullScreen)
 {
-    return true;
+    // Ensure the previous window is destroyed.
+    Destroy();
+
+
+    // Init data
+    m_fullScreen = fullScreen;
+    m_title      = "Proteus";
+    m_width      = width;
+    m_height     = height;
+    m_bits       = bits;
+
+    bool result = (prLinuxCreateDisplay(width, height) == PRTRUE);
+    if (result)
+    {
+        Resize(width, height);
+        SetTitle(m_title);
+    }
+
+    return result;
 }
 
 
@@ -94,6 +113,7 @@ void prWindow_Linux::SetTitle(const char *title)
 {
     if (title && *title)
     {
+    	m_title = title;
     }
 }
 

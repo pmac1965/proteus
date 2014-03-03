@@ -174,7 +174,7 @@ const _TCHAR *prArgsPopNextArg()
 void prArgsParseCommandLine(int argc, const char *args[])
 {
 #if defined(PLATFORM_LINUX)
-	prStoreArgs(argc, args);
+    prLinuxStoreArgs(argc, args);
 #endif
 
 }
