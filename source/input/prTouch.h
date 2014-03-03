@@ -156,8 +156,8 @@ public:
 private:
 
     // Don't change order.
-	TouchImplementation	*pImpl;
-	TouchImplementation	&imp;
+    TouchImplementation *pImpl;
+    TouchImplementation &imp;
 };
 
 

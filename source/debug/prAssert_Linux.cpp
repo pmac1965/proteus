@@ -45,7 +45,7 @@ bool prAssertPrint(const char *cond, const char *file, const char *function, int
 
     sprintf(buffer, format, cond, message, file, line, function);
 
-	// Display
+    // Display
     printf("%s", buffer);
 
     return true;
@@ -81,7 +81,7 @@ void prPanicPrint(const char *file, const char *function, int line, const char *
 
     sprintf(buffer, format, message, file, line, function);
 
-	// Display
+    // Display
     printf("%s", buffer);
 }
 
@@ -115,7 +115,7 @@ void prWarnPrint(const char *file, const char *function, int line, const char *f
 
     sprintf(buffer, format, message, file, line, function);
 
-	// Display
+    // Display
     printf("%s", buffer);
 }
 

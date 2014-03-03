@@ -279,7 +279,7 @@ PRBOOL prApplication_PC::DisplayCreateTool(u32 width, u32 height, u32 menuID, u3
             pRenderer->Init();
         }
 
-		// Let system know the screen size.
+        // Let system know the screen size.
         prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
         if (reg)
         {

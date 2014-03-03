@@ -59,7 +59,7 @@ void prOnScreenLogger::Add(const char *message, ...)
     {
         char buffer[512];
 
-		// Format the message.
+        // Format the message.
         va_list args;
         va_start(args, message);        
         vsprintf(buffer, message, args);

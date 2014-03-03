@@ -24,7 +24,7 @@
 
 
 // Max wave ID's
-#define MAX_NUM_WAVEID			1024
+#define MAX_NUM_WAVEID          1024
 
 
 // Enum: prWaveResult
@@ -51,28 +51,28 @@
 enum prWaveResult
 {
     WR_OK                               =   0,
-    WR_INVALIDFILENAME					= - 1,
-    WR_BADWAVEFILE						= - 2,
-    WR_INVALIDPARAM						= - 3,
-    WR_INVALIDWAVEID					= - 4,
-    WR_NOTSUPPORTEDYET					= - 5,
-    WR_WAVEMUSTBEMONO					= - 6,
-    WR_WAVEMUSTBEWAVEFORMATPCM			= - 7,
-    WR_WAVESMUSTHAVESAMEBITRESOLUTION	= - 8,
-    WR_WAVESMUSTHAVESAMEFREQUENCY		= - 9,
-    WR_WAVESMUSTHAVESAMEBITRATE			= -10,
-    WR_WAVESMUSTHAVESAMEBLOCKALIGNMENT	= -11,
-    WR_OFFSETOUTOFDATARANGE				= -12,
-    WR_FILEERROR						= -13,
-    WR_OUTOFMEMORY						= -14,
-    WR_INVALIDSPEAKERPOS				= -15,
-    WR_INVALIDWAVEFILETYPE				= -16,
-    WR_NOTWAVEFORMATEXTENSIBLEFORMAT	= -17
+    WR_INVALIDFILENAME                  = - 1,
+    WR_BADWAVEFILE                      = - 2,
+    WR_INVALIDPARAM                     = - 3,
+    WR_INVALIDWAVEID                    = - 4,
+    WR_NOTSUPPORTEDYET                  = - 5,
+    WR_WAVEMUSTBEMONO                   = - 6,
+    WR_WAVEMUSTBEWAVEFORMATPCM          = - 7,
+    WR_WAVESMUSTHAVESAMEBITRESOLUTION   = - 8,
+    WR_WAVESMUSTHAVESAMEFREQUENCY       = - 9,
+    WR_WAVESMUSTHAVESAMEBITRATE         = -10,
+    WR_WAVESMUSTHAVESAMEBLOCKALIGNMENT  = -11,
+    WR_OFFSETOUTOFDATARANGE             = -12,
+    WR_FILEERROR                        = -13,
+    WR_OUTOFMEMORY                      = -14,
+    WR_INVALIDSPEAKERPOS                = -15,
+    WR_INVALIDWAVEFILETYPE              = -16,
+    WR_NOTWAVEFORMATEXTENSIBLEFORMAT    = -17
 };
 
 
 // Types
-typedef int	prWaveID;
+typedef int prWaveID;
 
 
 // Forward declarations

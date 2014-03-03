@@ -52,7 +52,7 @@ namespace
         }
         else
         {
-	        prTrace("Unknown command line parameter was null or empty\n");
+            prTrace("Unknown command line parameter was null or empty\n");
         }
 
         return parseFailed;

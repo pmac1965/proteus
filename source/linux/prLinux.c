@@ -20,7 +20,7 @@
 
 
 // Locals
-static int	            argCount     = 0;
+static int              argCount     = 0;
 static const char     **argValues    = NULL;
 static Display         *display      = NULL;
 static XVisualInfo     *vi           = NULL;

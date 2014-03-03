@@ -1,6 +1,6 @@
 // File: prLinux.h
 // About:
-//		Contains linux helper functions that we need to write in C
+//      Contains linux helper functions that we need to write in C
 /*
     Copyright 2014 Paul Michael McNab
 
@@ -31,11 +31,11 @@ extern "C" {
 
 
 // Function: prStoreArgs
-//		Stores the args for internal use
+//      Stores the args for internal use
 void prLinuxStoreArgs(int argc, const char *args[]);
 
 // Function: prCreateLinuxDisplay
-// 		Creates a linux window
+//      Creates a linux window
 PRBOOL prLinuxCreateDisplay(u32 width, u32 height);
 
 

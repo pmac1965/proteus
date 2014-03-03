@@ -110,7 +110,7 @@ prApplication_Linux::~prApplication_Linux()
 /// ---------------------------------------------------------------------------
 PRBOOL prApplication_Linux::DisplayCreate(u32 width, u32 height, const char *pWindowName)
 {
-	PRBOOL result = PRFALSE;
+    PRBOOL result = PRFALSE;
 
 
     // Kill old.
@@ -170,9 +170,9 @@ PRBOOL prApplication_Linux::DisplayCreate(u32 width, u32 height, const char *pWi
 /// ---------------------------------------------------------------------------
 PRBOOL prApplication_Linux::Run()
 {
-	  while (1)
-	  {
-		  prLinuxLoop();
+      while (1)
+      {
+          prLinuxLoop();
 
           // Get systems
           //prMouse         *pMouse = static_cast<prMouse *>       (prCoreGetComponent(PRSYSTEM_MOUSE));
@@ -208,30 +208,30 @@ PRBOOL prApplication_Linux::Run()
 
           if (pFps)   { pFps->End(); }
 
-/*	    if (recalcModelView)
-	    {
-	      glMatrixMode(GL_MODELVIEW);
+/*      if (recalcModelView)
+        {
+          glMatrixMode(GL_MODELVIEW);
 
-	      // reset modelview matrix to the identity matrix
-	      glLoadIdentity();
+          // reset modelview matrix to the identity matrix
+          glLoadIdentity();
 
-	      // move the camera back three units
-	      glTranslatef(0.0, 0.0, -3.0);
+          // move the camera back three units
+          glTranslatef(0.0, 0.0, -3.0);
 
-	      // rotate by X, Y, and Z angles
-	      glRotatef(xAngle, 0.1, 0.0, 0.0);
-	      glRotatef(yAngle, 0.0, 0.1, 0.0);
-	      glRotatef(zAngle, 0.0, 0.0, 1.0);
+          // rotate by X, Y, and Z angles
+          glRotatef(xAngle, 0.1, 0.0, 0.0);
+          glRotatef(yAngle, 0.0, 0.1, 0.0);
+          glRotatef(zAngle, 0.0, 0.0, 1.0);
 
-	      recalcModelView = GL_FALSE;
-	      needRedraw = GL_TRUE;
-	    }
-	    if (needRedraw)
-	    {
-	      redraw();
-	      needRedraw = GL_FALSE;
-	    }//*/
-	  }
+          recalcModelView = GL_FALSE;
+          needRedraw = GL_TRUE;
+        }
+        if (needRedraw)
+        {
+          redraw();
+          needRedraw = GL_FALSE;
+        }//*/
+      }
 
     return PRFALSE;
 }

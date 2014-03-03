@@ -39,7 +39,7 @@
 
 
 // Defines
-#define WAVE_FORMAT_EXTENSIBLE		0xFFFE
+#define WAVE_FORMAT_EXTENSIBLE      0xFFFE
 #ifndef WAVE_FORMAT_PCM
 #define WAVE_FORMAT_PCM             0x0001
 #endif
@@ -57,8 +57,8 @@ enum prWaveFileType
 typedef struct prWaveFileHeader
 {
     char    riff[4];        // Identifier string = "RIFF"
-    u32	    size;           // Remaining length after this header.
-    char	wave[4];        // 4-byte data type identifier.  
+    u32     size;           // Remaining length after this header.
+    char    wave[4];        // 4-byte data type identifier.  
 
 } prWaveFileHeader;
 
@@ -66,8 +66,8 @@ typedef struct prWaveFileHeader
 // Header for a chunk in the wave file.
 typedef struct prRiffChunk
 {
-    char			name[4];
-    unsigned long	size;
+    char            name[4];
+    unsigned long   size;
 
 } prRiffChunk;
 
@@ -88,15 +88,15 @@ typedef struct prWaveFormat
         ulChannelMask       = 0;
     }
 
-    u16	    usFormatTag;
-    u16	    usChannels;
-    u32	    ulSamplesPerSec;
-    u32	    ulAvgBytesPerSec;
-    u16	    usBlockAlign;
-    u16	    usBitsPerSample;
-    u16	    usSize;
+    u16     usFormatTag;
+    u16     usChannels;
+    u32     ulSamplesPerSec;
+    u32     ulAvgBytesPerSec;
+    u16     usBlockAlign;
+    u16     usBitsPerSample;
+    u16     usSize;
     u16     usReserved;
-    u32	    ulChannelMask;
+    u32     ulChannelMask;
 
 } prWaveFormat;
 
@@ -104,17 +104,17 @@ typedef struct prWaveFormat
 // Details of a wave file.
 typedef struct prWaveFileInfo
 {
-    prWaveFileType	        wfType;
+    prWaveFileType          wfType;
     unsigned short          format;
     unsigned short          channels;
     unsigned int            samplesPerSec;
     unsigned int            bytesPerSec;
     unsigned short          blockAlign;
     unsigned short          bitsPerSample;
-    char			       *pData;
-    unsigned long	        ulDataSize;
-    prFile			       *pFile;
-    unsigned long	        ulDataOffset;
+    char                   *pData;
+    unsigned long           ulDataSize;
+    prFile                 *pFile;
+    unsigned long           ulDataOffset;
 
 } prWaveFileInfo;
 
@@ -229,7 +229,7 @@ prWaveResult prWaves::ParseFile(const char *filename, prWaveFileInfo* pWaveInfo)
 
     prWaveResult      wr = WR_BADWAVEFILE;
     prWaveFileHeader  header;
-    prRiffChunk		  riffChunk;
+    prRiffChunk       riffChunk;
     prWaveFormat      waveFmt;
 
     // Sanity checks

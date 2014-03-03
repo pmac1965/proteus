@@ -225,7 +225,7 @@ int ALC_ErrorCheck(void *device)
 {
 #if defined(SOUND_ALLOW)
 
-	int error = ALC_NO_ERROR;
+    int error = ALC_NO_ERROR;
 
     if (device)
     {
@@ -262,7 +262,7 @@ int AL_ErrorCheck()
 {
 #if defined(SOUND_ALLOW)
 
-	int error = AL_NO_ERROR;
+    int error = AL_NO_ERROR;
 
     error = alGetError();
 

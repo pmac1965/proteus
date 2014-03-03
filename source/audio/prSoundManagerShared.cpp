@@ -67,7 +67,7 @@ prLoadedWave::~prLoadedWave()
 {
     if (uiBuffer != 0xFFFFFFFF)
     {
-    	alDeleteBuffers(1, &uiBuffer);
+        alDeleteBuffers(1, &uiBuffer);
         AL_ERROR_CHECK();
     }
 

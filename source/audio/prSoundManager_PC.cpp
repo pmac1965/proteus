@@ -38,13 +38,13 @@ namespace
     // OggVorbis callback
     size_t ov_read_func(void *ptr, size_t size, size_t nmemb, void *datasource)
     {
-	    return fread(ptr, size, nmemb, (FILE*)datasource);
+        return fread(ptr, size, nmemb, (FILE*)datasource);
     }
 
     // OggVorbis callback
     int ov_seek_func(void *datasource, ogg_int64_t offset, int whence)
     {
-	    return fseek((FILE*)datasource, (long)offset, whence);
+        return fseek((FILE*)datasource, (long)offset, whence);
     }
 
     // OggVorbis callback
@@ -56,7 +56,7 @@ namespace
     // OggVorbis callback
     long ov_tell_func(void *datasource)
     {
-	    return ftell((FILE*)datasource);
+        return ftell((FILE*)datasource);
     }
 }
 
@@ -85,22 +85,22 @@ prSoundManager_PC::prSoundManager_PC()
     memset(&oggStream, 0, sizeof(oggStream));
 
 
-	// Try and load Vorbis DLLs. vorbisfile.dll will load ogg.dll and vorbis.dll
+    // Try and load Vorbis DLLs. vorbisfile.dll will load ogg.dll and vorbis.dll
     dll = LoadLibrary(TEXT("vorbisfile.dll"));
     if (dll)
-	{
+    {
         ov_open_callbacks = (LPOVOPENCALLBACKS)GetProcAddress(dll, "ov_open_callbacks");
         PRASSERT(ov_open_callbacks);
 
         ov_info = (LPOVINFO)GetProcAddress(dll, "ov_info");
         PRASSERT(ov_info);
 
-    	ov_clear = (LPOVCLEAR)GetProcAddress(dll, "ov_clear");
+        ov_clear = (LPOVCLEAR)GetProcAddress(dll, "ov_clear");
         PRASSERT(ov_clear);
 
-		ov_read = (LPOVREAD)GetProcAddress(dll, "ov_read");
+        ov_read = (LPOVREAD)GetProcAddress(dll, "ov_read");
         PRASSERT(ov_read);
-	}
+    }
     else
     {
         prTrace("Failed to load OggVorbis dll's\n");
@@ -282,7 +282,7 @@ void prSoundManager_PC::Release()
         {
             prTrace("OpenAL shutdown error\n");
         }
-		ALC_ErrorCheck(pDevice);
+        ALC_ErrorCheck(pDevice);
 
         // Destroy context
         alcDestroyContext(pContext);
@@ -417,17 +417,17 @@ void prSoundManager_PC::LoadSFX(const prSFXInfo *sfx, s32 count)
                 ALenum        eBufferFormat;
 
                 if (waves.GetWaveSize(id, (u32*)&iDataSize)                 == WR_OK &&
-	                waves.GetWaveData(id, (void**)&pData)                   == WR_OK &&
-	                waves.GetWaveFrequency(id, (u32*)&iFrequency)           == WR_OK &&
-	                waves.GetWaveALBufferFormat(id, (u32*)&eBufferFormat)   == WR_OK
+                    waves.GetWaveData(id, (void**)&pData)                   == WR_OK &&
+                    waves.GetWaveFrequency(id, (u32*)&iFrequency)           == WR_OK &&
+                    waves.GetWaveALBufferFormat(id, (u32*)&eBufferFormat)   == WR_OK
                    )
                 {
                     // Generate a buffer
-                	alGenBuffers(1, &entry->uiBuffer);
+                    alGenBuffers(1, &entry->uiBuffer);
                     AL_ERROR_CHECK()
 
-	                // Store data.
-				    alBufferData(entry->uiBuffer, eBufferFormat, pData, iDataSize, iFrequency);
+                    // Store data.
+                    alBufferData(entry->uiBuffer, eBufferFormat, pData, iDataSize, iFrequency);
                     AL_ERROR_CHECK()
 
                     // Delete file as we no longer require it.
@@ -443,9 +443,9 @@ void prSoundManager_PC::LoadSFX(const prSFXInfo *sfx, s32 count)
 
                     #if defined(SOUND_SHOW_FAILS) && (defined(_DEBUG) || defined(DEBUG))
                     prTrace("GetWaveSize           == %i\n", waves.GetWaveSize(id, (u32*)&iDataSize)                 == WR_OK);
-	                prTrace("GetWaveData           == %i\n", waves.GetWaveData(id, (void**)&pData)                   == WR_OK);
-	                prTrace("GetWaveFrequency      == %i\n", waves.GetWaveFrequency(id, (u32*)&iFrequency)           == WR_OK);
-	                prTrace("GetWaveALBufferFormat == %i\n", waves.GetWaveALBufferFormat(id, (u32*)&eBufferFormat)   == WR_OK);
+                    prTrace("GetWaveData           == %i\n", waves.GetWaveData(id, (void**)&pData)                   == WR_OK);
+                    prTrace("GetWaveFrequency      == %i\n", waves.GetWaveFrequency(id, (u32*)&iFrequency)           == WR_OK);
+                    prTrace("GetWaveALBufferFormat == %i\n", waves.GetWaveALBufferFormat(id, (u32*)&eBufferFormat)   == WR_OK);
                     #endif
                 }
             }
@@ -503,11 +503,11 @@ void prSoundManager_PC::SongPlayByName(const char *filename)
     }
 
 
-	// Ogg stream support
+    // Ogg stream support
     callbacks.read_func  = ov_read_func;
-	callbacks.seek_func  = ov_seek_func;
-	callbacks.close_func = ov_close_func;
-	callbacks.tell_func  = ov_tell_func;
+    callbacks.seek_func  = ov_seek_func;
+    callbacks.close_func = ov_close_func;
+    callbacks.tell_func  = ov_tell_func;
 
     // Reset
     frequency      = 0;
@@ -526,45 +526,45 @@ void prSoundManager_PC::SongPlayByName(const char *filename)
     // Create an OggVorbis file stream
     PRASSERT(ov_open_callbacks);
     if (ov_open_callbacks(pOggFile , &oggStream, NULL, 0, callbacks) == 0)
-	{
-		// Get some information about the file (Channels, Format, and Frequency)
+    {
+        // Get some information about the file (Channels, Format, and Frequency)
         PRASSERT(ov_info);
-		vorbis_info *pVorbisInfo = ov_info(&oggStream, -1);
-		if (pVorbisInfo)
-		{
-			frequency = pVorbisInfo->rate;
-			channels  = pVorbisInfo->channels;
+        vorbis_info *pVorbisInfo = ov_info(&oggStream, -1);
+        if (pVorbisInfo)
+        {
+            frequency = pVorbisInfo->rate;
+            channels  = pVorbisInfo->channels;
 
-			if (pVorbisInfo->channels == 1)
-			{
-				format = AL_FORMAT_MONO16;
-			}
-			else if (pVorbisInfo->channels == 2)
-			{
-				format = AL_FORMAT_STEREO16;
-			}
-			else if (pVorbisInfo->channels == 4)
-			{
-				format = alGetEnumValue("AL_FORMAT_QUAD16");
-			}
-			else if (pVorbisInfo->channels == 6)
-			{
-				format = alGetEnumValue("AL_FORMAT_51CHN16");
-			}
+            if (pVorbisInfo->channels == 1)
+            {
+                format = AL_FORMAT_MONO16;
+            }
+            else if (pVorbisInfo->channels == 2)
+            {
+                format = AL_FORMAT_STEREO16;
+            }
+            else if (pVorbisInfo->channels == 4)
+            {
+                format = alGetEnumValue("AL_FORMAT_QUAD16");
+            }
+            else if (pVorbisInfo->channels == 6)
+            {
+                format = alGetEnumValue("AL_FORMAT_51CHN16");
+            }
             else
             {
-		        // Close OggVorbis stream
+                // Close OggVorbis stream
                 PRASSERT(ov_clear);
-		        ov_clear(&oggStream);
+                ov_clear(&oggStream);
                 prTrace("Unknown channel count from .ogg file: %s\n", filename);
                 return;
             }
-		}
+        }
         else
         {
-		    // Close OggVorbis stream
+            // Close OggVorbis stream
             PRASSERT(ov_clear);
-		    ov_clear(&oggStream);
+            ov_clear(&oggStream);
             prTrace("Failed to get info from .ogg file: %s\n", filename);
             return;
         }
@@ -814,7 +814,7 @@ s32 prSoundManager_PC::SFXPlay(s32 index, f32 volume, bool loop)
                     alSourcei(soundEffects[i].uiSource, AL_BUFFER, entry->uiBuffer);
                     AL_ERROR_CHECK()
 
-					// Set volume
+                    // Set volume
                     float vol = PRCLAMP(volume, AUDIO_SFX_MIN_VOLUME, AUDIO_SFX_MAX_VOLUME);
                     vol *= masterSfxVolume;
                     alSourcef(soundEffects[i].uiSource, AL_GAIN, vol);

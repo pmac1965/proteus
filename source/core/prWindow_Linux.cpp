@@ -113,7 +113,7 @@ void prWindow_Linux::SetTitle(const char *title)
 {
     if (title && *title)
     {
-    	m_title = title;
+        m_title = title;
     }
 }
 

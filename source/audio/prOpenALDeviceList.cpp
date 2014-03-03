@@ -92,8 +92,8 @@ prOpenALDeviceList::prOpenALDeviceList()
 
             
             // Next
-		    pDeviceList += strlen(pDeviceList) + 1;
-		    index++;
+            pDeviceList += strlen(pDeviceList) + 1;
+            index++;
         }
     }
 
@@ -115,7 +115,7 @@ prOpenALDeviceList::~prOpenALDeviceList()
 s32 prOpenALDeviceList::GetNumDevices() const
 {
 #if defined(SOUND_ALLOW)
-    return (s32)m_deviceList.size();	
+    return (s32)m_deviceList.size();    
 #else
     return 0;
 #endif
