@@ -1,22 +1,19 @@
-/**
- * @file       prVector2.h
- * @brief      Contains a class designed to represent a 2D vector.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
- *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+// File: prVector2.h
+/*
+    Copyright 2014 Paul Michael McNab
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
 
 
 #ifndef __PRVECTOR2_H
@@ -26,37 +23,47 @@
 #include "../prConfig.h"
 
 
-/// @brief      Class designed to represent a 2D vector.
+// Class: prVector2
+//      Class designed to represent a 2D vector.
 class prVector2
 {
 public:
 
-    static const prVector2 Zero;        ///< Pre-made value
-    static const prVector2 One;         ///< Pre-made value
-    static const prVector2 UnitX;       ///< Pre-made value
-    static const prVector2 UnitY;       ///< Pre-made value
+    static const prVector2 Zero;        // Pre-made value
+    static const prVector2 One;         // Pre-made value
+    static const prVector2 UnitX;       // Pre-made value
+    static const prVector2 UnitY;       // Pre-made value
 
 
 public:
-
-    /// @brief     Constructor.
+    // Method: prVector2
+    //      Constructor.
     prVector2() : x (0.0f) , y (0.0f)    
     {}
 
-    /// @brief     Constructor.
+    // Method: prVector2
+    //      Parameterised constructor.
+    //
+    // Parameters:
+    //      nx - X coordinate
+    //      ny - Y coordinate
     prVector2(float nx, float ny) : x (nx) , y (ny)
     {}
 
-    /// @brief     Calculates the magnitude of the vector.
+    // Method: Magnitude
+    //      Calculates the magnitude of the vector.
     float Magnitude() const;
 
-    /// @brief     Calculates the magnitude of the vector squared.
+    // Method: MagnitudeSquared
+    //      Calculates the magnitude of the vector.
     float MagnitudeSquared() const;
     
-    /// @brief     Normalise this vector.
+    // Method: Normalize
+    //      Normalise this vector.
     prVector2& Normalize();
 
-    /// @brief     Returns the vector as a string.
+    // Method: ToString
+    //      Returns the vector as a string.
     const char *ToString() const;
 
 

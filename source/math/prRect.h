@@ -62,7 +62,7 @@ public:
     //      bottomRight - Rectangle coordinate 
     prRect(const prPoint3& topLeft, const prPoint3& bottomRight);
 
-    // Method: Dtor
+    // Method: ~prRect
     //      Destructor
     ~prRect()
     {}

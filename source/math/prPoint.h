@@ -1,21 +1,18 @@
+// File: prPoint.h
 /**
- * @file       prPoint.h
- * @brief      Contains some simple point classes.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -26,21 +23,24 @@
 #include "../core/prTypes.h"
 
 
-// template for a simple 3D point.
+// Class: TPoint3
+//      template for a simple 3D point.
 template<typename T>
 struct TPoint3
 {
 public:
-
-    /// Constructor.
+    // Method: TPoint3
+    //      Constructor.
     TPoint3() : x(0), y(0), z(0)
     {}
 
-    /// Constructor.
+    // Method: TPoint3
+    //      Parameerised constructor.
     TPoint3(T nx, T ny, T nz) : x(nx), y(ny), z(nz) 
     {}
 
-    /// Copy Constructor.
+    // Method: TPoint3
+    //      Copy constructor.
     TPoint3(const TPoint3& p) : x(p.x), y(p.y), z(p.z)
     {}
 
@@ -52,21 +52,24 @@ public:
 };
 
 
-// template for a simple 2D point.
+// Class: TPoint2
+//      template for a simple 2D point.
 template<typename T>
 struct TPoint2
 {
 public:
-
-    /// Constructor.
+    // Method: TPoint2
+    //      Constructor.
     TPoint2() : x(0), y(0)
     {}
 
-    /// Constructor.
+    // Method: TPoint2
+    //      Parameerised constructor.
     TPoint2(T nx, T ny) : x(nx), y(ny)
     {}
 
-    /// Copy Constructor.
+    // Method: TPoint2
+    //      Copy constructor.
     TPoint2(const TPoint2& p) : x(p.x), y(p.y)
     {}
 
@@ -78,20 +81,20 @@ public:
 };
 
 
-/// @typedef    prPoint3
-/// @brief      Simple 3D point with integer x, y, z
+// Typedef: prPoint3
+//      Simple 3D point with integer x, y, z
 typedef TPoint3<s32>     prPoint3;
 
-/// @typedef    prPoint3F
-/// @brief      Simple 3D point with float x, y, z
+// Typedef: prPoint3F
+//      Simple 3D point with float x, y, z
 typedef TPoint3<f32>     prPoint3F;
 
-/// @typedef    prPoint2.
-/// @brief      Simple 2D point with integer x, y
+// Typedef: prPoint2.
+//      Simple 2D point with integer x, y
 typedef TPoint2<s32>     prPoint2;
 
-/// @typedef    prPoint2F.
-/// @brief      Simple 2D point with float x, y
+// Typedef: prPoint2F.
+//      Simple 2D point with float x, y
 typedef TPoint2<f32>     prPoint2F;
 
 

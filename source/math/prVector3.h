@@ -1,22 +1,19 @@
-/**
- * @file       prVector3.h
- * @brief      Contains a class designed to represent a 3D vector.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
- *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+// File: prVector2.h
+/*
+    Copyright 2014 Paul Michael McNab
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+*/
 
 
 #ifndef __PRVECTOR3_H
@@ -26,46 +23,59 @@
 #include "../prConfig.h"
 
 
-/// @brief      Class designed to represent a 3D vector.
+// Class: prVector3
+//      Class designed to represent a 3D vector.
 class prVector3
 {
 public:
 
-    static const prVector3 Zero;        ///< Pre-made value
-    static const prVector3 One;         ///< Pre-made value
-    static const prVector3 UnitX;       ///< Pre-made value
-    static const prVector3 UnitY;       ///< Pre-made value
-    static const prVector3 UnitZ;       ///< Pre-made value
+    static const prVector3 Zero;        // Pre-made value
+    static const prVector3 One;         // Pre-made value
+    static const prVector3 UnitX;       // Pre-made value
+    static const prVector3 UnitY;       // Pre-made value
+    static const prVector3 UnitZ;       // Pre-made value
 
 
 public:
-
-    /// @brief      Ctor
+    // Method: prVector3
+    //      Constructor.
     prVector3() : x (0.0f) , y (0.0f) , z (0.0f)    
     {
     }
 
-    /// @brief      Ctor
+    // Method: prVector3
+    //      Parameterised constructor.
+    //
+    // Parameters:
+    //      nx - X coordinate
+    //      ny - Y coordinate
+    //      nz - Z coordinate
     prVector3(float nx, float ny, float nz) : x (nx) , y (ny) , z (nz)
     {
     }
 
-    /// @brief     Calculates the magnitude of the vector.
+    // Method: Magnitude
+    //      Calculates the magnitude of the vector.
     float Magnitude() const;
 
-    /// @brief     Calculates the magnitude of the vector squared.
+    // Method: MagnitudeSquared
+    //      Calculates the magnitude of the vector.
     float MagnitudeSquared() const;
     
-    /// @brief     Normalise this vector.
+    // Method: Normalize
+    //      Normalise this vector.
     prVector3& Normalize();
     
-    /// @brief     Returns the dot product.
+    // Method: DotProduct
+    //      Returns the dot product.
     float DotProduct(const prVector3 &v) const;
 
-    /// @brief     Returns the cross product.
+    // Method: CrossProduct
+    //      Returns the cross product.
     prVector3 CrossProduct(const prVector3 &v) const;
 
-    /// @brief     Returns the vector as a string.
+    // Method: ToString
+    //      Returns the vector as a string.
     const char *ToString() const;
 
 
