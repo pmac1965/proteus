@@ -31,6 +31,7 @@ REM ---------------------------------------------------------------------------
     echo Copy the source to include directory.
     xcopy .\..\..\..\..\source\*.h   %PROTEUS_ENGINE_DIR%\include\proteus /E /Q
     xcopy .\..\..\..\..\source\*.inl %PROTEUS_ENGINE_DIR%\include\proteus /E /Q
+    copy  .\..\..\..\..\source\includes.bat %PROTEUS_ENGINE_DIR%\include\proteus\includes.bat
 
 
 REM --------------------------------------
@@ -38,8 +39,23 @@ REM Delete files which you aren't needed
 REM --------------------------------------
     del %PROTEUS_ENGINE_DIR%\include\proteus\display\prSplash.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prDebugFont.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\utf8proc\utf8proc_data.h
 
     rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\libzip
+    REM rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\audio\external
+
+
+REM --------------------------------------
+REM Update build number
+REM --------------------------------------
+    echo Updating build number
+    setlocal EnableDelayedExpansion
+
+    set /P BUILD_NUM=<vernum.txt
+    echo BUILD_NUMBER=%BUILD_NUM%
+    set /A BUILD_NUM+=1
+    echo %BUILD_NUM% > vernum.txt
+    echo #define BUILD_NUMBER %BUILD_NUM% > ../../../../source/prVerNum.h
 
 
 REM ---------------------------------------------------------------------------

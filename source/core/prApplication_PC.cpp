@@ -40,6 +40,7 @@
 #include "../core/prStringUtil.h"
 #include "../audio/prSoundManager.h"
 #include "../input/prTouch.h"
+#include "../prVerNum.h"
 
 
 // ----------------------------------------------------------------------------
@@ -87,6 +88,8 @@ prApplication_PC::prApplication_PC() : prApplication()
             prTrace("Ogg            : 1.2.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
             prTrace("Vorbis         : 1.3.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
             prTrace("AntTweakBar    : 1.16  - Copyright (C) 2005-2013 Philippe Decaudin.\n");        
+            prTrace("libutf8proc    : 1.1.5 - Copyright (C) 2009 Public Software Group e. V.,\n");
+            prTrace("                                                         Berlin, Germany\n");
             prTrace("-------------------------------------------------------------------------------\n");
             prTrace("Config         : %s - PC - Debug\n", BuildType());
             prTrace("-------------------------------------------------------------------------------\n");
@@ -95,14 +98,17 @@ prApplication_PC::prApplication_PC() : prApplication()
             prTrace("               : Log to file  %s\n", reg->GetValue("LogToFile"));
             prTrace("               : Help         %s\n", reg->GetValue("Help"));
             prTrace("-------------------------------------------------------------------------------\n");
+            prTrace("Build number: %i\n", BUILD_NUMBER);
+            prTrace("-------------------------------------------------------------------------------\n");
         }
     }
+#else
+    // Write startup info.
+    prTrace("-------------------------------------------------------------------------------\n");
+    prTrace("Build number: %i\n", BUILD_NUMBER);
+    prTrace("-------------------------------------------------------------------------------\n");
+
 #endif
-
-
-    //prTrace("-------------------------------------------------------------------------------\n");
-    //prTrace("Build number %0.4f\n", BUILD_NUMBER);
-    //prTrace("-------------------------------------------------------------------------------\n");
 
 
     // Access the embedded data, so it'll stay linked into the game.

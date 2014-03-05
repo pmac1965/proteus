@@ -123,7 +123,8 @@ void prTrace(const char *fmt, ...)
             prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
             if (reg)
             {
-                if (prStringCompare(reg->GetValue("LogToFile"), "true") == CMP_EQUALTO)
+                if (prStringCompare(reg->GetValue("LogToFile"), "true") == CMP_EQUALTO &&
+                    prStringCompare(reg->GetValue("Exit"), "true")      != CMP_EQUALTO)
                 {
                     FILE *fp = fopen(TRACE_LOG_NAME, "a");
                     if (fp)
