@@ -39,7 +39,7 @@ enum
 
 // Forward declarations
 class prSprite;
-//class BitmapFont;
+class prBitmapFont;
 class prButtonListener;
 class prSpriteManager;
 
@@ -82,7 +82,7 @@ public:
     void OnReleased(prTouchEvent e);
 
     void SetSprite(prSprite *pSprite);
-    //void SetFont(BitmapFont *pFont);
+    void SetFont(prBitmapFont *pFont);
     void SetText(const char *text);
 
     void RegisterListener(prButtonListener *pListener);
@@ -101,7 +101,7 @@ private:
 private:
 
     prSprite               *m_sprite;
-    //BitmapFont             *m_font;
+    prBitmapFont           *m_font;
     prString                m_text;
     s32                     m_buttonState;
     s32                     m_width;

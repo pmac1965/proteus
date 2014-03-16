@@ -154,6 +154,9 @@ public:
 
 
 private:
+    // Stops passing by value and assignment.
+    prTouch(const prTouch&);
+    const prTouch& operator = (const prTouch&);
 
     // Don't change order.
     TouchImplementation *pImpl;

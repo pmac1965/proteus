@@ -1,4 +1,4 @@
-// File: prVector2.h
+// File: prVector3.h
 /*
     Copyright 2014 Paul Michael McNab
 

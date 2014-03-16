@@ -211,6 +211,7 @@
     <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2WeldJoint.h" />
     <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2WheelJoint.h" />
     <ClInclude Include="..\..\..\..\source\Box2D\Rope\b2Rope.h" />
+    <ClInclude Include="..\..\..\..\source\collision\prLine.h" />
     <ClInclude Include="..\..\..\..\source\core\prApplication.h" />
     <ClInclude Include="..\..\..\..\source\core\prApplication_Android.h" />
     <ClInclude Include="..\..\..\..\source\core\prApplication_Bada.h" />
@@ -255,7 +256,9 @@
     <ClInclude Include="..\..\..\..\source\debug\prTrace.h" />
     <ClInclude Include="..\..\..\..\source\display\prBackground.h" />
     <ClInclude Include="..\..\..\..\source\display\prBackgroundManager.h" />
+    <ClInclude Include="..\..\..\..\source\display\prBitmapFont.h" />
     <ClInclude Include="..\..\..\..\source\display\prCamera.h" />
+    <ClInclude Include="..\..\..\..\source\display\prCameraManager.h" />
     <ClInclude Include="..\..\..\..\source\display\prColour.h" />
     <ClInclude Include="..\..\..\..\source\display\prFadeManager.h" />
     <ClInclude Include="..\..\..\..\source\display\prFixedWidthFont.h" />
@@ -409,6 +412,7 @@
     <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2WeldJoint.cpp" />
     <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2WheelJoint.cpp" />
     <ClCompile Include="..\..\..\..\source\Box2D\Rope\b2Rope.cpp" />
+    <ClCompile Include="..\..\..\..\source\collision\prLine.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prApplication.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prApplication_Android.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prApplication_Bada.cpp" />
@@ -444,7 +448,9 @@
     <ClCompile Include="..\..\..\..\source\debug\prTrace.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prBackground.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prBackgroundManager.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prBitmapFont.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prCamera.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prCameraManager.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prColour.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prFadeManager.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prFixedWidthFont.cpp" />

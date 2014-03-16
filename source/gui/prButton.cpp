@@ -21,7 +21,7 @@
 #include "prButton.h"
 #include "prButtonListener.h"
 #include "../display/prSprite.h"
-//#include "../display/bitmapFont.h"
+#include "../display/prBitmapFont.h"
 #include "../math/prRect.h"
 #include "../debug/prDebug.h"
 
@@ -33,7 +33,7 @@ prButton::prButton(const char *name, prSpriteManager *pSpriteManager) : prWidget
                                                                       , m_textColour(prColour::White)
 {
     m_sprite            = NULL;
-//    m_font              = NULL;
+    m_font              = NULL;
     m_width             = 0;
     m_height            = 0;
     m_buttonState       = BS_NORMAL;
@@ -93,15 +93,16 @@ void prButton::Draw()
         // Draw button
         m_sprite->Draw();
 
-/*        if (m_font && m_text.Length() > 0)
+        // Draw the font
+        if (m_font && m_text.Length() > 0)
         {
-            //Vector2 size = m_font->MeasureString(m_text.Text(), m_textScale);
+            prVector2 size = m_font->MeasureString(m_text.Text(), m_textScale);
             
-            f32 x = pos.x + (m_sprite->FrameWidth()  >> 1);
-            f32 y = pos.y;// + (m_sprite->FrameHeight() >> 1);
+            f32 x = pos.x + (m_sprite->GetFrameWidth()  >> 1);
+            f32 y = pos.y + ((m_sprite->GetFrameHeight() >> 1) - (size.y / 2));
             
-            m_font->Draw(x, y, m_textScale, m_textColour, BitmapFont::ALIGN_CENTRE, m_text.Text());
-        }//*/
+            m_font->Draw(x, y, m_textScale, m_textColour, prBitmapFont::ALIGN_CENTRE, m_text.Text());
+        }
     }
 }
 
@@ -200,10 +201,10 @@ void prButton::SetSprite(prSprite *pSprite)
 // ----------------------------------------------------------------------------
 // Sets or removes the buttons text font.
 // ----------------------------------------------------------------------------
-//void prButton::SetFont(BitmapFont *pFont)
-//{ 
-//    m_font = pFont;
-//}
+void prButton::SetFont(prBitmapFont *pFont)
+{ 
+    m_font = pFont;
+}
 
 
 // ----------------------------------------------------------------------------

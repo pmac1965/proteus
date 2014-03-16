@@ -64,9 +64,9 @@ public:
     }
 
 
-private:
+public:
     
-    s32 x;
+    s32 x;              // public for fast access
     s32 y;
     s32 index;
 };

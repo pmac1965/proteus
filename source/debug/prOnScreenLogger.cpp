@@ -52,12 +52,19 @@ prOnScreenLogger::~prOnScreenLogger()
     // Delete the font
     PRSAFE_DELETE(m_pFixedWidthFont);
 
-    // Release the fonts texture
-    prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
-    if (pRM && m_pTexture)
+    // Release the loggers texture as long as the game isn't exitting
+    prRegistry *pReg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+    if (pReg)
     {
-        pRM->Unload(m_pTexture);
-        m_pTexture = NULL;
+        if (prStringCompare(pReg->GetValue("Exit"), "false") == 0)
+        {
+            prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
+            if (pRM && m_pTexture)
+            {
+                pRM->Unload(m_pTexture);
+                m_pTexture = NULL;
+            }
+        }
     }
 
     // And clear the strings

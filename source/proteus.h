@@ -44,6 +44,7 @@
 #include "audio/external/os_types.h"
 #include "audio/external/vorbisenc.h"
 #include "audio/external/vorbisfile.h"
+#include "collision/prLine.h"
 #include "core/prApplication.h"
 #include "core/prApplication_Android.h"
 #include "core/prApplication_Bada.h"
@@ -87,7 +88,9 @@
 #include "debug/prTrace.h"
 #include "display/prBackground.h"
 #include "display/prBackgroundManager.h"
+#include "display/prBitmapFont.h"
 #include "display/prCamera.h"
+#include "display/prCameraManager.h"
 #include "display/prColour.h"
 #include "display/prFadeManager.h"
 #include "display/prFixedWidthFont.h"
@@ -134,9 +137,11 @@
     #pragma comment(lib, "glu32.lib")
 
     // DirectX
-    #pragma comment(lib, "dxguid.lib")
-    #pragma comment(lib, "dinput8.lib")
-    #pragma comment(lib, "dxerr.lib")
+    #if defined(ALLOW_DIRECTX)
+      #pragma comment(lib, "dxguid.lib")
+      #pragma comment(lib, "dinput8.lib")
+      #pragma comment(lib, "dxerr.lib")
+    #endif
 
     // OpenAL libs
     #if defined(SOUND_ALLOW)

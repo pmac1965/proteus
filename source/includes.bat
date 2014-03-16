@@ -9,6 +9,10 @@ pushd audio
 dir /S /B *.h >> ..\files.txt
 popd
 
+pushd collision
+dir /S /B *.h >> ..\files.txt
+popd
+
 pushd core
 dir /S /B *.h >> ..\files.txt
 popd

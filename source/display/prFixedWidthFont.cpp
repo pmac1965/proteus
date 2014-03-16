@@ -185,7 +185,7 @@ void prFixedWidthFont::Draw(f32 x, f32 y, const char *fmt, ...)
         va_end(args);
 
 
-        glEnable(GL_TEXTURE_2D);
+        //glEnable(GL_TEXTURE_2D);
 
 
         // Enable blending
@@ -277,7 +277,7 @@ void prFixedWidthFont::Draw(f32 x, f32 y, const char *fmt, ...)
         glDisable(GL_BLEND);
         ERR_CHECK();
 
-        glDisable(GL_TEXTURE_2D);
+        //glDisable(GL_TEXTURE_2D);
     }
 }
 

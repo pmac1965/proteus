@@ -72,6 +72,10 @@
 #define SOUND_ALLOW
 #endif
 
+#ifndef ALLOW_DIRECTX                                   // For builds that don't need DirectX
+//#define ALLOW_DIRECTX
+#endif
+
 #ifndef REMOVE_EXCEPTIONS                               // Allows try/catch code to be removed. For example bada doesn't allow try/catch code.
 #define REMOVE_EXCEPTIONS
 #endif
@@ -81,7 +85,7 @@
 #endif
 
 #ifndef SHOW_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.
-//#define SHOW_MESSAGES
+#define SHOW_MESSAGES
 #endif
 
 #ifndef PROTEUS_ALLOW_CONSOLE                           // Allows the debug console to be optionally removed. (PC only)
