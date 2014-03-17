@@ -43,7 +43,7 @@ LOCAL_CFLAGS   += $(DEBUG_FLAGS) -fno-rtti -fno-exceptions
 LOCAL_LDLIBS := -ldl -llog -lGLESv1_CM -lstdc++
 
 
-LOCAL_SRC_FILES :=		actor/prActor.cpp	\
+LOCAL_SRC_FILES :=	actor/prActor.cpp	\
 	actor/prActorManager.cpp	\
 	Box2D/Collision/b2BroadPhase.cpp	\
 	Box2D/Collision/b2CollideCircle.cpp	\
@@ -91,6 +91,7 @@ LOCAL_SRC_FILES :=		actor/prActor.cpp	\
 	Box2D/Dynamics/Joints/b2WeldJoint.cpp	\
 	Box2D/Dynamics/Joints/b2WheelJoint.cpp	\
 	Box2D/Rope/b2Rope.cpp	\
+	collision/prLine.cpp	\
 	core/prApplication.cpp	\
 	core/prApplication_Android.cpp	\
 	core/prApplication_Bada.cpp	\
@@ -99,6 +100,7 @@ LOCAL_SRC_FILES :=		actor/prActor.cpp	\
 	core/prApplication_PC.cpp	\
 	core/prArgs.cpp	\
 	core/prATB.cpp	\
+	core/prBitArray.cpp	\
 	core/prCore.cpp	\
 	core/prCoreSystem.cpp	\
 	core/prMessageManager.cpp	\
@@ -116,6 +118,7 @@ LOCAL_SRC_FILES :=		actor/prActor.cpp	\
 	core/prWindow_PC.cpp	\
 	debug/prAssert.cpp	\
 	debug/prAssert_Android.cpp	\
+	debug/prAssert_Linux.cpp	\
 	debug/prConsoleWindow.cpp	\
 	debug/prDebug.cpp	\
 	debug/prFps.cpp	\
@@ -124,7 +127,9 @@ LOCAL_SRC_FILES :=		actor/prActor.cpp	\
 	debug/prTrace.cpp	\
 	display/prBackground.cpp	\
 	display/prBackgroundManager.cpp	\
+	display/prBitmapFont.cpp	\
 	display/prCamera.cpp	\
+	display/prCameraManager.cpp	\
 	display/prColour.cpp	\
 	display/prFadeManager.cpp	\
 	display/prFixedWidthFont.cpp	\
@@ -148,6 +153,8 @@ LOCAL_SRC_FILES :=		actor/prActor.cpp	\
 	gui/prWidget.cpp	\
 	input/prMouse.cpp	\
 	input/prTouch.cpp	\
+	locale/prLanguage.cpp	\
+	locale/prLocales.cpp	\
 	math/prMathsUtil.cpp	\
 	math/prRect.cpp	\
 	math/prRectF.cpp	\
@@ -158,6 +165,7 @@ LOCAL_SRC_FILES :=		actor/prActor.cpp	\
 	tinyxml/tinyxml.cpp	\
 	tinyxml/tinyxmlerror.cpp	\
 	tinyxml/tinyxmlparser.cpp	\
+	utf8proc/utf8proc.cpp	\
 	libzip/mkstemp.c	\
 	libzip/zip_add.c	\
 	libzip/zip_add_dir.c	\
@@ -212,6 +220,7 @@ LOCAL_SRC_FILES :=		actor/prActor.cpp	\
 	libzip/zip_unchange_all.c	\
 	libzip/zip_unchange_archive.c	\
 	libzip/zip_unchange_data.c	\
+	linux/prLinux.c	\
 	lua/lapi.c	\
 	lua/lauxlib.c	\
 	lua/lbaselib.c	\

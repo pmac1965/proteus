@@ -127,7 +127,7 @@ namespace
     /// -----------------------------------------------------------------------
     /// Get the platforms default language.
     /// -----------------------------------------------------------------------
-    s32 GetPlatformsLanguage()
+    s32 prGetPlatformsLanguage()
     {
         return Proteus::Locale::EN_US;
     }
@@ -136,7 +136,16 @@ namespace
     /// -----------------------------------------------------------------------
     /// Get the platforms default language.
     /// -----------------------------------------------------------------------
-    s32 GetPlatformsLanguage()
+    s32 prGetPlatformsLanguage()
+    {
+        return Proteus::Locale::EN_US;
+    }
+
+#elif defined(PLATFORM_LINUX)
+    /// -----------------------------------------------------------------------
+    /// Get the platforms default language.
+    /// -----------------------------------------------------------------------
+    s32 prGetPlatformsLanguage()
     {
         return Proteus::Locale::EN_US;
     }
@@ -145,7 +154,7 @@ namespace
     /// -----------------------------------------------------------------------
     /// Get the platforms default language.
     /// -----------------------------------------------------------------------
-    s32 GetPlatformsLanguage()
+    s32 prGetPlatformsLanguage()
     {
         int lang;
 

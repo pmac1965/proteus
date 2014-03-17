@@ -49,6 +49,8 @@
 
 #include "../prConfig.h"
 #include "../debug/prAssert.h"
+#include "../core/prDefines.h"
+#include "../math/prMathsUtil.h"
 #include "prContainers.h"
 
 

@@ -319,7 +319,7 @@ void prList<T>::RemoveRange(int start, int end)
 
     if (start > end)
     {
-        PRSWAP(start, end);
+        prSwap(start, end);
     }
 
     int count = (end - start) + 1;
