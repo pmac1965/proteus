@@ -126,6 +126,8 @@
 #include "math/prVector2.h"
 #include "math/prVector3.h"
 #include "memory/prMemory.h"
+#include "thread/prMutex.h"
+#include "thread/prThread.h"
 #include "utf8proc/utf8proc.h"
 
 

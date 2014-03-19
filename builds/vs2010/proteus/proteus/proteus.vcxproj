@@ -339,8 +339,11 @@
     <ClInclude Include="..\..\..\..\source\math\prVector2.h" />
     <ClInclude Include="..\..\..\..\source\math\prVector3.h" />
     <ClInclude Include="..\..\..\..\source\memory\prMemory.h" />
+    <ClInclude Include="..\..\..\..\source\memory\prMemoryPool.h" />
     <ClInclude Include="..\..\..\..\source\prConfig.h" />
     <ClInclude Include="..\..\..\..\source\proteus.h" />
+    <ClInclude Include="..\..\..\..\source\thread\prMutex.h" />
+    <ClInclude Include="..\..\..\..\source\thread\prThread.h" />
     <ClInclude Include="..\..\..\..\source\tinyxml\tinystr.h" />
     <ClInclude Include="..\..\..\..\source\tinyxml\tinyxml.h" />
     <ClInclude Include="..\..\..\..\source\tool\AntTweakBar.h" />
@@ -839,6 +842,8 @@
     <ClCompile Include="..\..\..\..\source\math\prVector2.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prVector3.cpp" />
     <ClCompile Include="..\..\..\..\source\memory\prMemory.cpp" />
+    <ClCompile Include="..\..\..\..\source\thread\prMutex.cpp" />
+    <ClCompile Include="..\..\..\..\source\thread\prThread.cpp" />
     <ClCompile Include="..\..\..\..\source\tinyxml\tinystr.cpp" />
     <ClCompile Include="..\..\..\..\source\tinyxml\tinyxml.cpp" />
     <ClCompile Include="..\..\..\..\source\tinyxml\tinyxmlerror.cpp" />
