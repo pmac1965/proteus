@@ -270,7 +270,7 @@ private:
 
     // Friends
     friend class prSpriteManager;
-    //friend class prSpritePointerPool;
+    friend class prSpritePointerPool;
 
 
     // Ctor

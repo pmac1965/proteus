@@ -340,6 +340,10 @@
     <ClInclude Include="..\..\..\..\source\math\prVector3.h" />
     <ClInclude Include="..\..\..\..\source\memory\prMemory.h" />
     <ClInclude Include="..\..\..\..\source\memory\prMemoryPool.h" />
+    <ClInclude Include="..\..\..\..\source\memory\prSpritePointerPool.h" />
+    <ClInclude Include="..\..\..\..\source\particle\prEmitter.h" />
+    <ClInclude Include="..\..\..\..\source\particle\prParticle.h" />
+    <ClInclude Include="..\..\..\..\source\particle\prParticleManager.h" />
     <ClInclude Include="..\..\..\..\source\prConfig.h" />
     <ClInclude Include="..\..\..\..\source\proteus.h" />
     <ClInclude Include="..\..\..\..\source\thread\prMutex.h" />
@@ -842,6 +846,10 @@
     <ClCompile Include="..\..\..\..\source\math\prVector2.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prVector3.cpp" />
     <ClCompile Include="..\..\..\..\source\memory\prMemory.cpp" />
+    <ClCompile Include="..\..\..\..\source\memory\prSpritePointerPool.cpp" />
+    <ClCompile Include="..\..\..\..\source\particle\prEmitter.cpp" />
+    <ClCompile Include="..\..\..\..\source\particle\prParticle.cpp" />
+    <ClCompile Include="..\..\..\..\source\particle\prParticleManager.cpp" />
     <ClCompile Include="..\..\..\..\source\thread\prMutex.cpp" />
     <ClCompile Include="..\..\..\..\source\thread\prThread.cpp" />
     <ClCompile Include="..\..\..\..\source\tinyxml\tinystr.cpp" />

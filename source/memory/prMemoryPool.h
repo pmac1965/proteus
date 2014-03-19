@@ -45,7 +45,7 @@ public:
         Create(size);
     }
     
-    // Method: prMemoryPool
+    // Method: ~prMemoryPool
     //      Destructor.
     ~prMemoryPool()
     {
@@ -110,11 +110,11 @@ public:
     //      Returns the number of free objects in the pool.
     s32 GetFree() const { return m_index;}
 
-    // Method: GetFree
+    // Method: GetUsed
     //      Returns the number of used objects in the pool.
     s32 GetUsed() const { return m_size - m_index;}
 
-    // Method: GetFree
+    // Method: DisplayUsage
     //      Displays memory pool status information.
     void DisplayUsage() const
     {
