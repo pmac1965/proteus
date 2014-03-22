@@ -108,18 +108,82 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
             }
 
         #elif defined(PLATFORM_ANDROID)
+            // Check renderer type value.
             PRASSERT(rendererType == PRRENDERER_OPENGL);
             PRASSERT(version == PRGLVER_11 || version == PRGLVER_20);
 
+            // Check version numbers
+            if (rendererType == PRRENDERER_OPENGL)
+            {
+                PRASSERT(version == PRGLVER_11 || version == PRGLVER_20 || version == PRGLVER_30);
+                switch (version)
+                {
+                    case PRGLVER_11:
+                        systems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
+                        break;
+                    
+                    case PRGLVER_20:
+                        PRPANIC("Under construction");
+                        break;
+                    
+                    case PRGLVER_30:
+                        PRPANIC("Under construction");
+                        break;
+                }
+            }
+        
         #elif defined(PLATFORM_IOS)
+            // Check renderer type value.
             PRASSERT(rendererType == PRRENDERER_OPENGL);
             PRASSERT(version == PRGLVER_11 || version == PRGLVER_20);
+
+            // Check version numbers
+            if (rendererType == PRRENDERER_OPENGL)
+            {
+                PRASSERT(version == PRGLVER_11 || version == PRGLVER_20 || version == PRGLVER_30);
+                switch (version)
+                {
+                    case PRGLVER_11:
+                        systems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
+                        break;
+                    
+                    case PRGLVER_20:
+                        PRPANIC("Under construction");
+                        break;
+                    
+                    case PRGLVER_30:
+                        PRPANIC("Under construction");
+                        break;
+                }
+            }
 
         #elif defined(PLATFORM_BADA)
+            // Check renderer type value.
             PRASSERT(rendererType == PRRENDERER_OPENGL);
             PRASSERT(version == PRGLVER_11 || version == PRGLVER_20);
 
+            // Check version numbers
+            if (rendererType == PRRENDERER_OPENGL)
+            {
+                PRASSERT(version == PRGLVER_11 || version == PRGLVER_20 || version == PRGLVER_30);
+                switch (version)
+                {
+                    case PRGLVER_11:
+                        systems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
+                        break;
+                    
+                    case PRGLVER_20:
+                        PRPANIC("Under construction");
+                        break;
+                    
+                    case PRGLVER_30:
+                        PRPANIC("Under construction");
+                        break;
+                }
+            }
+
         #elif defined(PLATFORM_LINUX)
+            // Check renderer type value.
             PRASSERT(rendererType == PRRENDERER_OPENGL);
             PRASSERT(version == PRGLVER_11 || version == PRGLVER_20 || version == PRGLVER_30);
 

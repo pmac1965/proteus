@@ -1,4 +1,4 @@
-// File: prWindow_Android.h
+// File: prWindow_Ios.h
 /*
     Copyright 2014 Paul Michael McNab
 
@@ -16,34 +16,33 @@
 */
 
 
-#ifndef __PRWINDOW_ANDROID_H
-#define __PRWINDOW_ANDROID_H
+#ifndef __PRWINDOW_IOS_H
+#define __PRWINDOW_IOS_H
 
 
 #include "../prConfig.h"
 
 
-#if defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_IOS)
 
 
-#include <GLES/gl.h>
-//#include <GLES/glu.h>
+#include <OpenGLES/ES1/gl.h>
 #include "prTypes.h"
 #include "prWindow.h"
 
 
-// Class: prWindow_Android
-//      Window class for android.
-class prWindow_Android : public prWindow
+// Class: prWindow_Ios
+//      Window class for ios.
+class prWindow_Ios : public prWindow
 {
 public:
-    // Method: prWindow_Android
+    // Method: prWindow_Ios
     //      Ctor    
-    prWindow_Android();
+    prWindow_Ios();
 
-    // Method: ~prWindow_Android
+    // Method: ~prWindow_Ios
     //      Dtor    
-    ~prWindow_Android();
+    ~prWindow_Ios();
 
     // Method: Create
     //      Creates the application window.
@@ -88,8 +87,8 @@ private:
 };
 
 
-#endif//PLATFORM_ANDROID
+#endif//PLATFORM_IOS
 
 
-#endif//__PRWINDOW_ANDROID_H
+#endif//__PRWINDOW_IOS_H
 

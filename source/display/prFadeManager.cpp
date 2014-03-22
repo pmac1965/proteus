@@ -29,6 +29,7 @@
 
 #elif defined(PLATFORM_IOS)
     #include <OpenGLES/ES1/gl.h>
+    #include <cstdlib>
 
 #elif defined(PLATFORM_BADA)
     #include <FGraphicsOpengl.h>

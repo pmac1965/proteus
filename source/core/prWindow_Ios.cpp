@@ -1,5 +1,5 @@
 /**
- * prWindow_Android.cpp
+ * prWindow_Ios.cpp
  *
  *  Copyright 2014 Paul Michael McNab
  *
@@ -21,10 +21,10 @@
 #include "../prConfig.h"
 
 
-#if defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_IOS)
 
 
-#include "prWindow_Android.h"
+#include "prWindow_Ios.h"
 #include "../debug/prTrace.h"
 #include "../debug/prAssert.h"
 #include "../debug/prDebug.h"
@@ -39,7 +39,7 @@
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
-prWindow_Android::prWindow_Android() : prWindow()
+prWindow_Ios::prWindow_Ios() : prWindow()
 {
 }
 
@@ -47,7 +47,7 @@ prWindow_Android::prWindow_Android() : prWindow()
 /// ---------------------------------------------------------------------------
 /// Dtor
 /// ---------------------------------------------------------------------------
-prWindow_Android::~prWindow_Android()
+prWindow_Ios::~prWindow_Ios()
 {
     Destroy();
 }
@@ -56,7 +56,7 @@ prWindow_Android::~prWindow_Android()
 /// ---------------------------------------------------------------------------
 /// Creates the application window.
 /// ---------------------------------------------------------------------------
-bool prWindow_Android::Create(u32 width, u32 height, u32 bits, bool fullScreen)
+bool prWindow_Ios::Create(u32 width, u32 height, u32 bits, bool fullScreen)
 {
     // Ensure the previous window is destroyed.
     Destroy();
@@ -83,7 +83,7 @@ bool prWindow_Android::Create(u32 width, u32 height, u32 bits, bool fullScreen)
 /// ---------------------------------------------------------------------------
 /// Destroys the PC application window.
 /// ------------------------------ ---------------------------------------------
-void prWindow_Android::Destroy()
+void prWindow_Ios::Destroy()
 {
 }
 
@@ -91,7 +91,7 @@ void prWindow_Android::Destroy()
 /// ---------------------------------------------------------------------------
 /// Resizes the window
 /// ---------------------------------------------------------------------------
-void prWindow_Android::Resize(u32 width, u32 height)
+void prWindow_Ios::Resize(u32 width, u32 height)
 {
     // Prevent possible divide by zero.
     if (height == 0)
@@ -125,7 +125,7 @@ void prWindow_Android::Resize(u32 width, u32 height)
 /// ---------------------------------------------------------------------------
 /// Sets the windows title.
 /// ---------------------------------------------------------------------------
-void prWindow_Android::SetTitle(const char *title)
+void prWindow_Ios::SetTitle(const char *title)
 {
     if (title && *title)
     {

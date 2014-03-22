@@ -244,6 +244,7 @@
     <ClInclude Include="..\..\..\..\source\core\prWindowProcedure.h" />
     <ClInclude Include="..\..\..\..\source\core\prWindow_Android.h" />
     <ClInclude Include="..\..\..\..\source\core\prWindow_Bada.h" />
+    <ClInclude Include="..\..\..\..\source\core\prWindow_Ios.h" />
     <ClInclude Include="..\..\..\..\source\core\prWindow_Linux.h" />
     <ClInclude Include="..\..\..\..\source\core\prWindow_PC.h" />
     <ClInclude Include="..\..\..\..\source\debug\prAssert.h" />
@@ -265,6 +266,7 @@
     <ClInclude Include="..\..\..\..\source\display\prGLFont.h" />
     <ClInclude Include="..\..\..\..\source\display\prLookAt.h" />
     <ClInclude Include="..\..\..\..\source\display\prOglUtils.h" />
+    <ClInclude Include="..\..\..\..\source\display\prPerspective.h" />
     <ClInclude Include="..\..\..\..\source\display\prPvr.h" />
     <ClInclude Include="..\..\..\..\source\display\prRenderer.h" />
     <ClInclude Include="..\..\..\..\source\display\prRenderer_DX9.h" />
@@ -286,6 +288,7 @@
     <ClInclude Include="..\..\..\..\source\input\prMouse.h" />
     <ClInclude Include="..\..\..\..\source\input\prTouch.h" />
     <ClInclude Include="..\..\..\..\source\input\prTouchListener.h" />
+    <ClInclude Include="..\..\..\..\source\ios\prIos.h" />
     <ClInclude Include="..\..\..\..\source\libzip\config.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -442,10 +445,12 @@
     <ClCompile Include="..\..\..\..\source\core\prWindowProcedure.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prWindow_Android.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prWindow_Bada.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prWindow_Ios.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prWindow_Linux.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prWindow_PC.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prAssert.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prAssert_Android.cpp" />
+    <ClCompile Include="..\..\..\..\source\debug\prAssert_Ios.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prAssert_Linux.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prConsoleWindow.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prDebug.cpp" />
@@ -464,6 +469,7 @@
     <ClCompile Include="..\..\..\..\source\display\prGLFont.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prLookAt.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prOglUtils.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prPerspective.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer_DX9.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer_GL11.cpp" />
@@ -871,6 +877,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\source\core\prList.inl" />
+    <None Include="..\..\..\..\source\ios\prIos.mm" />
     <None Include="..\..\..\..\source\license.txt" />
     <None Include="..\..\..\..\source\math\prVector2.inl" />
     <None Include="..\..\..\..\source\math\prVector3.inl" />

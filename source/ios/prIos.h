@@ -1,4 +1,4 @@
-// File: prParticle.h
+// File: prIos.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,24 +16,28 @@
  */
 
 
-#ifndef __PRPARTICLE_H
-#define __PRPARTICLE_H
+#if defined(__APPLE_CC__)
 
 
-//#include "../math/prVector2.h"
+#include <OpenAL/al.h>
+#include <OpenAL/alc.h>
+#include <AudioToolbox/AudioToolbox.h>
+#include <AudioToolbox/ExtendedAudioFile.h>
+#include <AudioToolbox/AudioServices.h>
 
 
-class prParticle
-{
-public:
-    // Method: prParticle
-    //      Constructor.
-    prParticle();
+// Function: prGetAppDataPath
+//      Gets the applications data directory.
+const char *prGetAppDataPath();
 
-    // Method: ~prParticle
-    //      Destructor.
-    ~prParticle();
-};
+// Function: prGetDocumentsPath
+//      Gets the applications documents path.
+void prGetDocumentsPath(char *buffer);
+
+// Function: prLoadAudioFile
+//      Loads an audio file.
+void *prLoadAudioFile(const char *filename, ALsizei *size, ALsizei *freq, ALenum *format);
 
 
-#endif//__PRPARTICLE_H
+#endif//__APPLE_CC__
+

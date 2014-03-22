@@ -30,11 +30,11 @@ class prParticleManager
 public:
     // Method: prParticleManager
     //      Constructor.
-    prParticleManager::prParticleManager();
+    prParticleManager();
 
     // Method: ~prParticleManager
     //      Destructor.
-    prParticleManager::~prParticleManager();
+    ~prParticleManager();
 };
 
 

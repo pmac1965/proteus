@@ -135,6 +135,7 @@ LOCAL_SRC_FILES :=	actor/prActor.cpp	\
 	display/prFixedWidthFont.cpp	\
 	display/prGLFont.cpp	\
 	display/prLookAt.cpp	\
+	display/prPerspective.cpp	\
 	display/prOglUtils.cpp	\
 	display/prRenderer.cpp	\
 	display/prRenderer_DX9.cpp	\

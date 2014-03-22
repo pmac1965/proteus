@@ -39,7 +39,7 @@
 
 #elif defined(PLATFORM_IOS)  
   #include <stdlib.h>
-  #include "../iphone/iphone.h"
+  #include "../ios/prIos.h"
 
 #elif defined(PLATFORM_BADA)
   #include <stdlib.h>
@@ -231,7 +231,7 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
     // IOS
     #if defined(PLATFORM_IOS)    
         // Copy the app path.
-        strcpy(imp.dataPath, GetAppDataPath());
+        strcpy(dataPath, prGetAppDataPath());
 
     // PC
     #elif defined(PLATFORM_PC)    
@@ -488,23 +488,23 @@ const char *prFileManager::GetSystemPath(const char *filename)
         #elif defined(PLATFORM_IOS)
             // Make filename for current system.
             // For iphone its the data path + '/' + filename (path data needs to be stripped)
-            strcpy(imp.path, imp.dataPath);
-            strcat(imp.path, "/");            
+            strcpy(path, dataPath);
+            strcat(path, "/");
 
             // Remove the passed filename path data.
             char path[FILE_MAX_FILENAME_SIZE];
             strcpy(path, filename);
 
-            StringReplaceChar(path, '\\', '/');
+            prStringReplaceChar(path, '\\', '/');
 
-            int index = StringFindLastIndex(path, '/');
+            int index = prStringFindLastIndex(path, '/');
             if (index > -1)
             {
-                strcat(imp.path, &path[index + 1]);
+                strcat(path, &path[index + 1]);
             }
             else
             {
-                strcat(imp.path, path);
+                strcat(path, path);
             }
 
         #elif defined(PLATFORM_BADA)

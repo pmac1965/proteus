@@ -26,7 +26,6 @@
  
 #include "prApplication_Linux.h"
 #include "prWindow_Linux.h"
-#include "prWindowProcedure.h"
 #include "prCore.h"
 #include "prRegistry.h"
 #include "prVersion.h"
@@ -271,4 +270,4 @@ const char *prApplication_Linux::BuildType()
 }
 
 
-#endif//PLATFORM_PC
+#endif//PLATFORM_LINUX

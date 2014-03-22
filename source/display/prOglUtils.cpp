@@ -30,6 +30,7 @@
 
 #elif defined(PLATFORM_IOS)
   #include <OpenGLES/ES1/gl.h>  
+  #include <cstdlib>
   #include <stdio.h>
 
 #elif defined(PLATFORM_BADA)

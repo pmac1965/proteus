@@ -80,7 +80,6 @@ public:
 private:
 
     const char *BuildType();
-
 };
 
 

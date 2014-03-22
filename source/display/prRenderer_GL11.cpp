@@ -44,6 +44,9 @@
   #include <FGraphicsOpengl.h>
   using namespace Osp::Graphics::Opengl;
 
+#elif defined(PLATFORM_IOS)
+  #include <OpenGLES/ES1/gl.h>
+
 #else
   #error No platform defined.
 
@@ -133,7 +136,7 @@ void prRenderer_GL11::Init()
     ERR_CHECK();
     
     // Depth buffer
-#if defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS)
     glClearDepthf(1.0f);                                // Depth buffer setup
     ERR_CHECK();
 #else
@@ -249,7 +252,7 @@ void prRenderer_GL11::SetOrthographicView()
         glLoadIdentity();
         ERR_CHECK();
         
-#if defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS)
         glOrthof(0, m_pWindow->GetWidth(), m_pWindow->GetHeight(), 0, 0, 1);
         ERR_CHECK();
 #else
