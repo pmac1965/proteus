@@ -962,18 +962,20 @@ bool TiXmlDocument::SaveFile() const
 	return SaveFile( Value() );
 }
 
-bool TiXmlDocument::LoadFile( const char* _filename, TiXmlEncoding encoding )
+bool TiXmlDocument::LoadFile( const char* _filename, TiXmlEncoding encoding ) // PMAC: Changed to allow for cross platform/archive support
 {
 	TIXML_STRING filename( _filename );
 	value = filename;
 
 	// reading in binary mode so that tinyxml can normalize the EOL
-	FILE* file = TiXmlFOpen( value.c_str (), "rb" );	
-
+	prFile* file = new prFile(value.c_str ());
 	if ( file )
 	{
-		bool result = LoadFile( file, encoding );
-		fclose( file );
+        file->Open();
+		bool result = LoadFile( file, encoding );		
+        file->Close();
+        delete file;
+
 		return result;
 	}
 	else
@@ -983,7 +985,7 @@ bool TiXmlDocument::LoadFile( const char* _filename, TiXmlEncoding encoding )
 	}
 }
 
-bool TiXmlDocument::LoadFile( FILE* file, TiXmlEncoding encoding )
+bool TiXmlDocument::LoadFile( prFile* file, TiXmlEncoding encoding ) // PMAC: Changed to allow for cross platform/archive support
 {
 	if ( !file ) 
 	{
@@ -996,10 +998,7 @@ bool TiXmlDocument::LoadFile( FILE* file, TiXmlEncoding encoding )
 	location.Clear();
 
 	// Get the file size, so we can pre-allocate the string. HUGE speed impact.
-	long length = 0;
-	fseek( file, 0, SEEK_END );
-	length = ftell( file );
-	fseek( file, 0, SEEK_SET );
+	long length = file->Size();
 
 	// Strange case, but good to handle up front.
 	if ( length <= 0 )
@@ -1032,7 +1031,7 @@ bool TiXmlDocument::LoadFile( FILE* file, TiXmlEncoding encoding )
 	char* buf = new char[ length+1 ];
 	buf[0] = 0;
 
-	if ( fread( buf, length, 1, file ) != 1 ) {
+    if (file->Read(buf, length) != length) {
 		delete [] buf;
 		SetError( TIXML_ERROR_OPENING_FILE, 0, 0, TIXML_ENCODING_UNKNOWN );
 		return false;

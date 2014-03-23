@@ -39,6 +39,7 @@
 #include "../debug/prTrace.h"
 #include "../debug/prFps_PC.h"
 #include "../audio/prSoundManager_PC.h"
+#include "../audio/prSoundManager_Ios.h"
 #include "../input/prTouch.h"
 
 
@@ -288,7 +289,7 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 #elif defined(PLATFORM_ANDROID)
                     systems[id] = NULL;
                 #elif defined(PLATFORM_IOS)
-                    systems[id] = NULL;
+                    systems[id] = new prSoundManager_Ios();
                 #elif defined(PLATFORM_LINUX)
                     systems[id] = NULL;
                 #elif defined(PLATFORM_BADA)

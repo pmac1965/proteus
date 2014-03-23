@@ -38,6 +38,8 @@ distribution.
 #include <string.h>
 #include <assert.h>
 
+#include "../file/prFile.h" // PMAC: For cross platform/archive access
+
 // Help out windows:
 #if defined( _DEBUG ) && !defined( DEBUG )
 #define DEBUG
@@ -1424,7 +1426,8 @@ public:
 		will be interpreted as an XML file. TinyXML doesn't stream in XML from the current
 		file location. Streaming may be added in the future.
 	*/
-	bool LoadFile( FILE*, TiXmlEncoding encoding = TIXML_DEFAULT_ENCODING );
+	//bool LoadFile( FILE*, TiXmlEncoding encoding = TIXML_DEFAULT_ENCODING ); // PMAC: Changed to allow for cross platform/archive support
+	bool LoadFile( prFile*, TiXmlEncoding encoding = TIXML_DEFAULT_ENCODING );
 	/// Save a file using the given FILE*. Returns true if successful.
 	bool SaveFile( FILE* ) const;
 

@@ -163,11 +163,7 @@ prFile::prFile(const char *filename) : pImpl (new FileImplementation())
     {
         // Creates two file names. One for the disk, one for the archive.
         prStringCopySafe(imp.filenameArch, filename + 5, FILE_MAX_FILENAME_SIZE);
-        //StringCopySafe(imp.filenameDisk, FileManager::GetInstance()->GetSystemPath(filename), FILE_MAX_FILENAME_SIZE);
-
         prStringCopySafe(imp.filenameDisk, pFM->GetSystemPath(filename), FILE_MAX_FILENAME_SIZE);
-
-        //TODO("Fix")
 
         // Must be lowercase
         prStringToLower(imp.filenameArch);
@@ -175,6 +171,9 @@ prFile::prFile(const char *filename) : pImpl (new FileImplementation())
         // And use forward slashes
         prStringReplaceChar(imp.filenameArch, '\\', '/');
         prStringReplaceChar(imp.filenameDisk, '\\', '/');
+        
+        //prTrace("ARC: %s\n", imp.filenameArch);
+        //prTrace("DSK: %s\n", imp.filenameDisk);
     }
     else
     {

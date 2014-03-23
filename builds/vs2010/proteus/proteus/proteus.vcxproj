@@ -162,6 +162,7 @@
     <ClInclude Include="..\..\..\..\source\audio\prOpenALErrors.h" />
     <ClInclude Include="..\..\..\..\source\audio\prSoundManager.h" />
     <ClInclude Include="..\..\..\..\source\audio\prSoundManagerShared.h" />
+    <ClInclude Include="..\..\..\..\source\audio\prSoundManager_Ios.h" />
     <ClInclude Include="..\..\..\..\source\audio\prSoundManager_PC.h" />
     <ClInclude Include="..\..\..\..\source\audio\prWaves.h" />
     <ClInclude Include="..\..\..\..\source\Box2D\Box2D.h" />
@@ -289,6 +290,7 @@
     <ClInclude Include="..\..\..\..\source\input\prTouch.h" />
     <ClInclude Include="..\..\..\..\source\input\prTouchListener.h" />
     <ClInclude Include="..\..\..\..\source\ios\prIos.h" />
+    <ClInclude Include="..\..\..\..\source\ios\prIosAudio.h" />
     <ClInclude Include="..\..\..\..\source\libzip\config.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -374,6 +376,7 @@
     <ClCompile Include="..\..\..\..\source\audio\prOpenALErrors.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prSoundManager.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prSoundManagerShared.cpp" />
+    <ClCompile Include="..\..\..\..\source\audio\prSoundManager_Ios.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prSoundManager_PC.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prWaves.cpp" />
     <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2BroadPhase.cpp" />
@@ -878,6 +881,7 @@
   <ItemGroup>
     <None Include="..\..\..\..\source\core\prList.inl" />
     <None Include="..\..\..\..\source\ios\prIos.mm" />
+    <None Include="..\..\..\..\source\ios\prIosAudio.mm" />
     <None Include="..\..\..\..\source\license.txt" />
     <None Include="..\..\..\..\source\math\prVector2.inl" />
     <None Include="..\..\..\..\source\math\prVector3.inl" />

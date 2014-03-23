@@ -273,7 +273,7 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
 
 
     prStringReplaceChar(dataPath, '\\', '/');
-    prTrace("App data path: %s\n", dataPath);
+    //prTrace("App data path: %s\n", dataPath);
 }
 
 
@@ -492,19 +492,18 @@ const char *prFileManager::GetSystemPath(const char *filename)
             strcat(path, "/");
 
             // Remove the passed filename path data.
-            char path[FILE_MAX_FILENAME_SIZE];
-            strcpy(path, filename);
+            char tempPath[FILE_MAX_FILENAME_SIZE];
+            strcpy(tempPath, filename);
 
-            prStringReplaceChar(path, '\\', '/');
-
-            int index = prStringFindLastIndex(path, '/');
+            prStringReplaceChar(tempPath, '\\', '/');
+            int index = prStringFindLastIndex(tempPath, '/');
             if (index > -1)
             {
-                strcat(path, &path[index + 1]);
+                strcat(path, &tempPath[index + 1]);
             }
             else
             {
-                strcat(path, path);
+                strcat(path, tempPath);
             }
 
         #elif defined(PLATFORM_BADA)

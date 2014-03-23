@@ -190,7 +190,7 @@ PRBOOL prApplication_Ios::DisplayCreate(u32 width, u32 height, const char *pWind
 /// ---------------------------------------------------------------------------
 PRBOOL prApplication_Ios::Run()
 {
-      while (1)
+      //while (1)
       {
           //prLinuxLoop();
 
@@ -227,30 +227,6 @@ PRBOOL prApplication_Ios::Run()
           //Sleep(1);
 
 //          if (pFps)   { pFps->End(); }
-
-/*      if (recalcModelView)
-        {
-          glMatrixMode(GL_MODELVIEW);
-
-          // reset modelview matrix to the identity matrix
-          glLoadIdentity();
-
-          // move the camera back three units
-          glTranslatef(0.0, 0.0, -3.0);
-
-          // rotate by X, Y, and Z angles
-          glRotatef(xAngle, 0.1, 0.0, 0.0);
-          glRotatef(yAngle, 0.0, 0.1, 0.0);
-          glRotatef(zAngle, 0.0, 0.0, 1.0);
-
-          recalcModelView = GL_FALSE;
-          needRedraw = GL_TRUE;
-        }
-        if (needRedraw)
-        {
-          redraw();
-          needRedraw = GL_FALSE;
-        }//*/
       }
 
     return PRFALSE;
