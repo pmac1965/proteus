@@ -33,7 +33,6 @@
 #include "../core/prCore.h"
 #include "../core/prRegistry.h"
 #include "../core/prStringUtil.h"
-//#include "../linux/prLinux.h"
 
 
 /// ---------------------------------------------------------------------------
@@ -41,6 +40,7 @@
 /// ---------------------------------------------------------------------------
 prWindow_Android::prWindow_Android() : prWindow()
 {
+    m_title = NULL;
 }
 
 

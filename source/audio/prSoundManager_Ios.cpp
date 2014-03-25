@@ -72,6 +72,8 @@ prSoundManager_Ios::prSoundManager_Ios()
     active                  = 0;
     effectId                = 1;
     songCurr                = -1;
+    device                  = NULL;
+    context                 = NULL;
 
     // Set default states
     for (s32 i=0; i<AUDIO_MAX_ACTIVE; i++)
