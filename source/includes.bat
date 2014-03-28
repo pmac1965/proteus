@@ -49,6 +49,14 @@ pushd memory
 dir /S /B *.h >> ..\files.txt
 popd
 
+pushd persistance
+dir /S /B *.h >> ..\files.txt
+popd
+
+pushd thread
+dir /S /B *.h >> ..\files.txt
+popd
+
 pushd utf8proc
 dir /S /B *.h >> ..\files.txt
 popd
