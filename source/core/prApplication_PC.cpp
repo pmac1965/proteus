@@ -128,6 +128,7 @@ prApplication_PC::prApplication_PC() : prApplication()
 
     // Give the window procedure a pointer to the application.
     prSetApplicationForWindowProcedure(this);
+    prTraceLogClear();
 }
 
 

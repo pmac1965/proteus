@@ -29,6 +29,7 @@
 #include "../core/prCoreSystem.h"
 #include "../core/prRegistry.h"
 #include "../core/prStringUtil.h"
+#include "../file/prFileSystem.h"
 
 
 // ----------------------------------------------------------------------------
@@ -173,12 +174,13 @@ void prTraceRemoveDuplicates(bool state)
 void prTraceLogClear()
 {
 #if defined(PLATFORM_PC)
-    TODO("Re-add")
-    //if (FileExist(TRACE_LOG_NAME))
-    //{
-    //    FileRemoveReadOnly(TRACE_LOG_NAME);
-    //    FileDelete(TRACE_LOG_NAME);
-    //}
+    
+    if (prFileExist(TRACE_LOG_NAME))
+    {
+        prFileRemoveReadOnly(TRACE_LOG_NAME);
+        prFileDelete(TRACE_LOG_NAME);
+    }
+
 #endif
 }
 

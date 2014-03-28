@@ -21,7 +21,7 @@
 
 // Audio platform
 #define AUDIO_PC        1
-#define AUDIO_IPHONE    2
+#define AUDIO_IOS       2
 #define AUDIO_BADA      3
 #define AUDIO_ANDROID   4
 #define AUDIO_MAC       5
@@ -36,7 +36,7 @@
 // Else, Is it the iphone?
 #elif defined(__APPLE_CC__)
     #define PLATFORM_IOS
-    #define AUDIO_TYPE  AUDIO_IPHONE
+    #define AUDIO_TYPE  AUDIO_IOS
 
 // Or, Is it the bada? Android?
 #elif defined(__GNUC__)

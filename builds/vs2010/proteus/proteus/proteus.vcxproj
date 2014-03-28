@@ -282,6 +282,7 @@
     <ClInclude Include="..\..\..\..\source\file\prFile.h" />
     <ClInclude Include="..\..\..\..\source\file\prFileManager.h" />
     <ClInclude Include="..\..\..\..\source\file\prFileShared.h" />
+    <ClInclude Include="..\..\..\..\source\file\prFileSystem.h" />
     <ClInclude Include="..\..\..\..\source\gui\prButton.h" />
     <ClInclude Include="..\..\..\..\source\gui\prButtonListener.h" />
     <ClInclude Include="..\..\..\..\source\gui\prGui.h" />
@@ -349,6 +350,13 @@
     <ClInclude Include="..\..\..\..\source\particle\prEmitter.h" />
     <ClInclude Include="..\..\..\..\source\particle\prParticle.h" />
     <ClInclude Include="..\..\..\..\source\particle\prParticleManager.h" />
+    <ClInclude Include="..\..\..\..\source\persistence\prEncryption.h" />
+    <ClInclude Include="..\..\..\..\source\persistence\prSave.h" />
+    <ClInclude Include="..\..\..\..\source\persistence\prSaveBase.h" />
+    <ClInclude Include="..\..\..\..\source\persistence\prSave_android.h" />
+    <ClInclude Include="..\..\..\..\source\persistence\prSave_bada.h" />
+    <ClInclude Include="..\..\..\..\source\persistence\prSave_ios.h" />
+    <ClInclude Include="..\..\..\..\source\persistence\prSave_pc.h" />
     <ClInclude Include="..\..\..\..\source\prConfig.h" />
     <ClInclude Include="..\..\..\..\source\proteus.h" />
     <ClInclude Include="..\..\..\..\source\thread\prMutex.h" />
@@ -358,6 +366,7 @@
     <ClInclude Include="..\..\..\..\source\tool\AntTweakBar.h" />
     <ClInclude Include="..\..\..\..\source\utf8proc\utf8proc.h" />
     <ClInclude Include="..\..\..\..\source\utf8proc\utf8proc_data.h" />
+    <ClInclude Include="..\..\..\..\source\util\prFill.h" />
     <ClInclude Include="..\..\..\..\source\zlib\crc32.h" />
     <ClInclude Include="..\..\..\..\source\zlib\deflate.h" />
     <ClInclude Include="..\..\..\..\source\zlib\inffast.h" />
@@ -485,6 +494,7 @@
     <ClCompile Include="..\..\..\..\source\file\prFile.cpp" />
     <ClCompile Include="..\..\..\..\source\file\prFileManager.cpp" />
     <ClCompile Include="..\..\..\..\source\file\prFileShared.cpp" />
+    <ClCompile Include="..\..\..\..\source\file\prFileSystem.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prButton.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prGui.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prWidget.cpp" />
@@ -859,6 +869,13 @@
     <ClCompile Include="..\..\..\..\source\particle\prEmitter.cpp" />
     <ClCompile Include="..\..\..\..\source\particle\prParticle.cpp" />
     <ClCompile Include="..\..\..\..\source\particle\prParticleManager.cpp" />
+    <ClCompile Include="..\..\..\..\source\persistence\prEncryption.cpp" />
+    <ClCompile Include="..\..\..\..\source\persistence\prSave.cpp" />
+    <ClCompile Include="..\..\..\..\source\persistence\prSaveBase.cpp" />
+    <ClCompile Include="..\..\..\..\source\persistence\prSave_android.cpp" />
+    <ClCompile Include="..\..\..\..\source\persistence\prSave_bada.cpp" />
+    <ClCompile Include="..\..\..\..\source\persistence\prSave_ios.cpp" />
+    <ClCompile Include="..\..\..\..\source\persistence\prSave_pc.cpp" />
     <ClCompile Include="..\..\..\..\source\thread\prMutex.cpp" />
     <ClCompile Include="..\..\..\..\source\thread\prThread.cpp" />
     <ClCompile Include="..\..\..\..\source\tinyxml\tinystr.cpp" />
@@ -866,6 +883,7 @@
     <ClCompile Include="..\..\..\..\source\tinyxml\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\..\..\source\tinyxml\tinyxmlparser.cpp" />
     <ClCompile Include="..\..\..\..\source\utf8proc\utf8proc.cpp" />
+    <ClCompile Include="..\..\..\..\source\util\prFill.cpp" />
     <ClCompile Include="..\..\..\..\source\zlib\adler32.c" />
     <ClCompile Include="..\..\..\..\source\zlib\compress.c" />
     <ClCompile Include="..\..\..\..\source\zlib\crc32.c" />
