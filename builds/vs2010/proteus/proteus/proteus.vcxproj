@@ -369,6 +369,7 @@
     <ClInclude Include="..\..\..\..\source\memory\prMemory.h" />
     <ClInclude Include="..\..\..\..\source\memory\prMemoryPool.h" />
     <ClInclude Include="..\..\..\..\source\memory\prSpritePointerPool.h" />
+    <ClInclude Include="..\..\..\..\source\online\prWeb.h" />
     <ClInclude Include="..\..\..\..\source\particle\prEmitter.h" />
     <ClInclude Include="..\..\..\..\source\particle\prParticle.h" />
     <ClInclude Include="..\..\..\..\source\particle\prParticleManager.h" />
@@ -908,6 +909,10 @@
     <ClCompile Include="..\..\..\..\source\math\prVector3.cpp" />
     <ClCompile Include="..\..\..\..\source\memory\prMemory.cpp" />
     <ClCompile Include="..\..\..\..\source\memory\prSpritePointerPool.cpp" />
+    <ClCompile Include="..\..\..\..\source\online\prWeb_android.cpp" />
+    <ClCompile Include="..\..\..\..\source\online\prWeb_bada.cpp" />
+    <ClCompile Include="..\..\..\..\source\online\prWeb_ios.cpp" />
+    <ClCompile Include="..\..\..\..\source\online\prWeb_pc.cpp" />
     <ClCompile Include="..\..\..\..\source\particle\prEmitter.cpp" />
     <ClCompile Include="..\..\..\..\source\particle\prParticle.cpp" />
     <ClCompile Include="..\..\..\..\source\particle\prParticleManager.cpp" />

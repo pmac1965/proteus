@@ -6,19 +6,19 @@ dir /S /B *.h > ..\files.txt
 popd
 
 pushd actor
-dir /S /B *.h > ..\files.txt
+dir /S /B *.h >> ..\files.txt
 popd
 
 pushd adverts
-dir /S /B *.h > ..\files.txt
+dir /S /B *.h >> ..\files.txt
 popd
 
 pushd analytics
-dir /S /B *.h > ..\files.txt
+dir /S /B *.h >> ..\files.txt
 popd
 
 pushd android
-dir /S /B *.h > ..\files.txt
+dir /S /B *.h >> ..\files.txt
 popd
 
 pushd audio
@@ -74,6 +74,10 @@ dir /S /B *.h >> ..\files.txt
 popd
 
 pushd memory
+dir /S /B *.h >> ..\files.txt
+popd
+
+pushd online
 dir /S /B *.h >> ..\files.txt
 popd
 

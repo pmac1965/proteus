@@ -39,7 +39,14 @@ REM Delete files which you aren't needed
 REM --------------------------------------
     del %PROTEUS_ENGINE_DIR%\include\proteus\display\prSplash.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prDebugFont.h
+    
     del %PROTEUS_ENGINE_DIR%\include\proteus\utf8proc\utf8proc_data.h
+
+    del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_android.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_bada.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_base.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_ios.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_pc.h
 
     rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\libzip
     REM rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\audio\external
