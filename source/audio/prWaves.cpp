@@ -22,7 +22,7 @@
 #include "../prConfig.h"
 
 
-#if defined(PLATFORM_PC) || defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_PC) //|| defined(PLATFORM_ANDROID)
 
 #if defined(PLATFORM_PC)
   #include <windows.h>
@@ -31,10 +31,10 @@
   #include <ks.h>
   #include <ksmedia.h>
 
-#elif defined(PLATFORM_ANDROID)
-  #include "../android/AL/al.h"
-  #include "../android/AL/alc.h"
-  #include "prOpenALErrors.h"
+//#elif defined(PLATFORM_ANDROID)
+//  //#include "../android/AL/al.h"
+//  //#include "../android/AL/alc.h"
+//  #include "prOpenALErrors.h"
 
 #else
     #error Unsupported platform

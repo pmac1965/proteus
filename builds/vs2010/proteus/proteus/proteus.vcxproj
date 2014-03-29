@@ -176,6 +176,7 @@
     <ClInclude Include="..\..\..\..\source\audio\prOpenALErrors.h" />
     <ClInclude Include="..\..\..\..\source\audio\prSoundManager.h" />
     <ClInclude Include="..\..\..\..\source\audio\prSoundManagerShared.h" />
+    <ClInclude Include="..\..\..\..\source\audio\prSoundManager_Android.h" />
     <ClInclude Include="..\..\..\..\source\audio\prSoundManager_Ios.h" />
     <ClInclude Include="..\..\..\..\source\audio\prSoundManager_PC.h" />
     <ClInclude Include="..\..\..\..\source\audio\prWaves.h" />
@@ -421,6 +422,7 @@
     <ClCompile Include="..\..\..\..\source\audio\prOpenALErrors.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prSoundManager.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prSoundManagerShared.cpp" />
+    <ClCompile Include="..\..\..\..\source\audio\prSoundManager_Android.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prSoundManager_Ios.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prSoundManager_PC.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prWaves.cpp" />

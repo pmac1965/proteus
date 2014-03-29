@@ -58,6 +58,14 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	analytics/prAnalytics.cpp	\
 	analytics/prAnalyticsBase.cpp	\
 	analytics/prAnalyticsFlurry.cpp	\
+	audio/prOpenALDeviceList.cpp	\
+	audio/prOpenALErrors.cpp	\
+	audio/prSoundManager.cpp	\
+	audio/prSoundManagerShared.cpp	\
+	audio/prSoundManager_Android.cpp	\
+	audio/prSoundManager_Ios.cpp	\
+	audio/prSoundManager_PC.cpp	\
+	audio/prWaves.cpp	\
 	Box2D/Collision/b2BroadPhase.cpp	\
 	Box2D/Collision/b2CollideCircle.cpp	\
 	Box2D/Collision/b2CollideEdge.cpp	\
