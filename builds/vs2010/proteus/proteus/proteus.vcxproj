@@ -294,6 +294,13 @@
     <ClInclude Include="..\..\..\..\source\gui\prButtonListener.h" />
     <ClInclude Include="..\..\..\..\source\gui\prGui.h" />
     <ClInclude Include="..\..\..\..\source\gui\prWidget.h" />
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prInAppPurchase.h" />
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore.h" />
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_android.h" />
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_bada.h" />
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_ios.h" />
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_pc.h" />
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prTransactionResult.h" />
     <ClInclude Include="..\..\..\..\source\input\prMouse.h" />
     <ClInclude Include="..\..\..\..\source\input\prTouch.h" />
     <ClInclude Include="..\..\..\..\source\input\prTouchListener.h" />
@@ -347,6 +354,7 @@
     <ClInclude Include="..\..\..\..\source\lua\lzio.h" />
     <ClInclude Include="..\..\..\..\source\math\prMathsUtil.h" />
     <ClInclude Include="..\..\..\..\source\math\prPoint.h" />
+    <ClInclude Include="..\..\..\..\source\math\prRandom.h" />
     <ClInclude Include="..\..\..\..\source\math\prRect.h" />
     <ClInclude Include="..\..\..\..\source\math\prRectF.h" />
     <ClInclude Include="..\..\..\..\source\math\prVector2.h" />
@@ -512,6 +520,12 @@
     <ClCompile Include="..\..\..\..\source\gui\prButton.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prGui.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prWidget.cpp" />
+    <ClCompile Include="..\..\..\..\source\inAppPurchase\prInAppPurchase.cpp" />
+    <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore.cpp" />
+    <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_android.cpp" />
+    <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_bada.cpp" />
+    <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_ios.cpp" />
+    <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_pc.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prMouse.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prTouch.cpp" />
     <ClCompile Include="..\..\..\..\source\libzip\mkstemp.c">
@@ -874,6 +888,7 @@
     <ClCompile Include="..\..\..\..\source\lua\lvm.c" />
     <ClCompile Include="..\..\..\..\source\lua\lzio.c" />
     <ClCompile Include="..\..\..\..\source\math\prMathsUtil.cpp" />
+    <ClCompile Include="..\..\..\..\source\math\prRandom.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prRect.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prRectF.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prVector2.cpp" />
