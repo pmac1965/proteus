@@ -31,7 +31,7 @@
 #include "../debug/prAssert.h"
 #include "../file/prFileSystem.h"
 #include "../file/prFileShared.h"
-#include "../file/prEncryption.h"
+#include "prEncryption.h"
 #include "../ios/prIos.h"
 
 

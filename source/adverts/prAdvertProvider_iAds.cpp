@@ -34,7 +34,7 @@
 /// ---------------------------------------------------------------------------
 namespace
 {
-    AdvertProviderDetails details =
+    prAdvertProviderDetails details =
     {
         AD_PROVIDER_IADS,
         AD_PROVIDER_CAPABILITY_RENDER |                         // This provider renders the adverts.

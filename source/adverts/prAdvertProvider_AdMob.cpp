@@ -35,7 +35,7 @@
 /// ---------------------------------------------------------------------------
 namespace
 {
-    AdvertProviderDetails details =
+    prAdvertProviderDetails details =
     {
         AD_PROVIDER_ADMOB,
         AD_PROVIDER_CAPABILITY_RENDER |                         // This provider renders the adverts.
@@ -79,7 +79,7 @@ void prAdvertProvider_AdMob::Init()
 /// ---------------------------------------------------------------------------
 void prAdvertProvider_AdMob::Show(s32 type)
 {
-    UNUSED(type);
+    PRUNUSED(type);
     if (!m_visible)
     {
         //JNI_AdvertShow();
@@ -94,7 +94,7 @@ void prAdvertProvider_AdMob::Show(s32 type)
 void prAdvertProvider_AdMob::Hide()
 {
     //m_visible = false;
-    PRUNUSED(type);
+    //PRUNUSED(type);
 
     if (!m_visible)
     {

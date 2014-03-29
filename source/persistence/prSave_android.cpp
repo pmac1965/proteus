@@ -34,7 +34,7 @@
 #include "../file/prFileSystem.h"
 #include "../file/prFileShared.h"
 #include "../file/prFileManager.h"
-#include "../file/prEncryption.h"
+#include "prEncryption.h"
 
 
 /// ---------------------------------------------------------------------------

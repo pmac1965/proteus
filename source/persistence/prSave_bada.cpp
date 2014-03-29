@@ -33,7 +33,7 @@
 #include "../debug/prAssert.h"
 #include "../file/prFileSystem.h"
 #include "../file/prFileShared.h"
-#include "../persistence/prEncryption.h"
+#include "prEncryption.h"
 
 
 /// ---------------------------------------------------------------------------

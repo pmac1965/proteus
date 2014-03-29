@@ -43,8 +43,21 @@ LOCAL_CFLAGS   += $(DEBUG_FLAGS) -fno-rtti -fno-exceptions
 LOCAL_LDLIBS := -ldl -llog -lGLESv1_CM -lstdc++
 
 
-LOCAL_SRC_FILES :=	actor/prActor.cpp	\
+LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
+	achievements/prAchievement_android.cpp	\
+	achievements/prAchievement_bada.cpp	\
+	achievements/prAchievement_ios.cpp	\
+	achievements/prAchievement_pc.cpp	\
+	achievements/prLeaderboards.cpp	\
+	actor/prActor.cpp	\
 	actor/prActorManager.cpp	\
+	adverts/prAdvertProvider.cpp	\
+	adverts/prAdvertProvider_AdMob.cpp	\
+	adverts/prAdvertProvider_iAds.cpp	\
+	adverts/prAdverts.cpp	\
+	analytics/prAnalytics.cpp	\
+	analytics/prAnalyticsBase.cpp	\
+	analytics/prAnalyticsFlurry.cpp	\
 	Box2D/Collision/b2BroadPhase.cpp	\
 	Box2D/Collision/b2CollideCircle.cpp	\
 	Box2D/Collision/b2CollideEdge.cpp	\
@@ -114,10 +127,12 @@ LOCAL_SRC_FILES :=	actor/prActor.cpp	\
 	core/prWindowProcedure.cpp	\
 	core/prWindow_Android.cpp	\
 	core/prWindow_Bada.cpp	\
+	core/prWindow_Ios.cpp	\
 	core/prWindow_Linux.cpp	\
 	core/prWindow_PC.cpp	\
 	debug/prAssert.cpp	\
 	debug/prAssert_Android.cpp	\
+	debug/prAssert_Ios.cpp	\
 	debug/prAssert_Linux.cpp	\
 	debug/prConsoleWindow.cpp	\
 	debug/prDebug.cpp	\
@@ -135,8 +150,8 @@ LOCAL_SRC_FILES :=	actor/prActor.cpp	\
 	display/prFixedWidthFont.cpp	\
 	display/prGLFont.cpp	\
 	display/prLookAt.cpp	\
-	display/prPerspective.cpp	\
 	display/prOglUtils.cpp	\
+	display/prPerspective.cpp	\
 	display/prRenderer.cpp	\
 	display/prRenderer_DX9.cpp	\
 	display/prRenderer_GL11.cpp	\
@@ -149,24 +164,50 @@ LOCAL_SRC_FILES :=	actor/prActor.cpp	\
 	file/prFile.cpp	\
 	file/prFileManager.cpp	\
 	file/prFileShared.cpp	\
+	file/prFileSystem.cpp	\
 	gui/prButton.cpp	\
 	gui/prGui.cpp	\
 	gui/prWidget.cpp	\
+	inAppPurchase/prInAppPurchase.cpp	\
+	inAppPurchase/prStore.cpp	\
+	inAppPurchase/prStore_android.cpp	\
+	inAppPurchase/prStore_bada.cpp	\
+	inAppPurchase/prStore_ios.cpp	\
+	inAppPurchase/prStore_pc.cpp	\
 	input/prMouse.cpp	\
 	input/prTouch.cpp	\
 	locale/prLanguage.cpp	\
 	locale/prLocales.cpp	\
 	math/prMathsUtil.cpp	\
+	math/prRandom.cpp	\
 	math/prRect.cpp	\
 	math/prRectF.cpp	\
 	math/prVector2.cpp	\
 	math/prVector3.cpp	\
 	memory/prMemory.cpp	\
+	memory/prSpritePointerPool.cpp	\
+	online/prWeb_android.cpp	\
+	online/prWeb_bada.cpp	\
+	online/prWeb_ios.cpp	\
+	online/prWeb_pc.cpp	\
+	particle/prEmitter.cpp	\
+	particle/prParticle.cpp	\
+	particle/prParticleManager.cpp	\
+	persistence/prEncryption.cpp	\
+	persistence/prSave.cpp	\
+	persistence/prSaveBase.cpp	\
+	persistence/prSave_android.cpp	\
+	persistence/prSave_bada.cpp	\
+	persistence/prSave_ios.cpp	\
+	persistence/prSave_pc.cpp	\
+	thread/prMutex.cpp	\
+	thread/prThread.cpp	\
 	tinyxml/tinystr.cpp	\
 	tinyxml/tinyxml.cpp	\
 	tinyxml/tinyxmlerror.cpp	\
 	tinyxml/tinyxmlparser.cpp	\
 	utf8proc/utf8proc.cpp	\
+	util/prFill.cpp	\
 	libzip/mkstemp.c	\
 	libzip/zip_add.c	\
 	libzip/zip_add_dir.c	\
