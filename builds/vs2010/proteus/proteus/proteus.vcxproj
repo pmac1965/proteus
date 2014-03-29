@@ -151,6 +151,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\source\achievements\prAchievementManager.h" />
+    <ClInclude Include="..\..\..\..\source\achievements\prAchievement_android.h" />
+    <ClInclude Include="..\..\..\..\source\achievements\prAchievement_bada.h" />
+    <ClInclude Include="..\..\..\..\source\achievements\prAchievement_base.h" />
+    <ClInclude Include="..\..\..\..\source\achievements\prAchievement_ios.h" />
+    <ClInclude Include="..\..\..\..\source\achievements\prAchievement_pc.h" />
+    <ClInclude Include="..\..\..\..\source\achievements\prLeaderboards.h" />
     <ClInclude Include="..\..\..\..\source\actor\prActor.h" />
     <ClInclude Include="..\..\..\..\source\actor\prActorManager.h" />
     <ClInclude Include="..\..\..\..\source\adverts\prAdvertProvider.h" />
@@ -394,6 +401,12 @@
     <ClInclude Include="..\..\..\..\source\zlib\zutil.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\source\achievements\prAchievementManager.cpp" />
+    <ClCompile Include="..\..\..\..\source\achievements\prAchievement_android.cpp" />
+    <ClCompile Include="..\..\..\..\source\achievements\prAchievement_bada.cpp" />
+    <ClCompile Include="..\..\..\..\source\achievements\prAchievement_ios.cpp" />
+    <ClCompile Include="..\..\..\..\source\achievements\prAchievement_pc.cpp" />
+    <ClCompile Include="..\..\..\..\source\achievements\prLeaderboards.cpp" />
     <ClCompile Include="..\..\..\..\source\actor\prActor.cpp" />
     <ClCompile Include="..\..\..\..\source\actor\prActorManager.cpp" />
     <ClCompile Include="..\..\..\..\source\adverts\prAdvertProvider.cpp" />
