@@ -195,15 +195,13 @@ PRBOOL prApplication_Linux::Run()
           prLinuxLoop();
 
           // Get systems
-          //prMouse         *pMouse = static_cast<prMouse *>       (prCoreGetComponent(PRSYSTEM_MOUSE));
+          prMouse         *pMouse = static_cast<prMouse *>       (prCoreGetComponent(PRSYSTEM_MOUSE));
           prSoundManager  *pSound = static_cast<prSoundManager *>(prCoreGetComponent(PRSYSTEM_AUDIO));
           prTouch         *pTouch = static_cast<prTouch *>       (prCoreGetComponent(PRSYSTEM_TOUCH));
           prFps           *pFps   = static_cast<prFps *>         (prCoreGetComponent(PRSYSTEM_FPS));
 
 
 //            GameTime::GetInstance()->Update();
-          static int c=0;
-          prTrace("Update: %i\n", c++);
 
           // Update game
           if (m_pWindow && m_pWindow->GetActive())
@@ -211,46 +209,22 @@ PRBOOL prApplication_Linux::Run()
 //                float dt = GameTime::GetInstance()->ElapsedTime();
 
               // System updates
-              //if (pMouse) { pMouse->Update(); }
+              if (pMouse) { pMouse->Update(); }
               if (pSound) { pSound->Update(16.0f); }
               if (pTouch) { pTouch->Update(); }
               if (pFps)   { pFps->Begin(); }
 
               // Update and draw the game
-              Update(16.0f);// dt);
+              Update(16.0f);
               Draw();
           }
 
           // Needs modified to track game speed!
 //          Sleep(14);
-          TODO("Needs modified to track game speed!")
+          //TODO("Needs modified to track game speed!")
           //Sleep(1);
 
           if (pFps)   { pFps->End(); }
-
-/*      if (recalcModelView)
-        {
-          glMatrixMode(GL_MODELVIEW);
-
-          // reset modelview matrix to the identity matrix
-          glLoadIdentity();
-
-          // move the camera back three units
-          glTranslatef(0.0, 0.0, -3.0);
-
-          // rotate by X, Y, and Z angles
-          glRotatef(xAngle, 0.1, 0.0, 0.0);
-          glRotatef(yAngle, 0.0, 0.1, 0.0);
-          glRotatef(zAngle, 0.0, 0.0, 1.0);
-
-          recalcModelView = GL_FALSE;
-          needRedraw = GL_TRUE;
-        }
-        if (needRedraw)
-        {
-          redraw();
-          needRedraw = GL_FALSE;
-        }//*/
       }
 
     return PRFALSE;

@@ -29,9 +29,11 @@
 #include <X11/X.h>
 #include <X11/keysym.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "../core/prTypes.h"
 #include "../core/prDefines.h"
 #include "../debug/prTrace.h"
+#include "prLinuxInput.h"
 
 
 // Locals
@@ -41,7 +43,12 @@ static Display         *display      = NULL;
 static XVisualInfo     *vi           = NULL;
 static GLboolean        doubleBuffer = GL_TRUE;
 static Window           win;
-
+static long             eventMask    =  KeyPressMask         |
+//                                        ExposureMask         |
+                                        ButtonPressMask      |       // Pointer button down events wanted
+                                        ButtonReleaseMask    |       // Pointer button up events wanted
+                                        PointerMotionMask    |       // Pointer motion
+                                        StructureNotifyMask;
 
 // Local data
 static int singleBuf[] = {GLX_RGBA, GLX_DEPTH_SIZE, 16, None};
@@ -116,10 +123,7 @@ PRBOOL prLinuxCreateDisplay(u32 width, u32 height)
     cmap = XCreateColormap(display, RootWindow(display, vi->screen), vi->visual, AllocNone);
     swa.colormap     = cmap;
     swa.border_pixel = 0;
-    swa.event_mask   = KeyPressMask    |
-                       ExposureMask    |
-                       ButtonPressMask |
-                       StructureNotifyMask;
+    swa.event_mask   = eventMask;
 
     win = XCreateWindow(display,
                         RootWindow(display, vi->screen),
@@ -174,9 +178,13 @@ void prLinuxLoop()
 {
     XEvent event;
 
-    do
+    //do
+    if (XCheckWindowEvent(display, win, eventMask, &event))
     {
-        XNextEvent(display, &event);
+        //printf("Event %i\n", event.type);
+        //prTrace("Event %i\n", event.type);
+
+        //XNextEvent(display, &event);
         switch (event.type)
         {
             case KeyPress:
@@ -189,40 +197,38 @@ void prLinuxLoop()
                 //kevent = (XKeyEvent *)&event;
                 if ((XLookupString((XKeyEvent*)&event, buffer, 1, &keysym,NULL) == 1) && (keysym == (KeySym)XK_Escape))
                 {
+                    printf("1: Quit app\n");
                     exit(0);
                 }
                 break;
             }
 
+            // Mouse move
+            case MotionNotify:
+                prLinuxUpdateMouse(event.xbutton.x,event.xbutton.y, 0);
+                    break;
+
+            // Mouse buttons
+            case ButtonRelease:
             case ButtonPress:
-                //recalcModelView = GL_TRUE;
-                switch (event.xbutton.button)
-                {
-                case 1:// xAngle += 10.0;
+                prLinuxUpdateMouse(event.xbutton.x,event.xbutton.y, event.xbutton.button);
                     break;
-                case 2: //yAngle += 10.0;
-                    break;
-                case 3: //zAngle += 10.0;
-                    break;
-                }
-            break;//*/
 
-            case ConfigureNotify:
-                prTrace("ConfigureNotify - %i, %i\n", event.xconfigure.width, event.xconfigure.height);
-                glViewport(0, 0, event.xconfigure.width, event.xconfigure.height);
+            //case ConfigureNotify:
+                //printf("ConfigureNotify - %i, %i\n", event.xconfigure.width, event.xconfigure.height);
+                //glViewport(0, 0, event.xconfigure.width, event.xconfigure.height);
                 // fall through
-                break;
+                //break;
 
-            case Expose:
-                {
-                    static int c=0;
-                    prTrace("Expose %i\n", c++);
+            //case Expose:
+                //{
+                    //static int c=0;
+                    //printf("Expose %i\n", c++);
                 //needRedraw = GL_TRUE;
+                //}
+                //break;
                 }
-                break;
-        }
-
-    } while(XPending(display)); /* loop to compress events */
+    } //while(XPending(display)); /* loop to compress events */
 //}
 
 }

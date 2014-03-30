@@ -1,5 +1,5 @@
 /**
- * prWeb_ios.cpp
+ * prStore_linux.cpp
  *
  *  Copyright 2014 Paul Michael McNab
  *
@@ -21,19 +21,19 @@
 #include "../prConfig.h"
 
 
-#if defined(PLATFORM_IOS)
+#if defined(PLATFORM_LINUX)
 
 
-#include "prWeb.h"
-
-
-//extern void IPOpenURL(const char *address);
+#include "prStore_linux.h"
+#include "prInAppPurchase.h"
+#include "../core/prMacros.h"
+//#include "../android/JNIInterface.h"
 
 
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
-prWeb::prWeb()
+prStore_linux::prStore_linux(prInAppPurchase &iap) : prStore(iap)
 {
 }
 
@@ -41,21 +41,29 @@ prWeb::prWeb()
 /// ---------------------------------------------------------------------------
 /// Dtor
 /// ---------------------------------------------------------------------------
-prWeb::~prWeb()
+prStore_linux::~prStore_linux()
 {
 }
 
 
 /// ---------------------------------------------------------------------------
-/// Opens a web page in a browser
+/// Callback from the game.
 /// ---------------------------------------------------------------------------
-void prWeb::OpenURL(const char *address)
+void prStore_linux::EventNotify(s32 type, const char *id)
 {
-    if (address && *address)
-    {
-        //IPOpenURL(address);
-    }
+    m_prInAppPurchase.EventNotify(type, id);
 }
 
 
-#endif
+/// ---------------------------------------------------------------------------
+/// Purchase an item.
+/// ---------------------------------------------------------------------------
+void prStore_linux::BeginPurchase(const char *name, int id)
+{
+    //JNI_ShowPurchaseDialog();
+    PRUNUSED(name);
+    PRUNUSED(id);
+}
+
+
+#endif//PLATFORM_LINUX

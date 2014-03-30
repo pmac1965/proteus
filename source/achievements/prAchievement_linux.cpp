@@ -1,5 +1,5 @@
 /**
- * prWeb_ios.cpp
+ * prAchievement_linux.cpp
  *
  *  Copyright 2014 Paul Michael McNab
  *
@@ -21,40 +21,43 @@
 #include "../prConfig.h"
 
 
-#if defined(PLATFORM_IOS)
+#if defined(PLATFORM_LINUX)
 
 
-#include "prWeb.h"
-
-
-//extern void IPOpenURL(const char *address);
+#include "prAchievement_linux.h"
 
 
 /// ---------------------------------------------------------------------------
-/// Ctor
+/// Award an achievement.
 /// ---------------------------------------------------------------------------
-prWeb::prWeb()
+void prAchievement_Linux::Award(const char *name, s32 id)
 {
-}
+    PRUNUSED(id);
 
-
-/// ---------------------------------------------------------------------------
-/// Dtor
-/// ---------------------------------------------------------------------------
-prWeb::~prWeb()
-{
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Opens a web page in a browser
-/// ---------------------------------------------------------------------------
-void prWeb::OpenURL(const char *address)
-{
-    if (address && *address)
+    if (name && *name)
     {
-        //IPOpenURL(address);
+        //JNI_AwardAchievement(name);
     }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Checks if an achievement has been awarded.
+/// ---------------------------------------------------------------------------
+bool prAchievement_Linux::IsAwarded(const char *name, s32 id)
+{
+    PRUNUSED(name);
+    PRUNUSED(id);
+    return false;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Checks if the provider is ready to be used
+/// ---------------------------------------------------------------------------
+bool prAchievement_Linux::IsReady()
+{ 
+    return true;
 }
 
 

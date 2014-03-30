@@ -35,7 +35,7 @@
     #include "prStore_android.h"
 
 #elif defined(PLATFORM_IOS)
-    #include "prStore_iphone.h"
+    #include "prStore_ios.h"
 
 #elif defined(PLATFORM_BADA)
     #include "prStore_bada.h"
@@ -130,7 +130,7 @@ void prInAppPurchase::Init()
         pStore->Init();
 
 #elif defined(PLATFORM_IOS)
-        pStore = new prStore_iphone(*this);
+        pStore = new prStore_ios(*this);
         pStore->Init();
 
 #elif defined(PLATFORM_BADA)

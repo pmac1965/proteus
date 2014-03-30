@@ -1,4 +1,4 @@
-// File: prSave_ios.h
+// File: prSave_linux.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,35 +16,35 @@
  */
 
 
-#ifndef __PRSAVE_IOS_H
-#define __PRSAVE_IOS_H
+#ifndef __PRSAVELINUX_H
+#define __PRSAVELINUX_H
 
 
 #include "../prConfig.h"
 
 
-#if defined(PLATFORM_IOS)
+#if defined(PLATFORM_LINUX)
 
 
 #include "prSaveBase.h"
 
 
 // Forward declarations
-struct SaveIosImplementation;
+struct SaveLinuxImplementation;
 
 
-// Class: prSaveIos
-//      IOS Save code.
-class prSaveIos : public prSaveBase
+// Class: prSaveLinux
+//      Linux save code.
+class prSaveLinux : public prSaveBase
 {
 public:
-    // Method: prSaveIos
+    // Method: prSaveLinux
     //      Ctor
-    prSaveIos();
+    prSaveLinux();
 
-    // Method: ~prSaveIos
+    // Method: ~prSaveLinux
     //      Dtor
-    ~prSaveIos();
+    ~prSaveLinux();
 
     // Method: SaveBegin
     //      Overridden method to start a save
@@ -73,18 +73,18 @@ public:
 private:
 
     // Stops passing by value and assignment.
-    prSaveIos(const prSaveIos&);
-    const prSaveIos& operator = (const prSaveIos&);
+    prSaveLinux(const prSaveLinux&);
+    const prSaveLinux& operator = (const prSaveLinux&);
 
 private:
 
     // Don't change order.
-    SaveIosImplementation  *pImpl;
-    SaveIosImplementation  &imp;
+    SaveLinuxImplementation  *pImpl;
+    SaveLinuxImplementation  &imp;
 };
 
 
 #endif
 
 
-#endif//__PRSAVE_IOS_H
+#endif//__PRSAVELINUX_H

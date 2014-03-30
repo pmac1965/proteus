@@ -21,7 +21,7 @@
 #include "../prConfig.h"
 
 
-#if defined(PLATFORM_PC)
+#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
 
 
 #include "prMouse.h"
@@ -96,8 +96,8 @@ void prMouse::Update()
 
 
     // Shift/control pressed?
-    m_shift   = ((m_flags & MK_SHIFT)   == MK_SHIFT);
-    m_control = ((m_flags & MK_CONTROL) == MK_CONTROL);
+    m_shift   = ((m_flags & KEY_SHIFT)   == KEY_SHIFT);
+    m_control = ((m_flags & KEY_CONTROL) == KEY_CONTROL);
     
 
     // Set the key states.
@@ -155,6 +155,8 @@ void prMouse::SetMouseData(s32 x, s32 y, u32 flags)
 /// ---------------------------------------------------------------------------
 void prMouse::ShowSystemCursor(bool show)
 {
+#if defined(PLATFORM_PC)
+
     if (show)
     {
         // Test if mouse is attached!
@@ -173,6 +175,14 @@ void prMouse::ShowSystemCursor(bool show)
             {}
         }
     }
+
+#elif defined(PLATFORM_LINUX)
+
+#else
+
+    #error Undefined platform
+
+#endif
 
     m_visible = show;
 }

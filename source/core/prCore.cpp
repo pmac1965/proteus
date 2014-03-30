@@ -43,7 +43,7 @@
 #include "../input/prTouch.h"
 
 
-#if defined(PLATFORM_PC)
+#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
 #include "../input/prMouse.h"
 #endif
 
@@ -217,6 +217,11 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
         #if defined(PLATFORM_PC)
         systems[PRSYSTEM_MOUSE]     = new prMouse();
         systems[PRSYSTEM_KEYBOARD]  = NULL;
+        #endif
+
+
+        #if defined(PLATFORM_LINUX)
+        systems[PRSYSTEM_MOUSE]     = new prMouse();
         #endif
     }
     else

@@ -1,4 +1,4 @@
-// File: prStore_ios.h
+// File: prStore_linux.h
 /**
  *  Copyright 2014 Paul Michael McNab
  *
@@ -16,40 +16,33 @@
  */
 
 
-#ifndef __PRSTORE_IPHONE_H
-#define __PRSTORE_IPHONE_H
+#ifndef __PRSTORE_LINUX_H
+#define __PRSTORE_LINUX_H
 
 
 #include "prStore.h"
+#include "../core/prTypes.h"
 
 
 // Forward declarations
 class prInAppPurchase;
 
 
-// Class: prStore_ios
-//      IOS store class
-class prStore_ios : public prStore
+// Class: prStore_linux
+//      Linux store class
+class prStore_linux : public prStore
 {
 public:
-    // Method: prStore_ios
+    // Method: prStore_linux
     //      Ctor
     //
     // Parameters:
     //      iap - The parent iap creator class
-    prStore_ios(prInAppPurchase &iap);
+    prStore_linux(prInAppPurchase &iap);
 
-    // Method: ~prStore_ios
+    // Method: ~prStore_linux
     //      Dtor
-    ~prStore_ios();
-    
-    // Method: Init
-    //      Perform store specific initialisation.
-    void Init();
-    
-    // Method: Update
-    //      Perform store specific updates.
-    bool Update(f32 dt);
+    ~prStore_linux();
 
     // Method: EventNotify
     //      Callback from the game.
@@ -61,4 +54,4 @@ public:
 };
 
 
-#endif//__PRSTORE_IPHONE_H
+#endif//__PRSTORE_LINUX_H

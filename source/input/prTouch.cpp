@@ -131,7 +131,7 @@ typedef struct TouchImplementation
                         e.rx    = 0;
                         e.ry    = 0;
                         e.index = i;
-#if defined(PLATFORM_PC)
+#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
                         e.index = 0;
 #endif
                         e.id    = touchLocation.id;
@@ -163,7 +163,7 @@ typedef struct TouchImplementation
                         e.rx    = touchData[i].x - touchData[i].px;
                         e.ry    = touchData[i].y - touchData[i].py;
                         e.index = i;
-#if defined(PLATFORM_PC)
+#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
                         e.index = 0;
 #endif
                         e.id    = touchLocation.id;
@@ -203,7 +203,7 @@ typedef struct TouchImplementation
                     e.rx    = 0;
                     e.ry    = 0;
                     e.index = i;
-#if defined(PLATFORM_PC)
+#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
                         e.index = 0;
 #endif
                     e.id    = touchLocation.id;
@@ -220,7 +220,7 @@ typedef struct TouchImplementation
                     e.rx    = touchData[i].px - touchData[i].x;
                     e.ry    = touchData[i].py - touchData[i].y;
                     e.index = i;
-#if defined(PLATFORM_PC)
+#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
                         e.index = 0;
 #endif
                     e.id    = touchLocation.id;
@@ -386,7 +386,7 @@ void prTouch::Update()
 {
     PRASSERT(pImpl);
 
-#if defined(PLATFORM_PC)
+#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
     prMouse *pMouse = static_cast<prMouse *>(prCoreGetComponent(PRSYSTEM_MOUSE));
 
     if (!imp.down)

@@ -68,7 +68,8 @@
   #include "prAchievement_android.h"
 
 #elif defined(PLATFORM_LINUX)
-  #include <GLES/gl.h>
+  #include <GL/gl.h>
+  #include <GL/glu.h>
   #include "prAchievement_linux.h"
 
 #else

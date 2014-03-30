@@ -14,29 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * @file       prMouse.h
- * @brief      Contains basic mouse access class.
- * @copyright  Copyright Paul Michael McNab. All rights reserved.
- * @note       This mouse class is best suited to standard windows application.
- * @n          For games use, you should use the prTouch class instead.
- * @n          This class is used to simulate TouchInput for 'phone' type devices.
- * @see        prTouch
- *
- *//*
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
 
 
 #ifndef __PRMOUSE_H
@@ -46,19 +23,36 @@
 #include "../prConfig.h"
 
 
+#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
+
+
 #if defined(PLATFORM_PC)
+    // Exclude MFC
+    #ifndef WIN32_LEAN_AND_MEAN
+    #define WIN32_LEAN_AND_MEAN
+    #endif
+    #ifndef WIN32_EXTRA_LEAN
+    #define WIN32_EXTRA_LEAN
+    #endif
 
+    #include <windows.h>
 
-// Exclude MFC
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
+    // Defines
+    #define KEY_SHIFT       MK_SHIFT
+    #define KEY_CONTROL     MK_CONTROL
+
+#elif defined(PLATFORM_LINUX)
+    // Defines
+    #define KEY_SHIFT       0
+    #define KEY_CONTROL     0
+
+#else
+    // Error
+    #error Undefined platform
+
 #endif
-#ifndef WIN32_EXTRA_LEAN
-#define WIN32_EXTRA_LEAN
-#endif
 
 
-#include <windows.h>
 #include "../core/prTypes.h"
 #include "../core/prCoreSystem.h"
 #include "../debug/prDebug.h"
@@ -75,6 +69,8 @@
 //      MOUSE_BUTTON_X2     - Extra 2 button (Side buttons)
 typedef enum prMouseButton
 {
+#if defined(PLATFORM_PC)
+    // Buttons
     MOUSE_BUTTON_LEFT   = MK_LBUTTON,
     MOUSE_BUTTON_RIGHT  = MK_RBUTTON,
     MOUSE_BUTTON_MIDDLE = MK_MBUTTON,
@@ -87,6 +83,19 @@ typedef enum prMouseButton
         MOUSE_BUTTON_X2 = 0x0040,
     #endif
 
+#elif defined(PLATFORM_LINUX)
+    // Buttons
+    MOUSE_BUTTON_LEFT   = 0x00001,
+    MOUSE_BUTTON_RIGHT  = 0x00002,
+    MOUSE_BUTTON_MIDDLE = 0x00004,
+    MOUSE_BUTTON_X1     = 0x0020,
+    MOUSE_BUTTON_X2     = 0x0040,
+
+#else
+    // Error
+    #error Undefined platform
+
+#endif
 } prMouseButton;
 
 
@@ -265,7 +274,7 @@ private:
 };
 
 
-#endif//PLATFORM_PC
+#endif//PLATFORM_PC || PLATFORM_LINUX
 
 
 #endif//__PRMOUSE_H

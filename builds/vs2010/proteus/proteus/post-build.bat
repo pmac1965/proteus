@@ -47,6 +47,7 @@ REM --------------------------------------
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_base.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_ios.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_pc.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_linux.h
 
     rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\libzip
     REM rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\audio\external

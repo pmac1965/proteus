@@ -156,6 +156,7 @@
     <ClInclude Include="..\..\..\..\source\achievements\prAchievement_bada.h" />
     <ClInclude Include="..\..\..\..\source\achievements\prAchievement_base.h" />
     <ClInclude Include="..\..\..\..\source\achievements\prAchievement_ios.h" />
+    <ClInclude Include="..\..\..\..\source\achievements\prAchievement_linux.h" />
     <ClInclude Include="..\..\..\..\source\achievements\prAchievement_pc.h" />
     <ClInclude Include="..\..\..\..\source\achievements\prLeaderboards.h" />
     <ClInclude Include="..\..\..\..\source\actor\prActor.h" />
@@ -307,6 +308,7 @@
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_android.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_bada.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_ios.h" />
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_linux.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_pc.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prTransactionResult.h" />
     <ClInclude Include="..\..\..\..\source\input\prMouse.h" />
@@ -333,6 +335,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Tool release|Win32'">true</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="..\..\..\..\source\linux\prLinux.h" />
+    <ClInclude Include="..\..\..\..\source\linux\prLinuxInput.h" />
     <ClInclude Include="..\..\..\..\source\locale\prLanguage.h" />
     <ClInclude Include="..\..\..\..\source\locale\prLocales.h" />
     <ClInclude Include="..\..\..\..\source\lua\lapi.h" />
@@ -380,6 +383,7 @@
     <ClInclude Include="..\..\..\..\source\persistence\prSave_android.h" />
     <ClInclude Include="..\..\..\..\source\persistence\prSave_bada.h" />
     <ClInclude Include="..\..\..\..\source\persistence\prSave_ios.h" />
+    <ClInclude Include="..\..\..\..\source\persistence\prSave_linux.h" />
     <ClInclude Include="..\..\..\..\source\persistence\prSave_pc.h" />
     <ClInclude Include="..\..\..\..\source\prConfig.h" />
     <ClInclude Include="..\..\..\..\source\proteus.h" />
@@ -407,6 +411,7 @@
     <ClCompile Include="..\..\..\..\source\achievements\prAchievement_android.cpp" />
     <ClCompile Include="..\..\..\..\source\achievements\prAchievement_bada.cpp" />
     <ClCompile Include="..\..\..\..\source\achievements\prAchievement_ios.cpp" />
+    <ClCompile Include="..\..\..\..\source\achievements\prAchievement_linux.cpp" />
     <ClCompile Include="..\..\..\..\source\achievements\prAchievement_pc.cpp" />
     <ClCompile Include="..\..\..\..\source\achievements\prLeaderboards.cpp" />
     <ClCompile Include="..\..\..\..\source\actor\prActor.cpp" />
@@ -541,6 +546,7 @@
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_android.cpp" />
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_bada.cpp" />
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_ios.cpp" />
+    <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_linux.cpp" />
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_pc.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prMouse.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prTouch.cpp" />
@@ -869,6 +875,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Tool release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\..\source\linux\prLinux.c" />
+    <ClCompile Include="..\..\..\..\source\linux\prLinuxInput.cpp" />
     <ClCompile Include="..\..\..\..\source\locale\prLanguage.cpp" />
     <ClCompile Include="..\..\..\..\source\locale\prLocales.cpp" />
     <ClCompile Include="..\..\..\..\source\lua\lapi.c" />
@@ -924,6 +931,7 @@
     <ClCompile Include="..\..\..\..\source\persistence\prSave_android.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave_bada.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave_ios.cpp" />
+    <ClCompile Include="..\..\..\..\source\persistence\prSave_linux.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave_pc.cpp" />
     <ClCompile Include="..\..\..\..\source\thread\prMutex.cpp" />
     <ClCompile Include="..\..\..\..\source\thread\prThread.cpp" />
