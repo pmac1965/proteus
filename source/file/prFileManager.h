@@ -99,28 +99,28 @@ private:
 //
 // Notes:
 //      *Android only*
-void SetAPKPath(const char *path);
+void prSetAPKPath(const char *path);
 
 // Method: SetCardPath
 //      Sets the card path.
 //
 // Notes:
 //      *Android only*
-void SetCardPath(const char *path);
+void prSetCardPath(const char *path);
 
 // Method: GetCardPath
 //      Gets the card path.
 //
 // Notes:
 //      *Android only*
-const char *GetCardPath();
+const char *prGetCardPath();
 
 // Method: GetAPKArchive
 //      Get access to the android data zip file.
 //
 // Notes:
 //      *Android only*
-zip *GetAPKArchive();
+zip *prGetAPKArchive();
 #endif
 
 

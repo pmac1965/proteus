@@ -42,6 +42,7 @@
 #include "analytics/prAnalytics.h"
 #include "analytics/prAnalyticsBase.h"
 #include "analytics/prAnalyticsFlurry.h"
+#include "android/prJNIInterface.h"
 #include "audio/prOpenALDeviceList.h"
 #include "audio/prOpenALErrors.h"
 #include "audio/prSoundManager.h"

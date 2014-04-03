@@ -273,7 +273,7 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
 
 
     prStringReplaceChar(dataPath, '\\', '/');
-    //prTrace("App data path: %s\n", dataPath);
+    prTrace("App data path: %s\n", dataPath);
 }
 
 
@@ -749,10 +749,10 @@ u32 prFileManager::Read(u8 *pDataBuffer, u32 size, u32 hash)
 }//*/
 
 
-// ----------------------------------------------------------------------------
-// Sets the APK path for an android device.
-// ----------------------------------------------------------------------------
-void SetAPKPath(const char *path)
+/// ---------------------------------------------------------------------------
+/// Sets the APK path for an android device.
+/// ---------------------------------------------------------------------------
+void prSetAPKPath(const char *path)
 {
     memset(APKPath, 0, sizeof(APKPath));
 
@@ -763,10 +763,10 @@ void SetAPKPath(const char *path)
 }
 
 
-// ----------------------------------------------------------------------------
-// Sets the card path for an android device.
-// ----------------------------------------------------------------------------
-void SetCardPath(const char *path)
+/// ---------------------------------------------------------------------------
+/// Sets the card path for an android device.
+/// ---------------------------------------------------------------------------
+void prSetCardPath(const char *path)
 {
     memset(CardPath, 0, sizeof(CardPath));
 
@@ -777,19 +777,19 @@ void SetCardPath(const char *path)
 }
 
 
-// ----------------------------------------------------------------------------
-// Sets the card path for an android device.
-// ----------------------------------------------------------------------------
-const char *GetCardPath()
+/// ---------------------------------------------------------------------------
+/// Sets the card path for an android device.
+/// ---------------------------------------------------------------------------
+const char *prGetCardPath()
 {
     return CardPath;
 }
 
 
-// ----------------------------------------------------------------------------
-// Get access to the android data zip file.
-// ----------------------------------------------------------------------------
-zip *GetAPKArchive()
+/// ---------------------------------------------------------------------------
+/// Get access to the android data zip file.
+/// ---------------------------------------------------------------------------
+zip *prGetAPKArchive()
 {
     return APKArchive;
 }

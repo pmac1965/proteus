@@ -168,6 +168,7 @@
     <ClInclude Include="..\..\..\..\source\analytics\prAnalytics.h" />
     <ClInclude Include="..\..\..\..\source\analytics\prAnalyticsBase.h" />
     <ClInclude Include="..\..\..\..\source\analytics\prAnalyticsFlurry.h" />
+    <ClInclude Include="..\..\..\..\source\android\prJNIInterface.h" />
     <ClInclude Include="..\..\..\..\source\audio\external\codec.h" />
     <ClInclude Include="..\..\..\..\source\audio\external\ogg.h" />
     <ClInclude Include="..\..\..\..\source\audio\external\os_types.h" />
@@ -423,6 +424,7 @@
     <ClCompile Include="..\..\..\..\source\analytics\prAnalytics.cpp" />
     <ClCompile Include="..\..\..\..\source\analytics\prAnalyticsBase.cpp" />
     <ClCompile Include="..\..\..\..\source\analytics\prAnalyticsFlurry.cpp" />
+    <ClCompile Include="..\..\..\..\source\android\prJNIInterface.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prOpenALDeviceList.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prOpenALErrors.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prSoundManager.cpp" />
