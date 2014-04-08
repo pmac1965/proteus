@@ -59,7 +59,7 @@ typedef struct SaveAndroidImplementation
 /// ---------------------------------------------------------------------------
 void GetSaveLoadPath(char *pBuffer)
 {
-    const char *path = GetCardPath();
+    const char *path = prGetCardPath();
     if (path && *path)
     {
         strcpy(pBuffer, path);

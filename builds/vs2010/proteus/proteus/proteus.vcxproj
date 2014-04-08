@@ -63,19 +63,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;C:\Program Files\OpenAL 1.1 SDK\include;$(IncludePath);C:\Program Files\OpenAL 1.1 SDK\include</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include;$(IncludePath)</IncludePath>
     <TargetName>$(ProjectName)_d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tool debug|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath);C:\Program Files\OpenAL 1.1 SDK\include</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include</IncludePath>
     <TargetName>$(ProjectName)_td</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath);C:\Program Files\OpenAL 1.1 SDK\include</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include</IncludePath>
     <TargetName>$(ProjectName)_r</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tool release|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath);C:\Program Files\OpenAL 1.1 SDK\include</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include</IncludePath>
     <TargetName>$(ProjectName)_tr</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

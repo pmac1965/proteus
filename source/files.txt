@@ -1,49 +1,4 @@
-# ----------------------------------------------------------------------------------------------
-#
-#      Description     - Contains an android .mk file for compiling the proteus engine.
-#      Author          - Paul Micheal McNab.
-#      Copyright       - Copyright Paul Micheal McNab. All rights reserved.
-#
-# ----------------------------------------------------------------------------------------------
-
-
-# ----------------------------------------------------------------------------------------------
-#
-# NOTES -	The define NO_LOCALECONV was added because android does not fully support locale.h
-#               and does not have the localeconv function.
-# NOTES -	You must not have code with exceptions or RTTI as android doesn't support it.
-#
-#  ndk-build NDK_DEBUG=1      - generate debuggable native code.
-#  ndk-build V=1              - launch build, displaying build commands.
-#  ndk-build -B               - force a complete rebuild.
-#  ndk-build -B V=1           - force a complete rebuild and display build commands.
-#
-# ----------------------------------------------------------------------------------------------
-
-
-LOCAL_PATH := $(call my-dir)
-
-
-include $(CLEAR_VARS)
-
-
-LOCAL_MODULE := Proteus
-
-
-ifeq ($(APP_OPTIM),debug)
-  DEBUG_FLAGS := -DDEBUG -DNO_LOCALECONV
-else
-  DEBUG_FLAGS := -DNDEBUG -DNO_LOCALECONV
-endif
-
-
-LOCAL_CFLAGS   += $(DEBUG_FLAGS) -fno-rtti -fno-exceptions
-
-
-LOCAL_LDLIBS := -ldl -llog -lGLESv1_CM -lstdc++
-
-
-LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
+	achievements/prAchievementManager.cpp	\
 	achievements/prAchievement_android.cpp	\
 	achievements/prAchievement_bada.cpp	\
 	achievements/prAchievement_ios.cpp	\
@@ -319,6 +274,3 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	zlib/trees.c	\
 	zlib/uncompr.c	\
 	zlib/zutil.c
-
-
-include $(BUILD_SHARED_LIBRARY)

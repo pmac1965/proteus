@@ -18,6 +18,12 @@
  */
 
 
+#include "../prConfig.h"
+
+
+#if defined(PLATFORM_LINUX)
+
+
 #include "prLinuxInput.h"
 #include "../core/prCore.h"
 #include "../debug/prTrace.h"
@@ -62,3 +68,6 @@ void prLinuxUpdateMouse(s32 x, s32 y, u32 flags)
         pMouse->SetInRect(true);
     }
 }
+
+
+#endif//PLATFORM_LINUX

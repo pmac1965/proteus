@@ -69,6 +69,8 @@ REM --------------------------------------
 REM ---------------------------------------------------------------------------
 REM Update engine docs
 REM ---------------------------------------------------------------------------
-    echo Updating docs
-    cd D:\NaturalDocs-1.52
-    doc_engine.bat
+    if exist D:\NaturalDocs-1.52\doc_engine.bat (
+        echo Updating docs
+        cd D:\NaturalDocs-1.52
+        doc_engine.bat
+    )

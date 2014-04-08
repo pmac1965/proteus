@@ -126,7 +126,7 @@ void prOutputString(const char *text)
         AppLog("%s", text);
 
 #elif defined(PLATFORM_ANDROID)
-        __android_log_print(ANDROID_LOG_DEBUG, "Proteus", text);
+        __android_log_print(ANDROID_LOG_DEBUG, "Proteus", "%s", text);
 
 #else
     #error Unsupported platform.

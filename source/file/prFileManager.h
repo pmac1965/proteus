@@ -94,28 +94,28 @@ private:
 
 
 #if defined(PLATFORM_ANDROID)
-// Method: SetAPKPath
+// Method: prSetAPKPath
 //      Sets the APK path.
 //
 // Notes:
 //      *Android only*
 void prSetAPKPath(const char *path);
 
-// Method: SetCardPath
+// Method: prSetCardPath
 //      Sets the card path.
 //
 // Notes:
 //      *Android only*
 void prSetCardPath(const char *path);
 
-// Method: GetCardPath
+// Method: prGetCardPath
 //      Gets the card path.
 //
 // Notes:
 //      *Android only*
 const char *prGetCardPath();
 
-// Method: GetAPKArchive
+// Method: prGetAPKArchive
 //      Get access to the android data zip file.
 //
 // Notes:

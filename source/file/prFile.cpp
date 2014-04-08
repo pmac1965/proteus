@@ -230,7 +230,7 @@ bool prFile::Exists()
         {
 #if defined(PLATFORM_ANDROID)
             // Open
-            zip* pArchive = GetAPKArchive();
+            zip* pArchive = prGetAPKArchive();
             if (pArchive)
             {
                 prFileManager *pFileManager = static_cast<prFileManager*>(prCoreGetComponent(PRSYSTEM_FILEMANAGER));
@@ -297,7 +297,7 @@ bool prFile::Open()
     PRASSERT(imp.filemode != FileMode_Simple, "You cannot open file created by the Load() method.");
 
     // Open
-    zip* pArchive = GetAPKArchive();
+    zip* pArchive = prGetAPKArchive();
     if (pArchive)
     {
         prFileManager *pFileManager = static_cast<prFileManager*>(prCoreGetComponent(PRSYSTEM_FILEMANAGER));
@@ -569,7 +569,7 @@ void prFile::Internal_Seek(s32 offset, s32 origin)
     // Reads from start to simulate seek set.
     else if (origin == PRFILE_SEEK_SET)
     {
-        zip* pArchive = GetAPKArchive();
+        zip* pArchive = prGetAPKArchive();
         if (pArchive)
         {
             // Close the old file.
