@@ -75,6 +75,20 @@ public:
     //      Read a file.
     u32 Read(u8 *pDataBuffer, u32 size, u32 hash);
 
+#if defined(PLATFORM_ANDROID)
+    // Method: Read
+    //      Read a file.
+    u32 Read(u8 *pDataBuffer, u32 size, const char *filename);
+#endif
+
+
+private:
+    // This function looks in all registered archives for the file.
+    // Returns the last file found as code assumes later archives
+    // will contain updated files
+    bool Exists(u32 hash, u32 &size);
+
+
 private:
 
     char        dataPath[FILE_MAX_FILENAME_SIZE];               // Path to the data directory

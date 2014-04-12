@@ -269,12 +269,11 @@ void prRenderer_GL11::SetOrthographicView()
         glDisable(GL_DEPTH_TEST);
         ERR_CHECK();
 
-        //// Displacement trick for exact pixelization
-        //glTranslatef(((1.0f / (f32)m_pWindow->GetWidth())),
-        //             ((1.0f / (f32)m_pWindow->GetHeight())),
-        //             0.0f);
-        //ERR_CHECK();
-        //prTrace("%f\n", ((1.0f / (f32)m_pWindow->GetHeight()) / 2.0f) / 2.0f);
+#if defined(PLATFORM_ANDROID)
+        // Displacement trick for exact pixelization
+        glTranslatef(0.375f, 0.375f, 0.0f);
+        ERR_CHECK();
+#endif
     }
 }
 

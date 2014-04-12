@@ -61,7 +61,8 @@
   #define MAX_PATH    260
   #endif
 
-  //#define ANDROID_APK_DEBUG
+  #define ANDROID_APK_DEBUG
+  //#define ANDROID_APK_DEBUG_SHOW_CONTENTS
 
   namespace
   {
@@ -74,133 +75,6 @@
   #error No platform defined.
 
 #endif
-
-
-// ----------------------------------------------------------------------------
-// Implementation.
-// ----------------------------------------------------------------------------
-/*typedef struct FileManagerImplementation
-{
-    // ------------------------------------------------------------------------
-    // Ctor
-    // ------------------------------------------------------------------------
-    FileManagerImplementation()
-    {
-        // Init data
-        count    = 0;
-        ready    = false;
-        exp0     = false;
-        exp1     = false;
-        exp2     = false;
-        table    = -1;
-        index    = -1;
-        filehash = 0xFFFFFFFF;
-
-        for (int i=0; i<FILE_ARCHIVES_MAX; i++)
-        {
-            pArchiveFile[i] = NULL;
-            pEntries[i]     = NULL;
-            entryCount[i]   = 0;
-        }
-
-        memset(path, 0, sizeof(path));
-        memset(dataPath, 0, sizeof(dataPath));
-
-        // Android doesn't use the archive as the .APK
-        // is already zipped! So we'll have one archive only!
-        //#if defined(PLATFORM_ANDROID)
-        //count        = 1;
-        //ready        = true;
-        //#endif
-
-        //Trace("CTOR - prFileManager\n");
-    }
-
-
-    // ------------------------------------------------------------------------
-    // Dtor
-    // ------------------------------------------------------------------------
-    ~FileManagerImplementation()
-    {
-        for (int i=0; i<FILE_ARCHIVES_MAX; i++)
-        {
-            // Close and delete file
-            if (pArchiveFile[i] != NULL)
-            {
-                pArchiveFile[i]->Close();
-                PRSAFE_DELETE(pArchiveFile[i]);
-            }
-
-            // Delete entry table
-            PRSAFE_DELETE(pEntries[i]);
-        }
-    }
-
-
-    // ------------------------------------------------------------------------
-    // This function looks in all archives for the file.
-    // Returns the last file found as code assumes later archives will contain updated files
-    // ------------------------------------------------------------------------
-    bool Exists(u32 hash, u32 &size)
-    {
-        bool result = false;
-
-        table    = -1;
-        index    = -1;
-        size     = 0xFFFFFFFF;
-        filehash = 0xFFFFFFFF;
-
-        if (count > 0)
-        {
-            for (u32 i=0; i<count; i++)
-            {
-                int  lower = 0;
-                int  upper = entryCount[i];
-                //int  mid;
-
-                // Get table start
-                ArcEntry *pStart = pEntries[i];
-
-                while(lower <= upper)
-                {
-                    int mid = (lower + upper) / 2;
-                    //Trace("%i %i %i\n", lower, upper, mid);
-
-                    // Get mid entry
-                    ArcEntry *pEntry = pStart;
-                    pEntry += mid;
-
-                    if (hash > pEntry->hash)
-                    {
-                        lower = mid + 1;
-                    }
-                    else if (hash < pEntry->hash)
-                    {
-                        upper = mid - 1;
-                    }
-                    else
-                    {
-                        index    = mid;
-                        table    = i;
-                        result   = true;
-                        size     = pEntry->filesize;
-                        filehash = hash;
-                        //Trace("Found in archive: %s\n", pEntry->filename);
-                        break;
-                    }
-                }
-            }
-        }
-
-        //if (!result)
-        //{
-        //    Trace("Failed to find file in archive: %x\n", hash);
-        //}
-
-        return result;
-    }
-
-} FileManagerImplementation;*/
 
 
 /// ---------------------------------------------------------------------------
@@ -282,12 +156,24 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
 /// ---------------------------------------------------------------------------
 prFileManager::~prFileManager()
 {
+    for (int i=0; i<FILE_ARCHIVES_MAX; i++)
+    {
+        // Close and delete file
+        if (pArchiveFile[i] != NULL)
+        {
+            pArchiveFile[i]->Close();
+            PRSAFE_DELETE(pArchiveFile[i]);
+        }
+
+        // Delete entry table
+        PRSAFE_DELETE(pEntries[i]);
+    }
 }
 
 
-// ----------------------------------------------------------------------------
-// Register an archive.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Register an archive.
+/// ---------------------------------------------------------------------------
 void prFileManager::RegisterArchive(const char *filename)
 {
 #if !defined(PLATFORM_ANDROID)
@@ -430,13 +316,13 @@ void prFileManager::RegisterArchive(const char *filename)
         {
             PRPANIC("Error loading APK");
         }
- //       else
- //       {
- //           Trace("Opened APK: %s\n", APKPath);
- //       }
+        else
+        {
+            prTrace("Opened APK: %s\n", APKPath);
+        }
 
-        // Print APK contents
-        #if defined(ANDROID_APK_DEBUG)
+        // Print the APK's contents
+        #if defined(ANDROID_APK_DEBUG) && defined(ANDROID_APK_DEBUG_SHOW_CONTENTS)
         if (APKArchive)
         {
             int numFiles = zip_get_num_files(APKArchive);
@@ -445,9 +331,9 @@ void prFileManager::RegisterArchive(const char *filename)
                 const char *name = zip_get_name(APKArchive, i, 0);
                 if (name == NULL)
                 {
-                    PANIC("Error reading zip file name at index %i : %s", i, zip_strerror(APKArchive));
+                    PRPANIC("Error reading zip file name at index %i : %s", i, zip_strerror(APKArchive));
                 }
-                Trace("File %i, %s\n", i, name);
+                prTrace("File %i, %s\n", i, name);
             }
         }
         #endif
@@ -457,9 +343,9 @@ void prFileManager::RegisterArchive(const char *filename)
 }
 
 
-// ----------------------------------------------------------------------------
-// Returns the filepath for the current platform.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Returns the filepath for the current platform.
+/// ---------------------------------------------------------------------------
 const char *prFileManager::GetSystemPath(const char *filename)
 {
     PRASSERT(filename && *filename);
@@ -546,9 +432,9 @@ const char *prFileManager::GetSystemPath(const char *filename)
 }
 
 
-// ----------------------------------------------------------------------------
-// Let the file system know we're done registering archives.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Let the file system know we're done registering archives.
+/// ---------------------------------------------------------------------------
 void prFileManager::SetRegistrationComplete()
 {
 #if !defined(PLATFORM_ANDROID)
@@ -557,40 +443,38 @@ void prFileManager::SetRegistrationComplete()
 }
 
 
-// ----------------------------------------------------------------------------
-// Ready to use?
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Ready to use?
+/// ---------------------------------------------------------------------------
 bool prFileManager::Ready() const
 {
     return ready;
 }
 
 
-// ----------------------------------------------------------------------------
-// How many archives loaded.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// How many archives loaded.
+/// ---------------------------------------------------------------------------
 int prFileManager::ArchiveCount() const
 {
     return count;
 }
 
 
-// ----------------------------------------------------------------------------
-// Does the file exist
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Does the file exist
+/// ---------------------------------------------------------------------------
 bool prFileManager::Exists(const char *filename, u32 &size)
 {
     PRASSERT(filename && *filename);
 
 #if !defined(PLATFORM_ANDROID)
     
-    //u32  hash   = prStringHash(filename);
-    bool result = false; // imp.Exists(hash, size);
-        TODO("Fix")
+    u32  hash   = prStringHash(filename);
+    bool result = Exists(hash, size);
     if (!result)
     {
-        TODO("Put me back")
-//        Trace("Failed to find file in archive: %s\n", filename);
+        prTrace("Failed to find file in archive: %s\n", filename);
     }
 
 #else
@@ -650,8 +534,8 @@ u32 prFileManager::Read(u8 *pDataBuffer, u32 size, u32 hash)
     // Do we need to locate the file? Or can we use the last search results?
     if (hash != filehash)
     {
-        //u32 filesize = 0;
-        //if (!Exists(hash, filesize))
+        u32 filesize = 0;
+        if (!Exists(hash, filesize))
         {
             PRPANIC("Archive internal read failed. Failed to find file");
         }
@@ -712,11 +596,74 @@ u32 prFileManager::Read(u8 *pDataBuffer, u32 size, u32 hash)
 }
 
 
+// ------------------------------------------------------------------------
+// This function looks in all archives for the file.
+// Returns the last file found as code assumes later archives will contain updated files
+// ------------------------------------------------------------------------
+bool prFileManager::Exists(u32 hash, u32 &size)
+{
+    bool result = false;
+
+    table    = -1;
+    index    = -1;
+    size     = 0xFFFFFFFF;
+    filehash = 0xFFFFFFFF;
+
+    if (count > 0)
+    {
+        for (u32 i=0; i<count; i++)
+        {
+            s32  lower = 0;
+            s32  upper = entryCount[i];
+
+            // Get table start
+            prArcEntry *pStart = pEntries[i];
+
+            while(lower <= upper)
+            {
+                s32 mid = (lower + upper) / 2;
+                //prTrace("%i %i %i\n", lower, upper, mid);
+
+                // Get mid entry
+                prArcEntry *pEntry = pStart;
+                pEntry += mid;
+
+                if (hash > pEntry->hash)
+                {
+                    lower = mid + 1;
+                }
+                else if (hash < pEntry->hash)
+                {
+                    upper = mid - 1;
+                }
+                else
+                {
+                    index    = mid;
+                    table    = i;
+                    result   = true;
+                    size     = pEntry->filesize;
+                    filehash = hash;
+                    //prTrace("Found in archive: %s\n", pEntry->filename);
+                    break;
+                }
+            }
+        }
+    }
+
+    //if (!result)
+    //{
+    //    Trace("Failed to find file in archive: %x\n", hash);
+    //}
+
+    return result;
+}
+
+
 #if defined(PLATFORM_ANDROID)
 // ----------------------------------------------------------------------------
 // Read a file.
 // ----------------------------------------------------------------------------
-/*u32 prFileManager::Read(u8 *pDataBuffer, u32 size, const char *filename)
+u32 prFileManager::Read(u8 *pDataBuffer, u32 size, const char *filename)
 {
     PRASSERT(pDataBuffer);
     PRASSERT(filename);
@@ -731,22 +678,22 @@ u32 prFileManager::Read(u8 *pDataBuffer, u32 size, u32 hash)
         {
             if (size != file->bytes_left)
             {
-                Trace("size not match");
+                prTrace("size not match");
             }
 
             filesize = file->bytes_left;
             zip_fread(file, pDataBuffer, size);
             zip_fclose(file);
-            //Trace("AND: Loaded file: %s\n", GetSystemPath(filename));
+            prTrace("AND: Loaded file: %s\n", GetSystemPath(filename));
         }
         else
         {
-            Trace("Read: Failed to open file: %s\n", GetSystemPath(filename));
+            prTrace("Read: Failed to open file: %s\n", GetSystemPath(filename));
         }
     }
 
     return filesize;
-}//*/
+}
 
 
 /// ---------------------------------------------------------------------------

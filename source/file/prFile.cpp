@@ -42,9 +42,9 @@
 #endif
 
 
-// ----------------------------------------------------------------------------
-// prFile operation mode.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// prFile operation mode.
+/// ---------------------------------------------------------------------------
 enum prFileMode
 {
     FileMode_None,                                      // No file operation has been performed yet!
@@ -53,14 +53,12 @@ enum prFileMode
 };
 
 
-// ----------------------------------------------------------------------------
-// Implementation data
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Implementation data
+/// ---------------------------------------------------------------------------
 typedef struct FileImplementation
 {
-    // ------------------------------------------------------------------------
     // Ctor
-    // ------------------------------------------------------------------------
     FileImplementation()
     {
         filedata    = NULL;
@@ -83,18 +81,14 @@ typedef struct FileImplementation
     }
     
     
-    // ------------------------------------------------------------------------
     // Dtor
-    // ------------------------------------------------------------------------
     ~FileImplementation()
     {
         PRSAFE_DELETE(filedata);
     }
 
 
-    // ------------------------------------------------------------------------
     // Checks for file errors.
-    // ------------------------------------------------------------------------
     bool WasThereAFileError()
     {
         bool result = false;
@@ -141,9 +135,9 @@ typedef struct FileImplementation
 } FileImplementation;
 
 
-// ----------------------------------------------------------------------------
-// Ctor.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Ctor.
+/// ---------------------------------------------------------------------------
 prFile::prFile(const char *filename) : pImpl (new FileImplementation())
                                  , imp   (*pImpl)
 {
@@ -184,9 +178,9 @@ prFile::prFile(const char *filename) : pImpl (new FileImplementation())
 }
 
 
-// ----------------------------------------------------------------------------
-// Dtor.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Dtor.
+/// ---------------------------------------------------------------------------
 prFile::~prFile()
 {
     Close();
@@ -194,9 +188,9 @@ prFile::~prFile()
 }
 
 
-// ----------------------------------------------------------------------------
-// Gets the size of the file.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Gets the size of the file.
+/// ---------------------------------------------------------------------------
 u32 prFile::Size() const
 {
     PRASSERT(pImpl);
@@ -204,24 +198,27 @@ u32 prFile::Size() const
 }
 
 
-// ----------------------------------------------------------------------------
-// Determines if the file exists
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Determines if the file exists
+/// ---------------------------------------------------------------------------
 bool prFile::Exists()
 {
     PRASSERT(pImpl);
-//    PRASSERT(FileManager::SingletonExists());
+
+    // Get filemanager
+    prFileManager *pFM = static_cast<prFileManager *>(prCoreGetComponent(PRSYSTEM_FILEMANAGER));
+    PRASSERT(pFM)
 
     bool result = false;
-
-    if (imp.filenameDisk[0] != 0 && imp.filenameArch[0] != 0 )
+    if (imp.filenameDisk[0] != 0 &&
+        imp.filenameArch[0] != 0 )
     {
-        //u32 size = 0;
+        u32 size = 0;
 
         // Check archive
-        if (false//FileManager::GetInstance()->Ready()                     &&
-            //FileManager::GetInstance()->ArchiveCount() > 0          &&
-            //FileManager::GetInstance()->Exists(imp.filenameArch, size)
+        if (pFM->Ready()                     &&
+            pFM->ArchiveCount() > 0          &&
+            pFM->Exists(imp.filenameArch, size)
            )
         {
             result = true;
@@ -276,13 +273,12 @@ bool prFile::Exists()
 }
 
 
-// ----------------------------------------------------------------------------
-// Opens a file for reading.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Opens a file for reading.
+/// ---------------------------------------------------------------------------
 bool prFile::Open()
 {
     PRASSERT(pImpl);
-    //PRASSERT(FileManager::SingletonExists());
 
 
     // Calling open again?
@@ -323,13 +319,16 @@ bool prFile::Open()
 
 #else
 
-    TODO("Fix")
+    // Get filemanager
+    prFileManager *pFM = static_cast<prFileManager *>(prCoreGetComponent(PRSYSTEM_FILEMANAGER));
+    PRASSERT(pFM)
+
     // Archives registered?
-/*    if (FileManager::GetInstance()->Ready() && FileManager::GetInstance()->ArchiveCount() > 0)
+    if (pFM->Ready() && pFM->ArchiveCount() > 0)
     {
         u32 size = 0;
 
-        if (FileManager::GetInstance()->Exists(imp.filenameArch, size))
+        if (pFM->Exists(imp.filenameArch, size))
         {
             // Okay files open.
             imp.filemode  = FileMode_Normal;
@@ -338,7 +337,7 @@ bool prFile::Open()
             imp.filesize  = size;
             return true;
         }
-    }//*/
+    }
 
 
     // Check mode.
@@ -380,9 +379,9 @@ bool prFile::Open()
 }
 
 
-// ----------------------------------------------------------------------------
-// Closes a file
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Closes a file
+/// ---------------------------------------------------------------------------
 void prFile::Close()
 {
     PRASSERT(pImpl);
@@ -419,9 +418,9 @@ void prFile::Close()
 }
 
 
-// ----------------------------------------------------------------------------
-// Reads data from an open file
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Reads data from an open file
+/// ---------------------------------------------------------------------------
 u32 prFile::Read(void *pDataBuffer, u32 size)
 {
     // Sanity checks
@@ -430,19 +429,21 @@ u32 prFile::Read(void *pDataBuffer, u32 size)
     PRASSERT(imp.filemode == FileMode_Normal);
     PRASSERT(pDataBuffer  != NULL);
     PRASSERT(size > 0);
-    //PRASSERT(FileManager::SingletonExists());
+
+    
+    // Get filemanager
+    prFileManager *pFM = static_cast<prFileManager *>(prCoreGetComponent(PRSYSTEM_FILEMANAGER));
+    PRASSERT(pFM)
+
 
     size_t bytes = 0xFFFFFFFF;
-
     if (imp.inArchive)
     {
-        TODO("Fix")
-            bytes = 0;//FileManager::GetInstance()->Read((u8*)pDataBuffer, size, StringHash(imp.filenameArch));
-        //Trace(" Loaded file: %s\n", imp.filenameArch);
+        bytes = pFM->Read((u8*)pDataBuffer, size, prStringHash(imp.filenameArch));
 
-#if defined(PLATFORM_ANDROID)
-        __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Error: Found in archive");
-#endif
+        #if defined(PLATFORM_ANDROID)
+        __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Error: File found in archive");
+        #endif
     }
     else
     {
@@ -477,9 +478,9 @@ u32 prFile::Read(void *pDataBuffer, u32 size)
 }
 
 
-// ----------------------------------------------------------------------------
-// Seek within an open file.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Seek within an open file.
+/// ---------------------------------------------------------------------------
 void prFile::Seek(s32 offset, s32 origin)
 {
     // Sanity checks
@@ -496,9 +497,9 @@ void prFile::Seek(s32 offset, s32 origin)
 }
 
 
-// ----------------------------------------------------------------------------
-// Returns the file pointers position.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Returns the file pointers position.
+/// ---------------------------------------------------------------------------
 s32 prFile::Tell() const
 {
     // Sanity checks
@@ -517,9 +518,9 @@ s32 prFile::Tell() const
 }
 
 
-// ----------------------------------------------------------------------------
-// Sets the file pointer back to the start of the file.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Sets the file pointer back to the start of the file.
+/// ---------------------------------------------------------------------------
 void prFile::Rewind()
 {
     // Sanity checks
@@ -536,9 +537,9 @@ void prFile::Rewind()
 }
 
 
-// ----------------------------------------------------------------------------
-// Rewind to the start of the file
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Rewind to the start of the file
+/// ---------------------------------------------------------------------------
 void prFile::Internal_Rewind()
 {
     PRASSERT(pImpl);
@@ -548,9 +549,9 @@ void prFile::Internal_Rewind()
 }
 
 
-// ----------------------------------------------------------------------------
-// Seeks to a position within a file
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Seeks to a position within a file
+/// ---------------------------------------------------------------------------
 void prFile::Internal_Seek(s32 offset, s32 origin)
 {
     PRASSERT(pImpl);
@@ -607,9 +608,9 @@ void prFile::Internal_Seek(s32 offset, s32 origin)
 }
 
 
-// ----------------------------------------------------------------------------
-// Returns the current file pointer position
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Returns the current file pointer position
+/// ---------------------------------------------------------------------------
 s32 prFile::Internal_Tell() const
 {
     PRASSERT(pImpl);

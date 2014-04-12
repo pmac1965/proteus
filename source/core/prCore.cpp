@@ -106,6 +106,7 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
             else if (rendererType == PRRENDERER_DIRECTX)
             {
                 PRASSERT(version == PRDXVER_9 || version == PRDXVER_10 || version == PRDXVER_11);
+                PRPANIC("Under construction");
             }
 
         #elif defined(PLATFORM_ANDROID)
