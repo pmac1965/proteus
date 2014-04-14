@@ -237,7 +237,10 @@ typedef struct AchievementManagerImplementation
 
     // Update
     void Update(f32 dt)
-    {        
+    {
+        if (!enabled)
+            return;
+
         // Check if awards have succeeded!
 /*        timer -= dt;
 
@@ -762,27 +765,27 @@ typedef struct AchievementManagerImplementation
 //bool AchievementManagerImplementation::success;
 
 
-// ----------------------------------------------------------------------------
-// Ctor
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Ctor
+/// ---------------------------------------------------------------------------
 prAchievementManager::prAchievementManager(const char *folder) : pImpl (new AchievementManagerImplementation(folder))
                                                                , imp   (*pImpl)
 {
 }
 
 
-// ----------------------------------------------------------------------------
-// Dtor
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Dtor
+/// ---------------------------------------------------------------------------
 prAchievementManager::~prAchievementManager()
 {
     PRSAFE_DELETE(pImpl);
 }
 
 
-// ----------------------------------------------------------------------------
-// Update the achievement manager
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Update the achievement manager
+/// ---------------------------------------------------------------------------
 void prAchievementManager::Update(f32 dt)
 {
     PRASSERT(pImpl);
@@ -792,10 +795,9 @@ void prAchievementManager::Update(f32 dt)
 
 #else
     if (imp.enabled == false)
-        return;
-
-    imp.Update(dt);
-
+    {
+        imp.Update(dt);
+    }
 #endif
 }
 

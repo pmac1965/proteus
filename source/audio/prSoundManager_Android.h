@@ -156,7 +156,7 @@ private:
     //ALuint              format;
     //ALuint              songBuffers[2];
     //ALuint              songSource;
-    //u32                 songCurr;
+    u32                 songCurr;
 };
 
 

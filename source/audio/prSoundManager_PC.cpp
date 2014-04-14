@@ -368,6 +368,7 @@ void prSoundManager_PC::Update(f32 dt)
 
             if (songFade > 0)
             {
+                // PRLERP(runTime / emit_time_run, emit_time_max, emit_time_min);
                 float v = (PRLERP(songFade, 0.0f, songTime) / songFade); 
                 v = (v / songFade);
                 songTime -= (dt / 1000.0f);
@@ -630,7 +631,7 @@ void prSoundManager_PC::SongPlayByName(const char *filename)
         alSourcePlay(songSource);
         AL_ERROR_CHECK()
 
-        prTrace("Playing song: %s\n", filename);
+        //prTrace("Playing song: %s\n", filename);
         SongSetVolume(songVolume);
     }
     else

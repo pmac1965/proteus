@@ -107,7 +107,6 @@ static const float INCREMENT = 2.0f * Proteus::Maths::Pi / SEGMENTS;
 /// ---------------------------------------------------------------------------
 prRenderer_GL11::prRenderer_GL11() : prRenderer()
 {
-    TODO("For bada and android add the window code here")
 }
 
 
@@ -269,11 +268,11 @@ void prRenderer_GL11::SetOrthographicView()
         glDisable(GL_DEPTH_TEST);
         ERR_CHECK();
 
-#if defined(PLATFORM_ANDROID)
-        // Displacement trick for exact pixelization
-        glTranslatef(0.375f, 0.375f, 0.0f);
-        ERR_CHECK();
-#endif
+//#if defined(PLATFORM_ANDROID)
+//        // Displacement trick for exact pixelization
+//        glTranslatef(0.375f, 0.375f, 0.0f);
+//        ERR_CHECK();
+//#endif
     }
 }
 

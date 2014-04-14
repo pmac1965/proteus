@@ -43,9 +43,7 @@
 #include "prOpenALErrors.h"
 
 
-/// ---------------------------------------------------------------------------
 /// Defines.
-/// ---------------------------------------------------------------------------
 #define SOUND_DEBUG
 
 
@@ -54,7 +52,7 @@
 /// ---------------------------------------------------------------------------
 prSoundManager_Ios::prSoundManager_Ios()
 {
-    masterMusVolume         = AUDIO_MUS_MAX_VOLUME;
+    /*masterMusVolume         = AUDIO_MUS_MAX_VOLUME;
     masterSfxVolume         = AUDIO_SFX_MAX_VOLUME;
     songVolume              = AUDIO_MUS_INITIAL_VOL;
     songIndex               = -1;
@@ -70,20 +68,20 @@ prSoundManager_Ios::prSoundManager_Ios()
     numTracks               = 0;
     numEffects              = 0;
     active                  = 0;
-    effectId                = 1;
+    effectId                = 1;//*/
     songCurr                = -1;
     device                  = NULL;
     context                 = NULL;
 
     // Set default states
-    for (s32 i=0; i<AUDIO_MAX_ACTIVE; i++)
+    /*for (s32 i=0; i<AUDIO_MAX_ACTIVE; i++)
     {
         soundEffects[i].state    = SFX_STATE_UNAVAILABLE;
         soundEffects[i].uiSource = 0xFFFFFFFF;
     }
 
     TODO("Add audio loop control")
-    TODO("Add silent mode")
+    TODO("Add silent mode")*/
 }
 
 

@@ -20,26 +20,49 @@
 #define __PRJNIINTERFACE_H
 
 
-//#define FX_PLAYING  0
-//#define FX_PAUSED   1
+#include "../prConfig.h"
 
 
-// Function: prJNISetPackageName
+#if defined(PLATFORM_ANDROID)
+
+
+#include <jni.h>
+
+
+// Function: prJNI_SetPackageName
 //      Sets the android package name
-void prJNISetPackageName(const char *package);
+void prJNI_SetPackageName(const char *package);
 
-// Function: prJNISetActivityName
+// Function: prJNI_SetActivityName
 //      Sets the android activity name
-void prJNISetActivityName(const char *activity);
+void prJNI_SetActivityName(const char *activity);
 
-// Function: prJNISetProviderName
+// Function: prJNI_SetProviderName
 //      Sets the android provider name
-void prJNISetProviderName(const char *provider);
+void prJNI_SetProviderName(const char *provider);
 
-// Function: prJNISetAnalyticName
+// Function: prJNI_SetAnalyticName
 //      Sets the android analytic name
-void prJNISetAnalyticName(const char *analytic);
+void prJNI_SetAnalyticName(const char *analytic);
+
+// Function: prJNI_MakeFinalClassName
+//      Makes the final class name. 
+const char *prJNI_MakeFinalClassName(const char *pClassName);
+
+// Function: prJNI_GetEnv
+//      Get java environment.
+bool prJNI_GetEnv(JNIEnv **env, bool &isAttached);
+
+// Function: prJNI_GetClass
+//      Finds a class.
+jclass prJNI_GetClass(JNIEnv *env, const char *className, bool isAttached);
+
+// Function: prJNI_GetVM
+//      Gets the VM
+JavaVM *prJNI_GetVM();
 
 
-#endif//_JNIINTERFACE_H
+#endif//PLATFORM_ANDROID
 
+
+#endif//__PRJNIINTERFACE_H

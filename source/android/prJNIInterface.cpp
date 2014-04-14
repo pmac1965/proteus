@@ -80,7 +80,7 @@ JNIEXPORT void JNI_OnUnload(JavaVM *vm, void *reserved)
 /// ---------------------------------------------------------------------------
 /// Sets the package name.
 /// ---------------------------------------------------------------------------
-void prJNISetPackageName(const char *package)
+void prJNI_SetPackageName(const char *package)
 {
     PRASSERT(package && *package);
     PRASSERT(prStringLength(package) < (ANDROID_NAME_SIZE - 1));
@@ -91,7 +91,7 @@ void prJNISetPackageName(const char *package)
 /// ---------------------------------------------------------------------------
 /// Sets the activity name.
 /// ---------------------------------------------------------------------------
-void prJNISetActivityName(const char *activity)
+void prJNI_SetActivityName(const char *activity)
 {
     PRASSERT(activity && *activity);
     PRASSERT(prStringLength(activity) < (ANDROID_NAME_SIZE - 1));
@@ -102,7 +102,7 @@ void prJNISetActivityName(const char *activity)
 /// ---------------------------------------------------------------------------
 /// Sets the provider name.
 /// ---------------------------------------------------------------------------
-void prJNISetProviderName(const char *provider)
+void prJNI_SetProviderName(const char *provider)
 {
     PRASSERT(provider && *provider);
     PRASSERT(prStringLength(provider) < (ANDROID_NAME_SIZE - 1));
@@ -113,7 +113,7 @@ void prJNISetProviderName(const char *provider)
 /// ---------------------------------------------------------------------------
 /// Sets the analytic name.
 /// ---------------------------------------------------------------------------
-void prJNISetAnalyticName(const char *analytic)
+void prJNI_SetAnalyticName(const char *analytic)
 {
     PRASSERT(analytic && *analytic);
     PRASSERT(prStringLength(analytic) < (ANDROID_NAME_SIZE - 1));
@@ -121,11 +121,10 @@ void prJNISetAnalyticName(const char *analytic)
 }
 
 
-#if 0
-// ----------------------------------------------------------------------------
-// Makes the final class name. 
-// ----------------------------------------------------------------------------
-const char *JNI_MakeFinalClassName(const char *pClassName)
+/// ---------------------------------------------------------------------------
+/// Makes the final class name. 
+/// ---------------------------------------------------------------------------
+const char *prJNI_MakeFinalClassName(const char *pClassName)
 {
     static char name[256];
 
@@ -133,23 +132,27 @@ const char *JNI_MakeFinalClassName(const char *pClassName)
     strcat(name, "/");
     strcat(name, pClassName);
 
+    __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Final %s", name);
+
     return name;
 }
 
 
-// ----------------------------------------------------------------------------
-// Get environment.
-// ----------------------------------------------------------------------------
-bool JNI_GetEnv(JNIEnv **env, bool &isAttached)
+/// ---------------------------------------------------------------------------
+/// Get environment.
+/// ---------------------------------------------------------------------------
+bool prJNI_GetEnv(JNIEnv **env, bool &isAttached)
 {
     int status = gJavaVM->GetEnv((void **)env, JNI_VERSION_1_4);
     if (status < 0)
     {
         // Failed to get JNI environment. Assuming native thread.
+        __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get JNI environment. Assuming native thread.");
+
         status = gJavaVM->AttachCurrentThread(env, NULL);
         if (status < 0) 
         {
-            prLog("Failed to attach current thread\n");
+            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to attach current thread");
             return false;
         }
 
@@ -160,15 +163,20 @@ bool JNI_GetEnv(JNIEnv **env, bool &isAttached)
 }
 
 
-// ----------------------------------------------------------------------------
-// Finds a class.
-// ----------------------------------------------------------------------------
-jclass JNI_GetClass(JNIEnv *env, const char *className, bool isAttached) 
+/// ---------------------------------------------------------------------------
+/// Finds a class.
+/// ---------------------------------------------------------------------------
+jclass prJNI_GetClass(JNIEnv *env, const char *className, bool isAttached) 
 {
-    jclass cls = env->FindClass(JNI_MakeFinalClassName(className));
+    PRASSERT(env);
+    PRASSERT(className && *className);
+
+    jclass cls = env->FindClass(prJNI_MakeFinalClassName(className));
     if (!cls) 
     {
-        prLog("Failed to find class.\n");            
+        // Warn
+        __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to find class %s", className);
+
         if (isAttached)
         {
             gJavaVM->DetachCurrentThread();
@@ -179,224 +187,16 @@ jclass JNI_GetClass(JNIEnv *env, const char *className, bool isAttached)
 }
 
 
-// ----------------------------------------------------------------------------
-// Plays a song.
-// ----------------------------------------------------------------------------
-void JNI_SongPlay(const char *filename)
+/// ---------------------------------------------------------------------------
+/// Gets the VM
+/// ---------------------------------------------------------------------------
+JavaVM *prJNI_GetVM()
 {
-    ASSERT(gJavaVM);
-    if (gJavaVM)
-    {
-        bool    isAttached  = false;
-        JNIEnv *env         = NULL;
-
-        // Get environment.
-        if (!JNI_GetEnv(&env, isAttached))
-            return;
-
-        // Find class
-        jclass cls = JNI_GetClass(env, "Audio", isAttached);
-        if (!cls)
-            return;
-        
-        // Find the callBack method ID
-        jmethodID method = env->GetStaticMethodID(cls, "SongPlay", "(Ljava/lang/String;)V");
-        if (!method)
-        {
-            if (isAttached)
-            {
-                gJavaVM->DetachCurrentThread();
-            }
-            return;
-        }
-
-        // Construct a Java string.
-        jstring js = env->NewStringUTF(filename);
-        env->CallStaticVoidMethod(cls, method, js);
-
-        // And done
-        if (isAttached)
-        {
-            gJavaVM->DetachCurrentThread();
-        }
-    }
+    return gJavaVM;
 }
 
 
-// ----------------------------------------------------------------------------
-// Stops a song.
-// ----------------------------------------------------------------------------
-void JNI_SongStop()
-{
-    ASSERT(gJavaVM);
-    if (gJavaVM)
-    {
-        bool    isAttached  = false;
-        JNIEnv *env         = NULL;
-
-        // Get environment.
-        if (!JNI_GetEnv(&env, isAttached))
-            return;
-
-        // Find class
-        jclass cls = JNI_GetClass(env, "Audio", isAttached);
-        if (!cls)
-            return;
-        
-        // Find the callBack method ID
-        jmethodID method = env->GetStaticMethodID(cls, "SongStop", "()V");
-        if (!method)
-        {
-            prLog("Failed to get method ID\n");
-            if (isAttached)
-            {
-                gJavaVM->DetachCurrentThread();
-            }
-            return;
-        }
-
-        // Call.
-        env->CallStaticVoidMethod(cls, method);
-
-        // And done
-        if (isAttached)
-        {
-            gJavaVM->DetachCurrentThread();
-        }
-    }
-}
-
-
-// ----------------------------------------------------------------------------
-// Sets song volume.
-// ----------------------------------------------------------------------------
-void JNI_SongSetVolume(float volume)
-{
-    ASSERT(gJavaVM);
-    if (gJavaVM)
-    {
-        bool    isAttached  = false;
-        JNIEnv *env         = NULL;
-
-        // Get environment.
-        if (!JNI_GetEnv(&env, isAttached))
-            return;
-
-        // Find class
-        jclass cls = JNI_GetClass(env, "Audio", isAttached);
-        if (!cls)
-            return;
-        
-        // Find the callBack method ID
-        jmethodID method = env->GetStaticMethodID(cls, "SongSetVolume", "(F)V");
-        if (!method)
-        {
-            prLog("Failed to get method ID\n");
-            if (isAttached)
-            {
-                gJavaVM->DetachCurrentThread();
-            }
-            return;
-        }
-
-        // Call.
-        env->CallStaticVoidMethod(cls, method, volume);
-
-        // And done
-        if (isAttached)
-        {
-            gJavaVM->DetachCurrentThread();
-        }
-    }
-}
-
-
-// ----------------------------------------------------------------------------
-// Pauses the currently playing song.
-// ----------------------------------------------------------------------------
-void JNI_SongPause()
-{
-    ASSERT(gJavaVM);
-    if (gJavaVM)
-    {
-        bool    isAttached  = false;
-        JNIEnv *env         = NULL;
-
-        // Get environment.
-        if (!JNI_GetEnv(&env, isAttached))
-            return;
-
-        // Find class
-        jclass cls = JNI_GetClass(env, "Audio", isAttached);
-        if (!cls)
-            return;
-        
-        // Find the callBack method ID
-        jmethodID method = env->GetStaticMethodID(cls, "SongPause", "()V");
-        if (!method)
-        {
-            prLog("Failed to get method ID\n");
-            if (isAttached)
-            {
-                gJavaVM->DetachCurrentThread();
-            }
-            return;
-        }
-
-        // Call.
-        env->CallStaticVoidMethod(cls, method);
-
-        // And done
-        if (isAttached)
-        {
-            gJavaVM->DetachCurrentThread();
-        }
-    }
-}
-
-
-// ----------------------------------------------------------------------------
-// Pauses the currently playing song.
-// ----------------------------------------------------------------------------
-void JNI_SongResume()
-{
-    ASSERT(gJavaVM);
-    if (gJavaVM)
-    {
-        bool    isAttached  = false;
-        JNIEnv *env         = NULL;
-
-        // Get environment.
-        if (!JNI_GetEnv(&env, isAttached))
-            return;
-
-        // Find class
-        jclass cls = JNI_GetClass(env, "Audio", isAttached);
-        if (!cls)
-            return;
-        
-        // Find the callBack method ID
-        jmethodID method = env->GetStaticMethodID(cls, "SongResume", "()V");
-        if (!method)
-        {
-            prLog("Failed to get method ID\n");
-            if (isAttached)
-            {
-                gJavaVM->DetachCurrentThread();
-            }
-            return;
-        }
-
-        // Call.
-        env->CallStaticVoidMethod(cls, method);
-
-        // And done
-        if (isAttached)
-        {
-            gJavaVM->DetachCurrentThread();
-        }
-    }
-}
+#if 0
 
 
 // ----------------------------------------------------------------------------

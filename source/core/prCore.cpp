@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -40,6 +39,7 @@
 #include "../debug/prFps_PC.h"
 #include "../audio/prSoundManager_PC.h"
 #include "../audio/prSoundManager_Ios.h"
+#include "../audio/prSoundManager_Android.h"
 #include "../input/prTouch.h"
 
 
@@ -293,7 +293,7 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 #if defined(PLATFORM_PC)
                     systems[id] = new prSoundManager_PC();
                 #elif defined(PLATFORM_ANDROID)
-                    systems[id] = NULL;
+                    systems[id] = new prSoundManager_Android();
                 #elif defined(PLATFORM_IOS)
                     systems[id] = new prSoundManager_Ios();
                 #elif defined(PLATFORM_LINUX)

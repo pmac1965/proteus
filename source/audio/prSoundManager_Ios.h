@@ -151,11 +151,11 @@ public:
 private:
     ALCdevice          *device;
     ALCcontext         *context;
-    ALuint              frequency;
-    ALuint              channels;
-    ALuint              format;
-    ALuint              songBuffers[2];
-    ALuint              songSource;
+    //ALuint              frequency;
+    //ALuint              channels;
+    //ALuint              format;
+    //ALuint              songBuffers[2];
+    //ALuint              songSource;
     u32                 songCurr;
 };
 

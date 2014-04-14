@@ -48,14 +48,9 @@
   #endif
 
 #elif defined(PLATFORM_ANDROID)
-    // Uses the openal-soft-android-251011 lib for android as OpenAL is unsupported as yet!
-    //#if defined(USE_OPENAL)
-    //#include "../android/AL/al.h"
-    //#include "../android/AL/alc.h"
+    //#ifdef SOUND_ALLOW
+    //#undef SOUND_ALLOW
     //#endif
-    #ifdef SOUND_ALLOW
-    #undef SOUND_ALLOW
-    #endif
 
 
 #elif defined(PLATFORM_LINUX)
@@ -87,9 +82,12 @@ prLoadedWave::~prLoadedWave()
 
     if (uiBuffer != 0xFFFFFFFF)
     {
+        #if !defined(PLATFORM_ANDROID)
         alDeleteBuffers(1, &uiBuffer);
         AL_ERROR_CHECK();
+        #endif
     }
+
 #endif
 
     uiBuffer = 0xFFFFFFFF;

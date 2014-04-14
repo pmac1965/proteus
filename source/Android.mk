@@ -60,6 +60,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	analytics/prAnalyticsBase.cpp	\
 	analytics/prAnalyticsFlurry.cpp	\
 	android/prJNIInterface.cpp	\
+	android/prJNIAudio.cpp	\
 	audio/prOpenALDeviceList.cpp	\
 	audio/prOpenALErrors.cpp	\
 	audio/prSoundManager.cpp	\
