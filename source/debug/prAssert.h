@@ -23,6 +23,11 @@
 #include "../prConfig.h"
 
 
+#if defined(PLATFORM_MAC)
+#include <csignal>
+#endif
+
+
 #if defined(_DEBUG) || defined(DEBUG)
 
     // Function: prAssertPrint
@@ -101,13 +106,19 @@
             *((int*)0) = 0;                                                         \
         }
 
+    #elif defined(PLATFORM_MAC)
+        #define PRBREAKPOINT()                                                      \
+        {                                                                           \
+            raise(SIGINT);                                                          \
+        }
+
     #else
         #error No platform defined.
 
     #endif
 
 
-    #if defined(PLATFORM_BADA) || defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID) || defined(PLATFORM_LINUX)
+    #if defined(PLATFORM_BADA) || defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC)
 
         // Assertion macro which allows additional information to be displayed.
         #define PRASSERT(cond, args...)                                             \

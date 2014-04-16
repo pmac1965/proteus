@@ -40,7 +40,7 @@ prSpriteAnimationSequence::prSpriteAnimationSequence(const char *name, s32 frame
     PRASSERT(name && *name);
     PRASSERT(frames > 0);
 
-    int len = strlen(name) + 1;
+    int len = (int)(strlen(name) + 1);
 
     m_pName         = new char[len];
     m_pData         = new prAnimSequenceData[ frames ];

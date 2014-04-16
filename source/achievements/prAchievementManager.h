@@ -21,6 +21,7 @@
 
 
 #include "../core/prTypes.h"
+#include "../persistence/prSave.h"
 
 
 // Enums
@@ -84,9 +85,10 @@ class prBitmapFont;
 class prLanguage;
 class prColour;
 
+
 // Class: prAchievementManager
 //      Achievements manager
-class prAchievementManager
+class prAchievementManager : public prIoResultCallback
 {
 public:
     // Method: prAchievementManager
@@ -121,6 +123,20 @@ public:
 
     // Saves the achievements states.
     void Save();
+
+    // Method: SaveResult
+    //      This method receives state messages.
+    //
+    // Parameters:
+    //      save - The save result
+    void SaveResult(s32 result);
+
+    // Method: LoadResult
+    //      This method receives state messages.
+    //
+    // Parameters:
+    //      save - The save result
+    void LoadResult(s32 result);
 
     // Sets whether the engine or the provider renders the achievement popup.
     // The engine can be faster and it allows for platforms that

@@ -30,6 +30,10 @@
   #include <OpenGLES/ES1/gl.h>  
   #include <stdio.h>
 
+#elif defined(PLATFORM_MAC)
+  #include <OpenGL/gl.h>
+  #include <stdio.h>
+
 #elif defined(PLATFORM_BADA)
   #include <FGraphicsOpengl.h>
   using namespace Osp::Graphics::Opengl;
@@ -63,7 +67,7 @@
 
 
 // prTexture formats.
-#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
+#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC)
 enum
 {
     TEX_FMT_OGL888          = 0x00000015,

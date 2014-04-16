@@ -37,6 +37,9 @@
 #elif defined(PLATFORM_IOS)
     #include <stdio.h>
 
+#elif defined(PLATFORM_MAC)
+    #include <stdio.h>
+
 #elif defined(PLATFORM_ANDROID)
     #include <android/log.h>
 
@@ -117,6 +120,9 @@ void prOutputString(const char *text)
         OutputDebugStringA(text);
 
 #elif defined(PLATFORM_IOS)
+        printf("%s", text);
+        
+#elif defined(PLATFORM_MAC)
         printf("%s", text);
 
 #elif defined(PLATFORM_LINUX)

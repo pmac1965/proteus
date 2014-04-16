@@ -38,6 +38,9 @@
 #elif defined(PLATFORM_LINUX)
     // To be added
 
+#elif defined(PLATFORM_MAC)
+    // To be added
+
 #else
   #error "Unsupported platform."
 
@@ -142,6 +145,15 @@ namespace
     }
 
 #elif defined(PLATFORM_LINUX)
+    /// -----------------------------------------------------------------------
+    /// Get the platforms default language.
+    /// -----------------------------------------------------------------------
+    s32 prGetPlatformsLanguage()
+    {
+        return Proteus::Locale::EN_US;
+    }
+
+#elif defined(PLATFORM_MAC)
     /// -----------------------------------------------------------------------
     /// Get the platforms default language.
     /// -----------------------------------------------------------------------

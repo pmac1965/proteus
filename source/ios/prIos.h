@@ -16,7 +16,10 @@
  */
 
 
-#if defined(__APPLE_CC__)
+#include "../prConfig.h"
+
+
+#if defined(PLATFORM_IOS)
 
 
 #include <OpenAL/al.h>
@@ -39,5 +42,5 @@ void prGetDocumentsPath(char *buffer);
 void *prLoadAudioFile(const char *filename, ALsizei *size, ALsizei *freq, ALenum *format);
 
 
-#endif//__APPLE_CC__
+#endif//PLATFORM_IOS
 

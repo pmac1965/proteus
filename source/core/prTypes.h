@@ -36,8 +36,8 @@ typedef unsigned __int64        u64;
 typedef float                   f32;
 typedef double                  f64;
 
-// Basic types - iphone
-#elif defined(PLATFORM_IOS)
+// Basic types - iphone/mac
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_MAC))
 typedef   signed char           s8;
 typedef unsigned char           u8;
 typedef   signed short          s16;

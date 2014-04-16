@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -29,8 +28,6 @@
 #include "../core/prMacros.h"
 #include "../core/prStringUtil.h"
 #include "../core/prResourceManager.h"
-//#include "../core/prSystemResourceManager.h"
-//#include "../core/system.h"
 #include "../display/prSprite.h"
 #include "../display/prTexture.h"
 #include "../display/prRenderer.h"
@@ -38,13 +35,6 @@
 #include "../locale/prLanguage.h"
 #include "../persistence/prSave.h"
 #include "../tinyxml/tinyxml.h"
-
-
-//#include "../input/prInput.h"
-//#include "../input/keyboard.h"
-
-
-//static bool lite_build = false;
 
 
 // Platform specifics
@@ -57,6 +47,10 @@
 #elif defined(PLATFORM_IOS)
   #include <OpenGLES/ES1/gl.h>
   #include "prAchievement_ios.h"
+
+#elif defined(PLATFORM_MAC)
+  //#include <OpenGLES/ES1/gl.h>
+  #include "prAchievement_mac.h"
 
 #elif defined(PLATFORM_BADA)
   #include <FGraphicsOpengl.h>
@@ -79,7 +73,7 @@
 
 
 // Defines
-//#define ACHIEVEMENT_DEBUG
+#define ACHIEVEMENT_DEBUG
 #define SHOW_ACHIEVEMENT_TIME       3000.0f                 // In milliseconds
 #define TEXT_DISPLAY_WIDTH          260.0f
 #define AWARDS_TEST_DELAY           (1000.0f * 60.f)        // One minute delay.
@@ -113,7 +107,7 @@ const char *GetAchievementState(s32 state)
 
 
 // Achievement definition.
-typedef struct AchievementDefinition
+typedef struct prAchievementDefinition
 {
 	u32				hash;
     std::string     name;
@@ -121,35 +115,30 @@ typedef struct AchievementDefinition
     std::string     description;
     std::string     achieved;
     std::string     identifier;
-    std::string     of;
     std::string     image;
 
-} AchievementDefinition;
+} prAchievementDefinition;
 
 
 // Implementation data.
 typedef struct AchievementManagerImplementation
 {
-    // Ctor
+    /// -----------------------------------------------------------------------
+    /// Ctor
+    /// -----------------------------------------------------------------------
     AchievementManagerImplementation(const char *folder) : colour(prColour::White)
     {
         PRASSERT(folder && *folder);
 
-#if defined(PLATFORM_BADA)
-        save                    = NULL;
-
-#else
         save                    = new prSave(folder);
-
-#endif
         achievementsCount       = 0;
         achievements            = NULL;
         pNotificationBar        = NULL;
         pFont                   = NULL;
         pTexture                = NULL;
-//        success                 = false;
+        success                 = false;
         render                  = false;
-        hiRes                   = false;
+//        hiRes                   = false;
         enabled                 = true;
         exp0                    = false;
         mode                    = MODE_NONE;
@@ -160,6 +149,7 @@ typedef struct AchievementManagerImplementation
         on_pos                  = 0;
         off_pos                 = 0;
         step                    = 0;
+        checkIndex              = 0;
         fontScale               = 1.0f;
 
         memset(text_title, 0, sizeof(text_title));
@@ -180,32 +170,29 @@ typedef struct AchievementManagerImplementation
 #elif defined(PLATFORM_LINUX)
         pAchievementProvider = new prAchievement_Linux();
 
+#elif defined(PLATFORM_MAC)
+        pAchievementProvider = new prAchievement_Mac();
+
 #else
         #error No platform defined.
 
 #endif
-
-        TODO("USE sprites! Not textures");
     }
 
 
-    // Dtor
+    /// -----------------------------------------------------------------------
+    /// Dtor
+    /// -----------------------------------------------------------------------
     ~AchievementManagerImplementation()
     {
         PRSAFE_DELETE(save);
         PRSAFE_DELETE(pAchievementProvider);
         PRSAFE_DELETE_ARRAY(achievements);
-
-        if (pTexture)
-        {
-            //prSystemResourceManager::Get()->Unload(pTexture);
-            pTexture = NULL;
-        }
     }
     
     
     // Unused copy constructor.
-    AchievementManagerImplementation(AchievementManagerImplementation& other) : colour(other.colour)
+    /*AchievementManagerImplementation(AchievementManagerImplementation& other) : colour(other.colour)
     {
         save                    = NULL;
         achievementsCount       = 0;
@@ -232,7 +219,7 @@ typedef struct AchievementManagerImplementation
         memset(text_description, 0, sizeof(text_description));
         
         pAchievementProvider    = NULL;
-    }
+    }*/
 
 
     // Update
@@ -241,42 +228,42 @@ typedef struct AchievementManagerImplementation
         if (!enabled)
             return;
 
-        // Check if awards have succeeded!
-/*        timer -= dt;
-
+        // Check if awards given have been registered with the OS!
+        timer -= dt;
         if (timer < 0.0f && mode == MODE_NONE)
         {
-            static u32 num = 0;
+            timer = AWARDS_TEST_DELAY;
 
-            timer = (AWARDS_TEST_DELAY);
-
-            if (achievementsCount > 0 && num < achievementsCount)
+            if (achievements && achievementsCount > 0 && checkIndex < achievementsCount)
             {
-                if (achievements[num].state == Proteus::Achievement::Awarding)
+                // If an achievement state is awarding, try to verify awarded state
+                if (achievements[checkIndex].state == Proteus::Achievement::Awarding)
                 {
-                    if (!lite_build)
+                    //if (!lite_build)
                     {
                         if (pAchievementProvider)
                         {
                             if (pAchievementProvider->IsReady())
                             {
-                                pAchievementProvider->Award(GetIdentifierByIndex(num), 0);
-                                SaveState();
+                                pAchievementProvider->Award(GetIdentifierByIndex(checkIndex), 0);
+                                //SaveState();
                                 //prTrace("Resub %i of %i\n", num, achievementsCount);
                             }
                         }
                     }                    
                 }
-                else
-                {
-                    //prTrace("Skipping %i\n", num);
-                    timer = 64.0f;
-                }
+                //else
+                //{
+                //    //prTrace("Skipping %i\n", num);
+                //    timer = 64.0f;
+                //}
                 
-                if (++num >= achievementsCount)
-                    num = 0;                
+                if (++checkIndex >= achievementsCount)
+                {
+                    checkIndex = 0;                
+                }
             }
-        }//*/
+        }
 
 
         /*if (render)
@@ -383,31 +370,7 @@ typedef struct AchievementManagerImplementation
         {
             if (!renderList.empty())
             {
-                /*if (m_bloody_hack == 666 || m_bloody_hack == 999)
-                {
-                    glPushMatrix();
-                    ERR_CHECK();
-
-                    float r1 =  -90.0f;
-                    float x1 = -913.0f;
-                    float y1 =  269.0f;
-                    float r  =  90.0f;
-                    float x  = -132.0f;
-                    float y  = -754.0f;
-
-                    if (m_bloody_hack == 999)
-                    {
-                        glRotatef(r1, 0.0f, 0.0f, 1.0f);
-                        glTranslatef(x1, y1, 0);
-                    }
-                    else
-                    {
-                        glRotatef(r, 0.0f, 0.0f, 1.0f);
-                        glTranslatef(x, y, 0);
-                    }
-                }*/
-
-                /*if (pNotificationBar)
+                if (pNotificationBar)
                 {
                     pNotificationBar->Draw();
 
@@ -512,18 +475,18 @@ typedef struct AchievementManagerImplementation
     }
     
     
-    // ----------------------------------------------------------------------------
-    // Saves the achievements states.
-    // ----------------------------------------------------------------------------
-    void SaveState()
+    /// -----------------------------------------------------------------------
+    /// Saves the achievements states.
+    /// -----------------------------------------------------------------------
+    /*void SaveState()
     {
         // Save the file.
         if (achievementsCount == 0)
             return;
         
-        /*if (save)
+        if (save)
         {
-            save->StartSave(achievements, achievementsCount * sizeof(prAchievementStatus), SaveCallback, "achievements.dat");
+            save->StartSave(achievements, achievementsCount * sizeof(prAchievementStatus), this, "achievements.dat");
             success = false;
             do
             {
@@ -535,11 +498,13 @@ typedef struct AchievementManagerImplementation
             {
                 prTrace("Failed to save achievements status file.\n");
             }
-        }//*/
-    }
+        }
+    }*/
 
 
-    // Load the XML descriptions of the achievements.
+    /// -----------------------------------------------------------------------
+    /// Load the XML descriptions of the achievements.
+    /// -----------------------------------------------------------------------
     void Load(const char *filename)
     {
         PRASSERT(filename && *filename);
@@ -563,14 +528,14 @@ typedef struct AchievementManagerImplementation
     }
 
 
-    // ------------------------------------------------------------------------
-    // Parses the xml file.
-    // ------------------------------------------------------------------------
+    /// -----------------------------------------------------------------------
+    /// Parses the xml file.
+    /// -----------------------------------------------------------------------
     void ParseFile(TiXmlNode* pParent)
     {
-/*        switch (pParent->Type())
+        switch (pParent->Type())
         {
-        case TiXmlNode::ELEMENT:
+        case TiXmlNode::TINYXML_ELEMENT:
             {
                 // File data
                 if (strcmp(pParent->Value(), "achievements_file") == 0)
@@ -593,17 +558,16 @@ typedef struct AchievementManagerImplementation
         for (TiXmlNode *pChild = pParent->FirstChild(); pChild != 0; pChild = pChild->NextSibling()) 
         {
             ParseFile(pChild);
-        }*/
+        }
     }
 
 
-    // ------------------------------------------------------------------------
-    // Attribute parser.
-    // ------------------------------------------------------------------------
+    /// -----------------------------------------------------------------------
+    /// Attribute parser.
+    /// -----------------------------------------------------------------------
     void ParseAttribs_Achievement(TiXmlElement* pElement)
     {
         PRASSERT(pElement);
-
         if (pElement)
         {
             PRASSERT(pElement->Attribute("name"));
@@ -612,16 +576,14 @@ typedef struct AchievementManagerImplementation
             PRASSERT(pElement->Attribute("desc_achieved"));
             PRASSERT(pElement->Attribute("identifier"));
             PRASSERT(pElement->Attribute("image"));
-            PRASSERT(pElement->Attribute("of"));
 
-            AchievementDefinition d;
+            prAchievementDefinition d;
             d.name          = pElement->Attribute("name");
             d.description   = pElement->Attribute("desc_brief");
             d.howTo         = pElement->Attribute("desc_howto");
 			d.achieved      = pElement->Attribute("desc_achieved");
             d.identifier    = pElement->Attribute("identifier");
 			d.image			= pElement->Attribute("image");
-            d.of            = pElement->Attribute("of");
 			d.hash          = prStringHash(pElement->Attribute("name"));
 
             achievementsList.push_back(d);
@@ -668,8 +630,8 @@ typedef struct AchievementManagerImplementation
 
 	    if (name && *name)
 	    {
-		    std::list<AchievementDefinition>::iterator itr = achievementsList.begin();
-		    std::list<AchievementDefinition>::iterator end = achievementsList.end();
+		    std::list<prAchievementDefinition>::iterator itr = achievementsList.begin();
+		    std::list<prAchievementDefinition>::iterator end = achievementsList.end();
 
 		    u32 hash = prStringHash(name);
 
@@ -677,11 +639,11 @@ typedef struct AchievementManagerImplementation
 		    {
 			    if (hash == (*itr).hash)
 			    {
-#if defined(PLATFORM_ANDROID)
-                    return (*itr).of.c_str();
-#else
+//#if defined(PLATFORM_ANDROID)
+//                    return (*itr).of.c_str();
+//#else
                     return (*itr).identifier.c_str();
-#endif
+//#endif
 			    }
 		    }
 	    }
@@ -696,8 +658,8 @@ typedef struct AchievementManagerImplementation
     // ----------------------------------------------------------------------------
     const char *GetIdentifierByIndex(u32 index)
     {
-		std::list<AchievementDefinition>::iterator itr = achievementsList.begin();
-		std::list<AchievementDefinition>::iterator end = achievementsList.end();
+		std::list<prAchievementDefinition>::iterator itr = achievementsList.begin();
+		std::list<prAchievementDefinition>::iterator end = achievementsList.end();
 
 		u32 idx = 0;
 
@@ -705,11 +667,11 @@ typedef struct AchievementManagerImplementation
 		{
 			if (idx == index)
 			{
-#if defined(PLATFORM_ANDROID)
-                return (*itr).of.c_str();
-#else
+//#if defined(PLATFORM_ANDROID)
+//                return (*itr).of.c_str();
+//#else
                 return (*itr).identifier.c_str();
-#endif
+//#endif
 			}
 
             idx++;
@@ -721,7 +683,7 @@ typedef struct AchievementManagerImplementation
 
 
     // --
-    std::list<AchievementDefinition>      achievementsList;
+    std::list<prAchievementDefinition>    achievementsList;
     std::list<u32>                        updateList;
     std::list<u32>                        renderList;
 
@@ -738,8 +700,8 @@ typedef struct AchievementManagerImplementation
     f32                 delay;
     f32                 timer;
     bool                render;
-    bool                hiRes;
     bool                enabled;
+    bool                success;
     bool                exp0;
     s32                 on_pos;
     s32                 off_pos;
@@ -748,6 +710,7 @@ typedef struct AchievementManagerImplementation
     prColour            colour;
 
     //u32                 m_bloody_hack;
+    u32                 checkIndex;
 
     // --
     char                text_title[512];
@@ -946,9 +909,9 @@ bool prAchievementManager::IsAwarded(const char *key)
 }
 
 
-// ----------------------------------------------------------------------------
-// Load the achievements.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Load the achievements.
+/// ---------------------------------------------------------------------------
 void prAchievementManager::Load(const char *filename)
 {
     PRASSERT(filename && *filename);
@@ -956,56 +919,60 @@ void prAchievementManager::Load(const char *filename)
     // Load achievement definitions.
     imp.Load(filename);
 
-
     // Load the status data.
     s32 size = 0;
     if (imp.save)
     {
-/*        imp.save->StartLoad((void **)&imp.achievements, &size, imp.LoadCallback, "achievements.dat");    
+        imp.save->StartLoad((void **)&imp.achievements, &size, this, "achievements.dat");    
         imp.success = false;
         do
         {
             imp.save->Update();
         }
-        while(imp.save->IsWorking());//*/
+        while(imp.save->IsWorking());
     }
     else
     {
+        PRPANIC("No save class");
         return;
     }
     
-/*    // No achievements, then write the default file.
+    // No achievements, then write the default file.
     if (!imp.success)
     {
         if (!imp.achievementsList.empty())
         {
             // Create the achievements status list and save it.
-            u32 count = imp.achievementsList.size();
+            u32 count = (u32)imp.achievementsList.size();
 
-            AchievementStatus *alist = new AchievementStatus[count];
-
+            prAchievementStatus *alist = new prAchievementStatus[count];
             if (alist)
             {
-                std::list<AchievementDefinition>::iterator itr = imp.achievementsList.begin();
-                std::list<AchievementDefinition>::iterator end = imp.achievementsList.end();
+                // Set initial states
+                std::list<prAchievementDefinition>::iterator itr = imp.achievementsList.begin();
+                std::list<prAchievementDefinition>::iterator end = imp.achievementsList.end();
                 s32 index = 0;
                 for (; itr != end; ++itr, ++index)
                 {
-                    alist[index].state = Proteus::Achievement::NotAwarded;
-                    alist[index].hash  = StringHash((*itr).name.c_str());
-                    alist[index].count = 0;
+                    alist[index].state = Proteus::Achievement::NotAwarded;      // Not awarded
+                    alist[index].hash  = prStringHash((*itr).name.c_str());     // Name hash
+                    alist[index].count = 0;                                     // Count times called. Award has when target reached
                 }
 
-                // Save the file.
-                imp.save->StartSave(alist, count * sizeof(AchievementStatus), imp.SaveCallback, "achievements.dat");
-                imp.success = false;
-                do
+                // Store.
+                imp.achievements = alist;
+
+                // Set number of achievements.
+                imp.achievementsCount = (u32)imp.achievementsList.size();
+
+                // Save
+                Save();
+
+                if (imp.success)
                 {
-                    imp.save->Update();
+                    prTrace("Saved initial achievements status file.\n");
                 }
-                while(imp.save->IsWorking());
-
-                if (!imp.success)
+                else
                 {
                     prTrace("Failed to save initial achievements status file.\n");
                 }
@@ -1014,12 +981,6 @@ void prAchievementManager::Load(const char *filename)
             {
                 prTrace("Failed to allocate 'AchievementStatus' buffer\n");
             }
-
-            // Store.
-            imp.achievements = alist;
-
-            // Set number of achievements.
-            imp.achievementsCount = imp.achievementsList.size();
         }
         else
         {
@@ -1029,10 +990,10 @@ void prAchievementManager::Load(const char *filename)
     else
     {
         // Set number of achievements.
-        imp.achievementsCount = size / sizeof(AchievementStatus);
+        imp.achievementsCount = size / sizeof(prAchievementStatus);
         PRASSERT(imp.achievementsCount == imp.achievementsList.size());
         prTrace("Loaded %i achievements\n", imp.achievementsCount);
-    }//*/
+    }
 
 
 #if defined(ACHIEVEMENT_DEBUG) && (defined(_DEBUG) || defined(DEBUG))
@@ -1047,21 +1008,81 @@ void prAchievementManager::Load(const char *filename)
 }
 
 
-// ----------------------------------------------------------------------------
-// Saves the achievements states.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Saves the achievements states.
+/// ---------------------------------------------------------------------------
 void prAchievementManager::Save()
 {
     PRASSERT(pImpl);
-    imp.SaveState();
+
+    // No achievements?
+    if (imp.achievementsCount == 0)
+        return;
+
+    // No data?
+    if (imp.achievements == NULL)
+        return;
+        
+    // Save the file.
+    if (imp.save)
+    {
+        imp.save->StartSave(imp.achievements, imp.achievementsCount * sizeof(prAchievementStatus), this, "achievements.dat");
+        imp.success = false;
+        do
+        {
+            imp.save->Update();
+        }
+        while(imp.save->IsWorking());
+        
+        if (!imp.success)
+        {
+            prTrace("Failed to save achievements status file.\n");
+        }
+    }
 }
 
 
-// ----------------------------------------------------------------------------
-// Sets whether the engine or the provider renders the achievement popup.
-// The engine is much faster and it allows for platforms that
-// don't have achievements.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// This method receives state messages.
+/// ---------------------------------------------------------------------------
+void prAchievementManager::SaveResult(s32 result)
+{
+    if (result == IO_RESULT_SUCCESS)
+    {
+        imp.success = true;
+    }
+    else
+    {
+        imp.success = false;
+    }
+
+    prTrace("Achievements loaded %s\n", PRBOOL_TO_STRING(imp.success));
+}
+
+
+/// ---------------------------------------------------------------------------
+/// This method receives state messages.
+/// ---------------------------------------------------------------------------
+void prAchievementManager::LoadResult(s32 result)
+{
+    if (result == IO_RESULT_SUCCESS)
+    {
+        imp.success = true;
+    }
+    else
+    {
+        imp.success = false;
+    }
+
+    prTrace("Achievements loaded %s\n", PRBOOL_TO_STRING(imp.success));
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Sets whether the engine or the provider renders the achievement popup.
+/// The engine is much faster and it allows for platforms that
+/// don't have achievements.
+/// ---------------------------------------------------------------------------
 void prAchievementManager::SetRender(bool state)
 {
     PRASSERT(pImpl);
@@ -1079,8 +1100,8 @@ const char *prAchievementManager::GetDescriptionText(const char *name, s32 type)
 
 	if (name && *name)
 	{
-		std::list<AchievementDefinition>::iterator itr = imp.achievementsList.begin();
-		std::list<AchievementDefinition>::iterator end = imp.achievementsList.end();
+		std::list<prAchievementDefinition>::iterator itr = imp.achievementsList.begin();
+		std::list<prAchievementDefinition>::iterator end = imp.achievementsList.end();
 
 		u32 hash = prStringHash(name);
 
@@ -1115,8 +1136,8 @@ const char *prAchievementManager::GetDescriptionTextByIndex(u32 index, s32 type)
 {
     PRASSERT(pImpl);
 
-	std::list<AchievementDefinition>::iterator itr = imp.achievementsList.begin();
-	std::list<AchievementDefinition>::iterator end = imp.achievementsList.end();
+	std::list<prAchievementDefinition>::iterator itr = imp.achievementsList.begin();
+	std::list<prAchievementDefinition>::iterator end = imp.achievementsList.end();
 
 	for (u32 currIndex = 0; itr != end; ++itr, currIndex++)
 	{
@@ -1180,8 +1201,8 @@ const char *prAchievementManager::GetNameByIndex(u32 index)
 {
     PRASSERT(pImpl);
 
-	std::list<AchievementDefinition>::iterator itr = imp.achievementsList.begin();
-	std::list<AchievementDefinition>::iterator end = imp.achievementsList.end();
+	std::list<prAchievementDefinition>::iterator itr = imp.achievementsList.begin();
+	std::list<prAchievementDefinition>::iterator end = imp.achievementsList.end();
 
 	for (u32 currIndex = 0; itr != end; ++itr, currIndex++)
 	{

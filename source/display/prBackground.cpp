@@ -32,6 +32,9 @@
 #elif defined(PLATFORM_IOS)
   #include <OpenGLES/ES1/gl.h>  
 
+#elif defined(PLATFORM_MAC)
+  #include <OpenGL/gl.h>
+
 #elif defined(PLATFORM_BADA)
   #include <FGraphicsOpengl.h>
   using namespace Osp::Graphics::Opengl;

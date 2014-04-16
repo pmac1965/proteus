@@ -16,7 +16,10 @@
  */
 
 
-#if defined(__APPLE_CC__)
+#include "../prConfig.h"
+
+
+#if defined(PLATFORM_IOS)
 
 
 // Function: prIosSongPlay
@@ -36,5 +39,5 @@ void prIosSongPause(bool pause);
 void prIosSongSetVolume(float volume);
 
 
-#endif//__APPLE_CC__
+#endif//PLATFORM_IOS
 

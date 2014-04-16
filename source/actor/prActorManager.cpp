@@ -231,7 +231,7 @@ void prActorManager::SetPriority(prActor *actor, s32 priority)
 /// ---------------------------------------------------------------------------
 int prActorManager::Count() const
 {
-    return actors.size();
+    return (int)actors.size();
 }
 
 

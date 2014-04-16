@@ -279,7 +279,7 @@ typedef struct TouchImplementation
     // ------------------------------------------------------------------------
     s32 GetListenerCount() const
     {
-        return listeners.size();
+        return (s32)listeners.size();
     }
 
 
@@ -517,6 +517,12 @@ void prTouch::TouchBegin(u32 id, float x, float y)
     PRUNUSED(x);
     PRUNUSED(y);
 
+#elif defined(PLATFORM_MAC)
+    
+    PRUNUSED(id);
+    PRUNUSED(x);
+    PRUNUSED(y);
+
 #else
 
     #error No platform defined.
@@ -549,6 +555,12 @@ void prTouch::TouchMove(u32 id, float x, float y)
 
 #elif defined(PLATFORM_LINUX)
 
+    PRUNUSED(id);
+    PRUNUSED(x);
+    PRUNUSED(y);
+
+#elif defined(PLATFORM_MAC)
+    
     PRUNUSED(id);
     PRUNUSED(x);
     PRUNUSED(y);
@@ -588,6 +600,12 @@ void prTouch::TouchEnd(u32 id, float x, float y)
 
 #elif defined(PLATFORM_LINUX)
 
+    PRUNUSED(id);
+    PRUNUSED(x);
+    PRUNUSED(y);
+    
+#elif defined(PLATFORM_MAC)
+    
     PRUNUSED(id);
     PRUNUSED(x);
     PRUNUSED(y);

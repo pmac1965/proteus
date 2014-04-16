@@ -18,7 +18,10 @@
  */
 
 
-#if defined(__APPLE_CC__)
+#include "../prConfig.h"
+
+
+#if defined(PLATFORM_IOS)
 
 
 #import <UIKit/UIKit.h>

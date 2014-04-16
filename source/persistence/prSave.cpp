@@ -49,6 +49,9 @@
 #elif defined(PLATFORM_LINUX)
   #include "prSave_linux.h"
 
+#elif defined(PLATFORM_MAC)
+  #include "prSave_mac.h"
+
 #else
   #error Unsupported platform.
 #endif
@@ -94,6 +97,9 @@ typedef struct SaveImplementation
 
         #elif defined(PLATFORM_LINUX)
           pSave = new prSaveLinux();
+        
+        #elif defined(PLATFORM_MAC)
+          pSave = new prSaveMac();
 
         #else
           #error Unsupported platform.

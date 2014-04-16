@@ -1031,7 +1031,7 @@ bool TiXmlDocument::LoadFile( prFile* file, TiXmlEncoding encoding ) // PMAC: Ch
 	char* buf = new char[ length+1 ];
 	buf[0] = 0;
 
-    if (file->Read(buf, length) != length) {
+    if (file->Read(buf, (u32)length) != (u32)length) {
 		delete [] buf;
 		SetError( TIXML_ERROR_OPENING_FILE, 0, 0, TIXML_ENCODING_UNKNOWN );
 		return false;

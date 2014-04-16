@@ -31,6 +31,10 @@
     #include <OpenGLES/ES1/gl.h>
     #include <cstdlib>
 
+#elif defined(PLATFORM_MAC)
+  #include <OpenGL/gl.h>
+  #include <cstdlib>
+
 #elif defined(PLATFORM_BADA)
     #include <FGraphicsOpengl.h>
     #include <cstdlib>

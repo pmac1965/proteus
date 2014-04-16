@@ -34,6 +34,11 @@
   #include <OpenGLES/ES1/glext.h>
   #include <math.h>
 
+#elif defined(PLATFORM_MAC)
+  #include <OpenGL/gl.h>
+  #include <OpenGL/glu.h>
+  #include <math.h>
+
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
   #include <math.h>

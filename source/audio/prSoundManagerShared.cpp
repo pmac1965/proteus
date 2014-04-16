@@ -26,7 +26,7 @@
   #include <al.h>
   #include <alc.h>
 
-#elif defined(PLATFORM_IOS)
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_MAC))
   #include <OpenAL/al.h>
   #include <OpenAL/alc.h>
   #include <AudioToolbox/AudioToolbox.h>

@@ -41,6 +41,10 @@
   #include <stdlib.h>
   #include "../ios/prIos.h"
 
+#elif defined(PLATFORM_MAC)
+  #include <stdlib.h>
+  //#include "../ios/prIos.h"
+
 #elif defined(PLATFORM_BADA)
   #include <stdlib.h>
 
@@ -106,6 +110,11 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
     #if defined(PLATFORM_IOS)    
         // Copy the app path.
         strcpy(dataPath, prGetAppDataPath());
+
+    // MAC
+    #elif defined(PLATFORM_MAC)
+        // Copy the app path.
+        //strcpy(dataPath, prGetAppDataPath());
 
     // PC
     #elif defined(PLATFORM_PC)    
@@ -356,7 +365,7 @@ const char *prFileManager::GetSystemPath(const char *filename)
         // Check for buffer overflow.
         #if defined(_DEBUG) || defined(DEBUG)
         {            
-            int total = strlen(dataPath) + 1 + strlen(filename);
+            int total = (int)(strlen(dataPath) + 1 + strlen(filename));
             PRASSERT(total < FILE_MAX_FILENAME_SIZE - 1);
         }
         #endif
@@ -403,6 +412,13 @@ const char *prFileManager::GetSystemPath(const char *filename)
             strcat(path, filename);
 
         #elif defined(PLATFORM_LINUX)
+            // Make filename for current system.
+            // Its the data path + '/' + filepath
+            strcpy(path, dataPath);
+            strcat(path, "/");
+            strcat(path, filename);
+        
+        #elif defined(PLATFORM_MAC)
             // Make filename for current system.
             // Its the data path + '/' + filepath
             strcpy(path, dataPath);

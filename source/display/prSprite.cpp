@@ -31,6 +31,11 @@
   #include <OpenGLES/ES1/gl.h>
   #include <string.h>
 
+#elif defined(PLATFORM_MAC)
+  #include <OpenGL/gl.h>
+  #include <OpenGL/glu.h>
+  #include <string.h>
+
 #elif defined(PLATFORM_BADA)
   #include <string.h>
   #include <FGraphicsOpengl.h>
@@ -554,7 +559,7 @@ void prSprite::SetColour(prColour col)
 void prSprite::SetName(const char *spriteName)
 {
     PRASSERT(spriteName && *spriteName);
-    int len = strlen(spriteName) + 1;
+    int len = (int)(strlen(spriteName) + 1);
     m_name = new char[len];
     strcpy(m_name, spriteName);
 }

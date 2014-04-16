@@ -358,7 +358,7 @@ bool prFile::Open()
     // Get the files size.
     if (fseek(imp.pFile, 0, SEEK_END) == 0)
     {
-        imp.filesize = ftell(imp.pFile);
+        imp.filesize = (u32)ftell(imp.pFile);
         rewind(imp.pFile);       
     }
     else
@@ -620,7 +620,7 @@ s32 prFile::Internal_Tell() const
 
 #else
     PRASSERT(imp.pFile);
-    return ftell(imp.pFile);
+    return (s32)ftell(imp.pFile);
 
 #endif
 }

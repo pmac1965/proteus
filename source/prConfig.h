@@ -33,10 +33,30 @@
     #define PLATFORM_PC
     #define AUDIO_TYPE  AUDIO_PC
 
-// Else, Is it the iphone?
+// Else, Is it the iphone? Mac?
 #elif defined(__APPLE_CC__)
+    #include "TargetConditionals.h"
+
+    // iOS Simulator
+    #if TARGET_IPHONE_SIMULATOR
     #define PLATFORM_IOS
     #define AUDIO_TYPE  AUDIO_IOS
+
+    // iOS device
+    #elif TARGET_OS_IPHONE
+        #define PLATFORM_IOS
+        #define AUDIO_TYPE     AUDIO_IOS
+
+    // Mac OS
+    #elif TARGET_OS_MAC
+        #define PLATFORM_MAC
+        #define AUDIO_TYPE     AUDIO_MAC
+
+    #else
+        // Unsupported platform
+        #error No platform has been defined!
+
+    #endif
 
 // Or, Is it the bada? Android?
 #elif defined(__GNUC__)
@@ -85,7 +105,7 @@
 #endif
 
 #ifndef SHOW_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.
-#define SHOW_MESSAGES
+//#define SHOW_MESSAGES
 #endif
 
 #ifndef PROTEUS_ALLOW_CONSOLE                           // Allows the debug console to be optionally removed. (PC only)

@@ -29,6 +29,10 @@
   #include <errno.h>
   #include <string.h>
 
+#elif defined(PLATFORM_MAC)
+  #include <errno.h>
+  #include <string.h>
+
 #elif defined(PLATFORM_BADA)
   #include <errno.h>
   #include <string.h>
@@ -296,7 +300,7 @@ s32 prFileSize(const char *filename)
         {
             if (fseek(fp, 0, SEEK_END) == 0)
             {
-                filesize = ftell(fp);
+                filesize = (s32)ftell(fp);
                 rewind(fp);       
             }
                         

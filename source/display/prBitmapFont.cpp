@@ -35,6 +35,10 @@
   #include <OpenGLES/ES1/gl.h>  
   #include <string.h>
 
+#elif defined(PLATFORM_MAC)
+  #include <OpenGL/gl.h>
+  #include <string.h>
+
 #elif defined(PLATFORM_BADA)
 	#include <FGraphicsOpengl.h>
 	using namespace Osp::Graphics::Opengl;

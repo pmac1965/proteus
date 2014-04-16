@@ -209,6 +209,32 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
                 }
             }
 
+        
+        #elif defined(PLATFORM_MAC)
+            // Check renderer type value.
+            PRASSERT(rendererType == PRRENDERER_OPENGL);
+            PRASSERT(version == PRGLVER_11 || version == PRGLVER_20 || version == PRGLVER_30);
+        
+            // Check version numbers
+            if (rendererType == PRRENDERER_OPENGL)
+            {
+                PRASSERT(version == PRGLVER_11 || version == PRGLVER_20 || version == PRGLVER_30);
+                switch (version)
+                {
+                case PRGLVER_11:
+                    systems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
+                    break;
+                    
+                case PRGLVER_20:
+                    PRPANIC("Under construction");
+                    break;
+                    
+                case PRGLVER_30:
+                    PRPANIC("Under construction");
+                    break;
+                }
+            }
+        
         #else
             #error Unsupported platform
 
@@ -296,6 +322,8 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                     systems[id] = new prSoundManager_Android();
                 #elif defined(PLATFORM_IOS)
                     systems[id] = new prSoundManager_Ios();
+                #elif defined(PLATFORM_MAC)
+                    systems[id] = NULL;
                 #elif defined(PLATFORM_LINUX)
                     systems[id] = NULL;
                 #elif defined(PLATFORM_BADA)
@@ -319,6 +347,8 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 #elif defined(PLATFORM_ANDROID)
                     systems[id] = NULL;
                 #elif defined(PLATFORM_IOS)
+                    systems[id] = NULL;
+                #elif defined(PLATFORM_MAC)
                     systems[id] = NULL;
                 #elif defined(PLATFORM_LINUX)
                     systems[id] = NULL;

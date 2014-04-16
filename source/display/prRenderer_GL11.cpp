@@ -36,6 +36,12 @@
   #include "../core/prWindow_PC.h"
   #include "../linux/prLinux.h"
 
+#elif defined(PLATFORM_MAC)
+  #include <OpenGL/gl.h>
+  #include <OpenGL/glu.h>
+  //#include "../core/prWindow_PC.h"
+  //#include "../linux/prLinux.h"
+
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
   #include "../core/prWindow_PC.h"

@@ -38,6 +38,9 @@
 #elif defined(PLATFORM_IOS)
   #include "../display/prLookAt.h"
 
+#elif defined(PLATFORM_MAC)
+  #include "../display/prLookAt.h"
+
 #elif defined(PLATFORM_BADA)
   #include "../display/prLookAt.h"
 

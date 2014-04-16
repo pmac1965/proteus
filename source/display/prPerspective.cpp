@@ -60,6 +60,11 @@
   #include <OpenGLES/ES1/glext.h>
   #include <math.h>
 
+#elif defined(PLATFORM_MAC)
+  #include <OpenGL/gl.h>
+  #include <OpenGL/glu.h>
+  #include <math.h>
+
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
   #include <math.h>
@@ -100,7 +105,7 @@ void prPerspective(double fovy, double aspect, double zNear, double zFar)
     xmin = ymin * aspect;
     xmax = ymax * aspect;
 
-#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
+#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC)
     glFrustum(xmin, xmax, ymin, ymax, zNear, zFar);
 
 #elif defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)

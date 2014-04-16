@@ -33,6 +33,11 @@
   #include <cstdlib>
   #include <stdio.h>
 
+#elif defined(PLATFORM_MAC)
+  #include <OpenGL/gl.h>
+  #include <cstdlib>
+  #include <stdio.h>
+
 #elif defined(PLATFORM_BADA)
   #include <FGraphicsOpengl.h>
   #include <cstdlib>
