@@ -47,8 +47,7 @@ namespace
 
         strcpy(name, "proteus/audio/");
         strcat(name, pClassName);
-
-        __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Audio final %s", name);
+        //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "Audio final %s", name);
 
         return name;
     }

@@ -169,6 +169,11 @@
     <ClInclude Include="..\..\..\..\source\analytics\prAnalytics.h" />
     <ClInclude Include="..\..\..\..\source\analytics\prAnalyticsBase.h" />
     <ClInclude Include="..\..\..\..\source\analytics\prAnalyticsFlurry.h" />
+    <ClInclude Include="..\..\..\..\source\android\AL\al.h" />
+    <ClInclude Include="..\..\..\..\source\android\AL\alc.h" />
+    <ClInclude Include="..\..\..\..\source\android\AL\alext.h" />
+    <ClInclude Include="..\..\..\..\source\android\AL\efx-creative.h" />
+    <ClInclude Include="..\..\..\..\source\android\AL\efx.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIAudio.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIInterface.h" />
     <ClInclude Include="..\..\..\..\source\audio\external\codec.h" />
@@ -315,6 +320,7 @@
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_mac.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_pc.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prTransactionResult.h" />
+    <ClInclude Include="..\..\..\..\source\input\prAccelerometer.h" />
     <ClInclude Include="..\..\..\..\source\input\prMouse.h" />
     <ClInclude Include="..\..\..\..\source\input\prTouch.h" />
     <ClInclude Include="..\..\..\..\source\input\prTouchListener.h" />
@@ -557,6 +563,7 @@
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_linux.cpp" />
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_mac.cpp" />
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_pc.cpp" />
+    <ClCompile Include="..\..\..\..\source\input\prAccelerometer.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prMouse.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prTouch.cpp" />
     <ClCompile Include="..\..\..\..\source\libzip\mkstemp.c">

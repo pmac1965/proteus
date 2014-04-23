@@ -290,11 +290,11 @@ bool prSavePC::LoadBegin()
                 }
             }
         }
-        //else
-        //{
-        //    prTrace("File doesn't exist. Load cancelled: %s\n", filename);
-        //    SetError(-1);
-        //}
+        else
+        {
+            prTrace("File doesn't exist. Load cancelled: %s\n", filename);
+            SetError(-1);
+        }
     }
 
     return result;

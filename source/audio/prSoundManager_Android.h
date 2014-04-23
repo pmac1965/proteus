@@ -26,9 +26,10 @@
 #if defined(PLATFORM_ANDROID)
 
 
-//#include <OpenAL/al.h>
-//#include <OpenAL/alc.h>
 #include "prSoundManager.h"
+#include "../android/AL/al.h"
+#include "../android/AL/alc.h"
+#include "prWaves.h"
 
 
 // Class: prSoundManager_Android
@@ -149,8 +150,9 @@ public:
 
 
 private:
-    //ALCdevice          *device;
-    //ALCcontext         *context;
+    ALCdevice          *device;
+    ALCcontext         *context;
+    prWaves             waves;
     //ALuint              frequency;
     //ALuint              channels;
     //ALuint              format;

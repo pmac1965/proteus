@@ -135,6 +135,7 @@
 #include "inAppPurchase/prStore_ios.h"
 #include "inAppPurchase/prStore_pc.h"
 #include "inAppPurchase/prTransactionResult.h"
+#include "input/prAccelerometer.h"
 #include "input/prMouse.h"
 #include "input/prTouch.h"
 #include "input/prTouchListener.h"

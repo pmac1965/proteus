@@ -41,6 +41,7 @@
 #include "../audio/prSoundManager_Ios.h"
 #include "../audio/prSoundManager_Android.h"
 #include "../input/prTouch.h"
+#include "../input/prAccelerometer.h"
 
 
 #if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
@@ -267,13 +268,11 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
 {
     PRASSERT(optionalSystems);
     PRASSERT(count > 0);
-
     if (optionalSystems)
     {
         for (u32 index = 0; index < count; index++)
         {
             s32 id = optionalSystems[index];
-
             switch (id)
             {
             // The background manager.
@@ -369,6 +368,18 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 if (systems[id] == NULL)
                 {
                     systems[id] = new prFadeManager();
+                }
+                else
+                {
+                    prTrace("Engine system '%s' already exists\n", systems[id]->Name());
+                }
+                break;
+
+            // Accelerometer
+            case PRSYSTEM_ACCELEROMETER:
+                if (systems[id] == NULL)
+                {
+                    systems[id] = new prAccelerometer();
                 }
                 else
                 {

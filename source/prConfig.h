@@ -130,7 +130,7 @@
 // ----------------------------------------------------------------------------
 #if defined(PLATFORM_ANDROID)
 #ifndef USE_OPENAL                                      // Allows the android to use OpenAL
-//#define USE_OPENAL
+#define USE_OPENAL
 #endif
 #endif
 

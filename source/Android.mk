@@ -186,6 +186,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	inAppPurchase/prStore_ios.cpp	\
 	inAppPurchase/prStore_linux.cpp	\
 	inAppPurchase/prStore_pc.cpp	\
+	input/prAccelerometer.cpp	\
 	input/prMouse.cpp	\
 	input/prTouch.cpp	\
 	linux/prLinuxInput.cpp	\
@@ -321,5 +322,6 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	zlib/uncompr.c	\
 	zlib/zutil.c
 
+LOCAL_SHARED_LIBRARIES := libopenal
 
 include $(BUILD_SHARED_LIBRARY)
