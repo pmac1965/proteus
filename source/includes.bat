@@ -77,6 +77,10 @@ pushd memory
 dir /S /B *.h >> ..\files.txt
 popd
 
+pushd multiplayer
+dir /S /B *.h >> ..\files.txt
+popd
+
 pushd online
 dir /S /B *.h >> ..\files.txt
 popd

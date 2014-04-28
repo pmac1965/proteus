@@ -120,7 +120,7 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
     #elif defined(PLATFORM_PC)    
         // If we're using the debugger then use the current directory as it will point to the
         // debug directory path, else use the executables path as the data path.
-        if (IsDebuggerPresent() == TRUE)
+        if (IsDebuggerPresent() != FALSE)
         {
             GetCurrentDirectoryA(FILE_MAX_FILENAME_SIZE, dataPath);
         }
@@ -241,12 +241,12 @@ void prFileManager::RegisterArchive(const char *filename)
 
                             // Store table
                             bool found = false;
-                            int  index = -1;
+                            int  idx = -1;
                             for (int i=0; i<FILE_ARCHIVES_MAX; i++)
                             {
                                 if (pEntries[i] == NULL && pArchiveFile[i] == NULL)
                                 {
-                                    index = i;
+                                    idx   = i;
                                     found = true;
                                     break;
                                 }
@@ -256,9 +256,9 @@ void prFileManager::RegisterArchive(const char *filename)
                             if (found)
                             {
                                 // Open file for data access, store entries and indicate we have an archive open for use.
-                                pArchiveFile[index] = new prFile(filenameArc);
-                                pEntries    [index] = entries;
-                                entryCount  [index] = header.entries;
+                                pArchiveFile[idx] = new prFile(filenameArc);
+                                pEntries    [idx] = entries;
+                                entryCount  [idx] = header.entries;
                                 count++;
 
                                 pArchiveFile[index]->Open();

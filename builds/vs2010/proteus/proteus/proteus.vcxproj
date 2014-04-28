@@ -176,6 +176,7 @@
     <ClInclude Include="..\..\..\..\source\android\AL\efx.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIAudio.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIInterface.h" />
+    <ClInclude Include="..\..\..\..\source\android\prJNINetwork.h" />
     <ClInclude Include="..\..\..\..\source\audio\external\codec.h" />
     <ClInclude Include="..\..\..\..\source\audio\external\ogg.h" />
     <ClInclude Include="..\..\..\..\source\audio\external\os_types.h" />
@@ -383,6 +384,12 @@
     <ClInclude Include="..\..\..\..\source\memory\prMemory.h" />
     <ClInclude Include="..\..\..\..\source\memory\prMemoryPool.h" />
     <ClInclude Include="..\..\..\..\source\memory\prSpritePointerPool.h" />
+    <ClInclude Include="..\..\..\..\source\multiplayer\prGameSession.h" />
+    <ClInclude Include="..\..\..\..\source\multiplayer\prGameSessionAndroid_BT.h" />
+    <ClInclude Include="..\..\..\..\source\multiplayer\prGameSessionProvider.h" />
+    <ClInclude Include="..\..\..\..\source\multiplayer\prMultiplayer.h" />
+    <ClInclude Include="..\..\..\..\source\multiplayer\prMultiplayerManager.h" />
+    <ClInclude Include="..\..\..\..\source\multiplayer\prMultiplayerProvider.h" />
     <ClInclude Include="..\..\..\..\source\online\prWeb.h" />
     <ClInclude Include="..\..\..\..\source\particle\prEmitter.h" />
     <ClInclude Include="..\..\..\..\source\particle\prParticle.h" />
@@ -437,6 +444,7 @@
     <ClCompile Include="..\..\..\..\source\analytics\prAnalyticsFlurry.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNIAudio.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNIInterface.cpp" />
+    <ClCompile Include="..\..\..\..\source\android\prJNINetwork.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prOpenALDeviceList.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prOpenALErrors.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prSoundManager.cpp" />
@@ -934,6 +942,12 @@
     <ClCompile Include="..\..\..\..\source\math\prVector3.cpp" />
     <ClCompile Include="..\..\..\..\source\memory\prMemory.cpp" />
     <ClCompile Include="..\..\..\..\source\memory\prSpritePointerPool.cpp" />
+    <ClCompile Include="..\..\..\..\source\multiplayer\prGameSession.cpp" />
+    <ClCompile Include="..\..\..\..\source\multiplayer\prGameSessionAndroid_BT.cpp" />
+    <ClCompile Include="..\..\..\..\source\multiplayer\prGameSessionProvider.cpp" />
+    <ClCompile Include="..\..\..\..\source\multiplayer\prMultiplayer.cpp" />
+    <ClCompile Include="..\..\..\..\source\multiplayer\prMultiplayerManager.cpp" />
+    <ClCompile Include="..\..\..\..\source\multiplayer\prMultiplayerProvider.cpp" />
     <ClCompile Include="..\..\..\..\source\online\prWeb_android.cpp" />
     <ClCompile Include="..\..\..\..\source\online\prWeb_bada.cpp" />
     <ClCompile Include="..\..\..\..\source\online\prWeb_ios.cpp" />

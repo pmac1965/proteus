@@ -287,8 +287,6 @@ PRBOOL prApplication_PC::DisplayCreateTool(u32 width, u32 height, u32 menuID, u3
     bool success = static_cast<prWindow_PC *>(m_pWindow)->CreateTool(width, height, menuID, iconID, pWindowName);
     if (success)
     {
-        m_running = true;
-
         // Set window.
         m_running = PRTRUE;
         result    = PRTRUE;

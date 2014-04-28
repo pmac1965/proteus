@@ -322,9 +322,9 @@ void prList<T>::RemoveRange(int start, int end)
         prSwap(start, end);
     }
 
-    int count = (end - start) + 1;
+    int amount = (end - start) + 1;
 
-    for (int i=0; i<count; i++)
+    for (int i=0; i<amount; i++)
     {
         RemoveAt(start); // Removes same index *count* times as the links shift down
     }

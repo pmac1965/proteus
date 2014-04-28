@@ -977,7 +977,7 @@ prVector2 prBitmapFont::MeasureStringUntilTerm(const char *string, float scale)
             c = string[index];
 
             // utf-8?
-            if (c < 0 || c > 127)
+            if (c < 0)// || c > 127)
             {
                 index += utf8proc_iterate((const ::uint8_t*)&string[index], -1, (::int32_t*)&character);
             }

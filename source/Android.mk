@@ -61,6 +61,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	analytics/prAnalyticsFlurry.cpp	\
 	android/prJNIInterface.cpp	\
 	android/prJNIAudio.cpp	\
+	android/prJNINetwork.cpp	\
 	audio/prOpenALDeviceList.cpp	\
 	audio/prOpenALErrors.cpp	\
 	audio/prSoundManager.cpp	\
@@ -200,6 +201,9 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	math/prVector3.cpp	\
 	memory/prMemory.cpp	\
 	memory/prSpritePointerPool.cpp	\
+	multiplayer/prGameSession.cpp	\
+	multiplayer/prGameSessionProvider.cpp	\
+	multiplayer/prGameSessionAndroid_BT.cpp	\
 	online/prWeb_android.cpp	\
 	online/prWeb_bada.cpp	\
 	online/prWeb_ios.cpp	\

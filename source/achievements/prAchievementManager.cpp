@@ -191,6 +191,9 @@ typedef struct AchievementManagerImplementation
     }
     
     
+    AchievementManagerImplementation(AchievementManagerImplementation& other);// : colour(other.colour)
+    
+    
     // Unused copy constructor.
     /*AchievementManagerImplementation(AchievementManagerImplementation& other) : colour(other.colour)
     {
@@ -594,19 +597,19 @@ typedef struct AchievementManagerImplementation
     // ------------------------------------------------------------------------
     // Callback
     // ------------------------------------------------------------------------
-    static void SaveCallback(int result)
-    {
+    //static void SaveCallback(int result)
+    //{
         //success = (result == Save::SAVE_RESULT_SUCCESS);
-    }
+    //}
 
 
     // ------------------------------------------------------------------------
     // Callback
     // ------------------------------------------------------------------------
-    static void LoadCallback(int result)
-    {
+    //static void LoadCallback(int result)
+    //{
         //success = (result == Save::SAVE_RESULT_SUCCESS);
-    }
+    //}
 
 
     // ------------------------------------------------------------------------
