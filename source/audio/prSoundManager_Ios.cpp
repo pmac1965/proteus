@@ -1017,6 +1017,45 @@ void prSoundManager_Ios::SFXSetVolume(s32 index, f32 volume)
 
 
 /// ---------------------------------------------------------------------------
+/// It's best if a sound effect is mono, or openal will not set the position
+/// correctly
+/// ---------------------------------------------------------------------------
+void prSoundManager_Ios::SFXSetPosition(const char *name, f32 x, f32 y, f32 z)
+{
+#ifdef SOUND_ALLOW
+
+    PRASSERT(name && *name);
+
+    if (initialised && name && *name)
+    {
+        u32 hash = prStringHash(name);
+
+        for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+        {
+            if (soundEffects[i].hash == hash)
+            {
+//                if (soundEffects[i].state == SFX_STATE_PLAYING)
+                {
+                    alSource3f(soundEffects[i].uiSource, AL_POSITION, x, y, z);
+                    AL_ERROR_CHECK()
+                }
+                break;
+            }
+        }
+    }
+
+#else
+
+    PRUNUSED(name);
+    PRUNUSED(x);
+    PRUNUSED(y);
+    PRUNUSED(z);
+
+#endif
+}
+
+
+/// ---------------------------------------------------------------------------
 /// Display debug information on the sound player.
 /// ---------------------------------------------------------------------------
 /*void prSoundManager_Ios::DisplayUsage() const

@@ -278,6 +278,7 @@
     <ClInclude Include="..\..\..\..\source\debug\prDebug.h" />
     <ClInclude Include="..\..\..\..\source\debug\prDebugFont.h" />
     <ClInclude Include="..\..\..\..\source\debug\prFps.h" />
+    <ClInclude Include="..\..\..\..\source\debug\prFps_Android.h" />
     <ClInclude Include="..\..\..\..\source\debug\prFps_PC.h" />
     <ClInclude Include="..\..\..\..\source\debug\prOnScreenLogger.h" />
     <ClInclude Include="..\..\..\..\source\debug\prTrace.h" />
@@ -532,6 +533,7 @@
     <ClCompile Include="..\..\..\..\source\debug\prConsoleWindow.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prDebug.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prFps.cpp" />
+    <ClCompile Include="..\..\..\..\source\debug\prFps_Android.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prFps_PC.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prOnScreenLogger.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prTrace.cpp" />

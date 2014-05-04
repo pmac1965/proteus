@@ -157,6 +157,14 @@ public:
     //      Gets the master volume for all the effects.
     f32 SFXGetMasterVolume() const { return masterSfxVolume; }
 
+    // Method: SFXSetPosition
+    //      Sets the position of a sound effect.
+    //
+    // Notes:
+    //      It's best if a sound effect is mono, or openal will not set the position
+    //      correctly
+    virtual void SFXSetPosition(const char *name, f32 x, f32 y, f32 z) = 0;
+
     // Method: SFXIsPlaying
     //      Determines if a particular sound effect is playing.
     virtual bool SFXIsPlaying(s32 id) const = 0;

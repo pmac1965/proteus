@@ -37,6 +37,7 @@
 #include "../debug/prOnScreenLogger.h"
 #include "../debug/prTrace.h"
 #include "../debug/prFps_PC.h"
+#include "../debug/prFps_Android.h"
 #include "../audio/prSoundManager_PC.h"
 #include "../audio/prSoundManager_Ios.h"
 #include "../audio/prSoundManager_Android.h"
@@ -344,7 +345,7 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 #if defined(PLATFORM_PC)
                     systems[id] = new prFps_PC();
                 #elif defined(PLATFORM_ANDROID)
-                    systems[id] = NULL;
+                    systems[id] = new prFps_Android();
                 #elif defined(PLATFORM_IOS)
                     systems[id] = NULL;
                 #elif defined(PLATFORM_MAC)

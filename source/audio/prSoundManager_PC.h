@@ -157,6 +157,14 @@ public:
     //      Sets the volume of the specified effect.
     void SFXSetVolume(s32 id, f32 volume);
 
+    // Method: SFXSetPosition
+    //      Sets the position of a sound effect.
+    //
+    // Notes:
+    //      It's best if a sound effect is mono, or openal will not set the position
+    //      correctly
+    void SFXSetPosition(const char *name, f32 x, f32 y, f32 z);
+
 /*    // Method: DisplayUsage
     //      Displays debug information on the sound player.
     void DisplayUsage() const;

@@ -43,11 +43,12 @@ LOCAL_CFLAGS   += $(DEBUG_FLAGS) -fno-rtti -fno-exceptions
 LOCAL_LDLIBS := -ldl -llog -lGLESv1_CM -lstdc++
 
 
-LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
+LOCAL_SRC_FILES :=			achievements/prAchievementManager.cpp	\
 	achievements/prAchievement_android.cpp	\
 	achievements/prAchievement_bada.cpp	\
 	achievements/prAchievement_ios.cpp	\
 	achievements/prAchievement_linux.cpp	\
+	achievements/prAchievement_mac.cpp	\
 	achievements/prAchievement_pc.cpp	\
 	achievements/prLeaderboards.cpp	\
 	actor/prActor.cpp	\
@@ -59,8 +60,8 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	analytics/prAnalytics.cpp	\
 	analytics/prAnalyticsBase.cpp	\
 	analytics/prAnalyticsFlurry.cpp	\
-	android/prJNIInterface.cpp	\
 	android/prJNIAudio.cpp	\
+	android/prJNIInterface.cpp	\
 	android/prJNINetwork.cpp	\
 	audio/prOpenALDeviceList.cpp	\
 	audio/prOpenALErrors.cpp	\
@@ -150,6 +151,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	debug/prDebug.cpp	\
 	debug/prFps.cpp	\
 	debug/prFps_PC.cpp	\
+	debug/prFps_Android.cpp	\
 	debug/prOnScreenLogger.cpp	\
 	debug/prTrace.cpp	\
 	display/prBackground.cpp	\
@@ -186,6 +188,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	inAppPurchase/prStore_bada.cpp	\
 	inAppPurchase/prStore_ios.cpp	\
 	inAppPurchase/prStore_linux.cpp	\
+	inAppPurchase/prStore_mac.cpp	\
 	inAppPurchase/prStore_pc.cpp	\
 	input/prAccelerometer.cpp	\
 	input/prMouse.cpp	\
@@ -202,8 +205,11 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	memory/prMemory.cpp	\
 	memory/prSpritePointerPool.cpp	\
 	multiplayer/prGameSession.cpp	\
-	multiplayer/prGameSessionProvider.cpp	\
 	multiplayer/prGameSessionAndroid_BT.cpp	\
+	multiplayer/prGameSessionProvider.cpp	\
+	multiplayer/prMultiplayer.cpp	\
+	multiplayer/prMultiplayerManager.cpp	\
+	multiplayer/prMultiplayerProvider.cpp	\
 	online/prWeb_android.cpp	\
 	online/prWeb_bada.cpp	\
 	online/prWeb_ios.cpp	\
@@ -218,6 +224,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	persistence/prSave_bada.cpp	\
 	persistence/prSave_ios.cpp	\
 	persistence/prSave_linux.cpp	\
+	persistence/prSave_mac.cpp	\
 	persistence/prSave_pc.cpp	\
 	thread/prMutex.cpp	\
 	thread/prThread.cpp	\

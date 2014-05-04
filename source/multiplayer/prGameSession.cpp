@@ -67,7 +67,7 @@ void prGameSession::Initialise(prGameSessionReceiver *pReceiver, prGameSessionPr
         // Okay tell game connections starting.
         if (pReceiver)
         {
-            pReceiver->GameSessionStatus(GSS_CONNECT_BEGIN);
+            pReceiver->GameSessionStatus((u32)GSS_CONNECT_BEGIN);
         }
     }
 }
@@ -93,27 +93,27 @@ void prGameSession::ReceiveMessage(s32 msg)
     switch(msg)
     {
     case GSS_CONNECT_BEGIN:
-        if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus(GSS_CONNECT_BEGIN); }
+        if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus((u32)GSS_CONNECT_BEGIN); }
         prTrace("GSS_CONNECT_BEGIN\n");
         break;
 
     case GSS_CONNECT_FAILED:
-        if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus(GSS_CONNECT_FAILED); }
+        if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus((u32)GSS_CONNECT_FAILED); }
         prTrace("GSS_CONNECT_FAILED\n");
         break;
 
     case GSS_CONNECT_OK:
-        if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus(GSS_CONNECT_OK); }
+        if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus((u32)GSS_CONNECT_OK); }
         prTrace("GSS_CONNECT_OK\n");
         break;
 
     case GSS_TURNED_ON:
-        if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus(GSS_TURNED_ON); }
+        if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus((u32)GSS_TURNED_ON); }
         prTrace("GSS_TURNED_ON\n");
         break;
 
     case GSS_DISCOVERY:
-        if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus(GSS_DISCOVERY); }
+        if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus((u32)GSS_DISCOVERY); }
         prTrace("GSS_DISCOVERY\n");
         break;
 

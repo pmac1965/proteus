@@ -156,43 +156,45 @@ prSprite *prSpriteManager::Create(const char *filename, bool draw)
     if (m_sprite && m_texture)
     {
         // Store
-        //if (imp.activeSprites.size() > 0)
+        if (!m_activeSprites.empty())
         {
             prActiveSprite as;
             as.sprite  = m_sprite;
             as.texture = m_texture;
             as.draw    = draw;
 
+            TODO("Re-add priority code")
+
             // Insert sprite according to priority.
-            std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
+/*            std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
             std::list<prActiveSprite>::iterator end = m_activeSprites.end();
             bool inserted = false;
 
             for (; it != end; ++it)
             {
-                TODO("Fix")
                 //if ((*it).sprite->GetPriority() >= 0)
-                {
+                //{
                     m_activeSprites.insert(it, as);
                     inserted = true;
                     break;
-                }
+                //}
             }
 
             // Else add last
-            if (!inserted)
+            if (!inserted)//*/
             {
                 m_activeSprites.push_back(as);
             }
         }
-        /*else
+        else
         {
+            // Push first
             prActiveSprite as;
-            as.sprite  = imp.sprite;
-            as.texture = imp.texture;
+            as.sprite  = m_sprite;
+            as.texture = m_texture;
             as.draw    = draw;
-            imp.activeSprites.push_back(as);
-        }//*/
+            m_activeSprites.push_back(as);
+        }
     }
     else
     {

@@ -116,6 +116,7 @@ prSprite::prSprite(prTexture *pTexture, const char *name, s32 frameWidth, s32 fr
     m_animated  = false;
     m_exp0      = false;
     m_exp1      = false;
+    m_priority  = 0;
 
     SetName(name);
     SetFrame(m_frame);
@@ -341,7 +342,7 @@ void prSprite::SetFrame(s32 frame)
     }
     else
     {
-        prTrace("Attempted to set an invalid sprite frame index %i. Texture: %s", frame, m_pTexture->Filename());
+        prTrace("Attempted to set an invalid sprite frame index %i. Texture: %s\n", frame, m_pTexture->Filename());
     }
 }
 

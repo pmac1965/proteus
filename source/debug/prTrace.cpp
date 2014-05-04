@@ -192,4 +192,5 @@ void prTraceLogClear()
 // ----------------------------------------------------------------------------
 void prLog(const char* fmt, ...)
 {
+    PRUNUSED(fmt);
 }

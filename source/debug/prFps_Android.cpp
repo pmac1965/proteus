@@ -1,5 +1,5 @@
 /**
- * prFps_PC.cpp
+ * prFps_Android.cpp
  *
  *  Copyright 2014 Paul Michael McNab
  *
@@ -20,40 +20,19 @@
 #include "../prConfig.h"
 
 
-#if defined(PLATFORM_PC)
+#if defined(PLATFORM_ANDROID)
 
 
-// Exclude MFC
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-#ifndef WIN32_EXTRA_LEAN
-#define WIN32_EXTRA_LEAN
-#endif
-
-
-#include <windows.h>
-#include "prFps_PC.h"
+#include <time.h>
+#include "prFps_Android.h"
 #include "prTrace.h"
-#include "prDebug.h"
 
 
 /// ---------------------------------------------------------------------------
 /// Constructor.
 /// ---------------------------------------------------------------------------
-prFps_PC::prFps_PC()
+prFps_Android::prFps_Android()
 {
-    LARGE_INTEGER countsPerSecond;
-
-    if (QueryPerformanceFrequency(&countsPerSecond))
-    {
-        ticksPerSecond = countsPerSecond.QuadPart;
-    }
-    else
-    {
-        ticksPerSecond = 0LL;
-    }
-
     Reset();
 }
 
@@ -61,7 +40,7 @@ prFps_PC::prFps_PC()
 /// ---------------------------------------------------------------------------
 /// Destructor.
 /// ---------------------------------------------------------------------------
-prFps_PC::~prFps_PC()
+prFps_Android::~prFps_Android()
 {
 }
 
@@ -69,26 +48,49 @@ prFps_PC::~prFps_PC()
 /// ---------------------------------------------------------------------------
 /// Resets the timing data, should be called on game entry, etc.
 /// ---------------------------------------------------------------------------
-void prFps_PC::Reset()
+void prFps_Android::Reset()
 {
-    prFps::Reset();
-
-    timeTotal     = 0LL;
-    timeStart     = 0LL;
-    timeEnd       = 0LL;
+    timeTotal      = 0LL;
+    timeStart      = clock();
+    frames         = 0;
+    frameRate      = 0;
+    frameRateMin   = 1000000;
+    frameRateMax   = -1000000;
 }
 
 
 /// ---------------------------------------------------------------------------
 /// Begins the timing period.
 /// ---------------------------------------------------------------------------
-void prFps_PC::Begin()
+void prFps_Android::Begin()
 {
-    LARGE_INTEGER timenow;
+    // Find the time taken.
+    timeTotal = (clock() - timeStart);
 
-    if (QueryPerformanceCounter(&timenow))
+    // Exceeded one second?
+    if (timeTotal >= CLOCKS_PER_SEC)
     {
-        timeStart = timenow.QuadPart;
+        frameRate  = frames;                // Sets the number of frames completed.
+        frames     = 0;                     // Resets the frame count.
+        timeStart  = clock();               // Reset the start time.
+
+        // Remove seconds from the total time taken.
+        while (timeTotal >= CLOCKS_PER_SEC)
+        {
+            timeTotal -= CLOCKS_PER_SEC;
+        }
+
+        // Set min/max
+        if (frameRate < frameRateMin)
+            frameRateMin = frameRate;
+
+        if (frameRate > frameRateMax)
+            frameRateMax = frameRate;
+    }
+    else
+    {
+        // Okay, completed another frame.
+        frames++;
     }
 }
 
@@ -96,39 +98,9 @@ void prFps_PC::Begin()
 /// ---------------------------------------------------------------------------
 /// Ends the timing period.
 /// ---------------------------------------------------------------------------
-void prFps_PC::End()
+void prFps_Android::End()
 {
-    LARGE_INTEGER timenow;
-
-    if (QueryPerformanceCounter(&timenow))
-    {
-        // Find the time taken.
-        timeEnd    = timenow.QuadPart;
-        timeTotal += (timeEnd - timeStart);
-
-
-        // Exceeded one second?
-        if (timeTotal >= ticksPerSecond)
-        {
-            frameRate  = frames;            // Sets the number of frames completed.
-            frames     = 0;                 // Resets the frame count.
-            timeTotal -= ticksPerSecond;    // Removes one second from the total time taken.
-
-            // Set min/max
-            if (frameRate < frameRateMin)
-                frameRateMin = frameRate;
-
-            if (frameRate > frameRateMax)
-                frameRateMax = frameRate;
-        }
-        else
-        {
-            // Okay, completed another frame.
-            frames++;
-        }
-    }
 }
 
 
-#endif//PLATFORM_PC
-
+#endif

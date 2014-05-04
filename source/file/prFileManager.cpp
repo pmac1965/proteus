@@ -33,6 +33,12 @@
 #include "../zlib/zlib.h"
 
 
+// Debug assist
+#if defined(_DEBUG) || defined(DEBUG)
+//#define FILEMANAGER_DEBUG
+#endif
+
+
 // Platform specific includes.
 #if defined(PLATFORM_PC)  
   #include <windows.h>
@@ -261,16 +267,17 @@ void prFileManager::RegisterArchive(const char *filename)
                                 entryCount  [idx] = header.entries;
                                 count++;
 
-                                pArchiveFile[index]->Open();
+                                pArchiveFile[idx]->Open();
 
+                                #if defined(FILEMANAGER_DEBUG)
                                 prTrace("Found archive: %s\n", filenameArc);
-
-                                /*for(u32 i=0; i<header.entries; i++)
+                                for(u32 i=0; i<header.entries; i++)
                                 {
-                                    ArcEntry *pE = imp.pEntries[index];
+                                    prArcEntry *pE = pEntries[idx];
                                     pE += i;
-                                    Trace("File: %s - %x\n", pE->filename, pE->hash);
-                                }//*/
+                                    prTrace("File: %s - %x\n", pE->filename, pE->hash);
+                                }
+                                #endif
                             }
                             else
                             {

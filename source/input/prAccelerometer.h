@@ -52,10 +52,17 @@ public:
     // Get accelerometer values.
     void GetDifference(f32 &x, f32 &y, f32 &z) const;
    
+
 private:    
     // Don't change order.
     AccelerometerImplementation  *pImpl;
     AccelerometerImplementation  &imp;
+
+
+private:
+    // Stops passing by value and assignment.
+    prAccelerometer(const prAccelerometer&);
+    const prAccelerometer& operator = (const prAccelerometer&);
 };
 
 
