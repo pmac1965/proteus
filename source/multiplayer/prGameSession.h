@@ -44,6 +44,18 @@ enum
 };
 
 
+// Class: prGameSessionPacket
+//      This class is incomplete as yet - TO BE COMPLETED
+class prGameSessionPacket
+{
+public:
+    u32 size;
+    u32 hash;
+    u32 type;
+    u32 index;
+};
+
+
 // Class: prGameSessionReceiver
 //      This class should be derived by any class wishing to know the status
 //      of the current game session
@@ -53,6 +65,10 @@ public:
     // Method: GameSessionStatus
     //      Receives the current status of a game session
     virtual void GameSessionStatus(u32 status) = 0;
+
+    // Method: PacketReceiver
+    //      Receive a data packet from the other device
+    virtual void PacketReceiver(prGameSessionPacket &packet) = 0;
 };
 
 
@@ -98,7 +114,24 @@ public:
 
     // Method: ReceiveMessage
     //      used by the OS to pass messages back to the game
+    //
+    // Notes:
+    //      The messages are of type. Game Session Status
+    //
+    //      Some of which are platform specific 
     void ReceiveMessage(s32 msg);
+
+    // Method: SendPacket
+    //      Send a data packet to the other device
+    void SendPacket(prGameSessionPacket &packet);
+
+    // Method: ReceivePacket
+    //      Receive a data packet from the other device
+    void ReceivePacket(prGameSessionPacket &packet);
+
+    // Method: IsServer
+    //      Determine if we are the client or the server
+    PRBOOL IsServer();
 
 
 private:

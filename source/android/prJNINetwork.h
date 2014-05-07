@@ -30,6 +30,14 @@
 //      Initialises bluetooth
 void prJNI_BTInit();
 
+// Function: prJNI_BTSend
+//      Sends data via bluetooth.
+void prJNI_BTSend(unsigned char *bytes, unsigned int arraySize);
+
+// Function: prJNI_BTIsServer
+//      Determines if current machine is the server.
+bool prJNI_BTIsServer();
+
 
 #endif//PLATFORM_ANDROID
 

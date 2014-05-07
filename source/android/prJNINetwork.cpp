@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -52,7 +51,7 @@ namespace
 
 
     /// ---------------------------------------------------------------------------
-    /// Finds an audio class.
+    /// Finds a network class.
     /// ---------------------------------------------------------------------------
     jclass prJNI_GetNetworkClass(JNIEnv *env, const char *className, bool isAttached) 
     {
@@ -78,7 +77,7 @@ namespace
 
 
 /// ---------------------------------------------------------------------------
-/// 
+/// Initialises bluetooth
 /// ---------------------------------------------------------------------------
 void prJNI_BTInit()
 {
@@ -121,6 +120,107 @@ void prJNI_BTInit()
     }
 }
 
+
+/// ---------------------------------------------------------------------------
+/// Sends data via bluetooth.
+/// ---------------------------------------------------------------------------
+void prJNI_BTSend(unsigned char *bytes, unsigned int arraySize)
+{
+    JavaVM *pJavaVM = prJNI_GetVM();
+    PRASSERT(pJavaVM);
+    if (pJavaVM)
+    {
+        bool    isAttached  = false;
+        JNIEnv *env         = NULL;
+
+        // Get environment.
+        if (!prJNI_GetEnv(&env, isAttached))
+            return;
+
+        // Find class
+        jclass cls = prJNI_GetNetworkClass(env, "Bluetooth", isAttached);
+        if (!cls)
+            return;
+        
+        // Find the callBack method ID
+        jmethodID method = env->GetStaticMethodID(cls, "send", "([B)V");
+        if (!method)
+        {
+            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "send");
+            if (isAttached)
+            {
+                pJavaVM->DetachCurrentThread();
+            }
+            return;
+        }
+
+        jbyteArray bArray = env->NewByteArray(arraySize);
+
+        env->SetByteArrayRegion(bArray, 0, arraySize, (const jbyte *)bytes);
+
+        // Call method
+        env->CallStaticVoidMethod(cls, method, bArray);
+
+        env->DeleteLocalRef(bArray);
+
+        // And done
+        if (isAttached)
+        {
+            pJavaVM->DetachCurrentThread();
+        }
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Determines if current machine is the server.
+/// ---------------------------------------------------------------------------
+bool prJNI_BTIsServer()
+{
+    bool result = false;
+
+    JavaVM *pJavaVM = prJNI_GetVM();
+    PRASSERT(pJavaVM);
+    if (pJavaVM)
+    {
+        bool    isAttached  = false;
+        JNIEnv *env         = NULL;
+
+        // Get environment.
+        if (!prJNI_GetEnv(&env, isAttached))
+            return result;
+
+        // Find class
+        jclass cls = prJNI_GetNetworkClass(env, "Bluetooth", isAttached);
+        if (!cls)
+            return result;
+        
+        // Find the callBack method ID
+        jmethodID method = env->GetStaticMethodID(cls, "isServer", "()Z");
+        if (!method)
+        {
+            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "isServer");
+            if (isAttached)
+            {
+                pJavaVM->DetachCurrentThread();
+            }
+            return result;
+        }
+
+
+        // Call method
+        result = env->CallStaticBooleanMethod(cls, method);
+
+        // And done
+        if (isAttached)
+        {
+            pJavaVM->DetachCurrentThread();
+        }
+    }
+
+
+    return result;
+}
 
 
 #endif

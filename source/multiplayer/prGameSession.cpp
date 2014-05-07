@@ -17,11 +17,19 @@
  */
 
 
+#include "../prConfig.h"
+
+
 #include "prGameSession.h"
 #include "../core/prDefines.h"
 #include "../core/prMacros.h"
 #include "../debug/prAssert.h"
 #include "../debug/prTrace.h"
+
+
+#if defined(PLATFORM_ANDROID)
+#include "../android/prJNINetwork.h"
+#endif
 
 
 /// ---------------------------------------------------------------------------
@@ -121,4 +129,40 @@ void prGameSession::ReceiveMessage(s32 msg)
         prTrace("game session: unknown message: 0x%08x\n", msg);
         break;
     }
+}
+
+
+void prGameSession::SendPacket(prGameSessionPacket &packet)
+{
+#if defined(PLATFORM_ANDROID)
+
+    prJNI_BTSend((unsigned char *)&packet, sizeof(prGameSessionPacket));
+
+#else
+    PRUNUSED(packet);
+
+#endif
+}
+
+
+void prGameSession::ReceivePacket(prGameSessionPacket &packet)
+{
+    if (mpGameSessionReceiver)
+    { 
+        mpGameSessionReceiver->PacketReceiver(packet);
+    }
+}
+
+
+PRBOOL prGameSession::IsServer()
+{
+    bool result = false;
+
+#if defined(PLATFORM_ANDROID)
+
+    result = prJNI_BTIsServer();
+    
+#endif
+
+    return result ? PRTRUE : PRFALSE;
 }
