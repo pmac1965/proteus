@@ -863,7 +863,7 @@ void prAchievementManager::Award(const char *key, s32 awardValue)
 
         if (!found)
         {
-            prTrace("prAchievementManager::Award - Failed to find achievement: %s", key);
+            prTrace("prAchievementManager::Award - Failed to find achievement: %s\n", key);
         }
     }
 
@@ -1127,7 +1127,7 @@ const char *prAchievementManager::GetDescriptionText(const char *name, s32 type)
 		}
 	}
 
-    prTrace("prAchievementManager::GetDescriptionText - Failed to find achievement: %s", name);
+    prTrace("prAchievementManager::GetDescriptionText - Failed to find achievement: %s\n", name);
     return NULL;
 }
 
@@ -1160,7 +1160,7 @@ const char *prAchievementManager::GetDescriptionTextByIndex(u32 index, s32 type)
 		}
 	}
 
-    prTrace("prAchievementManager::GetDescriptionTextByIndex - Failed to find achievement: %i", index);
+    prTrace("prAchievementManager::GetDescriptionTextByIndex - Failed to find achievement: %i\n", index);
     return NULL;
 }
 

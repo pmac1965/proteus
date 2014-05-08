@@ -32,10 +32,12 @@
 //      GUI widget types.
 //
 // - WT_Button
+// - WT_Dialog
 //
 typedef enum
 {
     WT_Button,
+    WT_Dialog,
 
 } prWidgetType;
 
@@ -121,6 +123,17 @@ public:
     //      c - The colour
     void SetColour(prColour c) { m_colour = c; }
 
+    // Method: SetLayer
+    //      Sets the widget layer.
+    //
+    // Parameters:
+    //      layer - The layer
+    void SetLayer(s32 layer) { m_layer = layer; }
+
+    // Method: GetLayer
+    //      Gets the widget layer.
+    s32 GetLayer() const { return m_layer; }
+
     // Method: Update
     //      Updates the widget
     //
@@ -140,7 +153,7 @@ public:
     //
     // See Also:
     //      <prTouchEvent>
-    virtual void OnPressed(prTouchEvent e) = 0;
+    virtual void OnPressed(const prTouchEvent &e) = 0;
 
     // Method: OnMove
     //      A touch event handler
@@ -150,7 +163,7 @@ public:
     //
     // See Also:
     //      <prTouchEvent>
-    virtual void OnMove(prTouchEvent e) = 0;
+    virtual void OnMove(const prTouchEvent &e) = 0;
 
     // Method: OnReleased
     //      A touch event handler
@@ -160,33 +173,29 @@ public:
     //
     // See Also:
     //      <prTouchEvent>
-    virtual void OnReleased(prTouchEvent e) = 0;
+    virtual void OnReleased(const prTouchEvent &e) = 0;
 
 
 private:
-
     prWidgetType    m_type;
     prString        m_name;
 
 
 protected:
-
-    bool            m_visible;
-    bool            m_enabled;
-    bool            m_animated;
-    bool            m_active;
-    bool            m_destroy;
-    bool            m_exp0;
-    bool            m_exp1;
-    bool            m_exp2;
-
+    bool                m_visible;
+    bool                m_enabled;
+    bool                m_animated;
+    bool                m_active;
+    bool                m_destroy;
+    bool                m_exp0;
+    bool                m_exp1;
+    bool                m_exp2;
     prSpriteManager    *m_pSpriteManager;
-
     prColour            m_colour;
+    s32                 m_layer;
 
 
 public:
-
     prVector2   pos;
 };
 

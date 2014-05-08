@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -38,6 +37,10 @@ prActor::prActor(s32 type) : m_type(type)
     m_state     = 0;
     m_priority  = 0;
     m_id        = m_baseid++;
+    user0       = 0;
+    user1       = 0;
+    user2       = 0;
+    user3       = 0;
 }
 
 

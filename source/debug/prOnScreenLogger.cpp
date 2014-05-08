@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -52,7 +51,8 @@ prOnScreenLogger::~prOnScreenLogger()
     // Delete the font
     PRSAFE_DELETE(m_pFixedWidthFont);
 
-    // Release the loggers texture as long as the game isn't exitting
+    // Release the loggers texture as long as the game isn't exitting, as the resource
+    // manager will do that
     prRegistry *pReg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
     if (pReg)
     {
@@ -86,7 +86,6 @@ void prOnScreenLogger::Add(const char *message, ...)
         va_start(args, message);        
         vsprintf(buffer, message, args);
         va_end(args);
-        TODO("Make safer");
 
         // Store
         m_messages.push_front(prStringDup(buffer));

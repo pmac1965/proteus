@@ -54,6 +54,7 @@ prWidget::prWidget(prWidgetType type, const char *name, prSpriteManager *pSprite
     m_exp0      = false;
     m_exp1      = false;
     m_exp2      = false;
+    m_layer     = 0;
 }
 
 

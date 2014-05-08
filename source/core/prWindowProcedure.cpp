@@ -183,8 +183,11 @@ namespace
         PRUNUSED(lParam);
 
         // Let the game know we're exiting.
-    //    System::SetGameExit();
-        TODO("Sort this");
+        prRegistry *pReg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+        if (pReg)
+        {
+            pReg->SetValue("Exit", "true");
+        }
     
         // Terminate AntTweakBar
         #if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)    

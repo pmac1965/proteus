@@ -390,7 +390,7 @@ void prFile::Close()
     // Check mode.
     if (imp.filemode == FileMode_Simple)
     {
-        prTrace("You cannot call close on files created by the Load() method.");
+        prTrace("You cannot call close on files created by the Load() method\n");
         return;
     }
 

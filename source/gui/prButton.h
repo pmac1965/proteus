@@ -51,6 +51,7 @@ class prButton : public prWidget
 private:
     // Friends
     friend class prGui;
+    friend class prDialog;
 
     // Method: prButton
     //      Ctor
@@ -77,9 +78,9 @@ public:
     //      Draws the button
     void Draw();
 
-    void OnPressed(prTouchEvent e);
-    void OnMove(prTouchEvent e);
-    void OnReleased(prTouchEvent e);
+    void OnPressed(const prTouchEvent &e);
+    void OnMove(const prTouchEvent &e);
+    void OnReleased(const prTouchEvent &e);
 
     void SetSprite(prSprite *pSprite);
     void SetFont(prBitmapFont *pFont);

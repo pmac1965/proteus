@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -205,7 +204,7 @@ void prResourceManager::Clear()
     }
 }
 
-TODO("Fix")
+
 /// ---------------------------------------------------------------------------
 /// Adds a resource to the manager.
 /// ---------------------------------------------------------------------------
@@ -218,4 +217,4 @@ void prResourceManager::Add(prResource *resource)
     std::list<prResource*>& list = m_resources[hash % RESOURCE_TABLE_SIZE];
 
     list.push_back(resource);
-}//*/
+}

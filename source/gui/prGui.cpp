@@ -14,13 +14,13 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
 #include "../prConfig.h"
 #include "prGui.h"
 #include "prButton.h"
+#include "prDialog.h"
 #include "../debug/prTrace.h"
 #include "../core/prStringUtil.h"
 #include "../core/prMacros.h"
@@ -43,6 +43,7 @@ prGui::prGui()
 {
     m_enabled = PRTRUE;
     m_visible = PRTRUE;
+    m_layer   = 0;
 
     prTouch *pTouch = static_cast<prTouch *>(prCoreGetComponent(PRSYSTEM_TOUCH));
     if (pTouch)
@@ -80,6 +81,11 @@ prWidget *prGui::Create(prWidgetType type, const char *name)
         widget = new prButton(name, &m_spriteManager);
         break;
 
+    case WT_Dialog:
+        widget = new prDialog(name, &m_spriteManager);
+        widget->SetLayer(++m_layer);
+        break;
+
     default:
         PRPANIC("Unknown widget type");
         break;
@@ -109,17 +115,11 @@ void prGui::Update(f32 dt)
 
             if (pWidget->GetDestroy())
             {
-                //// Make all other widgets active, if we're a dialog.
-                //if (pWidget->Type() == WT_Dialog)
-                //{
-                //    std::list<prWidget *>::iterator it2  = m_widgets.begin();
-                //    std::list<prWidget *>::iterator end2 = m_widgets.end();
-                //    for (; it2 != end2;)
-                //    {
-                //        (*it2)->SetActive(true);
-                //        ++it2;
-                //    }
-                //}
+                // Reduce layer
+                if (pWidget->Type() == WT_Dialog)
+                {
+                    m_layer--;
+                }
 
                 // Remove
                 m_widgets.remove(pWidget);
@@ -127,12 +127,14 @@ void prGui::Update(f32 dt)
             }
             else
             {
-                pWidget->Update(dt);
-                //++it;
+                // Only update widgets on the active layer.
+                if (m_layer == pWidget->GetLayer())
+                {
+                    pWidget->Update(dt);
+                }
             }
         }
     }
-    //Trace("W: %i\n", m_widgets.size());
 }
 
 
@@ -205,7 +207,11 @@ void prGui::InputPressed(const prTouchEvent &e)
         prWidget *widget = (*it);
         if (widget->GetActive())
         {
-            widget->OnPressed(e);
+            // Only send input to widgets on the active layer.
+            if (m_layer == widget->GetLayer())
+            {
+                widget->OnPressed(e);
+            }
         }
         ++it;
     }
@@ -224,7 +230,11 @@ void prGui::InputReleased(const prTouchEvent &e)
         prWidget *widget = (*it);
         if (widget->GetActive())
         {
-            widget->OnReleased(e);
+            // Only send input to widgets on the active layer.
+            if (m_layer == widget->GetLayer())
+            {
+                widget->OnReleased(e);
+            }
         }
         ++it;
     }
@@ -243,7 +253,11 @@ void prGui::InputAxis(const prTouchEvent &e)
         prWidget *widget = (*it);
         if (widget->GetActive())
         {
-            widget->OnMove(e);
+            // Only send input to widgets on the active layer.
+            if (m_layer == widget->GetLayer())
+            {
+                widget->OnMove(e);
+            }
         }
         ++it;
     }

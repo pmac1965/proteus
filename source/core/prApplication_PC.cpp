@@ -324,7 +324,7 @@ PRBOOL prApplication_PC::DisplayCreateTool(u32 width, u32 height, u32 menuID, u3
             m_hAccel = LoadAccelerators(GetModuleHandle(NULL), MAKEINTRESOURCE(accelID));
             if (m_hAccel == NULL)
             {
-                prTrace("Failed to load accelerator");
+                prTrace("Failed to load accelerator\n");
             }
         }
     }

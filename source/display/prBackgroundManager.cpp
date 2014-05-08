@@ -118,11 +118,22 @@ void prBackgroundManager::ReleaseAll()
 /// ---------------------------------------------------------------------------
 void prBackgroundManager::DisplayUsage()
 {
-    TODO("Fix")
-
 #if defined(_DEBUG) || defined(DEBUG)
 
-    //prSystemResourceManager::Get()->DisplayUsage();//RMT_Background)->DisplayUsage();
+    prTrace("\nBackground Manager: =============================================================\n");
+
+    for (s32 i=0; i<MAX_BACKGROUNDS; i++)
+    {
+        if (backgrounds[i])
+        {
+            prTrace("Slot %i occupied: W: %i, H: %i\n", i, backgrounds[i]->GetWidth(),
+                                                           backgrounds[i]->GetHeight());
+        }
+        else
+        {
+            prTrace("Slot %i unoccupied\n", i);
+        }
+    }
 
 #endif
 }

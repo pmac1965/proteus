@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -156,10 +155,6 @@ prSave::prSave(const char *folder)  : pImpl (new SaveImplementation())
     PRASSERT(pImpl);
     PRASSERT(folder && *folder);
     prStringCopySafe(imp.folder, folder, sizeof(imp.folder));
-
-	TODO("Add functionality into the struct and not the class, as this will make it faster");
-	TODO("Add duplicate functionality into the base class");
-	TODO("Split engine");
 }
 
 

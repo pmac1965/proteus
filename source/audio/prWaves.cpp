@@ -14,8 +14,9 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
+
+
 // http://www.gamedev.net/reference/articles/article709.asp
 
 
@@ -24,22 +25,22 @@
 
 #if defined(PLATFORM_PC) || defined(PLATFORM_ANDROID)
 
-#if defined(PLATFORM_PC)
-  #include <windows.h>
-  #include <al.h>
-  #include <alc.h>
-  #include <ks.h>
-  #include <ksmedia.h>
+  #if defined(PLATFORM_PC)
+    #include <windows.h>
+    #include <al.h>
+    #include <alc.h>
+    #include <ks.h>
+    #include <ksmedia.h>
 
-#elif defined(PLATFORM_ANDROID)
-  #include "../android/AL/al.h"
-  #include "../android/AL/alc.h"
-  #include "prOpenALErrors.h"
+  #elif defined(PLATFORM_ANDROID)
+    #include "../android/AL/al.h"
+    #include "../android/AL/alc.h"
+    #include "prOpenALErrors.h"
 
-#else
+  #else
     #error Unsupported platform
 
-#endif
+  #endif
 
 
 #include <cstring>
@@ -282,8 +283,7 @@ prWaveResult prWaves::ParseFile(const char *filename, prWaveFileInfo* pWaveInfo)
                         }
                         else
                         {
-                            TODO("Unsupported format")
-                            prTrace("Unsupported format");
+                            prTrace("Unsupported wave format\n");
                         }
                     }
                     else
@@ -306,7 +306,7 @@ prWaveResult prWaves::ParseFile(const char *filename, prWaveFileInfo* pWaveInfo)
                 if (riffChunk.size & 1)
                 {
                     file->Seek(1, PRFILE_SEEK_CUR);
-            }
+                }
             }
 
             if (pWaveInfo->ulDataSize   > 0 &&
@@ -317,7 +317,8 @@ prWaveResult prWaves::ParseFile(const char *filename, prWaveFileInfo* pWaveInfo)
             }
             else
             {
-                TODO("?")
+                prTrace("Invalid audio file\n");
+                return WR_BADWAVEFILE;
             }
         }
     }
@@ -347,7 +348,9 @@ bool prWaves::IsWaveID(prWaveID id) const
     if ((id >= 0) && (id < MAX_NUM_WAVEID))
     {
         if (m_waveID[id])
+        {
             bReturn = true;
+        }
     }
 
     return bReturn;

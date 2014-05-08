@@ -311,6 +311,8 @@
     <ClInclude Include="..\..\..\..\source\file\prFileSystem.h" />
     <ClInclude Include="..\..\..\..\source\gui\prButton.h" />
     <ClInclude Include="..\..\..\..\source\gui\prButtonListener.h" />
+    <ClInclude Include="..\..\..\..\source\gui\prDialog.h" />
+    <ClInclude Include="..\..\..\..\source\gui\prDialogListener.h" />
     <ClInclude Include="..\..\..\..\source\gui\prGui.h" />
     <ClInclude Include="..\..\..\..\source\gui\prWidget.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prInAppPurchase.h" />
@@ -563,6 +565,7 @@
     <ClCompile Include="..\..\..\..\source\file\prFileShared.cpp" />
     <ClCompile Include="..\..\..\..\source\file\prFileSystem.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prButton.cpp" />
+    <ClCompile Include="..\..\..\..\source\gui\prDialog.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prGui.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prWidget.cpp" />
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prInAppPurchase.cpp" />

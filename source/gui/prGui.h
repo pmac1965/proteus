@@ -122,6 +122,7 @@ private:
     prSpriteManager         m_spriteManager;
     PRBOOL                  m_enabled;
     PRBOOL                  m_visible;
+    s32                     m_layer;
 };
 
 

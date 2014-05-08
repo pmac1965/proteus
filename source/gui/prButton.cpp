@@ -110,7 +110,7 @@ void prButton::Draw()
 // ----------------------------------------------------------------------------
 // Gets called when a pressed event occurs
 // ----------------------------------------------------------------------------
-void prButton::OnPressed(prTouchEvent e)
+void prButton::OnPressed(const prTouchEvent &e)
 {
     if (m_sprite && m_enabled)
     {
@@ -135,7 +135,7 @@ void prButton::OnPressed(prTouchEvent e)
 // ----------------------------------------------------------------------------
 // Gets called when a move event occurs
 // ----------------------------------------------------------------------------
-void prButton::OnMove(prTouchEvent e)
+void prButton::OnMove(const prTouchEvent &e)
 {
     if (m_sprite && m_enabled)
     {
@@ -157,7 +157,7 @@ void prButton::OnMove(prTouchEvent e)
 // ----------------------------------------------------------------------------
 // Gets called when a released event occurs
 // ----------------------------------------------------------------------------
-void prButton::OnReleased(prTouchEvent e)
+void prButton::OnReleased(const prTouchEvent &e)
 {
     PRUNUSED(e);
 

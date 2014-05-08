@@ -1,19 +1,19 @@
 // File: prActor.h
-/*
-    Copyright 2014 Paul Michael McNab
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-*/
+/**
+ *  Copyright 2014 Paul Michael McNab
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 
 
 #ifndef __PRACTOR_H
@@ -39,7 +39,7 @@ public:
     typedef void (prActor::*prMethod)();
 
     // An individual entity state.
-    typedef struct// prFsmState
+    typedef struct
     {
         prMethod  entry;
         prMethod  update;
@@ -131,17 +131,30 @@ public:
     //      Entity state.
     void SetState(s32 state) { m_state = state; }
 
+    // Method: SetPriority
+    //      Entity priority.
+    void SetPriority(s32 priority) { m_priority = priority; }
+
+    // Method: GetPriority
+    //      Get entity priority.
+    s32 GetPriority() const { return m_priority; }
+
 
 public:
 
     prVector2 pos;
+    
+    s32       user0;            // User data for you to do as you please
+    s32       user1;            // User data for you to do as you please
+    s32       user2;            // User data for you to do as you please
+    s32       user3;            // User data for you to do as you please
 
 
 protected:
 
     s32     m_type;
     s32     m_state;
-    s32     m_priority;     /*  Will be removed */
+    s32     m_priority;
     s32     m_id;
 
     bool    m_visible;

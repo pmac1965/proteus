@@ -86,7 +86,7 @@ void prDebugShowLastError(const char *msg)
 
         prTrace("============================================================\n");
         prTrace("Message   : %s\n", (msg && *msg) ? msg : "None");
-        prTrace("Last error: %ls", lpMsgBuf);
+        prTrace("Last error: %ls\n", lpMsgBuf);
         prTrace("============================================================\n");
 
         if (lpMsgBuf)

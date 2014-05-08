@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -66,6 +65,11 @@
 #include "../display/prOglUtils.h"
 
 
+#ifndef MAX_PATH
+#define MAX_PATH    260
+#endif
+
+
 /// ---------------------------------------------------------------------------
 /// Constructs the background.
 /// ---------------------------------------------------------------------------
@@ -91,8 +95,6 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
     m_u1              = 0.0f;
     m_yAdjust         = 0.0f;
     m_xAdjust         = 0.0f;
-
-    TODO("Set bg type - m_type")
 
     // Parse the document
     TiXmlDocument* doc = new TiXmlDocument(filename);
@@ -258,7 +260,6 @@ void prBackground::ParseFile(TiXmlNode* pParent)
 void prBackground::ParseAttribs_File(TiXmlElement* pElement)
 {
     PRASSERT(pElement);
-
     if (pElement)
     {
         PRASSERT(pElement->Attribute("version"));
@@ -285,6 +286,21 @@ void prBackground::ParseAttribs_Background(TiXmlElement* pElement)
         PRASSERT(pElement->Attribute("type"));
 
 
+        // Set type
+        if (prStringCompare(pElement->Attribute("type"), "image") == 0)
+        {
+            m_type = IMAGE;
+        }
+        else if (prStringCompare(pElement->Attribute("type"), "tile") == 0)
+        {
+            m_type = TILEMAP;
+        }
+        else
+        {
+            PRPANIC("Unknown background type");
+        }
+
+
         // Acquire the child data.
         TiXmlHandle root(pElement);
         TiXmlElement *pElem = root.FirstChild("texture").Element();
@@ -293,11 +309,12 @@ void prBackground::ParseAttribs_Background(TiXmlElement* pElement)
             // Get the bacgrounds texture data
             PRASSERT(pElem->Attribute("data"));
             
-            int size = prStringLength(pElem->Attribute("data")) + 1;
+            s32 size = prStringLength(pElem->Attribute("data")) + 1;
             PRASSERT(size > 0);
+            PRASSERT(size < MAX_PATH);
 
+            // Store filename
             m_filename = new char[size];
-
             prStringCopySafe(m_filename, pElem->Attribute("data"), size);
         }
         else
