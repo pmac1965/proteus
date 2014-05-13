@@ -180,6 +180,7 @@ LOCAL_SRC_FILES :=			achievements/prAchievementManager.cpp	\
 	file/prFileShared.cpp	\
 	file/prFileSystem.cpp	\
 	gui/prButton.cpp	\
+	gui/prDialog.cpp	\
 	gui/prGui.cpp	\
 	gui/prWidget.cpp	\
 	inAppPurchase/prInAppPurchase.cpp	\

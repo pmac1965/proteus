@@ -36,11 +36,11 @@ enum
 // Game Session Status
 enum
 {
-    GSS_CONNECT_BEGIN   = 0x84210001,           // Connecting has begun
-    GSS_CONNECT_FAILED  = 0x84210002,           // Connecting failed
-    GSS_CONNECT_OK      = 0x84210003,           // Connecting succeeded
-    GSS_TURNED_ON       = 0x84210004,           // Bluetooth needs to be turned on. You must restart connect
-    GSS_DISCOVERY       = 0x84210005,           // Bluetooth is discovering devices. You must restart connect
+    GSS_CONNECT_BEGIN   = 0x64210001,           // Connecting has begun
+    GSS_CONNECT_FAILED  = 0x64210002,           // Connecting failed
+    GSS_CONNECT_OK      = 0x64210003,           // Connecting succeeded
+    GSS_TURNED_ON       = 0x64210004,           // Bluetooth needs to be turned on. You must restart connect
+    GSS_DISCOVERY       = 0x64210005,           // Bluetooth is discovering devices. You must restart connect
 };
 
 

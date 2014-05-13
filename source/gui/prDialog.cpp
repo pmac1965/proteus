@@ -80,12 +80,12 @@ void prDialog::Update(f32 dt)
 /// ---------------------------------------------------------------------------
 void prDialog::Draw()
 {
-    // Visible
-    if (!GetVisible())
-    {
-        TODO("Move visibility test to main gui draw.")
-        return;
-    }
+    //// Visible
+    //if (!GetVisible())
+    //{
+    //    TODO("Move visibility test to main gui draw.")
+    //    return;
+    //}
 
 
     // draw the dialog
@@ -164,9 +164,9 @@ void prDialog::OnPressed(const prTouchEvent &e)
 }
 
 
-// ----------------------------------------------------------------------------
-// Input handler.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Input handler.
+/// ---------------------------------------------------------------------------
 void prDialog::OnMove(const prTouchEvent &e)
 {
     for (s32 i=0; i<m_buttonCount; i++)
@@ -179,9 +179,9 @@ void prDialog::OnMove(const prTouchEvent &e)
 }
 
 
-// ----------------------------------------------------------------------------
-// Input handler.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Input handler.
+/// ---------------------------------------------------------------------------
 void prDialog::OnReleased(const prTouchEvent &e)
 {
     for (s32 i=0; i<m_buttonCount; i++)
@@ -194,9 +194,9 @@ void prDialog::OnReleased(const prTouchEvent &e)
 }
 
 
-// ----------------------------------------------------------------------------
-// Set the dialog backdrop.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Set the dialog backdrop.
+/// ---------------------------------------------------------------------------
 void prDialog::SetBackdrop(const char *backdrop)
 {
     PRASSERT(backdrop && *backdrop);
@@ -206,9 +206,9 @@ void prDialog::SetBackdrop(const char *backdrop)
 }
 
 
-// ----------------------------------------------------------------------------
-// Adds a button.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Adds a button.
+/// ---------------------------------------------------------------------------
 void prDialog::AddButton(const char *pFile, const char *pName)
 {
     PRASSERT(pFile && *pFile);
@@ -273,9 +273,9 @@ void prDialog::AddButton(const char *pFile, const char *pName)
 }
 
 
-// ----------------------------------------------------------------------------
-// Set the font for the buttons and the dialog.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Set the font for the buttons and the dialog.
+/// ---------------------------------------------------------------------------
 void prDialog::SetFont(prBitmapFont *pFont)
 {
     // Set text font.
@@ -292,9 +292,9 @@ void prDialog::SetFont(prBitmapFont *pFont)
 }
 
 
-// ----------------------------------------------------------------------------
-// Set the dialog title.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Set the dialog title.
+/// ---------------------------------------------------------------------------
 void prDialog::SetTitle(const char *text, f32 scale)
 {
     m_title.Set(text);
@@ -302,9 +302,9 @@ void prDialog::SetTitle(const char *text, f32 scale)
 }
 
 
-// ----------------------------------------------------------------------------
-// Set the dialog text.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Set the dialog text.
+/// ---------------------------------------------------------------------------
 void prDialog::SetText(const char *text, f32 scale)
 {
     m_text.Set(text);
@@ -312,18 +312,18 @@ void prDialog::SetText(const char *text, f32 scale)
 }
 
 
-// ----------------------------------------------------------------------------
-// Set callback listener.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Set callback listener.
+/// ---------------------------------------------------------------------------
 void prDialog::RegisterListener(prDialogListener *pListener)
 {
     m_prIDialogListener = pListener;
 }
 
 
-// ----------------------------------------------------------------------------
-// Callback handlers.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Callback handlers.
+/// ---------------------------------------------------------------------------
 void prDialog::OnButtonPressed(const char *name)
 {
     if (m_prIDialogListener)
@@ -345,14 +345,16 @@ void prDialog::OnButtonPressed(const char *name)
 }
 
 
-// ----------------------------------------------------------------------------
-// Callback handlers.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Callback handlers.
+/// ---------------------------------------------------------------------------
 void prDialog::OnButtonReleased(const char *name)
 {
     if (m_prIDialogListener)
     {
         s32 index = 0;
+
+        // Find index
         for (; index < m_buttonCount; index++)
         {
             if (m_buttons[index])
@@ -366,4 +368,36 @@ void prDialog::OnButtonReleased(const char *name)
 
         m_destroy = m_prIDialogListener->OnDlgButtonReleased(name, index);
     }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Gets dialog width
+/// ---------------------------------------------------------------------------
+s32 prDialog::GetWidth() const
+{
+    s32 size = 0;
+
+    if (m_spriteBackdrop)
+    {
+        size = m_spriteBackdrop->GetFrameWidth();
+    }
+
+    return size;
+}
+    
+
+/// ---------------------------------------------------------------------------
+/// Gets dialog height
+/// ---------------------------------------------------------------------------
+s32 prDialog::GetHeight() const
+{
+    s32 size = 0;
+
+    if (m_spriteBackdrop)
+    {
+        size = m_spriteBackdrop->GetFrameHeight();
+    }
+
+    return size;
 }

@@ -50,6 +50,10 @@ REM --------------------------------------
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_linux.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_mac.h
 
+    del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prFps_PC.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prFps_Android.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prFps_ios.h
+
     rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\libzip
     REM rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\audio\external
 

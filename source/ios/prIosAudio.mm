@@ -57,6 +57,7 @@ void prIosSongPlay(const char *filename)
         
         if (audioPlayer == nil)
         {
+            NSLog(@"Failed to play track: %s", filename);
             NSLog(@"%@", [err description]);
         }
         else

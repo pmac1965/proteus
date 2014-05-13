@@ -126,6 +126,8 @@
 #include "file/prFileSystem.h"
 #include "gui/prButton.h"
 #include "gui/prButtonListener.h"
+#include "gui/prDialog.h"
+#include "gui/prDialogListener.h"
 #include "gui/prGui.h"
 #include "gui/prWidget.h"
 #include "inAppPurchase/prInAppPurchase.h"

@@ -237,7 +237,7 @@ public:
 
     // Method: GetPriority
     //      Returns draw order priority
-    void GetPriority() const { m_priority; }
+    s32 GetPriority() const { return m_priority; }
 
     // Method: SetColour
     //      Sets the tint colour.
@@ -333,7 +333,7 @@ private:
     f32                 m_fw;               // Frame width  (UV coords)
     f32                 m_fh;               // Frame height (UV coords)
     f32                 m_angle;
-    f32                 m_priority;         // May not keep.
+    s32                 m_priority;         // May not keep.
 
     bool                m_animated;
     bool                m_visible;

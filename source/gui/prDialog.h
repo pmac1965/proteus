@@ -40,36 +40,68 @@ class prDialogListener;
 class prButton;
 
 
-// Standard GUI dialog
+// Class: prDialog
+//      Standard GUI dialog
+//
+// Notes:
+//      To get information on button presses a class must implement <prButtonListener>
+//      and register itself as a listener.
+//
+// See Also:
+//      <prButtonListener>
 class prDialog : public prWidget, prButtonListener
 {
-public:
+private:
+    // Friends
+    friend class prGui;
 
+    // Method: prDialog
+    //      Ctor
     prDialog(const char *name, prSpriteManager *pSpriteManager);
+
+    // Method: ~prDialog
+    //      Dtor
     ~prDialog();
 
-    // Update the dialog.
+
+public:
+    // Method: Update
+    //      Updates the dialog.
     void Update(f32 dt);
 
-    // Draw the dialog.
+    // Method: Draw
+    //      Draw the dialog.
     void Draw();
 
-    // Input handler.
+    // Method: OnPressed
+    //      Input handler.
     void OnPressed(const prTouchEvent &e);
 
-    // Input handler.
+    // Method: OnMove
+    //      Input handler.
     void OnMove(const prTouchEvent &e);
 
-    // Input handler.
+    // Method: OnReleased
+    //      Input handler.
     void OnReleased(const prTouchEvent &e);
 
-    // Set the dialog backdrop.
+    // Method: SetBackdrop
+    //      Set the dialog backdrop image.
+    //
+    // Parameters:
+    //      backdrop - A sprite filename
     void SetBackdrop(const char *backdrop);
 
-    // Adds a button.
+    // Method: AddButton
+    //      Adds a button.
+    //
+    // Parameters:
+    //      pFile - A sprite filename
+    //      pName - Buttons name
     void AddButton(const char *pFile, const char *pName);
 
-    // Set the font for the buttons and the dialog.
+    // Method: SetFont
+    //      Sets the font for the buttons and the dialog.
     void SetFont(prBitmapFont *pFont);
 
     // Set the dialog title.
@@ -84,6 +116,12 @@ public:
     // Callback handlers.
     void OnButtonPressed(const char *name);
     void OnButtonReleased(const char *name);
+
+    //
+    s32 GetWidth() const;
+    
+    //
+    s32 GetHeight() const;
 
     // x == pixels in from side, Y == pixels up from bottom.
     void SetButtonOffset(u32 x, u32 y) { m_offsetButtons.x = (f32)x;

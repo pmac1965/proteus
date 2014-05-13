@@ -68,9 +68,9 @@ prGui::~prGui()
 }
 
 
-// ----------------------------------------------------------------------------
-// 
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Create GUI components
+/// ---------------------------------------------------------------------------
 prWidget *prGui::Create(prWidgetType type, const char *name)
 {
     prWidget *widget = NULL;
@@ -100,9 +100,9 @@ prWidget *prGui::Create(prWidgetType type, const char *name)
 }
 
 
-// ----------------------------------------------------------------------------
-// Calls update on every widget.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Calls update on every widget.
+/// ---------------------------------------------------------------------------
 void prGui::Update(f32 dt)
 {
     if (m_enabled)
@@ -112,7 +112,7 @@ void prGui::Update(f32 dt)
         for (; it != end;)
         {
             prWidget *pWidget = (*it++);
-
+            PRASSERT(pWidget);
             if (pWidget->GetDestroy())
             {
                 // Reduce layer
@@ -130,7 +130,10 @@ void prGui::Update(f32 dt)
                 // Only update widgets on the active layer.
                 if (m_layer == pWidget->GetLayer())
                 {
-                    pWidget->Update(dt);
+                    if (pWidget->GetActive())
+                    {
+                        pWidget->Update(dt);
+                    }
                 }
             }
         }
@@ -138,9 +141,9 @@ void prGui::Update(f32 dt)
 }
 
 
-// ----------------------------------------------------------------------------
-// Calls draw on every widget.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Calls draw on every widget.
+/// ---------------------------------------------------------------------------
 void prGui::Draw()
 {
     if (m_visible)
@@ -149,16 +152,21 @@ void prGui::Draw()
         std::list<prWidget *>::iterator end = m_widgets.end();
         for (; it != end;)
         {
-            (*it)->Draw();
+            prWidget *widget = (*it);
+            PRASSERT(widget);
+            if (widget->GetVisible())
+            {
+                widget->Draw();
+            }
             ++it;
         }
     }
 }
 
 
-// ----------------------------------------------------------------------------
-// Removes all the widgets.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Removes all the widgets.
+/// ---------------------------------------------------------------------------
 void prGui::Clear()
 {
     std::list<prWidget *>::iterator it  = m_widgets.begin();
@@ -173,9 +181,9 @@ void prGui::Clear()
 }
 
 
-// ----------------------------------------------------------------------------
-// Finds a name widget.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Finds a name widget.
+/// ---------------------------------------------------------------------------
 prWidget *prGui::Find(const char *name)
 {
     PRASSERT(name && *name);
@@ -195,9 +203,9 @@ prWidget *prGui::Find(const char *name)
 }
 
 
-// ----------------------------------------------------------------------------
-// Passes on a touch event to every widget.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Passes on a touch event to every widget.
+/// ---------------------------------------------------------------------------
 void prGui::InputPressed(const prTouchEvent &e)
 {
     std::list<prWidget *>::iterator it  = m_widgets.begin();
@@ -205,12 +213,16 @@ void prGui::InputPressed(const prTouchEvent &e)
     for (; it != end;)
     {
         prWidget *widget = (*it);
+        PRASSERT(widget);
         if (widget->GetActive())
         {
             // Only send input to widgets on the active layer.
             if (m_layer == widget->GetLayer())
             {
-                widget->OnPressed(e);
+                if (widget->GetActive())
+                {
+                    widget->OnPressed(e);
+                }
             }
         }
         ++it;
@@ -218,9 +230,9 @@ void prGui::InputPressed(const prTouchEvent &e)
 }
 
 
-// ----------------------------------------------------------------------------
-// Passes on a touch event to every widget.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Passes on a touch event to every widget.
+/// ---------------------------------------------------------------------------
 void prGui::InputReleased(const prTouchEvent &e)
 {
     std::list<prWidget *>::iterator it  = m_widgets.begin();
@@ -228,12 +240,16 @@ void prGui::InputReleased(const prTouchEvent &e)
     for (; it != end;)
     {
         prWidget *widget = (*it);
+        PRASSERT(widget);
         if (widget->GetActive())
         {
             // Only send input to widgets on the active layer.
             if (m_layer == widget->GetLayer())
             {
-                widget->OnReleased(e);
+                if (widget->GetActive())
+                {
+                    widget->OnReleased(e);
+                }
             }
         }
         ++it;
@@ -241,9 +257,9 @@ void prGui::InputReleased(const prTouchEvent &e)
 }
 
 
-// ----------------------------------------------------------------------------
-// Passes on a touch event to every widget.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Passes on a touch event to every widget.
+/// ---------------------------------------------------------------------------
 void prGui::InputAxis(const prTouchEvent &e)
 {
     std::list<prWidget *>::iterator it  = m_widgets.begin();
@@ -251,12 +267,16 @@ void prGui::InputAxis(const prTouchEvent &e)
     for (; it != end;)
     {
         prWidget *widget = (*it);
+        PRASSERT(widget);
         if (widget->GetActive())
         {
             // Only send input to widgets on the active layer.
             if (m_layer == widget->GetLayer())
             {
-                widget->OnMove(e);
+                if (widget->GetActive())
+                {
+                    widget->OnMove(e);
+                }
             }
         }
         ++it;
