@@ -142,7 +142,7 @@ private:
     s32             m_height;
     s32             m_type;
     bool            m_correctFileType;
-    bool            m_exp0;
+    bool            m_widthHeightSupplied;
     bool            m_exp1;
     bool            m_exp2;
     prColour        m_colour;
@@ -152,8 +152,6 @@ private:
     f32             m_scrnHeight;
     f32             m_v0;
     f32             m_u1;
-    f32             m_xAdjust;
-    f32             m_yAdjust;
 };
 
 

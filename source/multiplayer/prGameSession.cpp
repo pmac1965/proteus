@@ -132,6 +132,9 @@ void prGameSession::ReceiveMessage(s32 msg)
 }
 
 
+/// ---------------------------------------------------------------------------
+/// Send a data packet to the other device
+/// ---------------------------------------------------------------------------
 void prGameSession::SendPacket(prGameSessionPacket &packet)
 {
 #if defined(PLATFORM_ANDROID)
@@ -145,6 +148,9 @@ void prGameSession::SendPacket(prGameSessionPacket &packet)
 }
 
 
+/// ---------------------------------------------------------------------------
+/// Receive a data packet from the other device
+/// ---------------------------------------------------------------------------
 void prGameSession::ReceivePacket(prGameSessionPacket &packet)
 {
     if (mpGameSessionReceiver)
@@ -154,6 +160,9 @@ void prGameSession::ReceivePacket(prGameSessionPacket &packet)
 }
 
 
+/// ---------------------------------------------------------------------------
+/// Determine if we are the client or the server
+/// ---------------------------------------------------------------------------
 PRBOOL prGameSession::IsServer()
 {
     bool result = false;
@@ -161,6 +170,8 @@ PRBOOL prGameSession::IsServer()
 #if defined(PLATFORM_ANDROID)
 
     result = prJNI_BTIsServer();
+
+#elif defined(PLATFORM_IOS)
     
 #endif
 

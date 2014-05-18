@@ -78,23 +78,21 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
     PRASSERT(filename && *filename);
 
     // Init data
-    m_texture         = NULL;
-    m_filename        = NULL;
-    m_width           = -1;
-    m_height          = -1;
-    m_type            = prBackground::UNKNOWN;
-    m_correctFileType = false;
-    m_exp0            = false;
-    m_exp1            = false;
-    m_exp2            = false;
-    m_pixelHeight     = 0.0f;
-    m_pixelWidth      = 0.0f;
-    m_scrnWidth       = 0.0f;
-    m_scrnHeight      = 0.0f;
-    m_v0              = 0.0f;
-    m_u1              = 0.0f;
-    m_yAdjust         = 0.0f;
-    m_xAdjust         = 0.0f;
+    m_texture               = NULL;
+    m_filename              = NULL;
+    m_width                 = -1;
+    m_height                = -1;
+    m_type                  = prBackground::UNKNOWN;
+    m_correctFileType       = false;
+    m_widthHeightSupplied   = false;
+    m_exp1                  = false;
+    m_exp2                  = false;
+    m_pixelHeight           = 0.0f;
+    m_pixelWidth            = 0.0f;
+    m_scrnWidth             = 0.0f;
+    m_scrnHeight            = 0.0f;
+    m_v0                    = 0.0f;
+    m_u1                    = 0.0f;
 
     // Parse the document
     TiXmlDocument* doc = new TiXmlDocument(filename);
@@ -131,19 +129,19 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
         m_pixelWidth  = 1.0f / m_width;
         m_pixelHeight = 1.0f / m_height;
 
-        // Actual screen size.
-        prRegistry *pReg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
-        PRASSERT(pReg);
-        m_scrnWidth  = (float)atof(pReg->GetValue("ScreenWidth"));
-        m_scrnHeight = (float)atof(pReg->GetValue("ScreenHeight"));
+        // Get draw size
+        if (!m_widthHeightSupplied)
+        {
+            // Assume display size is screen width/height
+            prRegistry *pReg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+            PRASSERT(pReg);
+            m_scrnWidth  = (float)atof(pReg->GetValue("ScreenWidth"));
+            m_scrnHeight = (float)atof(pReg->GetValue("ScreenHeight"));
+        }
 
         // UV Coords pre-calc
         m_v0 = 1.0f - (m_pixelHeight * m_scrnHeight);
         m_u1 =        (m_pixelWidth  * m_scrnWidth);
-        
-        // Center adjust
-        m_yAdjust = ((m_height - m_scrnHeight) / 2);
-        m_xAdjust = ((m_width  - m_scrnWidth)  / 2);
     }
     else
     {
@@ -177,8 +175,8 @@ void prBackground::Draw()
     
     if (m_texture)
     {
-        f32 width  = (f32)(m_width  >> 1);
-        f32 height = (f32)(m_height >> 1);
+        f32 width  = (f32)(m_scrnWidth  / 2);
+        f32 height = (f32)(m_scrnHeight / 2);
 
         glPushMatrix();
         ERR_CHECK();
@@ -188,7 +186,7 @@ void prBackground::Draw()
         ERR_CHECK();
 
         // Move to offset
-        glTranslatef(pos.x - m_xAdjust, pos.y - m_yAdjust, 0);
+        glTranslatef(pos.x, pos.y, 0);
         ERR_CHECK();
 
         // Set scale
@@ -315,7 +313,18 @@ void prBackground::ParseAttribs_Background(TiXmlElement* pElement)
 
             // Store filename
             m_filename = new char[size];
+            PRASSERT(m_filename);
             prStringCopySafe(m_filename, pElem->Attribute("data"), size);
+
+            // Width/height
+            const char *width  = pElem->Attribute("width");
+            const char *height = pElem->Attribute("height");
+            if (width && height)
+            {
+                m_widthHeightSupplied = true;
+                m_scrnWidth           = (f32)atof(width);
+                m_scrnHeight          = (f32)atof(height);
+            }
         }
         else
         {

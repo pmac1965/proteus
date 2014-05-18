@@ -113,7 +113,7 @@ public:
     PRBOOL IsEnabled() const { return mIsEnabled; }
 
     // Method: ReceiveMessage
-    //      used by the OS to pass messages back to the game
+    //      Used by the OS to pass messages back to the game
     //
     // Notes:
     //      The messages are of type. Game Session Status
@@ -132,6 +132,10 @@ public:
     // Method: IsServer
     //      Determine if we are the client or the server
     PRBOOL IsServer();
+    
+    // Method: GetProvider
+    //      Gets the current provider
+    prGameSessionProvider *GetProvider() const { return mpProvider; }
 
 
 private:

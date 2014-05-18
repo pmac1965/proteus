@@ -95,7 +95,7 @@
 #include "debug/prConsoleWindow.h"
 #include "debug/prDebug.h"
 #include "debug/prFps.h"
-#include "debug/prFps_PC.h"
+//#include "debug/prFps_PC.h"
 #include "debug/prOnScreenLogger.h"
 #include "debug/prTrace.h"
 #include "display/prBackground.h"
