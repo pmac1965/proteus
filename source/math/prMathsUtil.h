@@ -29,7 +29,7 @@ namespace Proteus
 {
     namespace Maths
     {
-        const long  MaxInt32    = 0xFFFFFFFF;                           // Maths constant
+        const s32   MaxInt32    = 0xFFFFFFFF;                           // Maths constant - was long, but longs size can vary.
         const float MinFloat    = -3.402823466e+38F;                    // Maths constant
         const float MaxFloat    =  3.402823466e+38F;                    // Maths constant
         const float Pi          = 3.14159265358979323846f;              // Maths constant

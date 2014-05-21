@@ -91,10 +91,10 @@ prSprite::prSprite(prTexture *pTexture, const char *name, s32 frameWidth, s32 fr
     m_framesTotal  = m_framesAcross * m_framesDown;
     m_frame        = 0;
 
-    float pw = 1.0f / pTexture->GetWidth();
-    float ph = 1.0f / pTexture->GetHeight();
-    m_fw = pw * frameWidth;
-    m_fh = ph * frameHeight;
+    m_pw = 1.0f / pTexture->GetWidth();     // Get pixel width/height
+    m_ph = 1.0f / pTexture->GetHeight();
+    m_fw = m_pw * frameWidth;               // Set frame width/height in pixels
+    m_fh = m_ph * frameHeight;
 
     // User values
     user0 = 0;
@@ -310,7 +310,7 @@ void prSprite::AddSequence(prSpriteAnimationSequence* sequence, const char *name
     TODO("Remove name param");
     if (m_animation == NULL)
     {
-        prTrace("Add sequence: '%s' to '%s'\n", name, Name());
+        //prTrace("Add sequence: '%s' to '%s'\n", name, Name());
         m_animation = new prSpriteAnimation(this);
         m_animated  = true;
     }
@@ -336,6 +336,11 @@ void prSprite::SetFrame(s32 frame)
 
         m_v0 = 1.0f - ((y * m_fh) + m_fh);
         m_v1 = m_v0 + m_fh;
+
+#if defined(PLATFORM_ANDROID)
+        m_u0 += (m_pw / 2);             // Add half pixel to stop blurring
+        m_v0 += (m_ph / 2);             // Add half pixel to stop blurring
+#endif
 
         // Set frame
         m_frame = frame;

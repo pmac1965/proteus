@@ -35,7 +35,7 @@ REM ---------------------------------------------------------------------------
 
 
 REM --------------------------------------
-REM Delete files which you aren't needed
+REM Delete files which aren't needed
 REM --------------------------------------
     del %PROTEUS_ENGINE_DIR%\include\proteus\display\prSplash.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prDebugFont.h

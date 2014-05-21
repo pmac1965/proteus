@@ -332,6 +332,8 @@ private:
     f32                 m_v1;
     f32                 m_fw;               // Frame width  (UV coords)
     f32                 m_fh;               // Frame height (UV coords)
+    f32                 m_pw;               // Pixel width
+    f32                 m_ph;               // Pixel height
     f32                 m_angle;
     s32                 m_priority;         // May not keep.
 

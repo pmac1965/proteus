@@ -43,7 +43,7 @@ LOCAL_CFLAGS   += $(DEBUG_FLAGS) -fno-rtti -fno-exceptions
 LOCAL_LDLIBS := -ldl -llog -lGLESv1_CM -lstdc++
 
 
-LOCAL_SRC_FILES :=			achievements/prAchievementManager.cpp	\
+LOCAL_SRC_FILES :=	achievements/prAchievementManager.cpp	\
 	achievements/prAchievement_android.cpp	\
 	achievements/prAchievement_bada.cpp	\
 	achievements/prAchievement_ios.cpp	\
@@ -150,8 +150,9 @@ LOCAL_SRC_FILES :=			achievements/prAchievementManager.cpp	\
 	debug/prConsoleWindow.cpp	\
 	debug/prDebug.cpp	\
 	debug/prFps.cpp	\
-	debug/prFps_PC.cpp	\
 	debug/prFps_Android.cpp	\
+	debug/prFps_ios.cpp	\
+	debug/prFps_PC.cpp	\
 	debug/prOnScreenLogger.cpp	\
 	debug/prTrace.cpp	\
 	display/prBackground.cpp	\
@@ -207,6 +208,7 @@ LOCAL_SRC_FILES :=			achievements/prAchievementManager.cpp	\
 	memory/prSpritePointerPool.cpp	\
 	multiplayer/prGameSession.cpp	\
 	multiplayer/prGameSessionAndroid_BT.cpp	\
+	multiplayer/prGameSessionIos_BT.cpp	\
 	multiplayer/prGameSessionProvider.cpp	\
 	multiplayer/prMultiplayer.cpp	\
 	multiplayer/prMultiplayerManager.cpp	\

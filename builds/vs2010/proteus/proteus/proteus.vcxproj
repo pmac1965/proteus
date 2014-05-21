@@ -412,6 +412,8 @@
     <ClInclude Include="..\..\..\..\source\persistence\prSave_pc.h" />
     <ClInclude Include="..\..\..\..\source\prConfig.h" />
     <ClInclude Include="..\..\..\..\source\proteus.h" />
+    <ClInclude Include="..\..\..\..\source\script\prLua.h" />
+    <ClInclude Include="..\..\..\..\source\script\prLuaDebug.h" />
     <ClInclude Include="..\..\..\..\source\thread\prMutex.h" />
     <ClInclude Include="..\..\..\..\source\thread\prThread.h" />
     <ClInclude Include="..\..\..\..\source\tinyxml\tinystr.h" />
@@ -975,6 +977,8 @@
     <ClCompile Include="..\..\..\..\source\persistence\prSave_linux.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave_mac.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave_pc.cpp" />
+    <ClCompile Include="..\..\..\..\source\script\prLua.cpp" />
+    <ClCompile Include="..\..\..\..\source\script\prLuaDebug.cpp" />
     <ClCompile Include="..\..\..\..\source\thread\prMutex.cpp" />
     <ClCompile Include="..\..\..\..\source\thread\prThread.cpp" />
     <ClCompile Include="..\..\..\..\source\tinyxml\tinystr.cpp" />
