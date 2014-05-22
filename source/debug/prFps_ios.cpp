@@ -50,6 +50,8 @@ prFps_ios::~prFps_ios()
 /// ---------------------------------------------------------------------------
 void prFps_ios::Reset()
 {
+    ticksPerSecond = 0LL;
+    timeEnd        = 0LL;
     timeTotal      = 0LL;
     timeStart      = clock();
     frames         = 0;

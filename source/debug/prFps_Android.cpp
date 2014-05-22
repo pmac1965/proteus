@@ -50,7 +50,9 @@ prFps_Android::~prFps_Android()
 /// ---------------------------------------------------------------------------
 void prFps_Android::Reset()
 {
+    ticksPerSecond = 0LL;
     timeTotal      = 0LL;
+    timeEnd        = 0LL;
     timeStart      = clock();
     frames         = 0;
     frameRate      = 0;

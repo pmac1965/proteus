@@ -165,15 +165,19 @@ void prGameSession::ReceivePacket(prGameSessionPacket &packet)
 /// ---------------------------------------------------------------------------
 PRBOOL prGameSession::IsServer()
 {
-    bool result = false;
-
 #if defined(PLATFORM_ANDROID)
 
-    result = prJNI_BTIsServer();
+    bool result = prJNI_BTIsServer();
 
 #elif defined(PLATFORM_IOS)
+
+    bool result = false;
+
+#else
+
+    bool result = false;
     
 #endif
 
-    return result ? PRTRUE : PRFALSE;
+    return (result ? PRTRUE : PRFALSE);
 }

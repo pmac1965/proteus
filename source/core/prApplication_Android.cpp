@@ -85,18 +85,22 @@ prApplication_Android::prApplication_Android() : prApplication()
             prTrace("               : Log to file  %s\n", reg->GetValue("LogToFile"));
             prTrace("               : Help         %s\n", reg->GetValue("Help"));
             prTrace("-------------------------------------------------------------------------------\n");
-            prTrace("Build number: %i\n", BUILD_NUMBER);
+            prTrace("Build number   : %i\n", BUILD_NUMBER);
+            prTrace("-------------------------------------------------------------------------------\n");
+        }
+        else
+        {
+            // Write startup info.
+            prTrace("-------------------------------------------------------------------------------\n");
+            prTrace("Engine version : %s\n", prGetVersionAsString());
+            prTrace("Build number   : %i\n", BUILD_NUMBER);
             prTrace("-------------------------------------------------------------------------------\n");
         }
     }
-#else
-    // Write startup info.
-    prTrace("-------------------------------------------------------------------------------\n");
-    prTrace("Build number: %i\n", BUILD_NUMBER);
-    prTrace("-------------------------------------------------------------------------------\n");
-
 #endif
 
+    // Keeps CppCheck happy
+    BuildType();
 
     // Access the embedded data, so it'll stay linked into the game.
     for (u32 j=0; j<PRARRAY_SIZE(embedded); j++)
