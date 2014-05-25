@@ -57,15 +57,13 @@ namespace
 
             case LUA_TNUMBER:
                 {
-                    const char *msg = lua_tostring(lua, i);
-                    prTrace("%s", msg);
+                    prTrace("%s", lua_tostring(lua, i));
                 }
                 break;
 
             case LUA_TSTRING:
                 {
-                    const char *msg = lua_tostring(lua, i);
-                    prTrace("%s", msg);
+                    prTrace("%s", lua_tostring(lua, i));
                 }
                 break;
 

@@ -41,6 +41,7 @@ enum
     GSS_CONNECT_OK      = 0x64210003,           // Connecting succeeded
     GSS_TURNED_ON       = 0x64210004,           // Bluetooth needs to be turned on. You must restart connect
     GSS_DISCOVERY       = 0x64210005,           // Bluetooth is discovering devices. You must restart connect
+    GSS_PEER_ID         = 0x64210006,           // Send the peer ID. Allows you to decide things, like who goes first
 };
 
 
@@ -102,7 +103,7 @@ public:
 
     // Method: Update
     //      Updates the game session
-    void Update();
+    bool Update();
 
     // Method: IsAvailable
     //      Is the technology available? For example does a device have bluetooth
@@ -136,6 +137,10 @@ public:
     // Method: GetProvider
     //      Gets the current provider
     prGameSessionProvider *GetProvider() const { return mpProvider; }
+    
+    // Method: Disconnect
+    //      Disconnects a game session
+    void Disconnect();
 
 
 private:

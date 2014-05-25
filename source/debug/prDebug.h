@@ -40,7 +40,7 @@ void prOutputString(const char *text);
 
 
 // Cross platform compiler messages.
-#if defined(PLATFORM_ANDROID) || defined (PLATFORM_IOS) || defined(PLATFORM_BADA) || defined (PLATFORM_LINUX)
+#if defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC)
     #define DO_PRAGMA(msg)          _Pragma(#msg)
 #endif
 
@@ -53,7 +53,7 @@ void prOutputString(const char *text);
         #define REMINDER                __FILE__ "(" PRCURRLINE ") : Reminder: " 
         #define TODO(msg)               __pragma(message(REMINDER msg))
 
-    #elif defined(PLATFORM_ANDROID) || defined(PLATFORM_BADA) || defined (PLATFORM_IOS) || defined (PLATFORM_LINUX)
+    #elif defined(PLATFORM_ANDROID) || defined(PLATFORM_BADA) || defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC)
         // Reminder macro
         #define TODO(msg)               DO_PRAGMA(message ("TODO: " #msg))
 

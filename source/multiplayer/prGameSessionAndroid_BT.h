@@ -43,7 +43,11 @@ public:
 
     // Method: Update
     //      Updates the game session provider
-    void Update();
+    bool Update();
+        
+    // Method: Disconnect
+    //      Disconnects a game session
+    void Disconnect();
 };
 
 

@@ -60,8 +60,19 @@ void prGameSessionAndroid_BT::Initialise()
 /// ---------------------------------------------------------------------------
 /// Updates the game session provider
 /// ---------------------------------------------------------------------------
-void prGameSessionAndroid_BT::Update()
+bool prGameSessionAndroid_BT::Update()
 {
+    return true;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Disconnects a game session
+/// ---------------------------------------------------------------------------
+void prGameSessionAndroid_BT::Disconnect()
+{
+    extern void connectionStop();
+    connectionStop();
 }
 
 

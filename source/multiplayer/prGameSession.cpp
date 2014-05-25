@@ -84,12 +84,16 @@ void prGameSession::Initialise(prGameSessionReceiver *pReceiver, prGameSessionPr
 /// ---------------------------------------------------------------------------
 /// Updates the game session
 /// ---------------------------------------------------------------------------
-void prGameSession::Update()
+bool prGameSession::Update()
 {
+    bool result = false;
+    
     if (mpProvider)
     {
-        mpProvider->Update();
+        result = mpProvider->Update();
     }
+    
+    return result;
 }
 
 
@@ -125,6 +129,11 @@ void prGameSession::ReceiveMessage(s32 msg)
         prTrace("GSS_DISCOVERY\n");
         break;
 
+    case GSS_PEER_ID:
+        if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus((u32)GSS_PEER_ID); }
+        prTrace("GSS_PEER_ID\n");
+        break;
+
     default:
         prTrace("game session: unknown message: 0x%08x\n", msg);
         break;
@@ -141,8 +150,10 @@ void prGameSession::SendPacket(prGameSessionPacket &packet)
 
     prJNI_BTSend((unsigned char *)&packet, sizeof(prGameSessionPacket));
 
-#else
-    PRUNUSED(packet);
+#elif defined(PLATFORM_IOS)
+    
+    extern void connectionSendData(prGameSessionPacket &packet);
+    connectionSendData(packet);
 
 #endif
 }
@@ -171,13 +182,26 @@ PRBOOL prGameSession::IsServer()
 
 #elif defined(PLATFORM_IOS)
 
-    bool result = false;
+    extern bool isServer();
+    bool result = isServer();
 
 #else
-
+    #pragma message("Stubbed function")    
     bool result = false;
     
 #endif
 
     return (result ? PRTRUE : PRFALSE);
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Disconnects a game session
+/// ---------------------------------------------------------------------------
+void prGameSession::Disconnect()
+{
+    if (mpProvider)
+    {
+        mpProvider->Disconnect();
+    }
 }

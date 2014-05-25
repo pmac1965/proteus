@@ -62,76 +62,112 @@ dir /S /B *.h >> ..\files.txt
 popd
 )
 
+if exist debug (
 pushd debug
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist display (
 pushd display
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist file (
 pushd file
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist gui (
 pushd gui
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist inAppPurchase (
 pushd inAppPurchase
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist input (
 pushd input
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist ios (
 pushd ios
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist linux (
 pushd linux
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist locale (
 pushd locale
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist math (
 pushd math
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist memory (
 pushd memory
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist multiplayer (
 pushd multiplayer
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist online (
 pushd online
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist particle (
 pushd particle
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist persistence (
 pushd persistence
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist thread (
 pushd thread
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist utf8proc (
 pushd utf8proc
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
+if exist util (
 pushd util
 dir /S /B *.h >> ..\files.txt
 popd
+)
 
 pause

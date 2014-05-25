@@ -46,7 +46,14 @@ public:
 
     // Method: Update
     //      Updates the game session provider
-    virtual void Update() = 0;
+    //
+    // Returns:
+    //      Returns true if still connected
+    virtual bool Update() = 0;
+    
+    // Method: Disconnect
+    //      Disconnects a game session
+    virtual void Disconnect() = 0;
 
 
 protected:

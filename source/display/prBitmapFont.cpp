@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -705,6 +704,7 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
         float    dist  = 0;
         float    w     = (1.0f / imp.scaleW);       // Pre-calculated value
         float    h     = (1.0f / imp.scaleH);       // Pre-calculated value
+        float    ya    = 0;
 
         do
         {
@@ -724,7 +724,8 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
             if (character == '\n')
             {
                 dist = 0;
-                y += imp.lineHeight * scale;
+                ya  += (imp.lineHeight * scale);
+                //prTrace("prBitmapFont::newline\n");
 
                 // Set alignment
                 switch(alignment)
@@ -806,7 +807,7 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
                         float px = pCharInfo->xoffset + (width  / 2) + imp.GetKerning(character, message[index]) + dist;
                         float py = pCharInfo->yoffset + (height / 2);
 
-                        glTranslatef(px * scale, py * scale, 0);
+                        glTranslatef(px * scale, (py * scale) + ya, 0);
                         ERR_CHECK();
 
                         glScalef(scale * width, scale * height, 1);

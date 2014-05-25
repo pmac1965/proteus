@@ -58,8 +58,20 @@ void prGameSessionIos_BT::Initialise()
 /// ---------------------------------------------------------------------------
 /// Updates the game session provider
 /// ---------------------------------------------------------------------------
-void prGameSessionIos_BT::Update()
+bool prGameSessionIos_BT::Update()
 {
+    extern bool isStillConnected();
+    return isStillConnected();
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Disconnects a game session
+/// ---------------------------------------------------------------------------
+void prGameSessionIos_BT::Disconnect()
+{
+    extern void connectionStop();
+    connectionStop();
 }
 
 
