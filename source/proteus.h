@@ -168,6 +168,7 @@
 #include "memory/prMemory.h"
 #include "memory/prMemoryPool.h"
 #include "memory/prSpritePointerPool.h"
+#include "mesh/prMesh.h"
 #include "multiplayer/prGameSession.h"
 #include "multiplayer/prGameSessionAndroid_BT.h"
 #include "multiplayer/prGameSessionIos_BT.h"

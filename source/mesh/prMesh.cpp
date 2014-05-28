@@ -1,5 +1,5 @@
 /**
- * prGameSessionAndroid_BT.cpp
+ * prMesh.cpp
  *
  *  Copyright 2014 Paul Michael McNab
  *
@@ -17,63 +17,72 @@
  */
 
 
-#include "../prConfig.h"
-
-
-#if defined(PLATFORM_ANDROID)
-
-
-#include "prGameSessionAndroid_BT.h"
-#include "prGameSession.h"
-#include "prGameSessionProvider.h"
-#include "../android/prJNINetwork.h"
+#include "prMesh.h"
+#include "prMeshLoader.h"
+#include "prMeshLoader_OBJ.h"
+#include "../core/prDefines.h"
+#include "../core/prmacros.h"
+#include "../core/prStringUtil.h"
+#include "../debug/prAssert.h"
 #include "../debug/prTrace.h"
 
 
 /// ---------------------------------------------------------------------------
-/// Ctor
+/// Constructor.
 /// ---------------------------------------------------------------------------
-prGameSessionAndroid_BT::prGameSessionAndroid_BT() : prGameSessionProvider(GSP_ANDROID_BT)
+prMesh::prMesh()
+{
+    pLoader = NULL;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Destructor.
+/// ---------------------------------------------------------------------------
+prMesh::~prMesh()
+{
+    PRSAFE_DELETE(pLoader);
+}
+
+
+/// ---------------------------------------------------------------------------
+/// 
+/// ---------------------------------------------------------------------------
+bool prMesh::Load(const char *filename)
+{
+    PRASSERT(filename && *filename);
+
+    s32  len    = prStringLength(filename);
+    bool result = false;
+
+    PRASSERT(len >= 4);
+    prTrace("File type: %s\n", &filename[len - 4]);
+
+    // Object files
+    if (prStringCompareNoCase(&filename[len - 4], ".obj") == 0)
+    {
+        pLoader = new prMeshLoader_OBJ();
+    }
+    else
+    {
+        prTrace("Unsupported mesh format\n");
+    }
+
+    return result;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// 
+/// ---------------------------------------------------------------------------
+void prMesh::Update()
 {
 }
 
 
 /// ---------------------------------------------------------------------------
-/// Dtor
+/// 
 /// ---------------------------------------------------------------------------
-prGameSessionAndroid_BT::~prGameSessionAndroid_BT()
+void prMesh::Draw()
 {
 }
-
-
-/// ---------------------------------------------------------------------------
-/// Initialises the game session provider
-/// ---------------------------------------------------------------------------
-void prGameSessionAndroid_BT::Initialise()
-{
-    prTrace("prGameSessionAndroid_BT::Initialise() - start\n");
-    prJNI_BTInit();
-    prTrace("prGameSessionAndroid_BT::Initialise() - done\n");
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Updates the game session provider
-/// ---------------------------------------------------------------------------
-bool prGameSessionAndroid_BT::Update()
-{
-    return true;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Disconnects a game session
-/// ---------------------------------------------------------------------------
-void prGameSessionAndroid_BT::Disconnect()
-{
-    //extern void connectionStop();
-    //connectionStop();
-}
-
-
-#endif//PLATFORM_ANDROID

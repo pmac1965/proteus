@@ -43,7 +43,7 @@ LOCAL_CFLAGS   += $(DEBUG_FLAGS) -fno-rtti -fno-exceptions
 LOCAL_LDLIBS := -ldl -llog -lGLESv1_CM -lstdc++
 
 
-LOCAL_SRC_FILES :=	achievements/prAchievementManager.cpp	\
+LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	achievements/prAchievement_android.cpp	\
 	achievements/prAchievement_bada.cpp	\
 	achievements/prAchievement_ios.cpp	\
@@ -206,6 +206,9 @@ LOCAL_SRC_FILES :=	achievements/prAchievementManager.cpp	\
 	math/prVector3.cpp	\
 	memory/prMemory.cpp	\
 	memory/prSpritePointerPool.cpp	\
+	mesh/prMesh.cpp	\
+	mesh/prMeshLoader.cpp	\
+	mesh/prMeshLoader_OBJ.cpp	\
 	multiplayer/prGameSession.cpp	\
 	multiplayer/prGameSessionAndroid_BT.cpp	\
 	multiplayer/prGameSessionIos_BT.cpp	\
@@ -229,6 +232,8 @@ LOCAL_SRC_FILES :=	achievements/prAchievementManager.cpp	\
 	persistence/prSave_linux.cpp	\
 	persistence/prSave_mac.cpp	\
 	persistence/prSave_pc.cpp	\
+	script/prLua.cpp	\
+	script/prLuaDebug.cpp	\
 	thread/prMutex.cpp	\
 	thread/prThread.cpp	\
 	tinyxml/tinystr.cpp	\

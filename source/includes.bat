@@ -128,6 +128,12 @@ dir /S /B *.h >> ..\files.txt
 popd
 )
 
+if exist mesh (
+pushd mesh
+dir /S /B *.h >> ..\files.txt
+popd
+)
+
 if exist multiplayer (
 pushd multiplayer
 dir /S /B *.h >> ..\files.txt
