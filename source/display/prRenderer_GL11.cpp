@@ -137,22 +137,27 @@ void prRenderer_GL11::Init()
     ERR_CHECK();
     
     // Colour
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);               // Clear colour
+    glClearColor(0.0f, 0.0f, 0.2f, 0.0f);               // Clear colour
     ERR_CHECK();
     
-    // Depth buffer
+    // Depth buffer setup
 #if defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS)
-    glClearDepthf(1.0f);                                // Depth buffer setup
+    glClearDepthf(1.0f);
     ERR_CHECK();
 #else
-    glClearDepth(1.0f);                                 // Depth buffer setup
+    glClearDepth(1.0f);
     ERR_CHECK();
 #endif
+
     glEnable(GL_DEPTH_TEST);                            // Enables depth testing
-    ERR_CHECK();
+    ERR_CHECK();    
     glDepthFunc(GL_LEQUAL);                             // The type of depth test to do
     ERR_CHECK();
 
+    glEnable(GL_CULL_FACE);                             // Enable culling.
+    ERR_CHECK();
+    glCullFace(GL_BACK);
+    ERR_CHECK();
 
     // Really nice perspective calculations
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
@@ -196,9 +201,20 @@ void prRenderer_GL11::Begin()
     glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
     ERR_CHECK();
 
+    // Enable depth testing
+    glEnable(GL_DEPTH_TEST);
+    ERR_CHECK();
+
+    // Enabled culling
+    glEnable(GL_CULL_FACE);
+    ERR_CHECK();
+    glCullFace(GL_BACK);
+    ERR_CHECK();
+
     // Reset the current modelview matrix.
     glMatrixMode(GL_MODELVIEW);
     ERR_CHECK();
+
     glLoadIdentity();
     ERR_CHECK();
 }
@@ -274,6 +290,9 @@ void prRenderer_GL11::SetOrthographicView()
         glDisable(GL_DEPTH_TEST);
         ERR_CHECK();
 
+        glDisable(GL_CULL_FACE);
+        ERR_CHECK();
+
 //#if defined(PLATFORM_ANDROID)
 //        // Displacement trick for exact pixelization
 //        glTranslatef(0.375f, 0.375f, 0.0f);
@@ -297,6 +316,15 @@ void prRenderer_GL11::RestorePerspectiveView()
         ERR_CHECK();
 
         glMatrixMode(GL_MODELVIEW);
+        ERR_CHECK();
+
+        glEnable(GL_DEPTH_TEST);
+        ERR_CHECK();
+
+        // Enabled culling
+        glEnable(GL_CULL_FACE);
+        ERR_CHECK();
+        glCullFace(GL_BACK);
         ERR_CHECK();
     }
 }

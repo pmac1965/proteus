@@ -1,4 +1,4 @@
-// File: prMeshLoader_OBJ.h
+// File: prNormals_MD2.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,30 +16,14 @@
  */
 
 
-#ifndef __PRMESHLOADEROBJ_H
-#define __PRMESHLOADEROBJ_H
+#ifndef __PRNORMALS_MD2_H
+#define __PRNORMALS_MD2_H
 
 
-#include "prMeshLoader.h"
+#include "prMD2.h"
 
 
-// Method: prMeshLoader_OBJ
-//      A 3D mesh loader class for wavefront obj files
-class prMeshLoader_OBJ : public prMeshLoader
-{
-public:
-    // Method: prMeshLoader_OBJ
-    //      Ctor
-    prMeshLoader_OBJ();
-
-    // Method: prMeshLoader_OBJ
-    //      Dtor
-    ~prMeshLoader_OBJ();
-
-    // Method: Load
-    //      Overridden load method
-    bool Load(const char *filename);
-};
+extern const prMD2Vec3 md2Normals[];
 
 
-#endif//__PRMESHLOADEROBJ_H
+#endif//__PRNORMALS_MD2_H

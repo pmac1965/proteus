@@ -18,11 +18,10 @@
 
 
 #include "prMesh.h"
-#include "prMeshLoader.h"
-#include "prMeshLoader_OBJ.h"
 #include "../core/prDefines.h"
 #include "../core/prmacros.h"
 #include "../core/prStringUtil.h"
+#include "../core/prVertex.h"
 #include "../debug/prAssert.h"
 #include "../debug/prTrace.h"
 
@@ -32,7 +31,9 @@
 /// ---------------------------------------------------------------------------
 prMesh::prMesh()
 {
-    pLoader = NULL;
+    mpTexture   = NULL;
+    mLoaded     = false;
+    mWireframe  = false;
 }
 
 
@@ -41,48 +42,5 @@ prMesh::prMesh()
 /// ---------------------------------------------------------------------------
 prMesh::~prMesh()
 {
-    PRSAFE_DELETE(pLoader);
-}
-
-
-/// ---------------------------------------------------------------------------
-/// 
-/// ---------------------------------------------------------------------------
-bool prMesh::Load(const char *filename)
-{
-    PRASSERT(filename && *filename);
-
-    s32  len    = prStringLength(filename);
-    bool result = false;
-
-    PRASSERT(len >= 4);
-    prTrace("File type: %s\n", &filename[len - 4]);
-
-    // Object files
-    if (prStringCompareNoCase(&filename[len - 4], ".obj") == 0)
-    {
-        pLoader = new prMeshLoader_OBJ();
-    }
-    else
-    {
-        prTrace("Unsupported mesh format\n");
-    }
-
-    return result;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// 
-/// ---------------------------------------------------------------------------
-void prMesh::Update()
-{
-}
-
-
-/// ---------------------------------------------------------------------------
-/// 
-/// ---------------------------------------------------------------------------
-void prMesh::Draw()
-{
+    prTrace("Kill prMesh\n");
 }

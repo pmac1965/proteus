@@ -1196,3 +1196,62 @@ char *prStringDup(const char* str)
 
     return newString;
 }
+
+
+/// ---------------------------------------------------------------------------
+/// Skips whitespace
+/// ---------------------------------------------------------------------------
+char *prStringSkipWhitespace(char* text)
+{
+    if (text && *text)
+    {
+        //char c;
+
+        //do
+        while(true)
+        {
+            char c = *text;
+
+            // Whitespace?
+            if (c == ' '  ||
+                c == '\r' ||
+                c == '\t' ||
+                c == '\n')
+            {
+                // Then bypass
+                text++;
+            }
+            else
+            {
+                // Else, hand control back
+                return text;
+            }
+        }
+        //while(c);
+    }
+
+    return text;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Skips non whitespace characters
+/// ---------------------------------------------------------------------------
+char *prStringSkipToWhitespace(char* text)
+{
+    while(text && *text)
+    {
+        char c = *text;
+
+        if (PRIS_WHITESPACE(c))
+        {
+            return text;
+        }
+        else
+        {
+            text++;
+        }
+    }
+
+    return text;
+}

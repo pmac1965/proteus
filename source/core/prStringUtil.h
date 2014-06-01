@@ -414,4 +414,10 @@ void prSprintf(char *buffer, const char* fmt, ...);
 char *prStringDup(const char* str);
 
 
+// Function: prStringSkipWhitespace
+//      Skips whitespace
+char *prStringSkipWhitespace(char* text);
+
+char *prStringSkipToWhitespace(char* text);
+
 #endif//__PRSTRINGUTIL_H

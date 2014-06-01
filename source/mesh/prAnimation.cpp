@@ -1,5 +1,5 @@
 /**
- * prMeshLoader_OBJ.cpp
+ * prAnimation.cpp
  *
  *  Copyright 2014 Paul Michael McNab
  *
@@ -17,29 +17,22 @@
  */
 
 
-#include "prMeshLoader_OBJ.h"
+#include "prAnimation.h"
 
 
 /// ---------------------------------------------------------------------------
 /// Constructor.
 /// ---------------------------------------------------------------------------
-prMeshLoader_OBJ::prMeshLoader_OBJ() : prMeshLoader()
+prAnimation::prAnimation()
 {
+    mPause         = false;
+    mCurrAnimation = ANIMATION_INVALID;
 }
 
 
 /// ---------------------------------------------------------------------------
 /// Destructor.
 /// ---------------------------------------------------------------------------
-prMeshLoader_OBJ::~prMeshLoader_OBJ()
+prAnimation::~prAnimation()
 {
-}
-
-
-/// ---------------------------------------------------------------------------
-/// 
-/// ---------------------------------------------------------------------------
-bool prMeshLoader_OBJ::Load(const char *filename)
-{
-    return false;
 }

@@ -139,7 +139,7 @@ typedef struct FileImplementation
 /// Ctor.
 /// ---------------------------------------------------------------------------
 prFile::prFile(const char *filename) : pImpl (new FileImplementation())
-                                 , imp   (*pImpl)
+                                     , imp   (*pImpl)
 {
     PRASSERT(pImpl);
     PRASSERT(filename && *filename);

@@ -21,11 +21,11 @@
 
 
 // Forward declarations
-class prMeshLoader;
+class prTexture;
 
 
 // Class: prMesh
-//      A 3D mesh class
+//      A 3D mesh class base class
 class prMesh
 {
 public:
@@ -35,24 +35,35 @@ public:
 
     // Method: ~prMesh
     //      Dtor
-    ~prMesh();
+    virtual ~prMesh();
 
     // Method: Load
     //      Loads a 3D mesh
-    bool Load(const char *filename);
+    virtual bool Load(const char *filename) = 0;
 
     // Method: Update
     //      Updates a 3D meshes animation if it is animated
-    void Update();
+    virtual void Update() = 0;
 
     // Method: Draw
     //      Draws a 3D mesh
-    void Draw();
+    virtual void Draw() = 0;
+    
+    // Method: SetWireframe
+    //      Sets the mesh to render as a wireframe.
+    void SetWireframe(bool state) { mWireframe = state; }
+
+    // Method: SetWireframe
+    //      Gets the meshes wireframe state.
+    bool GetWireframe() const { return mWireframe; }
 
 
-private:
+protected:
 
-    prMeshLoader    *pLoader;
+    prTexture  *mpTexture;
+
+    bool        mLoaded;
+    bool        mWireframe;
 };
 
 

@@ -42,6 +42,7 @@ REM --------------------------------------
     
     del %PROTEUS_ENGINE_DIR%\include\proteus\utf8proc\utf8proc_data.h
 
+    REM These aren't required
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_android.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_bada.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_base.h
@@ -50,9 +51,16 @@ REM --------------------------------------
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_linux.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_mac.h
 
+    REM These aren't required
     del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prFps_PC.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prFps_Android.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prFps_ios.h
+
+    REM These aren't required
+    del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prSoundManager_PC.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prSoundManager_Ios.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prSoundManager_Android.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prWaves.h
 
     rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\libzip
     REM rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\audio\external
