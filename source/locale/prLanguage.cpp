@@ -356,7 +356,7 @@ void prLanguage::ParseAttribs_Entry(TiXmlElement* pElement)
                         entry->text[locale] = new char [strlen(text) + 1];
 
                         prStringCopy((char *)text, entry->text[locale]);
-                        //Trace("> %s - %s - %i\n", entry->text[locale], text, strlen(text) + 1);
+                        //prTrace("> %s - %s - %i\n", entry->text[locale], text, strlen(text) + 1);
                         break;
                     }
                 }

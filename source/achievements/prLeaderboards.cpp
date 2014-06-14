@@ -39,7 +39,7 @@ void prLeaderboard::Submit(const char *name, u64 score)
     {
         if (submitAllowed)
         {
-        //#if defined(PLATFORM_IPHONE)    
+        //#if defined(PLATFORM_IOS)    
         //    extern void Leaderboards_Submit(const char *name, u64 score);
         //    Leaderboards_Submit(name, score);
         //    Trace("Submit leaderboard %s, %llu\n", name, score);        

@@ -187,4 +187,8 @@
 //#define OPENGL_CHECK_CALLS
 
 
+// Optimizations
+#define PROTEUS_OPTIMISE_REMOVE_ISTEXTURE
+
+
 #endif//__PRCONFIG_H

@@ -725,7 +725,6 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
             {
                 dist = 0;
                 ya  += (imp.lineHeight * scale);
-                //prTrace("prBitmapFont::newline\n");
 
                 // Set alignment
                 switch(alignment)
@@ -747,6 +746,9 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
                     x -= MeasureStringUntilTerm(&message[index], scale).x / 2;
                     break;
                 }
+            }
+            else if (character == '\r') // Just in case, we only need the one CR/LF character
+            {
             }
             else if (character != '\0')
             {
@@ -898,6 +900,9 @@ prVector2 prBitmapFont::MeasureString(const char *string, float scale)
                 len.x  = 0.0f;
                 len.y += imp.lineHeight;
             }
+            else if (character == '\r') // Just in case, we only need the one CR/LF character
+            {
+            }
             else if (character != '\0')
             {
                 // find character details
@@ -936,7 +941,7 @@ prVector2 prBitmapFont::MeasureString(const char *string, float scale)
                 }
                 else
                 {
-                    prTrace("Unsupported character %i\n", character);
+                    prTrace("Unsupported character: %i\n", character);
                 }
             }
         }
@@ -990,7 +995,7 @@ prVector2 prBitmapFont::MeasureStringUntilTerm(const char *string, float scale)
 
 
             // Get size.
-            if (character != '\0' && character != '\n')
+            if (character != '\0' && character != '\n' && character != '\r')
             {
                 // find character details
                 s32  lower  = 0;
@@ -1028,11 +1033,11 @@ prVector2 prBitmapFont::MeasureStringUntilTerm(const char *string, float scale)
                 }
                 else
                 {
-                    prTrace("Unsupported character %i\n", character);
+                    prTrace("Unsupported character: %i\n", character);
                 }
             }
         }
-        while(c != '\0' && c != '\n');
+        while(c != '\0' && c != '\n' && c != '\r');
     }
 
     len.x = max;

@@ -157,7 +157,7 @@ bool prMesh_MD2::Load(const char *filename)
 
         // Is the file too small?
         ifs.seekg(0, std::ios::end);
-        int size = ifs.tellg();
+        int size = (int)ifs.tellg();
         ifs.seekg(0, std::ios::beg);
 
         if (size <= sizeof(prMD2Header))
@@ -232,7 +232,7 @@ bool prMesh_MD2::Load(const char *filename)
                     prStringReplaceChar(buffer, '\\', '/');
                     prTrace("Skin 3: %s\n", buffer);
 
-                    s32 index = prStringFindLastIndex(buffer, '//');
+                    s32 index = prStringFindLastIndex(buffer, (char)'//');
                     if (index > 0)
                     {
                         prStringCopySafe(buffer, &buffer[index + 1], sizeof(buffer));

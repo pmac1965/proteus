@@ -21,8 +21,10 @@
 #include "prButtonListener.h"
 #include "../display/prSprite.h"
 #include "../display/prBitmapFont.h"
+#include "../display/prSpriteManager.h"
 #include "../math/prRect.h"
 #include "../debug/prDebug.h"
+#include "../debug/prTrace.h"
 
 
 /// ---------------------------------------------------------------------------
@@ -48,6 +50,11 @@ prButton::prButton(const char *name, prSpriteManager *pSpriteManager) : prWidget
 /// ---------------------------------------------------------------------------
 prButton::~prButton()
 {
+    //if (m_pSpriteManager && m_sprite)
+    //{
+    //    prTrace("GUI Button release sprite %s\n", m_sprite->Name());
+    //    m_pSpriteManager->Release(m_sprite);
+    //}
 }
 
 

@@ -206,9 +206,6 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	math/prVector3.cpp	\
 	memory/prMemory.cpp	\
 	memory/prSpritePointerPool.cpp	\
-	mesh/prMesh.cpp	\
-	mesh/prMeshLoader.cpp	\
-	mesh/prMeshLoader_OBJ.cpp	\
 	multiplayer/prGameSession.cpp	\
 	multiplayer/prGameSessionAndroid_BT.cpp	\
 	multiplayer/prGameSessionIos_BT.cpp	\

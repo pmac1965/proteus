@@ -140,6 +140,12 @@ dir /S /B *.h >> ..\files.txt
 popd
 )
 
+if exist notifications (
+pushd notifications
+dir /S /B *.h >> ..\files.txt
+popd
+)
+
 if exist online (
 pushd online
 dir /S /B *.h >> ..\files.txt
@@ -154,6 +160,18 @@ popd
 
 if exist persistence (
 pushd persistence
+dir /S /B *.h >> ..\files.txt
+popd
+)
+
+if exist script (
+pushd script
+dir /S /B *.h >> ..\files.txt
+popd
+)
+
+if exist social (
+pushd social
 dir /S /B *.h >> ..\files.txt
 popd
 )

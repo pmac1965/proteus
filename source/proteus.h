@@ -169,8 +169,10 @@
 #include "memory/prMemoryPool.h"
 #include "memory/prSpritePointerPool.h"
 #include "mesh/prMesh.h"
+#if !defined(PLATFORM_ANDROID)
 #include "mesh/prMesh_MD2.h"
 #include "mesh/prMesh_OBJ.h"
+#endif
 #include "multiplayer/prGameSession.h"
 #include "multiplayer/prGameSessionAndroid_BT.h"
 #include "multiplayer/prGameSessionIos_BT.h"

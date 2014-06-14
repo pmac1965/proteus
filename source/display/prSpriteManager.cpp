@@ -303,16 +303,24 @@ void prSpriteManager::ReleaseAll()
 /// ---------------------------------------------------------------------------
 void prSpriteManager::DisplayUsage()
 {
+#if defined(DEBUG) || defined(_DEBUG)
+
     if (!m_activeSprites.empty())
     {
+        prTrace("Sprites\n");
+
         std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
         std::list<prActiveSprite>::iterator end = m_activeSprites.end();
-
-        for (; it != end; ++it)
+        s32 index = 0;
+        for (; it != end; ++index, ++it)
         {
-            prTrace("Name: %s, TexID: %ul\n", (*it).sprite->Name(), (*it).texture->GetTexID());
+            prTrace("Sprite %03i: Name: %s, TexID: %ul\n", index, (*it).sprite->Name(), (*it).texture->GetTexID());
         }
+
+        prTrace("Total sprites: %i\n", m_activeSprites.size());
     }
+
+#endif
 }
 
 

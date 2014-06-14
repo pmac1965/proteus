@@ -186,7 +186,7 @@ PRBOOL prGameSession::IsServer()
     bool result = isServer();
 
 #else
-    #pragma message("Stubbed function")    
+    #pragma message("--- Stubbed function ---")    
     bool result = false;
     
 #endif
