@@ -339,5 +339,6 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	zlib/zutil.c
 
 LOCAL_SHARED_LIBRARIES := libopenal
+LOCAL_SHARED_LIBRARIES += libfreetype2
 
 include $(BUILD_SHARED_LIBRARY)

@@ -17,6 +17,12 @@
  */
 
 
+#include "../prConfig.h"
+
+
+#if defined(PLATFORM_PC)
+
+
 #include <stdlib.h>
 #include "prMesh_OBJ.h"
 #include "../file/prFile.h"
@@ -276,3 +282,6 @@ void prMesh_OBJ::ParseLine(char *buffer)
         }
     }
 }
+
+
+#endif

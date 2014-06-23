@@ -76,6 +76,10 @@ public:
     //      index - A value between 0 to max bits - 1
     bool Test(s32 index) const;
 
+    // Method: Count
+    //      Returns the number of bits in the array
+    u32 Count() const { return m_count; }
+
 
 protected:
 

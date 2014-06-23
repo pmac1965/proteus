@@ -90,7 +90,7 @@ s32 prRandomNumber(s32 min, s32 max)
 /// ---------------------------------------------------------------------------
 /// Returns a random number similar to the C standard lib rand() function.
 /// ---------------------------------------------------------------------------
-s32 Rand()
+s32 prRand()
 {
     return (s32)prRandomNumber(0x7FFF);
 }

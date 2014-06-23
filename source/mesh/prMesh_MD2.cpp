@@ -17,6 +17,12 @@
  */
 
 
+#include "../prConfig.h"
+
+
+#if defined(PLATFORM_PC)
+
+
 #include "prMesh_MD2.h"
 #include "prNormals_MD2.h"
 #include "prAnimation_MD2.h"
@@ -403,3 +409,6 @@ void prMesh_MD2::PlayA(const char *name)
         mpAnimation->Play(name);
     }
 }
+
+
+#endif

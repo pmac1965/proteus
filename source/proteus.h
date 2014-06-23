@@ -54,10 +54,6 @@
 #include "audio/prOpenALErrors.h"
 #include "audio/prSoundManager.h"
 #include "audio/prSoundManagerShared.h"
-//#include "audio/prSoundManager_Android.h"
-//#include "audio/prSoundManager_Ios.h"
-//#include "audio/prSoundManager_PC.h"
-//#include "audio/prWaves.h"
 //#include "audio/external/codec.h"
 //#include "audio/external/ogg.h"
 //#include "audio/external/os_types.h"
@@ -104,6 +100,8 @@
 #include "debug/prDebug.h"
 #include "debug/prFps.h"
 #include "debug/prOnScreenLogger.h"
+#include "debug/prProfileEntry.h"
+#include "debug/prProfileManager.h"
 #include "debug/prTrace.h"
 #include "display/prBackground.h"
 #include "display/prBackgroundManager.h"
@@ -127,10 +125,12 @@
 #include "display/prSpriteAnimationSequence.h"
 #include "display/prSpriteManager.h"
 #include "display/prTexture.h"
+#include "display/prTrueTypeFont.h"
 #include "file/prFile.h"
 #include "file/prFileManager.h"
 #include "file/prFileShared.h"
 #include "file/prFileSystem.h"
+#include "font/prFontManager.h"
 #include "gui/prButton.h"
 #include "gui/prButtonListener.h"
 #include "gui/prDialog.h"
@@ -168,11 +168,14 @@
 #include "memory/prMemory.h"
 #include "memory/prMemoryPool.h"
 #include "memory/prSpritePointerPool.h"
+#include "mesh/prAnimation.h"
+#include "mesh/prAnimation_MD2.h"
+#include "mesh/prMD2.h"
 #include "mesh/prMesh.h"
-#if !defined(PLATFORM_ANDROID)
+#include "mesh/prMeshLoader.h"
 #include "mesh/prMesh_MD2.h"
 #include "mesh/prMesh_OBJ.h"
-#endif
+#include "mesh/prNormals_MD2.h"
 #include "multiplayer/prGameSession.h"
 #include "multiplayer/prGameSessionAndroid_BT.h"
 #include "multiplayer/prGameSessionIos_BT.h"
@@ -194,6 +197,7 @@
 #include "persistence/prSave_mac.h"
 #include "persistence/prSave_pc.h"
 #include "script/prLua.h"
+#include "script/prLuaDebug.h"
 #include "thread/prMutex.h"
 #include "thread/prThread.h"
 #include "utf8proc/utf8proc.h"
@@ -212,6 +216,15 @@
       #pragma comment(lib, "dxguid.lib")
       #pragma comment(lib, "dinput8.lib")
       #pragma comment(lib, "dxerr.lib")
+    #endif
+
+    // Freetype
+    #if defined(ALLOW_FREETYPE)
+        #if defined(_DEBUG)
+            #pragma comment(lib, "freetype253_D.lib")
+        #else
+            #pragma comment(lib, "freetype253.lib")
+        #endif
     #endif
 
     // OpenAL libs

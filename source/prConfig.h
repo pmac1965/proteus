@@ -96,6 +96,10 @@
 //#define ALLOW_DIRECTX
 #endif
 
+#ifndef ALLOW_FREETYPE                                  // For builds that need freetype
+#define ALLOW_FREETYPE
+#endif
+
 #ifndef REMOVE_EXCEPTIONS                               // Allows try/catch code to be removed. For example bada doesn't allow try/catch code.
 #define REMOVE_EXCEPTIONS
 #endif
@@ -105,7 +109,7 @@
 #endif
 
 #ifndef SHOW_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.
-#define SHOW_MESSAGES
+//#define SHOW_MESSAGES
 #endif
 
 #ifndef PROTEUS_ALLOW_CONSOLE                           // Allows the debug console to be optionally removed. (PC only)

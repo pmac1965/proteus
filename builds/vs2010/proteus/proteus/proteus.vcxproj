@@ -63,19 +63,19 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.5.3\include;$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include;$(IncludePath)</IncludePath>
     <TargetName>$(ProjectName)_d</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tool debug|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.5.3\include;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include</IncludePath>
     <TargetName>$(ProjectName)_td</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.5.3\include;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include</IncludePath>
     <TargetName>$(ProjectName)_r</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tool release|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.5.3\include;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include</IncludePath>
     <TargetName>$(ProjectName)_tr</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -308,10 +308,12 @@
     <ClInclude Include="..\..\..\..\source\display\prSpriteAnimationSequence.h" />
     <ClInclude Include="..\..\..\..\source\display\prSpriteManager.h" />
     <ClInclude Include="..\..\..\..\source\display\prTexture.h" />
+    <ClInclude Include="..\..\..\..\source\display\prTrueTypeFont.h" />
     <ClInclude Include="..\..\..\..\source\file\prFile.h" />
     <ClInclude Include="..\..\..\..\source\file\prFileManager.h" />
     <ClInclude Include="..\..\..\..\source\file\prFileShared.h" />
     <ClInclude Include="..\..\..\..\source\file\prFileSystem.h" />
+    <ClInclude Include="..\..\..\..\source\font\prFontManager.h" />
     <ClInclude Include="..\..\..\..\source\gui\prButton.h" />
     <ClInclude Include="..\..\..\..\source\gui\prButtonListener.h" />
     <ClInclude Include="..\..\..\..\source\gui\prDialog.h" />
@@ -423,6 +425,7 @@
     <ClInclude Include="..\..\..\..\source\proteus.h" />
     <ClInclude Include="..\..\..\..\source\script\prLua.h" />
     <ClInclude Include="..\..\..\..\source\script\prLuaDebug.h" />
+    <ClInclude Include="..\..\..\..\source\system\prSystem.h" />
     <ClInclude Include="..\..\..\..\source\thread\prMutex.h" />
     <ClInclude Include="..\..\..\..\source\thread\prThread.h" />
     <ClInclude Include="..\..\..\..\source\tinyxml\tinystr.h" />
@@ -578,10 +581,12 @@
     <ClCompile Include="..\..\..\..\source\display\prSpriteAnimationSequence.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prSpriteManager.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prTexture.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prTrueTypeFont.cpp" />
     <ClCompile Include="..\..\..\..\source\file\prFile.cpp" />
     <ClCompile Include="..\..\..\..\source\file\prFileManager.cpp" />
     <ClCompile Include="..\..\..\..\source\file\prFileShared.cpp" />
     <ClCompile Include="..\..\..\..\source\file\prFileSystem.cpp" />
+    <ClCompile Include="..\..\..\..\source\font\prFontManager.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prButton.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prDialog.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prGui.cpp" />
@@ -996,6 +1001,7 @@
     <ClCompile Include="..\..\..\..\source\persistence\prSave_pc.cpp" />
     <ClCompile Include="..\..\..\..\source\script\prLua.cpp" />
     <ClCompile Include="..\..\..\..\source\script\prLuaDebug.cpp" />
+    <ClCompile Include="..\..\..\..\source\system\prSystem.cpp" />
     <ClCompile Include="..\..\..\..\source\thread\prMutex.cpp" />
     <ClCompile Include="..\..\..\..\source\thread\prThread.cpp" />
     <ClCompile Include="..\..\..\..\source\tinyxml\tinystr.cpp" />

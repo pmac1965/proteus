@@ -82,6 +82,7 @@ typedef enum //prVerType
 //  PRSYSTEM_BACKGROUNDMANAGER     - The background manager.
 //  PRSYSTEM_SPRITEMANAGER         - The sprite manager.
 //  PRSYSTEM_ACCELEROMETER         - The accelerometer.
+//  PRSYSTEM_FONTMANAGER           - The TTF font manager    
 //  PRSYSTEM_MAX                   - -- KEEP THIS LAST --
 enum prSystems
 {
@@ -111,6 +112,7 @@ enum prSystems
     PRSYSTEM_BACKGROUNDMANAGER,
     PRSYSTEM_SPRITEMANAGER,    
     PRSYSTEM_ACCELEROMETER,    
+    PRSYSTEM_FONTMANAGER,    
     PRSYSTEM_MAX,                   // -- KEEP THIS LAST --      
 };
 

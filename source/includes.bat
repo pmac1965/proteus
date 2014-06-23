@@ -80,6 +80,12 @@ dir /S /B *.h >> ..\files.txt
 popd
 )
 
+if exist font (
+pushd font
+dir /S /B *.h >> ..\files.txt
+popd
+)
+
 if exist gui (
 pushd gui
 dir /S /B *.h >> ..\files.txt
@@ -172,6 +178,12 @@ popd
 
 if exist social (
 pushd social
+dir /S /B *.h >> ..\files.txt
+popd
+)
+
+if exist system (
+pushd system
 dir /S /B *.h >> ..\files.txt
 popd
 )

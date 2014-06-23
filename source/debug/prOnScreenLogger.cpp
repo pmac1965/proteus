@@ -33,6 +33,12 @@
 #include <string.h>
 
 
+namespace
+{
+    char output[512] = { '\0' };
+}
+
+
 /// ----------------------------------------------------------------------------
 /// Ctor
 /// ----------------------------------------------------------------------------
@@ -86,6 +92,16 @@ void prOnScreenLogger::Add(const char *message, ...)
         va_start(args, message);        
         vsprintf(buffer, message, args);
         va_end(args);
+
+        // Remove duplicate to stop spamming output?
+        if (strcmp(buffer, output) == 0)
+        {
+            return;
+        }
+        else
+        {
+            strcpy(output, buffer);
+        }
 
         // Store
         m_messages.push_front(prStringDup(buffer));
@@ -170,6 +186,8 @@ void prOnScreenLogger::Clear()
         PRSAFE_DELETE(p);
         m_messages.pop_back();
     }
+
+    output[0] = '\0';
 }
 
 
