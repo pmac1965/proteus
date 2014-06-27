@@ -96,7 +96,9 @@ void prProfileEntry::Start()
     m_startTime.tv_nsec = 0;
     m_endTime.tv_sec    = 0;
     m_endTime.tv_nsec   = 0;
-    clock_gettime(CLOCK_MONOTONIC_HR, &m_startTime);
+//    clock_gettime(CLOCK_MONOTONIC_HR, &m_startTime);
+//    clock_gettime(CLOCK_MONOTONIC_RAW, &m_startTime);
+    clock_gettime(CLOCK_MONOTONIC, &m_startTime);
 
 #endif
 }
@@ -136,7 +138,7 @@ void prProfileEntry::Stop()
 #elif defined(PLATFORM_ANDROID)
 
     // Get stop time
-    if (clock_gettime(CLOCK_MONOTONIC_HR, &m_endTime) == 0)
+    if (clock_gettime(CLOCK_MONOTONIC, &m_endTime) == 0)
     {
         // Calculate time it took
         u64 start  = (m_startTime.tv_sec * BILLION) + m_startTime.tv_nsec;

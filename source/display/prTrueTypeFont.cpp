@@ -20,6 +20,9 @@
 #include "../prConfig.h"
 
 
+#if defined(PLATFORM_PC)
+
+
 // FreeType Headers
 #include <ft2build.h>
 #include <freetype.h>
@@ -86,12 +89,12 @@
 
 
 // Type for drawing quad.
-typedef struct QuadData
+/*typedef struct QuadData
 {
 	float x, y;
 	float u, v;
 
-}  QuadData;
+}  QuadData;//*/
 
 
 // Implementation data.
@@ -430,3 +433,6 @@ prVector2 prTrueTypeFont::MeasureString(const char *string, float scale)
 {    
     return prVector2::Zero;
 }
+
+
+#endif

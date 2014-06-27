@@ -45,17 +45,11 @@ LOCAL_LDLIBS := -ldl -llog -lGLESv1_CM -lstdc++
 
 LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	achievements/prAchievement_android.cpp	\
-	achievements/prAchievement_bada.cpp	\
-	achievements/prAchievement_ios.cpp	\
-	achievements/prAchievement_linux.cpp	\
-	achievements/prAchievement_mac.cpp	\
-	achievements/prAchievement_pc.cpp	\
 	achievements/prLeaderboards.cpp	\
 	actor/prActor.cpp	\
 	actor/prActorManager.cpp	\
 	adverts/prAdvertProvider.cpp	\
 	adverts/prAdvertProvider_AdMob.cpp	\
-	adverts/prAdvertProvider_iAds.cpp	\
 	adverts/prAdverts.cpp	\
 	analytics/prAnalytics.cpp	\
 	analytics/prAnalyticsBase.cpp	\
@@ -68,8 +62,6 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	audio/prSoundManager.cpp	\
 	audio/prSoundManagerShared.cpp	\
 	audio/prSoundManager_Android.cpp	\
-	audio/prSoundManager_Ios.cpp	\
-	audio/prSoundManager_PC.cpp	\
 	audio/prWaves.cpp	\
 	Box2D/Collision/b2BroadPhase.cpp	\
 	Box2D/Collision/b2CollideCircle.cpp	\
@@ -120,10 +112,6 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	collision/prLine.cpp	\
 	core/prApplication.cpp	\
 	core/prApplication_Android.cpp	\
-	core/prApplication_Bada.cpp	\
-	core/prApplication_IOS.cpp	\
-	core/prApplication_Linux.cpp	\
-	core/prApplication_PC.cpp	\
 	core/prArgs.cpp	\
 	core/prATB.cpp	\
 	core/prBitArray.cpp	\
@@ -137,23 +125,15 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	core/prStringUtil.cpp	\
 	core/prVersion.cpp	\
 	core/prWindow.cpp	\
-	core/prWindowProcedure.cpp	\
 	core/prWindow_Android.cpp	\
-	core/prWindow_Bada.cpp	\
-	core/prWindow_Ios.cpp	\
-	core/prWindow_Linux.cpp	\
-	core/prWindow_PC.cpp	\
 	debug/prAssert.cpp	\
 	debug/prAssert_Android.cpp	\
-	debug/prAssert_Ios.cpp	\
-	debug/prAssert_Linux.cpp	\
-	debug/prConsoleWindow.cpp	\
 	debug/prDebug.cpp	\
 	debug/prFps.cpp	\
 	debug/prFps_Android.cpp	\
-	debug/prFps_ios.cpp	\
-	debug/prFps_PC.cpp	\
 	debug/prOnScreenLogger.cpp	\
+	debug/prProfileEntry.cpp	\
+	debug/prProfileManager.cpp	\
 	debug/prTrace.cpp	\
 	display/prBackground.cpp	\
 	display/prBackgroundManager.cpp	\
@@ -163,12 +143,10 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	display/prColour.cpp	\
 	display/prFadeManager.cpp	\
 	display/prFixedWidthFont.cpp	\
-	display/prGLFont.cpp	\
 	display/prLookAt.cpp	\
 	display/prOglUtils.cpp	\
 	display/prPerspective.cpp	\
 	display/prRenderer.cpp	\
-	display/prRenderer_DX9.cpp	\
 	display/prRenderer_GL11.cpp	\
 	display/prRenderer_GL20.cpp	\
 	display/prSprite.cpp	\
@@ -176,10 +154,12 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	display/prSpriteAnimationSequence.cpp	\
 	display/prSpriteManager.cpp	\
 	display/prTexture.cpp	\
+	display/prTrueTypeFont.cpp	\
 	file/prFile.cpp	\
 	file/prFileManager.cpp	\
 	file/prFileShared.cpp	\
 	file/prFileSystem.cpp	\
+	font/prFontManager.cpp	\
 	gui/prButton.cpp	\
 	gui/prDialog.cpp	\
 	gui/prGui.cpp	\
@@ -187,13 +167,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	inAppPurchase/prInAppPurchase.cpp	\
 	inAppPurchase/prStore.cpp	\
 	inAppPurchase/prStore_android.cpp	\
-	inAppPurchase/prStore_bada.cpp	\
-	inAppPurchase/prStore_ios.cpp	\
-	inAppPurchase/prStore_linux.cpp	\
-	inAppPurchase/prStore_mac.cpp	\
-	inAppPurchase/prStore_pc.cpp	\
 	input/prAccelerometer.cpp	\
-	input/prMouse.cpp	\
 	input/prTouch.cpp	\
 	linux/prLinuxInput.cpp	\
 	locale/prLanguage.cpp	\
@@ -206,17 +180,20 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	math/prVector3.cpp	\
 	memory/prMemory.cpp	\
 	memory/prSpritePointerPool.cpp	\
+	mesh/prAnimation.cpp	\
+	mesh/prAnimation_MD2.cpp	\
+	mesh/prMesh.cpp	\
+	mesh/prMeshLoader.cpp	\
+	mesh/prMesh_MD2.cpp	\
+	mesh/prMesh_OBJ.cpp	\
+	mesh/prNormals_MD2.cpp	\
 	multiplayer/prGameSession.cpp	\
 	multiplayer/prGameSessionAndroid_BT.cpp	\
-	multiplayer/prGameSessionIos_BT.cpp	\
 	multiplayer/prGameSessionProvider.cpp	\
 	multiplayer/prMultiplayer.cpp	\
 	multiplayer/prMultiplayerManager.cpp	\
 	multiplayer/prMultiplayerProvider.cpp	\
 	online/prWeb_android.cpp	\
-	online/prWeb_bada.cpp	\
-	online/prWeb_ios.cpp	\
-	online/prWeb_pc.cpp	\
 	particle/prEmitter.cpp	\
 	particle/prParticle.cpp	\
 	particle/prParticleManager.cpp	\
@@ -224,13 +201,13 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	persistence/prSave.cpp	\
 	persistence/prSaveBase.cpp	\
 	persistence/prSave_android.cpp	\
-	persistence/prSave_bada.cpp	\
-	persistence/prSave_ios.cpp	\
-	persistence/prSave_linux.cpp	\
-	persistence/prSave_mac.cpp	\
-	persistence/prSave_pc.cpp	\
 	script/prLua.cpp	\
 	script/prLuaDebug.cpp	\
+	social/facebook/prFacebook.cpp	\
+	social/facebook/prFacebook_Android.cpp	\
+	social/twitter/prTwitter.cpp	\
+	social/twitter/prTwitter_Android.cpp	\
+	system/prSystem.cpp	\
 	thread/prMutex.cpp	\
 	thread/prThread.cpp	\
 	tinyxml/tinystr.cpp	\
@@ -293,7 +270,6 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	libzip/zip_unchange_all.c	\
 	libzip/zip_unchange_archive.c	\
 	libzip/zip_unchange_data.c	\
-	linux/prLinux.c	\
 	lua/lapi.c	\
 	lua/lauxlib.c	\
 	lua/lbaselib.c	\

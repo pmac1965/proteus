@@ -105,7 +105,14 @@ typedef struct prMD2Frame
     // Constructor.
     prMD2Frame()
     {
-        verts = NULL;
+        scale[0]     = 0.0f;
+        scale[1]     = 0.0f;
+        scale[2]     = 0.0f;
+        translate[0] = 0.0f;
+        translate[1] = 0.0f;
+        translate[2] = 0.0f;        
+        name[0]      = 0;
+        verts        = NULL;
     }
 
     // Destructor

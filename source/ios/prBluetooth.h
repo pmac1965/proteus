@@ -21,11 +21,8 @@
 
 #if defined(PLATFORM_IOS)
 
-// May remove this until I decide on interface layout
 
-//@interface prBluetooth
-//-(void)connectToDevice;
-//@end
+// May remove this until I decide on interface layout
 
 
 #endif//PLATFORM_IOS

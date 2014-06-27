@@ -27,6 +27,9 @@ prAnimation::prAnimation()
 {
     mPause         = false;
     mCurrAnimation = ANIMATION_INVALID;
+    mExp0          = false;
+    mExp1          = false;
+    mExp2          = false;
 }
 
 

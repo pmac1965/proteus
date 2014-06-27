@@ -59,6 +59,7 @@ prMesh_MD2::prMesh_MD2() : prMesh()
     m_skinHeight    = 0;
     m_scale         = 1.0f;
     m_frame         = 0;
+    m_numFrames     = 0;
 }
 
 

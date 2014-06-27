@@ -49,7 +49,7 @@ prMesh_OBJ::prMesh_OBJ() : prMesh()
 /// ---------------------------------------------------------------------------
 prMesh_OBJ::~prMesh_OBJ()
 {
-    PRSAFE_DELETE(pVerts);
+    PRSAFE_DELETE_ARRAY(pVerts);
 }
 
 
@@ -81,7 +81,7 @@ bool prMesh_OBJ::Load(const char *filename)
 
                 // Parse
                 Parse(buffer);
-                delete buffer;
+                PRSAFE_DELETE_ARRAY(buffer);
 
                 count = faces.size() * 3;
 

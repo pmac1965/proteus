@@ -44,8 +44,12 @@ namespace
 /// ----------------------------------------------------------------------------
 prOnScreenLogger::prOnScreenLogger() : prCoreSystem(PRSYSTEM_ONSCREENLOGGER, "prOnScreenLogger")
 {
-    m_pTexture        = NULL;
-    m_pFixedWidthFont = NULL;
+    m_pTexture          = NULL;
+    m_pFixedWidthFont   = NULL;
+    m_enabled           = true;
+    m_exp0              = false;
+    m_exp1              = false;
+    m_exp2              = false;
 }
 
 
@@ -83,6 +87,9 @@ prOnScreenLogger::~prOnScreenLogger()
 /// ----------------------------------------------------------------------------
 void prOnScreenLogger::Add(const char *message, ...)
 {
+    if (!m_enabled)
+        return;
+
     if (message && *message)
     {
         char buffer[512];
@@ -122,6 +129,9 @@ void prOnScreenLogger::Add(const char *message, ...)
 /// ----------------------------------------------------------------------------
 void prOnScreenLogger::Draw(u32 xpos, u32 ypos, prFixedWidthFont::prFixedWidthAlignment alignment)
 {
+    if (!m_enabled)
+        return;
+
     if (m_pFixedWidthFont == NULL)
     {
         // Create a texture

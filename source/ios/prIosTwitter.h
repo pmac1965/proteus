@@ -1,4 +1,4 @@
-// File: prSystem.h
+// File: prTwitter.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,30 +16,15 @@
  */
 
 
-#ifndef __PRSYSTEM_H
-#define __PRSYSTEM_H
+#include "../prConfig.h"
 
 
-#include "../core/prTypes.h"
+#if defined(PLATFORM_IOS)
 
 
-// Class: prSystem
-//      Class that abstracts system calls
-class prSystem
-{
-public:
-    // Method: prSystem
-    //      Constructor.
-    prSystem(s32 bitCount);
-
-    // Method: ~prSystem
-    //      Destructor.
-    ~prSystem();
-
-    // Method: SleepModeEnable
-    //      Enable or disable sleep mode.
-    virtual void SleepModeEnable(bool);
-};
+// Function: prIosTwitterOpenTweetSheet
+//      Opens the tweet sheet for basic tweeting
+bool prIosTwitterOpenTweetSheet(const char *initialText);
 
 
-#endif//__PRSYSTEM_H
+#endif//PLATFORM_IOS

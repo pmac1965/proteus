@@ -20,6 +20,9 @@
 #include "../prConfig.h"
 
 
+#if defined(PLATFORM_PC)
+
+
 // FreeType Headers
 #include <ft2build.h>
 #include <freetype.h>
@@ -56,3 +59,6 @@ prFontManager::~prFontManager()
 void prFontManager::Load(const char *fontname)
 {
 }
+
+
+#endif

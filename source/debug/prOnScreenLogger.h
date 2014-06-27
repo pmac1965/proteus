@@ -74,11 +74,22 @@ public:
     //      Returns the number of messages.
     s32 Count() const;
 
+    // Method: SetEnabled
+    //      Determines if logger accepts and prints messages.
+    void SetEnabled(bool state) { m_enabled = state; } 
+
+    // Method: GetEnabled
+    //      Returns the enabled state.
+    bool GetEnabled() const { return m_enabled; }
+
 
 private:
-
     prTexture          *m_pTexture;
     prFixedWidthFont   *m_pFixedWidthFont;
+    bool                m_enabled;
+    bool                m_exp0;
+    bool                m_exp1;
+    bool                m_exp2;
     std::list<char *>   m_messages;
 };
 
