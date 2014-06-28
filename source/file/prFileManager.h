@@ -122,12 +122,26 @@ void prSetAPKPath(const char *path);
 //      *Android only*
 void prSetCardPath(const char *path);
 
+// Method: prSetSavePath
+//      Sets the save path for an android device.
+//
+// Notes:
+//      *Android only*
+void prSetSavePath(const char *path);
+
 // Method: prGetCardPath
 //      Gets the card path.
 //
 // Notes:
 //      *Android only*
 const char *prGetCardPath();
+
+// Method: prGetSavePath
+//      Gets the save path for an android device.
+//
+// Notes:
+//      *Android only*
+const char *prGetSavePath();
 
 // Method: prGetAPKArchive
 //      Get access to the android data zip file.

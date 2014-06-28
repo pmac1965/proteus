@@ -204,6 +204,7 @@
 #include "social/twitter/prTwitter.h"
 #include "social/twitter/prTwitter_Android.h"
 #include "social/twitter/prTwitter_ios.h"
+#include "system/prSystem.h"
 #include "thread/prMutex.h"
 #include "thread/prThread.h"
 #include "utf8proc/utf8proc.h"

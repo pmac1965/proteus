@@ -1,4 +1,4 @@
-// File: prIosTwitter.h
+// File: prIosSystem.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -22,9 +22,13 @@
 #if defined(PLATFORM_IOS)
 
 
-// Function: prIosTwitterOpenTweetSheet
-//      Opens the tweet sheet for basic tweeting
-bool prIosTwitterOpenTweetSheet(const char *initialText);
+// Function: prIosSystemVibrate
+//      Does simple vibration
+void prIosSystemVibrate();
+
+// Function: prIosSystemSleepEnable
+//      Enables or disables the devices sleep mode
+void prIosSystemSleepEnable(bool state);
 
 
 #endif//PLATFORM_IOS

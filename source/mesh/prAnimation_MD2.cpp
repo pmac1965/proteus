@@ -56,7 +56,7 @@ prAnimation_MD2::prAnimation_MD2(prMD2Frame *pFrames, s32 numFrames)
         {
             if (work[j] >= '0' && work[j] <= '9')
             {
-                work[j] = NULL;
+                work[j] = '\0';
                 break;
             }
         }

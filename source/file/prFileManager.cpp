@@ -76,8 +76,9 @@
 
   namespace
   {
-    char APKPath[MAX_PATH];
-    char CardPath[MAX_PATH];
+    char APKPath [MAX_PATH] = { '\0' };
+    char CardPath[MAX_PATH] = { '\0' };
+    char SavePath[MAX_PATH] = { '\0' };
     zip *APKArchive = NULL;
   }
 
@@ -748,11 +749,34 @@ void prSetCardPath(const char *path)
 
 
 /// ---------------------------------------------------------------------------
-/// Sets the card path for an android device.
+/// Sets the save path for an android device.
+/// ---------------------------------------------------------------------------
+void prSetSavePath(const char *path)
+{
+    memset(SavePath, 0, sizeof(SavePath));
+
+    if (path && *path)
+    {
+        prStringCopySafe(SavePath, path, sizeof(SavePath));
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Gets the card path for an android device.
 /// ---------------------------------------------------------------------------
 const char *prGetCardPath()
 {
     return CardPath;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Gets the save path for an android device.
+/// ---------------------------------------------------------------------------
+const char *prGetSavePath()
+{
+    return SavePath;
 }
 
 

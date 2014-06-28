@@ -24,13 +24,14 @@
 
 
 // Class: prSystem
-//      Class that abstracts system calls
+//      Class that abstracts system calls for single use functions,
+//      like vibrate, which may not exist
 class prSystem
 {
 public:
     // Method: prSystem
     //      Constructor.
-    prSystem(s32 bitCount);
+    prSystem();
 
     // Method: ~prSystem
     //      Destructor.
@@ -38,7 +39,11 @@ public:
 
     // Method: SleepModeEnable
     //      Enable or disable sleep mode.
-    virtual void SleepModeEnable(bool);
+    void SleepModeEnable(bool state);
+
+    // Method: Vibrate
+    //      Vibrates the devices if possible
+    void Vibrate();
 };
 
 

@@ -338,6 +338,7 @@
     <ClInclude Include="..\..\..\..\source\ios\prIos.h" />
     <ClInclude Include="..\..\..\..\source\ios\prIosAudio.h" />
     <ClInclude Include="..\..\..\..\source\ios\prIosFacebook.h" />
+    <ClInclude Include="..\..\..\..\source\ios\prIosSystem.h" />
     <ClInclude Include="..\..\..\..\source\ios\prIosTwitter.h" />
     <ClInclude Include="..\..\..\..\source\libzip\config.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -1043,6 +1044,7 @@
     <None Include="..\..\..\..\source\ios\prIos.mm" />
     <None Include="..\..\..\..\source\ios\prIosAudio.mm" />
     <None Include="..\..\..\..\source\ios\prIosFacebook.mm" />
+    <None Include="..\..\..\..\source\ios\prIosSystem.mm" />
     <None Include="..\..\..\..\source\ios\prIosTwitter.mm" />
     <None Include="..\..\..\..\source\license.txt" />
     <None Include="..\..\..\..\source\math\prVector2.inl" />
