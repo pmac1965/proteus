@@ -158,6 +158,7 @@
 #include "linux/prLinuxInput.h"
 #include "locale/prLanguage.h"
 #include "locale/prLocales.h"
+#include "math/MersenneTwister.h"
 #include "math/prMathsUtil.h"
 #include "math/prPoint.h"
 #include "math/prRandom.h"

@@ -57,6 +57,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	android/prJNIAudio.cpp	\
 	android/prJNIInterface.cpp	\
 	android/prJNINetwork.cpp	\
+	android/prJNIFacebook.cpp	\
 	audio/prOpenALDeviceList.cpp	\
 	audio/prOpenALErrors.cpp	\
 	audio/prSoundManager.cpp	\
@@ -169,7 +170,6 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	inAppPurchase/prStore_android.cpp	\
 	input/prAccelerometer.cpp	\
 	input/prTouch.cpp	\
-	linux/prLinuxInput.cpp	\
 	locale/prLanguage.cpp	\
 	locale/prLocales.cpp	\
 	math/prMathsUtil.cpp	\

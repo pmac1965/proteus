@@ -175,8 +175,10 @@
     <ClInclude Include="..\..\..\..\source\android\AL\efx-creative.h" />
     <ClInclude Include="..\..\..\..\source\android\AL\efx.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIAudio.h" />
+    <ClInclude Include="..\..\..\..\source\android\prJNIFacebook.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIInterface.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNINetwork.h" />
+    <ClInclude Include="..\..\..\..\source\android\prJNITwitter.h" />
     <ClInclude Include="..\..\..\..\source\audio\external\codec.h" />
     <ClInclude Include="..\..\..\..\source\audio\external\ogg.h" />
     <ClInclude Include="..\..\..\..\source\audio\external\os_types.h" />
@@ -387,6 +389,7 @@
     <ClInclude Include="..\..\..\..\source\lua\lundump.h" />
     <ClInclude Include="..\..\..\..\source\lua\lvm.h" />
     <ClInclude Include="..\..\..\..\source\lua\lzio.h" />
+    <ClInclude Include="..\..\..\..\source\math\MersenneTwister.h" />
     <ClInclude Include="..\..\..\..\source\math\prMathsUtil.h" />
     <ClInclude Include="..\..\..\..\source\math\prPoint.h" />
     <ClInclude Include="..\..\..\..\source\math\prRandom.h" />
@@ -473,8 +476,10 @@
     <ClCompile Include="..\..\..\..\source\analytics\prAnalyticsBase.cpp" />
     <ClCompile Include="..\..\..\..\source\analytics\prAnalyticsFlurry.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNIAudio.cpp" />
+    <ClCompile Include="..\..\..\..\source\android\prJNIFacebook.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNIInterface.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNINetwork.cpp" />
+    <ClCompile Include="..\..\..\..\source\android\prJNITwitter.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prOpenALDeviceList.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prOpenALErrors.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prSoundManager.cpp" />

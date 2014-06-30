@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -68,15 +67,21 @@ prApplication_Android::prApplication_Android() : prApplication()
             prTrace("Engine version : %s\n", prGetVersionAsString());
             prTrace("-------------------------------------------------------------------------------\n");
             prTrace("Components:\n");
-            prTrace("Lua            : 5.2.3 - Copyright (C) 1994-2013 Lua.org, PUC-Rio.\n");
-            prTrace("Box2D          : 2.3.0 - Copyright (c) 2006-2013 Erin Catto\n");
-            prTrace("TinyXML        : 2.6.2 - Copyright (c) 2000-2006 Lee Thomason.\n");
-            prTrace("Zlib           : 1.2.8 - Copyright (C) 1995-2013 Jean-loup Gailly and Mark Adler.\n");
-            prTrace("Ogg            : 1.2.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
-            prTrace("Vorbis         : 1.3.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
-            prTrace("AntTweakBar    : 1.16  - Copyright (C) 2005-2013 Philippe Decaudin.\n");        
-            prTrace("libutf8proc    : 1.1.5 - Copyright (C) 2009 Public Software Group e. V.,\n");
+            prTrace("Lua              : 5.2.3 - Copyright (C) 1994-2013 Lua.org, PUC-Rio.\n");
+            prTrace("Box2D            : 2.3.0 - Copyright (C) 2006-2013 Erin Catto\n");
+            prTrace("TinyXML          : 2.6.2 - Copyright (C) 2000-2006 Lee Thomason.\n");
+            prTrace("Zlib             : 1.2.8 - Copyright (C) 1995-2013 Jean-loup Gailly and\n");
+            prTrace("                           Mark Adler.\n");
+            prTrace("Ogg              : 1.2.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
+            prTrace("Vorbis           : 1.3.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
+            prTrace("AntTweakBar      : 1.16  - Copyright (C) 2005-2013 Philippe Decaudin.\n");        
+            prTrace("libutf8proc      : 1.1.5 - Copyright (C) 2009 Public Software Group e. V.,\n");
             prTrace("                                                         Berlin, Germany\n");
+            prTrace("Mersenne Twister : 1.1   - Copyright (C) 1997 - 2002, Makoto Matsumoto and\n");        
+            prTrace("                           Takuji Nishimura,\n");        
+            prTrace("                           Copyright (C) 2000 - 2009, Richard J. Wagner\n");        
+            prTrace("Based on code by Makoto Matsumoto, Takuji Nishimura, and Shawn Cokus\n");        
+            prTrace("Richard J. Wagner  v1.1  28 September 2009  wagnerr@umich.edu\n");        
             prTrace("-------------------------------------------------------------------------------\n");
             prTrace("Config         : %s - Android - Debug\n", BuildType());
             prTrace("-------------------------------------------------------------------------------\n");

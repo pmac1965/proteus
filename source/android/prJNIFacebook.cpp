@@ -1,5 +1,5 @@
 /**
- * prJNINetwork.cpp
+ * prJNIFacebook.cpp
  *
  *  Copyright 2014 Paul Michael McNab
  *
@@ -27,6 +27,7 @@
 #include <string.h>
 #include <android/log.h>
 #include "prJNIInterface.h"
+#include "prJNIFacebook.h"
 #include "../debug/prTrace.h"
 #include "../debug/prAssert.h"
 #include "../core/prDefines.h"
@@ -37,13 +38,13 @@
 namespace
 {
     /// ---------------------------------------------------------------------------
-    /// Makes the final network class name. 
+    /// Makes the final class name. 
     /// ---------------------------------------------------------------------------
-    const char *prJNI_MakeNetworkClassName(const char *pClassName)
+    const char *prJNI_MakeFacebookClassName(const char *pClassName)
     {
         static char name[256];
 
-        strcpy(name, "proteus/network/");
+        strcpy(name, "proteus/social/");
         strcat(name, pClassName);
 
         return name;
@@ -51,19 +52,18 @@ namespace
 
 
     /// ---------------------------------------------------------------------------
-    /// Finds a network class.
+    /// Finds a class.
     /// ---------------------------------------------------------------------------
-    jclass prJNI_GetNetworkClass(JNIEnv *env, const char *className, bool isAttached) 
+    jclass prJNI_GetFacebookClass(JNIEnv *env, const char *className, bool isAttached) 
     {
         PRASSERT(env);
         PRASSERT(className && *className);
 
-        jclass cls = env->FindClass(prJNI_MakeNetworkClassName(className));
+        jclass cls = env->FindClass(prJNI_MakeFacebookClassName(className));
         if (!cls) 
         {
             // Warn
             __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to find class %s", className);
-
             if (isAttached)
             {
                 PRASSERT(prJNI_GetVM());
@@ -77,9 +77,9 @@ namespace
 
 
 /// ---------------------------------------------------------------------------
-/// Initialises bluetooth
+/// Opens a facebook session
 /// ---------------------------------------------------------------------------
-void prJNI_BTInit()
+void prJNI_FacebookOpenSession()
 {
     JavaVM *pJavaVM = prJNI_GetVM();
     PRASSERT(pJavaVM);
@@ -93,15 +93,15 @@ void prJNI_BTInit()
             return;
 
         // Find class
-        jclass cls = prJNI_GetNetworkClass(env, "Bluetooth", isAttached);
+        jclass cls = prJNI_GetFacebookClass(env, "Facebook", isAttached);
         if (!cls)
             return;
         
         // Find the callBack method ID
-        jmethodID method = env->GetStaticMethodID(cls, "connect", "()V");
+        jmethodID method = env->GetStaticMethodID(cls, "openSession", "()V");
         if (!method)
         {
-            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "connect");
+            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "openSession");
             if (isAttached)
             {
                 pJavaVM->DetachCurrentThread();
@@ -109,7 +109,7 @@ void prJNI_BTInit()
             return;
         }
 
-        // Call method
+        // Call.
         env->CallStaticVoidMethod(cls, method);
 
         // And done
@@ -122,9 +122,9 @@ void prJNI_BTInit()
 
 
 /// ---------------------------------------------------------------------------
-/// Sends data via bluetooth.
+/// Logs into facebook
 /// ---------------------------------------------------------------------------
-void prJNI_BTSend(unsigned char *bytes, unsigned int arraySize)
+void prJNI_FacebookLogin()
 {
     JavaVM *pJavaVM = prJNI_GetVM();
     PRASSERT(pJavaVM);
@@ -138,15 +138,15 @@ void prJNI_BTSend(unsigned char *bytes, unsigned int arraySize)
             return;
 
         // Find class
-        jclass cls = prJNI_GetNetworkClass(env, "Bluetooth", isAttached);
+        jclass cls = prJNI_GetFacebookClass(env, "Facebook", isAttached);
         if (!cls)
             return;
         
         // Find the callBack method ID
-        jmethodID method = env->GetStaticMethodID(cls, "send", "([B)V");
+        jmethodID method = env->GetStaticMethodID(cls, "logIn", "()V");
         if (!method)
         {
-            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "send");
+            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "logIn");
             if (isAttached)
             {
                 pJavaVM->DetachCurrentThread();
@@ -154,14 +154,8 @@ void prJNI_BTSend(unsigned char *bytes, unsigned int arraySize)
             return;
         }
 
-        jbyteArray bArray = env->NewByteArray(arraySize);
-
-        env->SetByteArrayRegion(bArray, 0, arraySize, (const jbyte *)bytes);
-
-        // Call method
-        env->CallStaticVoidMethod(cls, method, bArray);
-
-        env->DeleteLocalRef(bArray);
+        // Call.
+        env->CallStaticVoidMethod(cls, method);
 
         // And done
         if (isAttached)
@@ -169,57 +163,6 @@ void prJNI_BTSend(unsigned char *bytes, unsigned int arraySize)
             pJavaVM->DetachCurrentThread();
         }
     }
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Determines if current machine is the server.
-/// ---------------------------------------------------------------------------
-bool prJNI_BTIsServer()
-{
-    bool result = false;
-
-    JavaVM *pJavaVM = prJNI_GetVM();
-    PRASSERT(pJavaVM);
-    if (pJavaVM)
-    {
-        bool    isAttached  = false;
-        JNIEnv *env         = NULL;
-
-        // Get environment.
-        if (!prJNI_GetEnv(&env, isAttached))
-            return result;
-
-        // Find class
-        jclass cls = prJNI_GetNetworkClass(env, "Bluetooth", isAttached);
-        if (!cls)
-            return result;
-        
-        // Find the callBack method ID
-        jmethodID method = env->GetStaticMethodID(cls, "isServer", "()Z");
-        if (!method)
-        {
-            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "isServer");
-            if (isAttached)
-            {
-                pJavaVM->DetachCurrentThread();
-            }
-            return result;
-        }
-
-
-        // Call method
-        result = env->CallStaticBooleanMethod(cls, method);
-
-        // And done
-        if (isAttached)
-        {
-            pJavaVM->DetachCurrentThread();
-        }
-    }
-
-
-    return result;
 }
 
 

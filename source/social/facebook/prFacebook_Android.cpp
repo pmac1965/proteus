@@ -27,6 +27,7 @@
 #include "../../core/prTypes.h"
 #include "../../core/prDefines.h"
 #include "../../core/prMacros.h"
+#include "../../android/prJNIFacebook.h"
 
 
 /// ----------------------------------------------------------------------------
@@ -45,7 +46,6 @@ prFacebook_Android::~prFacebook_Android()
 }
 
 
-
 /// ----------------------------------------------------------------------------
 /// Initialise facebook for a specific platform
 /// ----------------------------------------------------------------------------
@@ -61,6 +61,46 @@ bool prFacebook_Android::Initialise()
 bool prFacebook_Android::Update()
 {
     return true;
+}
+
+
+/// ----------------------------------------------------------------------------
+/// Open a session
+/// ----------------------------------------------------------------------------
+bool prFacebook_Android::OpenSession()
+{
+    prJNI_FacebookOpenSession();
+    //prFB_OpenSession(mpCallbacks, mIsLoggedIn);
+    return mIsLoggedIn;
+}
+
+
+/// ----------------------------------------------------------------------------
+/// login to facebook
+/// ----------------------------------------------------------------------------
+bool prFacebook_Android::Login()
+{
+    prJNI_FacebookLogin();
+    //prFB_Login(mpCallbacks, mIsLoggedIn);
+    return mIsLoggedIn;
+}
+
+            
+/// ----------------------------------------------------------------------------
+/// Fetches the users details
+/// ----------------------------------------------------------------------------
+void prFacebook_Android::FetchUserDetails()
+{
+    //prFB_FetchUserDetails(mpCallbacks, this);
+}
+    
+    
+/// ----------------------------------------------------------------------------
+/// Send a brag to facebook
+/// ----------------------------------------------------------------------------
+void prFacebook_Android::Brag()
+{
+    //prFB_Brag(mpCallbacks, mPlayerFBID);
 }
 
 

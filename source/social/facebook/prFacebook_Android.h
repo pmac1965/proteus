@@ -44,6 +44,22 @@ public:
     // Method: Update
     //      Update facebook for a specific platform
     bool Update();
+
+    // Method: OpenSession
+    //      Open a session
+    bool OpenSession();
+
+    // Method: Login
+    //      login to facebook
+    bool Login();
+    
+    // Method: FetchUserDetails
+    //      login to facebook
+    void FetchUserDetails();
+    
+    // Method: Brag
+    //      Send a brag to facebook
+    void Brag();
 };
 
 

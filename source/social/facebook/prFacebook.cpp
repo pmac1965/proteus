@@ -20,6 +20,7 @@
 #include "prFacebook.h"
 #include "../../core/prDefines.h"
 #include "../../core/prMacros.h"
+#include "../../debug/prTrace.h"
 
 
 /// ----------------------------------------------------------------------------
@@ -56,10 +57,14 @@ void prFacebook::RegisterCallbackHandler(prFacebookCallbacks *pcb)
 void prFacebook::SetDetails(const char *name, u64 fbid)
 {
     mPlayerFBID = fbid;
-    
+    mIsLoggedIn = true;         // Set logged in - only when logged in to facebook
+                                //                 can we set the details    
     if (name && *name)
     {
         mPlayerName.Set(name);
     }
+
+    prTrace("FB: %s\n", mPlayerName.Text());
+    prTrace("FB: %llu\n", fbid);
 }
 
