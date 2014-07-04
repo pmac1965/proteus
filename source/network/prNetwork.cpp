@@ -1,5 +1,5 @@
 /**
- * prStore_ios.cpp
+ * prNetwork.cpp
  *
  *  Copyright 2014 Paul Michael McNab
  *
@@ -14,106 +14,90 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
 #include "../prConfig.h"
 
 
-#if defined(PLATFORM_IOS)
-
-
-#include "prStore_ios.h"
-#include "prInAppPurchase.h"
+#include "prNetwork.h"
 #include "../core/prMacros.h"
 
 
-// Externs found in the iOS code
-extern void IAPInit(prStore_ios *pStore);
-extern void IAPBeginPurchase(const char *name);
-extern bool IAPFindPrice(const char *name, char *buffer);
-extern bool DoWeHaveAConnection();
-
-
 /// ---------------------------------------------------------------------------
-/// Ctor.
+/// Ctor. 
 /// ---------------------------------------------------------------------------
-prStore_ios::prStore_ios(prInAppPurchase &iap) : prStore(iap)
+prNetwork::prNetwork()
 {
 }
 
 
 /// ---------------------------------------------------------------------------
-/// Dtor.
+/// Dtor
 /// ---------------------------------------------------------------------------
-prStore_ios::~prStore_ios()
+prNetwork::~prNetwork()
 {
 }
 
 
 /// ---------------------------------------------------------------------------
-/// Initialise the iphone store code in the game.
+/// Construct the class.
 /// ---------------------------------------------------------------------------
-void prStore_ios::Init()
+void prNetwork::Construct()
 {
-    IAPInit(this);
 }
 
 
 /// ---------------------------------------------------------------------------
-/// Perform store specific updates.
+/// Star the network interface.
 /// ---------------------------------------------------------------------------
-bool prStore_ios::Update(f32 dt)
+void prNetwork::Start()
 {
-    return DoWeHaveAConnection();
 }
 
 
 /// ---------------------------------------------------------------------------
-/// Callback from the game.
+/// Update the connection status, etc.
 /// ---------------------------------------------------------------------------
-void prStore_ios::EventNotify(s32 type, const char *id)
+void prNetwork::Update(f32 dt)
 {
-    m_prInAppPurchase.EventNotify(type, id);
+    PRUNUSED(dt);
 }
 
 
 /// ---------------------------------------------------------------------------
-/// Purchase an item.
+/// Do we have a connection to the internet?
 /// ---------------------------------------------------------------------------
-void prStore_ios::BeginPurchase(const char *name, int id)
+PRBOOL prNetwork::IsConnected()
 {
-    PRASSERT(name && *name);
-    PRUNUSED(id);
+    PRBOOL result = PRFALSE;
 
-    if (name && *name)
+#if defined(PLATFORM_IOS)
+    extern bool DoWeHaveAConnection();
+    if (DoWeHaveAConnection())
     {
-        IAPBeginPurchase(name);
+        result = PRTRUE;
     }
-}
 
+#elif defined(PLATFORM_PC)
+    result = PRTRUE;
 
-/// ----------------------------------------------------------------------------
-/// Find an items price.
-/// ----------------------------------------------------------------------------
-const char *prStore_ios::FindPrice(const char *name, int id)
-{
-    PRASSERT(name && *name);
-    PRUNUSED(id);
+#elif defined(PLATFORM_BADA)
+    result = PRTRUE;
+
+#elif defined(PLATFORM_ANDROID)
+    result = PRTRUE;
     
-    if (name && *name)
-    {
-        static char buffer[64];
-        
-        if (IAPFindPrice(name, buffer))
-        {
-            return buffer;
-        }
-    }
+#elif defined(PLATFORM_LINUX)
+    result = PRTRUE;
+    
+#elif defined(PLATFORM_MAC)
+    result = PRTRUE;
 
-    return NULL;
+#else
+    #error Unsupported platform
+
+#endif
+
+    return result;
 }
-
-
-#endif//PLATFORM_IOS

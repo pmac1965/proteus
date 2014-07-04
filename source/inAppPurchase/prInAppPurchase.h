@@ -85,6 +85,10 @@ public:
     //      Callback from the game. This is then passed on to the appropriate handler
     void EventNotify(s32 type, const char *id);
 
+    // Method: FindProductPrice
+    //      Find a products price.
+    const char *FindProductPrice(const char *name);
+
 
 private:
 

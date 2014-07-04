@@ -74,3 +74,12 @@ void prStore::BeginPurchase(const char *name, int id)
     PRUNUSED(name);
     PRUNUSED(id);
 }
+
+
+/// ---------------------------------------------------------------------------
+/// Find an items price.
+/// ---------------------------------------------------------------------------
+const char *prStore::FindPrice(const char *name, int id)
+{
+    return "$0.99";
+}

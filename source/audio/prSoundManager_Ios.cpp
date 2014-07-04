@@ -619,7 +619,7 @@ s32 prSoundManager_Ios::SFXPlay(s32 index, f32 volume, bool loop)
                     soundEffects[i].id    = effectId++;
 
                     // Set return value
-                    handle = i;
+                    handle = soundEffects[i].id;
                     break;
                 }
             }

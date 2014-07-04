@@ -30,6 +30,11 @@
 #import <AudioToolbox/AudioToolbox.h>
 
 
+// Debug
+//#define DEBUG_IOS_SYSTEM
+
+
+
 /// ---------------------------------------------------------------------------
 /// Does simple vibration
 /// ---------------------------------------------------------------------------
@@ -46,12 +51,31 @@ void prIosSystemSleepEnable(bool state)
 {
     if (state)
     {
+        #if defined(DEBUG_SLEEP) && defined(DEBUG)
+        NSLog(@"setIdleTimerDisabled:YES");
+        #endif
+        
         [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     }
     else
     {
+        #if defined(DEBUG_SLEEP) && defined(DEBUG)
+        NSLog(@"setIdleTimerDisabled:NO");
+        #endif
+        
         [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
     }
+ 
+    #if defined(DEBUG_SLEEP) && defined(DEBUG)
+    if ([UIApplication sharedApplication].idleTimerDisabled == YES)
+    {
+        NSLog(@"idleTimerDisabled == YES");
+    }
+    else
+    {
+        NSLog(@"idleTimerDisabled == NO");
+    }
+    #endif
 }
 
 

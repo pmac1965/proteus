@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -43,10 +42,10 @@
 namespace
 {
     JavaVM *gJavaVM = NULL;
-    char    gPackageName  [ANDROID_NAME_SIZE];
-    char    gActivityName [ANDROID_NAME_SIZE];
-    char    gProviderName [ANDROID_NAME_SIZE];
-    char    gAnalyticName [ANDROID_NAME_SIZE];
+    char    gPackageName  [ANDROID_NAME_SIZE] = { '\0' };
+    char    gActivityName [ANDROID_NAME_SIZE] = { '\0' };
+    char    gProviderName [ANDROID_NAME_SIZE] = { '\0' };
+    char    gAnalyticName [ANDROID_NAME_SIZE] = { '\0' };
 }
 
 
@@ -131,8 +130,7 @@ const char *prJNI_MakeFinalClassName(const char *pClassName)
     strcpy(name, gPackageName);
     strcat(name, "/");
     strcat(name, pClassName);
-
-    __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Final %s", name);
+    //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "Final %s", name);
 
     return name;
 }
@@ -193,6 +191,24 @@ jclass prJNI_GetClass(JNIEnv *env, const char *className, bool isAttached)
 JavaVM *prJNI_GetVM()
 {
     return gJavaVM;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Gets the package name
+/// ---------------------------------------------------------------------------
+const char *prJNI_GetPackageName()
+{
+    return gPackageName;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Gets the activity name
+/// ---------------------------------------------------------------------------
+const char *prJNI_GetActivityName()
+{
+    return gActivityName;
 }
 
 

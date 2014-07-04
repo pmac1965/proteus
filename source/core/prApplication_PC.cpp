@@ -29,6 +29,7 @@
 #include "prCore.h"
 #include "prRegistry.h"
 #include "prVersion.h"
+#include "prGameTime.h"
 #include "../debug/prDebug.h"
 #include "../debug/prTrace.h"
 #include "../debug/prConsoleWindow.h"
@@ -58,11 +59,16 @@ static const char *embedded[] =
 /// ---------------------------------------------------------------------------
 prApplication_PC::prApplication_PC() : prApplication()
 {
+    // Debug console
     #if (defined(_DEBUG) || defined(DEBUG)) && defined (PROTEUS_ALLOW_CONSOLE)
-        m_pCW = new prConsoleWindow(TEXT("Debug console"), 40, 80);
+      m_pCW = new prConsoleWindow(TEXT("Debug console"), 40, 80);
     #else
-        m_pCW = NULL;
+      m_pCW = NULL;
     #endif
+
+
+    // Game timer
+    pGameTime  = new prGameTime();
 
 
     // Init data
@@ -148,6 +154,7 @@ prApplication_PC::~prApplication_PC()
 {
     PRSAFE_DELETE(m_pCW);
     PRSAFE_DELETE(m_pWindow);
+    PRSAFE_DELETE(pGameTime);
 }
 
 
@@ -399,23 +406,25 @@ PRBOOL prApplication_PC::Run()
             prTouch         *pTouch = static_cast<prTouch *>       (prCoreGetComponent(PRSYSTEM_TOUCH));
             prFps           *pFps   = static_cast<prFps *>         (prCoreGetComponent(PRSYSTEM_FPS));
 
-
-//            GameTime::GetInstance()->Update();
-
-            // Update game
-            if (m_pWindow && m_pWindow->GetActive())
+            if (pGameTime)
             {
-//                float dt = GameTime::GetInstance()->ElapsedTime();
+                pGameTime->Update();
 
-                // System updates
-                if (pMouse) { pMouse->Update(); }
-                if (pSound) { pSound->Update(16.0f); }
-                if (pTouch) { pTouch->Update(); }
-                if (pFps)   { pFps->Begin(); }
+                // Update game
+                if (m_pWindow && m_pWindow->GetActive())
+                {
+                    float dt = pGameTime->ElapsedTime();
 
-                // Update and draw the game
-                Update(16.0f);// dt);
-                Draw();
+                    // System updates
+                    if (pMouse) { pMouse->Update(); }
+                    if (pSound) { pSound->Update(dt); }
+                    if (pTouch) { pTouch->Update(); }
+                    if (pFps)   { pFps->Begin(); }
+
+                    // Update and draw the game
+                    Update(dt);
+                    Draw();
+                }
             }
 
             // Needs modified to track game speed!

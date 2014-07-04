@@ -58,6 +58,10 @@ public:
     // Method: BeginPurchase
     //      Purchase an item.
     void BeginPurchase(const char *name, int id);
+    
+    // Method: FindPrice
+    //      Find an items price.
+    const char *FindPrice(const char *name, int id);
 };
 
 

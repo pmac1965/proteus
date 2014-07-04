@@ -33,6 +33,7 @@
 
 // Forward declarations
 class prConsoleWindow;
+class prGameTime;
 
 
 // Class: prApplication_PC
@@ -126,7 +127,7 @@ private:
 
 
 private:
-
+    prGameTime         *pGameTime;
     prConsoleWindow    *m_pCW;
     HACCEL              m_hAccel;
 };

@@ -40,6 +40,7 @@
     // iOS Simulator
     #if TARGET_IPHONE_SIMULATOR
     #define PLATFORM_IOS
+    #define IOS_SIMULATOR
     #define AUDIO_TYPE  AUDIO_IOS
 
     // iOS device

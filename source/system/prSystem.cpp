@@ -25,6 +25,7 @@
   #include "../ios/prIosSystem.h"
 
 #elif defined(PLATFORM_ANDROID)
+  #include "../android/prJNISleep.h"
 
 #endif
 
@@ -54,6 +55,7 @@ void prSystem::SleepModeEnable(bool state)
     prIosSystemSleepEnable(state);
 
 #elif defined(PLATFORM_ANDROID)
+    prJNI_SleepSetState(state);
 
 #endif
 }

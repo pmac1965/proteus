@@ -61,6 +61,14 @@ jclass prJNI_GetClass(JNIEnv *env, const char *className, bool isAttached);
 //      Gets the VM
 JavaVM *prJNI_GetVM();
 
+// Function: prJNI_GetPackageName
+//      Gets the package name
+const char *prJNI_GetPackageName();
+
+// Function: prJNI_GetActivityName
+//      Gets the activity name
+const char *prJNI_GetActivityName();
+
 
 #endif//PLATFORM_ANDROID
 

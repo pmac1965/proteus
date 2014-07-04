@@ -58,6 +58,10 @@ public:
     // Method: BeginPurchase
     //      Purchase an item.
     virtual void BeginPurchase(const char *name, int id);
+    
+    // Method: FindPrice
+    //      Find an items price.
+    virtual const char *FindPrice(const char *name, int id);
 
 
 private:

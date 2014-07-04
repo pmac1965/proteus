@@ -605,7 +605,7 @@ s32 prSoundManager_Android::SFXPlay(s32 index, f32 volume, bool loop)
                     soundEffects[i].id    = effectId++;
 
                     // Set return value
-                    handle = i;
+                    handle = soundEffects[i].id;
                     break;
                 }
             }
@@ -842,9 +842,46 @@ void prSoundManager_Android::SFXPause(s32 index, bool state)
 /// ---------------------------------------------------------------------------
 void prSoundManager_Android::SFXPause(const char *name, bool state)
 {
-    TODO("Complete")
+#ifdef SOUND_ALLOW
+
+    if (initialised && name && *name)
+    {
+        u32 hash = prStringHash(name);
+
+        for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+        {
+            if (soundEffects[i].hash == hash)
+            {
+                if (state)
+                {
+                    if (soundEffects[i].state == SFX_STATE_PLAYING)
+                    {
+                        soundEffects[i].state = SFX_STATE_PAUSED;
+                        alSourcePause(soundEffects[i].uiSource);
+                        AL_ERROR_CHECK()
+                        break;
+                    }
+                }
+                else
+                {
+                    if (soundEffects[i].state == SFX_STATE_PAUSED)
+                    {
+                        soundEffects[i].state = SFX_STATE_PLAYING;
+                        alSourcePlay(soundEffects[i].uiSource);
+                        AL_ERROR_CHECK()
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+#else
+
     PRUNUSED(name);
     PRUNUSED(state);
+
+#endif
 }
 
 
@@ -853,7 +890,46 @@ void prSoundManager_Android::SFXPause(const char *name, bool state)
 // ----------------------------------------------------------------------------
 void prSoundManager_Android::SFXPauseAll(bool state)
 {
+#ifdef SOUND_ALLOW
+    
+    if (initialised)
+    {
+        if (sfxPaused != state)
+        {
+            sfxPaused = state;
+
+            if (state)
+            {
+                for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+                {
+                    if (soundEffects[i].state == SFX_STATE_PLAYING)
+                    {
+                        soundEffects[i].state = SFX_STATE_PAUSED;
+                        alSourcePause(soundEffects[i].uiSource);
+                        AL_ERROR_CHECK()
+                    }
+                }
+            }
+            else
+            {
+                for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+                {
+                    if (soundEffects[i].state == SFX_STATE_PAUSED)
+                    {
+                        soundEffects[i].state = SFX_STATE_PLAYING;
+                        alSourcePlay(soundEffects[i].uiSource);
+                        AL_ERROR_CHECK()
+                    }
+                }
+            }
+        }
+    }
+
+#else
+
     PRUNUSED(state);
+
+#endif
 }
 
 
@@ -863,6 +939,16 @@ void prSoundManager_Android::SFXPauseAll(bool state)
 bool prSoundManager_Android::SFXGetPaused() const
 {
     bool result = false;
+
+#ifdef SOUND_ALLOW
+    
+    if (initialised)
+    {
+        result = sfxPaused;
+    }
+
+#endif
+
     return result;
 }
 
@@ -872,7 +958,11 @@ bool prSoundManager_Android::SFXGetPaused() const
 // ----------------------------------------------------------------------------
 s32 prSoundManager_Android::SFXGetActive() const
 {
+#ifdef SOUND_ALLOW    
+    return active;
+#else
     return 0;
+#endif
 }
 
 
@@ -881,8 +971,33 @@ s32 prSoundManager_Android::SFXGetActive() const
 // ----------------------------------------------------------------------------
 void prSoundManager_Android::SFXSetVolume(s32 index, f32 volume)
 {
+#ifdef SOUND_ALLOW
+    
+    if (initialised)
+    {
+        for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+        {
+            if (soundEffects[i].id == (u32)index)
+            {
+                if (soundEffects[i].state == SFX_STATE_PLAYING)
+                {
+                    // Set volume
+                    float vol = PRCLAMP(volume, AUDIO_SFX_MIN_VOLUME, AUDIO_SFX_MAX_VOLUME);
+                    vol *= masterSfxVolume;
+                    alSourcef(soundEffects[i].uiSource, AL_GAIN, vol);
+                    AL_ERROR_CHECK()
+                    break;
+                }
+            }
+        }
+    }
+
+#else
+
     PRUNUSED(index);
     PRUNUSED(volume);
+
+#endif
 }
 
 

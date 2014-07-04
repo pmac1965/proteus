@@ -178,6 +178,7 @@
     <ClInclude Include="..\..\..\..\source\android\prJNIFacebook.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIInterface.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNINetwork.h" />
+    <ClInclude Include="..\..\..\..\source\android\prJNISleep.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNITwitter.h" />
     <ClInclude Include="..\..\..\..\source\audio\external\codec.h" />
     <ClInclude Include="..\..\..\..\source\audio\external\ogg.h" />
@@ -253,6 +254,7 @@
     <ClInclude Include="..\..\..\..\source\core\prCore.h" />
     <ClInclude Include="..\..\..\..\source\core\prCoreSystem.h" />
     <ClInclude Include="..\..\..\..\source\core\prDefines.h" />
+    <ClInclude Include="..\..\..\..\source\core\prGameTime.h" />
     <ClInclude Include="..\..\..\..\source\core\prList.h" />
     <ClInclude Include="..\..\..\..\source\core\prMacros.h" />
     <ClInclude Include="..\..\..\..\source\core\prMessage.h" />
@@ -414,6 +416,7 @@
     <ClInclude Include="..\..\..\..\source\multiplayer\prMultiplayer.h" />
     <ClInclude Include="..\..\..\..\source\multiplayer\prMultiplayerManager.h" />
     <ClInclude Include="..\..\..\..\source\multiplayer\prMultiplayerProvider.h" />
+    <ClInclude Include="..\..\..\..\source\network\prNetwork.h" />
     <ClInclude Include="..\..\..\..\source\online\prWeb.h" />
     <ClInclude Include="..\..\..\..\source\particle\prEmitter.h" />
     <ClInclude Include="..\..\..\..\source\particle\prParticle.h" />
@@ -479,6 +482,7 @@
     <ClCompile Include="..\..\..\..\source\android\prJNIFacebook.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNIInterface.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNINetwork.cpp" />
+    <ClCompile Include="..\..\..\..\source\android\prJNISleep.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNITwitter.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prOpenALDeviceList.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prOpenALErrors.cpp" />
@@ -546,6 +550,7 @@
     <ClCompile Include="..\..\..\..\source\core\prBitArray.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prCore.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prCoreSystem.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prGameTime.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prMessageManager.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prRegistry.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prResource.cpp" />
@@ -997,6 +1002,7 @@
     <ClCompile Include="..\..\..\..\source\multiplayer\prMultiplayer.cpp" />
     <ClCompile Include="..\..\..\..\source\multiplayer\prMultiplayerManager.cpp" />
     <ClCompile Include="..\..\..\..\source\multiplayer\prMultiplayerProvider.cpp" />
+    <ClCompile Include="..\..\..\..\source\network\prNetwork.cpp" />
     <ClCompile Include="..\..\..\..\source\online\prWeb_android.cpp" />
     <ClCompile Include="..\..\..\..\source\online\prWeb_bada.cpp" />
     <ClCompile Include="..\..\..\..\source\online\prWeb_ios.cpp" />

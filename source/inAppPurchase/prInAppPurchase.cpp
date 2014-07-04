@@ -347,3 +347,17 @@ void prInAppPurchase::EventNotify(s32 type, const char *id)
         }
     }
 }
+
+
+/// ---------------------------------------------------------------------------
+/// Find a products price.
+/// ---------------------------------------------------------------------------
+const char *prInAppPurchase::FindProductPrice(const char *name)
+{
+    if (pStore)
+    {
+        return pStore->FindPrice(name, 0);
+    }
+    
+    return NULL;
+}

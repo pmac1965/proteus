@@ -184,6 +184,7 @@
 #include "multiplayer/prMultiplayer.h"
 #include "multiplayer/prMultiplayerManager.h"
 #include "multiplayer/prMultiplayerProvider.h"
+#include "network/prNetwork.h"
 #include "online/prWeb.h"
 #include "particle/prEmitter.h"
 #include "particle/prParticle.h"

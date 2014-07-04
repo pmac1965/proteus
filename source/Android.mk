@@ -58,6 +58,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	android/prJNIInterface.cpp	\
 	android/prJNINetwork.cpp	\
 	android/prJNIFacebook.cpp	\
+	android/prJNISleep.cpp	\
 	audio/prOpenALDeviceList.cpp	\
 	audio/prOpenALErrors.cpp	\
 	audio/prSoundManager.cpp	\
@@ -193,6 +194,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	multiplayer/prMultiplayer.cpp	\
 	multiplayer/prMultiplayerManager.cpp	\
 	multiplayer/prMultiplayerProvider.cpp	\
+	network/prNetwork.cpp	\
 	online/prWeb_android.cpp	\
 	particle/prEmitter.cpp	\
 	particle/prParticle.cpp	\
