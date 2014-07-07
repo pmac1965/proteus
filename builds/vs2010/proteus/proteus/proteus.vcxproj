@@ -176,6 +176,7 @@
     <ClInclude Include="..\..\..\..\source\android\AL\efx.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIAudio.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIFacebook.h" />
+    <ClInclude Include="..\..\..\..\source\android\prJNIInAppPurchase.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIInterface.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNINetwork.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNISleep.h" />
@@ -480,6 +481,7 @@
     <ClCompile Include="..\..\..\..\source\analytics\prAnalyticsFlurry.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNIAudio.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNIFacebook.cpp" />
+    <ClCompile Include="..\..\..\..\source\android\prJNIInAppPurchase.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNIInterface.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNINetwork.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNISleep.cpp" />

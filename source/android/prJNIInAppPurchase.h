@@ -1,4 +1,4 @@
-// File: prJNIFacebook.h
+// File: prJNIInAppPurchase.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,8 +16,8 @@
  */
 
 
-#ifndef __PRJNIFACEBOOK_H
-#define __PRJNIFACEBOOK_H
+#ifndef __PRJNIINAPPPURCHASE_H
+#define __PRJNIINAPPPURCHASE_H
 
 
 #include "../prConfig.h"
@@ -26,20 +26,12 @@
 #if defined(PLATFORM_ANDROID)
 
 
-// Function: prJNI_FacebookOpenSession
-//      Facebook open session
-void prJNI_FacebookOpenSession();
-
-// Function: prJNI_FacebookLogin
-//      Facebook log in
-void prJNI_FacebookLogin();
-
-// Function: prJNI_FacebookBrag
-//      Brag to Facebook
-void prJNI_FacebookBrag();
+// Function: prJNI_BeginPurchase
+//      Begins a purchase
+void prJNI_BeginPurchase(const char *item);
 
 
 #endif//PLATFORM_ANDROID
 
 
-#endif//__PRJNIFACEBOOK_H
+#endif//__PRJNIINAPPPURCHASE_H

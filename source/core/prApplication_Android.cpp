@@ -75,6 +75,7 @@ prApplication_Android::prApplication_Android() : prApplication()
             prTrace("Ogg              : 1.2.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
             prTrace("Vorbis           : 1.3.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
             prTrace("AntTweakBar      : 1.16  - Copyright (C) 2005-2013 Philippe Decaudin.\n");        
+            prTrace("Twitter4j        : 4.0.2 - Copyright 2007 Yusuke Yamamoto\n");        
             prTrace("libutf8proc      : 1.1.5 - Copyright (C) 2009 Public Software Group e. V.,\n");
             prTrace("                                                         Berlin, Germany\n");
             prTrace("Mersenne Twister : 1.1   - Copyright (C) 1997 - 2002, Makoto Matsumoto and\n");        

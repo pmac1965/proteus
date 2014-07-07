@@ -27,7 +27,7 @@
 #include "prStore_android.h"
 #include "prInAppPurchase.h"
 #include "../core/prMacros.h"
-//#include "../android/JNIInterface.h"
+#include "../android/prJNIInAppPurchase.h"
 
 
 /// ---------------------------------------------------------------------------
@@ -60,9 +60,12 @@ void prStore_android::EventNotify(s32 type, const char *id)
 /// ---------------------------------------------------------------------------
 void prStore_android::BeginPurchase(const char *name, int id)
 {
-    //JNI_ShowPurchaseDialog();
-    PRUNUSED(name);
     PRUNUSED(id);
+
+    if (name && *name)
+    {
+        prJNI_BeginPurchase(name);
+    }
 }
 
 

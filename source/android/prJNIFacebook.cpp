@@ -166,4 +166,49 @@ void prJNI_FacebookLogin()
 }
 
 
+/// ---------------------------------------------------------------------------
+/// brag to facebook
+/// ---------------------------------------------------------------------------
+void prJNI_FacebookBrag()
+{
+    JavaVM *pJavaVM = prJNI_GetVM();
+    PRASSERT(pJavaVM);
+    if (pJavaVM)
+    {
+        bool    isAttached  = false;
+        JNIEnv *env         = NULL;
+
+        // Get environment.
+        if (!prJNI_GetEnv(&env, isAttached))
+            return;
+
+        // Find class
+        jclass cls = prJNI_GetFacebookClass(env, "Facebook", isAttached);
+        if (!cls)
+            return;
+        
+        // Find the callBack method ID
+        jmethodID method = env->GetStaticMethodID(cls, "brag", "()V");
+        if (!method)
+        {
+            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "brag");
+            if (isAttached)
+            {
+                pJavaVM->DetachCurrentThread();
+            }
+            return;
+        }
+
+        // Call.
+        env->CallStaticVoidMethod(cls, method);
+
+        // And done
+        if (isAttached)
+        {
+            pJavaVM->DetachCurrentThread();
+        }
+    }
+}
+
+
 #endif

@@ -24,6 +24,7 @@
 
 
 #include "prTwitter_Android.h"
+#include "../../android/prJNITwitter.h"
 #include "../../core/prTypes.h"
 #include "../../core/prDefines.h"
 #include "../../core/prMacros.h"
@@ -69,6 +70,7 @@ bool prTwitter_Android::Update()
 /// ----------------------------------------------------------------------------
 bool prTwitter_Android::ShowTweetSheet(const char *initialText)
 {
+    prJNI_ShowTweet();
 }
 
 

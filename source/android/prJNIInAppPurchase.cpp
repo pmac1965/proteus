@@ -40,11 +40,11 @@ namespace
     /// ---------------------------------------------------------------------------
     /// Makes the final class name. 
     /// ---------------------------------------------------------------------------
-    const char *prJNI_MakeTwitterClassName(const char *pClassName)
+    const char *prJNI_FinalClassName(const char *pClassName)
     {
         static char name[256];
 
-        strcpy(name, "proteus/social/");
+        strcpy(name, "proteus/iap/");
         strcat(name, pClassName);
 
         return name;
@@ -54,12 +54,12 @@ namespace
     /// ---------------------------------------------------------------------------
     /// Finds a class.
     /// ---------------------------------------------------------------------------
-    jclass prJNI_GetTwitterClass(JNIEnv *env, const char *className, bool isAttached) 
+    jclass prJNI_GetTheClass(JNIEnv *env, const char *className, bool isAttached) 
     {
         PRASSERT(env);
         PRASSERT(className && *className);
 
-        jclass cls = env->FindClass(prJNI_MakeTwitterClassName(className));
+        jclass cls = env->FindClass(prJNI_FinalClassName(className));
         if (!cls) 
         {
             // Warn
@@ -77,45 +77,49 @@ namespace
 
 
 /// ---------------------------------------------------------------------------
-/// Opens the tweet sheet
+/// Begins a purchase
 /// ---------------------------------------------------------------------------
-void prJNI_ShowTweet()
+void prJNI_BeginPurchase(const char *item)
 {
-    JavaVM *pJavaVM = prJNI_GetVM();
-    PRASSERT(pJavaVM);
-    if (pJavaVM)
+    if (item && *item)
     {
-        bool    isAttached  = false;
-        JNIEnv *env         = NULL;
-
-        // Get environment.
-        if (!prJNI_GetEnv(&env, isAttached))
-            return;
-
-        // Find class
-        jclass cls = prJNI_GetTwitterClass(env, "Twitter", isAttached);
-        if (!cls)
-            return;
-        
-        // Find the callBack method ID
-        jmethodID method = env->GetStaticMethodID(cls, "showTweetSheet", "()V");
-        if (!method)
+        JavaVM *pJavaVM = prJNI_GetVM();
+        PRASSERT(pJavaVM);
+        if (pJavaVM)
         {
-            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "showTweetSheet");
+            bool    isAttached  = false;
+            JNIEnv *env         = NULL;
+
+            // Get environment.
+            if (!prJNI_GetEnv(&env, isAttached))
+                return;
+
+            // Find class
+            jclass cls = prJNI_GetTheClass(env, "InAppPurchase", isAttached);
+            if (!cls)
+                return;
+        
+            // Find the callBack method ID
+            jmethodID method = env->GetStaticMethodID(cls, "beginPurchase", "(Ljava/lang/String;)V");
+            if (!method)
+            {
+                __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "beginPurchase");
+                if (isAttached)
+                {
+                    pJavaVM->DetachCurrentThread();
+                }
+                return;
+            }
+
+            // Construct a Java string.
+            jstring js = env->NewStringUTF(item);
+            env->CallStaticVoidMethod(cls, method, js);
+
+            // And done
             if (isAttached)
             {
                 pJavaVM->DetachCurrentThread();
             }
-            return;
-        }
-
-        // Call.
-        env->CallStaticVoidMethod(cls, method);
-
-        // And done
-        if (isAttached)
-        {
-            pJavaVM->DetachCurrentThread();
         }
     }
 }

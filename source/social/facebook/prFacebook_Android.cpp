@@ -70,7 +70,6 @@ bool prFacebook_Android::Update()
 bool prFacebook_Android::OpenSession()
 {
     prJNI_FacebookOpenSession();
-    //prFB_OpenSession(mpCallbacks, mIsLoggedIn);
     return mIsLoggedIn;
 }
 
@@ -81,7 +80,6 @@ bool prFacebook_Android::OpenSession()
 bool prFacebook_Android::Login()
 {
     prJNI_FacebookLogin();
-    //prFB_Login(mpCallbacks, mIsLoggedIn);
     return mIsLoggedIn;
 }
 
@@ -100,6 +98,7 @@ void prFacebook_Android::FetchUserDetails()
 /// ----------------------------------------------------------------------------
 void prFacebook_Android::Brag()
 {
+    prJNI_FacebookBrag();
     //prFB_Brag(mpCallbacks, mPlayerFBID);
 }
 
