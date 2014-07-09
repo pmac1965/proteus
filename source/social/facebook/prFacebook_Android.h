@@ -59,7 +59,7 @@ public:
     
     // Method: Brag
     //      Send a brag to facebook
-    void Brag();
+    void Brag(const char *initialText);
 };
 
 

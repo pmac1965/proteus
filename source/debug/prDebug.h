@@ -77,4 +77,15 @@ void prOutputString(const char *text);
 #endif
 
 
+// Allows NSLog to be removeable
+#if defined(PLATFORM_IOS)
+    // Debug assist
+    #if defined(DEBUG)
+        #define DBG(text, args...)      NSLog(text, ## args)
+    #else
+        #define DBG(text, args...)
+    #endif
+#endif
+
+
 #endif//__PRDEBUG_H

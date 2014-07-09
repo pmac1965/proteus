@@ -26,6 +26,11 @@
 #include "../debug/prTrace.h"
 
 
+#if defined(PLATFORM_IOS)
+#include "../ios/prIosFlurry.h"
+#endif
+
+
 #if defined (PLATFORM_ANDROID)
 //#include "../android/JNIInterface.h"
 #endif
@@ -52,8 +57,30 @@ prAnalyticsFlurry::~prAnalyticsFlurry()
 /// ---------------------------------------------------------------------------
 void prAnalyticsFlurry::Construct(const char *appId, const char *secret)
 {
+#if defined (PLATFORM_IOS)
+    
+    PRUNUSED(secret);
+    
+    if (appId && *appId)
+    {
+        prIosFlurryConstruct(appId);
+    }
+    
+#elif defined (PLATFORM_ANDROID)
+
+    PRUNUSED(secret);
+
+    if (appId && *appId)
+    {
+    }
+    
+    
+#else
+    
     PRUNUSED(appId);
     PRUNUSED(secret);
+    
+#endif
 }
 
 
@@ -66,12 +93,11 @@ bool prAnalyticsFlurry::Submit(const char *name, const char *value)
     
 #if defined (PLATFORM_IOS)
     
-    //extern bool FLurry_LogEvent(const char *name, const char *value);
-    //if (name && *name)
-    //{
-    //    //Trace("Logging event %s\n", name);
-    //    result = FLurry_LogEvent(name, value);
-    //}
+    if (name && *name)
+    {
+        prIosFlurrySubmit(name);
+        prTrace("Logging event %s\n", name);
+    }
     
 #elif defined (PLATFORM_ANDROID)
 

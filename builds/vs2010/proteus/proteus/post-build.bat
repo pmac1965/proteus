@@ -62,7 +62,11 @@ REM --------------------------------------
     del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prSoundManager_Android.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prWaves.h
 
+    REM These aren't required
+    del %PROTEUS_ENGINE_DIR%\include\proteus\analytics\Flurry.h
+
     rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\libzip
+
     REM rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\audio\external
 
 

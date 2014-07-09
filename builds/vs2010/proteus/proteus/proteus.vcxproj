@@ -166,6 +166,7 @@
     <ClInclude Include="..\..\..\..\source\adverts\prAdvertProvider_AdMob.h" />
     <ClInclude Include="..\..\..\..\source\adverts\prAdvertProvider_iAds.h" />
     <ClInclude Include="..\..\..\..\source\adverts\prAdverts.h" />
+    <ClInclude Include="..\..\..\..\source\analytics\Flurry.h" />
     <ClInclude Include="..\..\..\..\source\analytics\prAnalytics.h" />
     <ClInclude Include="..\..\..\..\source\analytics\prAnalyticsBase.h" />
     <ClInclude Include="..\..\..\..\source\analytics\prAnalyticsFlurry.h" />
@@ -336,6 +337,7 @@
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prTransactionResult.h" />
     <ClInclude Include="..\..\..\..\source\input\prAccelerometer.h" />
     <ClInclude Include="..\..\..\..\source\input\prMouse.h" />
+    <ClInclude Include="..\..\..\..\source\input\prOnScreenKeyboard.h" />
     <ClInclude Include="..\..\..\..\source\input\prTouch.h" />
     <ClInclude Include="..\..\..\..\source\input\prTouchListener.h" />
     <ClInclude Include="..\..\..\..\source\ios\prBluetooth.h" />
@@ -343,6 +345,7 @@
     <ClInclude Include="..\..\..\..\source\ios\prIos.h" />
     <ClInclude Include="..\..\..\..\source\ios\prIosAudio.h" />
     <ClInclude Include="..\..\..\..\source\ios\prIosFacebook.h" />
+    <ClInclude Include="..\..\..\..\source\ios\prIosFlurry.h" />
     <ClInclude Include="..\..\..\..\source\ios\prIosSystem.h" />
     <ClInclude Include="..\..\..\..\source\ios\prIosTwitter.h" />
     <ClInclude Include="..\..\..\..\source\libzip\config.h">
@@ -622,6 +625,7 @@
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_pc.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prAccelerometer.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prMouse.cpp" />
+    <ClCompile Include="..\..\..\..\source\input\prOnScreenKeyboard.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prTouch.cpp" />
     <ClCompile Include="..\..\..\..\source\libzip\mkstemp.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -1057,6 +1061,7 @@
     <None Include="..\..\..\..\source\ios\prIos.mm" />
     <None Include="..\..\..\..\source\ios\prIosAudio.mm" />
     <None Include="..\..\..\..\source\ios\prIosFacebook.mm" />
+    <None Include="..\..\..\..\source\ios\prIosFlurry.mm" />
     <None Include="..\..\..\..\source\ios\prIosSystem.mm" />
     <None Include="..\..\..\..\source\ios\prIosTwitter.mm" />
     <None Include="..\..\..\..\source\license.txt" />

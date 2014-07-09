@@ -96,7 +96,7 @@ void prFacebook_Android::FetchUserDetails()
 /// ----------------------------------------------------------------------------
 /// Send a brag to facebook
 /// ----------------------------------------------------------------------------
-void prFacebook_Android::Brag()
+void prFacebook_Android::Brag(const char *initialText)
 {
     prJNI_FacebookBrag();
     //prFB_Brag(mpCallbacks, mPlayerFBID);

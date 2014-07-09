@@ -23,6 +23,12 @@
 #if defined(PLATFORM_IOS)
 
 
+// Defines
+#ifndef METHOD_SHARE_SHEET                      // Just in case we define it externally
+#define METHOD_SHARE_SHEET                      // This method uses the share sheet
+#endif
+
+
 #include "prFacebook_ios.h"
 #include "../../core/prTypes.h"
 #include "../../core/prDefines.h"
@@ -98,9 +104,19 @@ void prFacebook_Ios::FetchUserDetails()
 /// ----------------------------------------------------------------------------
 /// Send a brag to facebook
 /// ----------------------------------------------------------------------------
-void prFacebook_Ios::Brag()
+void prFacebook_Ios::Brag(const char *initialText)
 {
+#if defined(METHOD_SHARE_SHEET)
+
+    extern bool Tweet(const char *initialText);
+    Tweet(initialText);
+
+#else
+
+    PRUNUSED(initialText);
     prFB_Brag(mpCallbacks, mPlayerFBID);
+    
+#endif
 }
 
 

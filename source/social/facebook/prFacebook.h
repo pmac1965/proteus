@@ -127,7 +127,7 @@ public:
         
     // Method: Brag
     //      Send a brag to facebook
-    virtual void Brag() {}
+    virtual void Brag(const char *initialText) {}
 
 
 protected:
