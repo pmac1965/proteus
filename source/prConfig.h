@@ -26,6 +26,7 @@
 #define AUDIO_ANDROID   4
 #define AUDIO_MAC       5
 #define AUDIO_LINUX     6
+#define AUDIO_WINPHONE  7
 
 
 // Determine platform. First check for PC

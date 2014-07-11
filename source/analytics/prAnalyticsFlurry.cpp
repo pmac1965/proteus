@@ -32,7 +32,7 @@
 
 
 #if defined (PLATFORM_ANDROID)
-//#include "../android/JNIInterface.h"
+#include "../android/prJNIAnalytics.h"
 #endif
 
 
@@ -69,11 +69,10 @@ void prAnalyticsFlurry::Construct(const char *appId, const char *secret)
 #elif defined (PLATFORM_ANDROID)
 
     PRUNUSED(secret);
-
+    
     if (appId && *appId)
     {
     }
-    
     
 #else
     
@@ -101,15 +100,19 @@ bool prAnalyticsFlurry::Submit(const char *name, const char *value)
     
 #elif defined (PLATFORM_ANDROID)
 
-    if (value && *value)
+    if (name && *name)
     {
-        //JNI_SubmitFlurry(name, value);
+        if (value && *value)
+        {
+            //JNI_SubmitFlurry(name, value);
+        }
+        else
+        {
+            prTrace("Logging event %s\n", name);
+            prJNI_Submit(name);
+        }
     }
-    else
-    {
-        //JNI_SubmitFlurry(name);
-    }
-    
+
 #else
 
     PRUNUSED(name);

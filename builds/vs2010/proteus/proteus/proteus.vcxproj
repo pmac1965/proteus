@@ -175,6 +175,7 @@
     <ClInclude Include="..\..\..\..\source\android\AL\alext.h" />
     <ClInclude Include="..\..\..\..\source\android\AL\efx-creative.h" />
     <ClInclude Include="..\..\..\..\source\android\AL\efx.h" />
+    <ClInclude Include="..\..\..\..\source\android\prJNIAnalytics.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIAudio.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIFacebook.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIInAppPurchase.h" />
@@ -482,6 +483,7 @@
     <ClCompile Include="..\..\..\..\source\analytics\prAnalytics.cpp" />
     <ClCompile Include="..\..\..\..\source\analytics\prAnalyticsBase.cpp" />
     <ClCompile Include="..\..\..\..\source\analytics\prAnalyticsFlurry.cpp" />
+    <ClCompile Include="..\..\..\..\source\android\prJNIAnalytics.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNIAudio.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNIFacebook.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNIInAppPurchase.cpp" />
@@ -1055,6 +1057,7 @@
     <ClCompile Include="..\..\..\..\source\zlib\zutil.c" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\source\changes.txt" />
     <None Include="..\..\..\..\source\core\prList.inl" />
     <None Include="..\..\..\..\source\includes.bat" />
     <None Include="..\..\..\..\source\ios\prGameCenter.mm" />

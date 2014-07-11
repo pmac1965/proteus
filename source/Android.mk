@@ -61,6 +61,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	android/prJNITwitter.cpp	\
 	android/prJNISleep.cpp	\
 	android/prJNIInAppPurchase.cpp	\
+	android/prJNIAnalytics.cpp	\
 	audio/prOpenALDeviceList.cpp	\
 	audio/prOpenALErrors.cpp	\
 	audio/prSoundManager.cpp	\
