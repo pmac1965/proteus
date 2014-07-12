@@ -402,6 +402,7 @@
     <ClInclude Include="..\..\..\..\source\math\prRandom.h" />
     <ClInclude Include="..\..\..\..\source\math\prRect.h" />
     <ClInclude Include="..\..\..\..\source\math\prRectF.h" />
+    <ClInclude Include="..\..\..\..\source\math\prSinCos.h" />
     <ClInclude Include="..\..\..\..\source\math\prVector2.h" />
     <ClInclude Include="..\..\..\..\source\math\prVector3.h" />
     <ClInclude Include="..\..\..\..\source\memory\prMemory.h" />
@@ -993,6 +994,7 @@
     <ClCompile Include="..\..\..\..\source\math\prRandom.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prRect.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prRectF.cpp" />
+    <ClCompile Include="..\..\..\..\source\math\prSinCos.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prVector2.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prVector3.cpp" />
     <ClCompile Include="..\..\..\..\source\memory\prMemory.cpp" />

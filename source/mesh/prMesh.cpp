@@ -19,7 +19,7 @@
 
 #include "prMesh.h"
 #include "../core/prDefines.h"
-#include "../core/prmacros.h"
+#include "../core/prMacros.h"
 #include "../core/prStringUtil.h"
 #include "../core/prVertex.h"
 #include "../debug/prAssert.h"
