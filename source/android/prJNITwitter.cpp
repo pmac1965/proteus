@@ -79,7 +79,7 @@ namespace
 /// ---------------------------------------------------------------------------
 /// Opens the tweet sheet
 /// ---------------------------------------------------------------------------
-void prJNI_ShowTweet()
+void prJNI_ShowTweet(const char *initialText)
 {
     JavaVM *pJavaVM = prJNI_GetVM();
     PRASSERT(pJavaVM);
@@ -98,7 +98,7 @@ void prJNI_ShowTweet()
             return;
         
         // Find the callBack method ID
-        jmethodID method = env->GetStaticMethodID(cls, "showTweetSheet", "()V");
+        jmethodID method = env->GetStaticMethodID(cls, "showTweetSheet", "(Ljava/lang/String;)V");
         if (!method)
         {
             __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "showTweetSheet");
@@ -109,8 +109,11 @@ void prJNI_ShowTweet()
             return;
         }
 
+        // Construct a Java string.
+        jstring js = env->NewStringUTF(initialText);
+
         // Call.
-        env->CallStaticVoidMethod(cls, method);
+        env->CallStaticVoidMethod(cls, method, js);
 
         // And done
         if (isAttached)

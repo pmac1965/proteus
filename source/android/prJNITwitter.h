@@ -28,7 +28,7 @@
 
 // Function: prJNI_ShowTweet
 //      Show tweet sheet
-void prJNI_ShowTweet();
+void prJNI_ShowTweet(const char *initialText);
 
 
 #endif//PLATFORM_ANDROID

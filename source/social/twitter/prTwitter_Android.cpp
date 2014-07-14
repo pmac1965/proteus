@@ -70,7 +70,7 @@ bool prTwitter_Android::Update()
 /// ----------------------------------------------------------------------------
 bool prTwitter_Android::ShowTweetSheet(const char *initialText)
 {
-    prJNI_ShowTweet();
+    prJNI_ShowTweet(initialText);
 }
 
 
