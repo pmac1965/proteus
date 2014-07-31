@@ -180,6 +180,8 @@ void prRenderer_GL11::Init()
     #if defined(OPENGL_SHOW_EXTENSIONS)
     prOpenGLShowExtensions();
     #endif
+
+    prOpenGLInit();
 }
 
 

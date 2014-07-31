@@ -398,7 +398,6 @@ void prStringParseControls(const char *text, char *buffer);
 //      ...        - Optional parameters
 void prSprintf(char *buffer, const char* fmt, ...);
 
-
 // Function: prStringDup
 //      Duplicates a string
 //
@@ -413,11 +412,13 @@ void prSprintf(char *buffer, const char* fmt, ...);
 //
 char *prStringDup(const char* str);
 
-
 // Function: prStringSkipWhitespace
-//      Skips whitespace
+//      Skips to next non whitespace character
 char *prStringSkipWhitespace(char* text);
 
+// Function: prStringSkipToWhitespace
+//      Skips to next whitespace character
 char *prStringSkipToWhitespace(char* text);
+
 
 #endif//__PRSTRINGUTIL_H

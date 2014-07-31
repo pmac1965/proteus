@@ -41,9 +41,10 @@
 /// ---------------------------------------------------------------------------
 prGui::prGui()
 {
-    m_enabled = PRTRUE;
-    m_visible = PRTRUE;
-    m_layer   = 0;
+    m_enabled   = PRTRUE;
+    m_visible   = PRTRUE;
+    m_layer     = 0;
+    m_baseLayer = m_layer;
 
     prTouch *pTouch = static_cast<prTouch *>(prCoreGetComponent(PRSYSTEM_TOUCH));
     if (pTouch)
@@ -79,6 +80,7 @@ prWidget *prGui::Create(prWidgetType type, const char *name)
     {
     case WT_Button:
         widget = new prButton(name, &m_spriteManager);
+        widget->SetLayer(m_layer);
         break;
 
     case WT_Dialog:
@@ -178,6 +180,9 @@ void prGui::Clear()
     }
 
     m_widgets.clear();
+
+    // Init control data
+    m_layer = m_baseLayer;
 }
 
 
@@ -198,7 +203,6 @@ prWidget *prGui::Find(const char *name)
         }
     }
 
-    prTrace("Failed to find widget: %s\n", name);
     return NULL;
 }
 
@@ -208,24 +212,27 @@ prWidget *prGui::Find(const char *name)
 /// ---------------------------------------------------------------------------
 void prGui::InputPressed(const prTouchEvent &e)
 {
-    std::list<prWidget *>::iterator it  = m_widgets.begin();
-    std::list<prWidget *>::iterator end = m_widgets.end();
-    for (; it != end;)
+    if (m_enabled)
     {
-        prWidget *widget = (*it);
-        PRASSERT(widget);
-        if (widget->GetActive())
+        std::list<prWidget *>::iterator it  = m_widgets.begin();
+        std::list<prWidget *>::iterator end = m_widgets.end();
+        for (; it != end;)
         {
-            // Only send input to widgets on the active layer.
-            if (m_layer == widget->GetLayer())
+            prWidget *widget = (*it);
+            PRASSERT(widget);
+            if (widget->GetActive())
             {
-                if (widget->GetActive())
+                // Only send input to widgets on the active layer.
+                if (m_layer == widget->GetLayer())
                 {
-                    widget->OnPressed(e);
+                    if (widget->GetActive())
+                    {
+                        widget->OnPressed(e);
+                    }
                 }
             }
+            ++it;
         }
-        ++it;
     }
 }
 
@@ -235,24 +242,27 @@ void prGui::InputPressed(const prTouchEvent &e)
 /// ---------------------------------------------------------------------------
 void prGui::InputReleased(const prTouchEvent &e)
 {
-    std::list<prWidget *>::iterator it  = m_widgets.begin();
-    std::list<prWidget *>::iterator end = m_widgets.end();
-    for (; it != end;)
+    if (m_enabled)
     {
-        prWidget *widget = (*it);
-        PRASSERT(widget);
-        if (widget->GetActive())
+        std::list<prWidget *>::iterator it  = m_widgets.begin();
+        std::list<prWidget *>::iterator end = m_widgets.end();
+        for (; it != end;)
         {
-            // Only send input to widgets on the active layer.
-            if (m_layer == widget->GetLayer())
+            prWidget *widget = (*it);
+            PRASSERT(widget);
+            if (widget->GetActive())
             {
-                if (widget->GetActive())
+                // Only send input to widgets on the active layer.
+                if (m_layer == widget->GetLayer())
                 {
-                    widget->OnReleased(e);
+                    if (widget->GetActive())
+                    {
+                        widget->OnReleased(e);
+                    }
                 }
             }
+            ++it;
         }
-        ++it;
     }
 }
 
@@ -262,24 +272,27 @@ void prGui::InputReleased(const prTouchEvent &e)
 /// ---------------------------------------------------------------------------
 void prGui::InputAxis(const prTouchEvent &e)
 {
-    std::list<prWidget *>::iterator it  = m_widgets.begin();
-    std::list<prWidget *>::iterator end = m_widgets.end();
-    for (; it != end;)
+    if (m_enabled)
     {
-        prWidget *widget = (*it);
-        PRASSERT(widget);
-        if (widget->GetActive())
+        std::list<prWidget *>::iterator it  = m_widgets.begin();
+        std::list<prWidget *>::iterator end = m_widgets.end();
+        for (; it != end;)
         {
-            // Only send input to widgets on the active layer.
-            if (m_layer == widget->GetLayer())
+            prWidget *widget = (*it);
+            PRASSERT(widget);
+            if (widget->GetActive())
             {
-                if (widget->GetActive())
+                // Only send input to widgets on the active layer.
+                if (m_layer == widget->GetLayer())
                 {
-                    widget->OnMove(e);
+                    if (widget->GetActive())
+                    {
+                        widget->OnMove(e);
+                    }
                 }
             }
+            ++it;
         }
-        ++it;
     }
 }
 

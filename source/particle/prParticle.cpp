@@ -26,6 +26,7 @@
 /// ---------------------------------------------------------------------------
 prParticle::prParticle()
 {
+    Init();
 }
 
 
@@ -34,4 +35,69 @@ prParticle::prParticle()
 /// ---------------------------------------------------------------------------
 prParticle::~prParticle()
 {
+}
+
+
+/// ---------------------------------------------------------------------------
+/// 
+/// ---------------------------------------------------------------------------
+void prParticle::Init()
+{
+    mLifeTime   = 0.0f;                         // Particles lifetime
+    mPos        = prVector3::Zero;              // Paricles position
+    mColour     = prColour::White;              // Particles colour (Add colour change)
+
+    //f32         mScaleMin;
+    //f32         mScaleMax;
+
+    mVisible    = true;
+    mActive     = true;
+    mExp1       = false;
+    mExp0       = false;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Updates a particle
+/// ---------------------------------------------------------------------------
+bool prParticle::Update(f32 dt)
+{
+    if (mActive)
+    {
+        mPos += (mDirection * mSpeed) * dt;
+
+        mPos += mGravity * dt;
+
+        // Update life timer
+        mLifeTime -= dt;
+        if (mLifeTime < 0.0f)
+        {
+            Kill();
+        }
+    }
+
+
+    return mActive;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// 
+/// ---------------------------------------------------------------------------
+void prParticle::Draw()
+{
+    if (mVisible)
+    {
+
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// 
+/// ---------------------------------------------------------------------------
+void prParticle::Kill()
+{
+    mVisible    = false;
+    mActive     = false;
 }

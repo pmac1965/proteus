@@ -381,7 +381,7 @@ typedef struct BitmapFontImplementation
                         // Create the page texture
                         prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
                         PRASSERT(pRM)
-                        pPageInfo[index].pTexture = pRM->Load<prTexture>(pPageInfo[index].filename);
+                        pPageInfo[index].pTexture = pRM->Load<prTexture>(pPageInfo[index].filename, false, TEXTRA_ANTIALIAS);
                         PRASSERT(pPageInfo[index].pTexture);
                     }
                 }

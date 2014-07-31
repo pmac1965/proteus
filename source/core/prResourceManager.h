@@ -56,7 +56,7 @@ public:
     // Returns:
     //      A resource
     template<typename T>
-    T* Load(const char *filename, bool locked = false)
+    T* Load(const char *filename, bool locked = false, s32 extra = 0)
     {
         // Created resource?
         prResource *pRes = Find(filename);
@@ -70,7 +70,7 @@ public:
         T *resource = new T(filename);
         if (resource)
         {
-            resource->Load();
+            resource->Load(extra);
             resource->Lock(locked);
             Add(resource);
         }

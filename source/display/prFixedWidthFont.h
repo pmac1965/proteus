@@ -115,6 +115,10 @@ public:
     //      <prFixedWidthAlignment>
     void SetAlignment(u32 alignment);
 
+    // Method: GetAlignment
+    //      Gets the text alignment.
+    u32 GetAlignment() const { return m_alignment; }
+
     // Method: GetFrameWidth
     //      Get the frame width
     u32 GetFrameWidth() const { return m_frameWidth; }

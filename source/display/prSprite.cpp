@@ -201,6 +201,23 @@ void prSprite::Draw()
         glDisable(GL_BLEND);
         ERR_CHECK();
     }
+
+//#if defined(PLATFORM_PC)
+//    if (PRKEY_DOWN('W'))
+//    {
+//        m_u0 -= (m_pw);
+//    }
+//    if (PRKEY_DOWN('S'))
+//    {
+//    }
+//    if (PRKEY_DOWN('O'))
+//    {
+//    }
+//    if (PRKEY_DOWN('P'))
+//    {
+//        m_u1 -= (m_pw);
+//    }
+//#endif
 }
 
 
@@ -338,8 +355,11 @@ void prSprite::SetFrame(s32 frame)
         m_v1 = m_v0 + m_fh;
 
 #if defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS)
-        m_u0 += (m_pw / 4);             // Add quarter pixel to stop blurring. Doesn't seem to effect desktops which look fine
-        m_v0 += (m_ph / 4);             // Add quarter pixel to stop blurring
+        // Left/right
+        m_u0 += (m_pw / 2);             // Add half pixel to stop blurring. Doesn't seem to effect desktops which look fine
+
+        // Top/bottom
+        m_v0 += (m_ph / 2);             // Add half pixel to stop blurring
 #endif
 
         // Set frame

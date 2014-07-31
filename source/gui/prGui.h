@@ -85,6 +85,19 @@ public:
     //      name - The name of the item
     prWidget *Find(const char *name);
 
+    // Method: GetWidgetCount
+    //      Returns the number of widgets
+    s32 GetWidgetCount() const { return m_widgets.size(); }
+
+    // Method: SetBaseLayer
+    //      Sets the base layer for GUI dialogs
+    //
+    // Notes:
+    //      This is useful for when your using multiple GUI's as it stops
+    //      them mixing messages
+    void SetBaseLayer(u32 layer) { m_layer     = layer;
+                                   m_baseLayer = layer; }
+
     // Method: InputPressed
     //      Passes on a touch event to the GUI items
     //
@@ -123,6 +136,7 @@ private:
     PRBOOL                  m_enabled;
     PRBOOL                  m_visible;
     s32                     m_layer;
+    s32                     m_baseLayer;
 };
 
 

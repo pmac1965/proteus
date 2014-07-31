@@ -386,7 +386,10 @@ PRBOOL prApplication_PC::Run()
 
             if (m_hAccel)
             {
-                if (!TranslateAccelerator(static_cast<prWindow_PC*>(m_pWindow)->GetWindowHandle(), m_hAccel, &msg))
+                HWND hwnd = static_cast<prWindow_PC*>(m_pWindow)->GetWindowHandle();
+
+                if (!TranslateAccelerator(hwnd, m_hAccel, &msg) &&
+                    !IsDialogMessage(hwnd, &msg))
                 {
                     TranslateMessage(&msg);
                     DispatchMessage(&msg);

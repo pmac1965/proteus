@@ -28,6 +28,13 @@
 struct prPVRTextureHeader;
 
 
+// Optional texture configuration
+enum
+{
+    TEXTRA_ANTIALIAS    = 0x64008001,
+};
+
+
 // Class: prTexture
 //      Class that represents a texture.
 class prTexture : public prResource
@@ -71,7 +78,7 @@ private:
     ~prTexture();
 
     // Load texture.
-    void Load();
+    void Load(s32 extra);
 
     // Unload texture.
     void Unload();
@@ -92,6 +99,12 @@ private:
 
     // Validates the header
     bool ValidateHeader(prPVRTextureHeader *header);
+
+    // Sets the texture to have alias
+    void SetAliasParameters();
+
+    // Sets the texture to have anti-alias
+    void SetAntiAliasParameters();
 
 
 private:

@@ -21,11 +21,19 @@
 
 
 #include "../prConfig.h"
+#include "../core/prTypes.h"
 
 
 // Forward declarations
 class prTexture;
 
+
+// Public information
+extern f32 PRGL_VERSION;
+
+
+/// Gets some basic info about opengl
+void prOpenGLInit();
 
 // Function: prOpenGLShowExtensions
 //      Shows the opengl extensions available for the current platform.

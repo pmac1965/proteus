@@ -1242,8 +1242,11 @@ void prAchievementManager::SetNotificationBar(prSprite *bar)
 // ----------------------------------------------------------------------------
 void prAchievementManager::SetNotificationBarPos(s32 x, s32 y)
 {
-    imp.pNotificationBar->pos.x  = (float)x;
-    imp.pNotificationBar->pos.y  = (float)y;
+    if (imp.pNotificationBar)
+    {
+        imp.pNotificationBar->pos.x  = (float)x;
+        imp.pNotificationBar->pos.y  = (float)y;
+    }
 }
 
 

@@ -1,4 +1,4 @@
-// File: prEmitter.h
+// File: prSpriteCallbacks.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,30 +16,25 @@
  */
 
 
-#ifndef __PREMITTER_H
-#define __PREMITTER_H
+#ifndef __PRSPRITECALLBACKS_H
+#define __PRSPRITECALLBACKS_H
 
 
 #include "../core/prTypes.h"
-#include "../math/prVector3.h"
-#include "../display/prColour.h"
 
 
-// Class: prEmitter
-//      Class represents a particle emission point
-class prEmitter
+// Class: prSpriteCallbacks
+//      Class to include sprite callbacks
+class prSpriteCallbacks
 {
 public:
-    prEmitter();
-
-    ~prEmitter();
-
-    void Load(const char *filename);
-
-    void Update();
-
-    void Draw();
+    // Method: SpriteCurrentFrameIndex
+    //      Updates the sprites animation.
+    //
+    // Parameters:
+    //      dt - Delta time
+    virtual void SpriteCurrentFrameIndex(const char *name, s32 index) = 0;
 };
 
 
-#endif//__PREMITTER_H
+#endif//__PRSPRITECALLBACKS_H

@@ -67,6 +67,7 @@ static const TCHAR *g_ClassName = TEXT("Proteus Class");
 #define PR_OVERLAPPEDWINDOW (WS_OVERLAPPED     | \
                              WS_CAPTION        | \
                              WS_SYSMENU        | \
+                             WS_TABSTOP        | \
                              PR_THICKFRAME     | \
                              PR_MINIMIZEBOX    | \
                              PR_MAXIMIZEBOX)

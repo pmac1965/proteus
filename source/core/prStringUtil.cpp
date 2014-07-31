@@ -1205,9 +1205,6 @@ char *prStringSkipWhitespace(char* text)
 {
     if (text && *text)
     {
-        //char c;
-
-        //do
         while(true)
         {
             char c = *text;
@@ -1227,7 +1224,6 @@ char *prStringSkipWhitespace(char* text)
                 return text;
             }
         }
-        //while(c);
     }
 
     return text;

@@ -69,6 +69,32 @@
 #include "prTexture.h"
 
 
+// Private data
+namespace
+{
+    bool    initialised = false;
+}
+
+
+// Public data
+f32 PRGL_VERSION  = 0.0f;
+
+
+/// ---------------------------------------------------------------------------
+/// Gets some basic info about opengl
+/// ---------------------------------------------------------------------------
+void prOpenGLInit()
+{
+    if (initialised == false)
+    {
+        initialised = true;
+
+        PRGL_VERSION = atof((const char *)glGetString(GL_VERSION));
+        prTrace("OpenGL version %f\n", PRGL_VERSION);
+    }
+}
+
+
 /// ---------------------------------------------------------------------------
 /// Shows the opengl extensions available for the current platform.
 /// ---------------------------------------------------------------------------

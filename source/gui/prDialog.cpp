@@ -229,6 +229,7 @@ void prDialog::AddButton(const char *pFile, const char *pName)
         m_buttons[m_buttonCount]->SetFont(m_pFont);
         m_buttons[m_buttonCount]->SetEnabled(true);
         m_buttons[m_buttonCount]->SetText(pName);
+        m_buttons[m_buttonCount]->SetLayer(GetLayer());
         m_buttons[m_buttonCount]->RegisterListener(this);
 
 

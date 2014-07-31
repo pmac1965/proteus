@@ -20,9 +20,13 @@
 #define __PRPARTICLE_H
 
 
-//#include "../math/prVector2.h"
+#include "../core/prTypes.h"
+#include "../math/prVector3.h"
+#include "../display/prColour.h"
 
 
+// Class: prParticle
+//      Class represents a single particle
 class prParticle
 {
 public:
@@ -33,6 +37,42 @@ public:
     // Method: ~prParticle
     //      Destructor.
     ~prParticle();
+
+    void Init();
+
+    // Method: Update
+    //      Updates a particle
+    bool Update(f32 dt);
+
+    // Method: Draw
+    //      Draws a particle
+    void Draw();
+
+    // Method: Kill
+    //      Kills a particle
+    void Kill();
+
+    bool IsActive() const { return mActive; }
+
+    bool IsVisible() const { return mVisible; }
+
+
+private:
+
+    f32         mLifeTime;                  // Particles lifetime
+    prVector3   mPos;                       // Particles position
+    prVector3   mGravity;                   // Particles gravity
+    prVector3   mDirection;                 // Particles direction
+    prVector3   mSpeed;                     // Particles speed
+    prColour    mColour;                    // Particles colour (Add colour change)
+
+    //f32         mScaleMin;
+    //f32         mScaleMax;
+
+    bool        mVisible;
+    bool        mActive;
+    bool        mExp1;
+    bool        mExp0;
 };
 
 

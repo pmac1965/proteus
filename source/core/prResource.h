@@ -70,7 +70,7 @@ private:
 
     // Method: Load
     //      Load resource
-    virtual void Load()   = 0;
+    virtual void Load(s32 extra) = 0;
 
     // Method: Unload
     //      Unload resource

@@ -313,6 +313,7 @@
     <ClInclude Include="..\..\..\..\source\display\prSprite.h" />
     <ClInclude Include="..\..\..\..\source\display\prSpriteAnimation.h" />
     <ClInclude Include="..\..\..\..\source\display\prSpriteAnimationSequence.h" />
+    <ClInclude Include="..\..\..\..\source\display\prSpriteCallbacks.h" />
     <ClInclude Include="..\..\..\..\source\display\prSpriteManager.h" />
     <ClInclude Include="..\..\..\..\source\display\prTexture.h" />
     <ClInclude Include="..\..\..\..\source\display\prTrueTypeFont.h" />
@@ -321,6 +322,7 @@
     <ClInclude Include="..\..\..\..\source\file\prFileShared.h" />
     <ClInclude Include="..\..\..\..\source\file\prFileSystem.h" />
     <ClInclude Include="..\..\..\..\source\font\prFontManager.h" />
+    <ClInclude Include="..\..\..\..\source\freeImage\FreeImage.h" />
     <ClInclude Include="..\..\..\..\source\gui\prButton.h" />
     <ClInclude Include="..\..\..\..\source\gui\prButtonListener.h" />
     <ClInclude Include="..\..\..\..\source\gui\prDialog.h" />

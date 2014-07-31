@@ -149,7 +149,7 @@ prTexture::prTexture(const char *filename) : prResource(filename)
 {
     m_width  = 0;
     m_height = 0;
-    m_texID  = 0;
+    m_texID  = 0x00FFFFFF;
     m_alpha  = false;
     m_exp0   = false;
     m_exp1   = false;
@@ -219,7 +219,7 @@ void prTexture::Unbind()
 /// ---------------------------------------------------------------------------
 /// Load the texture
 /// ---------------------------------------------------------------------------
-void prTexture::Load()
+void prTexture::Load(s32 extra)
 {
     prFile *file = new prFile(Filename());
     if (file->Open())
@@ -280,6 +280,7 @@ void prTexture::Load()
             if (glGetError() != GL_NO_ERROR)
             {
                 prTrace("Failed to generate texture: %s\n", Filename());
+                prOpenGLErrorCheck(__FILE__, __FUNCTION__, __LINE__);
                 PRSAFE_DELETE_ARRAY(pTextureData);
                 PRSAFE_DELETE(file);
                 m_width  = 0;
@@ -293,19 +294,18 @@ void prTexture::Load()
             lastTextureID = m_texID;
             ERR_CHECK();
 
-            // Settings
             glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
             ERR_CHECK();
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-            ERR_CHECK();
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-            ERR_CHECK();
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            ERR_CHECK();
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            ERR_CHECK();
-            glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-            ERR_CHECK();
+
+            // Extra Settings
+            if (extra == TEXTRA_ANTIALIAS)
+            {
+                SetAntiAliasParameters();
+            }
+            else
+            {
+                SetAliasParameters();
+            }
 
             // Create texture
             int internalFormat, format, type;
@@ -596,6 +596,55 @@ bool prTexture::ValidateHeader(prPVRTextureHeader *header)
     }
 
     return result; //dwPVR
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Sets the texture to have alias (Normal setup)
+/// ---------------------------------------------------------------------------
+void prTexture::SetAliasParameters()
+{
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    ERR_CHECK();
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);    
+    ERR_CHECK();
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    ERR_CHECK();
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    ERR_CHECK();
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Sets the texture to have anti-alias
+/// ---------------------------------------------------------------------------
+void prTexture::SetAntiAliasParameters()
+{
+    // Set clamp to edge if required!
+    #if defined(PLATFORM_PC)
+      #ifndef GL_CLAMP_TO_EDGE
+        int GL_CLAMP_TO_EDGE = GL_REPEAT;
+        if (PRGL_VERSION >= 1.2f)
+        {    
+            GL_CLAMP_TO_EDGE = 0x812F;
+        }
+      #endif
+    #endif
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    ERR_CHECK();
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);    
+    ERR_CHECK();
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    ERR_CHECK();
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    ERR_CHECK();
 }
 
 
