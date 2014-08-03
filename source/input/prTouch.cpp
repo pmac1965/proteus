@@ -96,6 +96,12 @@ typedef struct TouchImplementation
         exp0                = false;
         exp1                = false;
         exp2                = false;
+
+        #if (defined(PLATFORM_PC) && defined(PROTEUS_TOOL))
+        mouseAdjustX        = 0;
+        mouseAdjustY        = 0;
+        #endif
+
         ClearListeners();
     }
 
@@ -355,6 +361,11 @@ typedef struct TouchImplementation
     bool            exp2;
     TouchData       touchData[MAX_TOUCHPOINTS];
 
+    #if (defined(PLATFORM_PC) && defined(PROTEUS_TOOL))
+    s32             mouseAdjustX;
+    s32             mouseAdjustY;
+    #endif
+
     std::list<ITouchListener *> listeners;
  
 } TouchImplementation;
@@ -402,6 +413,12 @@ void prTouch::Update()
             touch.x     = pMouse->x;
             touch.y     = pMouse->y;
             touch.id    = imp.id++;
+
+            #if (defined(PLATFORM_PC) && defined(PROTEUS_TOOL))
+            touch.x += imp.mouseAdjustX;
+            touch.y += imp.mouseAdjustY;
+            #endif
+
             imp.UpdateTouchData(touch);
         }
     }
@@ -431,6 +448,12 @@ void prTouch::Update()
             touch.x     = pMouse->x;
             touch.y     = pMouse->y;
             touch.id    = imp.id;
+
+            #if (defined(PLATFORM_PC) && defined(PROTEUS_TOOL))
+            touch.x += imp.mouseAdjustX;
+            touch.y += imp.mouseAdjustY;
+            #endif
+
             imp.UpdateTouchData(touch);
         }
     }
@@ -625,3 +648,17 @@ int prTouch::GetListenerCount() const
 {
     return imp.GetListenerCount();
 }
+
+
+#if (defined(PLATFORM_PC) && defined(PROTEUS_TOOL))
+
+/// ---------------------------------------------------------------------------
+/// Sets valuea to adjust the mouse pointer with due to windows tool bar
+/// ---------------------------------------------------------------------------
+void prTouch::SetMousePointerAdjust(s32 x, s32 y)
+{
+    imp.mouseAdjustX = x;
+    imp.mouseAdjustY = y;
+}
+
+#endif

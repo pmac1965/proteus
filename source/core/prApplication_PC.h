@@ -1,19 +1,19 @@
 // File: prApplication_PC.h
-/*
-    Copyright 2014 Paul Michael McNab
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-      http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-*/
+/**
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 
 #ifndef __PRAPPLICATIONPC_H
@@ -107,14 +107,19 @@ public:
     //
     // Parameters:
     //      command  - Windows command.
+    //      wParam   - Windows command parameter.
+    //      lParam   - Windows command parameter.
     //
     // Notes:
-    //      Standard commands like WM_CLOSE are passed, as well user defined commands.
+    //      Standard commands like WM_CLOSE are passed, as well user defined commands in WM_COMMAND
+    //      Sends WM_CLOSE
+    //      Sends WM_COMMAND
+    //      Sends WM_NOTIFY
     //
     // Returns:
     //      You should return true if the command is handled.
     //      Otherwise return false and the command is passed to the standard handler.
-    virtual bool WindowsCommand(int command) = 0;
+    virtual bool WindowsCommand(int command, WPARAM wParam, LPARAM lParam) = 0;
 
 
 private:

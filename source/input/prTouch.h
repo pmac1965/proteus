@@ -152,6 +152,12 @@ public:
     //      Gets the listener count.
     s32 GetListenerCount() const;
 
+#if (defined(PLATFORM_PC) && defined(PROTEUS_TOOL))
+    // Method: SetMousePointerAdjust
+    //      Sets valuea to adjust the mouse pointer with due to windows tool bar
+    void SetMousePointerAdjust(s32 x, s32 y);
+#endif
+
 
 private:
     // Stops passing by value and assignment.

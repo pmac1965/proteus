@@ -311,7 +311,6 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
         WindowMessage_Destroy(window, hwnd, msg, wParam, lParam);
         break;
 
-//#if defined(PROTEUS_TOOL)
 #if defined(PROTEUS_TOOL) || defined(PLATFORM_PC)
     case WM_COMMAND:
         if (pApp)
@@ -321,7 +320,7 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 
             // Send the command.
             int command = LOWORD(wParam);
-            static_cast<prApplication_PC *>(pApp)->WindowsCommand(command);
+            static_cast<prApplication_PC *>(pApp)->WindowsCommand(command, wParam, lParam);
         }
         break;
 
@@ -330,7 +329,19 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
         if (pApp)
         {
             // Handled?
-            if (static_cast<prApplication_PC *>(pApp)->WindowsCommand(msg) == true)
+            if (static_cast<prApplication_PC *>(pApp)->WindowsCommand(msg, wParam, lParam) == true)
+            {
+                break;
+            }
+        }
+        return DefWindowProc(hwnd, msg, wParam, lParam);
+
+    // Cases which the application may wish to handle.
+    case WM_NOTIFY:
+        if (pApp)
+        {
+            // Handled?
+            if (static_cast<prApplication_PC *>(pApp)->WindowsCommand(msg, wParam, lParam) == true)
             {
                 break;
             }
