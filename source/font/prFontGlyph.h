@@ -1,4 +1,4 @@
-// File: prFontManager.h
+// File: prFontGlyph.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,30 +16,16 @@
  */
 
 
-#ifndef __PRFONTMANAGER_H
-#define __PRFONTMANAGER_H
+#ifndef __PRFONTGLYPH_H
+#define __PRFONTGLYPH_H
 
 
-#include "../prConfig.h"
-#include "../core/prTypes.h"
-#include "../core/prCoreSystem.h"
-
-
-// Class: prFontManager
-//      Class for managing ttf fonts
-class prFontManager : public prCoreSystem
+class prFontGlyph
 {
 public:
-    // Method: prFontManager
-    //      Ctor
-    prFontManager();
-
-    // Method: ~prFontManager
-    //      Dtor
-    ~prFontManager();
-
-    //void Load(const char *fontname);
+    prFontGlyph();
+    ~prFontGlyph();
 };
 
 
-#endif//__PRFONTMANAGER_H
+#endif//

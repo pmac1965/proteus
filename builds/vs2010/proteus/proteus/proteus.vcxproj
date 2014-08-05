@@ -321,6 +321,7 @@
     <ClInclude Include="..\..\..\..\source\file\prFileManager.h" />
     <ClInclude Include="..\..\..\..\source\file\prFileShared.h" />
     <ClInclude Include="..\..\..\..\source\file\prFileSystem.h" />
+    <ClInclude Include="..\..\..\..\source\font\prFontGlyph.h" />
     <ClInclude Include="..\..\..\..\source\font\prFontManager.h" />
     <ClInclude Include="..\..\..\..\source\freeImage\FreeImage.h" />
     <ClInclude Include="..\..\..\..\source\gui\prButton.h" />
@@ -615,6 +616,7 @@
     <ClCompile Include="..\..\..\..\source\file\prFileManager.cpp" />
     <ClCompile Include="..\..\..\..\source\file\prFileShared.cpp" />
     <ClCompile Include="..\..\..\..\source\file\prFileSystem.cpp" />
+    <ClCompile Include="..\..\..\..\source\font\prFontGlyph.cpp" />
     <ClCompile Include="..\..\..\..\source\font\prFontManager.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prButton.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prDialog.cpp" />

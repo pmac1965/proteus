@@ -17,23 +17,20 @@
  */
 
 
-#include "../prConfig.h"
-
-
-#if defined(PLATFORM_PC)
-
-
-// FreeType Headers
-#include <ft2build.h>
-#include <freetype.h>
-#include <ftglyph.h>
-#include <ftoutln.h>
-#include <fttrigon.h>
-
-
+//#include "../prConfig.h"
+//
+//
+//// FreeType Headers
+//#include <ft2build.h>
+//#include <freetype.h>
+//#include <ftglyph.h>
+//#include <ftoutln.h>
+//#include <fttrigon.h>
+//
+//
 #include "prFontManager.h"
 #include "../core/prCore.h"
-#include "../core/prDefines.h"
+//#include "../core/prDefines.h"
 
 
 /// ---------------------------------------------------------------------------
@@ -41,7 +38,7 @@
 /// ---------------------------------------------------------------------------
 prFontManager::prFontManager() : prCoreSystem(PRSYSTEM_RENDERER, "prFontManager")
 {
-    FT_Library library = NULL;
+    //FT_Library library = NULL;
 }
 
 
@@ -51,14 +48,14 @@ prFontManager::prFontManager() : prCoreSystem(PRSYSTEM_RENDERER, "prFontManager"
 prFontManager::~prFontManager()
 {
 }
+//
+//
+///// ---------------------------------------------------------------------------
+///// Load a font
+///// ---------------------------------------------------------------------------
+//void prFontManager::Load(const char *fontname)
+//{
+//}
 
 
-/// ---------------------------------------------------------------------------
-/// Load a font
-/// ---------------------------------------------------------------------------
-void prFontManager::Load(const char *fontname)
-{
-}
-
-
-#endif
+//#endif

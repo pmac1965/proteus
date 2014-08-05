@@ -20,15 +20,24 @@
 #include "../prConfig.h"
 
 
-#if defined(PLATFORM_PC)
+//#if defined(PLATFORM_PC)
 
 
-// FreeType Headers
-#include <ft2build.h>
-#include <freetype.h>
-#include <ftglyph.h>
-#include <ftoutln.h>
-#include <fttrigon.h>
+#if defined(PLATFORM_PC)                // The PC points at the full freetype2 project.
+    // FreeType Headers
+    #include <ft2build.h>
+    #include <freetype.h>
+    #include <ftglyph.h>
+    #include <ftoutln.h>
+    #include <fttrigon.h>
+#else                                   // OpenglES uses an abbreviated version
+    // FreeType Headers
+    #include <ft2build.h>
+    #include <freetype/freetype.h>
+    #include <freetype/ftglyph.h>
+    #include <freetype/ftoutln.h>
+    #include <freetype/fttrigon.h>
+#endif
 
 
 // Platform
@@ -127,17 +136,26 @@ typedef struct TrueTypeFontImplementation
 } TrueTypeFontImplementation;
 
 
-///This function gets the first power of 2 >= the
-///int that we pass it.
+/// ---------------------------------------------------------------------------
+/// This function gets the first power of 2 >= the
+/// int that we pass it.
+/// ---------------------------------------------------------------------------
 inline int next_p2 ( int a )
 {
-	int rval=1;
-	while(rval<a) rval<<=1;
-	return rval;
+	int rval = 1;
+	
+    while(rval < a)
+    {
+        rval <<= 1;
+    }
+	
+    return rval;
 }
 
 
+/// ---------------------------------------------------------------------------
 /// Create a display list coresponding to the give character.
+/// ---------------------------------------------------------------------------
 void make_dlist(FT_Face face, char ch, GLuint list_base, GLuint *tex_base )
 {
 	//The first thing we do is get FreeType to render our character
@@ -303,7 +321,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
     FT_Face face;
     if (FT_New_Face(library, filename, 0, &face))
     {
-        prTrace("FT_New_Face failed. Tthere is probably a problem with your font file\n");
+        prTrace("FT_New_Face failed. There is probably a problem with your font file\n");
         return;
     }
 
@@ -325,7 +343,30 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
 
     imp.listBase=glGenLists(128);
     glGenTextures( 128, imp.textures );
- 
+
+    // Set clamp to edge if required!
+    #if defined(PLATFORM_PC)
+      #ifndef GL_CLAMP_TO_EDGE
+        int GL_CLAMP_TO_EDGE = GL_REPEAT;
+        if (PRGL_VERSION >= 1.2f)
+        {    
+            GL_CLAMP_TO_EDGE = 0x812F;
+        }
+      #endif
+    #endif
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    ERR_CHECK();
+    
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);    
+    ERR_CHECK();
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    ERR_CHECK();
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    ERR_CHECK();
+
     // This Is Where We Actually Create Each Of The Fonts Display Lists.
     for(unsigned char i=0;i<128;i++)
     {
@@ -388,39 +429,39 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
 
 	    glListBase(imp.listBase);
 
-	float modelview_matrix[16];	
-	glGetFloatv(GL_MODELVIEW_MATRIX, modelview_matrix);
+	    float modelview_matrix[16];	
+	    glGetFloatv(GL_MODELVIEW_MATRIX, modelview_matrix);
 
-	//This is where the text display actually happens.
-	//For each line of text we reset the modelview matrix
-	//so that the line's text will start in the correct position.
-	//Notice that we need to reset the matrix, rather than just translating
-	//down by h. This is because when each character is
-	//draw it modifies the current matrix so that the next character
-	//will be drawn immediatly after it.  
-	//for(int i=0;i<10;i++)
-    {
-        // http://www.glprogramming.com/red/chapter07.html
+	    //This is where the text display actually happens.
+	    //For each line of text we reset the modelview matrix
+	    //so that the line's text will start in the correct position.
+	    //Notice that we need to reset the matrix, rather than just translating
+	    //down by h. This is because when each character is
+	    //draw it modifies the current matrix so that the next character
+	    //will be drawn immediatly after it.  
+	    //for(int i=0;i<10;i++)
+        {
+            // http://www.glprogramming.com/red/chapter07.html
 		
 
-		glPushMatrix();
-		glLoadIdentity();       
-		glTranslatef(x, y, 0);
-        glScalef(scale, scale, 0.0f);
-		glMultMatrixf(modelview_matrix);
+		    glPushMatrix();
+		    glLoadIdentity();       
+		    glTranslatef(x, y, 0);
+            glScalef(scale, scale, 0.0f);
+		    glMultMatrixf(modelview_matrix);
 
-	//  The commented out raster position stuff can be useful if you need to
-	//  know the length of the text that you are creating.
-	//  If you decide to use it make sure to also uncomment the glBitmap command
-	//  in make_dlist().
-	//	glRasterPos2f(0,0);
-		glCallLists(strlen(message), GL_UNSIGNED_BYTE, message);
-	//	float rpos[4];
-	//	glGetFloatv(GL_CURRENT_RASTER_POSITION ,rpos);
-	//	float len=x-rpos[0];
+	    //  The commented out raster position stuff can be useful if you need to
+	    //  know the length of the text that you are creating.
+	    //  If you decide to use it make sure to also uncomment the glBitmap command
+	    //  in make_dlist().
+	    //	glRasterPos2f(0,0);
+		    glCallLists(strlen(message), GL_UNSIGNED_BYTE, message);
+	    //	float rpos[4];
+	    //	glGetFloatv(GL_CURRENT_RASTER_POSITION ,rpos);
+	    //	float len=x-rpos[0];
 
-		glPopMatrix();
-	}
+		    glPopMatrix();
+	    }
 
     }
 }
@@ -433,6 +474,3 @@ prVector2 prTrueTypeFont::MeasureString(const char *string, float scale)
 {    
     return prVector2::Zero;
 }
-
-
-#endif

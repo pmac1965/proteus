@@ -182,6 +182,12 @@ dir /S /B *.h >> ..\files.txt
 popd
 )
 
+if exist steam (
+pushd steam
+dir /S /B *.h >> ..\files.txt
+popd
+)
+
 if exist system (
 pushd system
 dir /S /B *.h >> ..\files.txt

@@ -41,6 +41,7 @@ LOCAL_CFLAGS   += $(DEBUG_FLAGS) -fno-rtti -fno-exceptions
 
 
 LOCAL_LDLIBS := -ldl -llog -lGLESv1_CM -lstdc++
+LOCAL_C_INCLUDES := D:/engine/freetype2/include
 
 
 LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
@@ -165,6 +166,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	file/prFileShared.cpp	\
 	file/prFileSystem.cpp	\
 	font/prFontManager.cpp	\
+	font/prFontGlyph.cpp	\
 	gui/prButton.cpp	\
 	gui/prDialog.cpp	\
 	gui/prGui.cpp	\
