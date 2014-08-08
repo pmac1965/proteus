@@ -124,6 +124,15 @@ typedef u32                 PRBOOL;
 #define PRFALSE             0
 
 
+// Type for drawing quad.
+typedef struct QuadData
+{
+	f32 x, y;
+	f32 u, v;
+
+}  QuadData;
+
+
 // Sanity checks
 PRCOMPILER_ASSERT(sizeof(s8) == 1);
 PRCOMPILER_ASSERT(sizeof(u8) == 1);

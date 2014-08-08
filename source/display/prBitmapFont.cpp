@@ -78,15 +78,6 @@
 //#define DEBUG_BMAP_FONT
 
 
-// Type for drawing quad.
-typedef struct QuadData
-{
-	float x, y;
-	float u, v;
-
-}  QuadData;
-
-
 // Info about a character.
 typedef struct CharData
 {

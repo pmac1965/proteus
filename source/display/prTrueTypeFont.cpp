@@ -18,9 +18,12 @@
 
 
 #include "../prConfig.h"
+#include "../font/prFontGlyph.h"
 
 
-//#if defined(PLATFORM_PC)
+// Defines
+#define MSG_BUFFER_SIZE     1024
+#define RESOLUTION          72
 
 
 #if defined(PLATFORM_PC)                // The PC points at the full freetype2 project.
@@ -80,30 +83,13 @@
 #include "../debug/prAssert.h"
 #include "../debug/prTrace.h"
 #include "../debug/prDebug.h"
-#include "../file/prFile.h"
-#include "../file/prFileShared.h"
-#include "../tinyxml/tinyxml.h"
 #include "../core/prMacros.h"
-#include "../core/prStringUtil.h"
 #include "../core/prCore.h"
-#include "../core/prResourceManager.h"
-#include "../utf8proc/utf8proc.h"
 #include "../display/prTexture.h"
 #include "../display/prRenderer.h"
 #include "../display/prOglUtils.h"
-
-
-// Defines
-#define MSG_BUFFER_SIZE     1024
-
-
-// Type for drawing quad.
-/*typedef struct QuadData
-{
-	float x, y;
-	float u, v;
-
-}  QuadData;//*/
+#include "../math/prMathsUtil.h"
+#include "../file/prFile.h"
 
 
 // Implementation data.
@@ -114,9 +100,9 @@ typedef struct TrueTypeFontImplementation
     // ------------------------------------------------------------------------
     TrueTypeFontImplementation()
     {
-        h        = 0;
-        textures = NULL;
-        listBase = 0;
+        mpGlyphs    = NULL;
+        mGlyphCount = 0;
+        mPointSize  = 0;
     }
 
     
@@ -125,159 +111,191 @@ typedef struct TrueTypeFontImplementation
     // ------------------------------------------------------------------------
     ~TrueTypeFontImplementation()
     {
-        PRSAFE_DELETE(textures);
+        DeinitGlyphs();
     }
 
-    float   h;          // Holds the height of the font.
-    GLuint *textures;   // Holds the texture id's 
-    GLuint  listBase;   // Holds the first display list id
 
+    /// -----------------------------------------------------------------------
+    /// Creates a characters texture and positioning data
+    /// -----------------------------------------------------------------------
+    void GenerateCharacter(FT_Face face, char charcode)
+    {
+        // Get glyph index
+        u32 glyphIndex = FT_Get_Char_Index(face, charcode);
+        if (glyphIndex == 0)
+        {
+            return;
+        }
+
+	    // Load the glyph for our character
+	    if (FT_Load_Glyph(face, glyphIndex, FT_LOAD_DEFAULT))
+        {
+		    prTrace("FT_Load_Glyph failed for character %i, Glyph index %i\n", charcode, glyphIndex);
+            return;
+        }
+
+	    // Move the faces glyph into a glyph object.
+        FT_Glyph glyph;
+        if (FT_Get_Glyph(face->glyph, &glyph))
+        {
+		    prTrace("FT_Get_Glyph failed\n");
+            return;
+        }
+
+	    // Convert the glyph to a bitmap.
+	    FT_Glyph_To_Bitmap(&glyph, ft_render_mode_normal, 0, 1);
+        FT_BitmapGlyph bitmap_glyph = (FT_BitmapGlyph)glyph;
+
+	    // This reference will make accessing the bitmap easier
+	    FT_Bitmap& bitmap = bitmap_glyph->bitmap;
+
+	    // Create texture width/height
+	    int width  = prNextPowerOf2(bitmap.width);
+	    int height = prNextPowerOf2(bitmap.rows);
+        //prTrace("Bitmap: %i, %i, (%i, %i) == %c\n", bitmap.width, bitmap.rows, width, height, charcode);
+
+	    // Allocate memory for the texture data.
+	    GLubyte* texData = new GLubyte[2 * width * height];
+
+	    // Here we fill in the data for the expanded bitmap.
+	    for(int j = 0; j < height; j++)
+        {
+		    for(int i=0; i < width; i++)
+            {
+			    texData[2 * (i + j * width)    ] = 255;
+                texData[2 * (i + j * width) + 1] = (i >= bitmap.width || j >= bitmap.rows) ? 0 : bitmap.buffer[i + bitmap.width * j];
+		    }
+	    }
+
+	    // Generate texture
+        u32 texID = 0;
+        glGenTextures(1, &texID);
+        if (glGetError() != GL_NO_ERROR)
+        {
+            prTrace("Failed to generate texture for TTF font\n");
+            prOpenGLErrorCheck(__FILE__, __FUNCTION__, __LINE__);
+            PRSAFE_DELETE_ARRAY(texData);
+            FT_Done_Glyph(glyph);
+            return;
+        }            
+
+        // Set clamp to edge if required!
+        #if defined(PLATFORM_PC)
+          #ifndef GL_CLAMP_TO_EDGE
+            int GL_CLAMP_TO_EDGE = GL_REPEAT;
+            if (PRGL_VERSION >= 1.2f)
+            {    
+                GL_CLAMP_TO_EDGE = 0x812F;
+            }
+          #endif
+        #endif
+
+	    // Now we just setup some texture paramaters.
+        glBindTexture(GL_TEXTURE_2D, texID);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        ERR_CHECK();    
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);    
+        ERR_CHECK();
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        ERR_CHECK();
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        ERR_CHECK();
+
+	    // Here we actually create the texture itself, notice that we are using GL_LUMINANCE_ALPHA to indicate that we are using 2 channel data.
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE_ALPHA, width, height, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, texData);
+
+	    // Clear used data
+        PRSAFE_DELETE_ARRAY(texData);
+
+	    // Now we need to account for the fact that many of
+	    // our textures are filled with empty padding space.
+	    // We figure what portion of the texture is used by 
+	    // the actual character and store that information in 
+	    // the x and y variables, then when we draw the
+	    // quad, we will only reference the parts of the texture
+	    // that we contain the character itself.
+	    float x = (float)bitmap.width / (float)width,
+			  y = (float)bitmap.rows  / (float)height;
+
+        // Create glyph
+        prFontGlyph *pGlyph = new prFontGlyph((f32)(face->glyph->advance.x >> 6), 0.0f,                         // Advance X, Y
+                                              (f32)(bitmap_glyph->left), (f32)mPointSize - bitmap_glyph->top,   // Positioning offset X, Y
+                                              charcode,                                                         // The char code
+                                              texID);                                                           // The texture ID
+
+        pGlyph->SetTextureCoords(0, 0, y);
+        pGlyph->SetTextureCoords(1, x, y);
+        pGlyph->SetTextureCoords(2, x, 0);
+        pGlyph->SetTextureCoords(3, 0, y);
+        pGlyph->SetTextureCoords(4, x, 0);
+        pGlyph->SetTextureCoords(5, 0, 0);
+
+        pGlyph->SetVertexCoords(0, 0,                 (f32)bitmap.rows);
+        pGlyph->SetVertexCoords(1, (f32)bitmap.width, (f32)bitmap.rows);
+        pGlyph->SetVertexCoords(2, (f32)bitmap.width, 0);
+        pGlyph->SetVertexCoords(3, 0,                 (f32)bitmap.rows);
+        pGlyph->SetVertexCoords(4, (f32)bitmap.width, 0);
+        pGlyph->SetVertexCoords(5, 0,                 0);
+
+        mpGlyphs[charcode] = pGlyph;
+
+        // Clean up
+        FT_Done_Glyph(glyph);
+    }
+
+
+    /// -----------------------------------------------------------------------
+    /// Creates the glyph data
+    /// -----------------------------------------------------------------------
+    void InitGlyphs(u32 glyphCount)
+    {
+        if (glyphCount == 0)
+        {
+            prTrace("Glyph count cannot be zero\n");
+            return;
+        }
+
+        if (mpGlyphs != NULL)
+        {
+            prTrace("Glyph array already created\n");
+            return;
+        }
+
+        // Create array
+        mpGlyphs    = new prFontGlyph*[glyphCount];
+        mGlyphCount = glyphCount;
+
+        // Clear array
+        memset(mpGlyphs, 0, sizeof(prFontGlyph*) * glyphCount);
+    }
+
+
+    /// -----------------------------------------------------------------------
+    /// Destroys the glyph data
+    /// -----------------------------------------------------------------------
+    void DeinitGlyphs()
+    {
+        // Kill the glyphs
+        if (mpGlyphs && mGlyphCount > 0)
+        {
+            for (u32 i=0; i<mGlyphCount; i++)
+            {
+                PRSAFE_DELETE(mpGlyphs[i]);
+            }
+        }
+
+        // Kill the array
+        PRSAFE_DELETE_ARRAY(mpGlyphs);
+    }
+
+
+    // Data
+    prFontGlyph   **mpGlyphs;       // Points to the glyph data
+    u32             mGlyphCount;    // Holds the numbers of glyphs      
+    s32             mPointSize;     // Holds the height of the font.
 
 } TrueTypeFontImplementation;
 
-
-/// ---------------------------------------------------------------------------
-/// This function gets the first power of 2 >= the
-/// int that we pass it.
-/// ---------------------------------------------------------------------------
-inline int next_p2 ( int a )
-{
-	int rval = 1;
-	
-    while(rval < a)
-    {
-        rval <<= 1;
-    }
-	
-    return rval;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Create a display list coresponding to the give character.
-/// ---------------------------------------------------------------------------
-void make_dlist(FT_Face face, char ch, GLuint list_base, GLuint *tex_base )
-{
-	//The first thing we do is get FreeType to render our character
-	//into a bitmap.  This actually requires a couple of FreeType commands:
-
-	// Load the glyph for our character
-	if (FT_Load_Glyph(face, FT_Get_Char_Index(face, ch), FT_LOAD_DEFAULT))
-    {
-		prTrace("FT_Load_Glyph failed\n");
-        return;
-    }
-
-	// Move the faces glyph into a glyph object.
-    FT_Glyph glyph;
-    if (FT_Get_Glyph( face->glyph, &glyph ))
-    {
-		prTrace("FT_Get_Glyph failed\n");
-        return;
-    }
-
-	// Convert the glyph to a bitmap.
-	FT_Glyph_To_Bitmap(&glyph, ft_render_mode_normal, 0, 1);
-    FT_BitmapGlyph bitmap_glyph = (FT_BitmapGlyph)glyph;
-
-	// This reference will make accessing the bitmap easier
-	FT_Bitmap& bitmap = bitmap_glyph->bitmap;
-
-	// Use our helper function to get the widths of
-	// the bitmap data that we will need in order to create
-	// our texture.
-	int width  = next_p2( bitmap.width );
-	int height = next_p2( bitmap.rows );
-
-	// Allocate memory for the texture data.
-	GLubyte* expanded_data = new GLubyte[ 2 * width * height];
-
-	// Here we fill in the data for the expanded bitmap.
-	// Notice that we are using two channel bitmap (one for
-	// luminocity and one for alpha), but we assign
-	// both luminocity and alpha to the value that we
-	// find in the FreeType bitmap. 
-	// We use the ?: operator so that value which we use
-	// will be 0 if we are in the padding zone, and whatever
-	// is the the Freetype bitmap otherwise.
-	for(int j = 0; j < height; j++)
-    {
-		for(int i=0; i < width; i++)
-        {
-			expanded_data[2 * (i + j * width)    ] = 255;
-            expanded_data[2 * (i + j * width) + 1] = (i >= bitmap.width || j >= bitmap.rows) ? 0 : bitmap.buffer[i + bitmap.width * j];
-		}
-	}
-
-
-	// Now we just setup some texture paramaters.
-    glBindTexture(GL_TEXTURE_2D, tex_base[ch]);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-
-	// Here we actually create the texture itself, notice
-	// that we are using GL_LUMINANCE_ALPHA to indicate that
-	// we are using 2 channel data.
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, expanded_data);
-
-	// With the texture created, we don't need to expanded data anymore
-    delete [] expanded_data;
-
-	// So now we can create the display list
-	glNewList(list_base+ch,GL_COMPILE);
-
-	glBindTexture(GL_TEXTURE_2D,tex_base[ch]);
-
-	glPushMatrix();
-
-	//first we need to move over a little so that
-	//the character has the right amount of space
-	//between it and the one before it.
-	glTranslatef((GLfloat)bitmap_glyph->left, 0, 0);
-
-	//Now we move down a little in the case that the
-	//bitmap extends past the bottom of the line 
-	//(this is only true for characters like 'g' or 'y'.
-	glTranslatef(0, (GLfloat)bitmap_glyph->top-bitmap.rows, 0);
-
-	//Now we need to account for the fact that many of
-	//our textures are filled with empty padding space.
-	//We figure what portion of the texture is used by 
-	//the actual character and store that information in 
-	//the x and y variables, then when we draw the
-	//quad, we will only reference the parts of the texture
-	//that we contain the character itself.
-	float	x=(float)bitmap.width / (float)width,
-			y=(float)bitmap.rows / (float)height;
-
-	//Here we draw the texturemaped quads.
-	//The bitmap that we got from FreeType was not 
-	//oriented quite like we would like it to be,
-	//so we need to link the texture to the quad
-	//so that the result will be properly aligned.
-	glBegin(GL_QUADS);
-	//glTexCoord2d(0,0); glVertex2f(0,bitmap.rows);
-	//glTexCoord2d(0,y); glVertex2f(0,0);
-	//glTexCoord2d(x,y); glVertex2f(bitmap.width,0);
-	//glTexCoord2d(x,0); glVertex2f(bitmap.width,bitmap.rows);
-	glTexCoord2d(x,y); glVertex2f((GLfloat)bitmap.width, (GLfloat)bitmap.rows);
-	glTexCoord2d(x,0); glVertex2f((GLfloat)bitmap.width, 0);
-	glTexCoord2d(0,0); glVertex2f(0, 0);
-	glTexCoord2d(0,y); glVertex2f(0, (GLfloat)bitmap.rows);
-	glEnd();
-	glPopMatrix();
-	glTranslatef((GLfloat)(face->glyph->advance.x >> 6), 0, 0);
-
-
-	//increment the raster position as if we were a bitmap font.
-	//(only needed if you want to calculate text length)
-	//glBitmap(0,0,0,0,face->glyph->advance.x >> 6,0,NULL);
-
-	// Finish the display list
-	glEndList();
-
-    FT_Done_Glyph(glyph);
-}
 
 
 
@@ -307,75 +325,78 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
 {
     PRASSERT(filename && *filename);
     PRASSERT(pImpl);
+    PRASSERT(height > 0);
 
-    // Create And initilize the FreeType Font Library.
-    FT_Library library;
-    
-    if (FT_Init_FreeType( &library ))
+    // Create and initilize the freetype font library.
+    FT_Library library;    
+    if (FT_Init_FreeType(&library))
     {
         prTrace("FT_Init_FreeType failed\n");
         return;
     }
- 
+
     // Load the font
-    FT_Face face;
-    if (FT_New_Face(library, filename, 0, &face))
+    prFile *pFile = new prFile(filename);
+    if (pFile)
     {
-        prTrace("FT_New_Face failed. There is probably a problem with your font file\n");
-        return;
-    }
+        pFile->Open();
 
-    prTrace("NUM GLYPHS: %i\n", face->num_glyphs);
-
-    // For some reason, FreeType measures font size
-    // in terms of 1/64ths of pixels. To make a font
-    // 'height' pixels high, we need to request a size of height * 64.
-    FT_Set_Char_Size(face, height << 6, height << 6, 96, 96);
- 
-    // Here We Ask OpenGL To Allocate Resources For
-    // All The Textures And Display Lists Which We
-    // Are About To Create. 
-    imp.textures = new GLuint[128];
-	imp.h = (f32)height;
-
-    //GLuint elementbuffer;
-    //glGenBuffers(1, &elementbuffer);
-
-    imp.listBase=glGenLists(128);
-    glGenTextures( 128, imp.textures );
-
-    // Set clamp to edge if required!
-    #if defined(PLATFORM_PC)
-      #ifndef GL_CLAMP_TO_EDGE
-        int GL_CLAMP_TO_EDGE = GL_REPEAT;
-        if (PRGL_VERSION >= 1.2f)
-        {    
-            GL_CLAMP_TO_EDGE = 0x812F;
+        // Get and check size.
+        u32 size = pFile->Size();
+        if (size == 0)
+        {
+            prTrace("prTrueTypeFont::Load failed. File was zero length\n");
+            return;
         }
-      #endif
-    #endif
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    ERR_CHECK();
-    
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);    
-    ERR_CHECK();
+        // Create buffer
+        char *buffer = new char [size];
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    ERR_CHECK();
+        // Read file
+        pFile->Read(buffer, size);
+        pFile->Close();
+        PRSAFE_DELETE(pFile);
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    ERR_CHECK();
+        // Load the font
+        FT_Face face;
+        //if (FT_New_Face(library, filename, 0, &face))
+        //{
+        //    prTrace("FT_New_Face failed. There is probably a problem with your font file\n");
+        //    return;
+        //}
+        if (FT_New_Memory_Face(library,
+                               (const FT_Byte *)buffer,
+                               size,
+                               0,
+                               &face))
+        {
+            prTrace("FT_New_Face failed. There is probably a problem with your font file\n");
+            PRSAFE_DELETE(buffer);
+            return;
+        }
 
-    // This Is Where We Actually Create Each Of The Fonts Display Lists.
-    for(unsigned char i=0;i<128;i++)
-    {
-        make_dlist(face, i, imp.listBase, imp.textures);
+        // Init glyphs
+        imp.InitGlyphs(256);
+
+        // For some reason, FreeType measures font size
+        // in terms of 1/64ths of pixels. To make a font
+        // 'height' pixels high, we need to request a size of height * 64.
+        FT_Set_Char_Size(face, 0L, height << 6, RESOLUTION, RESOLUTION);
+ 
+        // Init data
+        imp.mPointSize = height;
+
+        // This is where we actually create each of the fonts display lists.
+        for(unsigned char i=0; i<128; i++)
+        {
+            imp.GenerateCharacter(face, i);
+        }
+
+        // Clean up
+        FT_Done_Face(face);
+        FT_Done_FreeType(library);
+        PRSAFE_DELETE(buffer);
     }
-
-    // Clean up
-    FT_Done_Face(face);
-    FT_Done_FreeType(library);
 }
 
 
@@ -411,7 +432,6 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
     {
         char message[MSG_BUFFER_SIZE];
 
-
 		// Format the output.
         va_list args;
         va_start(args, fmt);        
@@ -426,43 +446,44 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
         // Set the colour.
         glColor4f(colour.red, colour.green, colour.blue, colour.alpha);
 
+		glPushMatrix();
+		glLoadIdentity();       
+		glTranslatef(x, y, 0);
+        glScalef(scale, scale, 0.0f);
 
-	    glListBase(imp.listBase);
+        // Enable blending
+        glEnable(GL_BLEND);
+        ERR_CHECK();
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        ERR_CHECK();
 
-	    float modelview_matrix[16];	
-	    glGetFloatv(GL_MODELVIEW_MATRIX, modelview_matrix);
-
-	    //This is where the text display actually happens.
-	    //For each line of text we reset the modelview matrix
-	    //so that the line's text will start in the correct position.
-	    //Notice that we need to reset the matrix, rather than just translating
-	    //down by h. This is because when each character is
-	    //draw it modifies the current matrix so that the next character
-	    //will be drawn immediatly after it.  
-	    //for(int i=0;i<10;i++)
+        // Set states
+        glEnableClientState(GL_VERTEX_ARRAY);
+        ERR_CHECK();
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        ERR_CHECK();
+		    
+        // Draw
+        s32 len = strlen(message);
+        for (s32 i=0; i<len; i++)
         {
-            // http://www.glprogramming.com/red/chapter07.html
-		
+            prFontGlyph *pGlyph = imp.mpGlyphs[message[i]];
+            if (pGlyph)
+            {
+                pGlyph->Draw();
+            }
+        }
 
-		    glPushMatrix();
-		    glLoadIdentity();       
-		    glTranslatef(x, y, 0);
-            glScalef(scale, scale, 0.0f);
-		    glMultMatrixf(modelview_matrix);
+        // Reset states
+        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+        ERR_CHECK();
+        glDisableClientState(GL_VERTEX_ARRAY);
+        ERR_CHECK();
+        glDisable(GL_BLEND);
+        ERR_CHECK();
 
-	    //  The commented out raster position stuff can be useful if you need to
-	    //  know the length of the text that you are creating.
-	    //  If you decide to use it make sure to also uncomment the glBitmap command
-	    //  in make_dlist().
-	    //	glRasterPos2f(0,0);
-		    glCallLists(strlen(message), GL_UNSIGNED_BYTE, message);
-	    //	float rpos[4];
-	    //	glGetFloatv(GL_CURRENT_RASTER_POSITION ,rpos);
-	    //	float len=x-rpos[0];
-
-		    glPopMatrix();
-	    }
-
+		glPopMatrix();
+        ERR_CHECK();
     }
 }
 
@@ -474,3 +495,5 @@ prVector2 prTrueTypeFont::MeasureString(const char *string, float scale)
 {    
     return prVector2::Zero;
 }
+
+

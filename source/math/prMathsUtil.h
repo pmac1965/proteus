@@ -133,6 +133,24 @@ inline double prRoundToFloat(double n, unsigned int d)
     return floor(n * pow(10., (int)d) + .5) / pow(10., (int)d);
 }
 
+// Function: prNextPowerOf2
+//      This function gets the first power of 2 >= the int that we pass it.
+//      A minimum of 8 is ensured
+inline int prNextPowerOf2(int a)
+{
+    // Ensure a minimum POT of 8
+    a = prMax(a, 8);
+
+	int rval = 1;
+	
+    while(rval < a)
+    {
+        rval <<= 1;
+    }
+	
+    return rval;
+}
+
 // Function: prPercentageOfValue
 //      Returns the specified percentage of a value.
 s32 prPercentageOfValue(s32 percent, s32 value);

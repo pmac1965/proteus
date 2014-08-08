@@ -20,12 +20,46 @@
 #define __PRFONTGLYPH_H
 
 
+#include "../core/prTypes.h"
+#include "../math/prVector2.h"
+
+
+// Class: prFontGlyph
+//      Represents a glyph from a TTF font
 class prFontGlyph
 {
 public:
-    prFontGlyph();
+    // Method: Ctor
+    //      Constructor
+    prFontGlyph(f32 advanceX, f32 advanceY,
+                f32 offsetX,  f32 offsetY,
+                u32 aChar, u32 texID);
+
+    // Method: Dtor
+    //      Destructor
     ~prFontGlyph();
+
+    // Method: SetTextureCoords
+    //      Sets the texture coords for the character
+    void SetTextureCoords(u32 index, f32 u, f32 v);
+
+    // Method: SetVertexCoords
+    //      Sets the vertex coords for the character
+    void SetVertexCoords(u32 index, f32 x, f32 y);
+
+    // Method: Draw
+    //      Draws the character. This is called by prTrueTypeFont
+    void Draw();
+
+
+private:
+
+    prVector2   mAdvance;               // Amount to advance character
+    prVector2   mOffset;                // X, Y positioning offset
+    u32         mCharacter;             // This character
+    u32         mTextureID;             // The texture ID
+    QuadData    quadData[6];            // Data to draw a simple quad
 };
 
 
-#endif//
+#endif//__PRFONTGLYPH_H
