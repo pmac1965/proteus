@@ -60,7 +60,7 @@ public:
 
     // Method: GetFrame
     //      Gets the current frame.
-    s32 GetFrame() { return mCurFrame; }
+    s32 GetFrame() const { return mCurFrame; }
 
 
 private:

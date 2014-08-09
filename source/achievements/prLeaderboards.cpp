@@ -14,12 +14,12 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
 #include "../prConfig.h"
 #include "../debug/prTrace.h"
+#include "../debug/prDebug.h"
 #include "prLeaderboards.h"
 
 
@@ -35,6 +35,9 @@ namespace
 /// ---------------------------------------------------------------------------
 void prLeaderboard::Submit(const char *name, u64 score)
 {
+    TODO("Finish leaderboards")
+    TODO("Remove scoreloop")
+
     if (name && *name && score > 0)
     {
         if (submitAllowed)

@@ -93,15 +93,15 @@ enum
 #if defined(ACHIEVEMENT_DEBUG) && (defined(_DEBUG) || defined(DEBUG))
 const char *GetAchievementState(s32 state)
 {
-	switch(state)
-	{
-	case Proteus::Achievement::NotAwarded: return "Not Awarded";
-	case Proteus::Achievement::Awarding:   return "Awarding";
-	case Proteus::Achievement::Awarded:    return "Awarded";
-	case Proteus::Achievement::Received:   return "Received";
-	}
+    switch(state)
+    {
+    case Proteus::Achievement::NotAwarded: return "Not Awarded";
+    case Proteus::Achievement::Awarding:   return "Awarding";
+    case Proteus::Achievement::Awarded:    return "Awarded";
+    case Proteus::Achievement::Received:   return "Received";
+    }
 
-	return "Unknown";
+    return "Unknown";
 }
 #endif
 
@@ -109,7 +109,7 @@ const char *GetAchievementState(s32 state)
 // Achievement definition.
 typedef struct prAchievementDefinition
 {
-	u32				hash;
+    u32				hash;
     std::string     name;
     std::string     howTo;
     std::string     description;
@@ -129,6 +129,8 @@ typedef struct AchievementManagerImplementation
     AchievementManagerImplementation(const char *folder) : colour(prColour::White)
     {
         PRASSERT(folder && *folder);
+
+        TODO("Finish converting achievement manager")
 
         save                    = new prSave(folder);
         achievementsCount       = 0;
@@ -280,12 +282,12 @@ typedef struct AchievementManagerImplementation
                     u32 index = (*i);
 
                     // Search for and load its icon
-	                std::list<AchievementDefinition>::iterator itr = achievementsList.begin();
-	                std::list<AchievementDefinition>::iterator end = achievementsList.end();
-	                for (u32 currIndex = 0; itr != end; ++itr, currIndex++)
-	                {
-		                if (currIndex == index)
-		                {
+                    std::list<AchievementDefinition>::iterator itr = achievementsList.begin();
+                    std::list<AchievementDefinition>::iterator end = achievementsList.end();
+                    for (u32 currIndex = 0; itr != end; ++itr, currIndex++)
+                    {
+                        if (currIndex == index)
+                        {
                             pTexture = prSystemResourceManager::Get()->Load<Texture>((*itr).image.c_str());
                             mode     = MODE_ON;
                             delay    = SHOW_ACHIEVEMENT_TIME;
@@ -311,8 +313,8 @@ typedef struct AchievementManagerImplementation
                                 strcpy(text_description, (*itr).achieved.c_str());
                             }
                             return;
-		                }
-	                }
+                        }
+                    }
 
                     prTrace("Failed to find icon\n");
                     return;
@@ -554,7 +556,7 @@ typedef struct AchievementManagerImplementation
             break;
 
         default:
-	        break;
+            break;
         } 
 
 
@@ -584,10 +586,10 @@ typedef struct AchievementManagerImplementation
             d.name          = pElement->Attribute("name");
             d.description   = pElement->Attribute("desc_brief");
             d.howTo         = pElement->Attribute("desc_howto");
-			d.achieved      = pElement->Attribute("desc_achieved");
+            d.achieved      = pElement->Attribute("desc_achieved");
             d.identifier    = pElement->Attribute("identifier");
-			d.image			= pElement->Attribute("image");
-			d.hash          = prStringHash(pElement->Attribute("name"));
+            d.image			= pElement->Attribute("image");
+            d.hash          = prStringHash(pElement->Attribute("name"));
 
             achievementsList.push_back(d);
         }
@@ -631,25 +633,25 @@ typedef struct AchievementManagerImplementation
     {
         PRASSERT(name && *name);
 
-	    if (name && *name)
-	    {
-		    std::list<prAchievementDefinition>::iterator itr = achievementsList.begin();
-		    std::list<prAchievementDefinition>::iterator end = achievementsList.end();
+        if (name && *name)
+        {
+            std::list<prAchievementDefinition>::iterator itr = achievementsList.begin();
+            std::list<prAchievementDefinition>::iterator end = achievementsList.end();
 
-		    u32 hash = prStringHash(name);
+            u32 hash = prStringHash(name);
 
-		    for (; itr != end; ++itr)
-		    {
-			    if (hash == (*itr).hash)
-			    {
+            for (; itr != end; ++itr)
+            {
+                if (hash == (*itr).hash)
+                {
 //#if defined(PLATFORM_ANDROID)
 //                    return (*itr).of.c_str();
 //#else
                     return (*itr).identifier.c_str();
 //#endif
-			    }
-		    }
-	    }
+                }
+            }
+        }
 
         prTrace("prAchievementManager::GetIdentifier - Failed to find identifier: %s\n", name);
         return NULL;
@@ -661,24 +663,24 @@ typedef struct AchievementManagerImplementation
     // ----------------------------------------------------------------------------
     const char *GetIdentifierByIndex(u32 index)
     {
-		std::list<prAchievementDefinition>::iterator itr = achievementsList.begin();
-		std::list<prAchievementDefinition>::iterator end = achievementsList.end();
+        std::list<prAchievementDefinition>::iterator itr = achievementsList.begin();
+        std::list<prAchievementDefinition>::iterator end = achievementsList.end();
 
-		u32 idx = 0;
+        u32 idx = 0;
 
-		for (; itr != end; ++itr)
-		{
-			if (idx == index)
-			{
+        for (; itr != end; ++itr)
+        {
+            if (idx == index)
+            {
 //#if defined(PLATFORM_ANDROID)
 //                return (*itr).of.c_str();
 //#else
                 return (*itr).identifier.c_str();
 //#endif
-			}
+            }
 
             idx++;
-		}
+        }
 
         prTrace("prAchievementManager::GetIdentifierByIndex - Failed to find identifier\n");
         return NULL;
@@ -828,13 +830,13 @@ void prAchievementManager::Award(const char *key, s32 awardValue)
                         {
 /*                            if (!lite_build)
                             {
-							    // Start the award process.
+                                // Start the award process.
                                 imp.pAchievementProvider->Award(imp.GetIdentifier(key), 0);
 
-							    // Set award is being awarded.
-							    imp.achievements[i].state = Proteus::Achievement::Awarding;
+                                // Set award is being awarded.
+                                imp.achievements[i].state = Proteus::Achievement::Awarding;
 
-							    // Add to display handler
+                                // Add to display handler
                                 imp.AddRenderList(i);
 
                                 // Save state change
@@ -842,13 +844,13 @@ void prAchievementManager::Award(const char *key, s32 awardValue)
                             }
                             else
                             {
-							    // Start the award process.
+                                // Start the award process.
 //                                imp.pAchievementProvider->Award(imp.GetIdentifier(key), 0);
                                 
-							    // Set award is being awarded.
-							    imp.achievements[i].state = Proteus::Achievement::Awarding;
+                                // Set award is being awarded.
+                                imp.achievements[i].state = Proteus::Achievement::Awarding;
                                 
-							    // Add to display handler
+                                // Add to display handler
                                 imp.AddRenderList(i);
                                 
                                 // Save state change
@@ -1000,13 +1002,13 @@ void prAchievementManager::Load(const char *filename)
 
 
 #if defined(ACHIEVEMENT_DEBUG) && (defined(_DEBUG) || defined(DEBUG))
-	if (imp.achievementsCount > 0)
-	{
-		for (u32 i=0; i<imp.achievementsCount; i++)
-		{
+    if (imp.achievementsCount > 0)
+    {
+        for (u32 i=0; i<imp.achievementsCount; i++)
+        {
             prTrace("Name: %*s, Hash %08x, State: %s, Count %i\n", 24, GetNameByIndex(i), imp.achievements[i].hash, GetAchievementState(imp.achievements[i].state), imp.achievements[i].count);
-		}
-	}
+        }
+    }
 #endif
 }
 
@@ -1101,31 +1103,31 @@ const char *prAchievementManager::GetDescriptionText(const char *name, s32 type)
     PRASSERT(pImpl);
     PRASSERT(name && *name);
 
-	if (name && *name)
-	{
-		std::list<prAchievementDefinition>::iterator itr = imp.achievementsList.begin();
-		std::list<prAchievementDefinition>::iterator end = imp.achievementsList.end();
+    if (name && *name)
+    {
+        std::list<prAchievementDefinition>::iterator itr = imp.achievementsList.begin();
+        std::list<prAchievementDefinition>::iterator end = imp.achievementsList.end();
 
-		u32 hash = prStringHash(name);
+        u32 hash = prStringHash(name);
 
-		for (; itr != end; ++itr)
-		{
-			if (hash == (*itr).hash)
-			{
+        for (; itr != end; ++itr)
+        {
+            if (hash == (*itr).hash)
+            {
                 switch(type)
                 {
                 case Proteus::Description::Brief:
-				    return (*itr).description.c_str();
+                    return (*itr).description.c_str();
 
                 case Proteus::Description::Achieved:
                     return (*itr).achieved.c_str();
 
                 case Proteus::Description::HowTo:
-				    return (*itr).howTo.c_str();
+                    return (*itr).howTo.c_str();
                 }
-			}
-		}
-	}
+            }
+        }
+    }
 
     prTrace("prAchievementManager::GetDescriptionText - Failed to find achievement: %s\n", name);
     return NULL;
@@ -1139,26 +1141,26 @@ const char *prAchievementManager::GetDescriptionTextByIndex(u32 index, s32 type)
 {
     PRASSERT(pImpl);
 
-	std::list<prAchievementDefinition>::iterator itr = imp.achievementsList.begin();
-	std::list<prAchievementDefinition>::iterator end = imp.achievementsList.end();
+    std::list<prAchievementDefinition>::iterator itr = imp.achievementsList.begin();
+    std::list<prAchievementDefinition>::iterator end = imp.achievementsList.end();
 
-	for (u32 currIndex = 0; itr != end; ++itr, currIndex++)
-	{
-		if (currIndex == index)
-		{
+    for (u32 currIndex = 0; itr != end; ++itr, currIndex++)
+    {
+        if (currIndex == index)
+        {
             switch(type)
             {
             case Proteus::Description::Brief:
-				return (*itr).description.c_str();
+                return (*itr).description.c_str();
 
             case Proteus::Description::Achieved:
                 return (*itr).achieved.c_str();
 
             case Proteus::Description::HowTo:
-				return (*itr).howTo.c_str();
+                return (*itr).howTo.c_str();
             }
-		}
-	}
+        }
+    }
 
     prTrace("prAchievementManager::GetDescriptionTextByIndex - Failed to find achievement: %i\n", index);
     return NULL;
@@ -1171,7 +1173,7 @@ const char *prAchievementManager::GetDescriptionTextByIndex(u32 index, s32 type)
 void prAchievementManager::SetNotificationPosition(u32 pos)
 {
     PRASSERT(pImpl);
-	PRUNUSED(pos);
+    PRUNUSED(pos);
 
     /*switch(pos)
     {
@@ -1193,7 +1195,7 @@ void prAchievementManager::SetNotificationPosition(u32 pos)
 u32 prAchievementManager::GetCount()
 {
     PRASSERT(pImpl);
-	return imp.achievementsCount;
+    return imp.achievementsCount;
 }
 
 
@@ -1204,18 +1206,18 @@ const char *prAchievementManager::GetNameByIndex(u32 index)
 {
     PRASSERT(pImpl);
 
-	std::list<prAchievementDefinition>::iterator itr = imp.achievementsList.begin();
-	std::list<prAchievementDefinition>::iterator end = imp.achievementsList.end();
+    std::list<prAchievementDefinition>::iterator itr = imp.achievementsList.begin();
+    std::list<prAchievementDefinition>::iterator end = imp.achievementsList.end();
 
-	for (u32 currIndex = 0; itr != end; ++itr, currIndex++)
-	{
-		if (currIndex == index)
-		{
-			return (*itr).name.c_str();
-		}
-	}
+    for (u32 currIndex = 0; itr != end; ++itr, currIndex++)
+    {
+        if (currIndex == index)
+        {
+            return (*itr).name.c_str();
+        }
+    }
 
-	return NULL;
+    return NULL;
 }
 
 

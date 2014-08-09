@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -29,6 +28,7 @@
 #include <android/log.h>
 #include "prJNIAudio.h"
 #include "prJNIInterface.h"
+#include "../debug/prDebug.h"
 #include "../debug/prTrace.h"
 #include "../debug/prAssert.h"
 #include "../core/prDefines.h"
@@ -43,11 +43,12 @@ namespace
     /// ---------------------------------------------------------------------------
     const char *prJNI_MakeAudioClassName(const char *pClassName)
     {
+        TODO("Remove the statics. They're not required")
+        TODO("These functions also need to be improved. Too many duplicates!")
         static char name[256];
 
         strcpy(name, "proteus/audio/");
         strcat(name, pClassName);
-        //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "Audio final %s", name);
 
         return name;
     }

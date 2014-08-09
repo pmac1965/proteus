@@ -52,16 +52,16 @@ namespace Proteus
         };
     }
 
-	// Description type.
-	namespace Description
-	{
-		enum
-		{
-			Brief,                              // Brief description.
-			HowTo,                              // The how to achieve description.
-			Achieved                            // The achieved description.
-		};
-	}
+    // Description type.
+    namespace Description
+    {
+        enum
+        {
+            Brief,                              // Brief description.
+            HowTo,                              // The how to achieve description.
+            Achieved                            // The achieved description.
+        };
+    }
 }
 
 
@@ -143,11 +143,11 @@ public:
     // don't have achievements.
     void SetRender(bool state);
 
-	// Gets the description text for the specified entry by type.
-	const char *GetDescriptionText(const char *name, s32 type);
+    // Gets the description text for the specified entry by type.
+    const char *GetDescriptionText(const char *name, s32 type);
 
     // Gets the description text for the specified entry by type.
-	const char *GetDescriptionTextByIndex(u32 index, s32 type);
+    const char *GetDescriptionTextByIndex(u32 index, s32 type);
 
     // Set the position of the notification bar.
     void SetNotificationPosition(u32 pos);

@@ -14,11 +14,11 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
 #include "prAdvertProvider.h"
+#include "../debug/prDebug.h"
 
 
 /// ---------------------------------------------------------------------------
@@ -26,6 +26,7 @@
 /// ---------------------------------------------------------------------------
 prAdvertProvider::prAdvertProvider(prAdvertProviderDetails *pDetails) : m_details(pDetails)
 {
+    TODO("Finish converting adverts")
     PRASSERT(m_details);
 }
 

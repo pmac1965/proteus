@@ -111,7 +111,7 @@
 #endif
 
 #ifndef SHOW_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.
-//#define SHOW_MESSAGES
+#define SHOW_MESSAGES
 #endif
 
 #ifndef PROTEUS_ALLOW_CONSOLE                           // Allows the debug console to be optionally removed. (PC only)
@@ -190,7 +190,7 @@
 
 // OpenGL debug settings
 //#define OPENGL_SHOW_EXTENSIONS
-#define OPENGL_CHECK_CALLS
+//#define OPENGL_CHECK_CALLS
 
 
 // Optimizations

@@ -100,6 +100,8 @@ typedef struct TrueTypeFontImplementation
     // ------------------------------------------------------------------------
     TrueTypeFontImplementation()
     {
+        TODO("Make freetype optional")
+
         mpGlyphs    = NULL;
         mGlyphCount = 0;
         mPointSize  = 0;
@@ -371,7 +373,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
                                &face))
         {
             prTrace("FT_New_Face failed. There is probably a problem with your font file\n");
-            PRSAFE_DELETE(buffer);
+            PRSAFE_DELETE_ARRAY(buffer);
             return;
         }
 
@@ -395,7 +397,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
         // Clean up
         FT_Done_Face(face);
         FT_Done_FreeType(library);
-        PRSAFE_DELETE(buffer);
+        PRSAFE_DELETE_ARRAY(buffer);
     }
 }
 
