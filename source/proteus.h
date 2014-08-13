@@ -230,7 +230,7 @@
 
     // Freetype
     #if defined(ALLOW_FREETYPE)
-        #if defined(_DEBUG)
+        #if (defined(_DEBUG) || defined(DEBUG))
             #pragma comment(lib, "freetype253_D.lib")
         #else
             #pragma comment(lib, "freetype253.lib")
@@ -249,13 +249,13 @@
 
     // Engine libs
     #if defined(PROTEUS_TOOL)
-        #if defined(_DEBUG)
+        #if (defined(_DEBUG) || defined(DEBUG))
             #pragma comment(lib, "proteus_td.lib")
         #else
             #pragma comment(lib, "proteus_tr.lib")
         #endif
     #else
-        #if defined(_DEBUG)
+        #if (defined(_DEBUG) || defined(DEBUG))
             #pragma comment(lib, "proteus_d.lib")
         #else
             #pragma comment(lib, "proteus_r.lib")

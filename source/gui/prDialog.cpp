@@ -24,6 +24,7 @@
 #include "../debug/prTrace.h"
 #include "../display/prSprite.h"
 #include "../display/prBitmapFont.h"
+#include "../display/prTrueTypeFont.h"
 #include <cstring>
 
 
@@ -33,6 +34,7 @@
 prDialog::prDialog(const char *name, prSpriteManager *pSpriteManager) : prWidget(WT_Dialog, name, pSpriteManager)
                                                                       , m_spriteBackdrop      (NULL)
                                                                       , m_pFont               (NULL)
+                                                                      , m_pttfFont            (NULL)
                                                                       , m_prIDialogListener   (NULL)
                                                                       , m_buttonCount         (0)
                                                                       , m_titleScale          (1.0f)
@@ -135,6 +137,10 @@ void prDialog::Draw()
         {
             m_pFont->Draw(pos.x + m_offsetTitle.x, pos.y + m_offsetTitle.y, m_titleScale, prColour::White, prBitmapFont::ALIGN_LEFT, m_title.Text());
         }
+        else if (m_pttfFont && m_title.Length() > 0)
+        {
+            m_pttfFont->Draw(pos.x + m_offsetTitle.x, pos.y + m_offsetTitle.y, m_titleScale, prColour::White, prTrueTypeFont::ALIGN_LEFT, m_title.Text());
+        }
 
         // Draw text
         if (m_pFont && m_text.Length() > 0)
@@ -143,9 +149,13 @@ void prDialog::Draw()
             f32 middle = (f32)(m_spriteBackdrop->GetFrameHeight() / 2);
             m_pFont->Draw(pos.x + center, pos.y + middle - m_offsetText.y, m_textScale, prColour::White, prBitmapFont::ALIGN_CENTER, m_text.Text());
         }
+        else if (m_pttfFont && m_text.Length() > 0)
+        {
+            f32 center = (f32)(m_spriteBackdrop->GetFrameWidth()  / 2);
+            f32 middle = (f32)(m_spriteBackdrop->GetFrameHeight() / 2);
+            m_pttfFont->Draw(pos.x + center, pos.y + middle - m_offsetText.y, m_textScale, prColour::White, prTrueTypeFont::ALIGN_CENTER, m_text.Text());
+        }
     }
-
-    //Trace("BC: %i\n", m_buttonCount);
 }
 
 
@@ -288,6 +298,25 @@ void prDialog::SetFont(prBitmapFont *pFont)
         if (m_buttons[i])
         {
             m_buttons[i]->SetFont(m_pFont);
+        }
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Sets the dialogs font
+/// ---------------------------------------------------------------------------
+void prDialog::SetTTFFont(prTrueTypeFont *pFont)
+{
+    // Set text font.
+    m_pttfFont = pFont;
+
+    // Set button font.
+    for (s32 i=0; i<m_buttonCount; i++)
+    {
+        if (m_buttons[i])
+        {
+            m_buttons[i]->SetTTFFont(m_pttfFont);
         }
     }
 }

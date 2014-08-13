@@ -88,6 +88,7 @@
 #include "../display/prTexture.h"
 #include "../display/prRenderer.h"
 #include "../display/prOglUtils.h"
+#include "../display/prTexture.h"
 #include "../math/prMathsUtil.h"
 #include "../file/prFile.h"
 
@@ -220,10 +221,10 @@ typedef struct TrueTypeFontImplementation
 			  y = (float)bitmap.rows  / (float)height;
 
         // Create glyph
-        prFontGlyph *pGlyph = new prFontGlyph((f32)(face->glyph->advance.x >> 6), 0.0f,                         // Advance X, Y
-                                              (f32)(bitmap_glyph->left), (f32)mPointSize - bitmap_glyph->top,   // Positioning offset X, Y
-                                              charcode,                                                         // The char code
-                                              texID);                                                           // The texture ID
+        prFontGlyph *pGlyph = new prFontGlyph((f32)(face->glyph->advance.x >> 6), (f32)(face->glyph->advance.y >> 6),   // Advance X, Y
+                                              (f32)(bitmap_glyph->left), (f32)mPointSize - bitmap_glyph->top,           // Positioning offset X, Y
+                                              charcode,                                                                 // The char code
+                                              texID);                                                                   // The texture ID
 
         pGlyph->SetTextureCoords(0, 0, y);
         pGlyph->SetTextureCoords(1, x, y);
@@ -388,10 +389,89 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
         // Init data
         imp.mPointSize = height;
 
-        // This is where we actually create each of the fonts display lists.
+        // This is where we actually create the fonts texture
         for(unsigned char i=0; i<128; i++)
         {
             imp.GenerateCharacter(face, i);
+        }
+
+        // Clean up
+        FT_Done_Face(face);
+        FT_Done_FreeType(library);
+        PRSAFE_DELETE_ARRAY(buffer);
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Loads the font data.
+/// ---------------------------------------------------------------------------
+void prTrueTypeFont::Load(const char *filename, s32 height, const char *characters)
+{
+    PRASSERT(filename && *filename);
+    PRASSERT(characters && *characters);
+    PRASSERT(pImpl);
+    PRASSERT(height > 0);
+
+    // Create and initilize the freetype font library.
+    FT_Library library;    
+    if (FT_Init_FreeType(&library))
+    {
+        prTrace("FT_Init_FreeType failed\n");
+        return;
+    }
+
+    // Load the font
+    prFile *pFile = new prFile(filename);
+    if (pFile)
+    {
+        pFile->Open();
+
+        // Get and check size.
+        u32 size = pFile->Size();
+        if (size == 0)
+        {
+            prTrace("prTrueTypeFont::Load failed. File was zero length\n");
+            return;
+        }
+
+        // Create buffer
+        char *buffer = new char [size];
+
+        // Read file
+        pFile->Read(buffer, size);
+        pFile->Close();
+        PRSAFE_DELETE(pFile);
+
+        // Load the font
+        FT_Face face;
+        if (FT_New_Memory_Face(library,
+                               (const FT_Byte *)buffer,
+                               size,
+                               0,
+                               &face))
+        {
+            prTrace("FT_New_Face failed. There is probably a problem with your font file\n");
+            PRSAFE_DELETE_ARRAY(buffer);
+            return;
+        }
+
+        // Init glyphs
+        imp.InitGlyphs(256);
+
+        // For some reason, FreeType measures font size
+        // in terms of 1/64ths of pixels. To make a font
+        // 'height' pixels high, we need to request a size of height * 64.
+        FT_Set_Char_Size(face, 0L, height << 6, RESOLUTION, RESOLUTION);
+ 
+        // Init data
+        imp.mPointSize = height;
+
+        // This is where we actually create the fonts texture
+        s32 len = strlen(characters);
+        for(s32 i=0; i<len; i++)
+        {
+            imp.GenerateCharacter(face, characters[i]);
         }
 
         // Clean up
@@ -445,6 +525,27 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
         #endif
         va_end(args);
 
+
+        // Set alignment
+        switch(alignment)
+        {
+        default:
+            prTrace("Unsupported alignment\n");
+            break;
+
+        case ALIGN_LEFT:
+            break;
+
+        case ALIGN_RIGHT:
+            x -= MeasureString(message, scale).x;
+            break;
+
+        case ALIGN_CENTER:
+            x -= MeasureString(message, scale).x / 2;
+            break;
+        }
+
+
         // Set the colour.
         glColor4f(colour.red, colour.green, colour.blue, colour.alpha);
 
@@ -467,12 +568,26 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
 		    
         // Draw
         s32 len = strlen(message);
+        s32 character;
+        f32 lineWidth = 0.0f;
+
         for (s32 i=0; i<len; i++)
         {
-            prFontGlyph *pGlyph = imp.mpGlyphs[message[i]];
-            if (pGlyph)
+            character = message[i];
+
+            if (character == '\n')
             {
-                pGlyph->Draw();
+                glTranslatef(-lineWidth, (f32)imp.mPointSize, 0);
+                lineWidth = 0.0f;
+            }
+            else if (character != '\r')
+            {
+                prFontGlyph *pGlyph = imp.mpGlyphs[character];
+                if (pGlyph)
+                {
+                    pGlyph->Draw();
+                    lineWidth += (pGlyph->mAdvance.x); 
+                }
             }
         }
 
@@ -487,6 +602,9 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
 		glPopMatrix();
         ERR_CHECK();
     }
+    
+    // Clear texture systems last used ID
+    prTextureClearLastID();
 }
 
 
@@ -494,8 +612,39 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
 /// Returns the pixel length of the string.
 /// ---------------------------------------------------------------------------
 prVector2 prTrueTypeFont::MeasureString(const char *string, float scale)
-{    
-    return prVector2::Zero;
+{
+    prVector2 size = prVector2(0, (f32)imp.mPointSize);
+
+    f32 max = 0.0f;
+    s32 len = strlen(string);
+    s32 character;
+
+    for (s32 i=0; i<len; i++)
+    {
+        character = string[i];
+
+        // Get size.
+        if (character == '\n')
+        {
+            size.x  = 0.0f;
+            size.y += imp.mPointSize;
+        }
+        else if (character != '\0' && character != '\r')
+        {
+            prFontGlyph *pGlyph = imp.mpGlyphs[character];
+            if (pGlyph)
+            {
+                size.x += pGlyph->mAdvance.x;
+                if (size.x > max)
+                {
+                    max = size.x;
+                }
+            }
+        }
+    }
+
+    // Set max width
+    size.x = max;
+
+    return (size * scale);
 }
-
-

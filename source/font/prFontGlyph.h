@@ -52,9 +52,11 @@ public:
     void Draw();
 
 
-private:
-
+public:
     prVector2   mAdvance;               // Amount to advance character
+
+
+private:
     prVector2   mOffset;                // X, Y positioning offset
     u32         mCharacter;             // This character
     u32         mTextureID;             // The texture ID

@@ -67,6 +67,19 @@ public:
     //      height   - The fonts required height
     void Load(const char *filename, s32 height);
 
+    // Method: Load
+    //      Loads the font data.
+    //
+    // Notes:
+    //      In order to save texture memory you can pass in a list of characters to
+    //      create.
+    //
+    // Parameters:
+    //      filename    - The font file to load
+    //      height      - The fonts required height
+    //      characters  - A list of characters to support
+    void Load(const char *filename, s32 height, const char *characters);
+
     // Method: Draw
     //      Draws a string
     //

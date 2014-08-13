@@ -58,6 +58,7 @@
 #include "../core/prCore.h"
 #include "../display/prOglUtils.h"
 #include "../display/prRenderer.h"
+#include "../debug/prTrace.h"
 
 
 /// ---------------------------------------------------------------------------
@@ -70,6 +71,7 @@ prFontGlyph::prFontGlyph(f32 advanceX, f32 advanceY, f32 offsetX, f32 offsetY, u
     , mCharacter(aChar)
     , mTextureID(texID)
 {
+    //prTrace("(%i): adv %f %f\n", aChar, advanceX, advanceY);
 }
 
 

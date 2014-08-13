@@ -39,6 +39,7 @@ enum
 // Forward declarations
 class prSprite;
 class prBitmapFont;
+class prTrueTypeFont;
 class prButtonListener;
 class prSpriteManager;
 
@@ -119,6 +120,10 @@ public:
     //      Sets the buttons font
     void SetFont(prBitmapFont *pFont);
 
+    // Method: SetTTFFont
+    //      Sets the buttons font
+    void SetTTFFont(prTrueTypeFont *pFont);
+
     // Method: SetText
     //      Sets the buttons text
     void SetText(const char *text);
@@ -151,6 +156,7 @@ private:
 private:
     prSprite               *m_sprite;
     prBitmapFont           *m_font;
+    prTrueTypeFont         *m_ttfFont;
     prString                m_text;
     s32                     m_buttonState;
     s32                     m_width;

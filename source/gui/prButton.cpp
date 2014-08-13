@@ -21,6 +21,7 @@
 #include "prButtonListener.h"
 #include "../display/prSprite.h"
 #include "../display/prBitmapFont.h"
+#include "../display/prTrueTypeFont.h"
 #include "../display/prSpriteManager.h"
 #include "../math/prRect.h"
 #include "../debug/prDebug.h"
@@ -35,6 +36,7 @@ prButton::prButton(const char *name, prSpriteManager *pSpriteManager) : prWidget
 {
     m_sprite            = NULL;
     m_font              = NULL;
+    m_ttfFont           = NULL;
     m_width             = 0;
     m_height            = 0;
     m_buttonState       = BS_NORMAL;
@@ -99,15 +101,26 @@ void prButton::Draw()
         // Draw button
         m_sprite->Draw();
 
-        // Draw the font
+        // Draw the font (Bitmap)
         if (m_font && m_text.Length() > 0)
         {
             prVector2 size = m_font->MeasureString(m_text.Text(), m_textScale);
             
-            f32 x = pos.x + (m_sprite->GetFrameWidth()  >> 1);
+            f32 x = pos.x +  (m_sprite->GetFrameWidth()  >> 1);
             f32 y = pos.y + ((m_sprite->GetFrameHeight() >> 1) - (size.y / 2));
             
             m_font->Draw(x, y, m_textScale, m_textColour, prBitmapFont::ALIGN_CENTRE, m_text.Text());
+        }
+
+        // Draw the font (TTF)
+        else if (m_ttfFont && m_text.Length() > 0)
+        {
+            prVector2 size = m_ttfFont->MeasureString(m_text.Text(), m_textScale);
+            
+            f32 x = pos.x +  (m_sprite->GetFrameWidth()  >> 1);
+            f32 y = pos.y + ((m_sprite->GetFrameHeight() >> 1) - ((size.y / 2) + (size.y / 10))); // Extra Y is to compensate and bring closer to center
+            
+            m_ttfFont->Draw(x, y, m_textScale, m_textColour, prTrueTypeFont::ALIGN_CENTRE, m_text.Text());
         }
     }
 }
@@ -210,6 +223,15 @@ void prButton::SetSprite(prSprite *pSprite)
 void prButton::SetFont(prBitmapFont *pFont)
 { 
     m_font = pFont;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Sets the buttons font
+/// ---------------------------------------------------------------------------
+void prButton::SetTTFFont(prTrueTypeFont *pFont)
+{
+    m_ttfFont = pFont;
 }
 
 

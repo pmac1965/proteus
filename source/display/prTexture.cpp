@@ -712,3 +712,13 @@ bool prTexture::GetTextureFormat(u32 texFormat, int &internalFormat, int &format
 
     return result;
 }
+
+
+/// ---------------------------------------------------------------------------
+/// If you bind textures outside the texture class, you'll need to
+/// call this or you'll get invalid textures
+/// ---------------------------------------------------------------------------
+void prTextureClearLastID()
+{
+    lastTextureID = 0xFFFFFFFF;
+}

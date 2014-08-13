@@ -36,6 +36,7 @@
 // Forward declarations
 class prSprite;
 class prBitmapFont;
+class prTrueTypeFont;
 class prDialogListener;
 class prButton;
 
@@ -104,6 +105,10 @@ public:
     //      Sets the font for the buttons and the dialog.
     void SetFont(prBitmapFont *pFont);
 
+    // Method: SetTTFFont
+    //      Sets the dialogs font
+    void SetTTFFont(prTrueTypeFont *pFont);
+
     // Set the dialog title.
     void SetTitle(const char *text, f32 scale = 1.0f);
 
@@ -147,6 +152,7 @@ private:
 
     prSprite               *m_spriteBackdrop;
     prBitmapFont           *m_pFont;
+    prTrueTypeFont         *m_pttfFont;
     prDialogListener       *m_prIDialogListener;
     prButton               *m_buttons       [DIALOG_MAX_BUTTONS];
     prVector2               m_buttonsPos    [DIALOG_MAX_BUTTONS];

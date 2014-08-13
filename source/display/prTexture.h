@@ -127,4 +127,10 @@ private:
 };
 
 
+// Method: prTextureClearLastID
+//      If you bind textures outside the texture class, you'll need to
+//      call this or you'll get invalid textures
+void prTextureClearLastID();
+
+
 #endif//__PRTEXTURE_H
