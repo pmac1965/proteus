@@ -35,6 +35,7 @@
 #include "prStringUtil.h"
 #include "prCoreSystem.h"
 #include "../debug/prDebug.h"
+#include "../debug/prTrace.h"
 #include "../input/prMouse.h"
 
 
@@ -60,6 +61,7 @@ namespace
     void MouseWheelUpdate(float delta);
     void WindowMessage_Activate(prWindow* window, HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
     void WindowMessage_Destroy(prWindow* window, HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+    void WindowMessage_Resize(prWindow* window, u32 width, u32 height);
 
 
     // ----------------------------------------------------------------------------
@@ -205,6 +207,17 @@ namespace
         PostQuitMessage(0);
     }
 
+
+    // ----------------------------------------------------------------------------
+    // Handles: Window sizing
+    // ----------------------------------------------------------------------------
+    void WindowMessage_Resize(prWindow* window, u32 width, u32 height)
+    {
+        if (window)
+        {
+            window->Resize(width, height);
+        }
+    }
 }
 
 
@@ -284,18 +297,32 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
         }
         break;
 
+    // Pause the game if moving, or sizing the window.
     case WM_SIZE:
     case WM_SIZING:
-        if (pApp)
         {
-            pApp->OnDeactivate();
+            if (pApp)
+            {
+                pApp->OnDeactivate();
+            }
+
+            // Size window
+            RECT r;
+            GetClientRect(hwnd, &r);
+            u32 width  = r.right - r.left;
+            u32 height = r.bottom - r.top;
+
+            WindowMessage_Resize(window, width, height);
+            prTrace("Size: %i, %i\n", width, height);
+            
+            // Also do tweak bar
+            #if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)
+            TwWindowSize(r.right - r.left, r.bottom - r.top);
+            #endif
         }
-//RECT r;
-//GetClientRect(hWnd, &r);
-//TwWindowSize(r.right - r.left, r.bottom - r.top);
         break;
 
-    //
+    // Exit size
     case WM_EXITSIZEMOVE:
         if (pApp)
         {
@@ -311,7 +338,15 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
         WindowMessage_Destroy(window, hwnd, msg, wParam, lParam);
         break;
 
-#if defined(PROTEUS_TOOL) || defined(PLATFORM_PC)
+    case WM_CHAR:
+        prTrace("%c\n", wParam);
+        break;
+
+    case WM_KEYDOWN:
+        break;
+
+    // Tool only code
+    #if defined(PROTEUS_TOOL) || defined(PLATFORM_PC)
     case WM_COMMAND:
         if (pApp)
         {
@@ -347,7 +382,7 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
             }
         }
         return DefWindowProc(hwnd, msg, wParam, lParam);
-#endif
+    #endif
 
     // This lot is bad for tool apps
     #if !defined(PROTEUS_TOOL)    

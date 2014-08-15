@@ -33,6 +33,7 @@
 #include "../core/prCore.h"
 #include "../core/prRegistry.h"
 #include "../core/prStringUtil.h"
+#include "../util/prUtility_PC.h"
 
 
 // Local data
@@ -570,6 +571,17 @@ bool prWindow_PC::CreateOpenGLWindow(u32 menuID, u32 iconID)
         CenterWindow(m_hwnd);
     }
 
+    
+    if (PR_MAXIMIZEBOX == 0)
+    {
+        prDisableMaximizeButton(m_hwnd);
+    }
+
+
+    if (PR_MINIMIZEBOX == 0)
+    {
+        prDisableMinimizeButton(m_hwnd);
+    }
 
     return true;        
 }

@@ -212,6 +212,7 @@
 #include "thread/prThread.h"
 #include "utf8proc/utf8proc.h"
 #include "util/prFill.h"
+#include "util/prUtility_PC.h"
 
 
 // Include the PC libraries

@@ -125,6 +125,7 @@ f32 prGameTime::RunTime() const
 f32 prGameTime::ElapsedTime() const
 {
     PRASSERT(pImpl);
+    //prTrace("%0.2f\n", imp.elapsedTime);
     return imp.elapsedTime;
 }
 

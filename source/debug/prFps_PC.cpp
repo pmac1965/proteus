@@ -89,6 +89,7 @@ void prFps_PC::Begin()
     if (QueryPerformanceCounter(&timenow))
     {
         timeStart = timenow.QuadPart;
+        //prTrace("beg\n");
     }
 }
 
@@ -105,6 +106,9 @@ void prFps_PC::End()
         // Find the time taken.
         timeEnd    = timenow.QuadPart;
         timeTotal += (timeEnd - timeStart);
+
+
+        //prTrace("FPS: %llu, %llu, %llu\n", timeEnd, timeTotal, ticksPerSecond);
 
 
         // Exceeded one second?
