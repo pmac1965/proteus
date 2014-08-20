@@ -37,6 +37,7 @@
 #include "../debug/prDebug.h"
 #include "../debug/prTrace.h"
 #include "../input/prMouse.h"
+#include "../input/prKeyboard_PC.h"
 
 
 // Use ant tweak bar.
@@ -62,6 +63,9 @@ namespace
     void WindowMessage_Activate(prWindow* window, HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
     void WindowMessage_Destroy(prWindow* window, HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
     void WindowMessage_Resize(prWindow* window, u32 width, u32 height);
+    void WindowMessage_InjectPressed(u32 charcode);
+    void WindowMessage_InjectControl(u32 charcode);
+    void WindowMessage_InjectDown(u32 charcode);
 
 
     // ----------------------------------------------------------------------------
@@ -218,6 +222,45 @@ namespace
             window->Resize(width, height);
         }
     }
+
+
+    // ----------------------------------------------------------------------------
+    // Handles: Handles keyboard injection
+    // ----------------------------------------------------------------------------
+    void WindowMessage_InjectPressed(u32 charcode)
+    {
+        prKeyboard *pKB = static_cast<prKeyboard *>(prCoreGetComponent(PRSYSTEM_KEYBOARD));
+        if (pKB)
+        {
+            pKB->KeyboardInjectPressed(charcode);
+        }
+    }
+
+
+    // ----------------------------------------------------------------------------
+    // Handles: Handles keyboard injection
+    // ----------------------------------------------------------------------------
+    void WindowMessage_InjectControl(u32 charcode)
+    {
+        prKeyboard *pKB = static_cast<prKeyboard *>(prCoreGetComponent(PRSYSTEM_KEYBOARD));
+        if (pKB)
+        {
+            pKB->KeyboardInjectControl(charcode);
+        }
+    }
+
+
+    // ----------------------------------------------------------------------------
+    // Handles: Handles keyboard injection
+    // ----------------------------------------------------------------------------
+    void WindowMessage_InjectDown(u32 charcode)
+    {
+        prKeyboard *pKB = static_cast<prKeyboard *>(prCoreGetComponent(PRSYSTEM_KEYBOARD));
+        if (pKB)
+        {
+            pKB->KeyboardInjectDown(charcode);
+        }
+    }
 }
 
 
@@ -313,7 +356,7 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
             u32 height = r.bottom - r.top;
 
             WindowMessage_Resize(window, width, height);
-            prTrace("Size: %i, %i\n", width, height);
+            //prTrace("Size: %i, %i\n", width, height);
             
             // Also do tweak bar
             #if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)
@@ -339,10 +382,40 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
         break;
 
     case WM_CHAR:
-        prTrace("%c\n", wParam);
+        WindowMessage_InjectPressed(wParam);
         break;
 
+    // Keys down
     case WM_KEYDOWN:
+        switch(wParam)
+        {
+        case VK_SHIFT:
+            if (GetKeyState(VK_LSHIFT) & 0x8000)
+            {
+                WindowMessage_InjectControl(PRCTRL_KEY_SHIFT_LEFT);
+            }            
+            if (GetKeyState(VK_RSHIFT) & 0x8000)
+            {
+                WindowMessage_InjectControl(PRCTRL_KEY_SHIFT_RIGHT);
+            }
+            break;
+
+        case VK_CONTROL:
+            if (GetKeyState(VK_LCONTROL) & 0x8000)
+            {
+                WindowMessage_InjectControl(PRCTRL_KEY_CTRL_LEFT);
+            }            
+            if (GetKeyState(VK_RCONTROL) & 0x8000)
+            {
+                WindowMessage_InjectControl(PRCTRL_KEY_CTRL_RIGHT);
+            }
+            break;
+
+        default:
+            //prTrace("down: %c\n", wParam);
+            WindowMessage_InjectDown(wParam);
+            break;
+        }
         break;
 
     // Tool only code

@@ -340,6 +340,9 @@
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_pc.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prTransactionResult.h" />
     <ClInclude Include="..\..\..\..\source\input\prAccelerometer.h" />
+    <ClInclude Include="..\..\..\..\source\input\prKeyboard.h" />
+    <ClInclude Include="..\..\..\..\source\input\prKeyboard_PC.h" />
+    <ClInclude Include="..\..\..\..\source\input\prKeys.h" />
     <ClInclude Include="..\..\..\..\source\input\prMouse.h" />
     <ClInclude Include="..\..\..\..\source\input\prOnScreenKeyboard.h" />
     <ClInclude Include="..\..\..\..\source\input\prTouch.h" />
@@ -632,6 +635,8 @@
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_mac.cpp" />
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_pc.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prAccelerometer.cpp" />
+    <ClCompile Include="..\..\..\..\source\input\prKeyboard.cpp" />
+    <ClCompile Include="..\..\..\..\source\input\prKeyboard_PC.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prMouse.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prOnScreenKeyboard.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prTouch.cpp" />

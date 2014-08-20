@@ -99,6 +99,7 @@ enum prSystems
     PRSYSTEM_MOUSE,            
     PRSYSTEM_KEYBOARD,         
 
+    // Desktop only
 #elif defined(PLATFORM_LINUX)
     PRSYSTEM_MOUSE,
 #endif

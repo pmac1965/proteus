@@ -51,6 +51,11 @@
 #endif
 
 
+#if defined(PLATFORM_PC)
+#include "../input/prKeyboard_PC.h"
+#endif
+
+
 /// ---------------------------------------------------------------------------
 /// Local data.
 /// ---------------------------------------------------------------------------
@@ -246,7 +251,7 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
 
         #if defined(PLATFORM_PC)
         systems[PRSYSTEM_MOUSE]     = new prMouse();
-        systems[PRSYSTEM_KEYBOARD]  = NULL;
+        systems[PRSYSTEM_KEYBOARD]  = new prKeyboard_PC();
         #endif
 
 

@@ -36,6 +36,7 @@
 #include "../debug/prOnScreenLogger.h"
 #include "../debug/prFps.h"
 #include "../input/prMouse.h"
+#include "../input/prKeyboard.h"
 #include "../display/prRenderer.h"
 #include "../core/prStringUtil.h"
 #include "../audio/prSoundManager.h"
@@ -407,6 +408,7 @@ PRBOOL prApplication_PC::Run()
             prMouse         *pMouse = static_cast<prMouse *>       (prCoreGetComponent(PRSYSTEM_MOUSE));
             prSoundManager  *pSound = static_cast<prSoundManager *>(prCoreGetComponent(PRSYSTEM_AUDIO));
             prTouch         *pTouch = static_cast<prTouch *>       (prCoreGetComponent(PRSYSTEM_TOUCH));
+            prKeyboard      *pKeyb  = static_cast<prKeyboard *>    (prCoreGetComponent(PRSYSTEM_KEYBOARD));
             prFps           *pFps   = static_cast<prFps *>         (prCoreGetComponent(PRSYSTEM_FPS));
 
             if (pGameTime)
@@ -427,6 +429,9 @@ PRBOOL prApplication_PC::Run()
                     // Update and draw the game
                     Update(dt);
                     Draw();
+
+                    // Clears keyboard, so do after update.
+                    if (pKeyb) { pKeyb->Update(); }
                 }
             }
 
