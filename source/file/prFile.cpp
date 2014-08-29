@@ -73,6 +73,7 @@ typedef struct FileImplementation
 
         memset(filenameArch, 0, sizeof(filenameArch));
         memset(filenameDisk, 0, sizeof(filenameDisk));
+        memset(filenameOrig, 0, sizeof(filenameOrig));
 
         #if defined(PLATFORM_ANDROID)
         pZipFile    = NULL;
@@ -120,6 +121,7 @@ typedef struct FileImplementation
     prFileMode  filemode;                               // Mode of operation.
     char        filenameArch[FILE_MAX_FILENAME_SIZE];   // The files name. (Archive)
     char        filenameDisk[FILE_MAX_FILENAME_SIZE];   // The files name. (With system path added)
+    char        filenameOrig[FILE_MAX_FILENAME_SIZE];   // The files name. (Original unaltered)
     u32         filesize;                               // Files size.
     s32         filePointer;                            // prFile position pointer
     bool        opened;                                 // Has the file been opened with Open()
@@ -155,9 +157,10 @@ prFile::prFile(const char *filename) : pImpl (new FileImplementation())
 
     if (strlen(filename) < FILE_MAX_FILENAME_SIZE)
     {
-        // Creates two file names. One for the disk, one for the archive.
+        // Creates file names. One for the disk, one for the archive and keeps the original
         prStringCopySafe(imp.filenameArch, filename + 5, FILE_MAX_FILENAME_SIZE);
         prStringCopySafe(imp.filenameDisk, pFM->GetSystemPath(filename), FILE_MAX_FILENAME_SIZE);
+        prStringCopySafe(imp.filenameOrig, filename, FILE_MAX_FILENAME_SIZE);
 
         // Must be lowercase
         prStringToLower(imp.filenameArch);
@@ -168,12 +171,14 @@ prFile::prFile(const char *filename) : pImpl (new FileImplementation())
         
         //prTrace("ARC: %s\n", imp.filenameArch);
         //prTrace("DSK: %s\n", imp.filenameDisk);
+        //prTrace("DRI: %s\n", imp.filenameOrig);
     }
     else
     {
         PRWARN("Filename was too long: %s", filename);
         imp.filenameArch[0] = 0;
         imp.filenameDisk[0] = 0;
+        imp.filenameOrig[0] = 0;
     }
 }
 
@@ -349,9 +354,18 @@ bool prFile::Open()
     if (imp.pFile == NULL)
     {
         // Show error
-        prTrace("STD: Failed to open file: %s\n", imp.filenameDisk);
         imp.WasThereAFileError();
-        return false;
+        prTrace("STD: Failed to open file: %s\n", imp.filenameDisk);
+        prTrace("STD: Trying to open file: %s\n", imp.filenameOrig);
+
+        imp.pFile = fopen(imp.filenameOrig, "rb");
+        if (imp.pFile == NULL)
+        {
+            // Show error
+            prTrace("STD: Failed to open file: %s\n", imp.filenameOrig);
+            imp.WasThereAFileError();
+            return false;
+        }
     }
 
 
