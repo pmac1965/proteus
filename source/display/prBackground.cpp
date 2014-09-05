@@ -94,6 +94,8 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
     m_v0                    = 0.0f;
     m_u1                    = 0.0f;
 
+    mVisible                = PRTRUE;
+
     // Parse the document
     TiXmlDocument* doc = new TiXmlDocument(filename);
     if (doc)
@@ -171,6 +173,11 @@ prBackground::~prBackground()
 /// ---------------------------------------------------------------------------
 void prBackground::Draw()
 {
+    // Visible?
+    if (mVisible == PRFALSE) {
+        return;
+    }
+
     PRASSERT(m_texture);
     
     if (m_texture)

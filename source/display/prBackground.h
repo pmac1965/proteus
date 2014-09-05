@@ -81,6 +81,14 @@ public:
     //      c - The tint colour
     void SetColour(prColour c);
 
+    // Method: SetVisible
+    //      Sets the visibility.
+    void SetVisible(PRBOOL state) { mVisible = state; }
+
+    // Method: GetVisible
+    //      Gets the visibility.
+    PRBOOL GetVisible() const { return mVisible; }
+
 
 public:
 
@@ -152,6 +160,8 @@ private:
     f32             m_scrnHeight;
     f32             m_v0;
     f32             m_u1;
+
+    PRBOOL          mVisible;
 };
 
 

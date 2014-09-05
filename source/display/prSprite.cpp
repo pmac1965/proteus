@@ -356,10 +356,15 @@ void prSprite::SetFrame(s32 frame)
 
 #if defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS)
         // Left/right
-        m_u0 += (m_pw / 2);             // Add half pixel to stop blurring. Doesn't seem to effect desktops which look fine
+        m_u0 += (m_pw / 2);             // Add half pixel to stop blurring.
 
         // Top/bottom
         m_v0 += (m_ph / 2);             // Add half pixel to stop blurring
+#endif
+
+
+#if defined(PLATFORM_PC)
+        m_v0 += (m_ph / 2);             // Sub half pixel to stop blurring
 #endif
 
         // Set frame
