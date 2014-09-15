@@ -20,11 +20,22 @@
 #define __PRPARTICLEMANAGER_H
 
 
-//#include "../math/prVector2.h"
+// Forward declarations
+class prEmitter;
+class prVector3;
+class TiXmlNode;
+class TiXmlElement;
+class prEmitterDefinition;
+
+
+#include <list>
+#include <map>
+#include <string>
+#include "../core/prTypes.h"
 
 
 // Class: prParticleManager
-//      This class is responsible for creating, and destroying particles
+//      This class is responsible for creating and destroying particle emitters
 class prParticleManager
 {
 public:
@@ -35,6 +46,44 @@ public:
     // Method: ~prParticleManager
     //      Destructor.
     ~prParticleManager();
+
+    // Method: Load
+    //      Loads the particle emitter definitions
+    //
+    // Parameters:
+    //      filename - An xml file describing the emitter types
+    bool Load(const char *filename);
+
+    // Method: Update
+    //      Updates the particle manager
+    void Update(f32 dt);
+
+    // Method: Fire
+    //      Fires off a particle effect
+    prEmitter *Fire(const char *name, prVector3 &pos);
+
+
+private:
+    void Add();
+
+    // Parses a particle file.
+    void ParseParticleFile(TiXmlNode* pParent);
+
+    // Parses a particle file.
+    void ParseAttribs_ParticleFile(TiXmlElement* pElement);
+
+    // Parses a particle file.
+    void ParseAttribs_Emitter(TiXmlElement* pElement);
+
+
+private:
+    // The active emitters
+    std::map<u32, prEmitter*>                       mEmitters;
+
+    // The definitions of the emitters
+    std::map<std::string, prEmitterDefinition*>     mDefinitions;
+
+    bool    mCorrectFileType;
 };
 
 

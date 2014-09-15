@@ -1,4 +1,4 @@
-// File: prEmitter.h
+// File: prLog.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,35 +16,13 @@
  */
 
 
-#ifndef __PREMITTER_H
-#define __PREMITTER_H
+#ifndef __PRLOG_H
+#define __PRLOG_H
 
 
-#include "../core/prTypes.h"
-#include "../math/prVector3.h"
-#include "../display/prColour.h"
+// Method: prLog
+//      Logs console messages regardless of debug/release
+void prLog(const char *message);
 
 
-// Class: prEmitter
-//      Class represents a particle emission point
-class prEmitter
-{
-public:
-    prEmitter();
-
-    ~prEmitter();
-
-    void Load(const char *filename);
-
-    void Update(f32 dt);
-
-    void Draw();
-
-
-    prVector3   mPos;           // Position of the emitter
-
-    //std::list<> mParticles;
-};
-
-
-#endif//__PREMITTER_H
+#endif//__PRLOG_H

@@ -95,10 +95,12 @@
 #include "core/prWindow_Ios.h"
 #include "core/prWindow_Linux.h"
 #include "core/prWindow_PC.h"
+#include "debug/prAlert.h"
 #include "debug/prAssert.h"
 #include "debug/prConsoleWindow.h"
 #include "debug/prDebug.h"
 #include "debug/prFps.h"
+#include "debug/prLog.h"
 #include "debug/prOnScreenLogger.h"
 #include "debug/prProfileEntry.h"
 #include "debug/prProfileManager.h"
@@ -209,6 +211,7 @@
 #include "social/twitter/prTwitter.h"
 #include "social/twitter/prTwitter_Android.h"
 #include "social/twitter/prTwitter_ios.h"
+#include "steam/prSteamManager.h"
 #include "system/prSystem.h"
 #include "thread/prMutex.h"
 #include "thread/prThread.h"
@@ -263,6 +266,11 @@
         #else
             #pragma comment(lib, "proteus_r.lib")
         #endif
+    #endif
+
+    // Steam
+    #if defined(ALLOW_STEAM)
+        #pragma comment(lib, "steam_api.lib")
     #endif
 
 #endif//PLATFORM_PC

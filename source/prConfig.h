@@ -110,6 +110,10 @@
 //#define ALLOW_PROTEUS_NAMESPACE
 #endif
 
+#ifndef ALLOW_STEAM                                     // Allows the steam code
+#define ALLOW_STEAM
+#endif
+
 #ifndef SHOW_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.
 //#define SHOW_MESSAGES
 #endif

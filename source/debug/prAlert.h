@@ -1,4 +1,4 @@
-// File: prEmitter.h
+// File: prAlert.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,35 +16,16 @@
  */
 
 
-#ifndef __PREMITTER_H
-#define __PREMITTER_H
+#ifndef __PRALERT_H
+#define __PRALERT_H
 
 
-#include "../core/prTypes.h"
-#include "../math/prVector3.h"
-#include "../display/prColour.h"
+// Method: prAlertShowError
+//      Shows a cross platfrom error message dialog
+//
+// Notes:
+//      If a dialog is not available, then message will be logged to the console
+void prAlertShowError(const char *title, const char *message);
 
 
-// Class: prEmitter
-//      Class represents a particle emission point
-class prEmitter
-{
-public:
-    prEmitter();
-
-    ~prEmitter();
-
-    void Load(const char *filename);
-
-    void Update(f32 dt);
-
-    void Draw();
-
-
-    prVector3   mPos;           // Position of the emitter
-
-    //std::list<> mParticles;
-};
-
-
-#endif//__PREMITTER_H
+#endif//__PRALERT_H

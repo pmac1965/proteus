@@ -63,20 +63,24 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.5.3\include;$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.5.3\include;D:\engine\external\steamworks_sdk_130\sdk\public;$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include;$(IncludePath)</IncludePath>
     <TargetName>$(ProjectName)_d</TargetName>
+    <LibraryPath>D:\engine\external\steamworks_sdk_130\sdk\public\steam\lib\win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tool debug|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.5.3\include;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.5.3\include;D:\engine\external\steamworks_sdk_130\sdk\public;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include</IncludePath>
     <TargetName>$(ProjectName)_td</TargetName>
+    <LibraryPath>D:\engine\external\steamworks_sdk_130\sdk\public\steam\lib\win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.5.3\include;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.5.3\include;D:\engine\external\steamworks_sdk_130\sdk\public;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include</IncludePath>
     <TargetName>$(ProjectName)_r</TargetName>
+    <LibraryPath>D:\engine\external\steamworks_sdk_130\sdk\public\steam\lib\win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tool release|Win32'">
-    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.5.3\include;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.5.3\include;D:\engine\external\steamworks_sdk_130\sdk\public;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include</IncludePath>
     <TargetName>$(ProjectName)_tr</TargetName>
+    <LibraryPath>D:\engine\external\steamworks_sdk_130\sdk\public\steam\lib\win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -280,6 +284,7 @@
     <ClInclude Include="..\..\..\..\source\core\prWindow_Ios.h" />
     <ClInclude Include="..\..\..\..\source\core\prWindow_Linux.h" />
     <ClInclude Include="..\..\..\..\source\core\prWindow_PC.h" />
+    <ClInclude Include="..\..\..\..\source\debug\prAlert.h" />
     <ClInclude Include="..\..\..\..\source\debug\prAssert.h" />
     <ClInclude Include="..\..\..\..\source\debug\prConsoleWindow.h" />
     <ClInclude Include="..\..\..\..\source\debug\prDebug.h" />
@@ -288,6 +293,7 @@
     <ClInclude Include="..\..\..\..\source\debug\prFps_Android.h" />
     <ClInclude Include="..\..\..\..\source\debug\prFps_ios.h" />
     <ClInclude Include="..\..\..\..\source\debug\prFps_PC.h" />
+    <ClInclude Include="..\..\..\..\source\debug\prLog.h" />
     <ClInclude Include="..\..\..\..\source\debug\prOnScreenLogger.h" />
     <ClInclude Include="..\..\..\..\source\debug\prProfileEntry.h" />
     <ClInclude Include="..\..\..\..\source\debug\prProfileManager.h" />
@@ -452,6 +458,9 @@
     <ClInclude Include="..\..\..\..\source\social\twitter\prTwitter.h" />
     <ClInclude Include="..\..\..\..\source\social\twitter\prTwitter_Android.h" />
     <ClInclude Include="..\..\..\..\source\social\twitter\prTwitter_ios.h" />
+    <ClInclude Include="..\..\..\..\source\steam\prSteamAchievements.h" />
+    <ClInclude Include="..\..\..\..\source\steam\prSteamLobby.h" />
+    <ClInclude Include="..\..\..\..\source\steam\prSteamManager.h" />
     <ClInclude Include="..\..\..\..\source\system\prSystem.h" />
     <ClInclude Include="..\..\..\..\source\thread\prMutex.h" />
     <ClInclude Include="..\..\..\..\source\thread\prThread.h" />
@@ -580,6 +589,7 @@
     <ClCompile Include="..\..\..\..\source\core\prWindow_Ios.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prWindow_Linux.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prWindow_PC.cpp" />
+    <ClCompile Include="..\..\..\..\source\debug\prAlert.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prAssert.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prAssert_Android.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prAssert_Ios.cpp" />
@@ -590,6 +600,7 @@
     <ClCompile Include="..\..\..\..\source\debug\prFps_Android.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prFps_ios.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prFps_PC.cpp" />
+    <ClCompile Include="..\..\..\..\source\debug\prLog.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prOnScreenLogger.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prProfileEntry.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prProfileManager.cpp" />
@@ -1047,6 +1058,9 @@
     <ClCompile Include="..\..\..\..\source\social\twitter\prTwitter.cpp" />
     <ClCompile Include="..\..\..\..\source\social\twitter\prTwitter_Android.cpp" />
     <ClCompile Include="..\..\..\..\source\social\twitter\prTwitter_ios.cpp" />
+    <ClCompile Include="..\..\..\..\source\steam\prSteamAchievements.cpp" />
+    <ClCompile Include="..\..\..\..\source\steam\prSteamLobby.cpp" />
+    <ClCompile Include="..\..\..\..\source\steam\prSteamManager.cpp" />
     <ClCompile Include="..\..\..\..\source\system\prSystem.cpp" />
     <ClCompile Include="..\..\..\..\source\thread\prMutex.cpp" />
     <ClCompile Include="..\..\..\..\source\thread\prThread.cpp" />
