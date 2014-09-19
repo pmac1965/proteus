@@ -19,6 +19,7 @@
 
 #include "../prConfig.h"
 #include "../font/prFontGlyph.h"
+#include "../font/prTagParser.h"
 
 
 // Defines
@@ -575,7 +576,27 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
         {
             character = message[i];
 
-            if (character == '\n')
+            if (character == '#')
+            {
+                // Tag?
+                u32 tag = prTagIsTag(&message[i]);
+                if (tag != PRTT_NONE)
+                {
+                    prTagDoAction();
+                    i += prTagGetTagLength();
+                }
+                else
+                {
+                    // Draw #
+                    prFontGlyph *pGlyph = imp.mpGlyphs[character];
+                    if (pGlyph)
+                    {
+                        pGlyph->Draw();
+                        lineWidth += (pGlyph->mAdvance.x); 
+                    }
+                }
+            }
+            else if (character == '\n')
             {
                 glTranslatef(-lineWidth, (f32)imp.mPointSize, 0);
                 lineWidth = 0.0f;
@@ -624,7 +645,29 @@ prVector2 prTrueTypeFont::MeasureString(const char *string, float scale)
         character = string[i];
 
         // Get size.
-        if (character == '\n')
+        if (character == '#')
+        {
+            // Tag?
+            u32 tag = prTagIsTag(&string[i]);
+            if (tag != PRTT_NONE)
+            {
+                i += prTagGetTagLength();
+            }
+            else
+            {
+                // Measure
+                prFontGlyph *pGlyph = imp.mpGlyphs[character];
+                if (pGlyph)
+                {
+                    size.x += pGlyph->mAdvance.x;
+                    if (size.x > max)
+                    {
+                        max = size.x;
+                    }
+                }
+            }
+        }
+        else if (character == '\n')
         {
             size.x  = 0.0f;
             size.y += imp.mPointSize;

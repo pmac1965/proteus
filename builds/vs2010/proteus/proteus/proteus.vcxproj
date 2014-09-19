@@ -306,6 +306,7 @@
     <ClInclude Include="..\..\..\..\source\display\prColour.h" />
     <ClInclude Include="..\..\..\..\source\display\prFadeManager.h" />
     <ClInclude Include="..\..\..\..\source\display\prFixedWidthFont.h" />
+    <ClInclude Include="..\..\..\..\source\display\prGifDecoder.h" />
     <ClInclude Include="..\..\..\..\source\display\prGLFont.h" />
     <ClInclude Include="..\..\..\..\source\display\prLookAt.h" />
     <ClInclude Include="..\..\..\..\source\display\prOglUtils.h" />
@@ -329,6 +330,7 @@
     <ClInclude Include="..\..\..\..\source\file\prFileSystem.h" />
     <ClInclude Include="..\..\..\..\source\font\prFontGlyph.h" />
     <ClInclude Include="..\..\..\..\source\font\prFontManager.h" />
+    <ClInclude Include="..\..\..\..\source\font\prTagParser.h" />
     <ClInclude Include="..\..\..\..\source\freeImage\FreeImage.h" />
     <ClInclude Include="..\..\..\..\source\gui\prButton.h" />
     <ClInclude Include="..\..\..\..\source\gui\prButtonListener.h" />
@@ -613,6 +615,7 @@
     <ClCompile Include="..\..\..\..\source\display\prColour.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prFadeManager.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prFixedWidthFont.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prGifDecoder.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prGLFont.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prLookAt.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prOglUtils.cpp" />
@@ -633,6 +636,7 @@
     <ClCompile Include="..\..\..\..\source\file\prFileSystem.cpp" />
     <ClCompile Include="..\..\..\..\source\font\prFontGlyph.cpp" />
     <ClCompile Include="..\..\..\..\source\font\prFontManager.cpp" />
+    <ClCompile Include="..\..\..\..\source\font\prTagParser.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prButton.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prDialog.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prGui.cpp" />

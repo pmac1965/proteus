@@ -352,6 +352,17 @@ void prStringParseFloats(const char* text, f32 &a, f32 &b);
 //      c    - Variable to receive parsed value
 void prStringParseFloats(const char* text, f32 &a, f32 &b, f32 &c);
 
+// Function: prStringParseFloats
+//      Parses a string in the format of "0,0,0" into float values
+//
+// Parameters:
+//      text - The string to parse
+//      a    - Variable to receive parsed value
+//      b    - Variable to receive parsed value
+//      c    - Variable to receive parsed value
+//      d    - Variable to receive parsed value
+void prStringParseFloats(const char* text, f32 &a, f32 &b, f32 &c, f32 &d);
+
 // Function: prStringFind
 //      Finds if the specified character exists within the supplied string.
 //
@@ -419,6 +430,10 @@ char *prStringSkipWhitespace(char* text);
 // Function: prStringSkipToWhitespace
 //      Skips to next whitespace character
 char *prStringSkipToWhitespace(char* text);
+
+// Function: prStringCountCharsOfType
+//      Counts the specified character in the passed string
+s32 prStringCountCharsOfType(const char* text, char character);
 
 
 #endif//__PRSTRINGUTIL_H

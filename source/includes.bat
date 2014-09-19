@@ -146,6 +146,12 @@ dir /S /B *.h >> ..\files.txt
 popd
 )
 
+if exist network (
+pushd network
+dir /S /B *.h >> ..\files.txt
+popd
+)
+
 if exist notifications (
 pushd notifications
 dir /S /B *.h >> ..\files.txt

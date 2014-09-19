@@ -113,6 +113,7 @@
 #include "display/prColour.h"
 #include "display/prFadeManager.h"
 #include "display/prFixedWidthFont.h"
+#include "display/prGifDecoder.h"
 #include "display/prGLFont.h"
 #include "display/prLookAt.h"
 #include "display/prOglUtils.h"

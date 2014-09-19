@@ -191,7 +191,11 @@ void prSteamManager::Deinitialise()
 #if (defined(ALLOW_STEAM) && defined(PLATFORM_PC))
 
     // Shutdown the SteamAPI
-	SteamController()->Shutdown();
+    if (SteamController())
+    {
+	    SteamController()->Shutdown();
+    }
+
 	SteamAPI_Shutdown();
 
 	// Shutdown Steam CEG

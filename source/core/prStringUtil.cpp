@@ -1026,6 +1026,53 @@ void prStringParseFloats(const char* text, f32 &a, f32 &b, f32 &c)
 
 
 /// ---------------------------------------------------------------------------
+/// Parses a string in the format of "0,0,0,0" into float values
+/// ---------------------------------------------------------------------------
+void prStringParseFloats(const char* text, f32 &a, f32 &b, f32 &c, f32 &d)
+{
+    PRASSERT(text && *text);
+
+    a = (f32)atof(text);
+
+    while(*text)
+    {
+        if (*text == ',')
+        {
+            text++;
+            b = (f32)atof(text);
+            break;
+        }
+
+        text++;
+    }
+
+    while(*text)
+    {
+        if (*text == ',')
+        {
+            text++;
+            c = (f32)atof(text);
+            break;
+        }
+
+        text++;
+    }
+
+    while(*text)
+    {
+        if (*text == ',')
+        {
+            text++;
+            d = (f32)atof(text);
+            break;
+        }
+
+        text++;
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
 /// Finds if the specified character exists within the supplied string.
 /// ---------------------------------------------------------------------------
 bool prStringFind(const char* string, char character)
@@ -1250,4 +1297,28 @@ char *prStringSkipToWhitespace(char* text)
     }
 
     return text;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Counts the specified character in the passed string
+/// ---------------------------------------------------------------------------
+s32 prStringCountCharsOfType(const char* text, char character)
+{
+    s32 count = 0;
+
+    if (text)
+    {
+        while(*text)
+        {
+            if (*text == character)
+            {
+                count++;
+            }
+
+            text++;
+        }
+    }
+
+    return count;
 }
