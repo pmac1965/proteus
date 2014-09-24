@@ -579,7 +579,7 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
             if (character == '#')
             {
                 // Tag?
-                u32 tag = prTagIsTag(&message[i]);
+                u32 tag = prTagIsTag(&message[i], colour.alpha);
                 if (tag != PRTT_NONE)
                 {
                     prTagDoAction();

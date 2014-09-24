@@ -206,7 +206,7 @@ prSprite *prSpriteManager::Create(const char *filename, bool draw)
 
 
 //#if defined(PROTEUS_TOOL)
-#if defined(PROTEUS_TOOL) || defined(PLATFORM_PC)
+//#if defined(PROTEUS_TOOL) || defined(PLATFORM_PC)
 /// ---------------------------------------------------------------------------
 /// Creates a sprite.
 /// ---------------------------------------------------------------------------
@@ -234,7 +234,7 @@ void prSpriteManager::ToolRelease(prSprite *sprite)
         delete sprite;
     }
 }
-#endif
+//#endif
 
 
 /// ---------------------------------------------------------------------------

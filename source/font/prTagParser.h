@@ -47,7 +47,7 @@ enum prTagType
 //
 // See Also:
 //      <prTagType>
-u32 prTagIsTag(const char *pString);
+u32 prTagIsTag(const char *pString, f32 _a = 1.0f);
 
 // Method: prTagDoAction
 //      Performs the action set by the last tag found

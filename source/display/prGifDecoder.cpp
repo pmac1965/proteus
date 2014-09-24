@@ -29,6 +29,7 @@
 #include "../display/prSprite.h"
 #include "../display/prTexture.h"
 #include "../display/prSpriteManager.h"
+#include "../math/prMathsUtil.h"
 
 
 /// ---------------------------------------------------------------------------
@@ -43,9 +44,10 @@ prGifDecoder::prGifDecoder(const char *filename)
     mDib            = NULL;
     mMultiBmp       = NULL;
     mpImage         = NULL;
+    mpImageCopy     = NULL;
     mpSprite        = NULL;
     mpTetxure       = NULL;
-    mImageSize      = 0;
+    mFileSize       = 0;
     mFrameCount     = 0;
     mFrameWidth     = 0;
     mFrameHeight    = 0;
@@ -58,13 +60,13 @@ prGifDecoder::prGifDecoder(const char *filename)
     {
         if (pFile->Open())
         {
-            mImageSize = pFile->Size();
-            if (mImageSize > 0)
+            mFileSize = pFile->Size();
+            if (mFileSize > 0)
             {
-                mpImage = new u8[mImageSize];
+                mpImage = new u8[mFileSize];
                 if (mpImage)
                 {
-                    pFile->Read(mpImage, mImageSize);
+                    pFile->Read(mpImage, mFileSize);
                 }
 
                 pFile->Close();
@@ -82,22 +84,22 @@ prGifDecoder::prGifDecoder(const char *filename)
         PRSAFE_DELETE(pFile);
     }
 
-    if (mpImage && mImageSize > 0)
+    // Get gif details
+    if (mpImage && mFileSize > 0)
     {
         // Attach the binary data to a memory stream
-        FIMEMORY *hmem = FreeImage_OpenMemory(mpImage, mImageSize);
+        FIMEMORY *hmem = FreeImage_OpenMemory(mpImage, mFileSize);
 
         // Get the image type. So we know its a gif
 		mFif = FreeImage_GetFileTypeFromMemory(hmem, 0);
         if (mFif == FIF_GIF)
         {
 	        // Open the multipage bitmap stream as read-only
-	        mMultiBmp = FreeImage_LoadMultiBitmapFromMemory(mFif, hmem, 0);//GIF_LOAD256);
+	        mMultiBmp = FreeImage_LoadMultiBitmapFromMemory(mFif, hmem, 0);
             if (mMultiBmp)
             {
+                // Gets frames
                 mFrameCount = FreeImage_GetPageCount(mMultiBmp);
-                //prTrace("Loaded %s\n", filename);
-                //prTrace("Frames %i\n", mFrameCount);
 
 		        // Use the first page to get the size
 			    FIBITMAP *dib = FreeImage_LockPage(mMultiBmp, 0);
@@ -105,9 +107,26 @@ prGifDecoder::prGifDecoder(const char *filename)
                 {
                     mFrameWidth  = FreeImage_GetWidth(dib);
                     mFrameHeight = FreeImage_GetHeight(dib);
-                    //prTrace("w %i\n", mFrameWidth);
-                    //prTrace("h %i\n", mFrameHeight);
 				    FreeImage_UnlockPage(mMultiBmp, dib, FALSE);
+
+                    // Set texture width/height and size.
+                    mTextureWidth   = mFrameWidth;
+                    mTextureHeight  = mFrameHeight;
+
+                    // Generate power of two texture size if required.
+                    if (!prIsPowerOf2(mTextureWidth))
+                    {
+                        mTextureWidth = prNextPowerOf2(mTextureHeight);
+                    }
+            
+                    if (!prIsPowerOf2(mTextureHeight))
+                    {
+                        mTextureHeight = prNextPowerOf2(mTextureHeight);
+                    }
+
+                    // Times four for RGBA
+                    mTextureSize = ((mTextureWidth * mTextureHeight) * 4);
+                    //prTrace("GIF.TEX: %i, %i, %i\n", mTextureWidth, mTextureHeight, mTextureSize);
 			    }
             }
         }
@@ -119,13 +138,7 @@ prGifDecoder::prGifDecoder(const char *filename)
     else
     {
         PRWARN("Failed to read gif");
-    }//*/
-
-    /*if (mMultiBmp)
-    {
-        FreeImage_CloseMultiBitmap(mMultiBmp, 0);
-        mMultiBmp = NULL;
-    }//*/
+    }
 }
 
 
@@ -140,9 +153,8 @@ prGifDecoder::~prGifDecoder()
         mMultiBmp = NULL;
     }
 
-    //FreeImage_DeInitialise();
-
     PRSAFE_DELETE(mpImage);
+    PRSAFE_DELETE(mpImageCopy);
 }
 
 
@@ -153,14 +165,8 @@ bool prGifDecoder::DecodeFrame(u32 frame)
 {
     bool result = false;
 
-    if (mpImage && mImageSize > 0)
+    if (mpImage && mFileSize > 0)
     {
-        // Attach the binary data to a memory stream
-        /*FIMEMORY *hmem = FreeImage_OpenMemory(mpImage, mImageSize);
-
-	    // Open the multipage bitmap stream as read-only
-	    mMultiBmp = FreeImage_LoadMultiBitmapFromMemory(mFif, hmem, 0);//*/
-
 	    FIBITMAP *dib = FreeImage_LockPage(mMultiBmp, frame);
         if (dib)
         {
@@ -171,96 +177,51 @@ bool prGifDecoder::DecodeFrame(u32 frame)
             u32 imageHeight = FreeImage_GetHeight(dib);
 
             // Calculate raw data size and create buffer
-            u32 rawImageSize = ((imageWidth * imageHeight) * 4);
-            u8 *rawImage     = new u8[rawImageSize];
-            memset(rawImage, 0, rawImageSize);
+            u8 *rawImage     = new u8[mTextureSize];
+            memset(rawImage, 0, mTextureSize);
+
+            // Create the copy image for merging frames
+            bool copyBase = false;
+            if (mpImageCopy == NULL)
+            {
+                mpImageCopy = new u8[mTextureSize];
+                memset(mpImageCopy, 0, mTextureSize);
+                copyBase = true;
+            }
 
             // Copy data
             FIBITMAP *bmp = FreeImage_ConvertTo32Bits(dib);
             if (bmp)
             {
                 FREE_IMAGE_TYPE type = FreeImage_GetImageType(dib);
+
                 switch(type)
                 {
                 // Convert bitmap
                 case FIT_BITMAP:
-                    // 32 bit bitmap?
-                    if (imageBPP == 32)
-                    {
-                        BYTE *bits  = FreeImage_GetBits(bmp);
-                        BYTE *image = rawImage;
-                        for(u32 y = 0; y < imageHeight; y++)
-                        {
-                            // Set row start
-                            BYTE *pixel = (BYTE*)bits;
-                            BYTE *line  = image;
-                            for (u32 x = 0; x < imageWidth; x++)
-                            {
-                                line[0] = pixel[FI_RGBA_RED];
-                                line[1] = pixel[FI_RGBA_GREEN];
-                                line[2] = pixel[FI_RGBA_BLUE];
-                                line[3] = pixel[FI_RGBA_ALPHA];
-                                pixel += 4;
-                                line  += 4;
-                            }
-
-                            // Next line
-                            bits += pitch;
-
-                            // Next row
-                            image += (imageWidth * 4);
-                        }
-                    }                    
-                    // 24 bit?
-                    else if (imageBPP == 24)
-                    {
-                        BYTE *raw  = (BYTE*)malloc(imageHeight * (imageWidth * 4));          // imageWidth * 4 == 24 to 32 bits
-                        BYTE *bits = raw;
-                        if (raw)
-                        {
-                            FreeImage_ConvertToRawBits(bits, bmp, imageWidth * 4, 32, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK, FALSE);
-                            BYTE *image = rawImage;
-                            for(u32 y = 0; y < imageHeight; y++)
-                            {
-                                // Set row start
-                                BYTE *pixel = (BYTE*)bits;
-                                BYTE *line  = image;
-
-                                for (u32 x = 0; x < imageWidth; x++)
-                                {
-                                    line[0] = pixel[FI_RGBA_RED];
-                                    line[1] = pixel[FI_RGBA_GREEN];
-                                    line[2] = pixel[FI_RGBA_BLUE];
-                                    line[3] = pixel[FI_RGBA_ALPHA];
-                                    pixel += 4;
-                                    line  += 4;
-                                }
-
-                                // Next line
-                                bits += (imageWidth * 4);
-
-                                // Next row
-                                image += (imageWidth * 4);
-                            }
-
-                            free(raw);
-                        }
-                    }
-
                     // 8 bit?
-                    else if (imageBPP == 8)
+                    if (imageBPP == 8)
                     {
                         BYTE *raw  = (BYTE*)malloc(imageHeight * (pitch * 4));          // pitch * 4 == 8 to 32 bits
                         BYTE *bits = raw;
                         if (raw)
                         {
                             FreeImage_ConvertToRawBits(bits, bmp, pitch * 4, 32, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK, FALSE);
-                            BYTE *image = rawImage;
+                            BYTE *image    = rawImage;
+                            BYTE *imageCpy = mpImageCopy;
+
+                            u32 offset = (mTextureHeight - imageHeight);
+
+                            // Put at top
+                            image    += ((mTextureWidth * 4) * offset);
+                            imageCpy += ((mTextureWidth * 4) * offset);
+
                             for(u32 y = 0; y < imageHeight; y++)
                             {
                                 // Set row start
-                                BYTE *pixel = (BYTE*)bits;
-                                BYTE *line  = image;
+                                BYTE *pixel     = (BYTE*)bits;
+                                BYTE *line      = image;
+                                BYTE *lineCopy  = imageCpy;
 
                                 for (u32 x = 0; x < imageWidth; x++)
                                 {
@@ -268,19 +229,34 @@ bool prGifDecoder::DecodeFrame(u32 frame)
                                     line[1] = pixel[FI_RGBA_GREEN];
                                     line[2] = pixel[FI_RGBA_BLUE];
                                     line[3] = pixel[FI_RGBA_ALPHA];
-                                    pixel += 4;
-                                    line  += 4;
+
+                                    if (copyBase)
+                                    {
+                                        lineCopy[0] = line[0];
+                                        lineCopy[1] = line[1];
+                                        lineCopy[2] = line[2];
+                                        lineCopy[3] = line[3];
+                                    }
+
+                                    pixel    += 4;
+                                    line     += 4;
+                                    lineCopy += 4;
                                 }
 
                                 // Next line
                                 bits += (pitch * 4);
 
                                 // Next row
-                                image += (imageWidth * 4);
+                                image    += (mTextureWidth * 4);
+                                imageCpy += (mTextureWidth * 4);
                             }
 
                             free(raw);
                         }
+                    }
+                    else
+                    {
+                        PRPANIC("Only 8 bit gifs supported at the moment");
                     }
                     break;
 
@@ -294,6 +270,23 @@ bool prGifDecoder::DecodeFrame(u32 frame)
             FreeImage_UnlockPage(mMultiBmp, dib, FALSE);
             result = true;
 
+            // Merge?
+            if (!copyBase)
+            {
+                u32 *pPrev = (u32*)mpImageCopy;
+                u32 *pCurr = (u32*)rawImage;
+
+                s32 count = (mTextureSize / 4);
+                while(count > 0)
+                {
+                    u32 curr = *pCurr++;
+                    
+                    if (curr) { *pPrev = curr; }
+                    
+                    pPrev++;
+                    count--;
+                }
+            }
 
             // Load texture
             prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
@@ -305,7 +298,7 @@ bool prGifDecoder::DecodeFrame(u32 frame)
                 mpTetxure = NULL;
             }
 
-            mpTetxure = pRM->LoadFromRaw<prTexture>("Texture", rawImage, rawImageSize, imageWidth, imageHeight);
+            mpTetxure = pRM->LoadFromRaw<prTexture>("Texture", mpImageCopy, mTextureSize, mTextureWidth, mTextureHeight);
             PRASSERT(mpTetxure);
 
             // Create the working sprite
@@ -321,17 +314,11 @@ bool prGifDecoder::DecodeFrame(u32 frame)
 
                 // Set working
                 mpSprite = pSM->ToolCreate(mpTetxure, imageWidth, imageHeight);
+                mpSprite->SetFrame(0);
             }
 
             PRSAFE_DELETE(rawImage);
         }
-
-
-        /*if (mMultiBmp)
-        {
-            FreeImage_CloseMultiBitmap(mMultiBmp, 0);
-            mMultiBmp = NULL;
-        }//*/
     }
 
     return result;

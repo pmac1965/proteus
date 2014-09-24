@@ -24,6 +24,15 @@
 #include "../debug/prTrace.h"
 
 
+// __cdecl is PC specific
+#if defined(PLATFORM_PC)
+    #define PC_API  __cdecl
+#else
+    #define PC_API
+#endif
+
+
+// Steam allowed?
 #if defined(ALLOW_STEAM)
     // PC  
     #if defined(PLATFORM_PC)
@@ -36,7 +45,7 @@
 /// ---------------------------------------------------------------------------
 /// Purpose: callback hook for debug text emitted from the Steam API
 /// ---------------------------------------------------------------------------
-extern "C" void __cdecl SteamAPIDebugTextHook(int nSeverity, const char *pchDebugText)
+extern "C" void PC_API SteamAPIDebugTextHook(int nSeverity, const char *pchDebugText)
 {
     prLog(pchDebugText);
 

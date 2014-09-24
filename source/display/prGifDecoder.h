@@ -1,4 +1,4 @@
-// File: prCamera.h
+// File: prGifDecoder.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -24,6 +24,7 @@
 #include "../freeImage/FreeImage.h"
 
 
+// Defines
 #define GIFDECODER_NOFRAME  0xFFFFFFFF
 
 
@@ -35,6 +36,9 @@ class prTexture;
 // Class: prGifDecoder
 //      Decodes and draws a gif animation at runtime.
 //      Designed for tutorials, adverts, etc
+//
+// Notes:
+//      Currently only decodes on 8 bit gifs
 class prGifDecoder
 {
 public:
@@ -86,14 +90,19 @@ private:
     FIBITMAP           *mDib;
     FIMULTIBITMAP      *mMultiBmp;
     u8                 *mpImage;
+    u8                 *mpImageCopy;
     prSprite           *mpSprite;
     prTexture          *mpTetxure;
-    u32                 mImageSize;
+    u32                 mFileSize;
 
     u32                 mFrameCount;
     u32                 mFrameWidth;
     u32                 mFrameHeight;
     u32                 mFrameCurrent;
+
+    u32                 mTextureWidth;
+    u32                 mTextureHeight;
+    u32                 mTextureSize;
 };
 
 

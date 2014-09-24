@@ -151,6 +151,26 @@ inline int prNextPowerOf2(int a)
     return rval;
 }
 
+
+// Function: prIsPowerOf2
+//      This function tests if a number is power of 2
+inline bool prIsPowerOf2(s32 size)
+{
+    bool result = false;
+    
+    for (s32 i = 1; i < 32; i++)
+    {
+        if (size == (1 << i))
+        {
+            result = true;
+            break;
+        }
+    }
+    
+    return result;
+}
+
+
 // Function: prPercentageOfValue
 //      Returns the specified percentage of a value.
 s32 prPercentageOfValue(s32 percent, s32 value);

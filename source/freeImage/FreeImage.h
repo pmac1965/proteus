@@ -26,6 +26,11 @@
 #ifndef FREEIMAGE_H
 #define FREEIMAGE_H
 
+
+// Paul: Need to use less decoders with Android and iOS
+#include "../prConfig.h"
+
+
 // Version information ------------------------------------------------------
 
 #define FREEIMAGE_MAJOR_VERSION   3
@@ -136,7 +141,9 @@ FI_STRUCT (FIMULTIBITMAP) { void *data; };
 #ifndef _MSC_VER
 // define portable types for 32-bit / 64-bit OS
 #include <inttypes.h>
+#ifndef OBJC_BOOL_DEFINED   // Paul: Objective C doesn't like this one little bit.
 typedef int32_t BOOL;
+#endif
 typedef uint8_t BYTE;
 typedef uint16_t WORD;
 typedef uint32_t DWORD;
@@ -367,6 +374,13 @@ FI_STRUCT (FIICCPROFILE) {
 /** I/O image format identifiers.
 */
 FI_ENUM(FREE_IMAGE_FORMAT) {
+    // Paul: Android and ios use a smaller set of decoders
+#if (defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID))
+	FIF_UNKNOWN = -1,
+	FIF_GIF     = 0,
+	FIF_TIFF	= 1,
+	FIF_RAW		= 2,
+#else
 	FIF_UNKNOWN = -1,
 	FIF_BMP		= 0,
 	FIF_ICO		= 1,
@@ -406,6 +420,7 @@ FI_ENUM(FREE_IMAGE_FORMAT) {
 	FIF_RAW		= 34,
 	FIF_WEBP	= 35,
 	FIF_JXR		= 36
+#endif
 };
 
 /** Image type used in FreeImage.

@@ -88,7 +88,7 @@ public:
     //      Returns the created sprite or NULL on failure
     prSprite *Create(const char *filename, bool draw = true);
 
-#if defined(PROTEUS_TOOL) || defined(PLATFORM_PC)
+//#if defined(PROTEUS_TOOL) || defined(PLATFORM_PC)
     // Method: ToolCreate
     //      Creates a sprite.
     //
@@ -113,7 +113,7 @@ public:
     // Notes:
     //      This call only exists in the tool build
     void ToolRelease(prSprite *sprite);
-#endif
+//#endif
 
     // Method: Release
     //      Releases a sprite and any asssociated assets.

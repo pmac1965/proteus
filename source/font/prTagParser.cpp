@@ -59,7 +59,7 @@
 #endif
 
 
-#define TAG_DEBUG
+//#define TAG_DEBUG
 #define TAG_MAX_SIZE    32
 
 
@@ -145,7 +145,7 @@ namespace
 /// ---------------------------------------------------------------------------
 /// Checks if a # in a string message indicates a tag
 /// ---------------------------------------------------------------------------
-u32 prTagIsTag(const char *pString)
+u32 prTagIsTag(const char *pString, f32 _a)
 {
     // Reset
     tagLength   = 0;
@@ -153,7 +153,7 @@ u32 prTagIsTag(const char *pString)
     r           = 1.0f;
     g           = 1.0f;
     b           = 1.0f;
-    a           = 1.0f;
+    a           = _a;                   // Allows alpha not to be destroyed
 
     if (pString && *pString)
     {
