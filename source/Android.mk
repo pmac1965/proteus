@@ -167,6 +167,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	file/prFileSystem.cpp	\
 	font/prFontManager.cpp	\
 	font/prFontGlyph.cpp	\
+	font/prTagParser.cpp	\
 	gui/prButton.cpp	\
 	gui/prDialog.cpp	\
 	gui/prGui.cpp	\

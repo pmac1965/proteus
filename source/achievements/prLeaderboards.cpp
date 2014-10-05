@@ -36,7 +36,6 @@ namespace
 void prLeaderboard::Submit(const char *name, u64 score)
 {
     TODO("Finish leaderboards")
-    TODO("Remove scoreloop")
 
     if (name && *name && score > 0)
     {

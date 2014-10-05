@@ -57,6 +57,28 @@ public:
     //      frame - The frame to decode
     bool DecodeFrame(u32 frame);
 
+    // Method: PartDecode1
+    //      Slower platforms can decode and animate the gif over several frames
+    //
+    // Notes:
+    //      This function acquires the next frame from the gif
+    void PartDecode1(u32 frame);
+
+    // Method: PartDecode2
+    //      Slower platforms can decode and animate the gif over several frames
+    //
+    // Notes:
+    //      This function merges the acquire data with the previous image to
+    //      create the next animation frame
+    void PartDecode2();
+
+    // Method: PartDecode3
+    //      Slower platforms can decode and animate the gif over several frames
+    //
+    // Notes:
+    //      This function creates and uploads the texture
+    void PartDecode3();
+
     // Method: Draw
     //      Draws the currently decoded frame
     //
@@ -84,8 +106,14 @@ public:
     //      Returns the animations frame height
     u32 GetFrameHeight() const { return mFrameHeight; }
 
-private:
 
+private:
+    // Stops passing by value and assignment.
+    prGifDecoder(const prGifDecoder&);
+    const prGifDecoder& operator = (const prGifDecoder&);
+
+    
+private:
     FREE_IMAGE_FORMAT   mFif;
     FIBITMAP           *mDib;
     FIMULTIBITMAP      *mMultiBmp;
@@ -103,6 +131,12 @@ private:
     u32                 mTextureWidth;
     u32                 mTextureHeight;
     u32                 mTextureSize;
+
+    u32                 pitch;
+    u32                 imageBPP;
+    u32                 imageWidth;
+    u32                 imageHeight;
+    u8                 *pRawImage;
 };
 
 

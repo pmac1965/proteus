@@ -84,17 +84,22 @@ prSteamManager::~prSteamManager()
 /// ---------------------------------------------------------------------------
 bool prSteamManager::IsAvailable() const
 {
-    bool result = false;
-
 #if defined(ALLOW_STEAM)
+
     // PC  
     #if defined(PLATFORM_PC)
-    result = true;
+    return true;
+    
+    #else
+    return false;
+
     #endif
 
-#endif
+#else
 
-    return result;
+    return false;
+
+#endif
 }
 
 

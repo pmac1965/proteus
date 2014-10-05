@@ -52,19 +52,18 @@ void prGetDocumentsPath(char *buffer)
 	{
 		char path_doc[256];
 
-	
-		// Get the install path
-		NSString   *appFolderPath = [[NSBundle mainBundle] resourcePath];
-		const char *appPath       = [appFolderPath UTF8String];	
-
-		strcpy(path_doc, appPath);
+		// Get the documents path
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = paths[0];
 	
 		// Create documents path
-		int index = prStringFindLastIndex(path_doc, '/');	
-		path_doc[index] = 0;		
-		strcat(path_doc, "/Documents/");
+		const char *appPath = [documentsDirectory UTF8String];
+		strcpy(path_doc, appPath);
+        strcat(path_doc, "/");
 
+        // Copy
 		strcpy(buffer, (const char *)path_doc);
+        //prTrace("Documents paths: %s\n", buffer);
 	}
 }
 

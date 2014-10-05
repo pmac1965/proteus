@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -52,7 +51,11 @@ prGifDecoder::prGifDecoder(const char *filename)
     mFrameWidth     = 0;
     mFrameHeight    = 0;
     mFrameCurrent   = GIFDECODER_NOFRAME;
-    
+    pRawImage       = NULL;
+    pitch           = 0;
+    imageBPP        = 0;
+    imageWidth      = 0;
+    imageHeight     = 0;
 
     // Read the gif into memory
     prFile *pFile = new prFile(filename);
@@ -91,23 +94,24 @@ prGifDecoder::prGifDecoder(const char *filename)
         FIMEMORY *hmem = FreeImage_OpenMemory(mpImage, mFileSize);
 
         // Get the image type. So we know its a gif
-		mFif = FreeImage_GetFileTypeFromMemory(hmem, 0);
+        mFif = FreeImage_GetFileTypeFromMemory(hmem, 0);
         if (mFif == FIF_GIF)
         {
-	        // Open the multipage bitmap stream as read-only
-	        mMultiBmp = FreeImage_LoadMultiBitmapFromMemory(mFif, hmem, 0);
+            // Open the multipage bitmap stream as read-only
+            mMultiBmp = FreeImage_LoadMultiBitmapFromMemory(mFif, hmem, 0);
             if (mMultiBmp)
             {
                 // Gets frames
                 mFrameCount = FreeImage_GetPageCount(mMultiBmp);
 
-		        // Use the first page to get the size
-			    FIBITMAP *dib = FreeImage_LockPage(mMultiBmp, 0);
-			    if(dib)
+
+                // Use the first page to get the size
+                FIBITMAP *dib = FreeImage_LockPage(mMultiBmp, 0);
+                if(dib)
                 {
                     mFrameWidth  = FreeImage_GetWidth(dib);
                     mFrameHeight = FreeImage_GetHeight(dib);
-				    FreeImage_UnlockPage(mMultiBmp, dib, FALSE);
+                    FreeImage_UnlockPage(mMultiBmp, dib, FALSE);
 
                     // Set texture width/height and size.
                     mTextureWidth   = mFrameWidth;
@@ -127,7 +131,7 @@ prGifDecoder::prGifDecoder(const char *filename)
                     // Times four for RGBA
                     mTextureSize = ((mTextureWidth * mTextureHeight) * 4);
                     //prTrace("GIF.TEX: %i, %i, %i\n", mTextureWidth, mTextureHeight, mTextureSize);
-			    }
+                }
             }
         }
         else
@@ -155,6 +159,7 @@ prGifDecoder::~prGifDecoder()
 
     PRSAFE_DELETE(mpImage);
     PRSAFE_DELETE(mpImageCopy);
+    PRSAFE_DELETE_ARRAY(pRawImage);
 }
 
 
@@ -171,21 +176,21 @@ bool prGifDecoder::DecodeFrame(u32 frame)
         if (dib)
         {
             // Get image pitch
-            u32 pitch       = FreeImage_GetPitch(dib);
-            u32 imageBPP    = FreeImage_GetBPP(dib);
-            u32 imageWidth  = FreeImage_GetWidth(dib);
-            u32 imageHeight = FreeImage_GetHeight(dib);
+            pitch       = FreeImage_GetPitch(dib);
+            imageBPP    = FreeImage_GetBPP(dib);
+            imageWidth  = FreeImage_GetWidth(dib);
+            imageHeight = FreeImage_GetHeight(dib);
 
             // Calculate raw data size and create buffer
             u8 *rawImage     = new u8[mTextureSize];
-            memset(rawImage, 0, mTextureSize);
+            //memset(rawImage, 0, mTextureSize);
 
             // Create the copy image for merging frames
             bool copyBase = false;
             if (mpImageCopy == NULL)
             {
                 mpImageCopy = new u8[mTextureSize];
-                memset(mpImageCopy, 0, mTextureSize);
+                //memset(mpImageCopy, 0, mTextureSize);
                 copyBase = true;
             }
 
@@ -225,17 +230,16 @@ bool prGifDecoder::DecodeFrame(u32 frame)
 
                                 for (u32 x = 0; x < imageWidth; x++)
                                 {
-                                    line[0] = pixel[FI_RGBA_RED];
-                                    line[1] = pixel[FI_RGBA_GREEN];
-                                    line[2] = pixel[FI_RGBA_BLUE];
-                                    line[3] = pixel[FI_RGBA_ALPHA];
+                                    u32 colour = (pixel[FI_RGBA_RED]        ) |
+                                                 (pixel[FI_RGBA_GREEN] << 8 ) |
+                                                 (pixel[FI_RGBA_BLUE]  << 16) |
+                                                 (pixel[FI_RGBA_ALPHA] << 24);
+                                    
+                                    *(u32*)line = colour;
 
                                     if (copyBase)
                                     {
-                                        lineCopy[0] = line[0];
-                                        lineCopy[1] = line[1];
-                                        lineCopy[2] = line[2];
-                                        lineCopy[3] = line[3];
+                                        *(u32*)lineCopy = colour;
                                     }
 
                                     pixel    += 4;
@@ -276,15 +280,28 @@ bool prGifDecoder::DecodeFrame(u32 frame)
                 u32 *pPrev = (u32*)mpImageCopy;
                 u32 *pCurr = (u32*)rawImage;
 
-                s32 count = (mTextureSize / 4);
-                while(count > 0)
+                u32 offset = (mTextureHeight - imageHeight);
+                
+                // Put at top
+                pCurr += (mTextureWidth * offset);
+                pPrev += (mTextureWidth * offset);
+
+                for(u32 y = 0; y < imageHeight; y++)
                 {
-                    u32 curr = *pCurr++;
+                    u32 *row = pCurr;
+                    u32 *pre = pPrev;
                     
-                    if (curr) { *pPrev = curr; }
+                    for (u32 x = 0; x < imageWidth; x++)
+                {
+                        u32 curr = *row++;
+                        
+                        if (curr) { *pre = curr; }
                     
-                    pPrev++;
-                    count--;
+                        pre++;
+                    }
+                    
+                    pPrev += mTextureWidth;
+                    pCurr += mTextureWidth;
                 }
             }
 
@@ -317,11 +334,194 @@ bool prGifDecoder::DecodeFrame(u32 frame)
                 mpSprite->SetFrame(0);
             }
 
-            PRSAFE_DELETE(rawImage);
+            PRSAFE_DELETE_ARRAY(rawImage);
         }
     }
 
     return result;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Slower platforms can decode and animate the gif over several frames
+/// This function acquires the next frame from the gif
+/// ---------------------------------------------------------------------------
+void prGifDecoder::PartDecode1(u32 frame)
+{
+    PRASSERT(mpImageCopy);
+    PRASSERT(pRawImage == NULL);
+
+    if (mpImage && mFileSize > 0)
+    {
+	    FIBITMAP *dib = FreeImage_LockPage(mMultiBmp, frame);
+        if (dib)
+        {
+            // Get image pitch
+            pitch       = FreeImage_GetPitch(dib);
+            imageBPP    = FreeImage_GetBPP(dib);
+            imageWidth  = FreeImage_GetWidth(dib);
+            imageHeight = FreeImage_GetHeight(dib);
+
+            // Calculate raw data size and create buffer
+            pRawImage = new u8[mTextureSize];
+
+            // Copy data
+            FIBITMAP *bmp = FreeImage_ConvertTo32Bits(dib);
+            if (bmp)
+            {
+                FREE_IMAGE_TYPE type = FreeImage_GetImageType(dib);
+
+                switch(type)
+                {
+                // Convert bitmap
+                case FIT_BITMAP:
+                    // 8 bit?
+                    if (imageBPP == 8)
+                    {
+                        BYTE *raw  = (BYTE*)malloc(imageHeight * (pitch * 4));          // pitch * 4 == 8 to 32 bits
+                        BYTE *bits = raw;
+                        if (raw)
+                        {
+                            FreeImage_ConvertToRawBits(bits, bmp, pitch * 4, 32, FI_RGBA_RED_MASK, FI_RGBA_GREEN_MASK, FI_RGBA_BLUE_MASK, FALSE);
+                            BYTE *image    = pRawImage;
+
+                            u32 offset = (mTextureHeight - imageHeight);
+
+                            // Put at top
+                            image += ((mTextureWidth << 2) * offset);
+
+                            for(u32 y = 0; y < imageHeight; y++)
+                            {
+                                // Set row start
+                                u32 *pixel = (u32*)bits;
+                                u32 *line  = (u32*)image;
+
+                                for (u32 x = 0; x < (imageWidth >> 1); x++)
+                                {
+                                    u32 colour = *pixel++;
+                                    
+                                    colour = ((colour & FI_RGBA_RED_MASK)   >> FI_RGBA_RED_SHIFT)          |
+                                            (((colour & FI_RGBA_GREEN_MASK) >> FI_RGBA_GREEN_SHIFT) <<  8) |
+                                            (((colour & FI_RGBA_BLUE_MASK)  >> FI_RGBA_BLUE_SHIFT)  << 16) |
+                                            (((colour & FI_RGBA_ALPHA_MASK) >> FI_RGBA_ALPHA_SHIFT) << 24);
+
+                                    *line++ = colour;
+
+                                    // Again, less loops
+                                    colour = *pixel++;
+                                    
+                                    colour = ((colour & FI_RGBA_RED_MASK)   >> FI_RGBA_RED_SHIFT)          |
+                                            (((colour & FI_RGBA_GREEN_MASK) >> FI_RGBA_GREEN_SHIFT) <<  8) |
+                                            (((colour & FI_RGBA_BLUE_MASK)  >> FI_RGBA_BLUE_SHIFT)  << 16) |
+                                            (((colour & FI_RGBA_ALPHA_MASK) >> FI_RGBA_ALPHA_SHIFT) << 24);
+                                    
+                                    *line++ = colour;
+                                }
+
+                                // Next line
+                                bits += (pitch << 2);
+
+                                // Next row
+                                image += (mTextureWidth << 2);
+                            }
+
+                            free(raw);
+                        }
+                    }
+                    else
+                    {
+                        PRPANIC("Only 8 bit gifs supported at the moment");
+                    }
+                    break;
+
+                    default:
+                        break;
+                    }
+
+                FreeImage_Unload(bmp);
+            }
+
+            FreeImage_UnlockPage(mMultiBmp, dib, FALSE);
+        }
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Slower platforms can decode and animate the gif over several frames
+/// This function merges the acquire data with the previous image to
+/// create the next animation frame
+/// ---------------------------------------------------------------------------
+void prGifDecoder::PartDecode2()
+{
+    // Merge?
+    {
+        u32 *pPrev = (u32*)mpImageCopy;
+        u32 *pCurr = (u32*)pRawImage;
+
+        u32 offset = (mTextureHeight - imageHeight);
+                
+        // Put at top
+        pCurr += (mTextureWidth * offset);
+        pPrev += (mTextureWidth * offset);
+
+        for(u32 y = 0; y < imageHeight; y++)
+        {
+            u32 *row = pCurr;
+            u32 *pre = pPrev;
+                    
+            for (u32 x = 0; x < imageWidth; x++)
+            {
+                u32 curr = *row++;
+                        
+                if (curr) { *pre = curr; }
+                    
+                pre++;
+            }
+                    
+            pPrev += mTextureWidth;
+            pCurr += mTextureWidth;
+        }
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Slower platforms can decode and animate the gif over several frames
+/// This function creates and uploads the texture
+/// ---------------------------------------------------------------------------
+void prGifDecoder::PartDecode3()
+{
+    // Load texture
+    prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
+
+    // Release old texture
+    if (mpTetxure)
+    {
+        pRM->Unload(mpTetxure);
+        mpTetxure = NULL;
+    }
+
+    mpTetxure = pRM->LoadFromRaw<prTexture>("Texture", mpImageCopy, mTextureSize, mTextureWidth, mTextureHeight);
+    PRASSERT(mpTetxure);
+
+    // Create the working sprite
+    prSpriteManager *pSM = static_cast<prSpriteManager *>(prCoreGetComponent(PRSYSTEM_SPRITEMANAGER));
+    if (pSM)
+    {
+        if (mpSprite)
+        {
+            // Delete old sprite
+            pSM->ToolRelease(mpSprite);
+            mpSprite = NULL;
+        }
+
+        // Set working
+        mpSprite = pSM->ToolCreate(mpTetxure, imageWidth, imageHeight);
+        mpSprite->SetFrame(0);
+    }
+
+    PRSAFE_DELETE_ARRAY(pRawImage);
 }
 
 

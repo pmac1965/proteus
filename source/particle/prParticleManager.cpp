@@ -65,7 +65,7 @@ public:
     // Debug assist
     void DisplayUsage()
     {
-        #if defined(PARTICLE_MANAGER_DEBUG)
+        #if (defined(PARTICLE_MANAGER_DEBUG) && (defined(DEBUG) || defined(_DEBUG)))
         prEffectTypeListIt it;
 
         for (it = mEffects.begin(); it != mEffects.end(); ++it)

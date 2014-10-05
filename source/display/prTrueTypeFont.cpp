@@ -569,12 +569,12 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
 		    
         // Draw
         s32 len = strlen(message);
-        s32 character;
+        //s32 character;
         f32 lineWidth = 0.0f;
 
         for (s32 i=0; i<len; i++)
         {
-            character = message[i];
+            s32 character = message[i];
 
             if (character == '#')
             {
@@ -638,11 +638,11 @@ prVector2 prTrueTypeFont::MeasureString(const char *string, float scale)
 
     f32 max = 0.0f;
     s32 len = strlen(string);
-    s32 character;
+    //s32 character;
 
     for (s32 i=0; i<len; i++)
     {
-        character = string[i];
+        s32 character = string[i];
 
         // Get size.
         if (character == '#')

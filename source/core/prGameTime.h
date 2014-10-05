@@ -52,7 +52,13 @@ public:
     //      Gets the elapsed time bewteen 1 frame and the next.
     f32 ElapsedTime() const;
 
+    
+private:
+    // Stops passing by value and assignment.
+    prGameTime(const prGameTime&);
+    const prGameTime& operator = (const prGameTime&);
 
+    
 private:
     // Don't change order.
 	GameTimeImplementation	*pImpl;

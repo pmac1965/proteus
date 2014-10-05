@@ -24,30 +24,29 @@
   #include <Windows.h>
   #include <gl/gl.h>
   #include <gl/glu.h>
-  //#include "../core/prWindow_PC.h"
 
 #elif defined(PLATFORM_LINUX)
   #include <GL/gl.h>
   #include <GL/glu.h>
-  //#include "../core/prWindow_PC.h"
-  //#include "../linux/prLinux.h"
+  #include <cstring>
 
 #elif defined(PLATFORM_MAC)
   #include <OpenGL/gl.h>
   #include <OpenGL/glu.h>
-  //#include "../core/prWindow_PC.h"
-  //#include "../linux/prLinux.h"
+  #include <cstring>
 
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
-  //#include "../core/prWindow_PC.h"
+  #include <cstring>
 
 #elif defined(PLATFORM_BADA)
   #include <FGraphicsOpengl.h>
+  #include <cstring>
   using namespace Osp::Graphics::Opengl;
 
 #elif defined(PLATFORM_IOS)
   #include <OpenGLES/ES1/gl.h>
+  #include <cstring>
 
 #else
   #error No platform defined.
@@ -72,6 +71,7 @@ prFontGlyph::prFontGlyph(f32 advanceX, f32 advanceY, f32 offsetX, f32 offsetY, u
     , mTextureID(texID)
 {
     //prTrace("(%i): adv %f %f\n", aChar, advanceX, advanceY);
+    memset(quadData, 0, sizeof(quadData));
 }
 
 
