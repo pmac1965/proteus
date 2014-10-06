@@ -27,6 +27,7 @@
 #define RESOLUTION          72
 
 
+#if defined(ALLOW_FREETYPE)
 #if defined(PLATFORM_PC)                // The PC points at the full freetype2 project.
     // FreeType Headers
     #include <ft2build.h>
@@ -41,6 +42,7 @@
     #include <freetype/ftglyph.h>
     #include <freetype/ftoutln.h>
     #include <freetype/fttrigon.h>
+#endif
 #endif
 
 
@@ -102,8 +104,6 @@ typedef struct TrueTypeFontImplementation
     // ------------------------------------------------------------------------
     TrueTypeFontImplementation()
     {
-        TODO("Make freetype optional")
-
         mpGlyphs    = NULL;
         mGlyphCount = 0;
         mPointSize  = 0;
@@ -122,6 +122,7 @@ typedef struct TrueTypeFontImplementation
     /// -----------------------------------------------------------------------
     /// Creates a characters texture and positioning data
     /// -----------------------------------------------------------------------
+    #if defined(ALLOW_FREETYPE)
     void GenerateCharacter(FT_Face face, char charcode)
     {
         // Get glyph index
@@ -246,6 +247,7 @@ typedef struct TrueTypeFontImplementation
         // Clean up
         FT_Done_Glyph(glyph);
     }
+    #endif
 
 
     /// -----------------------------------------------------------------------
@@ -327,6 +329,8 @@ prTrueTypeFont::~prTrueTypeFont()
 /// ---------------------------------------------------------------------------
 void prTrueTypeFont::Load(const char *filename, s32 height)
 {
+#if defined(ALLOW_FREETYPE)
+
     PRASSERT(filename && *filename);
     PRASSERT(pImpl);
     PRASSERT(height > 0);
@@ -401,6 +405,8 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
         FT_Done_FreeType(library);
         PRSAFE_DELETE_ARRAY(buffer);
     }
+
+#endif
 }
 
 
@@ -409,6 +415,8 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
 /// ---------------------------------------------------------------------------
 void prTrueTypeFont::Load(const char *filename, s32 height, const char *characters)
 {
+#if defined(ALLOW_FREETYPE)
+
     PRASSERT(filename && *filename);
     PRASSERT(characters && *characters);
     PRASSERT(pImpl);
@@ -480,6 +488,8 @@ void prTrueTypeFont::Load(const char *filename, s32 height, const char *characte
         FT_Done_FreeType(library);
         PRSAFE_DELETE_ARRAY(buffer);
     }
+
+#endif
 }
 
 
@@ -488,6 +498,8 @@ void prTrueTypeFont::Load(const char *filename, s32 height, const char *characte
 /// ---------------------------------------------------------------------------
 void prTrueTypeFont::Draw(f32 x, f32 y, const char *fmt, ...)
 {
+#if defined(ALLOW_FREETYPE)
+
     char message[MSG_BUFFER_SIZE];
 
 	// Format the output.
@@ -503,6 +515,8 @@ void prTrueTypeFont::Draw(f32 x, f32 y, const char *fmt, ...)
     va_end(args);
 
     Draw(x, y, 1.0f, prColour::White, ALIGN_LEFT, message);
+
+#endif
 }
 
 
@@ -511,6 +525,8 @@ void prTrueTypeFont::Draw(f32 x, f32 y, const char *fmt, ...)
 /// ---------------------------------------------------------------------------
 void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignment, const char *fmt, ...)
 {
+#if defined(ALLOW_FREETYPE)
+
     if (fmt && *fmt)
     {
         char message[MSG_BUFFER_SIZE];
@@ -626,6 +642,8 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
     
     // Clear texture systems last used ID
     prTextureClearLastID();
+
+#endif
 }
 
 
@@ -635,6 +653,8 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
 prVector2 prTrueTypeFont::MeasureString(const char *string, float scale)
 {
     prVector2 size = prVector2(0, (f32)imp.mPointSize);
+
+#if defined(ALLOW_FREETYPE)
 
     f32 max = 0.0f;
     s32 len = strlen(string);
@@ -688,6 +708,8 @@ prVector2 prTrueTypeFont::MeasureString(const char *string, float scale)
 
     // Set max width
     size.x = max;
+
+#endif
 
     return (size * scale);
 }

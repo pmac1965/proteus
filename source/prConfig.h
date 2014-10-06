@@ -99,7 +99,7 @@
 #endif
 
 #ifndef ALLOW_FREETYPE                                  // For builds that need freetype
-#define ALLOW_FREETYPE
+//#define ALLOW_FREETYPE
 #endif
 
 #ifndef REMOVE_EXCEPTIONS                               // Allows try/catch code to be removed. For example bada doesn't allow try/catch code.
@@ -111,7 +111,7 @@
 #endif
 
 #ifndef ALLOW_STEAM                                     // Allows the steam code
-#define ALLOW_STEAM
+//#define ALLOW_STEAM
 #endif
 
 #ifndef SHOW_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.
