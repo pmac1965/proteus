@@ -51,10 +51,12 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	actor/prActorManager.cpp	\
 	adverts/prAdvertProvider.cpp	\
 	adverts/prAdvertProvider_AdMob.cpp	\
+	adverts/prAdvertProvider_Flurry.cpp	\
 	adverts/prAdverts.cpp	\
 	analytics/prAnalytics.cpp	\
 	analytics/prAnalyticsBase.cpp	\
 	analytics/prAnalyticsFlurry.cpp	\
+	android/prJNIAdverts.cpp	\
 	android/prJNIAudio.cpp	\
 	android/prJNIInterface.cpp	\
 	android/prJNINetwork.cpp	\

@@ -23,12 +23,6 @@
 #include "../debug/prAssert.h"
 #include "../debug/prTrace.h"
 #include "../core/prMacros.h"
-#include <list>
-
-
-#if defined(PLATFORM_ANDROID)
-#include <android/log.h>
-#endif
 
 
 /// ---------------------------------------------------------------------------
@@ -36,7 +30,17 @@
 /// ---------------------------------------------------------------------------
 typedef struct AdvertsImplementation
 {
-    std::list<prAdvertProvider *>   list;
+    AdvertsImplementation()
+    {
+        pProvider = NULL;
+    }
+
+    ~AdvertsImplementation()
+    {
+        PRSAFE_DELETE(pProvider);
+    }
+
+    prAdvertProvider *pProvider;
 
 } AdvertsImplementation;
 
@@ -47,6 +51,7 @@ typedef struct AdvertsImplementation
 prAdverts::prAdverts() : pImpl (new AdvertsImplementation())
                        , imp   (*pImpl)
 {
+    PRASSERT(pImpl);
 }
 
 
@@ -56,15 +61,21 @@ prAdverts::prAdverts() : pImpl (new AdvertsImplementation())
 prAdverts::~prAdverts()
 {
     PRASSERT(pImpl);
-
-    std::list<prAdvertProvider *>::iterator itr = imp.list.begin();
-    std::list<prAdvertProvider *>::iterator end = imp.list.end();
-    for( ; itr != end; ++itr)
-    {
-        PRSAFE_DELETE(*itr);
-    }
-
     PRSAFE_DELETE(pImpl);
+}
+
+
+/// ---------------------------------------------------------------------------
+/// So you can determine when the provider is initialised,
+/// as you usually don't want ads appearing during loading.
+/// ---------------------------------------------------------------------------
+void prAdverts::Init()
+{
+    PRASSERT(pImpl);
+    if (imp.pProvider)
+    {
+        imp.pProvider->Init();
+    }
 }
 
 
@@ -75,30 +86,37 @@ void prAdverts::Add(prAdvertProvider *pProvider)
 {
     PRASSERT(pImpl);
     PRASSERT(pProvider);
-
     if (pProvider)
     {
-        imp.list.push_back(pProvider);
+        imp.pProvider = pProvider;
     }
 }
 
 
 /// ---------------------------------------------------------------------------
-/// Updates all providers
+/// Updates the provider
 /// ---------------------------------------------------------------------------
 void prAdverts::Update(f32 dt)
 {
     PRASSERT(pImpl);
     PRUNUSED(dt);
+    if (imp.pProvider)
+    {
+        imp.pProvider->Update();
+    }
 }
 
 
 /// ---------------------------------------------------------------------------
-/// Draws all providers
+/// Draws the provider
 /// ---------------------------------------------------------------------------
 void prAdverts::Draw()
 {
     PRASSERT(pImpl);
+    if (imp.pProvider)
+    {
+        imp.pProvider->Draw();
+    }
 }
 
 
@@ -108,13 +126,9 @@ void prAdverts::Draw()
 void prAdverts::ShowAd(int type)
 {
     PRASSERT(pImpl);
-
-    std::list<prAdvertProvider *>::iterator itr = imp.list.begin();
-    std::list<prAdvertProvider *>::iterator end = imp.list.end();
-    
-    for( ; itr != end; ++itr)
+    if (imp.pProvider)
     {
-        (*itr)->Show(type);
+        imp.pProvider->Show(type);
     }
 }
 
@@ -125,12 +139,61 @@ void prAdverts::ShowAd(int type)
 void prAdverts::HideAd()
 {
     PRASSERT(pImpl);
-
-    std::list<prAdvertProvider *>::iterator itr = imp.list.begin();
-    std::list<prAdvertProvider *>::iterator end = imp.list.end();
-    
-    for( ; itr != end; ++itr)
+    if (imp.pProvider)
     {
-        (*itr)->Hide();
+        imp.pProvider->Hide();
     }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Loads an advert if possible
+/// ---------------------------------------------------------------------------
+void prAdverts::LoadAd()
+{
+    if (IsAdvertLoaded()  == false &&
+        IsAdvertLoading() == false)
+    {
+        prTrace("Start loading advert\n");
+        if (imp.pProvider)
+        {
+            imp.pProvider->Load();
+        }
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Is an advert loading?
+/// ---------------------------------------------------------------------------
+bool prAdverts::IsAdvertLoading()
+{
+    PRASSERT(pImpl);    
+
+    bool result = false;
+
+    if (imp.pProvider)
+    {
+        result = imp.pProvider->IsAdvertLoading();
+    }
+
+    return result;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Has an advert loaded?
+/// ---------------------------------------------------------------------------
+bool prAdverts::IsAdvertLoaded()
+{
+    PRASSERT(pImpl);    
+
+    bool result = false;
+
+    if (imp.pProvider)
+    {
+        result = imp.pProvider->IsAdvertLoaded();
+    }
+
+    return result;
 }

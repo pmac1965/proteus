@@ -30,9 +30,11 @@ enum
 #if defined(PLATFORM_ANDROID)
     AD_PROVIDER_ADMOB,
     AD_PROVIDER_ADCLIX,
+    AD_PROVIDER_FLURRY,
 
 #elif defined(PLATFORM_IOS)
     AD_PROVIDER_IADS,
+    //AD_PROVIDER_FLURRY,       - Add when we can test
 
 #else
     AD_PROVIDER_NONE,
@@ -75,9 +77,25 @@ public:
     //      Dtor
     virtual ~prAdvertProvider();
 
+    // Method: EventNotify
+    //      This is to allow the client device to callback the provider with
+    //      advert event notifications. These will be provider specific.
+    //
+    // Parameters:
+    //      eventType   - The event type
+    //      data1       - Event data (Optional)
+    //      data2       - Event data (Optional)
+    virtual void EventNotify(u32 eventType, u32 data1 = 0, u32 data2 = 0) {}
+
     // Method: Init
-    //      So you can determine when the provider is initialised, as you usually don't want ads appearing during loading.
+    //      So you can determine when the provider is initialised,
+    //      as you usually don't want ads appearing during loading,
+    //      some providers show ads almost straight away
     virtual void Init() {}
+
+    // Method: Load
+    //      So you can determine when the provider loads an advert
+    virtual void Load() {}
 
     // Method: Show
     //      Show advert
@@ -107,10 +125,22 @@ public:
     //      Checks the provider for the specified ability
     bool ProviderHasCapability(u32 ability) const;
 
+    // Method: IsAdvertLoaded
+    //      Checks if the provider has loaded
+    bool IsAdvertLoaded() const { return mAdvertLoaded; }
+
+    // Method: IsAdvertLoading
+    //      Checks if the provider is loading an advert
+    bool IsAdvertLoading() const { return mAdvertLoading; }
+
 
 protected:
 
-     prAdvertProviderDetails   *m_details;
+     prAdvertProviderDetails   *mDetails;
+     bool                       mAdvertLoaded;
+     bool                       mAdvertLoading;
+     bool                       mVisible;
+     bool                       mInitialised;
 };
 
 

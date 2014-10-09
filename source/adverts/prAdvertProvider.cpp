@@ -24,10 +24,13 @@
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
-prAdvertProvider::prAdvertProvider(prAdvertProviderDetails *pDetails) : m_details(pDetails)
+prAdvertProvider::prAdvertProvider(prAdvertProviderDetails *pDetails) : mDetails(pDetails)
 {
-    TODO("Finish converting adverts")
-    PRASSERT(m_details);
+    PRASSERT(mDetails);
+    mAdvertLoaded  = false;
+    mAdvertLoading = false;
+    mVisible       = false;
+    mInitialised   = false;
 }
 
 
@@ -44,8 +47,8 @@ prAdvertProvider::~prAdvertProvider()
 /// ---------------------------------------------------------------------------
 s32 prAdvertProvider::ProviderType() const
 {
-    PRASSERT(m_details);
-    return m_details->type;
+    PRASSERT(mDetails);
+    return mDetails->type;
 }
 
 
@@ -54,8 +57,8 @@ s32 prAdvertProvider::ProviderType() const
 /// ---------------------------------------------------------------------------
 const char *prAdvertProvider::ProviderName() const
 {
-    PRASSERT(m_details);
-    return m_details->name;
+    PRASSERT(mDetails);
+    return mDetails->name;
 }
 
 
@@ -64,6 +67,6 @@ const char *prAdvertProvider::ProviderName() const
 /// ---------------------------------------------------------------------------
 bool prAdvertProvider::ProviderHasCapability(u32 ability) const
 {
-    PRASSERT(m_details);
-    return ((m_details->caps & ability) == ability);
+    PRASSERT(mDetails);
+    return ((mDetails->caps & ability) == ability);
 }

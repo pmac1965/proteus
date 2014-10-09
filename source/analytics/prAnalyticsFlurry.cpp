@@ -67,11 +67,11 @@ void prAnalyticsFlurry::Construct(const char *appId, const char *secret)
     
 #elif defined (PLATFORM_ANDROID)
 
+    PRUNUSED(appId);
     PRUNUSED(secret);
     
-    if (appId && *appId)
-    {
-    }
+    // the android version is constructed on app startup in the java code.
+    // And uses onStart/onStop
     
 #else
     
@@ -104,10 +104,11 @@ bool prAnalyticsFlurry::Submit(const char *name, const char *value)
         if (value && *value)
         {
             //JNI_SubmitFlurry(name, value);
+            prTrace("PROT:(2) Logging event %s\n", name);
         }
         else
         {
-            prTrace("Logging event %s\n", name);
+            prTrace("PROT:(1) Logging event %s\n", name);
             prJNI_Submit(name);
         }
     }

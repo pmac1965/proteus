@@ -51,6 +51,11 @@ public:
     //      Dtor
     ~prAdverts();
 
+    // Method: Init
+    //      So you can determine when the provider is initialised,
+    //      as you usually don't want ads appearing during loading.
+    void Init();
+
     // Method: Add
     //      Adds a provider
     //
@@ -59,11 +64,17 @@ public:
     void Add(prAdvertProvider *pProvider);
 
     // Method: Update
-    //      Updates all providers
+    //      Update the provider
+    //
+    // Notes:
+    //      Some providers may require updating. Most don't
     void Update(f32 dt);
 
     // Method: Draw
-    //      Draws all providers
+    //      Draws the provider
+    //
+    // Notes:
+    //      Some providers may require drawing. Most don't
     void Draw();
 
     // Method: ShowAd
@@ -74,9 +85,20 @@ public:
     //      hides ads
     void HideAd();
 
+    // Method: LoadAd
+    //      Loads an advert if possible
+    void LoadAd();
+
+    // Method: IsAdvertLoading
+    //      Is an advert loading?
+    bool IsAdvertLoading();
+
+    // Method: IsAdvertLoaded
+    //      Has an advert loaded?
+    bool IsAdvertLoaded();
+
 
 private:
-
     // Don't change order.
     AdvertsImplementation  *pImpl;
     AdvertsImplementation  &imp;

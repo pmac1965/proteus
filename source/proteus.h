@@ -38,6 +38,7 @@
 #include "adverts/prAdvertProvider.h"
 #include "adverts/prAdvertProvider_AdMob.h"
 #include "adverts/prAdvertProvider_iAds.h"
+#include "adverts/prAdvertProvider_Flurry.h"
 #include "adverts/prAdverts.h"
 #include "analytics/prAnalytics.h"
 #include "analytics/prAnalyticsBase.h"

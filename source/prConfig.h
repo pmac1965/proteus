@@ -64,19 +64,16 @@
 #elif defined(__GNUC__)
     // Bada?
     #if defined(SHP)
-        //#error "Its Bada"
         #define PLATFORM_BADA
         #define AUDIO_TYPE  AUDIO_BADA
     
     // Linux
     #elif (defined(linux) && !defined(__ANDROID__))
-        //#error "Its linux"
         #define PLATFORM_LINUX
         #define AUDIO_TYPE  AUDIO_LINUX
 
     // Android
     #elif (defined(linux) && defined(__ANDROID__))
-        //#error "Its Android"
         #define PLATFORM_ANDROID
         #define AUDIO_TYPE  AUDIO_ANDROID
     #endif
@@ -99,7 +96,7 @@
 #endif
 
 #ifndef ALLOW_FREETYPE                                  // For builds that need freetype
-//#define ALLOW_FREETYPE
+#define ALLOW_FREETYPE
 #endif
 
 #ifndef REMOVE_EXCEPTIONS                               // Allows try/catch code to be removed. For example bada doesn't allow try/catch code.
@@ -111,7 +108,7 @@
 #endif
 
 #ifndef ALLOW_STEAM                                     // Allows the steam code
-//#define ALLOW_STEAM
+#define ALLOW_STEAM
 #endif
 
 #ifndef SHOW_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.

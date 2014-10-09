@@ -168,6 +168,7 @@
     <ClInclude Include="..\..\..\..\source\actor\prActorManager.h" />
     <ClInclude Include="..\..\..\..\source\adverts\prAdvertProvider.h" />
     <ClInclude Include="..\..\..\..\source\adverts\prAdvertProvider_AdMob.h" />
+    <ClInclude Include="..\..\..\..\source\adverts\prAdvertProvider_Flurry.h" />
     <ClInclude Include="..\..\..\..\source\adverts\prAdvertProvider_iAds.h" />
     <ClInclude Include="..\..\..\..\source\adverts\prAdverts.h" />
     <ClInclude Include="..\..\..\..\source\analytics\Flurry.h" />
@@ -179,6 +180,7 @@
     <ClInclude Include="..\..\..\..\source\android\AL\alext.h" />
     <ClInclude Include="..\..\..\..\source\android\AL\efx-creative.h" />
     <ClInclude Include="..\..\..\..\source\android\AL\efx.h" />
+    <ClInclude Include="..\..\..\..\source\android\prJNIAdverts.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIAnalytics.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIAudio.h" />
     <ClInclude Include="..\..\..\..\source\android\prJNIFacebook.h" />
@@ -497,11 +499,13 @@
     <ClCompile Include="..\..\..\..\source\actor\prActorManager.cpp" />
     <ClCompile Include="..\..\..\..\source\adverts\prAdvertProvider.cpp" />
     <ClCompile Include="..\..\..\..\source\adverts\prAdvertProvider_AdMob.cpp" />
+    <ClCompile Include="..\..\..\..\source\adverts\prAdvertProvider_Flurry.cpp" />
     <ClCompile Include="..\..\..\..\source\adverts\prAdvertProvider_iAds.cpp" />
     <ClCompile Include="..\..\..\..\source\adverts\prAdverts.cpp" />
     <ClCompile Include="..\..\..\..\source\analytics\prAnalytics.cpp" />
     <ClCompile Include="..\..\..\..\source\analytics\prAnalyticsBase.cpp" />
     <ClCompile Include="..\..\..\..\source\analytics\prAnalyticsFlurry.cpp" />
+    <ClCompile Include="..\..\..\..\source\android\prJNIAdverts.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNIAnalytics.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNIAudio.cpp" />
     <ClCompile Include="..\..\..\..\source\android\prJNIFacebook.cpp" />
