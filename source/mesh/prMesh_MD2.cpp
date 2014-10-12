@@ -138,10 +138,10 @@ void prMesh_MD2::Animate()
             //mpAnimation->
             mpAnimation->Update(16.0f/1000.0f);
 
-            m_frame = ((prAnimation_MD2*)mpAnimation)->GetFrame();
+            m_frame = static_cast<prAnimation_MD2*>(mpAnimation)->GetFrame();
             prTrace("Frame %i\n", m_frame);
         }
-    }//*/
+    }
 }
 
 
