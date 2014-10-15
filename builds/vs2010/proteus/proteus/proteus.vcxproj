@@ -318,6 +318,7 @@
     <ClInclude Include="..\..\..\..\source\display\prRenderer_DX9.h" />
     <ClInclude Include="..\..\..\..\source\display\prRenderer_GL11.h" />
     <ClInclude Include="..\..\..\..\source\display\prRenderer_GL20.h" />
+    <ClInclude Include="..\..\..\..\source\display\prShader.h" />
     <ClInclude Include="..\..\..\..\source\display\prSplash.h" />
     <ClInclude Include="..\..\..\..\source\display\prSprite.h" />
     <ClInclude Include="..\..\..\..\source\display\prSpriteAnimation.h" />
@@ -414,6 +415,8 @@
     <ClInclude Include="..\..\..\..\source\lua\lzio.h" />
     <ClInclude Include="..\..\..\..\source\math\MersenneTwister.h" />
     <ClInclude Include="..\..\..\..\source\math\prMathsUtil.h" />
+    <ClInclude Include="..\..\..\..\source\math\prMatrix4.h" />
+    <ClInclude Include="..\..\..\..\source\math\prPlane.h" />
     <ClInclude Include="..\..\..\..\source\math\prPoint.h" />
     <ClInclude Include="..\..\..\..\source\math\prRandom.h" />
     <ClInclude Include="..\..\..\..\source\math\prRect.h" />
@@ -628,6 +631,8 @@
     <ClCompile Include="..\..\..\..\source\display\prRenderer_DX9.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer_GL11.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer_GL20.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prShader.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prSplash.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prSprite.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prSpriteAnimation.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prSpriteAnimationSequence.cpp" />
@@ -1020,6 +1025,8 @@
     <ClCompile Include="..\..\..\..\source\lua\lvm.c" />
     <ClCompile Include="..\..\..\..\source\lua\lzio.c" />
     <ClCompile Include="..\..\..\..\source\math\prMathsUtil.cpp" />
+    <ClCompile Include="..\..\..\..\source\math\prMatrix4.cpp" />
+    <ClCompile Include="..\..\..\..\source\math\prPlane.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prRandom.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prRect.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prRectF.cpp" />
@@ -1103,6 +1110,7 @@
     <None Include="..\..\..\..\source\ios\prIosSystem.mm" />
     <None Include="..\..\..\..\source\ios\prIosTwitter.mm" />
     <None Include="..\..\..\..\source\license.txt" />
+    <None Include="..\..\..\..\source\math\prMatrix4.inl" />
     <None Include="..\..\..\..\source\math\prVector2.inl" />
     <None Include="..\..\..\..\source\math\prVector3.inl" />
     <None Include="..\..\..\..\source\read.me" />

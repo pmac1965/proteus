@@ -1,3 +1,4 @@
+// File: prShader.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -15,19 +16,16 @@
  */
 
 
-#ifndef __PRSPLASH_H
-#define __PRSPLASH_H
+#ifndef __PRSHADER_H
+#define __PRSHADER_H
 
 
-#include "../core/prTypes.h"
+class prShader
+{
+public:
+    prShader();
+    ~prShader();
+};
 
 
-extern u8 proteusImg[];
-
-
-// Func: prSplashSize
-//      Returns the binary size of the splash image
-u32 prSplashSize();
-
-
-#endif//__PRSPLASH_H
+#endif//__PRSHADER_H

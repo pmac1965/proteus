@@ -87,7 +87,7 @@ public:
 
     // Method: GetWidgetCount
     //      Returns the number of widgets
-    s32 GetWidgetCount() const { return m_widgets.size(); }
+    s32 GetWidgetCount() const { return (s32)m_widgets.size(); }
 
     // Method: SetBaseLayer
     //      Sets the base layer for GUI dialogs

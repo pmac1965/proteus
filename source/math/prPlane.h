@@ -1,3 +1,4 @@
+// File: prPlane.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -15,19 +16,16 @@
  */
 
 
-#ifndef __PRSPLASH_H
-#define __PRSPLASH_H
+#ifndef __PRPLANE_H
+#define __PRPLANE_H
 
 
-#include "../core/prTypes.h"
+class prPlane
+{
+public:
+    prPlane();
+    ~prPlane();
+};
 
 
-extern u8 proteusImg[];
-
-
-// Func: prSplashSize
-//      Returns the binary size of the splash image
-u32 prSplashSize();
-
-
-#endif//__PRSPLASH_H
+#endif//__PRPLANE_H

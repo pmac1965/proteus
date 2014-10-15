@@ -166,6 +166,8 @@
 #include "locale/prLocales.h"
 #include "math/MersenneTwister.h"
 #include "math/prMathsUtil.h"
+#include "math/prMatrix4.h"
+#include "math/prPlane.h"
 #include "math/prPoint.h"
 #include "math/prRandom.h"
 #include "math/prRect.h"

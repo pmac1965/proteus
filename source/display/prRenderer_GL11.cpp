@@ -156,9 +156,10 @@ void prRenderer_GL11::Init()
     #if defined(PLATFORM_PC) && defined(PROTEUS_ALLOW_WATERMARK)
     prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
     PRASSERT(pRM)
-    m_pWatermark = pRM->LoadFromMemory<prTexture>("proteusImg", proteusImg, sizeof(proteusImg));
+    //m_pWatermark = pRM->LoadFromMemory<prTexture>("proteusImg", proteusImg, sizeof(proteusImg));
+    m_pWatermark = pRM->LoadFromMemory<prTexture>("proteusImg", proteusImg, prSplashSize());
     PRASSERT(m_pWatermark);
-    
+
     #else
     m_pWatermark = NULL;
 

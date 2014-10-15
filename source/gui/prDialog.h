@@ -146,6 +146,11 @@ public:
     // Colour setter.
     void SetButtonTextColour(prColour c) { m_textColour = c; }
     void SetButtonTextScale(f32 scale) { m_textScale = scale; }
+    void SetFontTextColour(prColour c) { m_fontColour = c; }
+    
+
+    void SetTextAlignment(s32 title, s32 body) { mFontAlignmentTitle = title;
+                                                 mFontAlignmentBody  = body; }
     
 
 private:
@@ -165,6 +170,10 @@ private:
     f32                     m_titleScale;
     f32                     m_textScale;
     prColour                m_textColour;
+    prColour                m_fontColour;
+    
+    s32                     mFontAlignmentTitle;
+    s32                     mFontAlignmentBody;
 };
 
 

@@ -43,6 +43,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include <unistd.h> // PMAC: Added to get compiling on xcode
+
 #ifndef O_BINARY
 #define O_BINARY 0
 #endif

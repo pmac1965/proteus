@@ -39,6 +39,7 @@
 #include <errno.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <unistd.h> // PMAC: Added to get compiling with xcode
 
 #include "zipint.h"
 

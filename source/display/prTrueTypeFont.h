@@ -113,15 +113,6 @@ public:
     //      returns the strings total height and the widest line length if the string is multilined.
     prVector2 MeasureString(const char *string, float scale);
 
-    // Method: SetRotation
-    //      Allows the text to be rotated, for sideways text, etc.
-//    void SetRotation(f32 rotation);
-
-
-//private:
-//    // Measures a string
-//    prVector2 MeasureStringUntilTerm(const char *string, float scale);
-
 
 private:
     // Stops passing by value and assignment.

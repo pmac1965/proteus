@@ -192,7 +192,7 @@ u32 prTagIsTag(const char *pString, f32 _a)
                                 // Pass in the parameter string
                                 if (tags[i].parser(&tag[tags[i].length]))
                                 {
-                                    tagLength   = strlen(tag) + 1;  // Add for end hash
+                                    tagLength   = (s32)strlen(tag) + 1;  // Add for end hash
                                     tagFound    = tags[i].action;
                                     break;
                                 }

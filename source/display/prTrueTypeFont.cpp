@@ -477,7 +477,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height, const char *characte
         imp.mPointSize = height;
 
         // This is where we actually create the fonts texture
-        s32 len = strlen(characters);
+        s32 len = (s32)strlen(characters);
         for(s32 i=0; i<len; i++)
         {
             imp.GenerateCharacter(face, characters[i]);
@@ -584,7 +584,7 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
         ERR_CHECK();
 		    
         // Draw
-        s32 len = strlen(message);
+        s32 len = (s32)strlen(message);
         //s32 character;
         f32 lineWidth = 0.0f;
 
@@ -657,7 +657,7 @@ prVector2 prTrueTypeFont::MeasureString(const char *string, float scale)
 #if defined(ALLOW_FREETYPE)
 
     f32 max = 0.0f;
-    s32 len = strlen(string);
+    s32 len = (s32)strlen(string);
     //s32 character;
 
     for (s32 i=0; i<len; i++)

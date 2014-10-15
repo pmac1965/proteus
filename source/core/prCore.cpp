@@ -103,7 +103,7 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
                     break;
 
                 case PRGLVER_20:
-                    PRPANIC("Under construction");
+                    systems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                     break;
 
                 case PRGLVER_30:
@@ -133,7 +133,7 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
                         break;
                     
                     case PRGLVER_20:
-                        PRPANIC("Under construction");
+                        systems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                         break;
                     
                     case PRGLVER_30:
@@ -158,7 +158,7 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
                         break;
                     
                     case PRGLVER_20:
-                        PRPANIC("Under construction");
+                        systems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                         break;
                     
                     case PRGLVER_30:
@@ -183,7 +183,7 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
                         break;
                     
                     case PRGLVER_20:
-                        PRPANIC("Under construction");
+                        systems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                         break;
                     
                     case PRGLVER_30:
@@ -208,7 +208,7 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
                     break;
 
                 case PRGLVER_20:
-                    PRPANIC("Under construction");
+                    systems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                     break;
 
                 case PRGLVER_30:
@@ -234,7 +234,7 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
                     break;
                     
                 case PRGLVER_20:
-                    PRPANIC("Under construction");
+                    systems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                     break;
                     
                 case PRGLVER_30:

@@ -39,6 +39,8 @@ prDialog::prDialog(const char *name, prSpriteManager *pSpriteManager) : prWidget
                                                                       , m_buttonCount         (0)
                                                                       , m_titleScale          (1.0f)
                                                                       , m_textScale           (1.0f)
+                                                                      , mFontAlignmentTitle   (0)               // 0 equals
+                                                                      , mFontAlignmentBody    (0)               // 0 equals
 {
     memset(&m_buttons, 0, sizeof(m_buttons));
 }
@@ -132,28 +134,31 @@ void prDialog::Draw()
             }
         }
 
-        // Draw title.
+
+        // Draw title text.
         if (m_pFont && m_title.Length() > 0)
         {
-            m_pFont->Draw(pos.x + m_offsetTitle.x, pos.y + m_offsetTitle.y, m_titleScale, prColour::White, prBitmapFont::ALIGN_LEFT, m_title.Text());
+            m_pFont->Draw(pos.x + m_offsetTitle.x, pos.y + m_offsetTitle.y, m_titleScale, prColour::White, mFontAlignmentTitle, m_title.Text());
         }
         else if (m_pttfFont && m_title.Length() > 0)
         {
-            m_pttfFont->Draw(pos.x + m_offsetTitle.x, pos.y + m_offsetTitle.y, m_titleScale, prColour::White, prTrueTypeFont::ALIGN_LEFT, m_title.Text());
+            m_pttfFont->Draw(pos.x + m_offsetTitle.x, pos.y + m_offsetTitle.y, m_titleScale, m_fontColour, mFontAlignmentTitle, m_title.Text());
+            m_pttfFont->Draw(pos.x + m_offsetTitle.x + 1, pos.y + m_offsetTitle.y + 1, m_titleScale, m_fontColour, mFontAlignmentTitle, m_title.Text());
         }
 
-        // Draw text
+        
+        // Draw body text
         if (m_pFont && m_text.Length() > 0)
         {
             f32 center = (f32)(m_spriteBackdrop->GetFrameWidth()  / 2);
             f32 middle = (f32)(m_spriteBackdrop->GetFrameHeight() / 2);
-            m_pFont->Draw(pos.x + center, pos.y + middle - m_offsetText.y, m_textScale, prColour::White, prBitmapFont::ALIGN_CENTER, m_text.Text());
+            m_pFont->Draw(pos.x + center, pos.y + middle - m_offsetText.y, m_textScale, prColour::White, mFontAlignmentBody, m_text.Text());
         }
         else if (m_pttfFont && m_text.Length() > 0)
         {
             f32 center = (f32)(m_spriteBackdrop->GetFrameWidth()  / 2);
             f32 middle = (f32)(m_spriteBackdrop->GetFrameHeight() / 2);
-            m_pttfFont->Draw(pos.x + center, pos.y + middle - m_offsetText.y, m_textScale, prColour::White, prTrueTypeFont::ALIGN_CENTER, m_text.Text());
+            m_pttfFont->Draw(pos.x + center, pos.y + middle - m_offsetText.y, m_textScale, m_fontColour, mFontAlignmentBody, m_text.Text());
         }
     }
 }

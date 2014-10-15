@@ -188,6 +188,8 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	math/prVector2.cpp	\
 	math/prVector3.cpp	\
 	math/prSinCos.cpp	\
+	math/prMatrix4.cpp	\
+	math/prPlane.cpp	\
 	memory/prMemory.cpp	\
 	memory/prSpritePointerPool.cpp	\
 	mesh/prAnimation.cpp	\
