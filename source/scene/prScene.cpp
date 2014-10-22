@@ -1,5 +1,5 @@
 /**
- * prEmitter.cpp
+ * prScene.cpp
  *
  *  Copyright 2014 Paul Michael McNab
  *
@@ -17,13 +17,13 @@
  */
 
 
-#include "prEmitter.h"
+#include "prScene.h"
 
 
 /// ---------------------------------------------------------------------------
 /// Constructor
 /// ---------------------------------------------------------------------------
-prEmitter::prEmitter()
+prScene::prScene()
 {
 }
 
@@ -31,21 +31,6 @@ prEmitter::prEmitter()
 /// ---------------------------------------------------------------------------
 /// Destructor
 /// ---------------------------------------------------------------------------
-prEmitter::~prEmitter()
-{
-}
-
-
-void prEmitter::Load(const char *filename)
-{
-}
-
-
-void prEmitter::Update(f32 dt)
-{
-}
-
-
-void prEmitter::Draw()
+prScene::~prScene()
 {
 }

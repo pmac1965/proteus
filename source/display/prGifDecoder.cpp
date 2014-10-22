@@ -460,6 +460,8 @@ void prGifDecoder::PartDecode2()
         u32 *pCurr = (u32*)pRawImage;
 
         u32 offset = (mTextureHeight - imageHeight);
+        
+        PRUNUSED(offset); // Cppcheck says this is unused. Cppcheck is wrong
                 
         // Put at top
         pCurr += (mTextureWidth * offset);

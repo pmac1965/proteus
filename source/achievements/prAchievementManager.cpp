@@ -770,9 +770,9 @@ void prAchievementManager::Update(f32 dt)
 }
 
 
-// ----------------------------------------------------------------------------
-// Render achievement dropdowns if required.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Render achievement dropdowns if required.
+/// ---------------------------------------------------------------------------
 void prAchievementManager::Render()
 {
     PRASSERT(pImpl);
@@ -790,9 +790,9 @@ void prAchievementManager::Render()
 }
 
 
-// ----------------------------------------------------------------------------
-// Award an achievement
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Award an achievement
+/// ---------------------------------------------------------------------------
 void prAchievementManager::Award(const char *key, s32 awardValue)
 {
 #if defined(PLATFORM_BADA)
@@ -873,9 +873,9 @@ void prAchievementManager::Award(const char *key, s32 awardValue)
 }
 
 
-// ----------------------------------------------------------------------------
-// Is an achievement awarded
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Is an achievement awarded
+/// ---------------------------------------------------------------------------
 bool prAchievementManager::IsAwarded(const char *key)
 {
     PRASSERT(pImpl);
@@ -1252,9 +1252,9 @@ void prAchievementManager::SetNotificationBarPos(s32 x, s32 y)
 }
 
 
-// ----------------------------------------------------------------------------
-// Sets the font used.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Sets the font used.
+/// ---------------------------------------------------------------------------
 void prAchievementManager::SetNotificationBarFont(prBitmapFont *font, float width, float scale)
 {
     PRASSERT(pImpl);
@@ -1264,9 +1264,10 @@ void prAchievementManager::SetNotificationBarFont(prBitmapFont *font, float widt
     imp.fontScale = scale;
 }
 
-// ----------------------------------------------------------------------------
-// Set a pointer to the language code.
-// ----------------------------------------------------------------------------
+
+/// ---------------------------------------------------------------------------
+/// Set a pointer to the language code.
+/// ---------------------------------------------------------------------------
 void prAchievementManager::SetLanguage(prLanguage *language)
 {
     PRASSERT(pImpl);
@@ -1274,9 +1275,30 @@ void prAchievementManager::SetLanguage(prLanguage *language)
 }
 
 
-// ----------------------------------------------------------------------------
-// Test to see if an achievement has been achieved.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Set the text colour
+/// ---------------------------------------------------------------------------
+void prAchievementManager::SetTextColour(const prColour &c)
+{
+    imp.colour = c;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Enable and disable achievements.
+/// ---------------------------------------------------------------------------
+void prAchievementManager::Enable(bool state)
+{
+    imp.enabled = state;
+}
+
+
+/// -- PRIVATE ----------------------------------------------------------------
+
+
+/// ---------------------------------------------------------------------------
+/// Test to see if an achievement has been achieved.
+/// ---------------------------------------------------------------------------
 bool prAchievementManager::Achieved(s32 value, s32 testValue, s32 type)
 {
     PRASSERT(pImpl);
@@ -1290,39 +1312,4 @@ bool prAchievementManager::Achieved(s32 value, s32 testValue, s32 type)
     }
 
     return result;
-}
-
-
-//// ----------------------------------------------------------------------------
-//// Sets if its a lite build - quick hack - will add to system states once all set up
-//// ----------------------------------------------------------------------------
-//void prAchievementManager::IsLiteBuild(bool state)
-//{
-//    lite_build = state;
-//}
-//
-//
-//// ----------------------------------------------------------------------------
-//// Sets if its a lite build - quick hack - will add to system states once all set up
-//// ----------------------------------------------------------------------------
-//void prAchievementManager::HiRes(bool state)
-//{
-//    imp.hiRes = state;
-//}
-
-// ----------------------------------------------------------------------------
-// Set the text colour
-// ----------------------------------------------------------------------------
-void prAchievementManager::SetTextColour(const prColour &c)
-{
-    imp.colour = c;
-}
-
-
-// ----------------------------------------------------------------------------
-// Enable and disable achievements.
-// ----------------------------------------------------------------------------
-void prAchievementManager::Enable(bool state)
-{
-    imp.enabled = state;
 }

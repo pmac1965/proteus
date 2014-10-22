@@ -457,6 +457,9 @@
     <ClInclude Include="..\..\..\..\source\persistence\prSave_pc.h" />
     <ClInclude Include="..\..\..\..\source\prConfig.h" />
     <ClInclude Include="..\..\..\..\source\proteus.h" />
+    <ClInclude Include="..\..\..\..\source\scene\prScene.h" />
+    <ClInclude Include="..\..\..\..\source\scene\prSceneNode.h" />
+    <ClInclude Include="..\..\..\..\source\scene\prSceneObject.h" />
     <ClInclude Include="..\..\..\..\source\script\prLua.h" />
     <ClInclude Include="..\..\..\..\source\script\prLuaDebug.h" />
     <ClInclude Include="..\..\..\..\source\social\facebook\prFacebook.h" />
@@ -1065,6 +1068,9 @@
     <ClCompile Include="..\..\..\..\source\persistence\prSave_linux.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave_mac.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave_pc.cpp" />
+    <ClCompile Include="..\..\..\..\source\scene\prScene.cpp" />
+    <ClCompile Include="..\..\..\..\source\scene\prSceneNode.cpp" />
+    <ClCompile Include="..\..\..\..\source\scene\prSceneObject.cpp" />
     <ClCompile Include="..\..\..\..\source\script\prLua.cpp" />
     <ClCompile Include="..\..\..\..\source\script\prLuaDebug.cpp" />
     <ClCompile Include="..\..\..\..\source\social\facebook\prFacebook.cpp" />

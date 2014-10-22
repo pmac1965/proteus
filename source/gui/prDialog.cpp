@@ -142,6 +142,7 @@ void prDialog::Draw()
         }
         else if (m_pttfFont && m_title.Length() > 0)
         {
+            TODO("Don't like this bold option! Remove")
             m_pttfFont->Draw(pos.x + m_offsetTitle.x, pos.y + m_offsetTitle.y, m_titleScale, m_fontColour, mFontAlignmentTitle, m_title.Text());
             m_pttfFont->Draw(pos.x + m_offsetTitle.x + 1, pos.y + m_offsetTitle.y + 1, m_titleScale, m_fontColour, mFontAlignmentTitle, m_title.Text());
         }

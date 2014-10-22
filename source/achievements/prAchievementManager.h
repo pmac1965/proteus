@@ -164,39 +164,52 @@ public:
     // Set the notification bars position.
     void SetNotificationBarPos(s32 x, s32 y);
 
-    // Sets the font used.
+    // Method: SetNotificationBarFont
+    //      Sets the font used by the notification bar.
+    //
+    // Parameters:
+    //      font    - The font
+    //      font    - The width of the font text before a new line occurs
+    //      font    - The scale of the font
+    //
+    // Notes:
+    //      This is an optional call
     void SetNotificationBarFont(prBitmapFont *font, float width, float scale);
 
-    // Set a pointer to the language code.
+    // Method: SetLanguage
+    //      Set a pointer to the language code.
+    //
+    // Notes:
+    //      This is an optional call.
+    //
+    // Notes:
+    //      If the language provider is not set, then the passed text will be used as is
     void SetLanguage(prLanguage *language);
 
-    //// Sets if its a lite build - quick hack - will add to system states once all set up
-    //void IsLiteBuild(bool state);
-
-    //// Another hack :-(
-    //void HiRes(bool state);
-
-    // Set the text colour
+    // Method: SetTextColour
+    //      Set the text colour of the achievement text
+    //
+    // Notes:
+    //      This affects engine rendered achievements only, not client achievements
     void SetTextColour(const prColour &c);
 
-    // Enable and disable achievements.
+    // Method: Enable
+    //      Enable and disable achievements.
     void Enable(bool state);
 
 
 private:
-
+    // Test to see if an achievement has been achieved.
     bool Achieved(s32 value, s32 testValue, s32 type);
 
 
 private:
-
     // Stops passing by value and assignment.
     prAchievementManager(const prAchievementManager&);
     const prAchievementManager& operator = (const prAchievementManager&);
 
 
 private:
-
     // Don't change order.
     AchievementManagerImplementation  *pImpl;
     AchievementManagerImplementation  &imp;

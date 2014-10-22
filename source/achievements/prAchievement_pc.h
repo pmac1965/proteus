@@ -25,6 +25,10 @@
 
 // Class: prAchievement_PC
 //      PC achievement provider
+//
+// Notes:
+//      The PC version can use achievements, that are stored locally, or
+//      it can use steam based achievements
 class prAchievement_PC : public prAchievementBase
 {
 public:

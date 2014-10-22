@@ -370,10 +370,12 @@ void prSprite::SetFrame(s32 frame)
         // Set frame
         m_frame = frame;
     }
+#if defined(ALLOW_INVALID_FRAME_WARNING)
     else
     {
         prTrace("Attempted to set an invalid sprite frame index %i. Texture: %s\n", frame, m_pTexture->Filename());
     }
+#endif
 }
 
 
