@@ -70,7 +70,7 @@ public:
     // Returns:
     //      PRTRUE if the display was created successfully.
     //      PRFALSE if the display was NOT created successfully.
-    PRBOOL DisplayCreate(u32 width, u32 height, const char *pWindowName);
+    PRBOOL DisplayCreate(u32 width, u32 height, const char *pWindowName, bool fullscreen);
 
     // Method: DisplayCreateTool
     //      Creates the application display for tools

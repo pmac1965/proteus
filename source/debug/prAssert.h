@@ -74,8 +74,8 @@
     void prWarnPrint(const char *file, const char *function, int line, const char *fmt = 0, ...);
 
 
-    /// @def PRBREAKPOINT
-    /// This macro will trigger a breakpoint.
+    // Macro: PRBREAKPOINT
+    //      This macro will trigger a breakpoint.
     #if defined(PLATFORM_PC)
         #define PRBREAKPOINT()                                                      \
         {                                                                           \
@@ -187,8 +187,8 @@
 #endif//_DEBUG
 
 
-/// @def PRCOMPILER_ASSERT
-/// Used to check values at compile time.
+// Macro: PRCOMPILER_ASSERT
+//      Used to check values at compile time.
 #ifndef PRCOMPILER_ASSERT
 #define PRCOMPILER_ASSERT(check) typedef int COMPILER_ASSERT__[(check) ? 1 : -1]
 #endif

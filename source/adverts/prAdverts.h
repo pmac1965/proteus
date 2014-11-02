@@ -91,11 +91,11 @@ public:
 
     // Method: IsAdvertLoading
     //      Is an advert loading?
-    bool IsAdvertLoading();
+    bool IsAdvertLoading() const;
 
     // Method: IsAdvertLoaded
     //      Has an advert loaded?
-    bool IsAdvertLoaded();
+    bool IsAdvertLoaded() const;
 
 
 private:

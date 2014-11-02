@@ -315,6 +315,8 @@
     <ClInclude Include="..\..\..\..\source\display\prPerspective.h" />
     <ClInclude Include="..\..\..\..\source\display\prPvr.h" />
     <ClInclude Include="..\..\..\..\source\display\prRenderer.h" />
+    <ClInclude Include="..\..\..\..\source\display\prRenderer_DX10.h" />
+    <ClInclude Include="..\..\..\..\source\display\prRenderer_DX11.h" />
     <ClInclude Include="..\..\..\..\source\display\prRenderer_DX9.h" />
     <ClInclude Include="..\..\..\..\source\display\prRenderer_GL11.h" />
     <ClInclude Include="..\..\..\..\source\display\prRenderer_GL20.h" />
@@ -351,6 +353,7 @@
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_pc.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prTransactionResult.h" />
     <ClInclude Include="..\..\..\..\source\input\prAccelerometer.h" />
+    <ClInclude Include="..\..\..\..\source\input\prJoystick.h" />
     <ClInclude Include="..\..\..\..\source\input\prKeyboard.h" />
     <ClInclude Include="..\..\..\..\source\input\prKeyboard_PC.h" />
     <ClInclude Include="..\..\..\..\source\input\prKeys.h" />
@@ -414,19 +417,24 @@
     <ClInclude Include="..\..\..\..\source\lua\lvm.h" />
     <ClInclude Include="..\..\..\..\source\lua\lzio.h" />
     <ClInclude Include="..\..\..\..\source\math\MersenneTwister.h" />
+    <ClInclude Include="..\..\..\..\source\math\prFixedPoint.h" />
     <ClInclude Include="..\..\..\..\source\math\prMathsUtil.h" />
     <ClInclude Include="..\..\..\..\source\math\prMatrix4.h" />
     <ClInclude Include="..\..\..\..\source\math\prPlane.h" />
     <ClInclude Include="..\..\..\..\source\math\prPoint.h" />
+    <ClInclude Include="..\..\..\..\source\math\prQuaternion.h" />
     <ClInclude Include="..\..\..\..\source\math\prRandom.h" />
     <ClInclude Include="..\..\..\..\source\math\prRect.h" />
     <ClInclude Include="..\..\..\..\source\math\prRectF.h" />
     <ClInclude Include="..\..\..\..\source\math\prSinCos.h" />
     <ClInclude Include="..\..\..\..\source\math\prVector2.h" />
     <ClInclude Include="..\..\..\..\source\math\prVector3.h" />
+    <ClInclude Include="..\..\..\..\source\memory\prAllocator.h" />
+    <ClInclude Include="..\..\..\..\source\memory\prLinkedHeap.h" />
     <ClInclude Include="..\..\..\..\source\memory\prMemory.h" />
     <ClInclude Include="..\..\..\..\source\memory\prMemoryPool.h" />
     <ClInclude Include="..\..\..\..\source\memory\prSpritePointerPool.h" />
+    <ClInclude Include="..\..\..\..\source\memory\prStackHeap.h" />
     <ClInclude Include="..\..\..\..\source\mesh\prAnimation.h" />
     <ClInclude Include="..\..\..\..\source\mesh\prAnimation_MD2.h" />
     <ClInclude Include="..\..\..\..\source\mesh\prMD2.h" />
@@ -631,6 +639,8 @@
     <ClCompile Include="..\..\..\..\source\display\prOglUtils.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prPerspective.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prRenderer_DX10.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prRenderer_DX11.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer_DX9.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer_GL11.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer_GL20.cpp" />
@@ -662,6 +672,7 @@
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_mac.cpp" />
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_pc.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prAccelerometer.cpp" />
+    <ClCompile Include="..\..\..\..\source\input\prJoystick.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prKeyboard.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prKeyboard_PC.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prMouse.cpp" />
@@ -1030,14 +1041,17 @@
     <ClCompile Include="..\..\..\..\source\math\prMathsUtil.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prMatrix4.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prPlane.cpp" />
+    <ClCompile Include="..\..\..\..\source\math\prQuaternion.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prRandom.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prRect.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prRectF.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prSinCos.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prVector2.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prVector3.cpp" />
+    <ClCompile Include="..\..\..\..\source\memory\prLinkedHeap.cpp" />
     <ClCompile Include="..\..\..\..\source\memory\prMemory.cpp" />
     <ClCompile Include="..\..\..\..\source\memory\prSpritePointerPool.cpp" />
+    <ClCompile Include="..\..\..\..\source\memory\prStackHeap.cpp" />
     <ClCompile Include="..\..\..\..\source\mesh\prAnimation.cpp" />
     <ClCompile Include="..\..\..\..\source\mesh\prAnimation_MD2.cpp" />
     <ClCompile Include="..\..\..\..\source\mesh\prMesh.cpp" />
@@ -1105,6 +1119,7 @@
     <ClCompile Include="..\..\..\..\source\zlib\zutil.c" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\source\Android.mk" />
     <None Include="..\..\..\..\source\changes.txt" />
     <None Include="..\..\..\..\source\core\prList.inl" />
     <None Include="..\..\..\..\source\includes.bat" />

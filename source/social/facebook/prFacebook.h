@@ -121,6 +121,10 @@ public:
     //      login to facebook
     virtual bool Login() { return false; }
 
+    // Method: Logout
+    //      logout off facebook
+    virtual bool Logout() { return false; }
+
     // Method: FetchUserDetails
     //      login to facebook
     virtual void FetchUserDetails() {}

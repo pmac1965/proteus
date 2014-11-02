@@ -116,7 +116,7 @@ public:
     void Award(const char *key, s32 awardValue);
 
     // Is an achievement awarded
-    bool IsAwarded(const char *key);
+    bool IsAwarded(const char *key) const;
 
     // Loads the achievement definition file and the achievement status file.
     void Load(const char *filename);
@@ -153,7 +153,7 @@ public:
     void SetNotificationPosition(u32 pos);
 
     // Get number of achievements
-    u32 GetCount();
+    u32 GetCount() const;
 
     // Get the name of the achievement by index.
     const char *GetNameByIndex(u32 index);

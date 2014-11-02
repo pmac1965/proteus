@@ -22,6 +22,7 @@
 #include "../prConfig.h"
 #include "../debug/prAlert.h"
 #include "../debug/prTrace.h"
+#include "../debug/prLog.h"
 
 
 // __cdecl is PC specific

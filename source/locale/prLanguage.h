@@ -108,7 +108,7 @@ public:
 
     // Method: GetString
     //      Gets a localised string.
-    const char *GetString(const char *name);
+    const char *GetString(const char *name) const;
 
 
 private:

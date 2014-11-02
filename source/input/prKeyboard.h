@@ -56,11 +56,11 @@ public:
 
     // Method: IsKeyDown
     //      Tests if the key passed is currently being held down.
-    bool IsKeyDown(u32 charcode, u32 ctrlKeys = PRCTRL_KEY_NONE);
+    bool IsKeyDown(u32 charcode, u32 ctrlKeys = PRCTRL_KEY_NONE) const;
 
     // Method: IsKeyPressed
     //      Tests if the key passed has been pressed
-    bool IsKeyPressed(u32 charcode, u32 ctrlKeys = PRCTRL_KEY_NONE);
+    bool IsKeyPressed(u32 charcode, u32 ctrlKeys = PRCTRL_KEY_NONE) const;
 
     // Method: LastKeyPressed
     //      Returns the last key pressed

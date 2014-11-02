@@ -83,6 +83,16 @@ bool prFacebook_Android::Login()
     return mIsLoggedIn;
 }
 
+
+/// ----------------------------------------------------------------------------
+/// logout of facebook
+/// ----------------------------------------------------------------------------
+bool prFacebook_Android::Logout()
+{
+    //prJNI_FacebookLogin();
+    return mIsLoggedIn;
+}
+
             
 /// ----------------------------------------------------------------------------
 /// Fetches the users details

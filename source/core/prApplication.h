@@ -63,7 +63,7 @@ public:
     // Returns:
     //      PRTRUE if the display was created successfully.
     //      PRFALSE if the display was NOT created successfully.
-    virtual PRBOOL DisplayCreate(u32 width, u32 height, const char *pWindowName) = 0;
+    virtual PRBOOL DisplayCreate(u32 width, u32 height, const char *pWindowName, bool fullscreen) = 0;
 
     // Method: Update
     //      Updates the application.

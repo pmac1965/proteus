@@ -166,7 +166,7 @@ void prAdverts::LoadAd()
 /// ---------------------------------------------------------------------------
 /// Is an advert loading?
 /// ---------------------------------------------------------------------------
-bool prAdverts::IsAdvertLoading()
+bool prAdverts::IsAdvertLoading() const
 {
     PRASSERT(pImpl);    
 
@@ -184,7 +184,7 @@ bool prAdverts::IsAdvertLoading()
 /// ---------------------------------------------------------------------------
 /// Has an advert loaded?
 /// ---------------------------------------------------------------------------
-bool prAdverts::IsAdvertLoaded()
+bool prAdverts::IsAdvertLoaded() const
 {
     PRASSERT(pImpl);    
 

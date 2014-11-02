@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -105,9 +104,9 @@ void prDebugShowLastError(const char *msg)
 }
 
 
-// ----------------------------------------------------------------------------
-// Outputs a string of text to the platforms debug output window.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Outputs a string of text to the platforms debug output window.
+/// ---------------------------------------------------------------------------
 void prOutputString(const char *text)
 {
     if (text && *text)

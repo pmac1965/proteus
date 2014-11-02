@@ -135,7 +135,7 @@ prApplication_Android::~prApplication_Android()
 /// ---------------------------------------------------------------------------
 /// Creates the application display.
 /// ---------------------------------------------------------------------------
-PRBOOL prApplication_Android::DisplayCreate(u32 width, u32 height, const char *pWindowName)
+PRBOOL prApplication_Android::DisplayCreate(u32 width, u32 height, const char *pWindowName, bool fullscreen)
 {
     PRBOOL result = PRFALSE;
 

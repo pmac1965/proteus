@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -32,17 +31,17 @@
 #include "../file/prFileSystem.h"
 
 
-// ----------------------------------------------------------------------------
-// Defines
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Defines
+/// ---------------------------------------------------------------------------
 #define MSG_BUFFER_SIZE     1024
 #define RPT_BUFFER_SIZE     256
 #define TRACE_LOG_NAME      "trace.txt"
 
 
-// ----------------------------------------------------------------------------
-// Locals
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Locals
+/// ---------------------------------------------------------------------------
 namespace
 {
     static bool enabled      = true;                    // Is logging enabled?
@@ -53,9 +52,45 @@ namespace
 }
 
 
-// ----------------------------------------------------------------------------
-// Outputs a debug string.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Write a trace message to file if enabled.
+/// ---------------------------------------------------------------------------
+void prTraceWriteToFile(bool repeat, const char *bufferRpt, const char *bufferMsg)
+{
+#if defined(PLATFORM_PC)
+
+    prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+    if (reg)
+    {
+        if (prStringCompare(reg->GetValue("LogToFile"), "true") == CMP_EQUALTO &&
+            prStringCompare(reg->GetValue("Exit"), "true")      != CMP_EQUALTO)
+        {
+            FILE *fp = fopen(TRACE_LOG_NAME, "a");
+            if (fp)
+            {
+                if (repeat)
+                {
+                    fprintf(fp, "%s", bufferRpt);
+                    fprintf(fp, "%s", bufferMsg);
+                }
+                else
+                {
+                    fprintf(fp, "%s", bufferMsg);
+                }
+
+                fflush(fp);
+                fclose(fp);
+            }
+        }
+    }
+
+#endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Outputs a debug string.
+/// ---------------------------------------------------------------------------
 void prTrace(const char *fmt, ...)
 {
     if (enabled)
@@ -108,7 +143,7 @@ void prTrace(const char *fmt, ...)
             }
 
 
-            // Debugger
+            // Write to console.=
             if (repeat)
             {
                 prOutputString(bufferRpt);
@@ -121,56 +156,33 @@ void prTrace(const char *fmt, ...)
 
 
             // Write to a file?
-            prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
-            if (reg)
-            {
-                if (prStringCompare(reg->GetValue("LogToFile"), "true") == CMP_EQUALTO &&
-                    prStringCompare(reg->GetValue("Exit"), "true")      != CMP_EQUALTO)
-                {
-                    FILE *fp = fopen(TRACE_LOG_NAME, "a");
-                    if (fp)
-                    {
-                        if (repeat)
-                        {
-                            fprintf(fp, "%s", bufferRpt);
-                            fprintf(fp, "%s", bufferMsg);
-                        }
-                        else
-                        {
-                            fprintf(fp, "%s", bufferMsg);
-                        }
-
-                        fflush(fp);
-                        fclose(fp);
-                    }
-                }
-            }
+            prTraceWriteToFile(repeat, bufferRpt, bufferMsg);
         }
     }
 }
 
 
-// ----------------------------------------------------------------------------
-// Allows tracing to be enabled/disabled.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Allows tracing to be enabled/disabled.
+/// ---------------------------------------------------------------------------
 void prTraceEnable(bool state)
 {
     enabled = state;
 }
 
 
-// ----------------------------------------------------------------------------
-// Enables or disables duplicate string output.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Enables or disables duplicate string output.
+/// ---------------------------------------------------------------------------
 void prTraceRemoveDuplicates(bool state)
 {
     duplicates = state;
 }
 
 
-// ----------------------------------------------------------------------------
-// Clears the old log file.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Clears the old log file.
+/// ---------------------------------------------------------------------------
 void prTraceLogClear()
 {
 #if defined(PLATFORM_PC)
@@ -182,15 +194,4 @@ void prTraceLogClear()
     }
 
 #endif
-}
-
-
-// ----------------------------------------------------------------------------
-// Outputs a debug string to an error log window.
-// The actual location is platform dependant, but will generally be the debuggers output window.
-// The release version of the function will still output a message.
-// ----------------------------------------------------------------------------
-void prLog(const char* fmt, ...)
-{
-    PRUNUSED(fmt);
 }

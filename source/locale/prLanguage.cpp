@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -35,62 +34,6 @@ typedef struct LocaleInfo
     u32 locale;
 
 } LocaleInfo;
-
-
-//// ----------------------------------------------------------------------------
-//// Implementation data.
-//// ----------------------------------------------------------------------------
-//typedef struct LanguageImplementation
-//{
-//
-//    // Finds a string by its name.
-//    //
-//    const char *Find(const char *name)
-//    {
-//        if (count > 0)
-//        {
-//            u32 hash = prStringHash(name);
-//
-//            // ...
-//            int  lower = 0;
-//            int  upper = count - 1;
-//            //int  mid;
-//
-//            while(lower <= upper)
-//            {
-//                int mid = (lower + upper) / 2;
-//
-//                if (hash > pStringTableEntries[mid]->hash)
-//                {
-//                    lower = mid + 1;
-//                }
-//                else if (hash < pStringTableEntries[mid]->hash)
-//                {
-//                    upper = mid - 1;
-//                }
-//                else
-//                {
-//                    return pStringTableEntries[mid]->text[language];
-//                }
-//            }
-//        }
-//
-//        prTrace("Failed to find string: %s\n", name);
-//        return name;
-//    }
-//
-//
-//    // Implementation data
-//    s32                     language;
-//    s32                     count;
-//    bool                    correctFileType;
-//    bool                    exp0;
-//    bool                    exp1;
-//    bool                    exp2;
-//    StringTableEntry      **pStringTableEntries;
-//    //List<StringTableEntry*> entries;
-//
-//} LanguageImplementation;
 
 
 /// ---------------------------------------------------------------------------
@@ -219,7 +162,7 @@ s32 prLanguage::Get() const
 /// ---------------------------------------------------------------------------
 /// Gets a localised string.
 /// ---------------------------------------------------------------------------
-const char *prLanguage::GetString(const char *name)
+const char *prLanguage::GetString(const char *name) const
 {
     if (count > 0)
     {

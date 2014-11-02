@@ -1,9 +1,18 @@
+// File: prProfileManager.h
 /**
- *  @file       prProfileManager.h
- *  @brief      Contains a class used to manage profiling entries.
- *  @author     Paul McNab. Copyright 2008 Paul Michael McNab. All rights reserved.
- *  @version    Sep 06, 2008 - Initial creation.
- *  @note		This class is true singleton. You cannot create an instance.
+ * Copyright 2014 Paul Michael McNab
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 
 
@@ -15,16 +24,16 @@
 #include "../core/prTypes.h"
 
 
-// ------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // Forward declarations
-// ------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 class prFixedWidthFont;
 class prProfileEntry;
 
 
-// ------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // Shortcut defines as you shouldn't add the profiling code without them
-// ------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 #if (defined(PLATFORM_PC) || defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID)) && defined(PROFILE)
     #define ProfileCreate(name)                     prProfileManager::GetInstance().Create((name))
     #define ProfileEnable(state)                    prProfileManager::GetInstance().Enable((state))
@@ -50,52 +59,73 @@ class prProfileEntry;
 #endif
 
 
-// ------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 // Defines
-// ------------------------------------------------------------------------------------------------
+// ----------------------------------------------------------------------------
 #define PROFILE_MAX_ENTRIES         128
 
 
-// ------------------------------------------------------------------------------------------------
-// Class used to manage profiling entries.
-// ------------------------------------------------------------------------------------------------
+// Class: prProfileManager
+//      Class used to manage profiling entries.
+//
+// Notes:
+//      This class should only be used on platforms where no proper profiling
+//      tools are available. SO LAST DITCH ONLY!!!
+//
+// Notes:
+//      This class is a singleton
 class prProfileManager
 {
 public:
-
-    // Returns a reference to the profile manager instance.
+    // Method: GetInstance
+    //      Returns a reference to the profile manager instance.
     static prProfileManager& GetInstance() { return m_instance; }
 
-    // Resets all the profile entries to their initial state.
+    // Method: Reset
+    //      Resets all the profile entries to their initial state.
     void Reset();
 
-    // Begins a profiling cycle.
+    // Method: Begin
+    //      Begins a profiling cycle.
     void Begin();
 
-    // Creates a new profiling entry.
+    // Method: Create
+    //      Creates a new profiling entry.
     s32 Create(const char *name);
 
-    // Destroys all profiling entries.
+    // Method: Destroy
+    //      Destroys all profiling entries.
     void Destroy();
 
-    // Displays the profile timings.
+    // Method: Display
+    //      Displays the profile timings.
+    //
+    // Parameters:
+    //      x       - The screen x position
+    //      y       - The screen y position
+    //      font    - The font to draw with
+    //      spacing - The spacing between the lines of text, so it can be tightly displayed
+    //      first   - The first timing t0 display (Allows scrolling of the text)
     void Display(s32 x, s32 y, prFixedWidthFont* font, s32 spacing, u32 first);
 
-    // Enables/disables profiling.
+    // Method: Enable
+    //      Enables/disables profiling.
     void Enable(bool state) { m_update = state; }
 
-    // Start profiling
+    // Method: Start
+    //      Start profiling
     void Start(u32 index);
 
-    // Stop profiling
+    // Method: Stop
+    //      Stop profiling
     void Stop(u32 index);
 
-    // Returns the number of visible entries.
-    s32 Count();
+    // Method: Count
+    //      Returns the number of visible entries.
+    s32 Count() const;
 
 
 private:
-
     // This class is true singleton. You cannot create an instance.
     prProfileManager();
     ~prProfileManager();
@@ -106,7 +136,6 @@ private:
 
 
 private:
-
     static prProfileManager m_instance;
     prProfileEntry         *m_entries[PROFILE_MAX_ENTRIES];
     float                   m_frequency;

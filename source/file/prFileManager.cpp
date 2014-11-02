@@ -248,7 +248,7 @@ void prFileManager::RegisterArchive(const char *filename)
 
                             // Store table
                             bool found = false;
-                            int  idx = -1;
+                            int  idx = 0;
                             for (int i=0; i<FILE_ARCHIVES_MAX; i++)
                             {
                                 if (pEntries[i] == NULL && pArchiveFile[i] == NULL)

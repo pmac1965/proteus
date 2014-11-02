@@ -876,7 +876,7 @@ void prAchievementManager::Award(const char *key, s32 awardValue)
 /// ---------------------------------------------------------------------------
 /// Is an achievement awarded
 /// ---------------------------------------------------------------------------
-bool prAchievementManager::IsAwarded(const char *key)
+bool prAchievementManager::IsAwarded(const char *key) const
 {
     PRASSERT(pImpl);
 
@@ -1192,7 +1192,7 @@ void prAchievementManager::SetNotificationPosition(u32 pos)
 // ----------------------------------------------------------------------------
 // Get number of achievements
 // ----------------------------------------------------------------------------
-u32 prAchievementManager::GetCount()
+u32 prAchievementManager::GetCount() const
 {
     PRASSERT(pImpl);
     return imp.achievementsCount;

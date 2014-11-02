@@ -80,6 +80,7 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
         init   = PRTRUE;
         result = PRTRUE;
 
+
         // Create the core systems
         systems[PRSYSTEM_RESOURCEMANAGER]   = new prResourceManager();
         systems[PRSYSTEM_TOUCH]             = new prTouch();
@@ -87,14 +88,15 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
         systems[PRSYSTEM_REGISTRY]          = new prRegistry();
         systems[PRSYSTEM_FILEMANAGER]       = new prFileManager();
 
+
         // Platform specific initialisation
         #if defined(PLATFORM_PC)
             // Check renderer type value.
             PRASSERT(rendererType == PRRENDERER_OPENGL || rendererType == PRRENDERER_DIRECTX);
 
-            // Check version numbers
             if (rendererType == PRRENDERER_OPENGL)
             {
+                // Check version numbers
                 PRASSERT(version == PRGLVER_11 || version == PRGLVER_20 || version == PRGLVER_30);
                 switch (version)
                 {
@@ -113,8 +115,22 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
             }
             else if (rendererType == PRRENDERER_DIRECTX)
             {
+                // Check version numbers
                 PRASSERT(version == PRDXVER_9 || version == PRDXVER_10 || version == PRDXVER_11);
-                PRPANIC("Under construction");
+                switch(version)
+                {
+                case PRDXVER_9:
+                    PRPANIC("Under construction");
+                    break;
+
+                case PRDXVER_10:
+                    PRPANIC("Under construction");
+                    break;
+
+                case PRDXVER_11:
+                    PRPANIC("Under construction");
+                    break;
+                }
             }
 
         #elif defined(PLATFORM_ANDROID)

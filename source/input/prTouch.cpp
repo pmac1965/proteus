@@ -136,9 +136,10 @@ typedef struct TouchImplementation
                         e.y     = touchData[i].py;
                         e.rx    = 0;
                         e.ry    = 0;
-                        e.index = i;
-#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
+#if (defined(PLATFORM_PC) || defined(PLATFORM_LINUX))
                         e.index = 0;
+#else
+                        e.index = i;
 #endif
                         e.id    = touchLocation.id;
                         //prLog("Released: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
@@ -168,9 +169,10 @@ typedef struct TouchImplementation
                         e.y     = touchData[i].y;
                         e.rx    = touchData[i].x - touchData[i].px;
                         e.ry    = touchData[i].y - touchData[i].py;
-                        e.index = i;
-#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
+#if (defined(PLATFORM_PC) || defined(PLATFORM_LINUX))
                         e.index = 0;
+#else
+                        e.index = i;
 #endif
                         e.id    = touchLocation.id;
                         //prLog("Axis: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
@@ -208,9 +210,10 @@ typedef struct TouchImplementation
                     e.y     = touchLocation.y;
                     e.rx    = 0;
                     e.ry    = 0;
+#if (defined(PLATFORM_PC) || defined(PLATFORM_LINUX))
+                    e.index = 0;
+#else
                     e.index = i;
-#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
-                        e.index = 0;
 #endif
                     e.id    = touchLocation.id;
                     //prLog("Pressed: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
@@ -225,9 +228,10 @@ typedef struct TouchImplementation
                     e.y     = touchData[i].y;
                     e.rx    = touchData[i].px - touchData[i].x;
                     e.ry    = touchData[i].py - touchData[i].y;
+#if (defined(PLATFORM_PC) || defined(PLATFORM_LINUX))
+                    e.index = 0;
+#else
                     e.index = i;
-#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
-                        e.index = 0;
 #endif
                     e.id    = touchLocation.id;
                     //prLog("Axis: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);

@@ -112,7 +112,7 @@
 #endif
 
 #ifndef SHOW_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.
-//#define SHOW_MESSAGES
+#define SHOW_MESSAGES
 #endif
 
 #ifndef PROTEUS_ALLOW_CONSOLE                           // Allows the debug console to be optionally removed. (PC only)
@@ -178,8 +178,10 @@
 
 
 // Tweakbar
-#ifndef PROTEUS_USE_ANT_TWEAK_BAR                       // Use AntTweakBar?
-#define PROTEUS_USE_ANT_TWEAK_BAR
+#if defined(PLATFORM_PC)
+  #ifndef PROTEUS_USE_ANT_TWEAK_BAR                     // Use AntTweakBar?
+  #define PROTEUS_USE_ANT_TWEAK_BAR
+  #endif
 #endif
 
 
@@ -195,7 +197,9 @@
 
 
 // Optimizations
-#define PROTEUS_OPTIMISE_REMOVE_ISTEXTURE
+#define PROTEUS_OPTIMISE_REMOVE_ISTEXTURE               // If defined this removes the IsTexture text in texture release
+//#define PROTEUS_OPTIMISE_NO_VECTOR2_INIT                // If defined then the prVector2 class does not zero its members in the constructor
+//#define PROTEUS_OPTIMISE_NO_VECTOR3_INIT                // If defined then the prVector3 class does not zero its members in the constructor
 
 
 #endif//__PRCONFIG_H

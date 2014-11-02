@@ -70,7 +70,7 @@ void prKeyboard::Update()
 /// ---------------------------------------------------------------------------
 /// Tests if the key passed is currently being held down.
 /// ---------------------------------------------------------------------------
-bool prKeyboard::IsKeyDown(u32 charcode, u32 ctrlKeys)
+bool prKeyboard::IsKeyDown(u32 charcode, u32 ctrlKeys) const
 {
     bool result = false;
 
@@ -101,7 +101,7 @@ bool prKeyboard::IsKeyDown(u32 charcode, u32 ctrlKeys)
 /// ---------------------------------------------------------------------------
 /// Tests if the key passed has been pressed
 /// ---------------------------------------------------------------------------
-bool prKeyboard::IsKeyPressed(u32 charcode, u32 ctrlKeys)
+bool prKeyboard::IsKeyPressed(u32 charcode, u32 ctrlKeys) const
 {
     bool result = false;
 

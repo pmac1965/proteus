@@ -73,14 +73,4 @@ void prTraceLogClear();
 #endif
 
 
-// Function: prLog 
-//      Outputs a debug string to an error log window.
-//      The actual location is platform dependant, but will generally be the debuggers output window.
-//
-// Parameters:
-//      fmt - The format string.
-//      ... - Format string parameters.
-void prLog(const char* fmt, ...);
-
-
 #endif//__PRTRACE_H

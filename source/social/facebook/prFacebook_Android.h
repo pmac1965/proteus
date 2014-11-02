@@ -52,6 +52,10 @@ public:
     // Method: Login
     //      login to facebook
     bool Login();
+
+    // Method: Logout
+    //      logout of facebook
+    bool Logout();
     
     // Method: FetchUserDetails
     //      login to facebook

@@ -134,7 +134,7 @@ prApplication_Ios::~prApplication_Ios()
 /// ---------------------------------------------------------------------------
 /// Creates the application display.
 /// ---------------------------------------------------------------------------
-PRBOOL prApplication_Ios::DisplayCreate(u32 width, u32 height, const char *pWindowName)
+PRBOOL prApplication_Ios::DisplayCreate(u32 width, u32 height, const char *pWindowName, bool fullscreen)
 {
     PRBOOL result = PRFALSE;
 

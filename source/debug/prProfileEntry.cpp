@@ -1,27 +1,36 @@
-// ------------------------------------------------------------------------------------------------
-//
-// prProfileEntry.cpp
-//
-// ------------------------------------------------------------------------------------------------
+/**
+ * prProfileEntry.cpp
+ *
+ *  Copyright 2014 Paul Michael McNab
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 
 
 #include "../prConfig.h"
 
 
 #if defined(PLATFORM_PC)
+  // Exclude MFC
+  #ifndef WIN32_LEAN_AND_MEAN
+  #define WIN32_LEAN_AND_MEAN
+  #endif
+  #ifndef WIN32_EXTRA_LEAN
+  #define WIN32_EXTRA_LEAN
+  #endif
 
+  #include <windows.h>
 
-// Exclude MFC
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-
-#ifndef WIN32_EXTRA_LEAN
-#define WIN32_EXTRA_LEAN
-#endif
-
-
-#include <windows.h>
 
 #elif defined (PLATFORM_IOS)
   #include <mach/mach_time.h>
@@ -36,16 +45,16 @@
 #include "prProfileEntry.h"
 
 
-// ------------------------------------------------------------------------------------------------
-// Defines
-// ------------------------------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Defines
+/// ---------------------------------------------------------------------------
 #define INITIAL_TIME                999999.0f
 #define BILLION                     1000000000LL
 
 
-// ------------------------------------------------------------------------------------------------
-// Ctor.
-// ------------------------------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Ctor.
+/// ---------------------------------------------------------------------------
 prProfileEntry::prProfileEntry(const char *name, float frequency) 
     : m_name        (name)
     , m_hash        (0)
@@ -62,17 +71,17 @@ prProfileEntry::prProfileEntry(const char *name, float frequency)
 }
 
 
-// ------------------------------------------------------------------------------------------------
-// Dtor
-// ------------------------------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Dtor
+/// ---------------------------------------------------------------------------
 prProfileEntry::~prProfileEntry()
 {
 }
 
 
-// ------------------------------------------------------------------------------------------------
-// Starts profiling.
-// ------------------------------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Starts profiling.
+/// ---------------------------------------------------------------------------
 void prProfileEntry::Start()
 {
 #if defined(PLATFORM_PC)
@@ -104,9 +113,9 @@ void prProfileEntry::Start()
 }
 
 
-// ------------------------------------------------------------------------------------------------
-// Stops profiling.
-// ------------------------------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Stops profiling.
+/// ---------------------------------------------------------------------------
 void prProfileEntry::Stop()
 {
 #if defined(PLATFORM_PC)
@@ -150,9 +159,9 @@ void prProfileEntry::Stop()
 }
 
 
-// ------------------------------------------------------------------------------------------------
-// Updates a profiling entry.
-// ------------------------------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Updates a profiling entry.
+/// ---------------------------------------------------------------------------
 void prProfileEntry::Update(u64 period)
 {
     float time = (float)period / m_frequency;
@@ -184,9 +193,9 @@ void prProfileEntry::Update(u64 period)
 }
 
 
-// ------------------------------------------------------------------------------------------------
-// Resets the profiling stats data.
-// ------------------------------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Resets the profiling stats data.
+/// ---------------------------------------------------------------------------
 void prProfileEntry::Reset()
 {
     m_hits         =  0;

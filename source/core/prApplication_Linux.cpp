@@ -137,7 +137,7 @@ prApplication_Linux::~prApplication_Linux()
 /// ---------------------------------------------------------------------------
 /// Creates the application display.
 /// ---------------------------------------------------------------------------
-PRBOOL prApplication_Linux::DisplayCreate(u32 width, u32 height, const char *pWindowName)
+PRBOOL prApplication_Linux::DisplayCreate(u32 width, u32 height, const char *pWindowName, bool fullscreen)
 {
     PRBOOL result = PRFALSE;
 

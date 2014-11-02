@@ -162,7 +162,7 @@ prApplication_PC::~prApplication_PC()
 /// ---------------------------------------------------------------------------
 /// Creates the application display.
 /// ---------------------------------------------------------------------------
-PRBOOL prApplication_PC::DisplayCreate(u32 width, u32 height, const char *pWindowName)
+PRBOOL prApplication_PC::DisplayCreate(u32 width, u32 height, const char *pWindowName, bool fullscreen)
 {
     PRBOOL result = PRFALSE;
 
@@ -207,7 +207,7 @@ PRBOOL prApplication_PC::DisplayCreate(u32 width, u32 height, const char *pWindo
 
 
     // Create the window
-    bool success = m_pWindow->Create(width, height, 32, false);
+    bool success = m_pWindow->Create(width, height, 32, fullscreen);
     if (success)
     {
         m_running = PRTRUE;

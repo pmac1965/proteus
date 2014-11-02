@@ -190,8 +190,11 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	math/prSinCos.cpp	\
 	math/prMatrix4.cpp	\
 	math/prPlane.cpp	\
+	math/prQuaternion.cpp	\
 	memory/prMemory.cpp	\
 	memory/prSpritePointerPool.cpp	\
+	memory/prLinkedHeap.cpp	\
+	memory/prStackHeap.cpp	\
 	mesh/prAnimation.cpp	\
 	mesh/prAnimation_MD2.cpp	\
 	mesh/prMesh.cpp	\

@@ -20,9 +20,34 @@
 #define __PRLOG_H
 
 
-// Method: prLog
-//      Logs console messages regardless of debug/release
+// Function: prLog 
+//      Outputs a debug string to an error log window.
+//      The actual location is platform dependant, but will generally be the debuggers output window.
+//
+// Parameters:
+//      message - The message to write
+//
+// Notes:
+//      This type of logging is designed for error messages only as it
+//      works in release mode as well as debug.
+//
+// Notes:
+//      By default this type of logging is disabled.
+//
+// See Also:
+//      <prLogEnable>
 void prLog(const char *message);
+
+// Method: prLogEnable
+//      Enables logging.
+//
+// Notes:
+//      This type of logging will always appear as it still
+//      works in release mode.
+//
+// Notes:
+//      By default this type of logging is disabled.
+void prLogEnable(bool state);
 
 
 #endif//__PRLOG_H

@@ -356,7 +356,7 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
             u32 height = r.bottom - r.top;
 
             WindowMessage_Resize(window, width, height);
-            //prTrace("Size: %i, %i\n", width, height);
+            prTrace("Size: %i, %i\n", width, height);
             
             // Also do tweak bar
             #if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)

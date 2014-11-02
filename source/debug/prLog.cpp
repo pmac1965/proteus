@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -23,38 +22,39 @@
 #include "prLog.h"
 
 
-#if defined(PLATFORM_PC)
-    // Exclude MFC
-    #ifndef WIN32_LEAN_AND_MEAN
-    #define WIN32_LEAN_AND_MEAN
-    #endif
-    #ifndef WIN32_EXTRA_LEAN
-    #define WIN32_EXTRA_LEAN
-    #endif
+namespace
+{
+    bool    enabled = false;
+}
 
-    #include <windows.h>
-//    #include <stdio.h>
-//    #include "prAssert.h"
 
-#else
-#endif
+// We use the trace function to write to file.
+extern void prTraceWriteToFile(bool repeat, const char *bufferRpt, const char *bufferMsg);
 
 
 /// ---------------------------------------------------------------------------
-/// Shows a cross platfrom error message dialog
+/// Outputs a debug string to an error log window.
+/// The actual location is platform dependant, but will generally be the debuggers output window.
 /// ---------------------------------------------------------------------------
 void prLog(const char *message)
 {
-    prOutputString(message);
-    //if (message && *message)
-    //{
-    //}
-//#if defined(PLATFORM_PC)
-//
-//    // Create error dialog
-//    MessageBoxA(HWND_DESKTOP, message, title, MB_OK | MB_ICONERROR | MB_TASKMODAL);
-//
-//#else
-//
-//#endif
+    if (enabled)
+    {
+        if (message && *message)
+        {
+            prOutputString(message);
+
+            prTraceWriteToFile(false, NULL, message);
+        }
+    }
 }
+
+
+/// ---------------------------------------------------------------------------
+/// Enables logging.
+/// ---------------------------------------------------------------------------
+void prLogEnable(bool state)
+{
+    enabled = state;
+}
+

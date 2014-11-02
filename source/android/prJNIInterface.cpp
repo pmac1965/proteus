@@ -28,6 +28,7 @@
 #include <string.h>
 #include <android/log.h>
 #include "../debug/prTrace.h"
+#include "../debug/prLog.h"
 #include "../debug/prAssert.h"
 #include "../core/prDefines.h"
 #include "../core/prStringUtil.h"

@@ -32,7 +32,7 @@ class prCoreSystem;
 //
 //  PRRENDERER_OPENGL   - Use OpenGL
 //  PRRENDERER_DIRECTX  - Use DirectX
-typedef enum //prRendererType
+typedef enum
 {
     PRRENDERER_OPENGL,
     PRRENDERER_DIRECTX,
@@ -49,7 +49,7 @@ typedef enum //prRendererType
 //  PRDXVER_9   - DirectX Version 9
 //  PRDXVER_10  - DirectX Version 10
 //  PRDXVER_11  - DirectX Version 11
-typedef enum //prVerType
+typedef enum
 {
     PRGLVER_11,
     PRGLVER_20,

@@ -378,6 +378,9 @@ void prWindow_PC::Resize(u32 width, u32 height)
     ERR_CHECK();
 
 
+    prTrace("PC RESIZE: %i, %i\n", width, height);
+
+
     // Calculate the aspect ratio of the window
     gluPerspective(45.0f, (GLfloat)width/(GLfloat)height, 0.1f, 1000.0f);
     ERR_CHECK();

@@ -521,7 +521,7 @@ typedef struct BitmapFontImplementation
     // ------------------------------------------------------------------------
     // Gets kerning data
     // ------------------------------------------------------------------------
-    f32 GetKerning(u32 first, u32 second)
+    f32 GetKerning(u32 first, u32 second) const
     {
         f32 amount = 0.0f;
 
