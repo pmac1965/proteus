@@ -34,3 +34,17 @@ prScene::prScene()
 prScene::~prScene()
 {
 }
+
+
+// Method: Add
+//
+void prScene::Add(prSceneNode *psn)
+{
+}
+
+
+// Method: Remove
+//
+void prScene::Remove(prSceneNode *psn)
+{
+}

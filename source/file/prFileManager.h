@@ -81,6 +81,15 @@ public:
     u32 Read(u8 *pDataBuffer, u32 size, const char *filename);
 #endif
 
+    // Method: DisplayFiles
+    //      Displays all files with the access state passed. This
+    //      allows all files which have and haven't been accessed to
+    //      be displayed
+    //
+    // Notes:
+    //      For the PC build only
+    void DisplayFiles(bool accessed);
+
 
 private:
     // This function looks in all registered archives for the file.

@@ -24,6 +24,9 @@
   #include <Windows.h>
   #include <gl/gl.h>
   #include <gl/glu.h>
+
+//
+
   #include "../core/prWindow_PC.h"
 
 #elif defined(PLATFORM_LINUX)
@@ -37,7 +40,10 @@
   #include <OpenGL/glu.h>
 
 #elif defined(PLATFORM_ANDROID)
-  #include <GLES/gl.h>
+  //#include <GLES/gl.h>
+  #include <GLES2/gl2.h>
+  #include <GLES2/gl2ext.h>
+  #include <EGL/egl.h>
   #include "../core/prWindow_PC.h"
 
 #elif defined(PLATFORM_BADA)
@@ -56,8 +62,9 @@
 #include <math.h>
 #include "prRenderer_GL20.h"
 #include "prColour.h"
-//#include "../debug/prTrace.h"
-//#include "../debug/prAssert.h"
+#include "../debug/prTrace.h"
+#include "../debug/prAssert.h"
+#include "../core/prMacros.h"
 //#include "../debug/prDebug.h"
 //#include "../math/prMathsUtil.h"
 //#include "../math/prVector3.h"
@@ -92,10 +99,119 @@
 
 
 /// ---------------------------------------------------------------------------
+/// Using a pimpl interface to minimize external includes in the header files,
+/// which can be a right pain in the neck
+/// ---------------------------------------------------------------------------
+class RendererImplementation
+{
+public:
+
+    RendererImplementation()
+    {
+#if defined(PLATFORM_ANDROID)
+        mDisplay = EGL_NO_DISPLAY;
+        mContext = EGL_NO_CONTEXT;
+        mSurface = EGL_NO_SURFACE;
+#endif
+    }
+
+    ~RendererImplementation()
+    {
+#if defined(PLATFORM_ANDROID)
+        mDisplay = EGL_NO_DISPLAY;
+        mContext = EGL_NO_CONTEXT;
+        mSurface = EGL_NO_SURFACE;
+#endif
+    }
+
+    void Initialise()
+    {
+#if defined(PLATFORM_PC)
+
+#elif defined(PLATFORM_ANDROID)
+
+		const EGLint attribs[] =
+		{
+				EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
+				EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
+				EGL_BLUE_SIZE, 8,
+				EGL_GREEN_SIZE, 8,
+				EGL_RED_SIZE, 8,
+				EGL_NONE
+		};
+
+		EGLint      format;
+		EGLint      numConfigs;
+		EGLConfig   config;
+        EGLint      majorVersion;
+        EGLint      minorVersion;
+
+        // Get a display
+		mDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
+        if (mDisplay ==  EGL_NO_DISPLAY)
+        {
+            prTrace("EGL: No display\n");
+            return;
+        }
+
+        // Initialise
+		eglInitialize(mDisplay, &majorVersion, &minorVersion);
+        prTrace("EGL VER %i, %i\n", majorVersion, minorVersion);
+
+
+		/* Here, the application chooses the configuration it desires. In this
+		 * sample, we have a very simplified selection process, where we pick
+		 * the first EGLConfig that matches our criteria */
+		eglChooseConfig(mDisplay, attribs, &config, 1, &numConfigs);
+
+		/* EGL_NATIVE_VISUAL_ID is an attribute of the EGLConfig that is
+		 * guaranteed to be accepted by ANativeWindow_setBuffersGeometry().
+		 * As soon as we picked a EGLConfig, we can safely reconfigure the
+		 * ANativeWindow buffers to match, using EGL_NATIVE_VISUAL_ID. */
+//		eglGetConfigAttrib(mDisplay, config, EGL_NATIVE_VISUAL_ID, &format);
+
+//		ANativeWindow_setBuffersGeometry(m_pState->window, 0, 0, format);
+
+		//mSurface = eglCreateWindowSurface(mDisplay, config, window, NULL);
+
+	/*	EGLint contextAttribs[] =
+		{
+				EGL_CONTEXT_CLIENT_VERSION, 2,
+				EGL_NONE
+		};
+
+		mContext = eglCreateContext(mDisplay, config, NULL, contextAttribs);//*/
+
+		//eglMakeCurrent(mDisplay, mSurface, m_surface, m_context);
+
+		//eglQuerySurface(mDisplay, mSurface, EGL_WIDTH, &m_width);
+		//eglQuerySurface(mDisplay, mSurface, EGL_HEIGHT, &m_height);//*/
+#endif
+    }
+
+    // Show the display
+    void Swap()
+    {
+    }
+
+#if defined(PLATFORM_ANDROID)
+	EGLDisplay		mDisplay;
+	EGLContext		mContext;
+	EGLSurface		mSurface;
+    //ANativeWindow   mWindow;
+#endif
+};
+
+
+
+/// ---------------------------------------------------------------------------
 /// Constructor.
 /// ---------------------------------------------------------------------------
-prRenderer_GL20::prRenderer_GL20() : prRenderer()
+prRenderer_GL20::prRenderer_GL20() : prRenderer ()
+                                   , pImpl      (new RendererImplementation())
+                                   , imp        (*pImpl)
 {
+    PRASSERT(pImpl);
 }
 
 
@@ -104,6 +220,7 @@ prRenderer_GL20::prRenderer_GL20() : prRenderer()
 /// ---------------------------------------------------------------------------
 prRenderer_GL20::~prRenderer_GL20()
 {
+    PRSAFE_DELETE(pImpl);
 }
 
 
@@ -112,6 +229,7 @@ prRenderer_GL20::~prRenderer_GL20()
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::Init()
 {
+    imp.Initialise();
 }
 
 
@@ -146,6 +264,8 @@ void prRenderer_GL20::End()
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::Present()
 {
+#if defined(PLATFORM_ANDROID)
+#endif
 }
 
 

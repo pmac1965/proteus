@@ -148,6 +148,9 @@ public:
     //      Sets the button text scale
     void SetTextScale(f32 scale) { m_textScale = scale; }
 
+    // ??
+    void SetExtend(s32 x) { m_extendX = x; }
+
 
 private:
     bool InButtonsRect(s32 x, s32 y);
@@ -166,6 +169,7 @@ private:
     prButtonListener       *m_prButtonListener;
     prColour                m_textColour;
     f32                     m_textScale;
+    s32                     m_extendX;
 };
 
 

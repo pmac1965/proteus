@@ -25,6 +25,10 @@ class prShader
 public:
     prShader();
     ~prShader();
+
+    bool Load(const char *);
+
+    void Attach();
 };
 
 

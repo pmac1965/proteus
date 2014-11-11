@@ -23,6 +23,10 @@
 #include "prRenderer.h"
 
 
+// Forward declarations
+class RendererImplementation;
+
+
 // Class: prRenderer_GL20
 //      Renderer for OpenGLES 2.0
 class prRenderer_GL20 : public prRenderer
@@ -207,6 +211,18 @@ public:
     // Parameters:
     //      state - true or false
     void BlendEnabled(bool state);
+
+
+private:
+    // Stops passing by value and assignment.
+    prRenderer_GL20(const prRenderer_GL20&);
+    const prRenderer_GL20& operator = (const prRenderer_GL20&);
+
+
+private:
+    // Don't change order.
+    RendererImplementation *pImpl;
+    RendererImplementation &imp;
 };
 
 

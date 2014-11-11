@@ -44,6 +44,7 @@ prButton::prButton(const char *name, prSpriteManager *pSpriteManager) : prWidget
     m_prevY             = -1;
     m_prButtonListener  = NULL;
     m_textScale         = 1.0f;
+    m_extendX           = 0;
 }
 
 
@@ -258,7 +259,7 @@ void prButton::RegisterListener(prButtonListener *pListener)
 /// ---------------------------------------------------------------------------
 bool prButton::InButtonsRect(s32 x, s32 y)
 {
-    prRect rect = prRect((s32)pos.y, (s32)pos.x, (s32)(pos.y + m_height), (s32)(pos.x + m_width));
+    prRect rect = prRect((s32)pos.y, (s32)pos.x, (s32)(pos.y + m_height), (s32)(pos.x + m_width + m_extendX));
     return rect.PointInside(x, y);
 }
 

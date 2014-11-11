@@ -21,6 +21,7 @@
 #include "prLuaDebug.h"
 #include "../debug/prTrace.h"
 #include "../lua/lua.hpp"
+#include "../thread/prThread.h"
 
 
 //namespace 
@@ -68,6 +69,16 @@ int my_function(lua_State *L)
 
   lua_pushnumber(L, 123); // return value
   return 1; // number of return values
+}
+
+
+/// ---------------------------------------------------------------------------
+/// This is the thread used to monitor a running script.
+/// ---------------------------------------------------------------------------
+//u32 PRTHREAD_CALLCONV LuaThreadFunc(void *)
+PRTHREAD_RETVAL PRTHREAD_CALLCONV LuaThreadFunc(void *)
+{
+    return 0;
 }
 
 

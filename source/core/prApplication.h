@@ -31,7 +31,7 @@ class prWindow;
 //      Interface class for all the application type classes.
 //
 // Notes:
-//      The class for a specification application type should implement,
+//      The class for a specific application type should implement,
 //      DisplayCreate and Run. The game class should implement the rest
 //
 // See Also:
@@ -56,6 +56,7 @@ public:
     //      width       - Display width.
     //      height      - Display height.
     //      pWindowName - The name of the window, which will only appear in windowed apps
+    //      fullscreen  - Create a full screen application if possible
     //
     // Notes:
     //      This call will destroy the previous display if it exists.

@@ -211,6 +211,8 @@
 #include "persistence/prSave_linux.h"
 #include "persistence/prSave_mac.h"
 #include "persistence/prSave_pc.h"
+#include "scene/prScene.h"
+#include "scene/prSceneNode.h"
 #include "script/prLua.h"
 #include "script/prLuaDebug.h"
 #include "social/facebook/prFacebook.h"

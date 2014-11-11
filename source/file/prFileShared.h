@@ -151,7 +151,7 @@ typedef struct prArcEntry
     u32     compressedSize;
     u8      compressed;
     u8      compressionType;
-    u8      exp0;
+    u8      accessed;
     u8      exp1;
     char    filename[FILE_MAX_FILENAME_SIZE];
 

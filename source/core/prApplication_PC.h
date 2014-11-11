@@ -63,6 +63,7 @@ public:
     //      width       - Display width.
     //      height      - Display height.
     //      pWindowName - The name of the window, which will only appear in windowed apps
+    //      fullscreen  - Create a full screen application if possible
     //
     // Notes:
     //      This call will destroy the previous display if it exists.

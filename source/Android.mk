@@ -40,7 +40,7 @@ endif
 LOCAL_CFLAGS   += $(DEBUG_FLAGS) -fno-rtti -fno-exceptions
 
 
-LOCAL_LDLIBS := -ldl -llog -lGLESv1_CM -lstdc++
+LOCAL_LDLIBS := -ldl -llog -lGLESv1_CM -lstdc++ -lEGL -lGLESv2
 LOCAL_C_INCLUDES := D:/engine/freetype2/include
 
 
@@ -65,7 +65,6 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	android/prJNISleep.cpp	\
 	android/prJNIInAppPurchase.cpp	\
 	android/prJNIAnalytics.cpp	\
-	audio/prOpenALDeviceList.cpp	\
 	audio/prOpenALErrors.cpp	\
 	audio/prSoundManager.cpp	\
 	audio/prSoundManagerShared.cpp	\

@@ -35,7 +35,7 @@
 
 // Debug assist
 #if defined(_DEBUG) || defined(DEBUG)
-//#define FILEMANAGER_DEBUG
+#define FILEMANAGER_DEBUG
 #endif
 
 
@@ -276,7 +276,7 @@ void prFileManager::RegisterArchive(const char *filename)
                                 {
                                     prArcEntry *pE = pEntries[idx];
                                     pE += i;
-                                    prTrace("File: %s - %x\n", pE->filename, pE->hash);
+                                    prTrace("File: %s - %x - %s - %s\n", pE->filename, pE->hash, PRBOOL_TO_STRING(pE->accessed), PRBOOL_TO_STRING(pE->exp1));
                                 }
                                 #endif
                             }
@@ -577,6 +577,9 @@ u32 prFileManager::Read(u8 *pDataBuffer, u32 size, u32 hash)
 
     // Read the file?
     prFile *pFile = pArchiveFile[table];
+
+    pEntry->accessed = true;
+
     if (pEntry->compressed)
     {
         u8* pData = (u8*)malloc(pEntry->compressedSize);
@@ -617,6 +620,42 @@ u32 prFileManager::Read(u8 *pDataBuffer, u32 size, u32 hash)
     return 0xFFFFFFFF;
 
 #endif
+}
+
+
+/// -----------------------------------------------------------------------
+/// Displays all files with the access state passed. This
+/// allows all files which have and haven't been accessed to
+/// be displayed
+/// -----------------------------------------------------------------------
+void prFileManager::DisplayFiles(bool accessed)
+{
+    for (int i=0; i<FILE_ARCHIVES_MAX; i++)
+    {
+        //pArchiveFile[i]
+        if (pArchiveFile[i] && pEntries[i])
+        {
+            prTrace("Archive %i\n", i);
+
+            u32 count = entryCount[i];
+            if (count)
+            {
+                prArcEntry *entry = pEntries[i];
+
+                for (int j=0; j<count; j++)
+                {
+                    prTrace("%s\n", entry->filename);
+                    //if (accessed)
+                    //{
+                    //
+                    //}
+                    //else
+                    //{
+                    //}
+                }
+            }
+        }
+    }
 }
 
 
