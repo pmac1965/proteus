@@ -37,8 +37,6 @@ public:
     // Method: ~prFontManager
     //      Dtor
     ~prFontManager();
-
-    //void Load(const char *fontname);
 };
 
 

@@ -212,6 +212,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	particle/prEmitter.cpp	\
 	particle/prParticle.cpp	\
 	particle/prParticleManager.cpp	\
+	particle/prParticleShared.cpp	\
 	persistence/prEncryption.cpp	\
 	persistence/prSave.cpp	\
 	persistence/prSaveBase.cpp	\

@@ -1,5 +1,5 @@
 /**
- * prRenderer.cpp
+ * prParticleShared.cpp
  *
  *  Copyright 2014 Paul Michael McNab
  *
@@ -17,37 +17,15 @@
  */
 
 
-#include "prRenderer.h"
-#include "../core/prCore.h"
-#include "../core/prDefines.h"
+#include "prParticleShared.h"
+#include "../core/prStringUtil.h"
+#include "../debug/prTrace.h"
 
 
 /// ---------------------------------------------------------------------------
-/// Ctor
+/// Constructor
 /// ---------------------------------------------------------------------------
-prRenderer::prRenderer() : prCoreSystem(PRSYSTEM_RENDERER, "prRenderer")
+prEmitterDefinition::prEmitterDefinition(const char *name) : mHash(prStringHash(name))
 {
-    m_pWindow    = NULL;
-    m_pWatermark = NULL;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Dtor
-/// ---------------------------------------------------------------------------
-prRenderer::~prRenderer()
-{
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Sets the window to draw to.
-/// ---------------------------------------------------------------------------
-void prRenderer::SetWindow(prWindow* window)
-{
-    PRASSERT(window);
-    if (window)
-    {
-        m_pWindow = window;
-    }
+    prTrace("New 'prEmitterDefinition' %s - %08x\n", name, mHash);
 }

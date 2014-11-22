@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -28,23 +28,27 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tool debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tool release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v120</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -454,6 +458,7 @@
     <ClInclude Include="..\..\..\..\source\particle\prEmitter.h" />
     <ClInclude Include="..\..\..\..\source\particle\prParticle.h" />
     <ClInclude Include="..\..\..\..\source\particle\prParticleManager.h" />
+    <ClInclude Include="..\..\..\..\source\particle\prParticleShared.h" />
     <ClInclude Include="..\..\..\..\source\persistence\prEncryption.h" />
     <ClInclude Include="..\..\..\..\source\persistence\prSave.h" />
     <ClInclude Include="..\..\..\..\source\persistence\prSaveBase.h" />
@@ -1073,6 +1078,7 @@
     <ClCompile Include="..\..\..\..\source\particle\prEmitter.cpp" />
     <ClCompile Include="..\..\..\..\source\particle\prParticle.cpp" />
     <ClCompile Include="..\..\..\..\source\particle\prParticleManager.cpp" />
+    <ClCompile Include="..\..\..\..\source\particle\prParticleShared.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prEncryption.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSaveBase.cpp" />

@@ -833,7 +833,7 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
                 }
                 else
                 {
-                    prTrace("Unsupported character: %i\n", character);
+                    prTrace("Unsupported character: %i, %c\n", character, character);
                 }
             }
         }
@@ -932,7 +932,7 @@ prVector2 prBitmapFont::MeasureString(const char *string, float scale)
                 }
                 else
                 {
-                    prTrace("Unsupported character: %i\n", character);
+                    prTrace("Unsupported character: %i, %c\n", character, character);
                 }
             }
         }
@@ -1024,7 +1024,7 @@ prVector2 prBitmapFont::MeasureStringUntilTerm(const char *string, float scale)
                 }
                 else
                 {
-                    prTrace("Unsupported character: %i\n", character);
+                    prTrace("Unsupported character: %i, %c\n", character, character);
                 }
             }
         }

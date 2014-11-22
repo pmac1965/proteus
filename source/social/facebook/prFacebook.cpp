@@ -64,7 +64,6 @@ void prFacebook::SetDetails(const char *name, u64 fbid)
         mPlayerName.Set(name);
     }
 
-    prTrace("FB: %s\n", mPlayerName.Text());
-    prTrace("FB: %llu\n", fbid);
+    prTrace("FB SetDetails: %s\n", mPlayerName.Text());
+    prTrace("FB SetDetails: %llu\n", fbid);
 }
-

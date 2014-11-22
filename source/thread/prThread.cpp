@@ -26,6 +26,9 @@
 // http://www.yolinux.com/TUTORIALS/LinuxTutorialPosixThreads.html
 
 
+// https://computing.llnl.gov/tutorials/pthreads/
+
+
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// NOT using _beginthreadex as docs state that its not allowed on

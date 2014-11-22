@@ -88,4 +88,12 @@ void prOutputString(const char *text);
 #endif
 
 
+// Used to log line numbers (Just a lazy shortcut... I know)
+#if (defined(DEBUG) || defined(_DEBUG))
+#define AT()                            prTrace("At func '%s' on line %i\n", __FUNCTION__, __LINE__)
+#else
+#define AT()
+#endif
+
+
 #endif//__PRDEBUG_H

@@ -18,13 +18,28 @@
 
 
 #include "prEmitter.h"
+#include "prParticleShared.h"
+#include "../debug/prTrace.h"
+#include "../core/prDefines.h"
+#include "../core/prMacros.h"
 
 
 /// ---------------------------------------------------------------------------
 /// Constructor
 /// ---------------------------------------------------------------------------
-prEmitter::prEmitter()
+prEmitter::prEmitter(s32 id, const prEmitterDefinition &ed) : mID(id)
 {
+    prTrace("prEmitter::prEmitter - %i\n", mID);
+
+    pEffects = NULL;
+    mAlive   = true;
+
+
+    s32 count = ed.mEffects.size();
+    if (count > 0)
+    {
+        pEffects = new prEffectType[count];
+    }
 }
 
 
@@ -33,19 +48,30 @@ prEmitter::prEmitter()
 /// ---------------------------------------------------------------------------
 prEmitter::~prEmitter()
 {
+    prTrace("prEmitter::~prEmitter - %i\n", mID);
+
+    PRSAFE_DELETE(pEffects);
 }
 
 
-void prEmitter::Load(const char *filename)
+//void prEmitter::Load(const char *filename)
+//{
+//}
+
+
+bool prEmitter::Update(f32 dt)
 {
+    // Reduce lifetime
+    if (mAlive)
+    {
+        mLifetime -= dt;
+        mAlive = (mLifetime > 0);
+    }
+
+    return mAlive;
 }
 
 
-void prEmitter::Update(f32 dt)
-{
-}
-
-
-void prEmitter::Draw()
-{
-}
+//void prEmitter::Draw()
+//{
+//}

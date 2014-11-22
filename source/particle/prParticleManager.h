@@ -25,7 +25,7 @@ class prEmitter;
 class prVector3;
 class TiXmlNode;
 class TiXmlElement;
-class prEmitterDefinition;
+struct prEmitterDefinition;
 
 
 #include <list>
@@ -54,18 +54,27 @@ public:
     //      filename - An xml file describing the emitter types
     bool Load(const char *filename);
 
+    // Method: Clear
+    //      Clears the particle manager of all definitions
+    void Clear();
+
     // Method: Update
     //      Updates the particle manager
     void Update(f32 dt);
 
     // Method: Fire
     //      Fires off a particle effect
-    prEmitter *Fire(const char *name, prVector3 &pos);
+    //
+    // Return:
+    //      Returns an ID for the emitter, or -1 on failure
+    s32 Fire(const char *name, const prVector3 &pos);
 
 
 private:
-    void Add();
+    static s32 sEmitterID;                                              // Used to give emitters a unique ID
 
+
+private:
     // Parses a particle file.
     void ParseParticleFile(TiXmlNode* pParent);
 
@@ -75,15 +84,14 @@ private:
     // Parses a particle file.
     void ParseAttribs_Emitter(TiXmlElement* pElement);
 
+    // Parses a particle file.
+    void ParseAttribs_Effect(TiXmlElement* pElement);
 
-private:
-    // The active emitters
-    std::map<u32, prEmitter*>                       mEmitters;
 
-    // The definitions of the emitters
-    std::map<std::string, prEmitterDefinition*>     mDefinitions;
-
-    bool    mCorrectFileType;
+private:    
+    std::map<s32, prEmitter*>                       mEmitters;          // The active emitters
+    std::map<std::string, prEmitterDefinition*>     mDefinitions;       // The definitions of the emitters
+    bool                                            mCorrectFileType;   // Used to ensure its the correct file type during loading.
 };
 
 

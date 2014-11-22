@@ -38,6 +38,10 @@ void prJNI_FacebookLogin();
 //      Brag to Facebook
 void prJNI_FacebookBrag();
 
+// Function: prJNI_FacebookLogout
+//      Facebook log out
+void prJNI_FacebookLogout();
+
 
 #endif//PLATFORM_ANDROID
 

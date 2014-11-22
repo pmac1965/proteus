@@ -89,7 +89,12 @@ bool prFacebook_Android::Login()
 /// ----------------------------------------------------------------------------
 bool prFacebook_Android::Logout()
 {
-    //prJNI_FacebookLogin();
+    // Clear the facebook details
+    mIsLoggedIn = false;
+    mPlayerFBID = 0LL;
+
+    prJNI_FacebookLogout();
+
     return mIsLoggedIn;
 }
 

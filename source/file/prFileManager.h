@@ -84,10 +84,14 @@ public:
     // Method: DisplayFiles
     //      Displays all files with the access state passed. This
     //      allows all files which have and haven't been accessed to
-    //      be displayed
+    //      be displayed, so you can trim unused data if required
     //
     // Notes:
-    //      For the PC build only
+    //      For any build which uses the archives. (PC, LINUX, IOS, MAC)
+    //
+    // Notes:
+    //      Only works if archives are loaded and being used as this methed uses
+    //      the archive entries
     void DisplayFiles(bool accessed);
 
 

@@ -14,7 +14,6 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
- *
  */
 
 
@@ -35,7 +34,7 @@
 
 // Debug assist
 #if defined(_DEBUG) || defined(DEBUG)
-#define FILEMANAGER_DEBUG
+//#define FILEMANAGER_DEBUG
 #endif
 
 
@@ -269,6 +268,15 @@ void prFileManager::RegisterArchive(const char *filename)
                                 count++;
 
                                 pArchiveFile[idx]->Open();
+                                
+                                // Clear the extra data, as we need it to do accessed tracking.
+                                for(u32 i=0; i<header.entries; i++)
+                                {
+                                    prArcEntry *pE = pEntries[idx];
+                                    pE += i;
+                                    pE->accessed = 0;
+                                    pE->exp1     = 0;
+                                }
 
                                 #if defined(FILEMANAGER_DEBUG)
                                 prTrace("Found archive: %s\n", filenameArc);
@@ -578,7 +586,9 @@ u32 prFileManager::Read(u8 *pDataBuffer, u32 size, u32 hash)
     // Read the file?
     prFile *pFile = pArchiveFile[table];
 
+    // Mark as accessed!
     pEntry->accessed = true;
+    //prTrace("Accessed '%s'\n", pEntry->filename);
 
     if (pEntry->compressed)
     {
@@ -632,7 +642,6 @@ void prFileManager::DisplayFiles(bool accessed)
 {
     for (int i=0; i<FILE_ARCHIVES_MAX; i++)
     {
-        //pArchiveFile[i]
         if (pArchiveFile[i] && pEntries[i])
         {
             prTrace("Archive %i\n", i);
@@ -642,16 +651,14 @@ void prFileManager::DisplayFiles(bool accessed)
             {
                 prArcEntry *entry = pEntries[i];
 
-                for (int j=0; j<count; j++)
+                for (u32 j=0; j<count; j++)
                 {
-                    prTrace("%s\n", entry->filename);
-                    //if (accessed)
-                    //{
-                    //
-                    //}
-                    //else
-                    //{
-                    //}
+                    if (static_cast<u8>(accessed) == entry->accessed)
+                    {
+                        prTrace("File %i of %i : '%s' - %s\n", j, count, entry->filename, PRBOOL_TO_STRING(entry->accessed));
+                    }
+
+                    entry++;
                 }
             }
         }

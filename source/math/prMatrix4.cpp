@@ -1,5 +1,5 @@
 /**
- * prVector2.cpp
+ * prMatrix4.cpp
  *
  *  Copyright 2014 Paul Michael McNab
  *

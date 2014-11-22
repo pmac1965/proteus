@@ -25,25 +25,51 @@
 #include "../display/prColour.h"
 
 
+// Forward declarations
+struct prEffectType;
+struct prEmitterDefinition;
+
+
 // Class: prEmitter
 //      Class represents a particle emission point
 class prEmitter
 {
-public:
-    prEmitter();
+private:
+    // We only want the particle manager creating emitters
+    friend class prParticleManager;
 
+    // Method: prEmitter 
+    //      Ctor
+    prEmitter(s32 id, const prEmitterDefinition &ed);
+
+    // Method: prEmitter 
+    //      Dtor
     ~prEmitter();
 
-    void Load(const char *filename);
+//    void Load(const char *filename);
 
-    void Update(f32 dt);
+    // Method: GetID
+    //      Get the emitters unique ID.
+    s32 GetID() const { return mID; }
 
-    void Draw();
+
+public:
+    bool Update(f32 dt);
+    //void Draw();
 
 
     prVector3   mPos;           // Position of the emitter
 
     //std::list<> mParticles;
+
+
+private:
+    prEffectType    *pEffects;
+
+    s32     mID;                // Unique ID
+    f32     mLifetime;          // Lifetime of this emitter as a whole
+
+    bool    mAlive;
 };
 
 
