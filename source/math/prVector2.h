@@ -21,6 +21,7 @@
 
 
 #include "../prConfig.h"
+#include "prMathsUtil.h"
 
 
 // Class: prVector2
@@ -28,7 +29,6 @@
 class prVector2
 {
 public:
-
     static const prVector2 Zero;        // Pre-made value
     static const prVector2 One;         // Pre-made value
     static const prVector2 UnitX;       // Pre-made value
@@ -36,10 +36,16 @@ public:
 
 
 public:
+#if defined(PROTEUS_OPTIMISE_NO_VECTOR2_INIT)
+    // This optimized version does not initialise its members
+    prVector2()
+    {}
+#else
     // Method: prVector2
     //      Constructor.
-    prVector2() : x (0.0f) , y (0.0f)    
+    prVector2() : x(0.0f), y(0.0f)    
     {}
+#endif
 
     // Method: prVector2
     //      Parameterised constructor.
@@ -47,7 +53,15 @@ public:
     // Parameters:
     //      nx - X coordinate
     //      ny - Y coordinate
-    prVector2(float nx, float ny) : x (nx) , y (ny)
+    prVector2(float nx, float ny) : x(nx), y(ny)
+    {}
+
+    // Method: prVector2
+    //      Copy constructor.
+    //
+    // Parameters:
+    //      copy - The vector to copy
+    prVector2(const prVector2& copy) : x(copy.x), y(copy.y)
     {}
 
     // Method: Magnitude
@@ -65,6 +79,16 @@ public:
     // Method: ToString
     //      Returns the vector as a string.
     const char *ToString() const;
+
+    // Method: Equals
+    //      Tests for equality with another vector
+    //
+    // Parameters:
+    //      other - The vector to compare
+    //
+    // Notes:
+    //      The difference between the vectors components must be less than Proteus::Maths::Epsilon
+    inline bool Equals(const prVector2 &other) const { return (IS_ZERO(x - other.x) && IS_ZERO(y - other.y)); }
 
 
     // -- Operators --
@@ -101,10 +125,14 @@ public:
     // Unary - operator.
     inline prVector2 operator - () const { return prVector2(-x, -y); }
 
+    // Operator ==
+    bool operator == (const prVector2& other) const { return  Equals(other); }
+
+    // Operator !=
+    bool operator != (const prVector2& other) const { return !Equals(other); }
+
 
 public:
-
-
 // PC warnings - warning C4201: nonstandard extension used : nameless struct/union
 //             - will break if ansi compatibility is enabled.
 #if defined(PLATFORM_PC)

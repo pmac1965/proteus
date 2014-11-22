@@ -41,7 +41,14 @@ namespace Proteus
 };
 
 
-// Tests if a number is near zero.
+// Macro: IS_ZERO(x)
+//      Tests if a number is near zero.
+//
+// Paramers:
+//      x - Value to test
+//
+// Notes:
+//      x should be a float/double
 #define IS_ZERO(x)      ((x) > -Proteus::Maths::Epsilon && (x) < Proteus::Maths::Epsilon)
 
 

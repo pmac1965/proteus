@@ -37,8 +37,6 @@ prResourceManager::prResourceManager() : prCoreSystem(PRSYSTEM_RESOURCEMANAGER, 
     TODO("Add ignore to warning message")
     TODO("Add clipboard trick - page 111 to 113 gems 1")
     TODO("Complete quaternion")
-    TODO("Add PROTEUS_OPTIMISE_NO_VECTOR2_INIT - Add Zero")    
-    TODO("Add PROTEUS_OPTIMISE_NO_VECTOR3_INIT - Add Zero")    
 }
 
 

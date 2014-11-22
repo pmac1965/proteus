@@ -21,6 +21,7 @@
 
 
 #include "../prConfig.h"
+#include "prMathsUtil.h"
 
 
 // Class: prVector3
@@ -28,7 +29,6 @@
 class prVector3
 {
 public:
-
     static const prVector3 Zero;        // Pre-made value
     static const prVector3 One;         // Pre-made value
     static const prVector3 UnitX;       // Pre-made value
@@ -37,11 +37,16 @@ public:
 
 
 public:
+#if defined(PROTEUS_OPTIMISE_NO_VECTOR3_INIT)
+    // This optimized version does not initialise its members
+    prVector3()
+    {}
+#else
     // Method: prVector3
     //      Constructor.
-    prVector3() : x (0.0f) , y (0.0f) , z (0.0f)    
-    {
-    }
+    prVector3() : x(0.0f), y(0.0f), z(0.0f)    
+    {}
+#endif
 
     // Method: prVector3
     //      Parameterised constructor.
@@ -50,9 +55,16 @@ public:
     //      nx - X coordinate
     //      ny - Y coordinate
     //      nz - Z coordinate
-    prVector3(float nx, float ny, float nz) : x (nx) , y (ny) , z (nz)
-    {
-    }
+    prVector3(float nx, float ny, float nz) : x(nx), y(ny), z(nz)
+    {}
+
+    // Method: prVector3
+    //      Copy constructor.
+    //
+    // Parameters:
+    //      copy - The vector to copy
+    prVector3(const prVector3& copy) : x(copy.x), y(copy.y), z(copy.z)
+    {}
 
     // Method: Magnitude
     //      Calculates the magnitude of the vector.
@@ -77,6 +89,16 @@ public:
     // Method: ToString
     //      Returns the vector as a string.
     const char *ToString() const;
+
+    // Method: Equals
+    //      Tests for equality with another vector
+    //
+    // Parameters:
+    //      other - The vector to compare
+    //
+    // Notes:
+    //      The difference between the vectors components must be less than Proteus::Maths::Epsilon
+    inline bool Equals(const prVector3 &other) const { return (IS_ZERO(x - other.x) && IS_ZERO(y - other.y) && IS_ZERO(z - other.z)); }
 
 
     // -- Operators --
@@ -113,9 +135,14 @@ public:
     // Unary - operator.
     inline prVector3 operator - () const { return prVector3(-x, -y, -z); }
 
+    // Operator ==
+    bool operator == (const prVector3& other) const { return  Equals(other); }
+
+    // Operator !=
+    bool operator != (const prVector3& other) const { return !Equals(other); }
+
 
 public:
-
 // PC warnings - warning C4201: nonstandard extension used : nameless struct/union
 //             - will break if ansi compatibility is enabled.
 #if defined(PLATFORM_PC)
