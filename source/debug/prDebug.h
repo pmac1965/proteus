@@ -89,8 +89,8 @@ void prOutputString(const char *text);
 
 
 // Used to log line numbers (Just a lazy shortcut... I know)
-#if (defined(DEBUG) || defined(_DEBUG))
-#define AT()                            prTrace("At func '%s' on line %i\n", __FUNCTION__, __LINE__)
+#if (defined(DEBUG) || defined(_DEBUG)) && defined(PROTEUS_ALLOW_AT)
+#define AT()                            prTrace("In func '%s' at line %i\n", __FUNCTION__, __LINE__)
 #else
 #define AT()
 #endif

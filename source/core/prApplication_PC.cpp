@@ -436,7 +436,7 @@ PRBOOL prApplication_PC::Run()
             }
 
             // Needs modified to track game speed!
-            Sleep(1);
+            Sleep(15);
             TODO("Needs modified to track game speed!")
             //Sleep(1);
 

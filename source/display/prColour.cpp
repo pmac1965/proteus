@@ -22,13 +22,13 @@
 
 
 const prColour  prColour::White         (1.0f, 1.0f, 1.0f);
-const prColour  prColour::Black         (   0,    0,    0);
-const prColour  prColour::Red           (1.0f,    0,    0);
-const prColour  prColour::Green         (   0, 1.0f,    0);
-const prColour  prColour::Blue          (   0,    0, 1.0f);
-const prColour  prColour::Yellow        (1.0f, 1.0f,    0);
-const prColour  prColour::Cyan          (   0, 1.0f, 1.0f);
-const prColour  prColour::Magenta       (1.0f,    0, 1.0f);
+const prColour  prColour::Black         (0.0f, 0.0f, 0.0f);
+const prColour  prColour::Red           (1.0f, 0.0f, 0.0f);
+const prColour  prColour::Green         (0.0f, 1.0f, 0.0f);
+const prColour  prColour::Blue          (0.0f, 0.0f, 1.0f);
+const prColour  prColour::Yellow        (1.0f, 1.0f, 0.0f);
+const prColour  prColour::Cyan          (0.0f, 1.0f, 1.0f);
+const prColour  prColour::Magenta       (1.0f, 0.0f, 1.0f);
 
 const prColour  prColour::DarkGray      (0.250f, 0.250f, 0.250f);
 const prColour  prColour::Gray          (0.500f, 0.500f, 0.500f);

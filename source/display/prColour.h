@@ -35,6 +35,10 @@ typedef struct prRGBA
 } prRGBA;
 
 
+// Value to get floats from bytes
+#define RGB_ELE     (1.0f / 255.0f)
+
+
 // Class: prColour
 //      A class represent an RGBA colour
 class prColour
@@ -68,10 +72,28 @@ public:
         blue  = b;
         alpha = a;
     }
+    
+    // Method: prColour
+    //      Ctor
+    //
+    // Notes:
+    //      Value range should be between 0 and 255
+    //
+    // Parameters:
+    //      r - The red component
+    //      g - The green component
+    //      b - The blue component
+    //      a - The alpha component
+    prColour(u8 r, u8 g, u8 b, u8 a = 255)
+    {
+        red   = RGB_ELE * r;
+        green = RGB_ELE * g;
+        blue  = RGB_ELE * b;
+        alpha = RGB_ELE * a;
+    }
 
 
 public:
-
     float   red;
     float   green;
     float   blue;
@@ -79,7 +101,6 @@ public:
 
 
 public:
-
     static const prColour     White;        ///< Pre-created colour value
     static const prColour     Black;        ///< Pre-created colour value
     static const prColour     Red;          ///< Pre-created colour value

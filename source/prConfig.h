@@ -131,6 +131,10 @@
 //#define PROTEUS_ALLOW_RESIZEABLE_WINDOW
 #endif
 
+#ifndef PROTEUS_ALLOW_AT                                // Allows the AT define to exist
+#define PROTEUS_ALLOW_AT
+#endif
+
 
 // ----------------------------------------------------------------------------
 // Android config

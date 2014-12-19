@@ -60,7 +60,7 @@
 
 
 //#define TAG_DEBUG
-#define TAG_MAX_SIZE    32
+#define TAG_MAX_SIZE    128
 
 
 // Local data

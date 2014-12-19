@@ -30,7 +30,7 @@ class prSpriteManager;
 
 // Defines
 #define POOL_MAX_SPRITES    128
-#define POOL_MAX_TYPES      32
+#define POOL_MAX_TYPES      64
 
 
 // Class: prSpritePointerPool

@@ -131,7 +131,7 @@ const char *prJNI_MakeFinalClassName(const char *pClassName)
     strcpy(name, gPackageName);
     strcat(name, "/");
     strcat(name, pClassName);
-    //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "Final %s", name);
+    __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Final %s", name);
 
     return name;
 }

@@ -123,12 +123,13 @@ typedef struct TrueTypeFontImplementation
     /// Creates a characters texture and positioning data
     /// -----------------------------------------------------------------------
     #if defined(ALLOW_FREETYPE)
-    void GenerateCharacter(FT_Face face, char charcode)
+    void GenerateCharacter(FT_Face face, u32 charcode)
     {
         // Get glyph index
         u32 glyphIndex = FT_Get_Char_Index(face, charcode);
         if (glyphIndex == 0)
         {
+            prTrace("Didn't find character %i - %c\n", charcode, charcode);
             return;
         }
 
@@ -243,6 +244,7 @@ typedef struct TrueTypeFontImplementation
         pGlyph->SetVertexCoords(5, 0,                 0);
 
         mpGlyphs[charcode] = pGlyph;
+        //prTrace("Store character %i - %c\n", charcode, charcode);
 
         // Clean up
         FT_Done_Glyph(glyph);
@@ -395,10 +397,14 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
         imp.mPointSize = height;
 
         // This is where we actually create the fonts texture
-        for(unsigned char i=0; i<128; i++)
+        for(u32 i=32; i<127; i++)
         {
             imp.GenerateCharacter(face, i);
         }
+
+        // We need this character too
+        TODO("Add the utf8 translation code");
+        imp.GenerateCharacter(face, 0x00A9); // '©'
 
         // Clean up
         FT_Done_Face(face);
@@ -592,6 +598,12 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
         {
             s32 character = message[i];
 
+            TODO("Add the utf8 translation code");
+
+            // Special hack
+            if (character == '©')
+                character = 0x00a9;
+
             if (character == '#')
             {
                 // Tag?
@@ -662,7 +674,13 @@ prVector2 prTrueTypeFont::MeasureString(const char *string, float scale)
 
     for (s32 i=0; i<len; i++)
     {
-        s32 character = string[i];
+        u32 character = string[i];
+
+        TODO("Add the utf8 translation code");
+
+        // Special hack
+        if (character == '©')
+            character = 0x00a9;
 
         // Get size.
         if (character == '#')
