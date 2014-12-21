@@ -599,8 +599,8 @@ u32 prFileManager::Read(u8 *pDataBuffer, u32 size, u32 hash)
             pFile->Read(pData, pEntry->compressedSize);
             pFile->Internal_Rewind();
 
-            u32 destLen = pEntry->filesize;
-            int result = uncompress(pDataBuffer, (uLong*)&destLen, pData, pEntry->compressedSize);
+            uLong destLen = (uLong)pEntry->filesize;
+            int result = uncompress(pDataBuffer, &destLen, pData, pEntry->compressedSize);
             if (result < Z_OK)
             {
                 PRWARN("Uncompress failed: %i\n", result);

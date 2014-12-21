@@ -22,6 +22,7 @@
 
 #include "../../core/prTypes.h"
 #include "../../core/prString.h"
+#include "../../core/prMacros.h"
 
 
 // Class: prTwitterCallbacks
@@ -71,7 +72,7 @@ public:
 
     // Method: ShowTweetSheet
     //      Show the tweet sheet
-    virtual bool ShowTweetSheet(const char *initialText) { return false; }
+    virtual bool ShowTweetSheet(const char *initialText) { PRUNUSED(initialText); return false; }
 
 
 protected:

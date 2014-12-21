@@ -77,10 +77,18 @@
     // Macro: PRBREAKPOINT
     //      This macro will trigger a breakpoint.
     #if defined(PLATFORM_PC)
+      #ifdef _M_IX86
         #define PRBREAKPOINT()                                                      \
         {                                                                           \
             _asm int 3                                                              \
         }
+      #else
+        // Need better breakpoint code!
+        #define PRBREAKPOINT()                                                      \
+        {                                                                           \
+            *((int*)0) = 0;                                                         \
+        }
+      #endif
 
     #elif defined(PLATFORM_IOS)
         #define PRBREAKPOINT()                                                      \

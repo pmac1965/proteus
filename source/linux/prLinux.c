@@ -19,6 +19,9 @@
 
 #include "../prConfig.h"
 
+// Just to stop the translation unit being consider empty!
+static void Filler() {
+}
 
 #if defined(PLATFORM_LINUX)
 

@@ -83,7 +83,7 @@ bool prMesh_OBJ::Load(const char *filename)
                 Parse(buffer);
                 PRSAFE_DELETE_ARRAY(buffer);
 
-                count = faces.size() * 3;
+                count = (s32)(faces.size() * 3);
 
                 pVerts = new prVertex3D[count];
 
@@ -186,6 +186,8 @@ bool prMesh_OBJ::ReadLine(char *buffer, s32 &size)
     //char
     if (working)
     {
+        bool loop = true;
+
         do
         {
             char c = *working++;
@@ -193,7 +195,7 @@ bool prMesh_OBJ::ReadLine(char *buffer, s32 &size)
             // File ended?
             if (c == '\0')
             {
-                size = (working - buffer);
+                size = (s32)(working - buffer);
                 return false;
             }
 
@@ -207,11 +209,11 @@ bool prMesh_OBJ::ReadLine(char *buffer, s32 &size)
             // Line end?
             if (c == '\n')
             {
-                size = (working - buffer);
+                size = (s32)(working - buffer);
                 return true;
             }
         }
-        while(true);
+        while(loop);
     }
 
     return false;

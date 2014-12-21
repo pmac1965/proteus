@@ -80,5 +80,7 @@ void prStore::BeginPurchase(const char *name, int id)
 /// ---------------------------------------------------------------------------
 const char *prStore::FindPrice(const char *name, int id)
 {
+    PRUNUSED(name);
+    PRUNUSED(id);
     return "$0.99";
 }

@@ -170,7 +170,7 @@ bool prSavePC::SaveUpdate()
 
         // Write header
         prEncrypt((u8*)&header, sizeof(prSaveHeader));
-        int bytes = fwrite(&header, 1, sizeof(prSaveHeader), imp.pFile);
+        size_t bytes = fwrite(&header, 1, sizeof(prSaveHeader), imp.pFile);
         if (bytes != sizeof(prSaveHeader))
         {
             prTrace("A:SaveUpdate - Bytes written did not match save size\n");

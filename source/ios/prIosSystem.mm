@@ -31,8 +31,8 @@
 
 
 // Debug
-//#define DEBUG_IOS_SYSTEM
-
+#define DEBUG_IOS_SYSTEM
+#define DEBUG_SLEEP
 
 
 /// ---------------------------------------------------------------------------

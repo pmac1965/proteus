@@ -22,6 +22,7 @@
 
 #include "../prConfig.h"
 #include "../core/prTypes.h"
+#include "../core/prMacros.h"
 
 
 // Current advert providers. By platform
@@ -85,7 +86,7 @@ public:
     //      eventType   - The event type
     //      data1       - Event data (Optional)
     //      data2       - Event data (Optional)
-    virtual void EventNotify(u32 eventType, u32 data1 = 0, u32 data2 = 0) {}
+    virtual void EventNotify(u32 eventType, u32 data1 = 0, u32 data2 = 0) { PRUNUSED(eventType); PRUNUSED(data1); PRUNUSED(data2); }
 
     // Method: Init
     //      So you can determine when the provider is initialised,

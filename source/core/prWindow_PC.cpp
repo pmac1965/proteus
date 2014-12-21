@@ -179,7 +179,12 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
 
 
     // Store a pointer to the window class in the windows user data.
+#ifdef _WIN64
+    SetWindowLongPtr(m_hwnd, GWLP_USERDATA, (LONG_PTR)this);
+#else
     SetWindowLong(m_hwnd, GWL_USERDATA, (long)(__int64)this);
+#endif
+
     SetTitle(m_title);
 
 
@@ -265,7 +270,12 @@ bool prWindow_PC::CreateTool(u32 width, u32 height, u32 menuID, u32 iconID, cons
 
 
     // Store a pointer to the window class in the windows user data.
+#ifdef _WIN64
+    SetWindowLongPtr(m_hwnd, GWLP_USERDATA, (LONG_PTR)this);
+#else
     SetWindowLong(m_hwnd, GWL_USERDATA, (long)(__int64)this);
+#endif
+
     SetTitle(m_title);
 
 
@@ -308,9 +318,15 @@ void prWindow_PC::Destroy()
     // Got a window handle?
     if (m_hwnd)
     {
-        // Remove pointer to this window.
+        // Clear last error
         SetLastError(0);
+
+        // Remove pointer to this window.
+#ifdef _WIN64
+        if (SetWindowLongPtr(m_hwnd, GWLP_USERDATA, 0) == 0)
+#else
         if (SetWindowLong(m_hwnd, GWL_USERDATA, 0) == 0)
+#endif
         {
             if (GetLastError() != 0)
             {

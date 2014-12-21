@@ -150,6 +150,7 @@ s32 prParticleManager::Fire(const char *name, const prVector3 &pos)
 {
     s32 handle = -1;
 
+    PRUNUSED(pos);
 
     if (name && *name && !mDefinitions.empty())
     {

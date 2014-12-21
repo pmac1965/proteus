@@ -35,7 +35,7 @@ prEmitter::prEmitter(s32 id, const prEmitterDefinition &ed) : mID(id)
     mAlive   = true;
 
 
-    s32 count = ed.mEffects.size();
+    s32 count = (s32)ed.mEffects.size();
     if (count > 0)
     {
         pEffects = new prEffectType[count];

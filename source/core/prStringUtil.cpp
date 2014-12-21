@@ -1251,7 +1251,8 @@ char *prStringSkipWhitespace(char* text)
 {
     if (text && *text)
     {
-        while(true)
+        bool loop = true;
+        while(loop)
         {
             char c = *text;
 

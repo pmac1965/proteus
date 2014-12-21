@@ -19,6 +19,7 @@
 
 #include "../prConfig.h"
 #include "prSystem.h"
+#include "../core/prMacros.h"
 
 
 #if defined(PLATFORM_IOS)
@@ -56,6 +57,9 @@ void prSystem::SleepModeEnable(bool state)
 
 #elif defined(PLATFORM_ANDROID)
     prJNI_SleepSetState(state);
+
+#else
+    PRUNUSED(state);
 
 #endif
 }

@@ -704,7 +704,7 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
             // utf-8?
             if (c < 0 || c > 127)
             {
-                index += utf8proc_iterate((const ::uint8_t*)&fmt[index], -1, (::int32_t*)&character);
+                index += (s32)utf8proc_iterate((const ::uint8_t*)&fmt[index], -1, (::int32_t*)&character);
             }
             else
             {
@@ -878,7 +878,7 @@ prVector2 prBitmapFont::MeasureString(const char *string, float scale)
             // utf-8?
             if (c < 0 || c > 127)
             {
-                 index += utf8proc_iterate((const ::uint8_t*)&string[index], -1, (::int32_t*)&character);
+                 index += (s32)utf8proc_iterate((const ::uint8_t*)&string[index], -1, (::int32_t*)&character);
             }
             else
             {
@@ -976,7 +976,7 @@ prVector2 prBitmapFont::MeasureStringUntilTerm(const char *string, float scale)
             // utf-8?
             if (c < 0)// || c > 127)
             {
-                index += utf8proc_iterate((const ::uint8_t*)&string[index], -1, (::int32_t*)&character);
+                index += (s32)utf8proc_iterate((const ::uint8_t*)&string[index], -1, (::int32_t*)&character);
             }
             else
             {

@@ -40,6 +40,13 @@
   #define PRTHREAD_CALLCONV
   #define PRTHREAD_RETVAL   void*
 
+// IOS
+#elif defined(PLATFORM_IOS)
+  #include <pthread.h>
+
+  #define PRTHREAD_CALLCONV
+  #define PRTHREAD_RETVAL   void*
+
 #else
 #error Platform not supported
 

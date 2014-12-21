@@ -22,6 +22,7 @@
 
 #include "../../core/prTypes.h"
 #include "../../core/prString.h"
+#include "../../core/prMacros.h"
 
 
 // Class: prFacebookCallbacks
@@ -131,7 +132,7 @@ public:
         
     // Method: Brag
     //      Send a brag to facebook
-    virtual void Brag(const char *initialText) {}
+    virtual void Brag(const char *initialText) { PRUNUSED(initialText); }
 
 
 protected:

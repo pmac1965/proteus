@@ -1,24 +1,44 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "proteus", "proteus\proteus.vcxproj", "{C28EBEF3-77A3-4EDF-9853-71F1128606D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Debug64|Win32 = Debug64|Win32
+		Debug64|x64 = Debug64|x64
 		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
 		Tool debug|Win32 = Tool debug|Win32
+		Tool debug|x64 = Tool debug|x64
 		Tool release|Win32 = Tool release|Win32
+		Tool release|x64 = Tool release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Debug|Win32.ActiveCfg = Debug|Win32
 		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Debug|Win32.Build.0 = Debug|Win32
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Debug|x64.ActiveCfg = Debug|x64
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Debug|x64.Build.0 = Debug|x64
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Debug64|Win32.ActiveCfg = Debug64|Win32
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Debug64|Win32.Build.0 = Debug64|Win32
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Debug64|x64.ActiveCfg = Debug64|x64
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Debug64|x64.Build.0 = Debug64|x64
 		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Release|Win32.ActiveCfg = Release|Win32
 		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Release|Win32.Build.0 = Release|Win32
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Release|x64.ActiveCfg = Release|x64
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Release|x64.Build.0 = Release|x64
 		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Tool debug|Win32.ActiveCfg = Tool debug|Win32
 		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Tool debug|Win32.Build.0 = Tool debug|Win32
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Tool debug|x64.ActiveCfg = Tool debug|x64
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Tool debug|x64.Build.0 = Tool debug|x64
 		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Tool release|Win32.ActiveCfg = Tool release|Win32
 		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Tool release|Win32.Build.0 = Tool release|Win32
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Tool release|x64.ActiveCfg = Tool release|x64
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Tool release|x64.Build.0 = Tool release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

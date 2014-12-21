@@ -40,6 +40,8 @@ prScene::~prScene()
 //
 void prScene::Add(prSceneNode *psn)
 {
+    if (psn) {
+    }
 }
 
 
@@ -47,4 +49,6 @@ void prScene::Add(prSceneNode *psn)
 //
 void prScene::Remove(prSceneNode *psn)
 {
+    if (psn) {
+    }
 }

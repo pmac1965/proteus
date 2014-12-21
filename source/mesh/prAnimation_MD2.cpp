@@ -193,6 +193,7 @@ void prAnimation_MD2::Play(const char *name)
 /// ---------------------------------------------------------------------------
 void prAnimation_MD2::Play(s32 animation)
 {
+    PRUNUSED(animation);
 }
 
 

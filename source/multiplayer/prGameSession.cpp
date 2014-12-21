@@ -155,6 +155,9 @@ void prGameSession::SendPacket(prGameSessionPacket &packet)
     extern void connectionSendData(prGameSessionPacket &packet);
     connectionSendData(packet);
 
+#else
+    PRUNUSED(packet);
+
 #endif
 }
 

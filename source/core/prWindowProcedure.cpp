@@ -284,7 +284,11 @@ void prSetApplicationForWindowProcedure(prApplication *app)
 LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     // Get window.
+#ifdef _WIN64
+    prWindow* window = (prWindow*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+#else
     prWindow* window = (prWindow*)(s64)GetWindowLong(hwnd, GWL_USERDATA);
+#endif
 
 
     // Send event message to AntTweakBar
@@ -382,7 +386,7 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
         break;
 
     case WM_CHAR:
-        WindowMessage_InjectPressed(wParam);
+        WindowMessage_InjectPressed((u32)wParam);
         break;
 
     // Keys down
@@ -413,7 +417,7 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 
         default:
             //prTrace("down: %c\n", wParam);
-            WindowMessage_InjectDown(wParam);
+            WindowMessage_InjectDown((u32)wParam);
             break;
         }
         break;

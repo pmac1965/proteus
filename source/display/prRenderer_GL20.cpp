@@ -67,7 +67,7 @@
 #include "../core/prMacros.h"
 //#include "../debug/prDebug.h"
 //#include "../math/prMathsUtil.h"
-//#include "../math/prVector3.h"
+#include "../math/prVector3.h"
 //#include "../core/prWindow.h"
 //#include "../core/prVertex.h"
 //#include "../core/prCore.h"
@@ -290,6 +290,8 @@ void prRenderer_GL20::RestorePerspectiveView()
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::DrawPoint(f32 x, f32 y)
 {
+    PRUNUSED(x);
+    PRUNUSED(y);
 }
 
 
@@ -298,6 +300,10 @@ void prRenderer_GL20::DrawPoint(f32 x, f32 y)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::DrawLine(f32 x1, f32 y1, f32 x2, f32 y2)
 {
+    PRUNUSED(x1);
+    PRUNUSED(y1);
+    PRUNUSED(x2);
+    PRUNUSED(y2);
 }
 
 
@@ -306,6 +312,8 @@ void prRenderer_GL20::DrawLine(f32 x1, f32 y1, f32 x2, f32 y2)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::DrawLine(prVector3 &from, prVector3 &to)
 {
+    PRUNUSED(from);
+    PRUNUSED(to);
 }
 
 
@@ -314,6 +322,10 @@ void prRenderer_GL20::DrawLine(prVector3 &from, prVector3 &to)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::DrawRect(f32 x1, f32 y1, f32 x2, f32 y2)
 {
+    PRUNUSED(x1);
+    PRUNUSED(y1);
+    PRUNUSED(x2);
+    PRUNUSED(y2);
 }
 
 
@@ -322,6 +334,10 @@ void prRenderer_GL20::DrawRect(f32 x1, f32 y1, f32 x2, f32 y2)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::DrawFilledRect(f32 x1, f32 y1, f32 x2, f32 y2)
 {
+    PRUNUSED(x1);
+    PRUNUSED(y1);
+    PRUNUSED(x2);
+    PRUNUSED(y2);
 }
 
 
@@ -330,6 +346,9 @@ void prRenderer_GL20::DrawFilledRect(f32 x1, f32 y1, f32 x2, f32 y2)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::DrawCircle(f32 x, f32 y, f32 radius)
 {
+    PRUNUSED(x);
+    PRUNUSED(y);
+    PRUNUSED(radius);
 }
 
 
@@ -338,6 +357,9 @@ void prRenderer_GL20::DrawCircle(f32 x, f32 y, f32 radius)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::DrawFilledCircle(f32 x, f32 y, f32 radius)
 {
+    PRUNUSED(x);
+    PRUNUSED(y);
+    PRUNUSED(radius);
 }
 
 
@@ -346,6 +368,8 @@ void prRenderer_GL20::DrawFilledCircle(f32 x, f32 y, f32 radius)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::DrawPolygon(prVertex2D *vertices, s32 count)
 {
+    PRUNUSED(vertices);
+    PRUNUSED(count);
 }
 
 
@@ -354,6 +378,8 @@ void prRenderer_GL20::DrawPolygon(prVertex2D *vertices, s32 count)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::DrawFilledPolygon(prVertex2D *vertices, s32 count)
 {
+    PRUNUSED(vertices);
+    PRUNUSED(count);
 }
 
 
@@ -362,6 +388,7 @@ void prRenderer_GL20::DrawFilledPolygon(prVertex2D *vertices, s32 count)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::SetColour(const prColour &colour)
 {
+    PRUNUSED(colour);
 }
 
 
@@ -370,6 +397,7 @@ void prRenderer_GL20::SetColour(const prColour &colour)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::SetClearColour(const prColour &colour)
 {
+    PRUNUSED(colour);
 }
 
 
@@ -386,6 +414,10 @@ void prRenderer_GL20::DrawQuad()
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::DrawQuad(float u0, float v0, float u1, float v1)
 {
+    PRUNUSED(u0);
+    PRUNUSED(v0);
+    PRUNUSED(u1);
+    PRUNUSED(v1);
 }
 
 
@@ -394,6 +426,11 @@ void prRenderer_GL20::DrawQuad(float u0, float v0, float u1, float v1)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::DrawQuad(float u0, float v0, float u1, float v1, prColour c)
 {
+    PRUNUSED(u0);
+    PRUNUSED(v0);
+    PRUNUSED(u1);
+    PRUNUSED(v1);
+    PRUNUSED(c);
 }
 
 
@@ -402,6 +439,11 @@ void prRenderer_GL20::DrawQuad(float u0, float v0, float u1, float v1, prColour 
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::BatchDrawQuad(float u0, float v0, float u1, float v1, prColour c)
 {
+    PRUNUSED(u0);
+    PRUNUSED(v0);
+    PRUNUSED(u1);
+    PRUNUSED(v1);
+    PRUNUSED(c);
 }
 
 
@@ -410,6 +452,7 @@ void prRenderer_GL20::BatchDrawQuad(float u0, float v0, float u1, float v1, prCo
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::TexturesEnabled(bool state)
 {
+    PRUNUSED(state);
 }
 
 
@@ -418,4 +461,5 @@ void prRenderer_GL20::TexturesEnabled(bool state)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::BlendEnabled(bool state)
 {
+    PRUNUSED(state);
 }
