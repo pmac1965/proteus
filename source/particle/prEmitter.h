@@ -58,7 +58,7 @@ public:
     //void Draw();
 
 
-    prVector3   mPos;           // Position of the emitter
+    Proteus::Math::prVector3   mPos;           // Position of the emitter
 
     //std::list<> mParticles;
 

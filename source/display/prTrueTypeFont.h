@@ -111,7 +111,7 @@ public:
     //
     // Notes: 
     //      returns the strings total height and the widest line length if the string is multilined.
-    prVector2 MeasureString(const char *string, float scale);
+    Proteus::Math::prVector2 MeasureString(const char *string, float scale);
 
 
 private:

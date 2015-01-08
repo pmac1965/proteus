@@ -22,7 +22,12 @@
 #include "prMathsUtil.h"
 
 
-static u64 seed = 0x12345678ABCDEF11LL;
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
+u64 seed = 0x12345678ABCDEF11LL;
 
 
 /// ---------------------------------------------------------------------------
@@ -93,3 +98,6 @@ s32 prRand()
 {
     return (s32)prRandomNumber(0x7FFF);
 }
+
+
+}}// Namespaces

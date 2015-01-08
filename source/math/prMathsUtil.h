@@ -24,32 +24,20 @@
 #include <math.h>
 
 
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
 // Maths constants
-namespace Proteus 
-{
-    namespace Maths
-    {
-        const s32   MaxInt32    = 0xFFFFFFFF;                           // Maths constant - was long, but longs size can vary.
-        const float MinFloat    = -3.402823466e+38F;                    // Maths constant
-        const float MaxFloat    =  3.402823466e+38F;                    // Maths constant
-        const float Pi          = 3.14159265358979323846f;              // Maths constant
-        const float TwoPi       = Pi * 2;                               // Maths constant
-        const float PiHalf      = Pi / 2;                               // Maths constant
-        const float Epsilon     = 0.000001f;                            // Maths constant
-        const float NaN         = *(const float*)&MaxInt32;             // Maths constant
-    };
-};
-
-
-// Macro: IS_ZERO(x)
-//      Tests if a number is near zero.
-//
-// Paramers:
-//      x - Value to test
-//
-// Notes:
-//      x should be a float/double
-#define IS_ZERO(x)      ((x) > -Proteus::Maths::Epsilon && (x) < Proteus::Maths::Epsilon)
+const s32   MaxInt32    = 0xFFFFFFFF;                           // Maths constant - was a long, but longs size can vary.
+const f32   MinFloat    = -3.402823466e+38F;                    // Maths constant
+const f32   MaxFloat    =  3.402823466e+38F;                    // Maths constant
+const f32   Pi          = 3.14159265358979323846f;              // Maths constant
+const f32   TwoPi       = Pi * 2;                               // Maths constant
+const f32   PiHalf      = Pi / 2;                               // Maths constant
+const f32   Epsilon     = 0.000001f;                            // Maths constant
+const f32   NaN         = *(const f32*)&MaxInt32;               // Maths constant
 
 
 // Function: prMax    
@@ -99,7 +87,7 @@ inline void prSwap(T& a, T& b)
 template<typename T>
 void prRadsToDegrees(T& radians)
 {
-    radians *= (180.0f / Proteus::Maths::Pi);
+    radians *= (180.0f / Proteus::Math::Pi);
 }
 
 // Function: prDegreesToRads
@@ -107,7 +95,7 @@ void prRadsToDegrees(T& radians)
 template<typename T>
 void prDegreesToRads(T& degrees)
 {
-    degrees *= (Proteus::Maths::Pi / 180.0f);
+    degrees *= (Proteus::Math::Pi / 180.0f);
 }
 
 // Function: prFastMul10
@@ -205,6 +193,20 @@ void prWorldToScreen(f32 wx, f32 wy, f32 wz, f64 &ox, f64 &oy, f64 &oz);
 // Function: prScreenToWorld
 //      Converts a screen position to a world position.
 void prScreenToWorld(s32 sx, s32 sy, f64 &ox, f64 &oy, f64 &oz);
+
+
+}}// Namespaces
+
+
+// Macro: IS_ZERO(x)
+//      Tests if a number is near zero.
+//
+// Paramers:
+//      x - Value to test
+//
+// Notes:
+//      x should be a float/double
+#define IS_ZERO(x)      ((x) > -Proteus::Math::Epsilon && (x) < Proteus::Math::Epsilon)
 
 
 #endif//__PRMATHSUTIL_H

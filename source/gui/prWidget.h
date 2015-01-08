@@ -196,7 +196,7 @@ protected:
 
 
 public:
-    prVector2   pos;
+    Proteus::Math::prVector2    pos;
 };
 
 

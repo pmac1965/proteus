@@ -154,31 +154,11 @@
 #define REMOVE_EXCEPTIONS
 #endif
 
-#ifndef ALLOW_PROTEUS_NAMESPACE                         // Prevents naming collisions.
-//#define ALLOW_PROTEUS_NAMESPACE
-#endif
-
 #ifndef BADA_SDK_2                                      // Bada SDK version 2 and above have different C library implementations
 #define BADA_SDK_2                                      // Need to be careful when using standard C code.
 #endif
 
 #endif//PLATFORM_BADA
-
-
-// ----------------------------------------------------------------------------
-// Namespace
-// ----------------------------------------------------------------------------
-#if defined(ALLOW_PROTEUS_NAMESPACE)                    // This code allows optional namespace usage.
-  #define PRNS_BEGIN        namespace Proteus {
-  #define PRNS              Proteus::
-  #define PRNS_END          }
-
-#else
-  #define PRNS_BEGIN
-  #define PRNS
-  #define PRNS_END
-
-#endif//ALLOW_PROTEUS_NAMESPACE
 
 
 // Tweakbar

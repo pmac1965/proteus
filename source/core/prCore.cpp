@@ -62,31 +62,58 @@
 namespace
 {
     PRBOOL          init   = PRFALSE;
-    prCoreSystem   *systems[PRSYSTEM_MAX];
+    prCoreSystem   *pSystems[PRSYSTEM_MAX];
 }
 
 
 /// ---------------------------------------------------------------------------
 /// Creates the engine core components
 /// ---------------------------------------------------------------------------
-PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
+void prCoreInit()
+{
+    if (init == PRFALSE)
+    {
+        // Set core initialised
+        init = PRTRUE;
+
+        // Clear the systems
+        memset(pSystems, 0, sizeof(prCoreSystem*) * PRSYSTEM_MAX);
+
+        // Create the core systems
+        pSystems[PRSYSTEM_RESOURCEMANAGER]  = new prResourceManager();
+        pSystems[PRSYSTEM_TOUCH]            = new prTouch();
+        pSystems[PRSYSTEM_MESSAGEMANAGER]   = new prMessageManager();
+        pSystems[PRSYSTEM_REGISTRY]         = new prRegistry();
+        pSystems[PRSYSTEM_FILEMANAGER]      = new prFileManager();
+
+        #if defined(PLATFORM_PC)
+        pSystems[PRSYSTEM_MOUSE]     = new prMouse();
+        pSystems[PRSYSTEM_KEYBOARD]  = new prKeyboard_PC();
+        #endif
+
+
+        #if defined(PLATFORM_LINUX)
+        pSystems[PRSYSTEM_MOUSE]     = new prMouse();
+        #endif
+
+    }
+    else
+    {
+        PRWARN("Cannot initialise the core twice");
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Sets the engine renderer
+/// ---------------------------------------------------------------------------
+PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version)
 {
     PRBOOL result = PRFALSE;
 
-    if (init == PRFALSE)
+    if (init == PRTRUE)
     {
-        memset(systems, 0, sizeof(systems));
-
-        init   = PRTRUE;
         result = PRTRUE;
-
-
-        // Create the core systems
-        systems[PRSYSTEM_RESOURCEMANAGER]   = new prResourceManager();
-        systems[PRSYSTEM_TOUCH]             = new prTouch();
-        systems[PRSYSTEM_MESSAGEMANAGER]    = new prMessageManager();
-        systems[PRSYSTEM_REGISTRY]          = new prRegistry();
-        systems[PRSYSTEM_FILEMANAGER]       = new prFileManager();
 
 
         // Platform specific initialisation
@@ -101,11 +128,11 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
                 switch (version)
                 {
                 case PRGLVER_11:
-                    systems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
+                    pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
                     break;
 
                 case PRGLVER_20:
-                    systems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
+                    pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                     break;
 
                 case PRGLVER_30:
@@ -145,11 +172,11 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
                 switch (version)
                 {
                     case PRGLVER_11:
-                        systems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
+                        pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
                         break;
                     
                     case PRGLVER_20:
-                        systems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
+                        pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                         break;
                     
                     case PRGLVER_30:
@@ -170,11 +197,11 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
                 switch (version)
                 {
                     case PRGLVER_11:
-                        systems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
+                        pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
                         break;
                     
                     case PRGLVER_20:
-                        systems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
+                        pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                         break;
                     
                     case PRGLVER_30:
@@ -195,11 +222,11 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
                 switch (version)
                 {
                     case PRGLVER_11:
-                        systems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
+                        pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
                         break;
                     
                     case PRGLVER_20:
-                        systems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
+                        pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                         break;
                     
                     case PRGLVER_30:
@@ -220,11 +247,11 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
                 switch (version)
                 {
                 case PRGLVER_11:
-                    systems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
+                    pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
                     break;
 
                 case PRGLVER_20:
-                    systems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
+                    pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                     break;
 
                 case PRGLVER_30:
@@ -246,11 +273,11 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
                 switch (version)
                 {
                 case PRGLVER_11:
-                    systems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
+                    pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
                     break;
                     
                 case PRGLVER_20:
-                    systems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
+                    pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                     break;
                     
                 case PRGLVER_30:
@@ -265,20 +292,12 @@ PRBOOL prCoreCreate(prRendererType rendererType, prVerType version)
         #endif
 
 
-        #if defined(PLATFORM_PC)
-        systems[PRSYSTEM_MOUSE]     = new prMouse();
-        systems[PRSYSTEM_KEYBOARD]  = new prKeyboard_PC();
-        #endif
-
-
-        #if defined(PLATFORM_LINUX)
-        systems[PRSYSTEM_MOUSE]     = new prMouse();
-        #endif
     }
     else
     {
-        prTrace("Core engine systems cannot be created twice.\n");
+        PRWARN("Core not initialised");
     }
+
 
     return result;
 }
@@ -300,113 +319,113 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
             {
             // The background manager.
             case PRSYSTEM_BACKGROUNDMANAGER:
-                if (systems[id] == NULL)
+                if (pSystems[id] == NULL)
                 {
-                    systems[id] = new prBackgroundManager();
+                    pSystems[id] = new prBackgroundManager();
                 }
                 else
                 {
-                    prTrace("Engine system '%s' already exists\n", systems[id]->Name());
+                    prTrace("Engine system '%s' already exists\n", pSystems[id]->Name());
                 }
                 break;
 
             // The sprite manager.
             case PRSYSTEM_SPRITEMANAGER:
-                if (systems[id] == NULL)
+                if (pSystems[id] == NULL)
                 {
-                    systems[id] = new prSpriteManager();
+                    pSystems[id] = new prSpriteManager();
                 }
                 else
                 {
-                    prTrace("Engine system '%s' already exists\n", systems[id]->Name());
+                    prTrace("Engine system '%s' already exists\n", pSystems[id]->Name());
                 }
                 break;
 
             // The on screen logger.
             case PRSYSTEM_ONSCREENLOGGER:
-                if (systems[id] == NULL)
+                if (pSystems[id] == NULL)
                 {
-                    systems[id] = new prOnScreenLogger();
+                    pSystems[id] = new prOnScreenLogger();
                 }
                 else
                 {
-                    prTrace("Engine system '%s' already exists\n", systems[id]->Name());
+                    prTrace("Engine system '%s' already exists\n", pSystems[id]->Name());
                 }
                 break;
 
             // The sound manager
             case PRSYSTEM_AUDIO:
-                if (systems[id] == NULL)
+                if (pSystems[id] == NULL)
                 {
                 #if defined(PLATFORM_PC)
-                    systems[id] = new prSoundManager_PC();
+                    pSystems[id] = new prSoundManager_PC();
                 #elif defined(PLATFORM_ANDROID)
-                    systems[id] = new prSoundManager_Android();
+                    pSystems[id] = new prSoundManager_Android();
                 #elif defined(PLATFORM_IOS)
-                    systems[id] = new prSoundManager_Ios();
+                    pSystems[id] = new prSoundManager_Ios();
                 #elif defined(PLATFORM_MAC)
-                    systems[id] = NULL;
+                    pSystems[id] = NULL;
                 #elif defined(PLATFORM_LINUX)
-                    systems[id] = NULL;
+                    pSystems[id] = NULL;
                 #elif defined(PLATFORM_BADA)
-                    systems[id] = NULL;
+                    pSystems[id] = NULL;
                 #else
                     #error Platform undefined
                 #endif
                 }
                 else
                 {
-                    prTrace("Engine system '%s' already exists\n", systems[id]->Name());
+                    prTrace("Engine system '%s' already exists\n", pSystems[id]->Name());
                 }
                 break;
 
             // FPS
             case PRSYSTEM_FPS:
-                if (systems[id] == NULL)
+                if (pSystems[id] == NULL)
                 {
                 #if defined(PLATFORM_PC)
-                    systems[id] = new prFps_PC();
+                    pSystems[id] = new prFps_PC();
                 #elif defined(PLATFORM_ANDROID)
-                    systems[id] = new prFps_Android();
+                    pSystems[id] = new prFps_Android();
                 #elif defined(PLATFORM_IOS)
-                    systems[id] = new prFps_ios();
+                    pSystems[id] = new prFps_ios();
                 #elif defined(PLATFORM_MAC)
-                    systems[id] = NULL;
+                    pSystems[id] = NULL;
                 #elif defined(PLATFORM_LINUX)
-                    systems[id] = NULL;
+                    pSystems[id] = NULL;
                 #elif defined(PLATFORM_BADA)
-                    systems[id] = NULL;
+                    pSystems[id] = NULL;
                 #else
                     #error Platform undefined
                 #endif
                 }
                 else
                 {
-                    prTrace("Engine system '%s' already exists\n", systems[id]->Name());
+                    prTrace("Engine system '%s' already exists\n", pSystems[id]->Name());
                 }
                 break;
 
             // The fade manager
             case PRSYSTEM_FADEMANAGER:
-                if (systems[id] == NULL)
+                if (pSystems[id] == NULL)
                 {
-                    systems[id] = new prFadeManager();
+                    pSystems[id] = new prFadeManager();
                 }
                 else
                 {
-                    prTrace("Engine system '%s' already exists\n", systems[id]->Name());
+                    prTrace("Engine system '%s' already exists\n", pSystems[id]->Name());
                 }
                 break;
 
             // Accelerometer
             case PRSYSTEM_ACCELEROMETER:
-                if (systems[id] == NULL)
+                if (pSystems[id] == NULL)
                 {
-                    systems[id] = new prAccelerometer();
+                    pSystems[id] = new prAccelerometer();
                 }
                 else
                 {
-                    prTrace("Engine system '%s' already exists\n", systems[id]->Name());
+                    prTrace("Engine system '%s' already exists\n", pSystems[id]->Name());
                 }
                 break;
 
@@ -436,10 +455,10 @@ void prCoreDestroy()
     // can get to release them first.
     for (s32 i = (PRSYSTEM_MAX - 1); i >= 0; i--)
     {
-        if (systems[i])
+        if (pSystems[i])
         {
-            prTrace("Destroying %s - %i\n", systems[i]->Name(), systems[i]->ID());
-            PRSAFE_DELETE(systems[i]);
+            prTrace("Destroying %s - %i\n", pSystems[i]->Name(), pSystems[i]->ID());
+            PRSAFE_DELETE(pSystems[i]);
         }
     }
 }
@@ -465,7 +484,7 @@ PRBOOL prCoreComponentExist(s32 systemID)
     {
         if (PRBETWEEN(systemID, 0, PRSYSTEM_MAX - 1))
         {
-            result = (systems[systemID] != NULL);
+            result = (pSystems[systemID] != NULL);
         }
         else
         {
@@ -487,7 +506,7 @@ prCoreSystem *prCoreGetComponent(u32 systemID)
     {
         if (PRBETWEEN(systemID, 0, PRSYSTEM_MAX - 1))
         {
-            return systems[systemID];
+            return pSystems[systemID];
         }
         else
         {

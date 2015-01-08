@@ -21,6 +21,12 @@
 #include "prVector2.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
+// Maths constants
 const prVector2 prVector2 :: Zero   (0.0f, 0.0f);
 const prVector2 prVector2 :: One    (1.0f, 1.0f);
 const prVector2 prVector2 :: UnitX  (1.0f, 0.0f);
@@ -42,3 +48,6 @@ const char *prVector2::ToString() const
 
     return buffer;
 }
+
+
+}}// Namespaces

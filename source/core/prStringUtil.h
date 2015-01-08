@@ -122,7 +122,7 @@ u32 prStringCopySafe(char* dst, const char* src, u32 destSize);
 //      The resultant string
 const char *prStringPrintf(const char* fmt, ...);
 
-// Function: prStringSprintf
+// Function: prStringSnprintf
 //      Creates a formatted string.
 //
 // Parameters:
@@ -130,7 +130,10 @@ const char *prStringPrintf(const char* fmt, ...);
 //      bufferSize - The destination buffer size in bytes
 //      fmt        - The format string
 //      ...        - Optional parameters
-void prStringSprintf(char *buffer, s32 bufferSize, const char* fmt, ...);
+//
+// Returns:
+//      The buffer you passed in
+char *prStringSnprintf(char *buffer, s32 bufferSize, const char* fmt, ...);
 
 // Function: prStringToLower
 //      Sets a string to lower case.

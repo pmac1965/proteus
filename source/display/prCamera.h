@@ -41,7 +41,7 @@ public:
     //      eye     - Camera vector
     //      up      - Camera vector
     //      at      - Camera vector
-    prCamera(prVector3 &eye, prVector3 &up, prVector3 &at);
+    prCamera(const Proteus::Math::prVector3 &eye, const Proteus::Math::prVector3 &up, const Proteus::Math::prVector3 &at);
     
     // Method: ~prCamera
     //      Dtor
@@ -54,30 +54,39 @@ public:
     // Method: LookAt
     //      Uploads the matrices.
     void LookAt();
+
+    // Method: Rotate
+    //      Rotates the camera.
+    //
+    // Parameters:
+    //      x - Amount to rotate the camera in the X direction
+    //      y - Amount to rotate the camera in the Y direction
+    //      z - Amount to rotate the camera in the Z direction
+    void Rotate(f32 x, f32 y, f32 z);
     
     // Method: SetTarget
     //      Sets the camera look at target position
-    void SetTarget(prVector3 &target);
+    void SetTarget(Proteus::Math::prVector3 &target);
     
     // Method: SetTarget
     //      Sets the camera look at target position
-    void SetTarget(const prVector3 &target);
+    void SetTarget(const Proteus::Math::prVector3 &target);
     
+    // Method: SetPosition
+    //      Sets the cameras position.
+    void SetPosition(Proteus::Math::prVector3 &pos);
+
+    // Method: SetPosition
+    //      Sets the cameras position.
+    void SetPosition(const Proteus::Math::prVector3 &pos);
+
     // Method: GetTarget
     //      Gets the camera look at target position
-    prVector3 GetTarget();
-
-    // Method: SetPosition
-    //      Sets the cameras position.
-    void SetPosition(prVector3 &pos);
-
-    // Method: SetPosition
-    //      Sets the cameras position.
-    void SetPosition(const prVector3 &pos);
+    Proteus::Math::prVector3 GetTarget() { return Proteus::Math::prVector3(m_at); }
 
     // Method: GetPosition
     //      Gets the cameras position.
-    prVector3 GetPosition();
+    Proteus::Math::prVector3 GetPosition() { return Proteus::Math::prVector3(m_eye); }
 
     // Method: GetID
     //      Gets the cameras unique ID.
@@ -101,20 +110,19 @@ public:
 
 
 protected:
-
-    prVector3   m_eye;
-    prVector3   m_at;
-    prVector3   m_up;
+    Proteus::Math::prVector3   m_eye;
+    Proteus::Math::prVector3   m_up;
+    Proteus::Math::prVector3   m_at;
 
 
 private:
-
     static u32  baseID;
 
+
+private:
     PRBOOL      m_active;
     u32         m_hash;
     s32         m_id;
-
     prString    m_name;
 };
 

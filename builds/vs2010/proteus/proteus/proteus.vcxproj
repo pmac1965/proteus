@@ -200,7 +200,7 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
@@ -232,7 +232,7 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
@@ -264,7 +264,7 @@
     <ClCompile>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS;PROTEUS_TOOL</PreprocessorDefinitions>
     </ClCompile>
@@ -294,7 +294,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
@@ -334,7 +334,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Tool release|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
@@ -702,6 +702,7 @@
     <ClInclude Include="..\..\..\..\source\persistence\prSave_pc.h" />
     <ClInclude Include="..\..\..\..\source\prConfig.h" />
     <ClInclude Include="..\..\..\..\source\proteus.h" />
+    <ClInclude Include="..\..\..\..\source\scene\prCube.h" />
     <ClInclude Include="..\..\..\..\source\scene\prScene.h" />
     <ClInclude Include="..\..\..\..\source\scene\prSceneNode.h" />
     <ClInclude Include="..\..\..\..\source\scene\prSceneObject.h" />
@@ -1644,6 +1645,7 @@
     <ClCompile Include="..\..\..\..\source\persistence\prSave_linux.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave_mac.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave_pc.cpp" />
+    <ClCompile Include="..\..\..\..\source\scene\prCube.cpp" />
     <ClCompile Include="..\..\..\..\source\scene\prScene.cpp" />
     <ClCompile Include="..\..\..\..\source\scene\prSceneNode.cpp" />
     <ClCompile Include="..\..\..\..\source\scene\prSceneObject.cpp" />

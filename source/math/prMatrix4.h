@@ -23,6 +23,11 @@
 #include "../core/prTypes.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
 // Forward declarations
 class prVector3;
 
@@ -137,6 +142,9 @@ public:
 private:
     f32 _m[16];
 };
+
+
+}}// Namespaces
 
 
 // Inline code

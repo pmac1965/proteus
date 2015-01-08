@@ -112,6 +112,10 @@ public:
     static const prColour     DarkGray;     ///< Pre-created colour value
     static const prColour     Gray;         ///< Pre-created colour value
     static const prColour     LiteGray;     ///< Pre-created colour value
+    static const prColour     Brown;        ///< Pre-created colour value
+    static const prColour     Orange;       ///< Pre-created colour value
+    static const prColour     PastelPink;   ///< Pre-created colour value
+    static const prColour     BarneyPurple; ///< Pre-created colour value
 };
 
 

@@ -35,27 +35,26 @@
 
 namespace
 {
+    // Internal data
 #if defined(PLATFORM_PC)
     LPWSTR         *pArgv           = NULL;
+
 #else
     char          **pArgv           = NULL;
+
 #endif
 
     UnknownParamCB  pUnknownParamCB = NULL;
     s32             paramIndex      = -1;
     s32             paramTotal      = -1;
     bool            parseFailed     = false;
-}
 
 
-#if defined(PLATFORM_PC)
-/// ---------------------------------------------------------------------------
-/// Unknown command handler.
-/// ---------------------------------------------------------------------------
-namespace
-{
-    bool UnknownCommand(const _TCHAR* argv);
-    bool UnknownCommand(const _TCHAR* argv)
+    /// -----------------------------------------------------------------------
+    /// Unknown command handler.
+    /// -----------------------------------------------------------------------
+    bool UnknownCommand(const char* argv);
+    bool UnknownCommand(const char* argv)
     {
         if (argv && *argv)
         {
@@ -74,6 +73,7 @@ namespace
 }
 
 
+#if defined(PLATFORM_PC)
 /// ---------------------------------------------------------------------------
 /// Processes command line args
 /// ---------------------------------------------------------------------------
@@ -90,7 +90,6 @@ void prArgsParseCommandLine(LPTSTR lpCmdLine)
         pArgv = CommandLineToArgvW(lpCmdLine, &paramTotal);
 
         prRegistry *reg  = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
-
         if (pArgv && reg)
         {
             if (paramTotal > 0)
@@ -128,19 +127,28 @@ void prArgsParseCommandLine(LPTSTR lpCmdLine)
                             }
                             else
                             {
-                                UnknownCommand(pArgv[paramIndex]);
+                                char buffer[256];
+                                size_t cnt = wcstombs(buffer, pArgv[paramIndex], sizeof(buffer));
+                                buffer[cnt] = 0;
+                                UnknownCommand(buffer);
                                 break;
                             }
                             break;
 
                         default:
-                            UnknownCommand(pArgv[paramIndex]);
+                            char buffer[256];
+                            size_t cnt = wcstombs(buffer, pArgv[paramIndex], sizeof(buffer));
+                            buffer[cnt] = 0;
+                            UnknownCommand(buffer);
                             break;
                         }
                     }
                     else
                     {
-                        UnknownCommand(pArgv[paramIndex]);
+                        char buffer[256];
+                        size_t cnt = wcstombs(buffer, pArgv[paramIndex], sizeof(buffer));
+                        buffer[cnt] = 0;
+                        UnknownCommand(buffer);
                         break;
                     }
                 
@@ -163,55 +171,49 @@ void prArgsParseCommandLine(LPTSTR lpCmdLine)
 }
 
 
-/// ---------------------------------------------------------------------------
-/// Retrieves an argument if there is one
-/// ---------------------------------------------------------------------------
-const _TCHAR *prArgsPopNextArg()
-{
-    if (pArgv && paramIndex > -1 &&
-                 paramTotal > -1)
-    {
-        if (paramIndex < (paramTotal - 1))
-        {
-            return pArgv[++paramIndex];
-        }
-    }
+#else
 
-    return NULL;
-}
-
-#else //PLATFORM_PC
 
 /// ---------------------------------------------------------------------------
 /// Processes command line args
 /// ---------------------------------------------------------------------------
 void prArgsParseCommandLine(int argc, const char *args[])
 {
-#if defined(PLATFORM_LINUX)
-    prLinuxStoreArgs(argc, args);
-#endif
+    // Init control data
+    paramIndex  = 0;
+    paramTotal  = 0;
+    parseFailed = false;
 
+    #if defined(PLATFORM_LINUX)
+    prLinuxStoreArgs(argc, args);
+    #endif
 }
+
+
+#endif
 
 
 /// ---------------------------------------------------------------------------
 /// Retrieves an argument if there is one
 /// ---------------------------------------------------------------------------
-const char *prArgsPopNextArg()
+void prArgsPopNextArg(char *buffer, s32 bufferSize)
 {
+    PRASSERT(buffer);
+    PRASSERT(bufferSize > 0);
+
     if (pArgv && paramIndex > -1 &&
                  paramTotal > -1)
     {
         if (paramIndex < (paramTotal - 1))
         {
-            return pArgv[++paramIndex];
+#if defined(PLATFORM_PC)
+            size_t cnt = wcstombs(buffer, pArgv[++paramIndex], bufferSize);            
+            buffer[cnt] = 0;
+#else
+#endif
         }
     }
-
-    return NULL;
 }
-
-#endif//PLATFORM_PC
 
 
 /// ---------------------------------------------------------------------------

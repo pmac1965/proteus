@@ -172,7 +172,7 @@ public:
 
     // Method: GetPosition
     //      Returns the mouse position.
-    prPoint3 GetPosition() const { return prPoint3(x, y, 0); }
+    Proteus::Math::prPoint3 GetPosition() const { return Proteus::Math::prPoint3(x, y, 0); }
 
     // Method: GetPosition
     //      Receives mouse data messages from the application message handler.

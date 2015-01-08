@@ -23,6 +23,11 @@
 #include "prPoint.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
 /// ---------------------------------------------------------------------------
 /// Constructor.
 /// ---------------------------------------------------------------------------
@@ -169,12 +174,10 @@ void prRect::VerifyCoords()
 /// ---------------------------------------------------------------------------
 bool prRect::Intersect(const prRect& rect) const
 {
-    return (
-                m_right   >= rect.GetLeft()   &&
-                m_left    <= rect.GetRight()  &&
-                m_bottom  >= rect.GetTop()    &&
-                m_top     <= rect.GetBottom()
-           );
+    return (m_right   >= rect.GetLeft()   &&
+            m_left    <= rect.GetRight()  &&
+            m_bottom  >= rect.GetTop()    &&
+            m_top     <= rect.GetBottom());
 }
 
 
@@ -188,3 +191,6 @@ void prRect::Move(s32 x, s32 y)
     m_bottom += y;
     m_top    += y;
 }
+
+
+}}// Namespaces

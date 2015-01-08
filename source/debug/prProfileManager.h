@@ -24,19 +24,16 @@
 #include "../core/prTypes.h"
 
 
-// ----------------------------------------------------------------------------
 // Forward declarations
-// ----------------------------------------------------------------------------
 class prFixedWidthFont;
 class prProfileEntry;
 
 
-// ----------------------------------------------------------------------------
 // Shortcut defines as you shouldn't add the profiling code without them
-// ----------------------------------------------------------------------------
 #if (defined(PLATFORM_PC) || defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID)) && defined(PROFILE)
     #define ProfileCreate(name)                     prProfileManager::GetInstance().Create((name))
     #define ProfileEnable(state)                    prProfileManager::GetInstance().Enable((state))
+    #define ProfileIsEnabled()                      prProfileManager::GetInstance().IsEnabled()
     #define ProfileBegin()                          prProfileManager::GetInstance().Begin()
     #define ProfileReset()                          prProfileManager::GetInstance().Reset()
     #define ProfileDestroy()                        prProfileManager::GetInstance().Destroy()
@@ -45,9 +42,14 @@ class prProfileEntry;
     #define ProfileDisplay(x, y, fnt, spacing, idx) prProfileManager::GetInstance().Display((x), (y), (fnt), (spacing), (idx))
     #define ProfileCount()                          prProfileManager::GetInstance().Count()
 
+    // Use these to declare data for the profiler
+    #define PROF_VAR_DEC(var)                       s32 var = -1;
+    #define PROF_VAR_SET(var)                       var = ProfileCreate(#var);
+
 #else
     #define ProfileCreate(name)
     #define ProfileEnable(state)
+    #define ProfileIsEnabled()                      false
     #define ProfileBegin()
     #define ProfileReset()
     #define ProfileDestroy()
@@ -56,12 +58,14 @@ class prProfileEntry;
     #define ProfileDisplay(x, y, fnt, spacing, idx)
     #define ProfileCount()
 
+    // Use these to declare data for the profiler
+    #define PROF_VAR_DEC(var)
+    #define PROF_VAR_SET(var)
+
 #endif
 
 
-// ----------------------------------------------------------------------------
 // Defines
-// ----------------------------------------------------------------------------
 #define PROFILE_MAX_ENTRIES         128
 
 
@@ -71,6 +75,9 @@ class prProfileEntry;
 // Notes:
 //      This class should only be used on platforms where no proper profiling
 //      tools are available. SO LAST DITCH ONLY!!!
+//
+//      It does however have a few useful features, like hit count, so you 
+//      know how often a function is getting hit
 //
 // Notes:
 //      This class is a singleton
@@ -111,6 +118,10 @@ public:
     // Method: Enable
     //      Enables/disables profiling.
     void Enable(bool state) { m_update = state; }
+
+    // Method: IsEnabled
+    //      Determines if profiling is updating/drawing
+    bool IsEnabled() const { return m_update; }
 
     // Method: Start
     //      Start profiling

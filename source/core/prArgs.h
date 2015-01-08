@@ -24,14 +24,26 @@
 #include "prTypes.h"
 
 
+// A macro to setup main
+#if defined(PLATFORM_PC)
+  #define PROTEUS_MAIN      int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
+    
+#elif defined(PLATFORM_LINUX)
+  #define PROTEUS_MAIN      int main(int argc, const char* argv[])
+
+#else
+  #define PROTEUS_MAIN
+
+#endif
+
+
+// Unknown parameter callback
+typedef bool (*UnknownParamCB)(const char* arg, s32 index);
+
+
 #if defined(PLATFORM_PC)
     #include <Windows.h>
     #include <tchar.h>
-
-    
-    // Unknown parameter callback
-    typedef bool (*UnknownParamCB)(const _TCHAR* arg, s32 index);
-
 
     // Function: prArgsParseCommandLine
     //      Processes command line args
@@ -44,19 +56,7 @@
     //      lpCmdLine - The args
     void prArgsParseCommandLine(LPTSTR lpCmdLine);
 
-    // Function: prArgsPopNextArg
-    //      Retrieves an argument if there is one
-    //
-    // Notes:
-    //      This is the windows version
-    const _TCHAR *prArgsPopNextArg();
-
 #else
-
-    // Unknown parameter callback
-    typedef bool (*UnknownParamCB)(const char* arg, s32 index);
-
-
     // Function: prArgsParseCommandLine
     //      Processes command line args
     //
@@ -69,11 +69,20 @@
     //      args - The arguments array
     void prArgsParseCommandLine(int argc, const char *args[]);
 
-    // Function: prArgsPopNextArg
-    //      Retrieves an argument if there is one
-    const char *prArgsPopNextArg();
-
 #endif
+
+
+// Function: prArgsPopNextArg
+//      Retrieves an argument if there is one
+//
+// Parameters:
+//      buffer     - A buffer to store the argument
+//      bufferSize - The buffers size
+//
+// Notes:
+//      Arguments are not persistant between one call and
+//      the next. Returned data should be used immediately
+void prArgsPopNextArg(char *buffer, s32 bufferSize);
 
 
 // Function: prArgsRegisterUnknownParamHandler
@@ -82,6 +91,7 @@
 // Parameters:
 //      cb - Pointer to the callback handler
 void prArgsRegisterUnknownParamHandler(UnknownParamCB cb);
+
 
 // Function: prArgsGetTotalArgCount
 //      Returns the total number of arguments
@@ -98,6 +108,7 @@ void prArgsRegisterUnknownParamHandler(UnknownParamCB cb);
 //      will return a number greater or equal to zero
 s32 prArgsGetTotalArgCount();
 
+
 // Function: prArgsGetRemainingArgCount
 //      Returns the total number of arguments remaining to be processed
 //
@@ -113,6 +124,7 @@ s32 prArgsGetTotalArgCount();
 //      will return a number greater or equal to zero
 s32 prArgsGetRemainingArgCount();
 
+
 // Function: prArgsParseFailed
 //      Determines if command line parsing failed
 //
@@ -124,6 +136,7 @@ s32 prArgsGetRemainingArgCount();
 //      true if parsing failed
 //      false if parsing reported no errors
 bool prArgsParseFailed();
+
 
 // Function: prArgsShowHelp
 //      Shows the default help file

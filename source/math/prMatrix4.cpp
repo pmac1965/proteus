@@ -21,6 +21,11 @@
 #include "prVector3.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
 const f32 DEG2RAD = 3.141593f / 180;
 
 
@@ -286,3 +291,6 @@ prMatrix4& prMatrix4::RotateZ(f32 angle)
 void prMatrix4::Invert()
 {
 }
+
+
+}}// Namespaces

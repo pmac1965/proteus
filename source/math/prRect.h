@@ -24,12 +24,16 @@
 #include "prPoint.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
 // class: prRect
 //      Represents a simple rectangle.
 class prRect
 {
-public:
-        
+public:        
     // Method: prRect
     //      Constructor
     prRect();
@@ -177,7 +181,6 @@ public:
     
 
 private:
-
     s32     m_top;
     s32     m_left;
     s32     m_bottom;
@@ -187,10 +190,12 @@ private:
 
 
 private:
-
     // This method ensures that left is less than right and top greater than botton.
     void VerifyCoords();    
 };
+
+
+}}// Namespaces
 
 
 #endif//__PRRECT_H

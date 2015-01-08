@@ -99,12 +99,15 @@ void prOpenGLInit()
 /// ---------------------------------------------------------------------------
 void prOpenGLShowExtensions()
 {
+    TODO("Add glew")
+
     // Show GL details
     prTrace("OpenGL\n");
+    prTrace("------\n");
     prTrace("Vendor  : %s\n", (const char *)glGetString(GL_VENDOR));
     prTrace("Renderer: %s\n", (const char *)glGetString(GL_RENDERER));
     prTrace("Version : %s\n", (const char *)glGetString(GL_VERSION));
-    prTrace("-\n");
+    prTrace("------\n");
 
     // Show extensions.
     const char *extensions = (const char *)glGetString(GL_EXTENSIONS);
@@ -135,6 +138,8 @@ void prOpenGLShowExtensions()
         }
     }
     while(c != '\0');
+
+    prTrace("------\n");
 }
 
 

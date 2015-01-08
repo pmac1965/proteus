@@ -53,14 +53,14 @@ public:
 
 
 public:
-    prVector2   mAdvance;               // Amount to advance character
+    Proteus::Math::prVector2    mAdvance;               // Amount to advance character
 
 
 private:
-    prVector2   mOffset;                // X, Y positioning offset
-    u32         mCharacter;             // This character
-    u32         mTextureID;             // The texture ID
-    QuadData    quadData[6];            // Data to draw a simple quad
+    Proteus::Math::prVector2    mOffset;                // X, Y positioning offset
+    u32                         mCharacter;             // This character
+    u32                         mTextureID;             // The texture ID
+    QuadData                    quadData[6];            // Data to draw a simple quad
 };
 
 

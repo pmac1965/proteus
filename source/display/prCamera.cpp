@@ -59,6 +59,9 @@
 #include "../debug/prTrace.h"
 
 
+using namespace Proteus::Math;
+
+
 // Statics
 u32 prCamera::baseID = 1;
 
@@ -71,9 +74,9 @@ u32 prCamera::baseID = 1;
 /// ---------------------------------------------------------------------------
 prCamera::prCamera() 
 
-: m_eye     (prVector3::Zero)
-, m_at      (prVector3::Zero)
-, m_up      (prVector3(0, -1, 0))
+: m_eye     (Proteus::Math::prVector3::Zero)
+, m_up      (Proteus::Math::prVector3(0, 1, 0))
+, m_at      (Proteus::Math::prVector3::Zero)
 
 {
     m_active = PRFALSE;
@@ -85,7 +88,7 @@ prCamera::prCamera()
 /// ---------------------------------------------------------------------------
 /// Constructor
 /// ---------------------------------------------------------------------------
-prCamera::prCamera(prVector3 &eye, prVector3 &up, prVector3 &at) 
+prCamera::prCamera(const Proteus::Math::prVector3 &eye, const Proteus::Math::prVector3 &up, const Proteus::Math::prVector3 &at) 
 
 : m_eye     (eye)
 , m_at      (at)
@@ -134,9 +137,38 @@ void prCamera::LookAt()
 
 
 /// ---------------------------------------------------------------------------
+/// Rotates the camera.
+/// ---------------------------------------------------------------------------
+void prCamera::Rotate(f32 x, f32 y, f32 z)
+{
+	prVector3 vector = m_at - m_eye;
+
+    if (x) 
+	{
+		m_at.z = (m_eye.z + sin(x)*vector.y + cos(x)*vector.z);
+		m_at.y = (m_eye.y + cos(x)*vector.y - sin(x)*vector.z);
+	}
+
+	if (y) 
+	{
+	//prVector3 vector = m_at - m_eye;
+		m_at.z = (m_eye.z + (sin(y) * vector.x) + (cos(y) * vector.z));
+		m_at.x = (m_eye.x + (cos(y) * vector.x) - (sin(y) * vector.z));
+	}
+
+	if (z) 
+	{
+	//prVector3 vector = m_at - m_eye;
+		m_at.x = (m_eye.x + sin(z)*vector.y + cos(z)*vector.x);		
+		m_at.y = (m_eye.y + cos(z)*vector.y - sin(z)*vector.x);
+	}
+}
+
+
+/// ---------------------------------------------------------------------------
 /// Set target position.
 /// ---------------------------------------------------------------------------
-void prCamera::SetTarget(prVector3 &target)
+void prCamera::SetTarget(Proteus::Math::prVector3 &target)
 {
     m_at.x = target.x;
     m_at.y = target.y;
@@ -147,7 +179,7 @@ void prCamera::SetTarget(prVector3 &target)
 /// ---------------------------------------------------------------------------
 /// Set target position.
 /// ---------------------------------------------------------------------------
-void prCamera::SetTarget(const prVector3 &target)
+void prCamera::SetTarget(const Proteus::Math::prVector3 &target)
 {
     m_at.x = target.x;
     m_at.y = target.y;
@@ -156,18 +188,9 @@ void prCamera::SetTarget(const prVector3 &target)
 
 
 /// ---------------------------------------------------------------------------
-/// Get target position.
-/// ---------------------------------------------------------------------------
-prVector3 prCamera::GetTarget()
-{
-    return prVector3(m_at);
-}
-
-
-/// ---------------------------------------------------------------------------
 /// Set camera position.
 /// ---------------------------------------------------------------------------
-void prCamera::SetPosition(prVector3 &pos)
+void prCamera::SetPosition(Proteus::Math::prVector3 &pos)
 {
     m_eye.x = pos.x;
     m_eye.y = pos.y;
@@ -178,18 +201,9 @@ void prCamera::SetPosition(prVector3 &pos)
 /// ---------------------------------------------------------------------------
 /// Set camera position.
 /// ---------------------------------------------------------------------------
-void prCamera::SetPosition(const prVector3 &pos)
+void prCamera::SetPosition(const Proteus::Math::prVector3 &pos)
 {
     m_eye.x = pos.x;
     m_eye.y = pos.y;
     m_eye.z = pos.z;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Get camera position.
-/// ---------------------------------------------------------------------------
-prVector3 prCamera::GetPosition()
-{
-    return prVector3(m_eye);
 }

@@ -182,8 +182,8 @@ void prStackHeap::DisplayUsage(bool full) const
 
             prTrace
             (
-                "Start: %#08x, Block size: %*i, Data size: %*i, Func: %s\n",   
-                (u32)(u64)(node + sizeof(StackNode) + (m_bounds_check>>1)),
+                "Start: %#16x, Block size: %*i, Data size: %*i, Func: %s\n",   
+                (((u8*)node) + sizeof(StackNode) + (m_bounds_check>>1)),
                 SPACE_COUNT, node->size,
                 SPACE_COUNT, node->size - sizeof(StackNode) - m_bounds_check,
                 node->func ? node->func : "Unknown"

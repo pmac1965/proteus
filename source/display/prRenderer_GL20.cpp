@@ -24,9 +24,6 @@
   #include <Windows.h>
   #include <gl/gl.h>
   #include <gl/glu.h>
-
-//
-
   #include "../core/prWindow_PC.h"
 
 #elif defined(PLATFORM_LINUX)
@@ -44,14 +41,14 @@
   #include <GLES2/gl2.h>
   #include <GLES2/gl2ext.h>
   #include <EGL/egl.h>
-  #include "../core/prWindow_PC.h"
+  //#include "../core/prWindow_PC.h"
 
 #elif defined(PLATFORM_BADA)
   #include <FGraphicsOpengl.h>
   using namespace Osp::Graphics::Opengl;
 
 #elif defined(PLATFORM_IOS)
-  #include <OpenGLES/ES1/gl.h>
+  #include <OpenGLES/ES2/gl.h>
 
 #else
   #error No platform defined.
@@ -84,6 +81,9 @@
 #endif
 
 
+using namespace Proteus::Math;
+
+
 //// Use ant tweak bar.
 //#if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)
 //#include "../core/prATB.h"
@@ -95,7 +95,7 @@
 //// ----------------------------------------------------------------------------
 //static const float SEGMENTS  = 32.0f;
 //static const int   VERTICES  = 32;                                              // This must be the same as SEGMENTS
-//static const float INCREMENT = 2.0f * Proteus::Maths::Pi / SEGMENTS;
+//static const float INCREMENT = 2.0f * Proteus::Math::Pi / SEGMENTS;
 
 
 /// ---------------------------------------------------------------------------
@@ -310,7 +310,7 @@ void prRenderer_GL20::DrawLine(f32 x1, f32 y1, f32 x2, f32 y2)
 /// ---------------------------------------------------------------------------
 /// Draws a line 3D.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::DrawLine(prVector3 &from, prVector3 &to)
+void prRenderer_GL20::DrawLine(Proteus::Math::prVector3 &from, Proteus::Math::prVector3 &to)
 {
     PRUNUSED(from);
     PRUNUSED(to);
@@ -462,4 +462,37 @@ void prRenderer_GL20::TexturesEnabled(bool state)
 void prRenderer_GL20::BlendEnabled(bool state)
 {
     PRUNUSED(state);
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Draws a positioning grid
+/// ---------------------------------------------------------------------------
+void prRenderer_GL20::DrawGrid(s32 size)
+{
+    TexturesEnabled(false);
+
+    for (s32 x = -size; x< size; x++)
+    {
+        (x == 0) ? SetColour(prColour::Blue) : SetColour(prColour::White);
+
+        DrawLine(prVector3((f32)x, 0, (f32)-size),
+                 prVector3((f32)x, 0, (f32) size));
+    }
+        
+    DrawLine(prVector3((f32)size, 0, (f32)-size),
+             prVector3((f32)size, 0, (f32) size) );
+
+    for (s32 z = -size; z< size; z++)
+    {
+        (z == 0) ? SetColour(prColour::Red) : SetColour(prColour::White);
+
+        DrawLine(prVector3((f32)-size, 0, (f32)z),
+                 prVector3((f32) size, 0, (f32)z));
+    }
+
+    DrawLine(prVector3((f32)-size, 0, (f32)size),
+             prVector3((f32) size, 0, (f32)size));
+
+    TexturesEnabled(true);
 }

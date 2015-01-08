@@ -96,6 +96,9 @@
 #include "../file/prFile.h"
 
 
+using namespace Proteus::Math;
+
+
 // Implementation data.
 typedef struct TrueTypeFontImplementation
 {
@@ -584,8 +587,8 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
         ERR_CHECK();
 
         // Set states
-        glEnableClientState(GL_VERTEX_ARRAY);
-        ERR_CHECK();
+        //glEnableClientState(GL_VERTEX_ARRAY);
+        //ERR_CHECK();
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
         ERR_CHECK();
 		    
@@ -643,8 +646,8 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
         // Reset states
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         ERR_CHECK();
-        glDisableClientState(GL_VERTEX_ARRAY);
-        ERR_CHECK();
+        //glDisableClientState(GL_VERTEX_ARRAY);
+        //ERR_CHECK();
         glDisable(GL_BLEND);
         ERR_CHECK();
 
@@ -662,9 +665,9 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
 /// ---------------------------------------------------------------------------
 /// Returns the pixel length of the string.
 /// ---------------------------------------------------------------------------
-prVector2 prTrueTypeFont::MeasureString(const char *string, float scale)
+Proteus::Math::prVector2 prTrueTypeFont::MeasureString(const char *string, float scale)
 {
-    prVector2 size = prVector2(0, (f32)imp.mPointSize);
+    Proteus::Math::prVector2 size = Proteus::Math::prVector2(0, (f32)imp.mPointSize);
 
 #if defined(ALLOW_FREETYPE)
 

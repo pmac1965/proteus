@@ -18,7 +18,10 @@
 
 
 #include "../prConfig.h"
+#include "../core/prStringUtil.h"
 #include "prAlert.h"
+#include "prAssert.h"
+#include "prLog.h"
 
 
 #if defined(PLATFORM_PC)
@@ -43,12 +46,62 @@
 /// ---------------------------------------------------------------------------
 void prAlertShowError(const char *title, const char *message)
 {
+    PRASSERT(title && *title);
+    PRASSERT(message && *message);
+
+    char buffer[256];
+
 #if defined(PLATFORM_PC)
+
+    prLog("=======================================================\n");
+    prLog("ALERT\n");
+    prLog(prStringSnprintf(buffer, sizeof(buffer), "Title  : %s\n", title));
+    prLog(prStringSnprintf(buffer, sizeof(buffer), "Message: %s\n", message));
+    prLog("=======================================================\n");
 
     // Create error dialog
     MessageBoxA(HWND_DESKTOP, message, title, MB_OK | MB_ICONERROR | MB_TASKMODAL);
 
 #else
+
+    prLog("=======================================================\n");
+    prLog("ALERT\n");
+    prLog(prStringSnprintf(buffer, sizeof(buffer), "Title  : %s\n", title));
+    prLog(prStringSnprintf(buffer, sizeof(buffer), "Message: %s\n", message));
+    prLog("=======================================================\n");
+
+#endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Shows a cross platfrom information message dialog
+/// ---------------------------------------------------------------------------
+void prAlertShowInformation(const char *title, const char *message)
+{
+    PRASSERT(title && *title);
+    PRASSERT(message && *message);
+
+    char buffer[256];
+
+#if defined(PLATFORM_PC)
+
+    prLog("=======================================================\n");
+    prLog("ALERT\n");
+    prLog(prStringSnprintf(buffer, sizeof(buffer), "Title  : %s\n", title));
+    prLog(prStringSnprintf(buffer, sizeof(buffer), "Message: %s\n", message));
+    prLog("=======================================================\n");
+
+    // Create error dialog
+    MessageBoxA(HWND_DESKTOP, message, title, MB_OK | MB_ICONEXCLAMATION | MB_TASKMODAL);
+
+#else
+
+    prLog("=======================================================\n");
+    prLog("ALERT\n");
+    prLog(prStringSnprintf(buffer, sizeof(buffer), "Title  : %s\n", title));
+    prLog(prStringSnprintf(buffer, sizeof(buffer), "Message: %s\n", message));
+    prLog("=======================================================\n");
 
 #endif
 }

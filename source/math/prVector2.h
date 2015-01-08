@@ -21,7 +21,13 @@
 
 
 #include "../prConfig.h"
+#include "../core/prTypes.h"
 #include "prMathsUtil.h"
+
+
+// Namespaces
+namespace Proteus {
+namespace Math {
 
 
 // Class: prVector2
@@ -29,10 +35,10 @@
 class prVector2
 {
 public:
-    static const prVector2 Zero;        // Pre-made value
-    static const prVector2 One;         // Pre-made value
-    static const prVector2 UnitX;       // Pre-made value
-    static const prVector2 UnitY;       // Pre-made value
+    static const prVector2 Zero;        // All components set to zero
+    static const prVector2 One;         // All components set to one
+    static const prVector2 UnitX;       // X set to one, the rest set to zero
+    static const prVector2 UnitY;       // Y set to one, the rest set to zero
 
 
 public:
@@ -53,7 +59,7 @@ public:
     // Parameters:
     //      nx - X coordinate
     //      ny - Y coordinate
-    prVector2(float nx, float ny) : x(nx), y(ny)
+    prVector2(f32 nx, f32 ny) : x(nx), y(ny)
     {}
 
     // Method: prVector2
@@ -64,13 +70,13 @@ public:
     prVector2(const prVector2& copy) : x(copy.x), y(copy.y)
     {}
 
-    // Method: Magnitude
+    // Method: Length
     //      Calculates the magnitude of the vector.
-    float Magnitude() const;
+    f32 Length() const;
 
-    // Method: MagnitudeSquared
-    //      Calculates the magnitude of the vector.
-    float MagnitudeSquared() const;
+    // Method: LengthSquared
+    //      Calculates the magnitude of the vector squared.
+    f32 LengthSquared() const;
     
     // Method: Normalize
     //      Normalise this vector.
@@ -87,7 +93,7 @@ public:
     //      other - The vector to compare
     //
     // Notes:
-    //      The difference between the vectors components must be less than Proteus::Maths::Epsilon
+    //      The difference between the vectors components must be less than Proteus::Math::Epsilon
     inline bool Equals(const prVector2 &other) const { return (IS_ZERO(x - other.x) && IS_ZERO(y - other.y)); }
 
 
@@ -96,19 +102,19 @@ public:
 
     // Operator +
     inline prVector2 operator + (const prVector2& rhs) const;
-    inline prVector2 operator + (const float& rhs) const;
+    inline prVector2 operator + (const f32& rhs) const;
 
     // Operator -
     inline prVector2 operator - (const prVector2& rhs) const;
-    inline prVector2 operator - (const float& rhs) const;
+    inline prVector2 operator - (const f32& rhs) const;
 
     // Operator *
     inline prVector2 operator * (const prVector2& rhs) const;
-    inline prVector2 operator * (const float& rhs) const;
+    inline prVector2 operator * (const f32& rhs) const;
 
     // Operator /
     inline prVector2 operator / (const prVector2& rhs) const;
-    inline prVector2 operator / (const float& rhs) const;
+    inline prVector2 operator / (const f32& rhs) const;
 
     // Operator +=
     inline prVector2& operator += (const prVector2& rhs);
@@ -117,7 +123,7 @@ public:
     inline prVector2& operator -= (const prVector2& rhs);
 
     // Operator *=
-    inline prVector2& operator *= (const float val);
+    inline prVector2& operator *= (const f32 val);
 
     // Unary + operator.
     inline prVector2 operator + () const { return *this; }
@@ -142,12 +148,12 @@ public:
 
     union
     {
-        float element[2];
+        f32 element[2];
         
         struct
         {                   
-            float x;
-            float y;
+            f32 x;
+            f32 y;
         };
     };    
 
@@ -155,6 +161,9 @@ public:
 #pragma warning( pop )
 #endif
 };
+
+
+}}// Namespaces
 
 
 #include "prVector2.inl"

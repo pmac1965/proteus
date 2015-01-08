@@ -38,15 +38,19 @@
 #include <windows.h>
 
 
-//  Forward declarations
-class prApplication;
+// Forward declarations
+namespace Proteus {
+namespace Core {
+    class prApplication;
+}}
+
 
 // Function: prSetApplicationForWindowProcedure
 //      Pointer to allow game to receive specific messages like Activate and Deactivate.
 //
 // Parameters:
 //      app - A pointer to the current application
-void prSetApplicationForWindowProcedure(prApplication *app);
+void prSetApplicationForWindowProcedure(Proteus::Core::prApplication *app);
 
 
 // Function: prWindowProcedure

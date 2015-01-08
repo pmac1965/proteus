@@ -22,7 +22,14 @@
 
 // Forward declarations
 class prEmitter;
-class prVector3;
+namespace Proteus
+{
+    namespace Math
+    {
+        class prVector3;
+    }
+}
+
 class TiXmlNode;
 class TiXmlElement;
 struct prEmitterDefinition;
@@ -67,7 +74,7 @@ public:
     //
     // Return:
     //      Returns an ID for the emitter, or -1 on failure
-    s32 Fire(const char *name, const prVector3 &pos);
+    s32 Fire(const char *name, const Proteus::Math::prVector3 &pos);
 
 
 private:

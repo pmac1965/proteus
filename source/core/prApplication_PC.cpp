@@ -45,14 +45,22 @@
 
 
 // ----------------------------------------------------------------------------
-// Static data
+// Local data
 // ----------------------------------------------------------------------------
-static const char *embedded[] = 
+namespace
 {
-    "The Proteus Game Engine. ",
-    "Author Paul Michael McNab. ",
-    "Copyright Paul Michael McNab. All rights reserved.",
-};
+    const char *embedded[] = 
+    {
+        "The Proteus Game Engine. ",
+        "Author Paul Michael McNab. ",
+        "Copyright Paul Michael McNab. All rights reserved.",
+    };
+}
+
+
+// Namespaces
+namespace Proteus {
+namespace Core {
 
 
 /// ---------------------------------------------------------------------------
@@ -501,6 +509,7 @@ BOOL prApplication_PC::CheckPlatform()
 
     if (GetVersionEx((LPOSVERSIONINFO)&osvi) == 0)
     {
+        TODO("Change the above call as its ddeprecated!")
         prDebugShowLastError();
         initFailed = true;
     }
@@ -612,6 +621,9 @@ bool prApplication_PC::IsRemoteSession()
 
     return false;
 }
+
+
+}}// Namespaces
 
 
 #endif//PLATFORM_PC

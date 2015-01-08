@@ -36,6 +36,11 @@ class prConsoleWindow;
 class prGameTime;
 
 
+// Namespaces
+namespace Proteus {
+namespace Core {
+
+
 // Class: prApplication_PC
 //      Application class for the PC
 //
@@ -137,6 +142,9 @@ private:
     prConsoleWindow    *m_pCW;
     HACCEL              m_hAccel;
 };
+
+
+}} // Namespaces
 
 
 #endif//PLATFORM_PC

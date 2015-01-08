@@ -21,18 +21,21 @@
 #include "../debug/prDebug.h"
 
 
-const prColour  prColour::White         (1.0f, 1.0f, 1.0f);
-const prColour  prColour::Black         (0.0f, 0.0f, 0.0f);
-const prColour  prColour::Red           (1.0f, 0.0f, 0.0f);
-const prColour  prColour::Green         (0.0f, 1.0f, 0.0f);
-const prColour  prColour::Blue          (0.0f, 0.0f, 1.0f);
-const prColour  prColour::Yellow        (1.0f, 1.0f, 0.0f);
-const prColour  prColour::Cyan          (0.0f, 1.0f, 1.0f);
-const prColour  prColour::Magenta       (1.0f, 0.0f, 1.0f);
-
+const prColour  prColour::White         (1.0f,   1.0f,   1.0f);
+const prColour  prColour::Black         (0.0f,   0.0f,   0.0f);
+const prColour  prColour::Red           (1.0f,   0.0f,   0.0f);
+const prColour  prColour::Green         (0.0f,   1.0f,   0.0f);
+const prColour  prColour::Blue          (0.0f,   0.0f,   1.0f);
+const prColour  prColour::Yellow        (1.0f,   1.0f,   0.0f);
+const prColour  prColour::Cyan          (0.0f,   1.0f,   1.0f);
+const prColour  prColour::Magenta       (1.0f,   0.0f,   1.0f);
 const prColour  prColour::DarkGray      (0.250f, 0.250f, 0.250f);
 const prColour  prColour::Gray          (0.500f, 0.500f, 0.500f);
 const prColour  prColour::LiteGray      (0.750f, 0.750f, 0.750f);
+const prColour  prColour::Brown         (0.60f,  0.40f,  0.12f);
+const prColour  prColour::Orange        (0.98f,  0.625f, 0.12f);
+const prColour  prColour::PastelPink    (0.98f,  0.04f,  0.7f);
+const prColour  prColour::BarneyPurple  (0.60f,  0.40f,  0.70f);
 
 
 /// ---------------------------------------------------------------------------

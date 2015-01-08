@@ -30,6 +30,11 @@
 #include "prApplication.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Core {
+
+
 // Class: prApplication_Android
 //      Application class for android
 //
@@ -83,6 +88,9 @@ private:
 
     const char *BuildType();
 };
+
+
+}} // Namespaces
 
 
 #endif//PLATFORM_ANDROID

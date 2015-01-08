@@ -88,7 +88,7 @@ public:
     // Parameters:
     //      from - The start coordinate
     //      to   - The end coordinate
-    void DrawLine(prVector3 &from, prVector3 &to);
+    void DrawLine(Proteus::Math::prVector3 &from, Proteus::Math::prVector3 &to);
     
     // Method: DrawRect
     //      Draws a hollow rectangle.
@@ -207,6 +207,14 @@ public:
     // Parameters:
     //      state - true or false
     void BlendEnabled(bool state);
+
+    // Method: DrawGrid
+    //      Draws a positioning grid
+    //
+    // Parameters:
+    //      size - The number of squares in either direction.
+    //      E.g 2 will give a 4x4 grid
+    void DrawGrid(s32 size);
 };
 
 

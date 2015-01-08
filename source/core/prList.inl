@@ -319,7 +319,7 @@ void prList<T>::RemoveRange(int start, int end)
 
     if (start > end)
     {
-        prSwap(start, end);
+        Proteus::Math::prSwap<int&>(start, end);
     }
 
     int amount = (end - start) + 1;

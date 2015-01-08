@@ -42,9 +42,9 @@ prParticle::~prParticle()
 /// ---------------------------------------------------------------------------
 void prParticle::Init()
 {
-    mLifeTime   = 0.0f;                         // Particles lifetime
-    mPos        = prVector3::Zero;              // Paricles position
-    mColour     = prColour::White;              // Particles colour (Add colour change)
+    mLifeTime   = 0.0f;                             // Particles lifetime
+    mPos        = Proteus::Math::prVector3::Zero;   // Paricles position
+    mColour     = prColour::White;                  // Particles colour (Add colour change)
 
     //f32         mScaleMin;
     //f32         mScaleMax;

@@ -20,9 +20,7 @@
 #include "../prConfig.h"
 
 
-/// ---------------------------------------------------------------------------
 /// Defines
-/// ---------------------------------------------------------------------------
 #define PROFILE                     // Do not remove or we won't get the class definition.
 
 
@@ -35,7 +33,7 @@
   #define WIN32_EXTRA_LEAN
   #endif
 
-    #include <windows.h>
+  #include <windows.h>
 
 #endif
 
@@ -213,7 +211,7 @@ void prProfileManager::Display(s32 x, s32 y, prFixedWidthFont* font, s32 spacing
                     sprintf
                     (
                         buffer,
-                        "[%*s] S:%03.02f, F:%03.02f, A:%03.02f, H:%u",
+                        "[%*s] Slowest:%03.04f, Fastest:%03.04f, Avg:%03.04f, H:%u",
                         10,
                         entry->m_name.Text(),
                         entry->m_slowest,

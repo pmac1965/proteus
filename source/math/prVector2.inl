@@ -22,10 +22,15 @@
 #include <math.h>
 
 
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
 // ------------------------------------------------------------------------------------------------
 // Calculates the magnitude of a vector.
 // ------------------------------------------------------------------------------------------------
-inline float prVector2::Magnitude() const
+inline f32 prVector2::Length() const
 {
     return sqrt((x * x) + (y * y));
 }
@@ -34,7 +39,7 @@ inline float prVector2::Magnitude() const
 // ------------------------------------------------------------------------------------------------
 // Calculates the magnitude of a vector squared.
 // ------------------------------------------------------------------------------------------------
-inline float prVector2::MagnitudeSquared() const
+inline f32 prVector2::LengthSquared() const
 {
     return ((x * x) + (y * y));
 }
@@ -45,7 +50,7 @@ inline float prVector2::MagnitudeSquared() const
 // ------------------------------------------------------------------------------------------------
 inline prVector2& prVector2::Normalize()
 {
-    float mag = Magnitude();
+    f32 mag = Length();
 
     if (mag > 0.0f)
     {
@@ -66,7 +71,7 @@ inline prVector2 prVector2::operator + (const prVector2& rhs) const
 }
 
 // Operator +
-inline prVector2 prVector2::operator + (const float& rhs) const
+inline prVector2 prVector2::operator + (const f32& rhs) const
 {
     return prVector2(x + rhs, y + rhs);
 }
@@ -81,7 +86,7 @@ inline prVector2 prVector2::operator - (const prVector2& rhs) const
 }
 
 // Operator -
-inline prVector2 prVector2::operator - (const float& rhs) const
+inline prVector2 prVector2::operator - (const f32& rhs) const
 {
     return prVector2(x - rhs, y - rhs);
 }
@@ -96,7 +101,7 @@ inline prVector2 prVector2::operator * (const prVector2& rhs) const
 }
 
 // Operator *
-inline prVector2 prVector2::operator * (const float& rhs) const
+inline prVector2 prVector2::operator * (const f32& rhs) const
 {
     return prVector2(x * rhs, y * rhs);
 }
@@ -111,7 +116,7 @@ inline prVector2 prVector2::operator / (const prVector2& rhs) const
 }
 
 // Operator /
-inline prVector2 prVector2::operator / (const float& rhs) const
+inline prVector2 prVector2::operator / (const f32& rhs) const
 {
     return prVector2(x / rhs, y / rhs);
 }
@@ -144,10 +149,13 @@ inline prVector2& prVector2::operator -= (const prVector2& rhs)
 // ------------------------------------------------------------------------------------------------
 // Operator *=
 // ------------------------------------------------------------------------------------------------
-inline prVector2& prVector2::operator *= (const float val)
+inline prVector2& prVector2::operator *= (const f32 val)
 {
     x = x * val;
     y = y * val;
 
     return *this;
 }
+
+
+}}// Namespaces

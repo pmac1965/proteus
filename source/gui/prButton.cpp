@@ -105,7 +105,7 @@ void prButton::Draw()
         // Draw the font (Bitmap)
         if (m_font && m_text.Length() > 0)
         {
-            prVector2 size = m_font->MeasureString(m_text.Text(), m_textScale);
+            Proteus::Math::prVector2 size = m_font->MeasureString(m_text.Text(), m_textScale);
             
             f32 x = pos.x +  (m_sprite->GetFrameWidth()  >> 1);
             f32 y = pos.y + ((m_sprite->GetFrameHeight() >> 1) - (size.y / 2));
@@ -116,7 +116,7 @@ void prButton::Draw()
         // Draw the font (TTF)
         else if (m_ttfFont && m_text.Length() > 0)
         {
-            prVector2 size = m_ttfFont->MeasureString(m_text.Text(), m_textScale);
+            Proteus::Math::prVector2 size = m_ttfFont->MeasureString(m_text.Text(), m_textScale);
             
             f32 x = pos.x +  (m_sprite->GetFrameWidth()  >> 1);
             f32 y = pos.y + ((m_sprite->GetFrameHeight() >> 1) - ((size.y / 2) + (size.y / 10))); // Extra Y is to compensate and bring closer to center
@@ -259,7 +259,7 @@ void prButton::RegisterListener(prButtonListener *pListener)
 /// ---------------------------------------------------------------------------
 bool prButton::InButtonsRect(s32 x, s32 y)
 {
-    prRect rect = prRect((s32)pos.y, (s32)pos.x, (s32)(pos.y + m_height), (s32)(pos.x + m_width + m_extendX));
+    Proteus::Math::prRect rect = Proteus::Math::prRect((s32)pos.y, (s32)pos.x, (s32)(pos.y + m_height), (s32)(pos.x + m_width + m_extendX));
     return rect.PointInside(x, y);
 }
 

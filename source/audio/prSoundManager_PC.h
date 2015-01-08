@@ -183,6 +183,7 @@ public:
 
 
 private:
+    u8                 *pPCMBuffer;
     ALCdevice          *device;
     ALCcontext         *context;
     HINSTANCE           dll;
@@ -200,8 +201,8 @@ private:
     ALuint              songBuffers[2];
     ALuint              songSource;
 
-private:
-    
+
+private:    
     // Method: SongUpdate
     //      Updates the current song
     bool SongUpdate();

@@ -118,15 +118,39 @@ enum prSystems
 };
 
 
-// Function: prCoreCreate
-//      Creates the engine core components
+// Function: prCoreInit
+//      Initialises the engine core components
+//
+// Notes:
+//      These are;
+//      - The resource manager
+//      - Touch support
+//      - The message manager
+//      - The registry
+//      - The file manager
+//      - The mouse (If available on platform)
+//      - The keyboard (If available on platform)
+//
+// Notes:
+//      *THIS FUNCTION MUST BE CALLED FIRST*
+//
+// Notes:
+//      After this function you will still need to specify a renderer
+//
+// See Also:
+//      <prCoreSetRenderer>
+void prCoreInit();
+
+
+// Function: prCoreSetRenderer
+//      Sets the engine renderer
 //
 // Parameters:
 //      rendererType - The type of renderer. DirectX or OpenGL
 //      version      - Which version of the renderer
 //
 // Notes:
-//      This function must be the first call made during game construction
+//      This function must be called before you create a game window
 //
 // See Also:
 //      <prRendererType>
@@ -135,7 +159,7 @@ enum prSystems
 // Returns:
 //      PRTRUE if the core was constructed
 //      PRFALSE if the core already exists 
-PRBOOL prCoreCreate(prRendererType rendererType, prVerType version);
+PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version);
 
 
 // Function: prCoreCreateOptional

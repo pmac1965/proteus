@@ -16,8 +16,8 @@
  */
 
 
-#ifndef _PRMUTEX_H
-#define _PRMUTEX_H
+#ifndef __PRMUTEX_H
+#define __PRMUTEX_H
 
 
 #include "../prConfig.h"
@@ -29,7 +29,7 @@
 #elif defined(PLATFORM_PC)
     #include <windows.h>
 
-#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))
     // Allows class to compile for the other platforms.
 
 #else
@@ -55,6 +55,10 @@ public:
     //      Locks the mutex
 	void Lock();
 
+    // Method: TryLock
+    //      Trys to lock a mutex
+	bool TryLock();
+
     // Method: Unlock
     //      Unlocks the mutex.
 	void Unlock();
@@ -77,4 +81,4 @@ private:
 };
 
 
-#endif//_PRMUTEX_H
+#endif//__PRMUTEX_H

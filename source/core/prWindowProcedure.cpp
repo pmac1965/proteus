@@ -49,8 +49,8 @@
 // Local data
 namespace
 {
-    bool            mouseCaptured   = false;
-    prApplication  *pApp = NULL;
+    bool                            mouseCaptured   = false;
+    Proteus::Core::prApplication   *pApp            = NULL;
 }
 
 
@@ -267,7 +267,7 @@ namespace
 // ----------------------------------------------------------------------------
 // Pointer to allow game to receive specific messages like Activate and Deactivate.
 // ----------------------------------------------------------------------------
-void prSetApplicationForWindowProcedure(prApplication *app)
+void prSetApplicationForWindowProcedure(Proteus::Core::prApplication *app)
 {
     pApp = app;
 
@@ -432,7 +432,7 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
 
             // Send the command.
             int command = LOWORD(wParam);
-            static_cast<prApplication_PC *>(pApp)->WindowsCommand(command, wParam, lParam);
+            static_cast<Proteus::Core::prApplication_PC *>(pApp)->WindowsCommand(command, wParam, lParam);
         }
         break;
 
@@ -441,7 +441,7 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
         if (pApp)
         {
             // Handled?
-            if (static_cast<prApplication_PC *>(pApp)->WindowsCommand(msg, wParam, lParam) == true)
+            if (static_cast<Proteus::Core::prApplication_PC *>(pApp)->WindowsCommand(msg, wParam, lParam) == true)
             {
                 break;
             }
@@ -453,7 +453,7 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
         if (pApp)
         {
             // Handled?
-            if (static_cast<prApplication_PC *>(pApp)->WindowsCommand(msg, wParam, lParam) == true)
+            if (static_cast<Proteus::Core::prApplication_PC *>(pApp)->WindowsCommand(msg, wParam, lParam) == true)
             {
                 break;
             }

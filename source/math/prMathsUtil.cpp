@@ -51,6 +51,11 @@
 #endif
 
 
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
 /// ---------------------------------------------------------------------------
 /// Returns the specified percentage of a value.
 /// ---------------------------------------------------------------------------
@@ -131,8 +136,10 @@ void prScreenToWorld(s32 sx, s32 sy, f64 &ox, f64 &oy, f64 &oz)
     gluUnProject(sx, sy, sz, modelview, projection, viewport, &ox, &oy, &oz); 
     
 #else
-
     //
 
 #endif
 }
+
+
+}}// Namespaces

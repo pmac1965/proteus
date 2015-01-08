@@ -104,7 +104,7 @@ void prDialog::Draw()
         {
             if (m_buttons[i])
             {
-                prVector2 position = pos + m_buttonsPos[i];
+                Proteus::Math::prVector2 position = pos + m_buttonsPos[i];
                 
                 // Adjust buttons for offset
                 switch(m_buttonCount)

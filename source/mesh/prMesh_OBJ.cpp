@@ -116,6 +116,10 @@ bool prMesh_OBJ::Load(const char *filename)
                     pTempVerts->y = verts[c].y;
                     pTempVerts->z = verts[c].z;
                     pTempVerts++;
+
+                    prTrace("%f, %f, %f, ",  verts[a].x, verts[a].y, verts[a].z);
+                    prTrace("%f, %f, %f, ",  verts[b].x, verts[b].y, verts[b].z);
+                    prTrace("%f, %f, %f,\n", verts[c].x, verts[c].y, verts[c].z);
                 }
 
                 verts.clear();
@@ -136,7 +140,7 @@ void prMesh_OBJ::Draw()
     glPushAttrib(GL_POLYGON_BIT);
 
     // Set polyons to clockwise (For back face culling)
-    glFrontFace(GL_CW);
+    glFrontFace(GL_CCW);
 
     glBegin (GL_TRIANGLES);
     {

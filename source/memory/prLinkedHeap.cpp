@@ -21,6 +21,7 @@
 #include "prMemoryPool.h"
 #include "../debug/prAssert.h"
 #include "../debug/prTrace.h"
+#include "../debug/prDebug.h"
 #include "../core/prMacros.h"
 #include "../core/prList.h"
 
@@ -752,6 +753,8 @@ void prLinkedHeap::FreeListRemove(void* p)
 {
     prFreeNode* curr = m_free;
     prFreeNode* prev = NULL;
+
+    TODO("This code is suspect - check logic")// According to VS source analysis
 
     do
     {

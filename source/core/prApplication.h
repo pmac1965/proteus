@@ -27,6 +27,11 @@
 class prWindow;
 
 
+// Namespaces
+namespace Proteus {
+namespace Core {
+
+
 // Class: prApplication
 //      Interface class for all the application type classes.
 //
@@ -132,6 +137,9 @@ protected:
     prWindow   *m_pWindow;              ///< The applications window
     PRBOOL      m_running;              ///< Whether than app is running or not
 };
+
+
+}} // Namespaces
 
 
 #endif//__PRAPPLICATION_H

@@ -20,11 +20,14 @@
 #include "../math/prMathsUtil.h"
 
 
+using namespace Proteus::Math;
+
+
 /// ---------------------------------------------------------------------------
 /// Determines the intersection point on an infinite line.
 /// ---------------------------------------------------------------------------
 bool prLineIntersect(s32 x1, s32 y1, s32 x2, s32 y2, 
-                     s32 x3, s32 y3, s32 x4, s32 y4, prPoint2F &p)
+                     s32 x3, s32 y3, s32 x4, s32 y4, Proteus::Math::prPoint2F &p)
 {
     s32 d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
     if (d == 0)

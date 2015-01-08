@@ -21,6 +21,12 @@
 #include "prVector3.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
+// Maths constants 
 const prVector3 prVector3 :: Zero   (0.0f, 0.0f, 0.0f);
 const prVector3 prVector3 :: One    (1.0f, 1.0f, 1.0f);
 const prVector3 prVector3 :: UnitX  (1.0f, 0.0f, 0.0f);
@@ -43,3 +49,6 @@ const char *prVector3::ToString() const
 
     return buffer;
 }
+
+
+}}// Namespaces

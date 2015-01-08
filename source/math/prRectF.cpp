@@ -23,6 +23,11 @@
 #include "prPoint.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
 /// ---------------------------------------------------------------------------
 /// Constructor.
 /// ---------------------------------------------------------------------------
@@ -209,3 +214,6 @@ void prRectF::Move(f32 x, f32 y)
     m_bottom += y;
     m_top    += y;
 }
+
+
+}}// Namespaces

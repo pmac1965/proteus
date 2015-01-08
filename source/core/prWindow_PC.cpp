@@ -427,10 +427,10 @@ void prWindow_PC::SetTitle(const TCHAR *title)
                 s32 size = prStringLengthW(title) + 1;
                 PRASSERT(size > 0);
 
-                char *buffer = new char [prStringLengthW(title) + 1];
+                char *buffer = new char[size];
                 PRASSERT(buffer);
 
-                prStringSprintf(buffer, size, "%ls", title);
+                prStringSnprintf(buffer, size, "%ls", title);
                 reg->SetValue("WindowName", buffer);
                 
                 PRSAFE_DELETE_ARRAY(buffer);

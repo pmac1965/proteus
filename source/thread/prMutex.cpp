@@ -18,6 +18,8 @@
 
 
 #include "prMutex.h"
+#include "../debug/prLog.h"
+#include "../debug/prDebug.h"
 
 
 /// ---------------------------------------------------------------------------
@@ -27,13 +29,16 @@ prMutex::prMutex()
 {
 #if defined(PLATFORM_ANDROID)
     // Init lock.
-    pthread_mutex_init(&m_mutex, 0);
+    if (pthread_mutex_init(&m_mutex, 0) != 0)
+    {
+        PRPANIC("Failed to initialise mutex");
+    }
 
 #elif defined(PLATFORM_PC)
     // Init lock.
     InitializeCriticalSection(&m_cs);
 
-#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
     // Allows class to compile for the other platforms.
 
 #else
@@ -56,7 +61,7 @@ prMutex::~prMutex()
     // Destroy lock.
     DeleteCriticalSection(&m_cs);
 
-#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
     // Allows class to compile for the other platforms.
 
 #else
@@ -77,18 +82,58 @@ void prMutex::Lock()
 
 #elif defined(PLATFORM_PC)
     // Lock
-    if (!TryEnterCriticalSection(&m_cs))
-    {
-        EnterCriticalSection(&m_cs);
-    }
+    EnterCriticalSection(&m_cs);
 
-#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
     // Allows class to compile for the other platforms.
 
 #else
     #error unsupported platform
 
 #endif
+}
+
+
+// ----------------------------------------------------------------------------
+// Trys to lock mutex 
+// ----------------------------------------------------------------------------
+bool prMutex::TryLock()
+{
+    bool locked = false;
+
+#if defined(PLATFORM_ANDROID)
+    // Lock?
+    int result = pthread_mutex_trylock(&m_mutex);
+    if (result == 0)
+    {
+        locked = true;
+    }
+    else
+    {
+        prLog("Failed to locked mutex\n");
+    }
+
+#elif defined(PLATFORM_PC)
+    // Lock?
+    if (!TryEnterCriticalSection(&m_cs))
+    {
+        EnterCriticalSection(&m_cs);
+        locked = true;
+    }
+    else
+    {
+        prLog("Failed to locked mutex\n");
+    }
+
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
+    // Allows class to compile for the other platforms.
+
+#else
+    #error unsupported platform
+
+#endif
+
+    return locked;
 }
 
 
@@ -105,7 +150,7 @@ void prMutex::Unlock()
     // Unlock
     LeaveCriticalSection(&m_cs);
 
-#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
     // Allows class to compile for the other platforms.
 
 #else

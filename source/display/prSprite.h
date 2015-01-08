@@ -257,12 +257,12 @@ public:
 
 public:
 
-    prVector2 pos;          // Sprite position.
+    Proteus::Math::prVector2 pos;   // Sprite position.
 
-    s32     user0;          // This is free for game programmer use.
-    s32     user1;          // This is free for game programmer use.
-    s32     user2;          // This is free for game programmer use.
-    s32     user3;          // This is free for game programmer use.
+    s32     user0;                  // This is free for game programmer use.
+    s32     user1;                  // This is free for game programmer use.
+    s32     user2;                  // This is free for game programmer use.
+    s32     user3;                  // This is free for game programmer use.
 
 
 private:

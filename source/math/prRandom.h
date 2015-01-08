@@ -23,6 +23,11 @@
 #include "../core/prTypes.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
 // Function: prRandomSetSeed
 //      Sets a new random number seed.
 void prRandomSetSeed(u32 newSeed);
@@ -41,6 +46,9 @@ s32 prRandomNumber(s32 min, s32 max);
 // Function: prRand
 //      Returns a random number similar to the C standard lib rand() function.
 s32 prRand();
+
+
+}}// Namespaces
 
 
 #endif//__PRRANDOM_H

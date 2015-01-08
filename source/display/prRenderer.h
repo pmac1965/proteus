@@ -28,7 +28,13 @@
 // Forward declarations
 class  prWindow;
 class  prColour;
-class  prVector3;
+
+namespace Proteus {
+    namespace Math {
+        class  prVector3;
+    }
+}
+
 class  prTexture;
 struct prVertex2D;
 
@@ -115,7 +121,7 @@ public:
     // Parameters:
     //      from - The start coordinate
     //      to   - The end coordinate
-    virtual void DrawLine(prVector3 &from, prVector3 &to) = 0;
+    virtual void DrawLine(Proteus::Math::prVector3 &from, Proteus::Math::prVector3 &to) = 0;
     
     // Method: DrawRect
     //      Draws a hollow rectangle.
@@ -234,6 +240,15 @@ public:
     // Parameters:
     //      state - true or false
     virtual void BlendEnabled(bool state) = 0;
+
+
+    // Method: DrawGrid
+    //      Draws a positioning grid
+    //
+    // Parameters:
+    //      size - The number of squares in either direction.
+    //      E.g 2 will give a 4x4 grid
+    virtual void DrawGrid(s32 size) = 0;
 
 
 protected:

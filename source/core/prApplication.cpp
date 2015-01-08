@@ -22,6 +22,11 @@
 #include "../debug/prTrace.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Core {
+
+
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
@@ -38,3 +43,6 @@ prApplication::prApplication()
 prApplication::~prApplication()
 {
 }
+
+
+}}// Namespaces

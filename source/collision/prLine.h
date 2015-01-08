@@ -41,7 +41,7 @@
 // Returns:
 //      true if intersects, false otherwise
 bool prLineIntersect(s32 x1, s32 y1, s32 x2, s32 y2, 
-                     s32 x3, s32 y3, s32 x4, s32 y4, prPoint2F &p);
+                     s32 x3, s32 y3, s32 x4, s32 y4, Proteus::Math::prPoint2F &p);
 
 
 #endif//__PRLINE_H

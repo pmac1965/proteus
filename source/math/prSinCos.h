@@ -23,6 +23,11 @@
 #include "../core/prTypes.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
 // Method: prCos
 //      Returns cosine. In the range of 0 to 360.
 f32 prCos(u32 angle);
@@ -30,6 +35,9 @@ f32 prCos(u32 angle);
 // Method: prSin
 //      Returns sine. In the range of 0 to 360.
 f32 prSin(u32 angle);
+
+
+}}// Namespaces
 
 
 #endif//__PRSINCOS_H

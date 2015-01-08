@@ -97,7 +97,7 @@ public:
     //
     // Notes: 
     //      returns the strings total height and the widest line length if the string is multilined.
-    prVector2 MeasureString(const char *string, float scale);
+    Proteus::Math::prVector2 MeasureString(const char *string, float scale);
 
     // Method: SetRotation
     //      Allows the text to be rotated, for sideways text, etc.
@@ -106,7 +106,7 @@ public:
 
 private:
     // Measures a string
-    prVector2 MeasureStringUntilTerm(const char *string, float scale);
+    Proteus::Math::prVector2 MeasureStringUntilTerm(const char *string, float scale);
 
 
 private:

@@ -25,6 +25,11 @@
 #include "prMathsUtil.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
 // Forward declarations
 class prRect;
 
@@ -191,7 +196,6 @@ public:
     
 
 private:
-
     f32     m_top;
     f32     m_left;
     f32     m_bottom;
@@ -201,10 +205,12 @@ private:
 
 
 private:
-
     // This method ensures that left is less than right and top greater than botton.
     void VerifyCoords();    
 };
+
+
+}}// Namespaces
 
 
 #endif//__PRRECTF_H

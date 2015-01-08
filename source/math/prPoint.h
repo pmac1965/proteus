@@ -23,6 +23,11 @@
 #include "../core/prTypes.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
 // Class: TPoint3
 //      template for a simple 3D point.
 template<typename T>
@@ -35,7 +40,7 @@ public:
     {}
 
     // Method: TPoint3
-    //      Parameerised constructor.
+    //      Parameterised constructor.
     TPoint3(T nx, T ny, T nz) : x(nx), y(ny), z(nz) 
     {}
 
@@ -46,7 +51,6 @@ public:
 
 
 public:
-
     // Members are public for faster access.
     T x, y, z;
 };
@@ -64,7 +68,7 @@ public:
     {}
 
     // Method: TPoint2
-    //      Parameerised constructor.
+    //      Parameterised constructor.
     TPoint2(T nx, T ny) : x(nx), y(ny)
     {}
 
@@ -75,7 +79,6 @@ public:
 
 
 public:
-
     // Members are public for faster access.
     T x, y;
 };
@@ -96,6 +99,9 @@ typedef TPoint2<s32>     prPoint2;
 // Typedef: prPoint2F.
 //      Simple 2D point with float x, y
 typedef TPoint2<f32>     prPoint2F;
+
+
+}}// Namespaces
 
 
 #endif//__PRPOINT_H

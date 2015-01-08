@@ -645,8 +645,8 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
         ERR_CHECK();
 
         // Set states
-        glEnableClientState(GL_VERTEX_ARRAY);
-        ERR_CHECK();
+        //glEnableClientState(GL_VERTEX_ARRAY);
+        //ERR_CHECK();
 	    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
         ERR_CHECK();
 
@@ -847,8 +847,8 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
 	    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         ERR_CHECK();
 
-        glDisableClientState(GL_VERTEX_ARRAY);
-        ERR_CHECK();
+        //glDisableClientState(GL_VERTEX_ARRAY);
+        //ERR_CHECK();
 
         glDisable(GL_BLEND);
         ERR_CHECK();
@@ -859,10 +859,10 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
 /// ---------------------------------------------------------------------------
 /// Returns the pixel length of the string.
 /// ---------------------------------------------------------------------------
-prVector2 prBitmapFont::MeasureString(const char *string, float scale)
+Proteus::Math::prVector2 prBitmapFont::MeasureString(const char *string, float scale)
 {
     f32 max = 0.0f;
-    prVector2 len = prVector2(0, (f32)imp.lineHeight);
+    Proteus::Math::prVector2 len = Proteus::Math::prVector2(0, (f32)imp.lineHeight);
 
     if (string && *string)
     {
@@ -958,10 +958,10 @@ void prBitmapFont::SetRotation(f32 rotation)
 /// ---------------------------------------------------------------------------
 /// Returns the pixel length of the string.
 /// ---------------------------------------------------------------------------
-prVector2 prBitmapFont::MeasureStringUntilTerm(const char *string, float scale)
+Proteus::Math::prVector2 prBitmapFont::MeasureStringUntilTerm(const char *string, float scale)
 {
     f32     max = 0.0f;
-    prVector2 len = prVector2(0, (f32)imp.lineHeight);
+    Proteus::Math::prVector2 len = Proteus::Math::prVector2(0, (f32)imp.lineHeight);
 
     if (string && *string)
     {

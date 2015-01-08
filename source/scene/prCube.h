@@ -1,4 +1,4 @@
-// File: prAlert.h
+// File: prCube.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,24 +16,33 @@
  */
 
 
-#ifndef __PRALERT_H
-#define __PRALERT_H
+#ifndef __PRCUBE_H
+#define __PRCUBE_H
 
 
-// Method: prAlertShowError
-//      Shows a cross platfrom error message dialog
+#include "prSceneObject.h"
+
+
+// Class: prCube
+//      A simple geometric primitive for use by the *game editor*
 //
 // Notes:
-//      If a dialog is not available, then message will be logged to the console
-void prAlertShowError(const char *title, const char *message);
-
-
-// Method: prAlertShowError
-//      Shows a cross platfrom information message dialog
+//      This class is a scene object, and therefore inherits a great deal
+//      of functionality from the scene object
 //
-// Notes:
-//      If a dialog is not available, then message will be logged to the console
-void prAlertShowInformation(const char *title, const char *message);
+// See Also
+//      <prSceneObject>
+class prCube : public prSceneObject
+{
+public:
+    // Method: prCube
+    //      Ctor
+    prCube();
+
+    // Method: Draw
+    //      Draws this primitive
+    void Draw();
+};
 
 
-#endif//__PRALERT_H
+#endif//__PRCUBE_H

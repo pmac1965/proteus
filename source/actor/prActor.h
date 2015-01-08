@@ -142,12 +142,12 @@ public:
 
 public:
 
-    prVector2 pos;
+    Proteus::Math::prVector2    pos;
     
-    s32       user0;            // User data for you to do as you please
-    s32       user1;            // User data for you to do as you please
-    s32       user2;            // User data for you to do as you please
-    s32       user3;            // User data for you to do as you please
+    s32                         user0;            // User data for you to do as you please
+    s32                         user1;            // User data for you to do as you please
+    s32                         user2;            // User data for you to do as you please
+    s32                         user3;            // User data for you to do as you please
 
 
 protected:

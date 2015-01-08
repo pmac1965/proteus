@@ -101,7 +101,7 @@ void prParticleManager::Clear()
         {
             PRSAFE_DELETE((*it).second);
         }
-        prTrace("Clean emitters\n");
+        //prTrace("Clean emitters\n");
     }
 
     // Clean the definitions
@@ -112,7 +112,7 @@ void prParticleManager::Clear()
         {
             PRSAFE_DELETE((*it).second);
         }
-        prTrace("Clean definitions\n");
+        //prTrace("Clean definitions\n");
     }
 
     // And clear
@@ -146,7 +146,7 @@ void prParticleManager::Update(f32 dt)
 /// ---------------------------------------------------------------------------
 /// Fires off a particle effect
 /// ---------------------------------------------------------------------------
-s32 prParticleManager::Fire(const char *name, const prVector3 &pos)
+s32 prParticleManager::Fire(const char *name, const Proteus::Math::prVector3 &pos)
 {
     s32 handle = -1;
 
@@ -165,7 +165,7 @@ s32 prParticleManager::Fire(const char *name, const prVector3 &pos)
             const prEmitterDefinition *ed = (*it).second;
             if (hash == ed->mHash)
             {
-                prTrace("Found definition\n");
+                //prTrace("Found definition\n");
                 
                 // Ensure emitter is always positive
                 sEmitterID++;

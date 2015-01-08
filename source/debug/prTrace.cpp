@@ -59,27 +59,32 @@ void prTraceWriteToFile(bool repeat, const char *bufferRpt, const char *bufferMs
 {
 #if defined(PLATFORM_PC)
 
-    prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
-    if (reg)
+    if (bufferMsg && *bufferMsg)
     {
-        if (prStringCompare(reg->GetValue("LogToFile"), "true") == CMP_EQUALTO &&
-            prStringCompare(reg->GetValue("Exit"), "true")      != CMP_EQUALTO)
+        prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+        if (reg)
         {
-            FILE *fp = fopen(TRACE_LOG_NAME, "a");
-            if (fp)
+            // We must be allowed to log to file, and
+            // the game cannot be exiting
+            if (prStringCompare(reg->GetValue("LogToFile"), "true") == CMP_EQUALTO &&
+                prStringCompare(reg->GetValue("Exit"), "true")      != CMP_EQUALTO)
             {
-                if (repeat)
+                FILE *fp = fopen(TRACE_LOG_NAME, "a");
+                if (fp)
                 {
-                    fprintf(fp, "%s", bufferRpt);
-                    fprintf(fp, "%s", bufferMsg);
-                }
-                else
-                {
-                    fprintf(fp, "%s", bufferMsg);
-                }
+                    if (repeat && bufferRpt && *bufferRpt)
+                    {
+                        fprintf(fp, "%s", bufferRpt);
+                        fprintf(fp, "%s", bufferMsg);
+                    }
+                    else
+                    {
+                        fprintf(fp, "%s", bufferMsg);
+                    }
 
-                fflush(fp);
-                fclose(fp);
+                    fflush(fp);
+                    fclose(fp);
+                }
             }
         }
     }

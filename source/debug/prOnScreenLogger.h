@@ -20,11 +20,11 @@
 #define __PRONSCREENLOGGER_H
 
 
-//#include <string>
-#include <list>
+#include "../prConfig.h"
 #include "../core/prTypes.h"
 #include "../core/prCoreSystem.h"
 #include "../display/prFixedWidthFont.h"
+#include <list>
 
 
 // Forward declarations
@@ -35,11 +35,33 @@ class prTexture;
 #define MAX_MESSAGE_COUNT   64
 
 
+// Removable helper
+#if !defined(REMOVE_OSL)
+  #if defined(PLATFORM_PC)
+    #define prLogOsl(text, ...) {                                                                   \
+        prOnScreenLogger *pOSL = (prOnScreenLogger *)prCoreGetComponent(PRSYSTEM_ONSCREENLOGGER);   \
+        if (pOSL) { pOSL->Add(text, __VA_ARGS__); }                                                 \
+    }
+
+  #else    
+    #define prLogOsl(text, ...) {                                                                   \
+        prOnScreenLogger *pOSL = (prOnScreenLogger *)prCoreGetComponent(PRSYSTEM_ONSCREENLOGGER);   \
+        if (pOSL) { pOSL->Add(text, ## args); }                                                     \
+    }
+
+  #endif
+
+#else
+    #define prLogOsl(text, ...)
+
+#endif
+
+
 // Class: prOnScreenLogger
 //      Simple on screen logging class.
 //      Useful when the debugger isn't very good, or for when you want to
 //      log on test devices
-class prOnScreenLogger  : public prCoreSystem
+class prOnScreenLogger : public prCoreSystem
 {
 public:
     // Method: prOnScreenLogger

@@ -331,11 +331,10 @@ const char *prStringPrintf(const char* fmt, ...)
 /// ---------------------------------------------------------------------------
 /// Creates a formatted string.
 /// ---------------------------------------------------------------------------
-void prStringSprintf(char *buffer, s32 bufferSize, const char* fmt, ...)
+char *prStringSnprintf(char *buffer, s32 bufferSize, const char* fmt, ...)
 {
     PRASSERT(buffer);
     PRASSERT(bufferSize > 0);
-    PRUNUSED(bufferSize);
 
     if (fmt && *fmt)
     {
@@ -356,6 +355,8 @@ void prStringSprintf(char *buffer, s32 bufferSize, const char* fmt, ...)
     {
         buffer[0] = 0;
     }
+
+    return buffer;
 }
 
 

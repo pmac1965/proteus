@@ -155,25 +155,25 @@ public:
 
 private:
 
-    prSprite               *m_spriteBackdrop;
-    prBitmapFont           *m_pFont;
-    prTrueTypeFont         *m_pttfFont;
-    prDialogListener       *m_prIDialogListener;
-    prButton               *m_buttons       [DIALOG_MAX_BUTTONS];
-    prVector2               m_buttonsPos    [DIALOG_MAX_BUTTONS];
-    prVector2               m_offsetButtons;
-    prVector2               m_offsetTitle;
-    prVector2               m_offsetText;
-    s32                     m_buttonCount;
-    prString                m_title;
-    prString                m_text;
-    f32                     m_titleScale;
-    f32                     m_textScale;
-    prColour                m_textColour;
-    prColour                m_fontColour;
+    prSprite                *m_spriteBackdrop;
+    prBitmapFont            *m_pFont;
+    prTrueTypeFont          *m_pttfFont;
+    prDialogListener        *m_prIDialogListener;
+    prButton                *m_buttons       [DIALOG_MAX_BUTTONS];
+    Proteus::Math::prVector2 m_buttonsPos    [DIALOG_MAX_BUTTONS];
+    Proteus::Math::prVector2 m_offsetButtons;
+    Proteus::Math::prVector2 m_offsetTitle;
+    Proteus::Math::prVector2 m_offsetText;
+    s32                      m_buttonCount;
+    prString                 m_title;
+    prString                 m_text;
+    f32                      m_titleScale;
+    f32                      m_textScale;
+    prColour                 m_textColour;
+    prColour                 m_fontColour;
     
-    s32                     mFontAlignmentTitle;
-    s32                     mFontAlignmentBody;
+    s32                      mFontAlignmentTitle;
+    s32                      mFontAlignmentBody;
 };
 
 

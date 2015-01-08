@@ -59,12 +59,12 @@ public:
 
 private:
 
-    f32         mLifeTime;                  // Particles lifetime
-    prVector3   mPos;                       // Particles position
-    prVector3   mGravity;                   // Particles gravity
-    prVector3   mDirection;                 // Particles direction
-    prVector3   mSpeed;                     // Particles speed
-    prColour    mColour;                    // Particles colour (Add colour change)
+    f32                        mLifeTime;                  // Particles lifetime
+    Proteus::Math::prVector3   mPos;                       // Particles position
+    Proteus::Math::prVector3   mGravity;                   // Particles gravity
+    Proteus::Math::prVector3   mDirection;                 // Particles direction
+    Proteus::Math::prVector3   mSpeed;                     // Particles speed
+    prColour                   mColour;                    // Particles colour (Add colour change)
 
     //f32         mScaleMin;
     //f32         mScaleMax;

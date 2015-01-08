@@ -42,7 +42,7 @@
 
 // Macro: F32_TO_FIXED
 //      Converts a fixed point number to a float.
-#define FIXED_TO_F32( num )     ( ((float)(num) / FIXED_ONE) )
+#define FIXED_TO_F32( num )     ( ((f32)(num) / FIXED_ONE) )
 
 // Macro: FIXED_MUL
 //      Multiplies a fixed point number.

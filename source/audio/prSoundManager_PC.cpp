@@ -43,7 +43,7 @@
 // Defines.
 #define SOUND_DEBUG
 #define SOUND_SHOW_FAILS
-#define SONG_BUFFER_SIZE    (4096 * 32)
+#define SONG_BUFFER_SIZE    PRKB(128)
 
 
 // Locals
@@ -83,6 +83,7 @@ namespace
 /// ---------------------------------------------------------------------------
 prSoundManager_PC::prSoundManager_PC()
 {
+    pPCMBuffer          = new u8[SONG_BUFFER_SIZE];
     device              = NULL;
     context             = NULL;
     ov_open_callbacks   = NULL;
@@ -158,6 +159,8 @@ prSoundManager_PC::~prSoundManager_PC()
         FreeLibrary(dll);
         dll = NULL;
     }
+
+    PRSAFE_DELETE_ARRAY(pPCMBuffer);
 #endif
 }
 
@@ -1333,13 +1336,14 @@ bool prSoundManager_PC::SongStream(unsigned int buffer)
 {
 #ifdef SOUND_ALLOW
 
-    char pcm[SONG_BUFFER_SIZE];
+    //TODO("Put pcm on the heap")
+    //char pcm[SONG_BUFFER_SIZE];
     int  size = 0;
     int  section;
 
     while(size < SONG_BUFFER_SIZE)
     {
-        int result = ov_read(&oggStream, pcm + size, SONG_BUFFER_SIZE - size, 0, 2, 1, &section);    
+        int result = ov_read(&oggStream, (char*)(pPCMBuffer + size), SONG_BUFFER_SIZE - size, 0, 2, 1, &section);    
         if (result > 0)
         {
             size += result;
@@ -1363,7 +1367,7 @@ bool prSoundManager_PC::SongStream(unsigned int buffer)
     }
         
     //Trace("buffer %i\n", size);
-    alBufferData(buffer, format, pcm, size, frequency);
+    alBufferData(buffer, format, pPCMBuffer, size, frequency);
     AL_ERROR_CHECK()
 
 #else

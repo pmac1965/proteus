@@ -87,8 +87,7 @@ void prMesh_MD2::Draw()
         glPushMatrix();
 
             // Axis rotation - Makes test mesh upright!
-            glRotatef(90.0f, 1.0f, 0.0f, 0.0f);
-            glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
+            glRotatef(270.0f, 1.0f, 0.0f, 0.0f);
 
 
             // Wireframe?
@@ -110,6 +109,8 @@ void prMesh_MD2::Draw()
 
                 RenderFrame(m_frame);
 
+                glFrontFace(GL_CCW);
+
             glPopAttrib();
 
         glPopMatrix();
@@ -124,7 +125,6 @@ void prMesh_MD2::Update()
 {
     Animate();
 }
-//{}
 
 
 // Animates the mesh.

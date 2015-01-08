@@ -20,12 +20,20 @@
 #define __PRPLANE_H
 
 
+// Namespaces
+namespace Proteus {
+namespace Math {
+
+
 class prPlane
 {
 public:
     prPlane();
     ~prPlane();
 };
+
+
+}}// Namespaces
 
 
 #endif//__PRPLANE_H

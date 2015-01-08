@@ -198,8 +198,8 @@ void prFixedWidthFont::Draw(f32 x, f32 y, const char *fmt, ...)
         ERR_CHECK();
 
         // Set states
-        glEnableClientState(GL_VERTEX_ARRAY);
-        ERR_CHECK();
+        //glEnableClientState(GL_VERTEX_ARRAY);
+        //ERR_CHECK();
         glEnableClientState(GL_COLOR_ARRAY);
         ERR_CHECK();
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -273,8 +273,8 @@ void prFixedWidthFont::Draw(f32 x, f32 y, const char *fmt, ...)
         ERR_CHECK();
         glDisableClientState(GL_COLOR_ARRAY);
         ERR_CHECK();
-        glDisableClientState(GL_VERTEX_ARRAY);
-        ERR_CHECK();
+        //glDisableClientState(GL_VERTEX_ARRAY);
+        //ERR_CHECK();
 
         // Disable blending
         glDisable(GL_BLEND);
