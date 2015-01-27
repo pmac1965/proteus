@@ -26,8 +26,25 @@
 #include "../display/prColour.h"
 
 
-// Button states.
-enum
+// Forward declarations
+class prSprite;
+class prSpriteManager;
+
+
+// Namespaces
+namespace Proteus {
+namespace Gui {
+
+
+// Enum: prButtonStates
+//      Button states.
+//
+// - BS_NORMAL   (Sprite frame 0)
+// - BS_HOVER    (Sprite frame 1)
+// - BS_SELECTED (Sprite frame 2)
+// - BS_DISABLED (Sprite frame 3)
+//
+enum prButtonStates
 {
     BS_NORMAL,
     BS_HOVER,
@@ -37,11 +54,7 @@ enum
 
 
 // Forward declarations
-class prSprite;
-class prBitmapFont;
-class prTrueTypeFont;
 class prButtonListener;
-class prSpriteManager;
 
 
 // Class: prButton
@@ -116,14 +129,6 @@ public:
     //      Sets the buttons sprite
     void SetSprite(prSprite *pSprite);
 
-    // Method: SetFont
-    //      Sets the buttons font
-    void SetFont(prBitmapFont *pFont);
-
-    // Method: SetTTFFont
-    //      Sets the buttons font
-    void SetTTFFont(prTrueTypeFont *pFont);
-
     // Method: SetText
     //      Sets the buttons text
     void SetText(const char *text);
@@ -148,18 +153,17 @@ public:
     //      Sets the button text scale
     void SetTextScale(f32 scale) { m_textScale = scale; }
 
-    // ??
-    void SetExtend(s32 x) { m_extendX = x; }
-
 
 private:
+    // Tests if a touch is *over* the button
     bool InButtonsRect(s32 x, s32 y);
+
+    // Sets the current button frame
+    void SetCurrentFrame(s32 frame);
 
 
 private:
     prSprite               *m_sprite;
-    prBitmapFont           *m_font;
-    prTrueTypeFont         *m_ttfFont;
     prString                m_text;
     s32                     m_buttonState;
     s32                     m_width;
@@ -169,8 +173,10 @@ private:
     prButtonListener       *m_prButtonListener;
     prColour                m_textColour;
     f32                     m_textScale;
-    s32                     m_extendX;
 };
+
+
+}}// Namespaces
 
 
 #endif//__PRBUTTON_H

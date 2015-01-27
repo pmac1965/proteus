@@ -103,16 +103,16 @@
 #define REMOVE_EXCEPTIONS
 #endif
 
-#ifndef ALLOW_PROTEUS_NAMESPACE                         // Allows namespace to be removed.
-//#define ALLOW_PROTEUS_NAMESPACE
-#endif
-
 #ifndef ALLOW_STEAM                                     // Allows the steam code
 #define ALLOW_STEAM
 #endif
 
+#ifndef ALLOW_GLEW                                      // Allows the glew to be used
+#define ALLOW_GLEW
+#endif
+
 #ifndef SHOW_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.
-//#define SHOW_MESSAGES
+#define SHOW_MESSAGES
 #endif
 
 #ifndef PROTEUS_ALLOW_CONSOLE                           // Allows the debug console to be optionally removed. (PC only)
@@ -120,15 +120,15 @@
 #endif
 
 #ifndef PROTEUS_ALLOW_WINDOW_MINIMIZE                   // Allows the PC window to have a minimize button
-//#define PROTEUS_ALLOW_WINDOW_MINIMIZE
+#define PROTEUS_ALLOW_WINDOW_MINIMIZE
 #endif
 
 #ifndef PROTEUS_ALLOW_WINDOW_MAXIMIZE                   // Allows the PC window to have a maximize button
-//#define PROTEUS_ALLOW_WINDOW_MAXIMIZE
+#define PROTEUS_ALLOW_WINDOW_MAXIMIZE
 #endif
 
 #ifndef PROTEUS_ALLOW_RESIZEABLE_WINDOW                 // Allows the PC window to be resizeable.
-//#define PROTEUS_ALLOW_RESIZEABLE_WINDOW
+#define PROTEUS_ALLOW_RESIZEABLE_WINDOW
 #endif
 
 #ifndef PROTEUS_ALLOW_AT                                // Allows the AT define to exist
@@ -176,8 +176,8 @@
 
 
 // OpenGL debug settings
-//#define OPENGL_SHOW_EXTENSIONS
-//#define OPENGL_CHECK_CALLS
+#define OPENGL_SHOW_EXTENSIONS
+#define OPENGL_CHECK_CALLS
 
 
 // Optimizations

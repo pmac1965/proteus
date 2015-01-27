@@ -27,6 +27,7 @@
   #include <Windows.h>
   #include <gl/gl.h>
   #include <gl/glu.h>
+  #include "../debug/prException.h"
 
 #elif defined(PLATFORM_IOS)
   #include <OpenGLES/ES1/gl.h>  
@@ -56,7 +57,9 @@
 #include "prTexture.h"
 #include "../debug/prAssert.h"
 #include "../debug/prTrace.h"
+#include "../debug/prLog.h"
 #include "../debug/prDebug.h"
+#include "../debug/prAlert.h"
 #include "../core/prResourceManager.h"
 #include "../core/prStringUtil.h"
 #include "../core/prCore.h"
@@ -79,7 +82,6 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
 
     // Init data
     m_texture               = NULL;
-    m_filename              = NULL;
     m_width                 = -1;
     m_height                = -1;
     m_type                  = prBackground::UNKNOWN;
@@ -93,7 +95,6 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
     m_scrnHeight            = 0.0f;
     m_v0                    = 0.0f;
     m_u1                    = 0.0f;
-
     mVisible                = PRTRUE;
 
     // Parse the document
@@ -107,7 +108,7 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
         }
         else
         {
-            PRWARN("Failed to Load %s\n", filename);
+            PRWARN("Failed to Load background '%s'\n", filename);
             return;
         }
 
@@ -115,12 +116,16 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
     }
 
 
+#if defined(PROTEUS_TOOL)
+    // Texture created elsewhere
+
+#else
     // Load the texture - filename acquired from the xml
-    if (m_filename)
+    if (m_filename.Length() > 0)
     {
         prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
         PRASSERT(pRM);
-        m_texture = pRM->Load<prTexture>(m_filename);
+        m_texture = pRM->Load<prTexture>(m_filename.Text());
         PRASSERT(m_texture);
 
         // Texture width
@@ -144,11 +149,15 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
         // UV Coords pre-calc
         m_v0 = 1.0f - (m_pixelHeight * m_scrnHeight);
         m_u1 =        (m_pixelWidth  * m_scrnWidth);
+
+        prLog("Loaded texture '%s' (%i, %i)\n", m_filename.Text(), m_width, m_height);
     }
     else
     {
         PRPANIC("prBackground has no texture.");
     }
+
+#endif
 }
 
 
@@ -163,8 +172,6 @@ prBackground::~prBackground()
         pRM->Unload(m_texture);
         m_texture = NULL;
     }
-
-    PRSAFE_DELETE(m_filename);
 }
 
 
@@ -182,6 +189,19 @@ void prBackground::Draw()
     
     if (m_texture)
     {
+#if defined(PROTEUS_TOOL)
+        prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+        if (reg)
+        {
+            m_scrnWidth  =  (f32)m_texture->GetWidth();
+            m_scrnHeight =  (f32)m_texture->GetHeight();
+        }
+
+        // UV Coords pre-calc
+        m_v0 = 1.0f - (m_pixelHeight * m_scrnHeight);
+        m_u1 =        (m_pixelWidth  * m_scrnWidth);
+#endif
+
         f32 width  = (f32)(m_scrnWidth  / 2);
         f32 height = (f32)(m_scrnHeight / 2);
 
@@ -222,6 +242,40 @@ void prBackground::SetColour(prColour c)
 {
     m_colour = c;
 }
+
+
+#if defined(PROTEUS_TOOL)
+/// ---------------------------------------------------------------------------
+/// Sets the backgrounds texture
+/// ---------------------------------------------------------------------------
+void prBackground::SetTexture(prTexture* pTex)
+{
+    m_texture = pTex;
+    PRASSERT(m_texture);
+
+    // Texture width
+    m_width  = m_texture->GetWidth();
+    m_height = m_texture->GetHeight();
+        
+    // Texture pixel size.
+    m_pixelWidth  = 1.0f / m_width;
+    m_pixelHeight = 1.0f / m_height;
+
+    // Get draw size
+    if (!m_widthHeightSupplied)
+    {
+        // Assume display size is screen width/height
+        prRegistry *pReg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+        PRASSERT(pReg);
+        m_scrnWidth  = (float)atof(pReg->GetValue("ScreenWidth"));
+        m_scrnHeight = (float)atof(pReg->GetValue("ScreenHeight"));
+    }
+
+    // UV Coords pre-calc
+    m_v0 = 1.0f - (m_pixelHeight * m_scrnHeight);
+    m_u1 =        (m_pixelWidth  * m_scrnWidth);
+}
+#endif
 
 
 /// ---------------------------------------------------------------------------
@@ -302,7 +356,13 @@ void prBackground::ParseAttribs_Background(TiXmlElement* pElement)
         }
         else
         {
+        #if defined(PROTEUS_TOOL)
+            throw prException("Unknown background type");
+
+        #else
             PRPANIC("Unknown background type");
+
+        #endif
         }
 
 
@@ -311,17 +371,58 @@ void prBackground::ParseAttribs_Background(TiXmlElement* pElement)
         TiXmlElement *pElem = root.FirstChild("texture").Element();
         if (pElem)
         {
-            // Get the bacgrounds texture data
-            PRASSERT(pElem->Attribute("data"));
-            
-            s32 size = prStringLength(pElem->Attribute("data")) + 1;
-            PRASSERT(size > 0);
-            PRASSERT(size < MAX_PATH);
-
             // Store filename
-            m_filename = new char[size];
-            PRASSERT(m_filename);
-            prStringCopySafe(m_filename, pElem->Attribute("data"), size);
+            PRASSERT(pElem->Attribute("data"));
+            m_filename.Set(pElem->Attribute("data"));
+
+
+            // If we're a tool we cannot use the older .bgd files, they need
+            // converted.
+        #if defined(PROTEUS_TOOL)
+            char filename[MAX_PATH];
+            prStringCopySafe(filename, m_filename.Text(), sizeof(filename));
+            s32 index = prStringFindLastIndex(filename, '.');
+            if (index > -1)
+            {
+                if (prStringCompareNoCase(&filename[index], ".pvr") == 0)
+                {
+                    throw prException("You cannot use this background file, as it contains a .pvr file as the texture");
+                }
+            }
+            else
+            {
+                throw prException("Invalid background file");
+            }
+
+        #else
+            // Tool created background files use the path to the textures image, so we need to
+            // create the path to the .pvr data for games
+            char filename[MAX_PATH];
+            prStringCopySafe(filename, m_filename.Text(), sizeof(filename));
+            prStringReplaceChar(filename, '\\', '/');
+
+            s32 indexExt = prStringFindLastIndex(filename, '.');
+            s32 indexNme = prStringFindLastIndex(filename, '/');
+
+            if (indexExt > -1 &&
+                indexNme > -1)
+            {
+                // If not .pvr, create path to .pvr
+                if (prStringCompareNoCase(&filename[indexExt], ".pvr") != 0)
+                {
+                    char path[MAX_PATH];
+                    filename[indexExt] = 0;
+                    prStringSnprintf(path, sizeof(path), "data/textures/%s.pvr", &filename[indexNme + 1]);
+                    prTrace("Path: %s\n", path);
+                    m_filename.Set(path);
+                }
+            }
+            else
+            {
+                PRPANIC("Invalid background file");
+            }
+
+        #endif
 
             // Width/height
             const char *width  = pElem->Attribute("width");
@@ -335,7 +436,13 @@ void prBackground::ParseAttribs_Background(TiXmlElement* pElement)
         }
         else
         {
-            PRPANIC("Background has no texture.");
+        #if defined(PROTEUS_TOOL)
+            throw prException("The background file has no texture.");
+
+        #else
+            PRPANIC("The background file has no texture.");
+
+        #endif
         }
     }
 }

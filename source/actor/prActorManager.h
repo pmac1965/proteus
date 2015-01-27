@@ -107,7 +107,7 @@ public:
     //      type  - A user defined type
     //      index - 0 to how many you have of the specific type minus 1, as we're zero based
     //
-    // See Also
+    // See Also:
     //      <HowMany>
     prActor *FindByIndex(s32 type, u32 index);
 

@@ -33,42 +33,66 @@
 //
 // - WT_Button
 // - WT_Dialog
+// - WT_MenuStrip
+// - WT_Menu
 //
 typedef enum
 {
     WT_Button,
     WT_Dialog,
+    WT_MenuStrip,
+    WT_Menu,
 
 } prWidgetType;
 
 
 // Forward declarations 
 class prSpriteManager;
+class prBitmapFont;
+class prTrueTypeFont;
 
 
 // Class: prWidget
 //      Base GUI widget class
+//
+// Notes:
+//      Currently widgets can use one of two font types. The bitmap font or
+//      a true type font.
+//
+// See Also:
+//      <prSpriteManager>
+//      <prBitmapFont>
+//      <prTrueTypeFont>
 class prWidget
 {
 public:
     // Method: prWidget
-    //      Ctor
+    //      Widget constructor
+    //
+    // Parameters:
+    //      type            - The widget tyoe
+    //      name            - A name for the widget. Should be unique if you want to find it by searching.
+    //                        Can also be NULL
+    //      pSpriteManager  - A sprite manager as some widgets are sprites
+    //
+    // See Also:
+    //      <prWidgetType>
     prWidget(prWidgetType type, const char *name, prSpriteManager *pSpriteManager);
 
     // Method: ~prWidget
     //      Dtor
     virtual ~prWidget();
 
-    // Method: Name
+    // Method: GetName
     //      Get the widget name.
-    const char *Name() const { return m_name.Text(); }
+    const char *GetName() const { return m_name.Text(); }
 
-    // Method: Type
+    // Method: GetType
     //      Returns the widget type.
     //
     // See Also:
     //      <prWidgetType>
-    s32 Type() const { return m_type; }
+    s32 GetType() const { return m_type; }
 
     // Method: SetVisible
     //      Set the render visibility state.
@@ -76,7 +100,7 @@ public:
 
     // Method: GetVisible
     //      Get the render visibility state.
-    bool GetVisible() const     { return m_visible; }
+    bool GetVisible() const { return m_visible; }
 
     // Method: SetEnabled
     //      Sets the enabled state. If disabled, a widget should look disabled.
@@ -84,14 +108,14 @@ public:
 
     // Method: GetEnabled
     //      Gets the enabled state. If disabled, a widget should look disabled.
-    bool GetEnabled() const     { return m_enabled; }
+    bool GetEnabled() const { return m_enabled; }
     
     // Method: SetActive
-    //      If acive a widget will be updated. Meant for modal dialogs.
+    //      If active this widget will be updated. Meant for modal dialogs.
     void SetActive(bool state) { m_active = state; }
 
     // Method: GetActive
-    //      If acive a widget will be updated. Meant for modal dialogs.
+    //      If active this widget will be updated. Meant for modal dialogs.
     bool GetActive() const { return m_active; }
     
     // Method: SetAnimated
@@ -106,7 +130,7 @@ public:
     //
     // Notes:
     //      Used with sprite based widgets
-    bool GetAnimated() const    { return m_animated; }
+    bool GetAnimated() const { return m_animated; }
 
     // Method: GetDestroy
     //      Is this widget to be destroyed?
@@ -133,6 +157,22 @@ public:
     // Method: GetLayer
     //      Gets the widget layer.
     s32 GetLayer() const { return m_layer; }
+
+    // Method: SetBMPFont
+    //      Sets the default bitmap font.
+    void SetBMPFont(prBitmapFont *pBmp) { m_pBmpfont = pBmp; }
+
+    // Method: SetTTFFont
+    //      Sets the default true type font.
+    void SetTTFFont(prTrueTypeFont *pTtf) { m_pTtfFont = pTtf; }
+
+    // Method: GetBMPFont
+    //      Gets the default bitmap font.
+    prBitmapFont *GetBMPFont() const { return m_pBmpfont; }
+    
+    // Method: GetTTFFont
+    //      Gets the default true type font.
+    prTrueTypeFont *GetTTFFont() const { return m_pTtfFont; }
 
     // Method: Update
     //      Updates the widget
@@ -191,6 +231,8 @@ protected:
     bool                m_exp1;
     bool                m_exp2;
     prSpriteManager    *m_pSpriteManager;
+    prBitmapFont       *m_pBmpfont;
+    prTrueTypeFont     *m_pTtfFont;
     prColour            m_colour;
     s32                 m_layer;
 

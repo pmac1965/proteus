@@ -45,7 +45,7 @@ public:
     {
         ALIGN_LEFT   = 0x00000000,
         ALIGN_RIGHT  = 0x00000001,
-        ALIGN_CENTER = 0x00000020,
+        ALIGN_CENTER = 0x00000002,
         ALIGN_CENTRE = ALIGN_CENTER,
     };
 

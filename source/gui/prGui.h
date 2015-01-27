@@ -26,8 +26,24 @@
 #include <list>
 
 
+// Forward declarations 
+class prBitmapFont;
+class prTrueTypeFont;
+
+
+// Namespaces
+namespace Proteus {
+namespace Gui {
+
+
 // Class: prGui
-//      Container for GUI widgets
+//      Creator and container for GUI widgets
+//
+// Notes:
+//      This class is used to create and manage the widgets. As well as provide default fonts
+//
+// See Also:
+//      <prWidgetType>
 class prGui : public ITouchListener
 {
 public:
@@ -64,10 +80,16 @@ public:
 
     // Method: SetEnable
     //      Set the GUI's enabled state
+    //
+    // Notes:
+    //      This enables/disables all widgets
     void SetEnable(PRBOOL state) { m_enabled = state; }
 
     // Method: SetVisible
     //      Set the GUI's visible state
+    //
+    // Notes:
+    //      This shows/hides all widgets
     void SetVisible(PRBOOL state) { m_visible = state; }
 
     // Method: IsEnabled
@@ -97,6 +119,20 @@ public:
     //      them mixing messages
     void SetBaseLayer(u32 layer) { m_layer     = layer;
                                    m_baseLayer = layer; }
+
+    // Method: SetBMPFont
+    //      Sets the default bitmap font.
+    //
+    // Notes:
+    //      The default font can still be overriden
+    void SetBMPFont(prBitmapFont *pBmp) { m_pBmpfont = pBmp; }
+
+    // Method: SetTTFFont
+    //      Sets the default true type font.
+    //
+    // Notes:
+    //      The default font can still be overriden
+    void SetTTFFont(prTrueTypeFont *pTtf) { m_pTtfFont = pTtf; }
 
     // Method: InputPressed
     //      Passes on a touch event to the GUI items
@@ -130,14 +166,18 @@ public:
 
 
 private:
-
     std::list<prWidget *>   m_widgets;
     prSpriteManager         m_spriteManager;
     PRBOOL                  m_enabled;
     PRBOOL                  m_visible;
     s32                     m_layer;
     s32                     m_baseLayer;
+    prBitmapFont           *m_pBmpfont;
+    prTrueTypeFont         *m_pTtfFont;
 };
+
+
+}}// Namespaces
 
 
 #endif//__PRGUI_H

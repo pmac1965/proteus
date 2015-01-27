@@ -19,6 +19,7 @@
 
 #include "prCube.h"
 #include "../display/prOglUtils.h"
+#include "../display/prOglConfig.h"
 #include "../core/prMacros.h"
 
 
@@ -100,6 +101,8 @@ prCube::prCube() : prSceneObject("Cube")
 /// ---------------------------------------------------------------------------
 void prCube::Draw()
 {
+// Base PC version?
+#if defined(PROGL_VERSION_11)
     glPushMatrix();
     ERR_CHECK();
 
@@ -115,6 +118,7 @@ void prCube::Draw()
     // Scale
     glScalef(scale.x, scale.y, scale.z);
     ERR_CHECK();
+#endif
 
         // Base class draw
         prSceneObject::Draw();
@@ -166,6 +170,8 @@ void prCube::Draw()
 
         glDisable(GL_BLEND);
 
+#if defined(PROGL_VERSION_11)
     glPopMatrix();
     ERR_CHECK();
+#endif
 }

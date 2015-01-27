@@ -31,7 +31,7 @@
 //
 // Parameters:
 //      fmt - The format string.
-//      param   ... - Format string parameters.
+//      ... - Format string parameters.
 void prTrace(const char* fmt, ...);
 
 // Function: prTraceEnable 

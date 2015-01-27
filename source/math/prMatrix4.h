@@ -52,6 +52,8 @@ public:
     //      Dtor
     ~prMatrix4();
 
+    const char *ToString();
+
     // Method: Set
     //      Set the matrix data
     void Set(const f32 data[16]);

@@ -32,6 +32,9 @@
 //      More complex actors can use the internal
 //      state machine to control the actors.
 //      It is however optional
+//
+// Notes:
+//      Actors default to active, visible and on screen
 class prActor
 {
 public:
@@ -68,7 +71,7 @@ public:
 
     // Method: Draw
     //      Draw an actor
-    virtual void Draw() = 0;
+    virtual void Draw() {}
 
     // Method: Init
     //      Optional actor construction
@@ -80,13 +83,20 @@ public:
     // Method: UpdateScreen
     //      Override to determine on screen state.
     //
+    // Notes:
+    //      Since the engine knows nothing about how you'll render an
+    //      actor, you'll need to override this method and set the state
+    //      yourself.
+    //
+    //      The default value is on screen.
+    //
     // See Also:
     //      <IsOnscreen>
     virtual void UpdateScreen() {}
 
-    // Method: Type
+    // Method: GetType
     //      Returns user specified type.
-    s32 Type() const { return m_type; }
+    s32 GetType() const { return m_type; }
 
     // Method: SetVisible
     //      Sets visible.
@@ -98,7 +108,7 @@ public:
 
     // Method: Destroy
     //      Destroy this actor?
-    void Destroy() { m_destroy = true; }
+    void SetDestroy() { m_destroy = true; }
 
     // Method: IsOnscreen
     //      Is onscreen?
@@ -141,7 +151,6 @@ public:
 
 
 public:
-
     Proteus::Math::prVector2    pos;
     
     s32                         user0;            // User data for you to do as you please
@@ -151,12 +160,10 @@ public:
 
 
 protected:
-
     s32     m_type;
     s32     m_state;
     s32     m_priority;
     s32     m_id;
-
     bool    m_visible;
     bool    m_active;
     bool    m_destroy;

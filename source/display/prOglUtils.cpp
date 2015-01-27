@@ -99,8 +99,6 @@ void prOpenGLInit()
 /// ---------------------------------------------------------------------------
 void prOpenGLShowExtensions()
 {
-    TODO("Add glew")
-
     // Show GL details
     prTrace("OpenGL\n");
     prTrace("------\n");

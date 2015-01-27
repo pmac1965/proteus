@@ -18,10 +18,11 @@ REM ---------------------------------------------------------------------------
     if exist "..\Tool debug\proteus_td.lib"   copy /B /V /Y "..\Tool debug\proteus_td.lib"   %PROTEUS_ENGINE_DIR%\libs\proteus_td.lib
     if exist "..\Tool release\proteus_tr.lib" copy /B /V /Y "..\Tool release\proteus_tr.lib" %PROTEUS_ENGINE_DIR%\libs\proteus_tr.lib
     if exist ..\x64\Debug64\proteus64_d.lib   copy /B /V /Y ..\x64\Debug64\proteus64_d.lib   %PROTEUS_ENGINE_DIR%\libs\proteus64_d.lib
+    if exist ..\x64\Release64\proteus64_r.lib copy /B /V /Y ..\x64\Release64\proteus64_r.lib %PROTEUS_ENGINE_DIR%\libs\proteus64_r.lib
 
 
 REM ---------------------------------------------------------------------------
-REM - Create the includes
+REM - Create the includes folder
 REM ---------------------------------------------------------------------------
     echo Deleting old includes directory
     rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus
@@ -29,21 +30,32 @@ REM ---------------------------------------------------------------------------
     echo Creating include directory
     md %PROTEUS_ENGINE_DIR%\include\proteus
 
-    echo Copy the source to include directory.
+    echo Copying the source to include directory.
     xcopy .\..\..\..\..\source\*.h   %PROTEUS_ENGINE_DIR%\include\proteus /E /Q
     xcopy .\..\..\..\..\source\*.inl %PROTEUS_ENGINE_DIR%\include\proteus /E /Q
     copy  .\..\..\..\..\source\includes.bat %PROTEUS_ENGINE_DIR%\include\proteus\includes.bat
 
 
-REM --------------------------------------
-REM Delete files which aren't needed
-REM --------------------------------------
+REM ---------------------------------------------------------------------------
+REM Delete files which aren't needed in the include files folder
+REM as they are either not needed, or shouldn't be there as they expose
+REM interfaces which shouldn't be visible
+REM
+REM Also, lesser includes means a faster compile for applications
+REM ---------------------------------------------------------------------------
+    REM ****************
+    REM * NOT REQUIRED *
+    REM ****************
     del %PROTEUS_ENGINE_DIR%\include\proteus\display\prSplash.h
-    del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prDebugFont.h
-    
+       
+    REM ****************
+    REM * NOT REQUIRED *
+    REM ****************
     del %PROTEUS_ENGINE_DIR%\include\proteus\utf8proc\utf8proc_data.h
 
-    REM These aren't required
+    REM ****************
+    REM * NOT REQUIRED *
+    REM ****************
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_android.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_bada.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_base.h
@@ -52,23 +64,36 @@ REM --------------------------------------
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_linux.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_mac.h
 
-    REM These aren't required
+    REM ****************
+    REM * NOT REQUIRED *
+    REM ****************
+    del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prDebugFont.h 
     del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prFps_PC.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prFps_Android.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prFps_ios.h
 
-    REM These aren't required
+    REM ****************
+    REM * NOT REQUIRED *
+    REM ****************
     del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prSoundManager_PC.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prSoundManager_Ios.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prSoundManager_Android.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prWaves.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prOpenALDeviceList.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prOpenALErrors.h
 
-    REM These aren't required
+    REM ****************
+    REM * NOT REQUIRED *
+    REM ****************
     del %PROTEUS_ENGINE_DIR%\include\proteus\analytics\Flurry.h
 
+    REM ****************
+    REM * NOT REQUIRED *
+    REM ****************
     rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\libzip
-
-    REM rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\audio\external
+    rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\android\AL
+    rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\audio\external
+    rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\android
 
 
 REM --------------------------------------

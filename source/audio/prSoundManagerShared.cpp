@@ -19,6 +19,7 @@
 
 #include "../prConfig.h"
 #include "prSoundManagerShared.h"
+#include "prOpenALErrors.h"
 
 
 #if defined(PLATFORM_PC)
@@ -50,7 +51,6 @@
     //#ifdef SOUND_ALLOW
     //#undef SOUND_ALLOW
     //#endif
-
 
 #elif defined(PLATFORM_LINUX)
     #include <AL/al.h>

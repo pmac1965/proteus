@@ -20,15 +20,36 @@
 #define __PRSHADER_H
 
 
+#include "../core/prTypes.h"
+
+
+// Class: prShader
+//      A shader class
 class prShader
 {
 public:
     prShader();
     ~prShader();
 
-    bool Load(const char *);
+    // Method: LoadFromMemory
+    //      Loads a shader
+    //
+    // Parameters:
+    //      vertexSrc   - 
+    //      fragmentSrc - 
+    bool LoadFromMemory(const char *vertexSrc, const char *fragmentSrc);
 
     void Attach();
+
+private:
+    // Sets the source for a memory based shader
+    void SetSource(u32 shader, const char *src);
+
+    // Shows the shader info log
+    void ShaderInfoLog(u32 shader);
+
+    // Shows the program info log
+    void ProgramInfoLog(u32 shader);
 };
 
 

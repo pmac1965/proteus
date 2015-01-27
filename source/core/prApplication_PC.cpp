@@ -445,8 +445,6 @@ PRBOOL prApplication_PC::Run()
 
             // Needs modified to track game speed!
             Sleep(1);
-            TODO("Needs modified to track game speed!")
-            //Sleep(1);
 
             if (pFps)   { pFps->End(); }
         }
@@ -509,7 +507,7 @@ BOOL prApplication_PC::CheckPlatform()
 
     if (GetVersionEx((LPOSVERSIONINFO)&osvi) == 0)
     {
-        TODO("Change the above call as its ddeprecated!")
+        TODO("Change the above call as its deprecated!")
         prDebugShowLastError();
         initFailed = true;
     }

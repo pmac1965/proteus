@@ -261,6 +261,33 @@ namespace
             pKB->KeyboardInjectDown(charcode);
         }
     }
+
+
+    // ----------------------------------------------------------------------------
+    // Handles: Minimum window size
+    // ----------------------------------------------------------------------------
+    bool WindowMessage_GetMinMaxInfo(prWindow* window, WPARAM wParam, LPARAM lParam)
+    {
+        MINMAXINFO* mmi = (MINMAXINFO*)lParam;
+        bool handled = false;
+        
+        if (window)
+        {
+            if (window->GetMinWidth() != 0xFFFFFFFF)
+            {
+                mmi->ptMinTrackSize.x = window->GetMinWidth();
+                handled = true;
+            }
+
+            if (window->GetMinHeight() != 0xFFFFFFFF)
+            {
+                mmi->ptMinTrackSize.y = window->GetMinHeight();
+                handled = true;
+            }
+        }
+
+        return handled;
+    }
 }
 
 
@@ -348,11 +375,6 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
     case WM_SIZE:
     case WM_SIZING:
         {
-            if (pApp)
-            {
-                pApp->OnDeactivate();
-            }
-
             // Size window
             RECT r;
             GetClientRect(hwnd, &r);
@@ -360,22 +382,41 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
             u32 height = r.bottom - r.top;
 
             WindowMessage_Resize(window, width, height);
-            prTrace("Size: %i, %i\n", width, height);
             
             // Also do tweak bar
             #if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)
             TwWindowSize(r.right - r.left, r.bottom - r.top);
             #endif
+
+            if (pApp)
+            {
+                pApp->OnDeactivate();
+
+                // Pass on the size messages
+                static_cast<Proteus::Core::prApplication_PC *>(pApp)->WindowsCommand(msg, wParam, lParam);
+            }
         }
-        break;
+        return DefWindowProc(hwnd, msg, wParam, lParam);
 
     // Exit size
     case WM_EXITSIZEMOVE:
         if (pApp)
         {
+            // Active on move/size exit
             pApp->OnActivate();
+
+            // Pass on the exit size/move message
+            static_cast<Proteus::Core::prApplication_PC *>(pApp)->WindowsCommand(msg, wParam, lParam);
         }
+        return DefWindowProc(hwnd, msg, wParam, lParam);
+
+    // Set min/max size
+#if defined(PROTEUS_TOOL) || defined(PLATFORM_PC)
+    case WM_GETMINMAXINFO:
+        WindowMessage_GetMinMaxInfo(window, wParam, lParam);
+        return DefWindowProc(hwnd, msg, wParam, lParam);
         break;
+#endif
 
     case WM_ACTIVATE:
         WindowMessage_Activate(window, hwnd, msg, wParam, lParam);

@@ -20,6 +20,11 @@
 #define __PRDIALOGLISTENER_H
 
 
+// Namespaces
+namespace Proteus {
+namespace Gui {
+
+
 // Class: prDialogListener
 //      The listener for a dialog
 class prDialogListener
@@ -39,6 +44,9 @@ public:
     //      name - The name of the button released
     virtual bool OnDlgButtonReleased(const char *name, s32 index) = 0;
 };
+
+
+}}// Namespaces
 
 
 #endif//__PRDIALOGLISTENER_H

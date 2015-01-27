@@ -3,3 +3,4 @@
 - Improved mutexes
 - Improved profiler
 - Reduced state switching in opengl (Improves performance)
+- Reduced included headers

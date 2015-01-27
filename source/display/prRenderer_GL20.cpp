@@ -17,13 +17,11 @@
  */
 
 
+//#include <glew.h>
 #include "../prConfig.h"
 
 
 #if defined(PLATFORM_PC)
-  #include <Windows.h>
-  #include <gl/gl.h>
-  #include <gl/glu.h>
   #include "../core/prWindow_PC.h"
 
 #elif defined(PLATFORM_LINUX)
@@ -66,12 +64,12 @@
 //#include "../math/prMathsUtil.h"
 #include "../math/prVector3.h"
 //#include "../core/prWindow.h"
-//#include "../core/prVertex.h"
+#include "../core/prVertex.h"
 //#include "../core/prCore.h"
 //#include "../core/prRegistry.h"
 //#include "../core/prStringUtil.h"
 //#include "../core/prResourceManager.h"
-//#include "../display/prOglUtils.h"
+#include "../display/prOglUtils.h"
 //#include "../display/prTexture.h"
 
 
@@ -290,8 +288,19 @@ void prRenderer_GL20::RestorePerspectiveView()
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::DrawPoint(f32 x, f32 y)
 {
-    PRUNUSED(x);
-    PRUNUSED(y);
+    prVertex2D vertices[] = 
+    {
+        {x, y},
+    };
+
+//    glVertexPointer(2, GL_FLOAT, 0, vertices);
+//    ERR_CHECK();
+    
+    //glEnableClientState(GL_VERTEX_ARRAY);
+    //ERR_CHECK();
+
+    glDrawArrays(GL_POINTS, 0, 1);
+    ERR_CHECK();
 }
 
 
@@ -311,6 +320,16 @@ void prRenderer_GL20::DrawLine(f32 x1, f32 y1, f32 x2, f32 y2)
 /// Draws a line 3D.
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::DrawLine(Proteus::Math::prVector3 &from, Proteus::Math::prVector3 &to)
+{
+    PRUNUSED(from);
+    PRUNUSED(to);
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Draws a line 3D.
+/// ---------------------------------------------------------------------------
+void prRenderer_GL20::DrawLine(const Proteus::Math::prVector3 &from, const Proteus::Math::prVector3 &to)
 {
     PRUNUSED(from);
     PRUNUSED(to);

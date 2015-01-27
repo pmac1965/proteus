@@ -25,15 +25,12 @@
 
 
 #if defined(PLATFORM_PC)
-  #include <Windows.h>
-  #include <gl/gl.h>
-  #include <gl/glu.h>
   #include "../core/prWindow_PC.h"
 
 #elif defined(PLATFORM_LINUX)
   #include <GL/gl.h>
   #include <GL/glu.h>
-  #include "../core/prWindow_PC.h"
+  //#include "../core/prWindow_PC.h"
   #include "../linux/prLinux.h"
 
 #elif defined(PLATFORM_MAC)
@@ -242,7 +239,7 @@ void prRenderer_GL11::Present()
     if (m_pWindow)
     {
         // Draw watermark
-        #if defined(PLATFORM_PC) && defined(PROTEUS_ALLOW_WATERMARK)
+        #if defined(PLATFORM_PC) && defined(PROTEUS_ALLOW_WATERMARK) && !defined(PROTEUS_TOOL)
         prDrawWaterMark(m_pWatermark);
         #endif
 
@@ -388,6 +385,31 @@ void prRenderer_GL11::DrawLine(f32 x1, f32 y1, f32 x2, f32 y2)
 /// Draws a line 3D.
 /// ---------------------------------------------------------------------------
 void prRenderer_GL11::DrawLine(Proteus::Math::prVector3 &from, Proteus::Math::prVector3 &to)
+{
+    prVertex3D vertices[] = 
+    {
+        {from.x, from.y, from.z},
+        {to.x,   to.y,   to.z},
+    };
+
+    glVertexPointer(3, GL_FLOAT, 0, vertices);
+    ERR_CHECK();
+    
+    //glEnableClientState(GL_VERTEX_ARRAY);
+    //ERR_CHECK();
+
+    glDrawArrays(GL_LINES, 0, 2);
+    ERR_CHECK();
+
+    //glDisableClientState(GL_VERTEX_ARRAY);
+    //ERR_CHECK();
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Draws a line 3D.
+/// ---------------------------------------------------------------------------
+void prRenderer_GL11::DrawLine(const Proteus::Math::prVector3 &from, const Proteus::Math::prVector3 &to)
 {
     prVertex3D vertices[] = 
     {
@@ -807,29 +829,40 @@ void prRenderer_GL11::BlendEnabled(bool state)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL11::DrawGrid(s32 size)
 {
+    prVector3 from;
+    prVector3 to;
+
     TexturesEnabled(false);
 
     for (s32 x = -size; x< size; x++)
     {
         (x == 0) ? SetColour(prColour::Blue) : SetColour(prColour::White);
 
-        DrawLine(prVector3((f32)x, 0, (f32)-size),
-                 prVector3((f32)x, 0, (f32) size));
+        from = prVector3((f32)x, 0, (f32)-size);
+        to   = prVector3((f32)x, 0, (f32) size);
+        DrawLine(from, to);//prVector3((f32)x, 0, (f32)-size),
+                           //prVector3((f32)x, 0, (f32) size));
     }
         
-    DrawLine(prVector3((f32)size, 0, (f32)-size),
-             prVector3((f32)size, 0, (f32) size) );
+    from = prVector3((f32)size, 0, (f32)-size);
+    to   = prVector3((f32)size, 0, (f32) size);
+    DrawLine(from, to);//prVector3((f32)size, 0, (f32)-size),
+                       //prVector3((f32)size, 0, (f32) size));
 
     for (s32 z = -size; z< size; z++)
     {
         (z == 0) ? SetColour(prColour::Red) : SetColour(prColour::White);
 
-        DrawLine(prVector3((f32)-size, 0, (f32)z),
-                 prVector3((f32) size, 0, (f32)z));
+        from = prVector3((f32)-size, 0, (f32)z);
+        to   = prVector3((f32) size, 0, (f32)z);
+        DrawLine(from, to);//prVector3((f32)-size, 0, (f32)z),
+                          //prVector3((f32) size, 0, (f32)z));
     }
 
-    DrawLine(prVector3((f32)-size, 0, (f32)size),
-             prVector3((f32) size, 0, (f32)size));
+    from = prVector3((f32)-size, 0, (f32)size);
+    to   = prVector3((f32) size, 0, (f32)size);
+    DrawLine(from, to);//prVector3((f32)-size, 0, (f32)size),
+                       //prVector3((f32) size, 0, (f32)size));
 
     TexturesEnabled(true);
 }

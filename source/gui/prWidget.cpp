@@ -45,8 +45,8 @@ prWidget::prWidget(prWidgetType type, const char *name, prSpriteManager *pSprite
     m_name.Set(theName);
 
     // Init data
-    m_visible   = false;
-    m_enabled   = false;
+    m_visible   = true;
+    m_enabled   = true;
     m_animated  = false;
     m_active    = true;
     m_destroy   = false;
@@ -54,6 +54,8 @@ prWidget::prWidget(prWidgetType type, const char *name, prSpriteManager *pSprite
     m_exp1      = false;
     m_exp2      = false;
     m_layer     = 0;
+    m_pBmpfont  = NULL;
+    m_pTtfFont  = NULL;
 }
 
 

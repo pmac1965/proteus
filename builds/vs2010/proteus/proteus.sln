@@ -13,6 +13,8 @@ Global
 		Debug64|x64 = Debug64|x64
 		Release|Win32 = Release|Win32
 		Release|x64 = Release|x64
+		Release64|Win32 = Release64|Win32
+		Release64|x64 = Release64|x64
 		Tool debug|Win32 = Tool debug|Win32
 		Tool debug|x64 = Tool debug|x64
 		Tool release|Win32 = Tool release|Win32
@@ -31,6 +33,10 @@ Global
 		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Release|Win32.Build.0 = Release|Win32
 		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Release|x64.ActiveCfg = Release|x64
 		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Release|x64.Build.0 = Release|x64
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Release64|Win32.ActiveCfg = Release64|x64
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Release64|Win32.Build.0 = Release64|x64
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Release64|x64.ActiveCfg = Release64|x64
+		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Release64|x64.Build.0 = Release64|x64
 		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Tool debug|Win32.ActiveCfg = Tool debug|Win32
 		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Tool debug|Win32.Build.0 = Tool debug|Win32
 		{C28EBEF3-77A3-4EDF-9853-71F1128606D7}.Tool debug|x64.ActiveCfg = Tool debug|x64

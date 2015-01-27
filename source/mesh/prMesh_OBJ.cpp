@@ -117,9 +117,9 @@ bool prMesh_OBJ::Load(const char *filename)
                     pTempVerts->z = verts[c].z;
                     pTempVerts++;
 
-                    prTrace("%f, %f, %f, ",  verts[a].x, verts[a].y, verts[a].z);
-                    prTrace("%f, %f, %f, ",  verts[b].x, verts[b].y, verts[b].z);
-                    prTrace("%f, %f, %f,\n", verts[c].x, verts[c].y, verts[c].z);
+                    //prTrace("%f, %f, %f, ",  verts[a].x, verts[a].y, verts[a].z);
+                    //prTrace("%f, %f, %f, ",  verts[b].x, verts[b].y, verts[b].z);
+                    //prTrace("%f, %f, %f,\n", verts[c].x, verts[c].y, verts[c].z);
                 }
 
                 verts.clear();

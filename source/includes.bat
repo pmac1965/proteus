@@ -38,11 +38,11 @@ dir /S /B *.h >> ..\files.txt
 popd
 )
 
-if exist android (
-pushd android
-dir /S /B *.h >> ..\files.txt
-popd
-)
+REM if exist android (
+REM pushd android
+REM dir /S /B *.h >> ..\files.txt
+REM popd
+REM )
 
 if exist audio (
 pushd audio

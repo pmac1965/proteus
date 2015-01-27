@@ -28,19 +28,22 @@
 #include <cstring>
 
 
+// Namespaces
+namespace Proteus {
+namespace Gui {
+
+
 /// ---------------------------------------------------------------------------
 /// Standard GUI dialog
 /// ---------------------------------------------------------------------------
 prDialog::prDialog(const char *name, prSpriteManager *pSpriteManager) : prWidget(WT_Dialog, name, pSpriteManager)
                                                                       , m_spriteBackdrop      (NULL)
-                                                                      , m_pFont               (NULL)
-                                                                      , m_pttfFont            (NULL)
-                                                                      , m_prIDialogListener   (NULL)
+                                                                      , m_pDialogListener     (NULL)
                                                                       , m_buttonCount         (0)
                                                                       , m_titleScale          (1.0f)
                                                                       , m_textScale           (1.0f)
-                                                                      , mFontAlignmentTitle   (0)               // 0 equals
-                                                                      , mFontAlignmentBody    (0)               // 0 equals
+                                                                      , mFontAlignmentTitle   (0)       // 0 == ALIGN_LEFT
+                                                                      , mFontAlignmentBody    (0)       // 0 == ALIGN_LEFT
 {
     memset(&m_buttons, 0, sizeof(m_buttons));
 }
@@ -84,22 +87,13 @@ void prDialog::Update(f32 dt)
 /// ---------------------------------------------------------------------------
 void prDialog::Draw()
 {
-    //// Visible
-    //if (!GetVisible())
-    //{
-    //    TODO("Move visibility test to main gui draw.")
-    //    return;
-    //}
-
-
-    // draw the dialog
+    // Draw the dialog?
     if (m_spriteBackdrop)
     {
         m_spriteBackdrop->pos = pos;
         m_spriteBackdrop->Draw();
 
         // Draw any buttons
-        //Trace("Button Count: %i\n", m_buttonCount);
         for (s32 i=0; i<m_buttonCount; i++)
         {
             if (m_buttons[i])
@@ -127,8 +121,6 @@ void prDialog::Draw()
                     break;
                 }
 
-                m_buttons[i]->SetTextColour(m_textColour);
-                m_buttons[i]->SetTextScale(m_textScale);
                 m_buttons[i]->pos = position;
                 m_buttons[i]->Draw();
             }
@@ -136,30 +128,90 @@ void prDialog::Draw()
 
 
         // Draw title text.
-        if (m_pFont && m_title.Length() > 0)
         {
-            m_pFont->Draw(pos.x + m_offsetTitle.x, pos.y + m_offsetTitle.y, m_titleScale, prColour::White, mFontAlignmentTitle, m_title.Text());
-        }
-        else if (m_pttfFont && m_title.Length() > 0)
-        {
-            TODO("Don't like this bold option! Remove")
-            m_pttfFont->Draw(pos.x + m_offsetTitle.x, pos.y + m_offsetTitle.y, m_titleScale, m_fontColour, mFontAlignmentTitle, m_title.Text());
-            m_pttfFont->Draw(pos.x + m_offsetTitle.x + 1, pos.y + m_offsetTitle.y + 1, m_titleScale, m_fontColour, mFontAlignmentTitle, m_title.Text());
+            f32 titleX = pos.x;
+            f32 titleY = pos.y;
+
+            switch(mFontAlignmentTitle)
+            {
+            // Left
+            case 0:
+                break;
+
+            // Right
+            case 1:
+                titleX += m_spriteBackdrop->GetFrameWidth();
+                break;
+
+            // Center
+            case 2:
+                titleX += (m_spriteBackdrop->GetFrameWidth() / 2);                
+                break;
+
+            default:
+                PRWARN("Invalid text alignment");
+                break;
+            }
+
+            // Add users offset
+            titleX += m_offsetTitle.x;
+            titleY += m_offsetTitle.y;
+
+            // Draw title text.
+            if (m_pBmpfont && m_title.Length() > 0)
+            {
+                m_pBmpfont->Draw(titleX, titleY, m_titleScale, m_textColour, mFontAlignmentTitle, m_title.Text());
+            }
+            else if (m_pTtfFont && m_title.Length() > 0)
+            {
+                m_pTtfFont->Draw(titleX, titleY, m_titleScale, m_textColour, mFontAlignmentTitle, m_title.Text());
+            }
         }
 
         
         // Draw body text
-        if (m_pFont && m_text.Length() > 0)
         {
-            f32 center = (f32)(m_spriteBackdrop->GetFrameWidth()  / 2);
-            f32 middle = (f32)(m_spriteBackdrop->GetFrameHeight() / 2);
-            m_pFont->Draw(pos.x + center, pos.y + middle - m_offsetText.y, m_textScale, prColour::White, mFontAlignmentBody, m_text.Text());
-        }
-        else if (m_pttfFont && m_text.Length() > 0)
-        {
-            f32 center = (f32)(m_spriteBackdrop->GetFrameWidth()  / 2);
-            f32 middle = (f32)(m_spriteBackdrop->GetFrameHeight() / 2);
-            m_pttfFont->Draw(pos.x + center, pos.y + middle - m_offsetText.y, m_textScale, m_fontColour, mFontAlignmentBody, m_text.Text());
+            f32 bodyX = pos.x;
+            f32 bodyY = pos.y;
+
+            switch(mFontAlignmentBody)
+            {
+            // Left
+            case 0:
+                bodyY += (m_spriteBackdrop->GetFrameHeight() / 2);      // Center in Y
+                break;
+
+            // Right
+            case 1:
+                bodyX += m_spriteBackdrop->GetFrameWidth();             // Plus width
+                bodyY += (m_spriteBackdrop->GetFrameHeight() / 2);      // Center in Y
+                break;
+
+            // Center
+            case 2:
+                bodyX += (m_spriteBackdrop->GetFrameWidth() / 2);       // Center in X
+                bodyY += (m_spriteBackdrop->GetFrameHeight() / 2);      // Center in Y
+                break;
+
+            default:
+                PRWARN("Invalid text alignment");
+                break;
+            }
+
+            // Add users offset
+            bodyX += m_offsetText.x;
+            bodyY += m_offsetText.y;
+
+            if (m_pBmpfont && m_text.Length() > 0)
+            {
+                bodyY -= (m_pBmpfont->MeasureString("Y", m_textScale).y / 2); // Center text in Y
+                m_pBmpfont->Draw(bodyX, bodyY, m_textScale, m_textColour, mFontAlignmentBody, m_text.Text());
+            }
+            else if (m_pTtfFont && m_text.Length() > 0)
+            {
+                bodyY -= (m_pTtfFont->MeasureString("Y", m_textScale).y / 2); // Center text in Y
+                m_pTtfFont->Draw(bodyX, bodyY, m_textScale, m_textColour, mFontAlignmentBody, m_text.Text());
+            }
         }
     }
 }
@@ -211,6 +263,56 @@ void prDialog::OnReleased(const prTouchEvent &e)
 
 
 /// ---------------------------------------------------------------------------
+/// Callback handlers.
+/// ---------------------------------------------------------------------------
+void prDialog::OnButtonPressed(const char *name)
+{
+    if (m_pDialogListener)
+    {
+        s32 index = 0;
+        for (; index < m_buttonCount; index++)
+        {
+            if (m_buttons[index])
+            {
+                if (strcmp(m_buttons[index]->GetName(), name) == 0)
+                {
+                    break;
+                }
+            }
+        }
+
+        m_destroy = m_pDialogListener->OnDlgButtonPressed(name, index);
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Callback handlers.
+/// ---------------------------------------------------------------------------
+void prDialog::OnButtonReleased(const char *name)
+{
+    if (m_pDialogListener)
+    {
+        s32 index = 0;
+
+        // Find index
+        for (; index < m_buttonCount; index++)
+        {
+            if (m_buttons[index])
+            {
+                if (strcmp(m_buttons[index]->GetName(), name) == 0)
+                {
+                    break;
+                }
+            }
+        }
+
+        m_destroy = m_pDialogListener->OnDlgButtonReleased(name, index);
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
 /// Set the dialog backdrop.
 /// ---------------------------------------------------------------------------
 void prDialog::SetBackdrop(const char *backdrop)
@@ -225,15 +327,18 @@ void prDialog::SetBackdrop(const char *backdrop)
 /// ---------------------------------------------------------------------------
 /// Adds a button.
 /// ---------------------------------------------------------------------------
-void prDialog::AddButton(const char *pFile, const char *pName)
+prButton *prDialog::AddButton(const char *pFile, const char *pName, const char *pText)
 {
     PRASSERT(pFile && *pFile);
     PRASSERT(pName && *pName);
+    PRASSERT(pText && *pText);
+
+    prButton *pButton = NULL;
 
     if (m_buttonCount < DIALOG_MAX_BUTTONS)
     {
         // Create the button.
-        prButton *pButton = new prButton(pName, m_pSpriteManager);
+        pButton = new prButton(pName, m_pSpriteManager);
         PRASSERT(pButton);
         
         // Create the button.
@@ -242,9 +347,9 @@ void prDialog::AddButton(const char *pFile, const char *pName)
         
         m_buttons[m_buttonCount] = pButton;
         m_buttons[m_buttonCount]->SetSprite(pSprite);
-        m_buttons[m_buttonCount]->SetFont(m_pFont);
-        m_buttons[m_buttonCount]->SetEnabled(true);
-        m_buttons[m_buttonCount]->SetText(pName);
+        m_buttons[m_buttonCount]->SetBMPFont(m_pBmpfont);
+        m_buttons[m_buttonCount]->SetTTFFont(m_pTtfFont);
+        m_buttons[m_buttonCount]->SetText(pText);
         m_buttons[m_buttonCount]->SetLayer(GetLayer());
         m_buttons[m_buttonCount]->RegisterListener(this);
 
@@ -255,26 +360,26 @@ void prDialog::AddButton(const char *pFile, const char *pName)
         // 1 button
         case 0:
         {
-            s32 center = m_spriteBackdrop->GetFrameWidth() / 2;
-            s32 bottom = m_spriteBackdrop->GetFrameHeight();
-                s32 buttonHeight    = m_buttons[0]->GetHeight();
-                s32 buttonWidth     = m_buttons[0]->GetWidth();
-                m_buttonsPos[0].x   = (f32)(center - (buttonWidth / 2));
-                m_buttonsPos[0].y   = (f32)(bottom - buttonHeight);
+            s32 center          = m_spriteBackdrop->GetFrameWidth() / 2;
+            s32 bottom          = m_spriteBackdrop->GetFrameHeight();
+            s32 buttonHeight    = m_buttons[0]->GetHeight();
+            s32 buttonWidth     = m_buttons[0]->GetWidth();
+            m_buttonsPos[0].x   = (f32)(center - (buttonWidth / 2));
+            m_buttonsPos[0].y   = (f32)(bottom - buttonHeight);
         }
         break;
         
         // 2 buttons
         case 1:
         {
-                s32 width           = m_spriteBackdrop->GetFrameWidth();
-                s32 bottom          = m_spriteBackdrop->GetFrameHeight();
-                s32 buttonHeight    = m_buttons[0]->GetHeight();
-                s32 buttonWidth     = m_buttons[0]->GetWidth();
-                m_buttonsPos[0].x   = 0.0f;
-                m_buttonsPos[1].x   = (f32)(width - buttonWidth);
-                m_buttonsPos[0].y   = (f32)(bottom - buttonHeight);
-                m_buttonsPos[1].y   = (f32)(bottom - buttonHeight);
+            s32 width           = m_spriteBackdrop->GetFrameWidth();
+            s32 bottom          = m_spriteBackdrop->GetFrameHeight();
+            s32 buttonHeight    = m_buttons[0]->GetHeight();
+            s32 buttonWidth     = m_buttons[0]->GetWidth();
+            m_buttonsPos[0].x   = 0.0f;
+            m_buttonsPos[1].x   = (f32)(width - buttonWidth);
+            m_buttonsPos[0].y   = (f32)(bottom - buttonHeight);
+            m_buttonsPos[1].y   = (f32)(bottom - buttonHeight);
         }
         break;
 
@@ -287,44 +392,8 @@ void prDialog::AddButton(const char *pFile, const char *pName)
         m_buttonCount++;
     }
 
-}
 
-
-/// ---------------------------------------------------------------------------
-/// Set the font for the buttons and the dialog.
-/// ---------------------------------------------------------------------------
-void prDialog::SetFont(prBitmapFont *pFont)
-{
-    // Set text font.
-    m_pFont = pFont;
-
-    // Set button font.
-    for (s32 i=0; i<m_buttonCount; i++)
-    {
-        if (m_buttons[i])
-        {
-            m_buttons[i]->SetFont(m_pFont);
-        }
-    }
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Sets the dialogs font
-/// ---------------------------------------------------------------------------
-void prDialog::SetTTFFont(prTrueTypeFont *pFont)
-{
-    // Set text font.
-    m_pttfFont = pFont;
-
-    // Set button font.
-    for (s32 i=0; i<m_buttonCount; i++)
-    {
-        if (m_buttons[i])
-        {
-            m_buttons[i]->SetTTFFont(m_pttfFont);
-        }
-    }
+    return pButton;
 }
 
 
@@ -353,57 +422,7 @@ void prDialog::SetText(const char *text, f32 scale)
 /// ---------------------------------------------------------------------------
 void prDialog::RegisterListener(prDialogListener *pListener)
 {
-    m_prIDialogListener = pListener;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Callback handlers.
-/// ---------------------------------------------------------------------------
-void prDialog::OnButtonPressed(const char *name)
-{
-    if (m_prIDialogListener)
-    {
-        s32 index = 0;
-        for (; index < m_buttonCount; index++)
-        {
-            if (m_buttons[index])
-            {
-                if (strcmp(m_buttons[index]->Name(), name) == 0)
-                {
-                    break;
-                }
-            }
-        }
-
-        m_destroy = m_prIDialogListener->OnDlgButtonPressed(name, index);
-    }
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Callback handlers.
-/// ---------------------------------------------------------------------------
-void prDialog::OnButtonReleased(const char *name)
-{
-    if (m_prIDialogListener)
-    {
-        s32 index = 0;
-
-        // Find index
-        for (; index < m_buttonCount; index++)
-        {
-            if (m_buttons[index])
-            {
-                if (strcmp(m_buttons[index]->Name(), name) == 0)
-                {
-                    break;
-                }
-            }
-        }
-
-        m_destroy = m_prIDialogListener->OnDlgButtonReleased(name, index);
-    }
+    m_pDialogListener = pListener;
 }
 
 
@@ -437,3 +456,6 @@ s32 prDialog::GetHeight() const
 
     return size;
 }
+
+
+}}// Namespaces

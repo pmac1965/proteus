@@ -20,6 +20,8 @@
 #include "../prConfig.h"
 #include "../debug/prDebug.h"
 #include "prLog.h"
+#include <stdarg.h>
+#include <stdio.h>
 
 
 namespace
@@ -36,15 +38,23 @@ extern void prTraceWriteToFile(bool repeat, const char *bufferRpt, const char *b
 /// Outputs a debug string to an error log window.
 /// The actual location is platform dependant, but will generally be the debuggers output window.
 /// ---------------------------------------------------------------------------
-void prLog(const char *message)
+void prLog(const char *fmt, ...)
 {
     if (enabled)
     {
-        if (message && *message)
+        if (fmt && *fmt)
         {
-            prOutputString(message);
+            char output[512];
 
-            prTraceWriteToFile(false, NULL, message);
+            // Format the output.
+            va_list args;
+            va_start(args, fmt);
+            vsnprintf(output, sizeof(output) - 1, fmt, args);
+            va_end(args);
+
+            prOutputString(output);
+
+            prTraceWriteToFile(false, NULL, output);
         }
     }
 }

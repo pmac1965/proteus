@@ -25,7 +25,8 @@
 //      The actual location is platform dependant, but will generally be the debuggers output window.
 //
 // Parameters:
-//      message - The message to write
+//      fmt - The format string.
+//      ... - Format string parameters.
 //
 // Notes:
 //      This type of logging is designed for error messages only as it
@@ -36,7 +37,7 @@
 //
 // See Also:
 //      <prLogEnable>
-void prLog(const char *message);
+void prLog(const char *fmt, ...);
 
 // Method: prLogEnable
 //      Enables logging.

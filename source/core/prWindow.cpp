@@ -33,6 +33,8 @@ prWindow::prWindow()
     m_active      = true;
     m_exp0        = false;
     m_exp1        = false;
+    m_minWidth    = 0xFFFFFFFF; 
+    m_minHeight   = 0xFFFFFFFF;
 }
 
 

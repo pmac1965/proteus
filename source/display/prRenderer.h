@@ -122,6 +122,14 @@ public:
     //      from - The start coordinate
     //      to   - The end coordinate
     virtual void DrawLine(Proteus::Math::prVector3 &from, Proteus::Math::prVector3 &to) = 0;
+
+    // Method: DrawLine
+    //      Draws a line 3D.
+    //
+    // Parameters:
+    //      from - The start coordinate
+    //      to   - The end coordinate
+    virtual void DrawLine(const Proteus::Math::prVector3 &from, const Proteus::Math::prVector3 &to) = 0;
     
     // Method: DrawRect
     //      Draws a hollow rectangle.

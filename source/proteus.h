@@ -43,16 +43,16 @@
 #include "analytics/prAnalytics.h"
 #include "analytics/prAnalyticsBase.h"
 #include "analytics/prAnalyticsFlurry.h"
-#include "android/prJNIAudio.h"
-#include "android/prJNIInterface.h"
-#include "android/prJNINetwork.h"
-#include "android/AL/al.h"
-#include "android/AL/alc.h"
-#include "android/AL/alext.h"
-#include "android/AL/efx-creative.h"
-#include "android/AL/efx.h"
-#include "audio/prOpenALDeviceList.h"
-#include "audio/prOpenALErrors.h"
+//#include "android/prJNIAudio.h"
+//#include "android/prJNIInterface.h"
+//#include "android/prJNINetwork.h"
+//#include "android/AL/al.h"
+//#include "android/AL/alc.h"
+//#include "android/AL/alext.h"
+//#include "android/AL/efx-creative.h"
+//#include "android/AL/efx.h"
+//#include "audio/prOpenALDeviceList.h"
+//#include "audio/prOpenALErrors.h"
 #include "audio/prSoundManager.h"
 #include "audio/prSoundManagerShared.h"
 //#include "audio/external/codec.h"
@@ -100,6 +100,7 @@
 #include "debug/prAssert.h"
 #include "debug/prConsoleWindow.h"
 #include "debug/prDebug.h"
+#include "debug/prException.h"
 #include "debug/prFps.h"
 #include "debug/prLog.h"
 #include "debug/prOnScreenLogger.h"
@@ -140,6 +141,8 @@
 #include "gui/prDialog.h"
 #include "gui/prDialogListener.h"
 #include "gui/prGui.h"
+#include "gui/prMenu.h"
+#include "gui/prMenuStrip.h"
 #include "gui/prWidget.h"
 #include "inAppPurchase/prInAppPurchase.h"
 #include "inAppPurchase/prStore.h"
@@ -211,8 +214,8 @@
 #include "persistence/prSave_linux.h"
 #include "persistence/prSave_mac.h"
 #include "persistence/prSave_pc.h"
-#include "scene/prScene.h"
-#include "scene/prSceneNode.h"
+//#include "scene/prScene.h"
+//#include "scene/prSceneNode.h"
 #include "script/prLua.h"
 #include "script/prLuaDebug.h"
 #include "social/facebook/prFacebook.h"
@@ -281,6 +284,15 @@
     // Steam
     #if defined(ALLOW_STEAM)
         #pragma comment(lib, "steam_api.lib")
+    #endif
+
+    // GLEW
+    #if defined(ALLOW_GLEW)
+        #if (defined(_DEBUG) || defined(DEBUG))
+            #pragma comment(lib, "glew32d.lib")
+        #else
+            #pragma comment(lib, "glew32.lib")
+        #endif
     #endif
 
 #endif//PLATFORM_PC

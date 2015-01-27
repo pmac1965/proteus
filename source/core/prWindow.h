@@ -21,6 +21,7 @@
 
 
 #include "prTypes.h"
+#include "../debug/prAssert.h"
 
 
 // Class: prWindow
@@ -28,6 +29,10 @@
 //
 // Notes:
 //      The class is designed to allow for the window to be recreated.
+//
+// Notes:
+//      The minimum width/height are '0xFFFFFFFF' and need to be set to
+//      a sensible value to be used properly
 class prWindow
 {
 public:
@@ -98,12 +103,45 @@ public:
     //      Gets the windows bit depth
     u32 GetBits() const { return m_bits; }
 
+    // Method: GetMinWidth
+    //      Gets the windows minimum width
+    //
+    // Notes:
+    //      This is used during window resizing by the engine
+    u32 GetMinWidth() const { return m_minWidth; }
+
+    // Method: GetMinHeight
+    //      Gets the windows minimum height
+    //
+    // Notes:
+    //      This is used during window resizing by the engine
+    u32 GetMinHeight() const { return m_minHeight; }
+
+    // Method: SetMinSize
+    //      Gets the windows minimum size
+    //
+    // Parameters:
+    //      width  - minimum width
+    //      height - minimum height
+    //
+    // Notes:
+    //      This is used during window resizing by the engine
+    //
+    // Notes:
+    //      Neither values should be zero
+    void SetMinSize(u32 width, u32 height) { PRASSERT(width > 0);
+                                             PRASSERT(height > 0);
+                                             m_minWidth  = width;
+                                             m_minHeight = height; }
+
 
 protected:
 
     u32             m_width;        // Width of the window.
     u32             m_height;       // Height of the window.
     u32             m_bits;         // Bits per pixel.
+    u32             m_minWidth;     // Minimum width for windowed OS's like linux, mac and windows
+    u32             m_minHeight;    // Minimum height for windowed OS's like linux, mac and windows
 
     bool            m_fullScreen;   // Are we fullscreen or windowed?
     bool            m_active;       // Is the window active. This is set by the system.

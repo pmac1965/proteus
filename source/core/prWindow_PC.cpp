@@ -23,11 +23,18 @@
 #if defined(PLATFORM_PC)
 
 
+#if defined(ALLOW_GLEW)
+#include <glew.h>
+#include <wglew.h>
+#endif
+
+
 #include "prWindow_PC.h"
 #include "prWindowProcedure.h"
 #include "../debug/prTrace.h"
 #include "../debug/prAssert.h"
 #include "../debug/prDebug.h"
+#include "../debug/prLog.h"
 #include "../display/prOglUtils.h"
 #include "../core/prCore.h"
 #include "../core/prRegistry.h"
@@ -178,12 +185,48 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
     Resize(width, height);
 
 
+    // Init glew
+#if defined(ALLOW_GLEW)
+    GLenum err = glewInit();
+    if (GLEW_OK != err)
+    {
+        prTrace("GLEW: Failed to initialise\n");
+        prTrace("GLEW: Error: %s\n", glewGetErrorString(err));
+    }
+    else
+    {
+        prTrace("GLEW: Initialised\n");
+        prTrace("GLEW: Version: %s\n", glewGetString(GLEW_VERSION));
+
+
+        if (wglewIsSupported("WGL_EXT_swap_control"))
+        {
+            prTrace("GLEW: 'Got WGL_EXT_swap_control'\n");
+            wglSwapIntervalEXT(1);
+        }
+        else
+        {
+            prTrace("GLEW: Failed to find 'WGL_EXT_swap_control'");
+        }
+    }
+#endif
+
+
     // Store a pointer to the window class in the windows user data.
 #ifdef _WIN64
     SetWindowLongPtr(m_hwnd, GWLP_USERDATA, (LONG_PTR)this);
+    #pragma message("=========================")
+    #pragma message("x64 build")
+    #pragma message("=========================")
+
 #else
     SetWindowLong(m_hwnd, GWL_USERDATA, (long)(__int64)this);
+    #pragma message("=========================")
+    #pragma message("Win32 build")
+    #pragma message("=========================")
+
 #endif
+
 
     SetTitle(m_title);
 
@@ -381,7 +424,6 @@ void prWindow_PC::Resize(u32 width, u32 height)
     if (height == 0)
         height = 1;
 
-
     // Reset the current viewport
     glViewport(0, 0, width, height);
     ERR_CHECK();
@@ -392,14 +434,23 @@ void prWindow_PC::Resize(u32 width, u32 height)
     glLoadIdentity();
     ERR_CHECK();
 
+    // Tool builds have resizeable windows
+    #if defined(PROTEUS_TOOL)
+    m_width  = width;
+    m_height = height;
 
-    prTrace("PC RESIZE: %i, %i\n", width, height);
-
+    // Let system know the screen size.
+    prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+    if (reg)
+    {
+        reg->SetValue("ScreenWidth", width);
+        reg->SetValue("ScreenHeight", height);
+    }
+    #endif
 
     // Calculate the aspect ratio of the window
     gluPerspective(45.0f, (GLfloat)width/(GLfloat)height, 0.1f, 1000.0f);
     ERR_CHECK();
-
 
     // Select the modelview matrix and reset it.
     glMatrixMode(GL_MODELVIEW);
@@ -551,7 +602,7 @@ bool prWindow_PC::CreateOpenGLWindow(u32 menuID, u32 iconID)
 
 
     // Adjust window to true requested size
-    AdjustWindowRectEx(&rect, dwStyle, FALSE, dwExStyle);
+    AdjustWindowRectEx(&rect, dwStyle, menuID == 0 ? FALSE : TRUE, dwExStyle);
 
 
     // Register the window class

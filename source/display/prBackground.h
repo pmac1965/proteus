@@ -21,6 +21,7 @@
 
 
 #include "../core/prTypes.h"
+#include "../core/prString.h"
 #include "../math/prVector2.h"
 #include "prColour.h"
 
@@ -37,7 +38,6 @@ class prTexture;
 class prBackground
 {
 public:
-
     // Enum: prBackgroundType
     //      The background type
     //
@@ -54,7 +54,6 @@ public:
 
 
 public:
-
     // Method: GetWidth
     //      Returns the width of the background.
     s32 GetWidth() const { return m_width; }
@@ -90,13 +89,28 @@ public:
     PRBOOL GetVisible() const { return mVisible; }
 
 
-public:
+#if defined(PROTEUS_TOOL)
+    // Method: GetFilename
+    //      Gets the textures filename.
+    //
+    // Notes:
+    //      Only available on tool builds
+    const char *GetFilename() const { return m_filename.Text(); }
 
+    // Method: SetTexture
+    //      Sets the backgrounds texture
+    //
+    // Notes:
+    //      Only available on tool builds
+    void SetTexture(prTexture* pTex);
+#endif
+
+
+public:
     Proteus::Math::prVector2 pos;
 
 
 private:
-
     friend class prBackgroundManager;
 
     // Method: prBackground
@@ -112,7 +126,6 @@ private:
 
 
 private:
-
     // Method: ParseFile
     //      Parses the xml file.
     //
@@ -136,16 +149,14 @@ private:
 
 
 private:
-
     // Stops passing by value and assignment.
     prBackground(const prBackground&);
     const prBackground& operator = (const prBackground&);
 
     
 private:
-
     prTexture      *m_texture;
-    char           *m_filename;
+    prString        m_filename;
     s32             m_width;
     s32             m_height;
     s32             m_type;

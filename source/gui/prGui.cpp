@@ -21,6 +21,8 @@
 #include "prGui.h"
 #include "prButton.h"
 #include "prDialog.h"
+#include "prMenuStrip.h"
+#include "prMenu.h"
 #include "../debug/prTrace.h"
 #include "../core/prStringUtil.h"
 #include "../core/prMacros.h"
@@ -36,6 +38,11 @@
 #endif
 
 
+// Namespaces
+namespace Proteus {
+namespace Gui {
+
+
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
@@ -45,6 +52,8 @@ prGui::prGui()
     m_visible   = PRTRUE;
     m_layer     = 0;
     m_baseLayer = m_layer;
+    m_pBmpfont  = NULL;
+    m_pTtfFont  = NULL;
 
     prTouch *pTouch = static_cast<prTouch *>(prCoreGetComponent(PRSYSTEM_TOUCH));
     if (pTouch)
@@ -81,11 +90,29 @@ prWidget *prGui::Create(prWidgetType type, const char *name)
     case WT_Button:
         widget = new prButton(name, &m_spriteManager);
         widget->SetLayer(m_layer);
+        widget->SetBMPFont(m_pBmpfont);
+        widget->SetTTFFont(m_pTtfFont);
         break;
 
     case WT_Dialog:
         widget = new prDialog(name, &m_spriteManager);
         widget->SetLayer(++m_layer);
+        widget->SetBMPFont(m_pBmpfont);
+        widget->SetTTFFont(m_pTtfFont);
+        break;
+
+    case WT_MenuStrip:
+        widget = new prMenuStrip(name, &m_spriteManager);
+        widget->SetLayer(m_layer);
+        widget->SetBMPFont(m_pBmpfont);
+        widget->SetTTFFont(m_pTtfFont);
+        break;
+
+    case WT_Menu:
+        widget = new prMenu(name, &m_spriteManager);
+        widget->SetLayer(m_layer);
+        widget->SetBMPFont(m_pBmpfont);
+        widget->SetTTFFont(m_pTtfFont);
         break;
 
     default:
@@ -118,7 +145,7 @@ void prGui::Update(f32 dt)
             if (pWidget->GetDestroy())
             {
                 // Reduce layer
-                if (pWidget->Type() == WT_Dialog)
+                if (pWidget->GetType() == WT_Dialog)
                 {
                     m_layer--;
                 }
@@ -197,7 +224,7 @@ prWidget *prGui::Find(const char *name)
     std::list<prWidget *>::iterator end = m_widgets.end();
     for (; it != end; ++it)
     {
-        if (strcmp(name, (*it)->Name()) == 0)
+        if (strcmp(name, (*it)->GetName()) == 0)
         {
             return *it;
         }
@@ -296,3 +323,5 @@ void prGui::InputAxis(const prTouchEvent &e)
     }
 }
 
+
+}}// Namespaces
