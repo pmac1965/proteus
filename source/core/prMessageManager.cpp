@@ -69,7 +69,7 @@ void prMessageManager::Unregister(prMessageHandler *handler)
 
 
 /// ---------------------------------------------------------------------------
-/// Instantly sends a message to all registers receivers.
+/// Instantly sends a message to all registered receivers.
 /// ---------------------------------------------------------------------------
 void prMessageManager::Send(prGameMessage &msg)
 {
@@ -78,6 +78,9 @@ void prMessageManager::Send(prGameMessage &msg)
 
     for (; itr != end; ++itr)
     {
-        (*itr)->Receive(msg);
+        if ((*itr)->Receive(msg))
+        {
+            break;
+        }
     }
 }

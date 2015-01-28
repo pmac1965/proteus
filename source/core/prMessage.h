@@ -28,7 +28,6 @@
 typedef struct prGameMessage
 {
 public:
-
     // Method: prGameMessage
     //      Default constructor
     prGameMessage()
@@ -77,7 +76,6 @@ public:
 class prMessageHandler
 {
 public:
-
     // Method: prMessageHandler
     //      Ctor
     prMessageHandler() {}
@@ -94,6 +92,10 @@ public:
     //
     // Notes:
     //      The message can be targeted or system wide.
+    //
+    // Notes:
+    //      If true is returned, then the message is no longer 
+    //      passed on
     //
     // Returns:
     //      true if handled.
