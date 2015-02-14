@@ -1,4 +1,5 @@
 // File: prAlert.h
+//      Contains cross platform error dialogs designed for game use only.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -20,20 +21,56 @@
 #define __PRALERT_H
 
 
+// Forward declarations
+class prWindow;
+
+
 // Method: prAlertShowError
 //      Shows a cross platfrom error message dialog
 //
+// Parameters:
+//      title   - The dialogs title text
+//      message - The dialogs message text
+//      pWindow - Optional window pointer
+//
 // Notes:
-//      If a dialog is not available, then message will be logged to the console
-void prAlertShowError(const char *title, const char *message);
-
-
-// Method: prAlertShowError
-//      Shows a cross platfrom information message dialog
+//      On a *PC* the optional window pointer is used to determine the dialogs parent window.
 //
 // Notes:
 //      If a dialog is not available, then message will be logged to the console
-void prAlertShowInformation(const char *title, const char *message);
+void prAlertShowError(const char *title, const char *message, prWindow *pWindow = 0);
+
+
+// Method: prAlertShowInformation
+//      Shows a cross platfrom information message dialog
+//
+// Parameters:
+//      title   - The dialogs title text
+//      message - The dialogs message text
+//      pWindow - Optional window pointer
+//
+// Notes:
+//      On a *PC* the optional window pointer is used to determine the dialogs parent window.
+//
+// Notes:
+//      If a dialog is not available, then message will be logged to the console
+void prAlertShowInformation(const char *title, const char *message, prWindow *pWindow = 0);
+
+
+// Method: prAlertShowWarning
+//      Shows a cross platfrom warning message dialog
+//
+// Parameters:
+//      title   - The dialogs title text
+//      message - The dialogs message text
+//      pWindow - Optional window pointer
+//
+// Notes:
+//      On a *PC* the optional window pointer is used to determine the dialogs parent window.
+//
+// Notes:
+//      If a dialog is not available, then message will be logged to the console
+void prAlertShowWarning(const char *title, const char *message, prWindow *pWindow = 0);
 
 
 #endif//__PRALERT_H

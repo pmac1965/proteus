@@ -56,7 +56,10 @@ prBackgroundManager::~prBackgroundManager()
 /// ---------------------------------------------------------------------------
 prBackground *prBackgroundManager::Create(const char *filename)
 {
+    // Game builds will assert if there's no filename
+    #if !defined(PROTEUS_TOOL)
     PRASSERT(filename && *filename);
+    #endif
 
     for (int i=0; i<MAX_BACKGROUNDS; i++)
     {
@@ -72,7 +75,7 @@ prBackground *prBackgroundManager::Create(const char *filename)
             #if !defined(REMOVE_EXCEPTIONS)
             catch(...)
             {
-                WARN("Failed to create background: ", filename);
+                PRWARN("Failed to create background: ", filename);
             }
             #endif
         }

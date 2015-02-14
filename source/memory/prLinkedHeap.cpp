@@ -754,8 +754,6 @@ void prLinkedHeap::FreeListRemove(void* p)
     prFreeNode* curr = m_free;
     prFreeNode* prev = NULL;
 
-    TODO("This code is suspect - check logic")// According to VS source analysis
-
     do
     {
         if (p == curr)

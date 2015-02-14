@@ -215,15 +215,31 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
     // Store a pointer to the window class in the windows user data.
 #ifdef _WIN64
     SetWindowLongPtr(m_hwnd, GWLP_USERDATA, (LONG_PTR)this);
-    #pragma message("=========================")
+
+    // Show shome build information duriing a rebuild
+    #pragma message("======================================")
     #pragma message("x64 build")
-    #pragma message("=========================")
+
+    #if defined(SOUND_ALLOW)
+    #pragma message("Sound enabled")
+    #else
+    #pragma message("Sound disabled")
+    #endif
+    #pragma message("======================================")
 
 #else
     SetWindowLong(m_hwnd, GWL_USERDATA, (long)(__int64)this);
-    #pragma message("=========================")
+    
+    // Show shome build information duriing a rebuild
+    #pragma message("======================================")
     #pragma message("Win32 build")
-    #pragma message("=========================")
+
+    #if defined(SOUND_ALLOW)
+    #pragma message("Sound enabled")
+    #else
+    #pragma message("Sound disabled")
+    #endif
+    #pragma message("======================================")
 
 #endif
 

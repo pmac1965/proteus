@@ -144,6 +144,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	debug/prTrace.cpp	\
 	debug/prLog.cpp	\
 	display/prBackground.cpp	\
+	display/prBackgroundLayer.cpp	\
 	display/prBackgroundManager.cpp	\
 	display/prBitmapFont.cpp	\
 	display/prCamera.cpp	\

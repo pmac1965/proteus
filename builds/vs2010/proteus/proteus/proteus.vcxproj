@@ -598,6 +598,7 @@
     <ClInclude Include="..\..\..\..\source\debug\prProfileManager.h" />
     <ClInclude Include="..\..\..\..\source\debug\prTrace.h" />
     <ClInclude Include="..\..\..\..\source\display\prBackground.h" />
+    <ClInclude Include="..\..\..\..\source\display\prBackgroundLayer.h" />
     <ClInclude Include="..\..\..\..\source\display\prBackgroundManager.h" />
     <ClInclude Include="..\..\..\..\source\display\prBitmapFont.h" />
     <ClInclude Include="..\..\..\..\source\display\prCamera.h" />
@@ -953,6 +954,7 @@
     <ClCompile Include="..\..\..\..\source\debug\prProfileManager.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prTrace.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prBackground.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prBackgroundLayer.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prBackgroundManager.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prBitmapFont.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prCamera.cpp" />

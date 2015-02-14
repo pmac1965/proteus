@@ -137,6 +137,13 @@ public:
     //      Sets the button message receiver
     void RegisterListener(prButtonListener *pListener);
 
+    // Method: SetSelected
+    //      Sets the button as selected.
+    //
+    // Notes:
+    //      Used to highlight a specific button
+    void SetSelected();
+
     // Method: GetWidth
     //      Gets the button width
     s32 GetWidth() const { return m_width; }

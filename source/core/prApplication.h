@@ -33,7 +33,7 @@ namespace Core {
 
 
 // Class: prApplication
-//      Interface class for all the application type classes.
+//      Base interface class for all the application type classes.
 //
 // Notes:
 //      The class for a specific application type should implement,

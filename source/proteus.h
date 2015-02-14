@@ -108,6 +108,7 @@
 #include "debug/prProfileManager.h"
 #include "debug/prTrace.h"
 #include "display/prBackground.h"
+#include "display/prBackgroundLayer.h"
 #include "display/prBackgroundManager.h"
 #include "display/prBitmapFont.h"
 #include "display/prCamera.h"

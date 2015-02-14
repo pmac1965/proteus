@@ -68,6 +68,39 @@ void prSetApplicationForWindowProcedure(Proteus::Core::prApplication *app);
 LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
 
+// Function: prSubclassWindow
+//      Subclasses the main window
+//
+// Notes:
+//      This allows various tasks to be added as required,
+//      such as text character filtering
+//
+// Notes:
+//      should only be called once as any subsequent calls will be ignored
+//
+// Notes:
+//      This *ONLY* subclasses the main window, any child windows will need to be
+//      subclassed separately
+//
+// See Also:
+//      <prSubclassSetTextFilter>
+void prSubclassWindow(HWND hwnd);
+
+
+// Function: prSubclassSetTextFilter
+//      Sets text filter for a subclassed window
+//
+// Parameters:
+//      pChars - A pointer to acceptable input characters, or NULL to disable filtering
+//
+// Notes:
+//      This will affect all text input
+//
+// See Also:
+//      <prSubclassWindow>
+void prSubclassSetTextFilter(const TCHAR *pChars);
+
+
 #endif//PLATFORM_PC
 
 

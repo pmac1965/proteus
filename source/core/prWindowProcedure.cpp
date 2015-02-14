@@ -49,8 +49,11 @@
 // Local data
 namespace
 {
-    bool                            mouseCaptured   = false;
-    Proteus::Core::prApplication   *pApp            = NULL;
+    bool                            mouseCaptured       = false;
+    Proteus::Core::prApplication   *pApp                = NULL;
+    WNDPROC                         originalWinProc     = NULL;
+    const TCHAR                    *characters          = NULL;
+    BOOL                            enableTextFilter    = FALSE;
 }
 
 
@@ -68,9 +71,9 @@ namespace
     void WindowMessage_InjectDown(u32 charcode);
 
 
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Updates the system mouse upon a mouse move event.
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     void MouseMove(HWND hwnd, WPARAM wParam, LPARAM lParam)
     {
         POINT p;
@@ -110,9 +113,9 @@ namespace
     }
 
 
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Updates the mouse position.
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     void MouseUpdate(s32 x, s32 y, u32 flags)
     {
         prMouse *pMouse = static_cast<prMouse *>(prCoreGetComponent(PRSYSTEM_MOUSE));
@@ -124,9 +127,9 @@ namespace
     }
 
 
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Updates the mouse wheel.
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     void MouseWheelUpdate(float delta)
     {
         prMouse *pMouse = static_cast<prMouse *>(prCoreGetComponent(PRSYSTEM_MOUSE));
@@ -139,9 +142,9 @@ namespace
     }
 
 
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Handles: WM_ACTIVATE
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     void WindowMessage_Activate(prWindow* window, HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     {
         PRUNUSED(hwnd);
@@ -178,9 +181,9 @@ namespace
     }
 
 
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Handles: WM_DESTROY
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     void WindowMessage_Destroy(prWindow* window, HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
     {
         PRUNUSED(hwnd);
@@ -212,9 +215,9 @@ namespace
     }
 
 
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Handles: Window sizing
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     void WindowMessage_Resize(prWindow* window, u32 width, u32 height)
     {
         if (window)
@@ -224,9 +227,9 @@ namespace
     }
 
 
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Handles: Handles keyboard injection
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     void WindowMessage_InjectPressed(u32 charcode)
     {
         prKeyboard *pKB = static_cast<prKeyboard *>(prCoreGetComponent(PRSYSTEM_KEYBOARD));
@@ -237,9 +240,9 @@ namespace
     }
 
 
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Handles: Handles keyboard injection
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     void WindowMessage_InjectControl(u32 charcode)
     {
         prKeyboard *pKB = static_cast<prKeyboard *>(prCoreGetComponent(PRSYSTEM_KEYBOARD));
@@ -250,9 +253,9 @@ namespace
     }
 
 
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Handles: Handles keyboard injection
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     void WindowMessage_InjectDown(u32 charcode)
     {
         prKeyboard *pKB = static_cast<prKeyboard *>(prCoreGetComponent(PRSYSTEM_KEYBOARD));
@@ -263,9 +266,9 @@ namespace
     }
 
 
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Handles: Minimum window size
-    // ----------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     bool WindowMessage_GetMinMaxInfo(prWindow* window, WPARAM wParam, LPARAM lParam)
     {
         MINMAXINFO* mmi = (MINMAXINFO*)lParam;
@@ -288,12 +291,81 @@ namespace
 
         return handled;
     }
+
+
+    // ------------------------------------------------------------------------
+    // Determines if the character should be allowed in input
+    // ------------------------------------------------------------------------
+    bool IsAcceptableCharacter(WPARAM wparam)
+    {
+        bool result = false;
+
+        if (characters && *characters)
+        {
+            switch(wparam)
+            {
+            // Allow the edit keys
+            case VK_DELETE:
+            case VK_BACK:
+            case VK_HOME:
+            case VK_END:
+            case VK_LEFT:
+            case VK_RIGHT:
+                result = true;
+                break;
+
+            default:
+                {
+                    int   index = 0;
+                    TCHAR curr  = 0;
+                    do
+                    {
+                        curr = characters[index++];
+                        if (curr == wparam)
+                        {
+                            result = true;
+                            break;
+                        }
+                    }
+                    while(curr != 0);
+                }
+                break;
+            }
+        }
+        else
+        {
+            // No filter characters! Always allow
+            result = true;
+        }
+
+        return result;
+    }
+
+
+    // ------------------------------------------------------------------------
+    // Subclass procedure
+    // ------------------------------------------------------------------------
+    LRESULT CALLBACK prSubclassWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+    {
+        switch(uMsg)
+        {
+        case WM_CHAR:
+            if (enableTextFilter && !IsAcceptableCharacter(wParam))
+            {
+                return 0;
+            }
+            break;
+        }
+
+        return CallWindowProc(originalWinProc, hwnd, uMsg, wParam, lParam);
+    }
 }
 
 
-// ----------------------------------------------------------------------------
-// Pointer to allow game to receive specific messages like Activate and Deactivate.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// Pointer to allow game to receive specific messages like Activate
+/// and Deactivate.
+/// ---------------------------------------------------------------------------
 void prSetApplicationForWindowProcedure(Proteus::Core::prApplication *app)
 {
     pApp = app;
@@ -305,17 +377,17 @@ void prSetApplicationForWindowProcedure(Proteus::Core::prApplication *app)
 }
 
 
-// ----------------------------------------------------------------------------
-// The default window message handler.
-// ----------------------------------------------------------------------------
+/// ---------------------------------------------------------------------------
+/// The default window message handler.
+/// ---------------------------------------------------------------------------
 LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     // Get window.
-#ifdef _WIN64
-    prWindow* window = (prWindow*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
-#else
-    prWindow* window = (prWindow*)(s64)GetWindowLong(hwnd, GWL_USERDATA);
-#endif
+    #ifdef _WIN64
+      prWindow* window = (prWindow*)GetWindowLongPtr(hwnd, GWLP_USERDATA);
+    #else
+      prWindow* window = (prWindow*)(s64)GetWindowLong(hwnd, GWL_USERDATA);
+    #endif
 
 
     // Send event message to AntTweakBar
@@ -333,6 +405,10 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
         {
             PAINTSTRUCT ps;
             BeginPaint(hwnd, &ps);
+            if (pApp)
+            {
+                pApp->Draw();
+            }
             EndPaint(hwnd, &ps);
         }
         break;
@@ -524,6 +600,42 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
     }
 
     return 0;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Subclasses the main window
+/// ---------------------------------------------------------------------------
+void prSubclassWindow(HWND hwnd)
+{
+    // Subclass the window so we can filter keystrokes, etc
+    WNDPROC oldProc = reinterpret_cast<WNDPROC>(SetWindowLongPtr(
+                      hwnd,
+                      GWLP_WNDPROC,
+                      reinterpret_cast<LONG_PTR>(prSubclassWindowProc)));
+
+    if (originalWinProc == NULL)
+    {
+        originalWinProc = oldProc;
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Sets text filter
+/// ---------------------------------------------------------------------------
+void prSubclassSetTextFilter(const TCHAR *pChars)
+{
+    if (pChars && *pChars)
+    {
+        characters       = pChars;
+        enableTextFilter = TRUE;
+    }
+    else
+    {
+        characters        = NULL;
+        enableTextFilter  = FALSE;
+    }
 }
 
 

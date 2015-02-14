@@ -1,4 +1,12 @@
 // File: prBackground.h
+//      prBackground is designed to handle single and multi-layered backgrounds
+//
+//
+//      *IMAGE* type backgrounds single layered. Intended for simple 2D screens, like logo/title screens, etc
+//
+//
+//      *TILED* type backgrounds can be multi or single layered.
+//
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -30,21 +38,25 @@
 class TiXmlNode;
 class TiXmlElement;
 class prTexture;
+class prBackgroundLayer;
+
+
+// Defines
+#define BACKGROUND_MAX_LAYERS   4
 
 
 // Class: prBackground
-//      Background class designed to handle simple and scrolling screens.
-//      Intended for title, menu and other types of 2D screens.
+//      A class designed to handle single and multiplayered backgrounds.
 class prBackground
 {
 public:
     // Enum: prBackgroundType
-    //      The background type
+    //      The background types
     //
+    // Values:
     //      UNKNOWN - Default type
     //      IMAGE   - A single background image. Generally these are title, loading and menu screens
     //      TILEMAP - A tile mapped background. Generally large scrolling levels
-    //
     enum prBackgroundType
     {
         UNKNOWN = -1,
@@ -80,6 +92,19 @@ public:
     //      c - The tint colour
     void SetColour(prColour c);
 
+    // Method: GetLayer
+    //      Gets a layer of a tiled background
+    //
+    // Parameters:
+    //      c - The tint colour
+    //
+    // See also:
+    //      <prBackgroundLayer>
+    //
+    // Returns:
+    //      Either a layer or NULL
+    prBackgroundLayer* GetLayer(s32 index);
+
     // Method: SetVisible
     //      Sets the visibility.
     void SetVisible(PRBOOL state) { mVisible = state; }
@@ -88,21 +113,71 @@ public:
     //      Gets the visibility.
     PRBOOL GetVisible() const { return mVisible; }
 
+    // Method: GetName
+    //      Gets the backgrounds name.
+    const char *GetName() const { return m_name.Text(); }
+
 
 #if defined(PROTEUS_TOOL)
-    // Method: GetFilename
-    //      Gets the textures filename.
+    // Method: SetName
+    //      Sets the backgrounds name. *Only available on tool builds*
+    void SetName(const char *name) { m_name.Set(name); }
+
+    // Method: GetTextureFilename
+    //      Gets the textures filename. *Only available on tool builds*
+    const char *GetTextureFilename() const { return m_filenameTexture.Text(); }
+
+    // Method: SetTextureFilename
+    //      Sets the textures filename. *Only available on tool builds*
     //
-    // Notes:
-    //      Only available on tool builds
-    const char *GetFilename() const { return m_filename.Text(); }
+    // Parameters:
+    //      filename - A filename
+    void SetTextureFilename(const char *filename) { m_filenameTexture.Set(filename); }
+
+    // Method: SetBackgroundFilename
+    //      Sets the backgrounds filename. *Only available on tool builds*
+    //
+    // Parameters:
+    //      filename - A filename
+    void SetBackgroundFilename(const char *filename) { m_filenameBackground.Set(filename); }
+
+    // Method: GetBackgroundFilename
+    //      Gets the backgrounds filename. *Only available on tool builds*
+    const char *GetBackgroundFilename() const { return m_filenameBackground.Text(); }
 
     // Method: SetTexture
-    //      Sets the backgrounds texture
+    //      Sets the backgrounds texture. *Only available on tool builds*
+    //
+    // Parameters:
+    //      pTex - A texture pointer. *The_pointer_should_not_be_NULL*
+    void SetTexture(prTexture* pTex);
+
+    // Method: Save
+    //      Saves the background. *Only available on tool builds*
     //
     // Notes:
-    //      Only available on tool builds
-    void SetTexture(prTexture* pTex);
+    //      Uses the background filename set the by the user.
+    //
+    // See Also:
+    //      <SetBackgroundFilename>
+    //
+    // Returns:
+    //      false if save fails for any reason, else true
+    bool Save();
+
+    // Method: SetBackgroundType
+    //      Sets the background type. *Only available on tool builds*
+    //
+    // Parameters:
+    //      type - The background type
+    //
+    // See Also:
+    //      <prBackgroundType>
+    void SetBackgroundType(prBackgroundType type) { m_type = type; }
+
+    // Method: GetMapSize
+    //      Adds a new map layer
+    prBackgroundLayer *AddNewLayer(s32 width, s32 height, s32 tileWidth, s32 tileHeight, prTexture *pTexture);
 #endif
 
 
@@ -128,24 +203,19 @@ private:
 private:
     // Method: ParseFile
     //      Parses the xml file.
-    //
-    // Parameters:
-    //      pParent - A node pointer
     void ParseFile(TiXmlNode* pParent);
     
     // Method: ParseAttribs_File
     //      Attribute parser used to get information about the file.
-    //
-    // Parameters:
-    //      pElement - An element pointer
     void ParseAttribs_File(TiXmlElement* pElement);
 
     // Method: ParseAttribs_Background
     //      Attribute parser used to get information about the background like its name, type, etc.
-    //
-    // Parameters:
-    //      pElement - An element pointer
     void ParseAttribs_Background(TiXmlElement* pElement);
+
+    // Method: ParseAttribs_Background
+    //      Attribute parser used to get information about the backgrounds layers.
+    void ParseAttribs_Layer(TiXmlElement* pElement);
 
 
 private:
@@ -156,7 +226,8 @@ private:
     
 private:
     prTexture      *m_texture;
-    prString        m_filename;
+    prString        m_filenameTexture;
+    prString        m_name;
     s32             m_width;
     s32             m_height;
     s32             m_type;
@@ -171,8 +242,14 @@ private:
     f32             m_scrnHeight;
     f32             m_v0;
     f32             m_u1;
-
     PRBOOL          mVisible;
+    
+    // Tiled map layers
+    prBackgroundLayer *mLayers[BACKGROUND_MAX_LAYERS];
+
+    #if defined(PROTEUS_TOOL)
+    prString        m_filenameBackground;
+    #endif
 };
 
 

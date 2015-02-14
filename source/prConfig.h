@@ -88,7 +88,7 @@
 // Use these defines to configure the engine setup
 // ----------------------------------------------------------------------------
 #ifndef SOUND_ALLOW                                     // Use the sound system. Can be removed for debugging.
-#define SOUND_ALLOW
+//#define SOUND_ALLOW
 #endif
 
 #ifndef ALLOW_DIRECTX                                   // For builds that don't need DirectX
@@ -140,7 +140,7 @@
 // Android config
 // ----------------------------------------------------------------------------
 #if defined(PLATFORM_ANDROID)
-#ifndef USE_OPENAL                                      // Allows the android to use OpenAL
+#ifndef USE_OPENAL                                      // Allows android to use OpenAL
 #define USE_OPENAL
 #endif
 #endif
@@ -176,8 +176,8 @@
 
 
 // OpenGL debug settings
-#define OPENGL_SHOW_EXTENSIONS
-#define OPENGL_CHECK_CALLS
+//#define OPENGL_SHOW_EXTENSIONS
+//#define OPENGL_CHECK_CALLS
 
 
 // Optimizations

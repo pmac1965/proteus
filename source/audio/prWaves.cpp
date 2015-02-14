@@ -425,6 +425,8 @@ prWaveResult prWaves::GetWaveALBufferFormat(prWaveID id, u32 *pulFormat) const
 {
     prWaveResult wr = WR_OK;
 
+#if defined(SOUND_ALLOW)
+
     if (IsWaveID(id))
     {
         if (pulFormat)
@@ -485,6 +487,8 @@ prWaveResult prWaves::GetWaveALBufferFormat(prWaveID id, u32 *pulFormat) const
     {
         wr = WR_INVALIDWAVEID;
     }
+
+#endif
 
     return wr;
 }

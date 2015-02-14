@@ -245,6 +245,16 @@ void prButton::RegisterListener(prButtonListener *pListener)
 
 
 /// ---------------------------------------------------------------------------
+/// Sets the button as selected.
+/// ---------------------------------------------------------------------------
+void prButton::SetSelected()
+{
+    m_buttonState = BS_SELECTED;
+    SetCurrentFrame(BS_SELECTED);
+}
+
+
+/// ---------------------------------------------------------------------------
 /// Tests if a touch is *over* the button
 /// ---------------------------------------------------------------------------
 bool prButton::InButtonsRect(s32 x, s32 y)

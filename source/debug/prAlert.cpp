@@ -34,6 +34,7 @@
     #endif
 
     #include <windows.h>
+    #include "../core/prWindow_PC.h"
 
 #else
 
@@ -44,7 +45,7 @@
 /// ---------------------------------------------------------------------------
 /// Shows a cross platfrom error message dialog
 /// ---------------------------------------------------------------------------
-void prAlertShowError(const char *title, const char *message)
+void prAlertShowError(const char *title, const char *message, prWindow *pWindow)
 {
     PRASSERT(title && *title);
     PRASSERT(message && *message);
@@ -59,8 +60,11 @@ void prAlertShowError(const char *title, const char *message)
     prLog(prStringSnprintf(buffer, sizeof(buffer), "Message: %s\n", message));
     prLog("=======================================================\n");
 
+    // Get windows handle
+    HWND hwnd = (pWindow == 0) ? HWND_DESKTOP : static_cast<prWindow_PC*>(pWindow)->GetWindowHandle();
+
     // Create error dialog
-    MessageBoxA(HWND_DESKTOP, message, title, MB_OK | MB_ICONERROR | MB_TASKMODAL);
+    MessageBoxA(hwnd, message, title, MB_OK | MB_ICONERROR | MB_TASKMODAL);
 
 #else
 
@@ -77,7 +81,7 @@ void prAlertShowError(const char *title, const char *message)
 /// ---------------------------------------------------------------------------
 /// Shows a cross platfrom information message dialog
 /// ---------------------------------------------------------------------------
-void prAlertShowInformation(const char *title, const char *message)
+void prAlertShowInformation(const char *title, const char *message, prWindow *pWindow)
 {
     PRASSERT(title && *title);
     PRASSERT(message && *message);
@@ -92,8 +96,47 @@ void prAlertShowInformation(const char *title, const char *message)
     prLog(prStringSnprintf(buffer, sizeof(buffer), "Message: %s\n", message));
     prLog("=======================================================\n");
 
+    // Get windows handle
+    HWND hwnd = (pWindow == 0) ? HWND_DESKTOP : static_cast<prWindow_PC*>(pWindow)->GetWindowHandle();
+
     // Create error dialog
-    MessageBoxA(HWND_DESKTOP, message, title, MB_OK | MB_ICONEXCLAMATION | MB_TASKMODAL);
+    MessageBoxA(hwnd, message, title, MB_OK | MB_ICONEXCLAMATION | MB_TASKMODAL);
+
+#else
+
+    prLog("=======================================================\n");
+    prLog("ALERT\n");
+    prLog(prStringSnprintf(buffer, sizeof(buffer), "Title  : %s\n", title));
+    prLog(prStringSnprintf(buffer, sizeof(buffer), "Message: %s\n", message));
+    prLog("=======================================================\n");
+
+#endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Shows a cross platfrom warning message dialog
+/// ---------------------------------------------------------------------------
+void prAlertShowWarning(const char *title, const char *message, prWindow *pWindow)
+{
+    PRASSERT(title && *title);
+    PRASSERT(message && *message);
+
+    char buffer[256];
+
+#if defined(PLATFORM_PC)
+
+    prLog("=======================================================\n");
+    prLog("ALERT\n");
+    prLog(prStringSnprintf(buffer, sizeof(buffer), "Title  : %s\n", title));
+    prLog(prStringSnprintf(buffer, sizeof(buffer), "Message: %s\n", message));
+    prLog("=======================================================\n");
+
+    // Get windows handle
+    HWND hwnd = (pWindow == 0) ? HWND_DESKTOP : static_cast<prWindow_PC*>(pWindow)->GetWindowHandle();
+
+    // Create error dialog
+    MessageBoxA(hwnd, message, title, MB_OK | MB_ICONWARNING | MB_TASKMODAL);
 
 #else
 
