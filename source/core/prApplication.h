@@ -33,19 +33,21 @@ namespace Core {
 
 
 // Class: prApplication
-//      Base interface class for all the application type classes.
+//      The base interface class for all the application classes.
 //
 // Notes:
-//      The class for a specific application type should implement,
-//      DisplayCreate and Run. The game class should implement the rest
+//      The platform specific class will implement <DisplayCreate> and <Run>.
+//
+//      Your application/game class needs to implement the rest
 //
 // See Also:
-//      <DisplayCreate>
-//      <Run>
+//      <DisplayCreate> and <Run>
+//
+// See Also:
+//      <prApplication_PC>, <prApplication_Android>, <prApplication_Ios> and <prApplication_Linux>
 class prApplication
 {
-public:
-    
+public:    
     // Method: prApplication
     //      Ctor    
     prApplication();
@@ -65,6 +67,9 @@ public:
     //
     // Notes:
     //      This call will destroy the previous display if it exists.
+    //
+    // Notes:
+    //      Applications do not need to create a display. For example command line tools
     //
     // Returns:
     //      PRTRUE if the display was created successfully.
@@ -132,10 +137,9 @@ public:
     PRBOOL GetIsRunning() const { return m_running; }
 
 
-protected:
-    
-    prWindow   *m_pWindow;              ///< The applications window
-    PRBOOL      m_running;              ///< Whether than app is running or not
+protected:    
+    prWindow   *m_pWindow;              // The applications window
+    PRBOOL      m_running;              // Whether than app is running or not
 };
 
 

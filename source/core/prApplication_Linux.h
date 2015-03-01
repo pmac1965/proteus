@@ -62,6 +62,9 @@ public:
     // Notes:
     //      This call will destroy the previous display if it exists.
     //
+    // Notes:
+    //      Applications do not need to create a display. For example command line tools
+    //
     // Returns:
     //      PRTRUE if the display was created successfully.
     //      PRFALSE if the display was NOT created successfully.
