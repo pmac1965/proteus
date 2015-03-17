@@ -19,9 +19,6 @@
 
 #include "../prConfig.h"
 
-// Just to stop the translation unit being consider empty!
-static void Filler() {
-}
 
 #if defined(PLATFORM_LINUX)
 
@@ -233,6 +230,13 @@ void prLinuxLoop()
     } //while(XPending(display)); /* loop to compress events */
 //}
 
+}
+
+#else
+
+// Just to stop the translation unit being consider empty!
+static void Filler()
+{
 }
 
 #endif

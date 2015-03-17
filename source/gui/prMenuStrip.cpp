@@ -25,6 +25,9 @@
 #include "../display/prBitmapFont.h"
 #include "../display/prTrueTypeFont.h"
 #include "../math/prVector2.h"
+#include "../debug/prAssert.h"
+#include <cstdlib>
+#include <cstdio>
 
 
 #define MS_PIXEL_BUFFER     6.0f

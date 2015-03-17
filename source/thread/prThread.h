@@ -47,6 +47,13 @@
   #define PRTHREAD_CALLCONV
   #define PRTHREAD_RETVAL   void*
 
+// Linux
+#elif defined(PLATFORM_LINUX)
+  #include <pthread.h>
+
+  #define PRTHREAD_CALLCONV
+  #define PRTHREAD_RETVAL   void*
+
 #else
 #error Platform not supported
 

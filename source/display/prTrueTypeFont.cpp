@@ -27,6 +27,14 @@
 #define RESOLUTION          72
 
 
+// Need to setup freetype for linux
+#if defined(PLATFORM_LINUX)
+#if defined(ALLOW_FREETYPE)
+#undef ALLOW_FREETYPE
+#endif
+#endif
+
+
 #if defined(ALLOW_FREETYPE)
 #if defined(PLATFORM_PC)                // The PC points at the full freetype2 project.
     // FreeType Headers
@@ -74,6 +82,7 @@
 #elif defined(PLATFORM_LINUX)
   #include <GL/gl.h>
   #include <GL/glu.h>
+  #include <string.h>
 
 #else
   #error No platform defined.
@@ -407,7 +416,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
 
         // We need this character too
         TODO("Add the utf8 translation code");
-        imp.GenerateCharacter(face, 0x00A9); // '©'
+        imp.GenerateCharacter(face, 0x00A9); // 'ï¿½'
 
         // Clean up
         FT_Done_Face(face);
@@ -604,7 +613,7 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
             TODO("Add the utf8 translation code");
 
             // Special hack
-            if (character == '©')
+            if (character == 'ï¿½')
                 character = 0x00a9;
 
             if (character == '#')
@@ -682,7 +691,7 @@ Proteus::Math::prVector2 prTrueTypeFont::MeasureString(const char *string, float
         TODO("Add the utf8 translation code");
 
         // Special hack
-        if (character == '©')
+        if (character == 'ï¿½')
             character = 0x00a9;
 
         // Get size.

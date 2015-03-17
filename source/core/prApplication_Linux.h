@@ -29,6 +29,10 @@
 #include "prTypes.h"
 #include "prApplication.h"
 
+// Namespaces
+namespace Proteus {
+namespace Core {
+
 
 // Class: prApplication_Linux
 //      Application class for Linux
@@ -85,6 +89,9 @@ private:
 
     const char *BuildType();
 };
+
+
+}} // Namespaces
 
 
 #endif//PLATFORM_LINUX

@@ -54,6 +54,11 @@ static const char *embedded[] =
 };
 
 
+// Namespaces
+namespace Proteus {
+namespace Core {
+
+
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
@@ -251,6 +256,9 @@ const char *prApplication_Linux::BuildType()
         return "Game";
     #endif
 }
+
+
+}}// Namespaces
 
 
 #endif//PLATFORM_LINUX

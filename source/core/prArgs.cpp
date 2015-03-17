@@ -26,6 +26,7 @@
 #include "prCore.h"
 #include "prRegistry.h"
 #include "../debug/prTrace.h"
+#include "../debug/prAssert.h"
 
 
 #if defined(PLATFORM_LINUX)

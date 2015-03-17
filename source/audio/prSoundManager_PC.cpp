@@ -83,6 +83,8 @@ namespace
 /// ---------------------------------------------------------------------------
 prSoundManager_PC::prSoundManager_PC()
 {
+#ifdef SOUND_ALLOW
+
     pPCMBuffer          = new u8[SONG_BUFFER_SIZE];
     device              = NULL;
     context             = NULL;
@@ -123,6 +125,8 @@ prSoundManager_PC::prSoundManager_PC()
     {
         prTrace("Failed to load OggVorbis dll's\n");
     }
+
+#endif
 }
 
 

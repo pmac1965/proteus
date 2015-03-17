@@ -50,6 +50,7 @@
 #elif defined(PLATFORM_LINUX)
   #include <GL/gl.h>
   #include <GL/glu.h>
+  #include <cstring>
 
 #else
   #error No platform defined.
