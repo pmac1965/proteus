@@ -71,7 +71,7 @@
 #endif
 
 
-#if defined(PLATFORM_PC) || defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_PC) || defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID) || defined(PLATFORM_LINUX)
 
 
 #if defined(SOUND_ALLOW)

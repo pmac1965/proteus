@@ -95,7 +95,7 @@ const f32 cosTable[] =
 /// -----------------------------------------------------------------------------------------------
 f32 prCos(u32 angle)
 {
-    if (angle > PRARRAY_SIZE(cosTable))
+    if (angle >= PRARRAY_SIZE(cosTable))
     {
         angle %= PRARRAY_SIZE(cosTable);
         return cosTable[angle];
@@ -112,7 +112,7 @@ f32 prCos(u32 angle)
 /// -----------------------------------------------------------------------------------------------
 f32 prSin(u32 angle)
 {
-    if (angle > PRARRAY_SIZE(sinTable))
+    if (angle >= PRARRAY_SIZE(sinTable))
     {
         angle %= PRARRAY_SIZE(sinTable);
         return sinTable[angle];

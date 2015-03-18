@@ -43,6 +43,9 @@ prResource::prResource(const char *filename)
     m_references = 1;
     m_locked     = false;
     m_size       = 0;
+    m_exp0		 = false;
+    m_exp1		 = false;
+    m_exp2		 = false;
 }
 
 

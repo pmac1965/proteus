@@ -496,6 +496,7 @@
     <ClInclude Include="..\..\..\..\source\audio\prSoundManagerShared.h" />
     <ClInclude Include="..\..\..\..\source\audio\prSoundManager_Android.h" />
     <ClInclude Include="..\..\..\..\source\audio\prSoundManager_Ios.h" />
+    <ClInclude Include="..\..\..\..\source\audio\prSoundManager_Linux.h" />
     <ClInclude Include="..\..\..\..\source\audio\prSoundManager_PC.h" />
     <ClInclude Include="..\..\..\..\source\audio\prWaves.h" />
     <ClInclude Include="..\..\..\..\source\Box2D\Box2D.h" />
@@ -591,6 +592,7 @@
     <ClInclude Include="..\..\..\..\source\debug\prFps.h" />
     <ClInclude Include="..\..\..\..\source\debug\prFps_Android.h" />
     <ClInclude Include="..\..\..\..\source\debug\prFps_ios.h" />
+    <ClInclude Include="..\..\..\..\source\debug\prFps_Linux.h" />
     <ClInclude Include="..\..\..\..\source\debug\prFps_PC.h" />
     <ClInclude Include="..\..\..\..\source\debug\prLog.h" />
     <ClInclude Include="..\..\..\..\source\debug\prOnScreenLogger.h" />
@@ -861,6 +863,7 @@
     <ClCompile Include="..\..\..\..\source\audio\prSoundManagerShared.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prSoundManager_Android.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prSoundManager_Ios.cpp" />
+    <ClCompile Include="..\..\..\..\source\audio\prSoundManager_Linux.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prSoundManager_PC.cpp" />
     <ClCompile Include="..\..\..\..\source\audio\prWaves.cpp" />
     <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2BroadPhase.cpp" />
@@ -947,6 +950,7 @@
     <ClCompile Include="..\..\..\..\source\debug\prFps.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prFps_Android.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prFps_ios.cpp" />
+    <ClCompile Include="..\..\..\..\source\debug\prFps_Linux.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prFps_PC.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prLog.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prOnScreenLogger.cpp" />

@@ -23,7 +23,7 @@
 #include "../prConfig.h"
 
 
-#if defined(PLATFORM_PC) || defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_PC) || defined(PLATFORM_ANDROID) || defined(PLATFORM_LINUX)
 
   #if defined(PLATFORM_PC)
     #include <windows.h>
@@ -35,6 +35,11 @@
   #elif defined(PLATFORM_ANDROID)
     #include "../android/AL/al.h"
     #include "../android/AL/alc.h"
+    #include "prOpenALErrors.h"
+
+  #elif defined(PLATFORM_LINUX)
+    #include <AL/al.h>
+    #include <AL/alc.h>
     #include "prOpenALErrors.h"
 
   #else

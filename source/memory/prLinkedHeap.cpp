@@ -776,7 +776,12 @@ void prLinkedHeap::FreeListRemove(void* p)
             // If we get here, then all we need to do is unlink the entry.
             else
             {
-                prev->next = curr->next;
+                // Added if test because of code analysis warning, but it shouldn't fail,
+                // but... better safe than sorry, as shouldn't is not certain
+                if (prev) 
+                {
+                    prev->next = curr->next;
+                }
             }
 
             return;

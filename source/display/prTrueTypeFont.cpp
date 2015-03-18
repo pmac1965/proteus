@@ -27,14 +27,6 @@
 #define RESOLUTION          72
 
 
-// Need to setup freetype for linux
-#if defined(PLATFORM_LINUX)
-#if defined(ALLOW_FREETYPE)
-#undef ALLOW_FREETYPE
-#endif
-#endif
-
-
 #if defined(ALLOW_FREETYPE)
 #if defined(PLATFORM_PC)                // The PC points at the full freetype2 project.
     // FreeType Headers
@@ -43,7 +35,14 @@
     #include <ftglyph.h>
     #include <ftoutln.h>
     #include <fttrigon.h>
-#else                                   // OpenglES uses an abbreviated version
+#elif defined(PLATFORM_LINUX)           // The linux freetype2 project.
+    // FreeType Headers
+    #include <ft2build.h>
+    #include <freetype/freetype.h>
+    #include <freetype/ftglyph.h>
+    #include <freetype/ftoutln.h>
+    #include <freetype/fttrigon.h>
+#else                                   // Android/IOS uses an abbreviated version
     // FreeType Headers
     #include <ft2build.h>
     #include <freetype/freetype.h>

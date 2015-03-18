@@ -288,10 +288,12 @@ void prRenderer_GL20::RestorePerspectiveView()
 /// ---------------------------------------------------------------------------
 void prRenderer_GL20::DrawPoint(f32 x, f32 y)
 {
-    prVertex2D vertices[] = 
-    {
-        {x, y},
-    };
+	PRUNUSED(x);
+	PRUNUSED(y);
+//    prVertex2D vertices[] =
+//    {
+//        {x, y},
+//    };
 
 //    glVertexPointer(2, GL_FLOAT, 0, vertices);
 //    ERR_CHECK();

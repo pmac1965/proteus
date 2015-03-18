@@ -91,8 +91,8 @@ prCamera::prCamera()
 prCamera::prCamera(const Proteus::Math::prVector3 &eye, const Proteus::Math::prVector3 &up, const Proteus::Math::prVector3 &at) 
 
 : m_eye     (eye)
-, m_at      (at)
 , m_up      (up)
+, m_at      (at)
 
 {
     m_active = PRFALSE;

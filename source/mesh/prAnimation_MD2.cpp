@@ -52,7 +52,7 @@ prAnimation_MD2::prAnimation_MD2(prMD2Frame *pFrames, s32 numFrames)
 
 
         // Isolate the name.
-        for (int j=0; j<sizeof(work); j++)
+        for (unsigned int j=0; j<sizeof(work); j++)
         {
             if (work[j] >= '0' && work[j] <= '9')
             {

@@ -20,7 +20,7 @@
 #define __PROPENALERRORS_H
 
 
-#if defined(PLATFORM_PC) || defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_PC) || defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID) || defined(PLATFORM_LINUX)
     // Method: ALC_ErrorCheck
     //      Checks for errors
     int ALC_ErrorCheck(void *device);

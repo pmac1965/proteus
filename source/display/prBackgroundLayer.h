@@ -88,9 +88,13 @@ public:
 
 
 private:
-#if defined(PROTEUS_TOOL)
+    // Stop passing by value and assignment.
+    prBackgroundLayer(const prBackgroundLayer&);
+    const prBackgroundLayer& operator = (const prBackgroundLayer&);
+
+    #if defined(PROTEUS_TOOL)
     prString    mTextureFilename;
-#endif
+    #endif
 
     s32         mLayerWidth;
     s32         mLayerHeight;

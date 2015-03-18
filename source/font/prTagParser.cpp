@@ -179,7 +179,7 @@ u32 prTagIsTag(const char *pString, f32 _a)
                     prTrace("SEARCH TAG?: '%s'\n", tag);
                     #endif
 
-                    for (s32 i=0; i<PRARRAY_SIZE(tags); i++)
+                    for (u32 i=0; i<PRARRAY_SIZE(tags); i++)
                     {
                         if (strncmp(tags[i].tag, tag, tags[i].length) == 0)
                         {

@@ -27,12 +27,15 @@
 // A macro to setup main
 #if defined(PLATFORM_PC)
   #define PROTEUS_MAIN      int APIENTRY wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow)
+  #define PROTEUS_ARGS      lpCmdLine
     
 #elif defined(PLATFORM_LINUX)
   #define PROTEUS_MAIN      int main(int argc, const char* argv[])
+  #define PROTEUS_ARGS      argc, argv
 
 #else
   #define PROTEUS_MAIN
+  #define PROTEUS_ARGS
 
 #endif
 

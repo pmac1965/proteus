@@ -36,12 +36,15 @@
 #include "../display/prFadeManager.h"
 #include "../debug/prOnScreenLogger.h"
 #include "../debug/prTrace.h"
+#include "../debug/prAssert.h"
 #include "../debug/prFps_PC.h"
 #include "../debug/prFps_Android.h"
 #include "../debug/prFps_ios.h"
+#include "../debug/prFps_Linux.h"
 #include "../audio/prSoundManager_PC.h"
 #include "../audio/prSoundManager_Ios.h"
 #include "../audio/prSoundManager_Android.h"
+#include "../audio/prSoundManager_Linux.h"
 #include "../input/prTouch.h"
 #include "../input/prAccelerometer.h"
 
@@ -366,7 +369,7 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 #elif defined(PLATFORM_MAC)
                     pSystems[id] = NULL;
                 #elif defined(PLATFORM_LINUX)
-                    pSystems[id] = NULL;
+                    pSystems[id] = new prSoundManager_Linux();
                 #elif defined(PLATFORM_BADA)
                     pSystems[id] = NULL;
                 #else
@@ -392,7 +395,7 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 #elif defined(PLATFORM_MAC)
                     pSystems[id] = NULL;
                 #elif defined(PLATFORM_LINUX)
-                    pSystems[id] = NULL;
+                    pSystems[id] = new prFps_Linux();
                 #elif defined(PLATFORM_BADA)
                     pSystems[id] = NULL;
                 #else

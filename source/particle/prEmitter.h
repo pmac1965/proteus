@@ -31,7 +31,7 @@ struct prEmitterDefinition;
 
 
 // Class: prEmitter
-//      Class represents a particle emission point
+//      Class represents a particle emission point - W.I.P Work in progress
 class prEmitter
 {
 private:
@@ -64,12 +64,16 @@ public:
 
 
 private:
-    prEffectType    *pEffects;
+    // Stop passing by value and assignment.
+    prEmitter(const prEmitter&);
+    const prEmitter& operator = (const prEmitter&);
 
-    s32     mID;                // Unique ID
-    f32     mLifetime;          // Lifetime of this emitter as a whole
+    prEffectType   *pEffects;
 
-    bool    mAlive;
+    s32             mID;                // Unique ID
+    f32             mLifetime;          // Lifetime of this emitter as a whole
+
+    bool            mAlive;             //
 };
 
 
