@@ -121,7 +121,7 @@ namespace
         prMouse *pMouse = static_cast<prMouse *>(prCoreGetComponent(PRSYSTEM_MOUSE));
         if (pMouse)
         {
-            pMouse->SetMouseData(x, y, flags);
+            pMouse->SetMouseData(x, y, flags, false);
             pMouse->SetInRect(true);
         }
     }

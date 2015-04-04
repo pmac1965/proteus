@@ -22,11 +22,12 @@
 // Audio platform
 #define AUDIO_PC        1
 #define AUDIO_IOS       2
-#define AUDIO_BADA      3
+#define AUDIO_BADA      3           // Bada is dead. This is no longer used
 #define AUDIO_ANDROID   4
 #define AUDIO_MAC       5
 #define AUDIO_LINUX     6
 #define AUDIO_WINPHONE  7
+#define AUDIO_TIZEN     8           // Bada replacement
 
 
 // Determine platform. First check for PC
@@ -60,15 +61,10 @@
 
     #endif
 
-// Or, Is it the bada? Android?
+// Or Linux? Android?
 #elif defined(__GNUC__)
-    // Bada?
-    #if defined(SHP)
-        #define PLATFORM_BADA
-        #define AUDIO_TYPE  AUDIO_BADA
-    
     // Linux
-    #elif (defined(linux) && !defined(__ANDROID__))
+    #if (defined(linux) && !defined(__ANDROID__))
         #define PLATFORM_LINUX
         #define AUDIO_TYPE  AUDIO_LINUX
 
@@ -99,7 +95,7 @@
 #define ALLOW_FREETYPE
 #endif
 
-#ifndef REMOVE_EXCEPTIONS                               // Allows try/catch code to be removed. For example bada doesn't allow try/catch code.
+#ifndef REMOVE_EXCEPTIONS                               // Allows try/catch code to be removed.
 #define REMOVE_EXCEPTIONS
 #endif
 
@@ -112,7 +108,7 @@
 #endif
 
 #ifndef SHOW_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.
-//#define SHOW_MESSAGES
+#define SHOW_MESSAGES
 #endif
 
 #ifndef PROTEUS_ALLOW_CONSOLE                           // Allows the debug console to be optionally removed. (PC only)
@@ -144,21 +140,6 @@
 #define USE_OPENAL
 #endif
 #endif
-
-
-// ----------------------------------------------------------------------------
-// Bada config
-// ----------------------------------------------------------------------------
-#if defined(PLATFORM_BADA)                              // Bada can't allow try/catch as they're not supported.
-#ifndef REMOVE_EXCEPTIONS                               // This also affects 'new' as 'new' no longer throws exceptions
-#define REMOVE_EXCEPTIONS
-#endif
-
-#ifndef BADA_SDK_2                                      // Bada SDK version 2 and above have different C library implementations
-#define BADA_SDK_2                                      // Need to be careful when using standard C code.
-#endif
-
-#endif//PLATFORM_BADA
 
 
 // Tweakbar

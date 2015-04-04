@@ -26,6 +26,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
+#include <limits.h>
+#include <sys/stat.h>
+#include <sys/types.h>
 #include "prSave_linux.h"
 #include "../core/prMacros.h"
 #include "../debug/prTrace.h"
@@ -58,7 +61,9 @@ typedef struct SaveLinuxImplementation
 /// ---------------------------------------------------------------------------
 void GetSaveLoadPath(char *pBuffer)
 {
-    const char *path = "";//GetCardPath();
+	// The /var/lib path appears to be a good choice, but
+	// needs tested on other users machines
+    const char *path = "/var/lib";
     if (path && *path)
     {
         strcpy(pBuffer, path);
@@ -75,10 +80,9 @@ prSaveLinux::prSaveLinux() : pImpl (new SaveLinuxImplementation())
     // Write startup info?
     #if defined(_DEBUG) || defined(DEBUG)
     {
-        //TODO("Fix");
-        //char path[FILE_MAX_FILENAME_SIZE];
-        //GetSaveLoadPath(path);
-        //prTrace("Save path: %s\n", path);
+        char path[FILE_MAX_FILENAME_SIZE];
+        GetSaveLoadPath(path);
+        prTrace("Save path: %s\n", path);
     }
     #endif
 }
@@ -110,6 +114,26 @@ bool prSaveLinux::SaveBegin()
         strcat(filename, m_folder);
         strcat(filename, "/");
         strcat(filename, m_filename);
+
+
+        // Create the save directory if the file doesn't exist
+        if (prFileExist(filename) == false)
+        {
+            char path[PATH_MAX];
+            GetSaveLoadPath(path);
+            strcat(path, "/");
+            strcat(path, m_folder);
+
+            struct stat st = {0};
+
+            if (stat(path, &st) == -1)
+            {
+                if (mkdir(path, 0777) == -1)
+                {
+                	prTrace("Failed to create directory\n");
+                }
+            }
+        }
 
 
         // Create the file?
@@ -222,6 +246,8 @@ bool prSaveLinux::LoadBegin()
         strcat(filename, m_folder);
         strcat(filename, "/");
         strcat(filename, m_filename);
+
+        prTrace("Attempt to load: %s\n", filename);
 
         imp.filesize = 0;
 

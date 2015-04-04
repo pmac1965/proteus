@@ -175,32 +175,26 @@ void prLinuxSwapBuffers()
 /// ---------------------------------------------------------------------------
 void prLinuxLoop()
 {
+    // http://stackoverflow.com/questions/125806/capturing-input-in-linux
     XEvent event;
-
-    //do
     if (XCheckWindowEvent(display, win, eventMask, &event))
     {
-        //printf("Event %i\n", event.type);
-        //prTrace("Event %i\n", event.type);
-
         //XNextEvent(display, &event);
         switch (event.type)
         {
             case KeyPress:
             {
                 KeySym     keysym;
-                //XKeyEvent *kevent;
                 char       buffer[1];
 
                 // It is necessary to convert the keycode to a keysym before checking if it is an escape
-                //kevent = (XKeyEvent *)&event;
                 if ((XLookupString((XKeyEvent*)&event, buffer, 1, &keysym,NULL) == 1) && (keysym == (KeySym)XK_Escape))
                 {
                     printf("1: Quit app\n");
                     exit(0);
                 }
-                break;
             }
+			break;
 
             // Mouse move
             case MotionNotify:
@@ -212,24 +206,8 @@ void prLinuxLoop()
             case ButtonPress:
                 prLinuxUpdateMouse(event.xbutton.x,event.xbutton.y, event.xbutton.button);
                     break;
-
-            //case ConfigureNotify:
-                //printf("ConfigureNotify - %i, %i\n", event.xconfigure.width, event.xconfigure.height);
-                //glViewport(0, 0, event.xconfigure.width, event.xconfigure.height);
-                // fall through
-                //break;
-
-            //case Expose:
-                //{
-                    //static int c=0;
-                    //printf("Expose %i\n", c++);
-                //needRedraw = GL_TRUE;
-                //}
-                //break;
                 }
-    } //while(XPending(display)); /* loop to compress events */
-//}
-
+    }
 }
 
 #else

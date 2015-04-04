@@ -179,7 +179,7 @@ public:
     //
     // Notes:
     //      This method is called by the engine. *You should not call it*
-    void SetMouseData(s32 x, s32 y, u32 flags);
+    void SetMouseData(s32 x, s32 y, u32 flags, bool state);
 
     // Method: SetInRect
     //      Sets whether the mouse cursor is in the client rect.

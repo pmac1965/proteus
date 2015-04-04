@@ -1,6 +1,5 @@
 - Adding namespaces
 - Fixed VS code analysis issues. Well, the ones that made mattered
-- Improved mutexes
-- Improved profiler
-- Reduced state switching in opengl (Improves performance)
-- Reduced included headers
+- Removing bada
+- Adding TIZEN
+- Removed prFill as I cannot remember whats its for

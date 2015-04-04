@@ -233,7 +233,6 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	tinyxml/tinyxmlerror.cpp	\
 	tinyxml/tinyxmlparser.cpp	\
 	utf8proc/utf8proc.cpp	\
-	util/prFill.cpp	\
 	libzip/mkstemp.c	\
 	libzip/zip_add.c	\
 	libzip/zip_add_dir.c	\

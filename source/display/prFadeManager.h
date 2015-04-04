@@ -21,18 +21,17 @@
 
 
 #include "../core/prCoreSystem.h"
+#include "../core/prTypes.h"
 
 
 // Enum: prFade
-//      The type of fade to draw.
+//      The type of fade to update and draw
 //
-//  - FadeNone
 //  - FadeToBlack
 //  - FadeToWhite
 //  - FadeToNormal
 typedef enum prFade
 {
-    FadeNone,
     FadeToBlack,
     FadeToWhite,
     FadeToNormal
@@ -41,7 +40,7 @@ typedef enum prFade
 
 
 // Enum: prFadeColour
-//      Fade to colour
+//      The fade colour
 //
 //  - FadeColourNone
 //  - FadeColourBlack
@@ -55,8 +54,8 @@ typedef enum prFadeColour
 } prFadeColour;
 
 
-// Enum: prFadeType
-//      Fade type.
+// Fade type. 
+// This is an internal enumeration and is not documented externally
 typedef enum prFadeType
 {
     FadeTypeNone,
@@ -66,8 +65,8 @@ typedef enum prFadeType
 } prFadeType;
 
 
-// Class:
-//      Does simple screen fades to black, to white and to normal.
+// Class: prFadeManager
+//      Does basic screen fading to/from black, white and normal (No fade)
 class prFadeManager : public prCoreSystem
 {
 public:
@@ -84,7 +83,7 @@ public:
     //
     // Parameters:
     //      dt - Delta time
-    void Update(float dt);
+    void Update(f32 dt);
     
     // Method: Draw
     //      Draws the fade.
@@ -99,7 +98,7 @@ public:
     //
     // See Also:
     //      <prFade>
-    void Start(prFade fade, float runtime);
+    void Start(prFade fade, f32 runtime);
 
     // Method: Isfading
     //      Determines if a fade is running.
@@ -110,7 +109,7 @@ public:
     bool IsFadeVisible() const;
 
     // Method: SetBlack
-    //      Set to specific state
+    //      Set fade to black
     //
     // Parameters:
     //      in - The fade value
@@ -120,27 +119,25 @@ public:
     void SetBlack(f32 in = 255.0f);
 
     // Method: SetWhite
-    //      Set to specific state
+    //      Set fade to white
     void SetWhite();
 
     // Method: SetNormal
-    //      Set to specific state
+    //      Turns off the fade
     void SetNormal();
 
 
 private:
-
     // Resets to normal
     void Reset();
 
 
 private:
-
     prFadeColour colour;
     prFadeType   type;
-    float        alpha;
-    float        time;
-    float        step;
+    f32          alpha;
+    f32          time;
+    f32          step;
     bool         fading;
 };
 

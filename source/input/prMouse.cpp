@@ -135,8 +135,23 @@ void prMouse::Update()
 /// ---------------------------------------------------------------------------
 /// Receives mouse data messages from the window message handler.
 /// ---------------------------------------------------------------------------
-void prMouse::SetMouseData(s32 x, s32 y, u32 flags)
+void prMouse::SetMouseData(s32 x, s32 y, u32 flags, bool state)
 {
+#if defined(PLATFORM_LINUX)
+    m_xPos   = x;
+    m_yPos   = y;
+
+    switch(flags)
+    {
+    case MOUSE_BUTTON_LEFT:
+    case MOUSE_BUTTON_RIGHT:
+    case MOUSE_BUTTON_MIDDLE:
+    	m_flags = state ? PRSET_FLAG(m_flags, flags) : PRCLEAR_FLAG(m_flags, flags);
+    	break;
+    }
+
+#else
+
     if (m_reset)
     {
         m_reset = false;
@@ -146,6 +161,8 @@ void prMouse::SetMouseData(s32 x, s32 y, u32 flags)
     m_xPos   = x;
     m_yPos   = y;
     m_flags |= flags;
+
+#endif
 }
 
 

@@ -231,6 +231,8 @@ PRBOOL prApplication_Linux::Run()
               // Update and draw the game
               Update(16.0f);
               Draw();
+
+              //if (pMouse) { pMouse->ClearButtons(); }
           }
 
           // Needs modified to track game speed!

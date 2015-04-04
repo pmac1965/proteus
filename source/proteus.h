@@ -63,7 +63,7 @@
 #include "collision/prLine.h"
 #include "core/prApplication.h"
 #include "core/prApplication_Android.h"
-#include "core/prApplication_Bada.h"
+//#include "core/prApplication_Bada.h"
 #include "core/prApplication_IOS.h"
 #include "core/prApplication_Linux.h"
 #include "core/prApplication_PC.h"
@@ -92,7 +92,7 @@
 #include "core/prWindow.h"
 #include "core/prWindowProcedure.h"
 #include "core/prWindow_Android.h"
-#include "core/prWindow_Bada.h"
+//#include "core/prWindow_Bada.h"
 #include "core/prWindow_Ios.h"
 #include "core/prWindow_Linux.h"
 #include "core/prWindow_PC.h"
@@ -148,7 +148,7 @@
 #include "inAppPurchase/prInAppPurchase.h"
 #include "inAppPurchase/prStore.h"
 #include "inAppPurchase/prStore_android.h"
-#include "inAppPurchase/prStore_bada.h"
+//#include "inAppPurchase/prStore_bada.h"
 #include "inAppPurchase/prStore_ios.h"
 #include "inAppPurchase/prStore_linux.h"
 #include "inAppPurchase/prStore_mac.h"
@@ -210,7 +210,7 @@
 #include "persistence/prSave.h"
 #include "persistence/prSaveBase.h"
 #include "persistence/prSave_android.h"
-#include "persistence/prSave_bada.h"
+//#include "persistence/prSave_bada.h"
 #include "persistence/prSave_ios.h"
 #include "persistence/prSave_linux.h"
 #include "persistence/prSave_mac.h"
@@ -236,7 +236,6 @@
 
 // Include the PC libraries
 #if defined(PLATFORM_PC)
-
     // OpenGL libs
     #pragma comment(lib, "opengl32.lib")
     #pragma comment(lib, "glu32.lib")

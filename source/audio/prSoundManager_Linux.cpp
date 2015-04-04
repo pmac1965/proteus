@@ -150,7 +150,7 @@ bool prSoundManager_Linux::Initialise()
 /// ---------------------------------------------------------------------------
 void prSoundManager_Linux::Release()
 {
-#if defined(SOUND_ALLOW) && defined(USE_OPENAL)
+#if defined(SOUND_ALLOW)// && defined(USE_OPENAL)
 
     ALCcontext *pContext = alcGetCurrentContext();
     ALCdevice  *pDevice  = alcGetContextsDevice(pContext);

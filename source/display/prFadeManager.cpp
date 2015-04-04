@@ -34,10 +34,10 @@
   #include <OpenGL/gl.h>
   #include <cstdlib>
 
-#elif defined(PLATFORM_BADA)
-    #include <FGraphicsOpengl.h>
-    #include <cstdlib>
-    using namespace Osp::Graphics::Opengl;
+//#elif defined(PLATFORM_BADA)
+//    #include <FGraphicsOpengl.h>
+//    #include <cstdlib>
+//    using namespace Osp::Graphics::Opengl;
 
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
@@ -87,7 +87,7 @@ prFadeManager::~prFadeManager()
 /// ---------------------------------------------------------------------------
 /// Updates the fade.
 /// ---------------------------------------------------------------------------
-void prFadeManager::Update(float dt)
+void prFadeManager::Update(f32 dt)
 {
     if (fading)
     {
@@ -129,7 +129,7 @@ void prFadeManager::Draw()
         }
         else
         {
-            float a = alpha / 255.0f;
+            f32 a = alpha / 255.0f;
             glColor4f(a, a, a, a);
         }
 
@@ -157,17 +157,13 @@ void prFadeManager::Draw()
 /// ---------------------------------------------------------------------------
 /// Starts a fade running.
 /// ---------------------------------------------------------------------------
-void prFadeManager::Start(prFade fade, float runtime)
+void prFadeManager::Start(prFade fade, f32 runtime)
 {
     if (!fading)
     {
         // Check fade time
         PRASSERT(runtime > MINIMUM_FADE_TIME, "Fade time is too small!\n"
                                               "Possibly less than a single frame.");
-
-        // Check start state
-        PRASSERT(fade != FadeNone, "You can't start fading with 'Fade_None'\n\t\t  "
-                                   "If you want to cancel a fade use Stop()");
 
         // Set
         if (fade == FadeToBlack)
@@ -253,8 +249,6 @@ void prFadeManager::SetBlack(f32 in)
 /// ---------------------------------------------------------------------------
 void prFadeManager::SetWhite()
 {
-    TODO("Add in colour")
-
     colour = FadeColourWhite;
     alpha  = 255.0f;
 }
