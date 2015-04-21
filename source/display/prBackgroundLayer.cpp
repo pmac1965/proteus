@@ -23,7 +23,7 @@
 #include "../core/prCore.h"
 #include "../display/prOglUtils.h"
 #include "../display/prTexture.h"
-//#include "../system/prSystem.h"
+#include <cstring>
 
 
 // ----------------------------------------------------------------------------
@@ -40,9 +40,9 @@
 #elif defined(PLATFORM_MAC)
   #include <OpenGL/gl.h>
 
-#elif defined(PLATFORM_BADA)
-  #include <FGraphicsOpengl.h>
-  using namespace Osp::Graphics::Opengl;
+//#elif defined(PLATFORM_BADA)
+//  #include <FGraphicsOpengl.h>
+//  using namespace Osp::Graphics::Opengl;
 
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>

@@ -25,71 +25,46 @@
 
 // Basic types - PC
 #if defined(PLATFORM_PC)
-typedef   signed char           s8;
-typedef unsigned char           u8;
-typedef   signed short          s16;
-typedef unsigned short          u16;
-typedef   signed int            s32;
-typedef unsigned int            u32;
-typedef   signed __int64        s64;
-typedef unsigned __int64        u64;
-typedef float                   f32;
-typedef double                  f64;
+    typedef   signed char           s8;
+    typedef unsigned char           u8;
+    typedef   signed short          s16;
+    typedef unsigned short          u16;
+    typedef   signed int            s32;
+    typedef unsigned int            u32;
+    typedef   signed __int64        s64;
+    typedef unsigned __int64        u64;
+    typedef float                   f32;
+    typedef double                  f64;
 
 // Basic types - iphone/mac
 #elif (defined(PLATFORM_IOS) || defined(PLATFORM_MAC))
-typedef   signed char           s8;
-typedef unsigned char           u8;
-typedef   signed short          s16;
-typedef unsigned short          u16;
-typedef   signed int            s32;
-typedef unsigned int            u32;
-typedef   signed long long      s64;
-typedef unsigned long long      u64;
-typedef float                   f32;
-typedef double                  f64;
+    typedef   signed char           s8;
+    typedef unsigned char           u8;
+    typedef   signed short          s16;
+    typedef unsigned short          u16;
+    typedef   signed int            s32;
+    typedef unsigned int            u32;
+    typedef   signed long long      s64;
+    typedef unsigned long long      u64;
+    typedef float                   f32;
+    typedef double                  f64;
 
-// Basic types - bada
-#elif defined(PLATFORM_BADA)
-typedef   signed char           s8;
-typedef unsigned char           u8;
-typedef   signed short          s16;
-typedef unsigned short          u16;
-typedef   signed int            s32;
-typedef unsigned int            u32;
-typedef   signed long long      s64;
-typedef unsigned long long      u64;
-typedef float                   f32;
-typedef double                  f64;
-
-// Basic types - android
-#elif defined(PLATFORM_ANDROID)
-typedef   signed char           s8;
-typedef unsigned char           u8;
-typedef   signed short          s16;
-typedef unsigned short          u16;
-typedef   signed int            s32;
-typedef unsigned int            u32;
-typedef   signed long long      s64;
-typedef unsigned long long      u64;
-typedef float                   f32;
-typedef double                  f64;
-
-// Basic types - linux
-#elif defined(PLATFORM_LINUX)
-typedef   signed char           s8;
-typedef unsigned char           u8;
-typedef   signed short          s16;
-typedef unsigned short          u16;
-typedef   signed int            s32;
-typedef unsigned int            u32;
-typedef   signed long long      s64;
-typedef unsigned long long      u64;
-typedef float                   f32;
-typedef double                  f64;
+// Basic types - android, linux, tizen
+#elif (defined(PLATFORM_ANDROID) || defined(PLATFORM_LINUX) || defined(PLATFORM_TIZEN))
+    typedef   signed char           s8;
+    typedef unsigned char           u8;
+    typedef   signed short          s16;
+    typedef unsigned short          u16;
+    typedef   signed int            s32;
+    typedef unsigned int            u32;
+    typedef   signed long long      s64;
+    typedef unsigned long long      u64;
+    typedef float                   f32;
+    typedef double                  f64;
 
 #else
-#error Platform not defined
+    #error Platform not defined
+
 #endif
 
 
@@ -124,7 +99,7 @@ typedef u32                 PRBOOL;
 #define PRFALSE             0
 
 
-// Type for drawing quad.
+// Type for drawing quads
 typedef struct QuadData
 {
 	f32 x, y;

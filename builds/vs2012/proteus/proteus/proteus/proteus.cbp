@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="proteus" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="proteus" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-D_LIB" />
+				</Compiler>
+			</Target>
+			<Target title="Release ARM">
+				<Option output="proteus" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-D_LIB" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+			</Target>
+			<Target title="Debug ARM">
+				<Option output="proteus" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-D_LIB" />
+				</Compiler>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="proteus" prefix_auto="1" extension_auto="1" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-D_LIB" />
+					<Add option="-DNDEBUG" />
+				</Compiler>
+			</Target>
+		</Build>
+		<Unit filename="../../../../../source/achievements/prAchievementManager.cpp" />
+		<Unit filename="../../../../../source/achievements/prAchievementManager.h" />
+		<Unit filename="../../../../../source/achievements/prAchievement_android.cpp" />
+		<Unit filename="../../../../../source/achievements/prAchievement_android.h" />
+		<Unit filename="../../../../../source/achievements/prAchievement_bada.cpp" />
+		<Unit filename="../../../../../source/achievements/prAchievement_bada.h" />
+		<Unit filename="../../../../../source/achievements/prAchievement_base.h" />
+		<Unit filename="../../../../../source/achievements/prAchievement_ios.cpp" />
+		<Unit filename="../../../../../source/achievements/prAchievement_ios.h" />
+		<Unit filename="../../../../../source/achievements/prAchievement_linux.cpp" />
+		<Unit filename="../../../../../source/achievements/prAchievement_linux.h" />
+		<Unit filename="../../../../../source/achievements/prAchievement_mac.cpp" />
+		<Unit filename="../../../../../source/achievements/prAchievement_mac.h" />
+		<Unit filename="../../../../../source/achievements/prAchievement_pc.cpp" />
+		<Unit filename="../../../../../source/achievements/prAchievement_pc.h" />
+		<Unit filename="../../../../../source/achievements/prLeaderboards.cpp" />
+		<Unit filename="../../../../../source/achievements/prLeaderboards.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

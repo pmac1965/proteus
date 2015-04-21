@@ -9,6 +9,9 @@ REM
 REM ---------------------------------------------------------------------------
 
 
+echo TODO: Remove this file as its no longer needed
+
+
 if exist files.txt (
 del files.txt
 )
@@ -218,4 +221,7 @@ dir /S /B *.h >> ..\files.txt
 popd
 )
 
+echo TODO: Remove this file as its no longer needed
+echo TODO: Remove this file as its no longer needed
+echo TODO: Remove this file as its no longer needed
 pause

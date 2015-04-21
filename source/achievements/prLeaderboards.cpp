@@ -23,6 +23,11 @@
 #include "prLeaderboards.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Achievements {
+
+
 // Locals
 namespace
 {
@@ -33,25 +38,30 @@ namespace
 /// ---------------------------------------------------------------------------
 /// Submit a score to a leaderboard.
 /// ---------------------------------------------------------------------------
-void prLeaderboard::Submit(const char *name, u64 score)
+void prLeaderboard::Submit(const char *name, u64 value)
 {
     TODO("Finish leaderboards")
 
-    if (name && *name && score > 0)
+    if (name && *name && value > 0)
     {
         if (submitAllowed)
         {
-        //#if defined(PLATFORM_IOS)    
+        #if defined(PLATFORM_IOS)    
         //    extern void Leaderboards_Submit(const char *name, u64 score);
         //    Leaderboards_Submit(name, score);
-        //    Trace("Submit leaderboard %s, %llu\n", name, score);        
 
-        //#elif defined(PLATFORM_ANDROID)
+        #elif defined(PLATFORM_ANDROID)
         //    extern void JNI_SubmitLeaderboardScore(const char *name, s32 score);
-        //    JNI_SubmitLeaderboardScore(name, (int)score);
-        //    Trace("Submit leaderboard %s, %llu\n", name, score);        
 
-        //#endif
+        #elif defined(PLATFORM_PC)
+            //
+
+        #elif defined(PLATFORM_LINUX)
+            //
+
+        #endif
+
+            prTrace("Submit to leaderboard '%s' - %llu\n", name, value);        
         }
     }
 }
@@ -64,3 +74,6 @@ void prLeaderboard::SubmitEnabled(PRBOOL state)
 {
     submitAllowed = state;
 }
+
+
+}}// Namespaces

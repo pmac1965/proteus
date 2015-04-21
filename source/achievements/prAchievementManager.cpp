@@ -52,10 +52,10 @@
   //#include <OpenGLES/ES1/gl.h>
   #include "prAchievement_mac.h"
 
-#elif defined(PLATFORM_BADA)
-  #include <FGraphicsOpengl.h>
-  #include "prAchievement_bada.h"
-  using namespace Osp::Graphics::Opengl;
+//#elif defined(PLATFORM_BADA)
+//  #include <FGraphicsOpengl.h>
+//  #include "prAchievement_bada.h"
+//  using namespace Osp::Graphics::Opengl;
 
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
@@ -163,8 +163,8 @@ typedef struct AchievementManagerImplementation
 #elif defined(PLATFORM_IOS)
         pAchievementProvider = new prAchievement_Ios();
 
-#elif defined(PLATFORM_BADA)
-        pAchievementProvider = new prAchievement_Bada();
+//#elif defined(PLATFORM_BADA)
+//        pAchievementProvider = new prAchievement_Bada();
 
 #elif defined(PLATFORM_ANDROID)
         pAchievementProvider = new prAchievement_Android();

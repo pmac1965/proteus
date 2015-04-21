@@ -23,19 +23,33 @@
 #include "../core/prTypes.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Achievements {
+
+
 // Class: prLeaderboard
 //      Simple cross platform interface for leaderboards
 class prLeaderboard
 {
 public:
     // Method: Submit
-    //      Submit a score to a leaderboard.
-    void Submit(const char *name, u64 score);
+    //      Submit a value to a leaderboard.
+    //
+    // Parameters:
+    //      name  - The name of the leaderboard item
+    //      value - The value to submit to the leaderboard
+    void Submit(const char *name, u64 value);
 
     // Method: SubmitEnabled
     //      Allows submit to be disabled in case you need to remove it.
+    //      For example in a free build where leaderboards may be disabled
+    //      to encourage purchase of the full product
     void SubmitEnabled(PRBOOL state);
 };
+
+
+}}// Namespaces
 
 
 #endif//__PRLEADERBOARDS_H

@@ -21,6 +21,7 @@
 
 
 #include <cstring>
+#include <clocale>
 #include "prCore.h"
 #include "prCoreSystem.h"
 #include "prMessageManager.h"
@@ -99,10 +100,14 @@ void prCoreInit()
         pSystems[PRSYSTEM_MOUSE]     = new prMouse();
         #endif
 
+        // Set the locale to English.
+        // This stops XML reading from screwing up because it can use the wrong locale to
+        // extract the values. Example: English:'1.00f' - French:'1,00f'
+        setlocale(LC_ALL, "en-GB");
     }
     else
     {
-        PRWARN("Cannot initialise the core twice");
+        PRWARN("Waring: You cannot initialise the core twice");
     }
 }
 
@@ -293,8 +298,6 @@ PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version)
             #error Unsupported platform
 
         #endif
-
-
     }
     else
     {

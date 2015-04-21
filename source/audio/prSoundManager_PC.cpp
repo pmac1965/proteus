@@ -43,7 +43,7 @@
 // Defines.
 #define SOUND_DEBUG
 #define SOUND_SHOW_FAILS
-#define SONG_BUFFER_SIZE    PRKB(32)
+#define SONG_BUFFER_SIZE    PRKB(128)
 
 
 // Locals

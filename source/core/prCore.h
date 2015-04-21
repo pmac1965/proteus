@@ -170,10 +170,10 @@ PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version);
 //      count           - The number of elements
 //
 // Notes:
-//      This function should called just after prCoreCreate
+//      This function should called just after prCoreInit
 //
 // See Also:
-//      <prCoreCreate>
+//      <prCoreInit>
 void prCoreCreateOptional(s32 *optionalSystems, u32 count);
 
 

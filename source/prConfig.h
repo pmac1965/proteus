@@ -30,6 +30,41 @@
 #define AUDIO_TIZEN     8           // Bada replacement
 
 
+//#if defined(_MSC_VER)
+//
+//#if defined(_MSC_VER)
+//#pragma message("_MSC_VER")
+//#endif
+//
+//#if defined(_WIN32)
+//#pragma message("_WIN32")
+//#endif
+//
+//#else
+//
+//#if defined(__GNUC__)
+//#warning "__GNUC__"
+//#endif
+//
+//#if defined(linux)
+//#warning "linux"
+//#endif
+//
+//#if defined(WIN32)
+//#warning "WIN32"
+//#endif
+//
+//#if defined(_WIN32)
+//#warning "_WIN32"
+//#endif
+//
+//#if defined(__ANDROID__)
+//#warning "__ANDROID__"
+//#endif
+//
+//#endif // defined
+
+
 // Determine platform. First check for PC
 #if defined(_MSC_VER)
     #define PLATFORM_PC
@@ -116,15 +151,15 @@
 #endif
 
 #ifndef PROTEUS_ALLOW_WINDOW_MINIMIZE                   // Allows the PC window to have a minimize button
-#define PROTEUS_ALLOW_WINDOW_MINIMIZE
+//#define PROTEUS_ALLOW_WINDOW_MINIMIZE
 #endif
 
 #ifndef PROTEUS_ALLOW_WINDOW_MAXIMIZE                   // Allows the PC window to have a maximize button
-#define PROTEUS_ALLOW_WINDOW_MAXIMIZE
+//#define PROTEUS_ALLOW_WINDOW_MAXIMIZE
 #endif
 
 #ifndef PROTEUS_ALLOW_RESIZEABLE_WINDOW                 // Allows the PC window to be resizeable.
-#define PROTEUS_ALLOW_RESIZEABLE_WINDOW
+//#define PROTEUS_ALLOW_RESIZEABLE_WINDOW
 #endif
 
 #ifndef PROTEUS_ALLOW_AT                                // Allows the AT define to exist

@@ -93,7 +93,7 @@ REM ---------------------------------------------------------------------------
     rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\libzip
     rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\android\AL
     rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\audio\external
-    rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\android
+    REM rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\android
 
 
 REM --------------------------------------
@@ -112,6 +112,11 @@ REM --------------------------------------
 REM ---------------------------------------------------------------------------
 REM Update engine docs
 REM ---------------------------------------------------------------------------
+REM    if exist D:\NaturalDocs-1.52\doc_engine.bat (
+REM        echo Updating docs
+REM        cd D:\NaturalDocs-1.52
+REM        doc_engine.bat
+REM    )
     if exist D:\NaturalDocs-1.52\doc_engine.bat (
         echo Updating docs
         cd D:\NaturalDocs-1.52
