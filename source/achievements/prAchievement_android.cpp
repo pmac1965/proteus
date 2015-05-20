@@ -24,7 +24,9 @@
 
 
 #include "prAchievement_android.h"
-//#include "../android/JNIInterface.h"
+
+
+using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

@@ -20,9 +20,6 @@
 #define __PRLINUXINPUT_H
 
 
-#include "../core/prTypes.h"
-
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -30,7 +27,7 @@ extern "C" {
 
 // Function: prLinuxUpdateMouse
 //      A wrapper between input and the engine.
-void prLinuxUpdateMouse(s32 x, s32 y, u32 flags);
+void prLinuxUpdateMouse(int x, int y, unsigned int flags);
 
 
 #ifdef __cplusplus

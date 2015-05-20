@@ -39,6 +39,9 @@
 #include <gl/glu.h>
 
 
+using namespace Proteus::Core;
+
+
 // Debug
 #define MD2_DEBUG
 

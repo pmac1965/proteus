@@ -31,6 +31,9 @@
 #include "../debug/prDebug.h"
 
 
+using namespace Proteus::Core;
+
+
 // The touch states.
 namespace TouchState
 {

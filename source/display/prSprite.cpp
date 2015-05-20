@@ -67,6 +67,9 @@
 #include "../debug/prTrace.h"
 
 
+using namespace Proteus::Core;
+
+
 // Defines
 #define DEFAULT_SCALE                   1.0f
 #define ALLOW_INVALID_FRAME_WARNING

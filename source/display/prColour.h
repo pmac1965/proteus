@@ -27,10 +27,10 @@
 //      A struct to represent RGBA colour
 typedef struct prRGBA
 {
-    u8  r;
-    u8  g;
-    u8  b;
-    u8  a;
+    Proteus::Core::u8  r;
+    Proteus::Core::u8  g;
+    Proteus::Core::u8  b;
+    Proteus::Core::u8  a;
 
 } prRGBA;
 
@@ -65,7 +65,7 @@ public:
     //      g - The green component
     //      b - The blue component
     //      a - The alpha component
-    prColour(f32 r, f32 g, f32 b, f32 a = 1.0f)
+    prColour(Proteus::Core::f32 r, Proteus::Core::f32 g, Proteus::Core::f32 b, Proteus::Core::f32 a = 1.0f)
     {
         red   = r;
         green = g;
@@ -84,7 +84,7 @@ public:
     //      g - The green component
     //      b - The blue component
     //      a - The alpha component
-    prColour(u8 r, u8 g, u8 b, u8 a = 255)
+    prColour(Proteus::Core::u8 r, Proteus::Core::u8 g, Proteus::Core::u8 b, Proteus::Core::u8 a = 255)
     {
         red   = RGB_ELE * r;
         green = RGB_ELE * g;
@@ -125,7 +125,7 @@ public:
 // Parameters:
 //      pData - A pointer to the colour data
 //      size  - Size of the colour data
-void prSwitchRGBAToBGRA(u8 *pData, u32 size);
+void prSwitchRGBAToBGRA(Proteus::Core::u8 *pData, Proteus::Core::u32 size);
 
 
 #endif//__PRCOLOUR_H

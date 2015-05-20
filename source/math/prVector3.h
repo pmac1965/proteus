@@ -61,7 +61,7 @@ public:
     //      nx - X coordinate
     //      ny - Y coordinate
     //      nz - Z coordinate
-    prVector3(f32 nx, f32 ny, f32 nz) : x(nx), y(ny), z(nz)
+    prVector3(Proteus::Core::f32 nx, Proteus::Core::f32 ny, Proteus::Core::f32 nz) : x(nx), y(ny), z(nz)
     {}
 
     // Method: prVector3
@@ -74,11 +74,11 @@ public:
 
     // Method: Length
     //      Calculates the magnitude of the vector.
-    f32 Length() const;
+    Proteus::Core::f32 Length() const;
 
     // Method: LengthSquared
     //      Calculates the magnitude of the vector squared.
-    f32 LengthSquared() const;
+    Proteus::Core::f32 LengthSquared() const;
     
     // Method: Normalize
     //      Normalise this vector.
@@ -96,7 +96,7 @@ public:
     //
     //      The returned angle is between -1 and 1 and is actually the cosine between
     //      the two vectors
-    f32 DotProduct(const prVector3 &v) const;
+    Proteus::Core::f32 DotProduct(const prVector3 &v) const;
 
     // Method: CrossProduct
     //      Returns the cross product.
@@ -132,19 +132,19 @@ public:
     
     // Operator +
     inline prVector3 operator + (const prVector3& rhs) const;
-    inline prVector3 operator + (const f32& rhs) const;
+    inline prVector3 operator + (const Proteus::Core::f32& rhs) const;
 
     // Operator -
     inline prVector3 operator - (const prVector3& rhs) const;
-    inline prVector3 operator - (const f32& rhs) const;
+    inline prVector3 operator - (const Proteus::Core::f32& rhs) const;
 
     // Operator *
     inline prVector3 operator * (const prVector3& rhs) const;
-    inline prVector3 operator * (const f32& rhs) const;
+    inline prVector3 operator * (const Proteus::Core::f32& rhs) const;
 
     // Operator /
     inline prVector3 operator / (const prVector3& rhs) const;
-    inline prVector3 operator / (const f32& rhs) const;
+    inline prVector3 operator / (const Proteus::Core::f32& rhs) const;
 
     // Operator +=
     inline prVector3& operator += (const prVector3& rhs);
@@ -153,7 +153,7 @@ public:
     inline prVector3& operator -= (const prVector3& rhs);
 
     // Operator *=
-    inline prVector3& operator *= (const f32 val);
+    inline prVector3& operator *= (const Proteus::Core::f32 val);
 
     // Unary + operator.
     inline prVector3 operator + () const { return *this; }
@@ -178,13 +178,13 @@ public:
 
     union
     {
-        f32 element[3];
+        Proteus::Core::f32 element[3];
         
         struct
         {                   
-            f32 x;
-            f32 y;
-            f32 z;
+            Proteus::Core::f32 x;
+            Proteus::Core::f32 y;
+            Proteus::Core::f32 z;
         };
     };    
 

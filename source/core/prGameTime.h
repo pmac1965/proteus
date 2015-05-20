@@ -46,11 +46,11 @@ public:
 
     // Method: RunTime
     //      Gets the total runtime in milliseconds
-    f32 RunTime() const;
+    Proteus::Core::f32 RunTime() const;
 
     // Method: ElapsedTime
     //      Gets the elapsed time bewteen 1 frame and the next.
-    f32 ElapsedTime() const;
+    Proteus::Core::f32 ElapsedTime() const;
 
     
 private:

@@ -134,6 +134,9 @@ enum
 #define HEADER_MAGIC    0x21525650
 
 
+using namespace Proteus::Core;
+
+
 // Local data
 namespace
 {

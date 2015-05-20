@@ -87,7 +87,7 @@ public:
     //
     // See Also:
     //      <prButtonStates>
-    virtual bool SetButtonFrame(const char *name, s32 frame, s32 &newFrame) { return true; }
+    virtual bool SetButtonFrame(const char *name, Proteus::Core::s32 frame, Proteus::Core::s32 &newFrame) { return true; }
 };
 
 

@@ -31,11 +31,11 @@ class prAchievement_Linux : public prAchievementBase
 public:
     // Method: Award
     //      Award an achievement.
-    void Award(const char *name, s32 id);
+    void Award(const char *name, Proteus::Core::s32 id);
 
     // Method: IsAwarded
     //      Checks if an achievement has been award.
-    bool IsAwarded(const char *name, s32 id);
+    bool IsAwarded(const char *name, Proteus::Core::s32 id);
     
     // Method: IsReady
     //      Checks if the provider is ready to be used

@@ -32,7 +32,7 @@ class prAnimation_MD2 : public prAnimation
 public:
     // Method: prAnimation_MD2
     //      Constructor
-    prAnimation_MD2(prMD2Frame *pFrames, s32 numFrames);
+    prAnimation_MD2(prMD2Frame *pFrames, Proteus::Core::s32 numFrames);
 
     // Method: ~prAnimation_MD2
     //      Destructor
@@ -40,7 +40,7 @@ public:
 
     // Method: Update
     //      Updates the animation
-    void Update(f32 step);
+    void Update(Proteus::Core::f32 step);
 
     // Method: Play
     //      Plays an animation
@@ -48,7 +48,7 @@ public:
 
     // Method: Play
     //      Plays an animation
-    void Play(s32 animation);
+    void Play(Proteus::Core::s32 animation);
 
     // Method: Play
     //      Stops the current animation.
@@ -60,15 +60,15 @@ public:
 
     // Method: GetFrame
     //      Gets the current frame.
-    s32 GetFrame() const { return mCurFrame; }
+    Proteus::Core::s32 GetFrame() const { return mCurFrame; }
 
 
 private:
 
     std::list<prMD2Anim*>   mAnimations;
-    s32                     mStartFrame;
-    s32                     mEndFrame;
-    s32                     mCurFrame;
+    Proteus::Core::s32      mStartFrame;
+    Proteus::Core::s32      mEndFrame;
+    Proteus::Core::s32      mCurFrame;
     float                   mStep;
 };
 

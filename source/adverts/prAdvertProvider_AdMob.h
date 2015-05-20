@@ -42,7 +42,7 @@ public:
 
     // Method: Show
     //      Show advert
-    void Show(s32 type);
+    void Show(Proteus::Core::s32 type);
 
     // Method: Hide
     //      Hide advert.
@@ -58,7 +58,6 @@ public:
 
 
 private:
-
     bool    m_visible;
     bool    m_exp0;
     bool    m_exp1;

@@ -23,6 +23,24 @@
 #include "../debug/prAssert.h"
 
 
+// Namespaces for C++ code
+#if defined(__cplusplus)
+  #define PRNAMESPACE_BEG(name) namespace name {
+  #define PRNAMESPACE_END       }
+
+// Namespaces for C code
+#else
+  #define PRNAMESPACE_BEG(name)
+  #define PRNAMESPACE_END
+
+#endif
+
+
+// Namespaces
+PRNAMESPACE_BEG(Proteus)
+PRNAMESPACE_BEG(Core)
+
+
 // Basic types - PC
 #if defined(PLATFORM_PC)
     typedef   signed char           s8;
@@ -119,6 +137,10 @@ PRCOMPILER_ASSERT(sizeof(s64) == 8);
 PRCOMPILER_ASSERT(sizeof(u64) == 8);
 PRCOMPILER_ASSERT(sizeof(f32) == 4);
 PRCOMPILER_ASSERT(sizeof(f64) == 8);
+
+
+PRNAMESPACE_END
+PRNAMESPACE_END // Namespaces
 
 
 #endif//__PRTYPES_H

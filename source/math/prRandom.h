@@ -30,22 +30,22 @@ namespace Math {
 
 // Function: prRandomSetSeed
 //      Sets a new random number seed.
-void prRandomSetSeed(u32 newSeed);
+void prRandomSetSeed(Proteus::Core::u32 newSeed);
 
 
 // Function: prRandomNumber
 //      Returns a random number between 0 and max minus 1.
-u32 prRandomNumber(u32 max);
+Proteus::Core::u32 prRandomNumber(Proteus::Core::u32 max);
 
 
 // Function: prRandomNumber
 //      Returns a random number between min and max.
-s32 prRandomNumber(s32 min, s32 max);
+Proteus::Core::s32 prRandomNumber(Proteus::Core::s32 min, Proteus::Core::s32 max);
 
 
 // Function: prRand
 //      Returns a random number similar to the C standard lib rand() function.
-s32 prRand();
+Proteus::Core::s32 prRand();
 
 
 }}// Namespaces

@@ -29,7 +29,7 @@ class prTexture;
 
 
 // Public information
-extern f32 PRGL_VERSION;
+extern Proteus::Core::f32 PRGL_VERSION;
 
 
 /// Gets some basic info about opengl

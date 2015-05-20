@@ -68,18 +68,18 @@ public:
 public:
     // Method: GetWidth
     //      Returns the width of the background.
-    s32 GetWidth() const { return m_width; }
+    Proteus::Core::s32 GetWidth() const { return m_width; }
 
     // Method: GetHeight
     //      Returns the height of the background.
-    s32 GetHeight() const { return m_height; }
+    Proteus::Core::s32 GetHeight() const { return m_height; }
 
     // Method: GetType
     //      Returns the type of the background.
     //
     // See Also:
     //      <prBackgroundType>
-    s32 GetType() const { return m_type; }
+    Proteus::Core::s32 GetType() const { return m_type; }
 
     // Method: Draw
     //      Draws the background.
@@ -103,15 +103,15 @@ public:
     //
     // Returns:
     //      Either a layer or NULL
-    prBackgroundLayer* GetLayer(s32 index);
+    prBackgroundLayer* GetLayer(Proteus::Core::s32 index);
 
     // Method: SetVisible
     //      Sets the visibility.
-    void SetVisible(PRBOOL state) { mVisible = state; }
+    void SetVisible(Proteus::Core::PRBOOL state) { mVisible = state; }
 
     // Method: GetVisible
     //      Gets the visibility.
-    PRBOOL GetVisible() const { return mVisible; }
+    Proteus::Core::PRBOOL GetVisible() const { return mVisible; }
 
     // Method: GetName
     //      Gets the backgrounds name.
@@ -225,24 +225,24 @@ private:
 
     
 private:
-    prTexture      *m_texture;
-    prString        m_filenameTexture;
-    prString        m_name;
-    s32             m_width;
-    s32             m_height;
-    s32             m_type;
-    bool            m_correctFileType;
-    bool            m_widthHeightSupplied;
-    bool            m_exp1;
-    bool            m_exp2;
-    prColour        m_colour;
-    f32             m_pixelWidth;
-    f32             m_pixelHeight;
-    f32             m_scrnWidth;
-    f32             m_scrnHeight;
-    f32             m_v0;
-    f32             m_u1;
-    PRBOOL          mVisible;
+    prTexture              *m_texture;
+    prString                m_filenameTexture;
+    prString                m_name;
+    Proteus::Core::s32      m_width;
+    Proteus::Core::s32      m_height;
+    Proteus::Core::s32      m_type;
+    bool                    m_correctFileType;
+    bool                    m_widthHeightSupplied;
+    bool                    m_exp1;
+    bool                    m_exp2;
+    prColour                m_colour;
+    Proteus::Core::f32      m_pixelWidth;
+    Proteus::Core::f32      m_pixelHeight;
+    Proteus::Core::f32      m_scrnWidth;
+    Proteus::Core::f32      m_scrnHeight;
+    Proteus::Core::f32      m_v0;
+    Proteus::Core::f32      m_u1;
+    Proteus::Core::PRBOOL   mVisible;
     
     // Tiled map layers
     prBackgroundLayer *mLayers[BACKGROUND_MAX_LAYERS];

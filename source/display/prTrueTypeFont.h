@@ -65,7 +65,7 @@ public:
     // Parameters:
     //      filename - The font file to load
     //      height   - The fonts required height
-    void Load(const char *filename, s32 height);
+    void Load(const char *filename, Proteus::Core::s32 height);
 
     // Method: Load
     //      Loads the font data.
@@ -78,7 +78,7 @@ public:
     //      filename    - The font file to load
     //      height      - The fonts required height
     //      characters  - A list of characters to support
-    void Load(const char *filename, s32 height, const char *characters);
+    void Load(const char *filename, Proteus::Core::s32 height, const char *characters);
 
     // Method: Draw
     //      Draws a string
@@ -88,7 +88,7 @@ public:
     //      y   - Y position to draw at
     //      fmt - A format string
     //      ... - Optional parameters
-    void Draw(f32 x, f32 y, const char *fmt, ...);
+    void Draw(Proteus::Core::f32 x, Proteus::Core::f32 y, const char *fmt, ...);
 
     // Method: Draw
     //      Draws a string
@@ -104,7 +104,7 @@ public:
     //
     // See Also:
     //      <prTrueTypeFontAlign>
-    void Draw(f32 x, f32 y, float scale, prColour colour, s32 alignment, const char *fmt, ...);
+    void Draw(Proteus::Core::f32 x, Proteus::Core::f32 y, float scale, prColour colour, Proteus::Core::s32 alignment, const char *fmt, ...);
 
     // Method: MeasureString
     //      Returns the pixel size of the string.

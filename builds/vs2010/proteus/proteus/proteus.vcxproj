@@ -453,7 +453,6 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\..\source\achievements\prAchievementManager.h" />
     <ClInclude Include="..\..\..\..\source\achievements\prAchievement_android.h" />
-    <ClInclude Include="..\..\..\..\source\achievements\prAchievement_bada.h" />
     <ClInclude Include="..\..\..\..\source\achievements\prAchievement_base.h" />
     <ClInclude Include="..\..\..\..\source\achievements\prAchievement_ios.h" />
     <ClInclude Include="..\..\..\..\source\achievements\prAchievement_linux.h" />
@@ -831,7 +830,6 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\source\achievements\prAchievementManager.cpp" />
     <ClCompile Include="..\..\..\..\source\achievements\prAchievement_android.cpp" />
-    <ClCompile Include="..\..\..\..\source\achievements\prAchievement_bada.cpp" />
     <ClCompile Include="..\..\..\..\source\achievements\prAchievement_ios.cpp" />
     <ClCompile Include="..\..\..\..\source\achievements\prAchievement_linux.cpp" />
     <ClCompile Include="..\..\..\..\source\achievements\prAchievement_mac.cpp" />

@@ -95,11 +95,11 @@ public:
 
     // Method: GetFrameWidth
     //      Returns the sprite frame width.
-    s32 GetFrameWidth() const;
+    Proteus::Core::s32 GetFrameWidth() const;
 
     // Method: GetFrameHeight
     //      Returns the sprite frame height.
-    s32 GetFrameHeight() const;
+    Proteus::Core::s32 GetFrameHeight() const;
 
     // Method: Name
     //      Returns the sprites name.
@@ -113,11 +113,11 @@ public:
     //
     // Notes:
     //      Must be between 0 and the max frame count
-    void SetFrame(s32 frame);
+    void SetFrame(Proteus::Core::s32 frame);
 
     // Method: GetFrame
     //      Gets the current frame.
-    s32 GetFrame() const;
+    Proteus::Core::s32 GetFrame() const;
 
     // Method: PlayAnim
     //      Play an animation.
@@ -137,7 +137,7 @@ public:
     //
     // See Also:
     //      <ClearFlip>
-    void SetFlip(u32 flip);
+    void SetFlip(Proteus::Core::u32 flip);
 
     // Method: ClearFlip
     //      Clears horizontal/vertical flips.
@@ -147,14 +147,14 @@ public:
     //
     // See Also:
     //      <SetFlip>
-    void ClearFlip(u32 flip);
+    void ClearFlip(Proteus::Core::u32 flip);
 
     // Method: SetScale
     //      Set scale
     //
     // Parameters:
     //      scale - The scale to set
-    void SetScale(f32 scale);
+    void SetScale(Proteus::Core::f32 scale);
 
     // Method: SetScale
     //      Set scale
@@ -162,7 +162,7 @@ public:
     // Parameters:
     //      scaleX - The scale to set
     //      scaleY - The scale to set
-    void SetScale(f32 scaleX, f32 scaleY);
+    void SetScale(Proteus::Core::f32 scaleX, Proteus::Core::f32 scaleY);
 
     // Method: GetScale
     //      Get scale
@@ -170,30 +170,30 @@ public:
     // Parameters:
     //      x - Receives the X scale
     //      y - Receives the Y scale
-    void GetScale(f32 &x, f32 &y) const;
+    void GetScale(Proteus::Core::f32 &x, Proteus::Core::f32 &y) const;
     
     // Method: GetScale
     //      Get scale
-    f32 GetScale() const;
+    Proteus::Core::f32 GetScale() const;
 
     // Method: GetScaleX
     //      Returns the scale X component
-    f32 GetScaleX() const;
+    Proteus::Core::f32 GetScaleX() const;
 
     // Method: GetScaleY
     //      Returns the scale Y component
-    f32 GetScaleY() const;
+    Proteus::Core::f32 GetScaleY() const;
 
     // Method: SetRotation
     //      Sets rotation
     //
     // Parameters:
     //      rot - The rotation value
-    void SetRotation(f32 rot);
+    void SetRotation(Proteus::Core::f32 rot);
 
     // Method: GetRotation
     //      Returns the current rotation
-    f32 GetRotation() const;
+    Proteus::Core::f32 GetRotation() const;
 
     // Method: SetUser
     //      User data support.
@@ -201,7 +201,7 @@ public:
     // Parameters:
     //      index - 0 to 3
     //      value - Required value
-    void SetUser(s32 index, s32 value);
+    void SetUser(Proteus::Core::s32 index, Proteus::Core::s32 value);
 
     // Method: GetUser
     //      User data support.
@@ -211,7 +211,7 @@ public:
     //
     // Returns:
     //      Returns a user value
-    s32 GetUser(s32 index) const;
+    Proteus::Core::s32 GetUser(Proteus::Core::s32 index) const;
 
     // Method: GetUserDataForCurrentFrame
     //      Gets the user data for the current frame.
@@ -221,7 +221,7 @@ public:
     //
     // Returns:
     //      Returns the value or -1 if it doesn't exist
-    s32 GetUserDataForCurrentFrame(s32 index) const;
+    Proteus::Core::s32 GetUserDataForCurrentFrame(Proteus::Core::s32 index) const;
 
     // Method: IsAnimated
     //      Is this sprite animated?
@@ -237,7 +237,7 @@ public:
 
     // Method: GetPriority
     //      Returns draw order priority
-    s32 GetPriority() const { return m_priority; }
+    Proteus::Core::s32 GetPriority() const { return m_priority; }
 
     // Method: SetColour
     //      Sets the tint colour.
@@ -252,26 +252,22 @@ public:
 
     // Method: PoolIndex
     //      Returns pool index
-    s32 PoolIndex() const { return pool; }
+    Proteus::Core::s32 PoolIndex() const { return pool; }
 
 
 public:
-
-    Proteus::Math::prVector2 pos;   // Sprite position.
-
-    s32     user0;                  // This is free for game programmer use.
-    s32     user1;                  // This is free for game programmer use.
-    s32     user2;                  // This is free for game programmer use.
-    s32     user3;                  // This is free for game programmer use.
+    Proteus::Math::prVector2    pos;    // Sprite position.
+    Proteus::Core::s32          user0;  // This is free for game programmer use.
+    Proteus::Core::s32          user1;  // This is free for game programmer use.
+    Proteus::Core::s32          user2;  // This is free for game programmer use.
+    Proteus::Core::s32          user3;  // This is free for game programmer use.
 
 
 private:
-
-    s32     pool;           // Sprite pool index
+    Proteus::Core::s32     pool;    // Sprite pool index
 
 
 private:
-
     // Friends
     friend class prSpriteManager;
     friend class prSpritePointerPool;
@@ -282,14 +278,13 @@ private:
     //      name        - The sprites name
     //      frameWidth  - The sprites width
     //      frameHeight - The sprites height
-    prSprite(prTexture *pTexture, const char *name, s32 frameWidth, s32 frameHeight);
+    prSprite(prTexture *pTexture, const char *name, Proteus::Core::s32 frameWidth, Proteus::Core::s32 frameHeight);
 
     // Dtor
     ~prSprite();
 
 
 private:
-
     // Sets the sprite name
     //      spriteName  - The name
     void SetName(const char *spriteName);
@@ -301,41 +296,37 @@ private:
 
 
 private:
-
     // Stops passing by value and assignment.
     prSprite(const prSprite&);
     const prSprite& operator = (const prSprite&);
 
 
 private:
-
     prTexture          *m_pTexture;
     prSpriteAnimation  *m_animation;
     char               *m_name;
     
-    s32                 m_frameWidth;
-    s32                 m_frameHeight;
-    s32                 m_framesAcross;
-    s32                 m_framesDown;
-    s32                 m_framesTotal;
-    s32                 m_frame;
-    u32                 m_flip;
-
-    s32                 m_userData[MAX_USER_VALUES];
-
-    f32                 m_scaleX;
-    f32                 m_scaleY;
-    f32                 m_rotation;
-    f32                 m_u0;
-    f32                 m_u1;
-    f32                 m_v0;
-    f32                 m_v1;
-    f32                 m_fw;               // Frame width  (UV coords)
-    f32                 m_fh;               // Frame height (UV coords)
-    f32                 m_pw;               // Pixel width
-    f32                 m_ph;               // Pixel height
-    f32                 m_angle;
-    s32                 m_priority;         // May not keep.
+    Proteus::Core::s32  m_frameWidth;
+    Proteus::Core::s32  m_frameHeight;
+    Proteus::Core::s32  m_framesAcross;
+    Proteus::Core::s32  m_framesDown;
+    Proteus::Core::s32  m_framesTotal;
+    Proteus::Core::s32  m_frame;
+    Proteus::Core::u32  m_flip;
+    Proteus::Core::s32  m_userData[MAX_USER_VALUES];
+    Proteus::Core::f32  m_scaleX;
+    Proteus::Core::f32  m_scaleY;
+    Proteus::Core::f32  m_rotation;
+    Proteus::Core::f32  m_u0;
+    Proteus::Core::f32  m_u1;
+    Proteus::Core::f32  m_v0;
+    Proteus::Core::f32  m_v1;
+    Proteus::Core::f32  m_fw;               // Frame width  (UV coords)
+    Proteus::Core::f32  m_fh;               // Frame height (UV coords)
+    Proteus::Core::f32  m_pw;               // Pixel width
+    Proteus::Core::f32  m_ph;               // Pixel height
+    Proteus::Core::f32  m_angle;
+    Proteus::Core::s32  m_priority;         // May not keep.
 
     bool                m_animated;
     bool                m_visible;

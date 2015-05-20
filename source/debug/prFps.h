@@ -51,23 +51,23 @@ public:
 
     // Method: FrameRate
     //      Returns the frames per second.
-    s32 FrameRate() const { return frameRate; }
+    Proteus::Core::s32 FrameRate() const { return frameRate; }
 
     // Method: FrameRateMin
     //      Returns the minimum ever frames per second.
-    s32 FrameRateMin() const { return frameRateMin; }
+    Proteus::Core::s32 FrameRateMin() const { return frameRateMin; }
 
     // Method: FrameRateMax
     //      Returns the maximum ever frames per second.
-    s32 FrameRateMax() const { return frameRateMax; }
+    Proteus::Core::s32 FrameRateMax() const { return frameRateMax; }
 
 
 protected:
 
-    s32     frames;
-    s32     frameRate;
-    s32     frameRateMin;
-    s32     frameRateMax;
+    Proteus::Core::s32     frames;
+    Proteus::Core::s32     frameRate;
+    Proteus::Core::s32     frameRateMin;
+    Proteus::Core::s32     frameRateMax;
 };
 
 

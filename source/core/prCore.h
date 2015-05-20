@@ -159,7 +159,7 @@ void prCoreInit();
 // Returns:
 //      PRTRUE if the core was constructed
 //      PRFALSE if the core already exists 
-PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version);
+Proteus::Core::PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version);
 
 
 // Function: prCoreCreateOptional
@@ -174,7 +174,7 @@ PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version);
 //
 // See Also:
 //      <prCoreInit>
-void prCoreCreateOptional(s32 *optionalSystems, u32 count);
+void prCoreCreateOptional(Proteus::Core::s32 *optionalSystems, Proteus::Core::u32 count);
 
 
 // Function: prCoreDestroy
@@ -190,7 +190,7 @@ void prCoreDestroy();
 //
 // Returns:
 //      PRTRUE or PRFALSE
-PRBOOL prCoreExist();
+Proteus::Core::PRBOOL prCoreExist();
 
 
 // Function: prCoreComponentExist
@@ -204,7 +204,7 @@ PRBOOL prCoreExist();
 //
 // Returns:
 //      PRTRUE or PRFALSE
-PRBOOL prCoreComponentExist(s32 systemID);
+Proteus::Core::PRBOOL prCoreComponentExist(Proteus::Core::s32 systemID);
 
 
 // Function: prCoreGetComponent
@@ -219,7 +219,7 @@ PRBOOL prCoreComponentExist(s32 systemID);
 // Returns:
 //      A prCoreSystem pointer.
 //      May return NULL
-prCoreSystem *prCoreGetComponent(u32 systemID);
+prCoreSystem *prCoreGetComponent(Proteus::Core::u32 systemID);
 
 
 #endif//__PRCORE_H

@@ -29,7 +29,7 @@ class prActor;
 
 
 // Callback
-typedef prActor *(*prFactoryCallback)(s32 type);
+typedef prActor *(*prFactoryCallback)(Proteus::Core::s32 type);
 
 
 // Class: prActorManager
@@ -60,7 +60,7 @@ public:
     //
     // Returns:
     //      An actor pointer or NULL
-    prActor *Create(s32 type);
+    prActor *Create(Proteus::Core::s32 type);
 
     // Method: Release
     //      Releases the passed actor
@@ -75,7 +75,7 @@ public:
     //
     // Notes:
     //      This is optional
-    void Update(f32 time);
+    void Update(Proteus::Core::f32 time);
 
     // Method: Draw
     //      Draws the actors
@@ -87,18 +87,18 @@ public:
 
     // Method: SetPriority
     //      Set the draw order priority.
-    void SetPriority(prActor *actor, s32 priority);
+    void SetPriority(prActor *actor, Proteus::Core::s32 priority);
 
     // Method: Count
     //      Gets the number of actors
-    s32 Count() const;
+    Proteus::Core::s32 Count() const;
 
     // Method: HowMany
     //      Counts the actors of a specific type
     //
     // Parameters:
     //      type - A user defined type
-    u32 HowMany(s32 type);
+    Proteus::Core::u32 HowMany(Proteus::Core::s32 type);
 
     // Method: FindByIndex
     //      Finds an actor of a specific type an index.
@@ -109,7 +109,7 @@ public:
     //
     // See Also:
     //      <HowMany>
-    prActor *FindByIndex(s32 type, u32 index);
+    prActor *FindByIndex(Proteus::Core::s32 type, Proteus::Core::u32 index);
 
 
 private:

@@ -98,7 +98,7 @@ public:
 
     // Method: Create
     //      Creates a new profiling entry.
-    s32 Create(const char *name);
+    Proteus::Core::s32 Create(const char *name);
 
     // Method: Destroy
     //      Destroys all profiling entries.
@@ -113,7 +113,7 @@ public:
     //      font    - The font to draw with
     //      spacing - The spacing between the lines of text, so it can be tightly displayed
     //      first   - The first timing t0 display (Allows scrolling of the text)
-    void Display(s32 x, s32 y, prFixedWidthFont* font, s32 spacing, u32 first);
+    void Display(Proteus::Core::s32 x, Proteus::Core::s32 y, prFixedWidthFont* font, Proteus::Core::s32 spacing, Proteus::Core::u32 first);
 
     // Method: Enable
     //      Enables/disables profiling.
@@ -125,15 +125,15 @@ public:
 
     // Method: Start
     //      Start profiling
-    void Start(u32 index);
+    void Start(Proteus::Core::u32 index);
 
     // Method: Stop
     //      Stop profiling
-    void Stop(u32 index);
+    void Stop(Proteus::Core::u32 index);
 
     // Method: Count
     //      Returns the number of visible entries.
-    s32 Count() const;
+    Proteus::Core::s32 Count() const;
 
 
 private:

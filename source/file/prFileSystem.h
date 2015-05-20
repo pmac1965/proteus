@@ -29,7 +29,7 @@
 
 // Function: prFileSave
 //      Saves a binary file.
-bool prFileSave(const char* filename, const void *data, u32 size);
+bool prFileSave(const char* filename, const void *data, Proteus::Core::u32 size);
 
 
 // Function: prFileExist
@@ -54,17 +54,17 @@ bool prFileApplyReadOnly(const char* filename);
 
 // Function: prFileSize
 //      Returns the size of a file or -1 on error.
-s32 prFileSize(const char *filename);
+Proteus::Core::s32 prFileSize(const char *filename);
 
 
 // Function: prFileLoad
 //      Loads a binary file into the supplied buffer.
-bool prFileLoad(const char *filename, u32 filesize, void *buffer, u32 bufferSize);
+bool prFileLoad(const char *filename, Proteus::Core::u32 filesize, void *buffer, Proteus::Core::u32 bufferSize);
 
 
 // Function: prFileChangeExtension
 //      Changes a filenames extension.
-void prFileChangeExtension(char* filename, const char* extension, s32 bufferSize);
+void prFileChangeExtension(char* filename, const char* extension, Proteus::Core::s32 bufferSize);
 
 
 #endif//__PRFILESYSTEM_H

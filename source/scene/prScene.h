@@ -49,7 +49,7 @@ public:
     void Remove(prSceneNode *psn);
 
     //
-    void Update(f32 dt);
+    void Update(Proteus::Core::f32 dt);
 
     //
     //void Render();

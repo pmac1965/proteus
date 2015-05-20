@@ -64,7 +64,7 @@ public:
 
     // Method: Update
     //      Updates the in app purchase manager.
-    void Update(f32 dt);
+    void Update(Proteus::Core::f32 dt);
 
     // Method: BeginPurchase
     //      Begins a purchase
@@ -79,11 +79,11 @@ public:
     //
     // Parameters:
     //      testEvent - Which event to test.
-    void SetTestMode(u32 testEvent);
+    void SetTestMode(Proteus::Core::u32 testEvent);
 
     // Method: EventNotify
     //      Callback from the game. This is then passed on to the appropriate handler
-    void EventNotify(s32 type, const char *id);
+    void EventNotify(Proteus::Core::s32 type, const char *id);
 
     // Method: FindProductPrice
     //      Find a products price.

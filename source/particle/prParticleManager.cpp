@@ -27,6 +27,9 @@
 #include "../core/prString.h"
 
 
+using namespace Proteus::Core;
+
+
 // Types
 typedef std::map<s32, prEmitter*>::iterator                     prEmitterIt;
 typedef std::map<std::string, prEmitterDefinition*>::iterator   prEmitterDefinitionIt;

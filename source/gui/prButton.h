@@ -89,7 +89,7 @@ public:
     //
     // Parameters:
     //      dt - Delta time
-    void Update(f32 dt);
+    void Update(Proteus::Core::f32 dt);
 
     // Method: Draw
     //      Draws the button
@@ -146,11 +146,11 @@ public:
 
     // Method: GetWidth
     //      Gets the button width
-    s32 GetWidth() const { return m_width; }
+    Proteus::Core::s32 GetWidth() const { return m_width; }
 
     // Method: GetHeight
     //      Gets the button height
-    s32 GetHeight() const { return m_height; }
+    Proteus::Core::s32 GetHeight() const { return m_height; }
 
     // Method: SetTextColour
     //      Sets the button text colour
@@ -158,28 +158,28 @@ public:
 
     // Method: SetTextScale
     //      Sets the button text scale
-    void SetTextScale(f32 scale) { m_textScale = scale; }
+    void SetTextScale(Proteus::Core::f32 scale) { m_textScale = scale; }
 
 
 private:
     // Tests if a touch is *over* the button
-    bool InButtonsRect(s32 x, s32 y);
+    bool InButtonsRect(Proteus::Core::s32 x, Proteus::Core::s32 y);
 
     // Sets the current button frame
-    void SetCurrentFrame(s32 frame);
+    void SetCurrentFrame(Proteus::Core::s32 frame);
 
 
 private:
     prSprite               *m_sprite;
     prString                m_text;
-    s32                     m_buttonState;
-    s32                     m_width;
-    s32                     m_height;
-    s32                     m_prevX;
-    s32                     m_prevY;
+    Proteus::Core::s32      m_buttonState;
+    Proteus::Core::s32      m_width;
+    Proteus::Core::s32      m_height;
+    Proteus::Core::s32      m_prevX;
+    Proteus::Core::s32      m_prevY;
     prButtonListener       *m_prButtonListener;
     prColour                m_textColour;
-    f32                     m_textScale;
+    Proteus::Core::f32      m_textScale;
 };
 
 

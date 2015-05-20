@@ -25,11 +25,11 @@
 
 // Function: prEncrypt
 //      Encrypts a block of data.
-void prEncrypt(u8 *pData, u32 length);
+void prEncrypt(Proteus::Core::u8 *pData, Proteus::Core::u32 length);
 
 // Function: prDecrypt
 //      Decrypts a block of data.
-void prDecrypt(u8 *pData, u32 length);
+void prDecrypt(Proteus::Core::u8 *pData, Proteus::Core::u32 length);
 
 
 #endif//__PRENCRYPTION_H

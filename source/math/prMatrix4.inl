@@ -147,7 +147,7 @@ inline bool prMatrix4::operator!=(const prMatrix4& n) const
 // ------------------------------------------------------------------------------------------------
 // Operator []
 // ------------------------------------------------------------------------------------------------
-inline f32 prMatrix4::operator[](s32 index) const
+inline Proteus::Core::f32 prMatrix4::operator[](Proteus::Core::s32 index) const
 {
     return _m[index];
 }
@@ -156,7 +156,7 @@ inline f32 prMatrix4::operator[](s32 index) const
 // ------------------------------------------------------------------------------------------------
 // Operator []
 // ------------------------------------------------------------------------------------------------
-inline f32& prMatrix4::operator[](s32 index)
+inline Proteus::Core::f32& prMatrix4::operator[](Proteus::Core::s32 index)
 {
     return _m[index];
 }

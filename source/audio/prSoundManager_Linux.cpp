@@ -30,15 +30,14 @@
 #include "../debug/prAssert.h"
 #include "../core/prMacros.h"
 #include "../core/prStringUtil.h"
-//#include "../android/prJNIAudio.h"
-//#include "../android/AL/al.h"
-//#include "../android/AL/alc.h"
 #include "prOpenALErrors.h"
-//#include <android/log.h>
 
 
 /// Defines.
 #define SOUND_DEBUG
+
+
+using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------
@@ -157,7 +156,7 @@ void prSoundManager_Linux::Release()
 
     if (pContext)
     {
-        __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Cleaning OpenAL\n");
+        //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "Cleaning OpenAL\n");
 
         // Release the current context.
         if (!alcMakeContextCurrent(NULL))
@@ -312,12 +311,12 @@ void prSoundManager_Linux::LoadSFX(const prSFXInfo *sfx, s32 count)
                 	prTrace("Sound effect: %s\n", sfx[i].filename);
                 	prTrace("Failed to create effect\n");
 
-                    #if defined(SOUND_SHOW_FAILS) && (defined(_DEBUG) || defined(DEBUG))
-                    __android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveSize           == %i\n", waves.GetWaveSize(id, (u32*)&iDataSize)                 == WR_OK);
-	                __android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveData           == %i\n", waves.GetWaveData(id, (void**)&pData)                   == WR_OK);
-	                __android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveFrequency      == %i\n", waves.GetWaveFrequency(id, (u32*)&iFrequency)           == WR_OK);
-	                __android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveALBufferFormat == %i\n", waves.GetWaveALBufferFormat(id, (u32*)&eBufferFormat)   == WR_OK);
-                    #endif
+                    //#if defined(SOUND_SHOW_FAILS) && (defined(_DEBUG) || defined(DEBUG))
+                    //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveSize           == %i\n", waves.GetWaveSize(id, (u32*)&iDataSize)                 == WR_OK);
+	                //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveData           == %i\n", waves.GetWaveData(id, (void**)&pData)                   == WR_OK);
+	                //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveFrequency      == %i\n", waves.GetWaveFrequency(id, (u32*)&iFrequency)           == WR_OK);
+	                //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveALBufferFormat == %i\n", waves.GetWaveALBufferFormat(id, (u32*)&eBufferFormat)   == WR_OK);
+                    //#endif
                 }
             }
             else

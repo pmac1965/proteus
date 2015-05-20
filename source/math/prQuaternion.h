@@ -30,7 +30,7 @@ class prQuaternion
 public:
 
 private:
-    f32 x, y, z, w;
+    Proteus::Core::f32 x, y, z, w;
 };
 
 

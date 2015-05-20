@@ -68,9 +68,9 @@ namespace Proteus
 // The achievement status.
 typedef struct prAchievementStatus
 {
-    s32     state;                          // State
-    u32     hash;                           // Hash
-    u32     count;                          // Count
+    Proteus::Core::s32     state;               // State
+    Proteus::Core::u32     hash;                // Hash
+    Proteus::Core::u32     count;               // Count
 
 } prAchievementStatus;
 
@@ -101,7 +101,7 @@ public:
 
     // Method: Update
     //      Updates the achievement manager
-    void Update(f32 dt);
+    void Update(Proteus::Core::f32 dt);
 
     // Method: Render
     //      Renders the achievement dropdowns if required.
@@ -113,7 +113,7 @@ public:
     // Parameters:
     //      key         - key desc
     //      awardValue  - desc
-    void Award(const char *key, s32 awardValue);
+    void Award(const char *key, Proteus::Core::s32 awardValue);
 
     // Is an achievement awarded
     bool IsAwarded(const char *key) const;
@@ -129,14 +129,14 @@ public:
     //
     // Parameters:
     //      save - The save result
-    void SaveResult(s32 result);
+    void SaveResult(Proteus::Core::s32 result);
 
     // Method: LoadResult
     //      This method receives state messages.
     //
     // Parameters:
     //      save - The save result
-    void LoadResult(s32 result);
+    void LoadResult(Proteus::Core::s32 result);
 
     // Sets whether the engine or the provider renders the achievement popup.
     // The engine can be faster and it allows for platforms that
@@ -144,25 +144,25 @@ public:
     void SetRender(bool state);
 
     // Gets the description text for the specified entry by type.
-    const char *GetDescriptionText(const char *name, s32 type);
+    const char *GetDescriptionText(const char *name, Proteus::Core::s32 type);
 
     // Gets the description text for the specified entry by type.
-    const char *GetDescriptionTextByIndex(u32 index, s32 type);
+    const char *GetDescriptionTextByIndex(Proteus::Core::u32 index, Proteus::Core::s32 type);
 
     // Set the position of the notification bar.
-    void SetNotificationPosition(u32 pos);
+    void SetNotificationPosition(Proteus::Core::u32 pos);
 
     // Get number of achievements
-    u32 GetCount() const;
+    Proteus::Core::u32 GetCount() const;
 
     // Get the name of the achievement by index.
-    const char *GetNameByIndex(u32 index);
+    const char *GetNameByIndex(Proteus::Core::u32 index);
 
     // Set the image to use as the bar
     void SetNotificationBar(prSprite *bar);
 
     // Set the notification bars position.
-    void SetNotificationBarPos(s32 x, s32 y);
+    void SetNotificationBarPos(Proteus::Core::s32 x, Proteus::Core::s32 y);
 
     // Method: SetNotificationBarFont
     //      Sets the font used by the notification bar.
@@ -200,7 +200,7 @@ public:
 
 private:
     // Test to see if an achievement has been achieved.
-    bool Achieved(s32 value, s32 testValue, s32 type);
+    bool Achieved(Proteus::Core::s32 value, Proteus::Core::s32 testValue, Proteus::Core::s32 type);
 
 
 private:

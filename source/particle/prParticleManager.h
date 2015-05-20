@@ -67,18 +67,18 @@ public:
 
     // Method: Update
     //      Updates the particle manager
-    void Update(f32 dt);
+    void Update(Proteus::Core::f32 dt);
 
     // Method: Fire
     //      Fires off a particle effect
     //
     // Return:
     //      Returns an ID for the emitter, or -1 on failure
-    s32 Fire(const char *name, const Proteus::Math::prVector3 &pos);
+    Proteus::Core::s32 Fire(const char *name, const Proteus::Math::prVector3 &pos);
 
 
 private:
-    static s32 sEmitterID;                                              // Used to give emitters a unique ID
+    static Proteus::Core::s32 sEmitterID;                                              // Used to give emitters a unique ID
 
 
 private:
@@ -96,7 +96,7 @@ private:
 
 
 private:    
-    std::map<s32, prEmitter*>                       mEmitters;          // The active emitters
+    std::map<Proteus::Core::s32, prEmitter*>        mEmitters;          // The active emitters
     std::map<std::string, prEmitterDefinition*>     mDefinitions;       // The definitions of the emitters
     bool                                            mCorrectFileType;   // Used to ensure its the correct file type during loading.
 };

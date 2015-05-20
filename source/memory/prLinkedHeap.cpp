@@ -26,6 +26,9 @@
 #include "../core/prList.h"
 
 
+using namespace Proteus::Core;
+
+
 #define KILOBYTE            1024        // 1K.
 #define HEAP_MAX_SIZE_DIFF  256         // Max size a block can differ before realloc is denied.
 #define HEAP_MIN_SIZE       32          // Keep heap a reasonable minimum size.

@@ -39,13 +39,13 @@ public:
     // Parameters:
     //      name  - The name of the leaderboard item
     //      value - The value to submit to the leaderboard
-    void Submit(const char *name, u64 value);
+    void Submit(const char *name, Proteus::Core::u64 value);
 
     // Method: SubmitEnabled
     //      Allows submit to be disabled in case you need to remove it.
     //      For example in a free build where leaderboards may be disabled
     //      to encourage purchase of the full product
-    void SubmitEnabled(PRBOOL state);
+    void SubmitEnabled(Proteus::Core::PRBOOL state);
 };
 
 

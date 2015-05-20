@@ -21,6 +21,7 @@
 
 
 using namespace Proteus::Math;
+using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

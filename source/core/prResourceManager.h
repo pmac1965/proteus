@@ -56,7 +56,7 @@ public:
     // Returns:
     //      A resource
     template<typename T>
-    T* Load(const char *filename, bool locked = false, s32 extra = 0)
+    T* Load(const char *filename, bool locked = false, Proteus::Core::s32 extra = 0)
     {
         // Created resource?
         prResource *pRes = Find(filename);
@@ -90,7 +90,7 @@ public:
     // Returns:
     //      A resource
     template<typename T>
-    T* LoadFromMemory(const char *name, void *pData, u32 size)
+    T* LoadFromMemory(const char *name, void *pData, Proteus::Core::u32 size)
     {
         // Created resource?
         prResource *pRes = Find(name);
@@ -125,7 +125,7 @@ public:
     // Returns:
     //      A resource
     template<typename T>
-    T* LoadFromRaw(const char *name, void *pData, u32 size, u32 width, u32 height)
+    T* LoadFromRaw(const char *name, void *pData, Proteus::Core::u32 size, Proteus::Core::u32 width, Proteus::Core::u32 height)
     {
         // Create new resource and store it.
         T *resource = new T(name);
@@ -164,7 +164,7 @@ public:
     //
     // Returns:
     //      The number of resources stored
-    u32 Count() const;
+    Proteus::Core::u32 Count() const;
 
     // Method: Clear
     //      Clears the resource manager of all entries

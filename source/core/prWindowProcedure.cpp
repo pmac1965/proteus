@@ -40,6 +40,9 @@
 #include "../input/prKeyboard_PC.h"
 
 
+using namespace Proteus::Core;
+
+
 // Use ant tweak bar.
 #if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)
 #include "../tool/AntTweakBar.h"

@@ -47,7 +47,7 @@ public:
     //      dc       - A windows device context
     //      fontSize - The required font size
     //      fontName - A font name like 'arial'
-    prGLFont(HDC dc, s32 fontSize, const char *fontName);
+    prGLFont(HDC dc, Proteus::Core::s32 fontSize, const char *fontName);
 
     // Method: ~prGLFont
     //      Destructor.
@@ -60,7 +60,7 @@ public:
     //      x    - X coordinate
     //      y    - Y coordinate
     //      text - The text to write
-    void Draw(s32 x, s32 y, const char *text);
+    void Draw(Proteus::Core::s32 x, Proteus::Core::s32 y, const char *text);
 
     // Method: Draw
     //      Draws text to the display.
@@ -83,10 +83,10 @@ private:
 
 private:
 
-    u32 m_base;
-    f32 m_red;
-    f32 m_green;
-    f32 m_blue;
+    Proteus::Core::u32 m_base;
+    Proteus::Core::f32 m_red;
+    Proteus::Core::f32 m_green;
+    Proteus::Core::f32 m_blue;
 };
 
 

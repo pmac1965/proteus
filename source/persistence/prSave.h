@@ -46,14 +46,14 @@ public:
     //
     // Parameters:
     //      save - The save result
-    virtual void SaveResult(s32 result) = 0;
+    virtual void SaveResult(Proteus::Core::s32 result) = 0;
 
     // Method: LoadResult
     //      This method needs to be added to a load/save handling class.
     //
     // Parameters:
     //      save - The save result
-    virtual void LoadResult(s32 result) = 0;
+    virtual void LoadResult(Proteus::Core::s32 result) = 0;
 };
 
 
@@ -97,7 +97,7 @@ public:
     //
     // Notes:
     //      Makes a copy of the save data. So you can delete it once save has begun.
-    void StartSave(void *pData, s32 size, prIoResultCallback *cb, const char *filename);
+    void StartSave(void *pData, Proteus::Core::s32 size, prIoResultCallback *cb, const char *filename);
 
     // Method: StartLoad
     //      Starts loading.
@@ -114,7 +114,7 @@ public:
     //      
     //      As the load may take a while, the passed in pointers MUST not be
     //      local variables.
-    void StartLoad(void **ppData, s32 *pSize, prIoResultCallback *cb, const char *filename);
+    void StartLoad(void **ppData, Proteus::Core::s32 *pSize, prIoResultCallback *cb, const char *filename);
 
     // Method: IsWorking
     //      Are we saving or loading.

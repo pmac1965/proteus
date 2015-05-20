@@ -43,10 +43,10 @@ public:
 
     // Method: prMatrix4
     //      Constructor
-    prMatrix4(f32 m00, f32 m01, f32 m02, f32 m03,
-              f32 m04, f32 m05, f32 m06, f32 m07,
-              f32 m08, f32 m09, f32 m10, f32 m11,
-              f32 m12, f32 m13, f32 m14, f32 m15);
+    prMatrix4(Proteus::Core::f32 m00, Proteus::Core::f32 m01, Proteus::Core::f32 m02, Proteus::Core::f32 m03,
+              Proteus::Core::f32 m04, Proteus::Core::f32 m05, Proteus::Core::f32 m06, Proteus::Core::f32 m07,
+              Proteus::Core::f32 m08, Proteus::Core::f32 m09, Proteus::Core::f32 m10, Proteus::Core::f32 m11,
+              Proteus::Core::f32 m12, Proteus::Core::f32 m13, Proteus::Core::f32 m14, Proteus::Core::f32 m15);
 
     // Method: ~prMatrix4
     //      Dtor
@@ -56,7 +56,7 @@ public:
 
     // Method: Set
     //      Set the matrix data
-    void Set(const f32 data[16]);
+    void Set(const Proteus::Core::f32 data[16]);
 
     // Method: Zero
     //      Sets the matrix to all zero
@@ -68,7 +68,7 @@ public:
 
     // Method: Translate
     //      Translate the matrix by x, y, z
-    prMatrix4& Translate(f32 x, f32 y, f32 z);
+    prMatrix4& Translate(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 z);
 
     // Method: Translate
     //      Translate the matrix by the supplied vector
@@ -76,7 +76,7 @@ public:
 
     // Method: Scale
     //      Scale the matrix by x, y, z
-    prMatrix4& Scale(f32 x, f32 y, f32 z);
+    prMatrix4& Scale(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 z);
 
     // Method: Scale
     //      Scale the matrix by the supplied vector
@@ -84,23 +84,23 @@ public:
 
     // Method: Rotate
     //      Rotate the matrix by x, y, z
-    prMatrix4& Rotate(f32 angle, f32 x, f32 y, f32 z);
+    prMatrix4& Rotate(Proteus::Core::f32 angle, Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 z);
 
     // Method: Rotate
     //      Rotate the matrix by the supplied vector
-    prMatrix4& Rotate(f32 angle, prVector3& vec);
+    prMatrix4& Rotate(Proteus::Core::f32 angle, prVector3& vec);
 
     // Method: RotateX
     //      Rotate the matrix by the supplied angle
-    prMatrix4& RotateX(f32 angle);
+    prMatrix4& RotateX(Proteus::Core::f32 angle);
 
     // Method: RotateY
     //      Rotate the matrix by the supplied angle
-    prMatrix4& RotateY(f32 angle);
+    prMatrix4& RotateY(Proteus::Core::f32 angle);
 
     // Method: RotateZ
     //      Rotate the matrix by the supplied angle
-    prMatrix4& RotateZ(f32 angle);
+    prMatrix4& RotateZ(Proteus::Core::f32 angle);
 
     //
     void Invert();
@@ -135,14 +135,14 @@ public:
     inline bool operator!=(const prMatrix4& n) const;
 
     // Operator []
-    inline f32 operator[](s32 index) const;
+    inline Proteus::Core::f32 operator[](Proteus::Core::s32 index) const;
 
     // Operator []
-    inline f32& operator[](s32 index);
+    inline Proteus::Core::f32& operator[](Proteus::Core::s32 index);
 
 
 private:
-    f32 _m[16];
+    Proteus::Core::f32 _m[16];
 };
 
 

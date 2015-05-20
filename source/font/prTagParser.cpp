@@ -63,6 +63,9 @@
 #define TAG_MAX_SIZE    128
 
 
+using namespace Proteus::Core;
+
+
 // Local data
 namespace
 {

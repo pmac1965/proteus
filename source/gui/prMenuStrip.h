@@ -59,7 +59,7 @@ private:
 public:
     // Method: Update
     //      Updates the menu strip.
-    void Update(f32 dt);
+    void Update(Proteus::Core::f32 dt);
 
     // Method: Draw
     //      Draw the menu strip.
@@ -94,7 +94,7 @@ public:
 private:
     std::list<prMenu*>  mMenus;
 
-    f32 mScreenWidth;
+    Proteus::Core::f32 mScreenWidth;
 };
 
 

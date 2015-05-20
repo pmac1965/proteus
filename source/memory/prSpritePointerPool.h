@@ -97,7 +97,7 @@ public:
     //
     // Notes:
     //      Please remember this is *NOT* the total number of sprites.
-    s32 Count(const char *name) const;
+    Proteus::Core::s32 Count(const char *name) const;
 
     // Method: Count
     //      Gets the number of sprites remaining in a specified pool.
@@ -110,14 +110,14 @@ public:
     //
     // Notes:
     //      Please remember this is *NOT* the total number of sprites.
-    s32 Count(s32 index) const;
+    Proteus::Core::s32 Count(Proteus::Core::s32 index) const;
 
     // Method: Total
     //      Gets the total number of sprites in all the pools.
     //
     // Notes:
     //      This is regardless of whether they have been fetched or are still in their pool.
-    s32 Total() const { return count; }
+    Proteus::Core::s32 Total() const { return count; }
 
     // Method: Release
     //      Releases all the sprite pointers and resets the pool back to its default state.
@@ -137,7 +137,7 @@ public:
 private:
 
     // Finds the specified index for the types hash
-    s32 Find(u32 hash) const;
+    Proteus::Core::s32 Find(Proteus::Core::u32 hash) const;
 
     // Internal setup.
     void Init();
@@ -145,11 +145,11 @@ private:
 
 private:
 
-    prSprite* spriteList [POOL_MAX_TYPES][POOL_MAX_SPRITES];              // The sprite pools
-    prSprite* spriteBack [POOL_MAX_TYPES][POOL_MAX_SPRITES];              // Backup of the pool to allow release and return of the pointers.
-    s32       spriteCount[POOL_MAX_TYPES];                                // Contains the current count of sprites in each pool
-    u32       arrayHashes[POOL_MAX_TYPES];                                // Hashes for each pool type.
-    s32       count;                                                      // Total sprites in pool.
+    prSprite                *spriteList [POOL_MAX_TYPES][POOL_MAX_SPRITES]; // The sprite pools
+    prSprite                *spriteBack [POOL_MAX_TYPES][POOL_MAX_SPRITES]; // Backup of the pool to allow release and return of the pointers.
+    Proteus::Core::s32       spriteCount[POOL_MAX_TYPES];                   // Contains the current count of sprites in each pool
+    Proteus::Core::u32       arrayHashes[POOL_MAX_TYPES];                   // Hashes for each pool type.
+    Proteus::Core::s32       count;                                         // Total sprites in pool.
 };
 
 

@@ -66,7 +66,7 @@ public:
     //
     // Returns:
     //      Window created true or false.
-    bool Create(u32 width, u32 height, u32 bits, bool fullScreen);
+    bool Create(Proteus::Core::u32 width, Proteus::Core::u32 height, Proteus::Core::u32 bits, bool fullScreen);
 
     // Method: CreateTool
     //      Creates the PC application window for engine tools.
@@ -80,7 +80,7 @@ public:
     //
     // Returns:
     //      Window created true or false.
-    bool CreateTool(u32 width, u32 height, u32 menuID, u32 iconID, const TCHAR *title);
+    bool CreateTool(Proteus::Core::u32 width, Proteus::Core::u32 height, Proteus::Core::u32 menuID, Proteus::Core::u32 iconID, const TCHAR *title);
 
     // Method: Destroy
     //      Destroys the PC application window.
@@ -95,7 +95,7 @@ public:
     //
     // Notes:
     //      Called by engine. *DO NOT USE*
-    void Resize(u32 width, u32 height);
+    void Resize(Proteus::Core::u32 width, Proteus::Core::u32 height);
 
     // Method: SetTitle
     //      Sets the PC application window title.
@@ -124,8 +124,8 @@ private:
 
     void CenterWindow(HWND hwnd);
     bool ChangeToFullScreen();
-    bool CreateOpenGLWindow(u32 menuID, u32 iconID);
-    bool RegisterWindowClass(u32 menuID, u32 iconID);
+    bool CreateOpenGLWindow(Proteus::Core::u32 menuID, Proteus::Core::u32 iconID);
+    bool RegisterWindowClass(Proteus::Core::u32 menuID, Proteus::Core::u32 iconID);
     bool SetOpenGLPixelFormat();
 
 

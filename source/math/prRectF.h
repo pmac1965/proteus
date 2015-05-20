@@ -51,7 +51,7 @@ public:
     //      left   - Rectangle coordinate 
     //      bottom - Rectangle coordinate
     //      right  - Rectangle coordinate
-    prRectF(f32 top, f32 left, f32 bottom, f32 right);
+    prRectF(Proteus::Core::f32 top, Proteus::Core::f32 left, Proteus::Core::f32 bottom, Proteus::Core::f32 right);
 
     // Method: prRectF
     //      Constructor
@@ -75,7 +75,7 @@ public:
     //
     // Returns:
     //      true or false
-    bool PointInside(f32 x, f32 y) const;
+    bool PointInside(Proteus::Core::f32 x, Proteus::Core::f32 y) const;
 
     // Method: PointInside
     //      Determines if the passed coordinates are within the rectangle.
@@ -105,7 +105,7 @@ public:
     //      left   - Adjustment value
     //      bottom - Adjustment value
     //      right  - Adjustment value
-    void Resize(f32 top, f32 left, f32 bottom, f32 right);                    
+    void Resize(Proteus::Core::f32 top, Proteus::Core::f32 left, Proteus::Core::f32 bottom, Proteus::Core::f32 right);                    
 
     // Method: Set
     //      Sets the size of the rectangle.
@@ -115,7 +115,7 @@ public:
     //      left   - Rectangle coordinate 
     //      bottom - Rectangle coordinate
     //      right  - Rectangle coordinate
-    void Set(f32 top, f32 left, f32 bottom, f32 right);
+    void Set(Proteus::Core::f32 top, Proteus::Core::f32 left, Proteus::Core::f32 bottom, Proteus::Core::f32 right);
                    
     // Method: IsEmpty
     //      Determines if the rectangle has zero width and height.
@@ -129,42 +129,42 @@ public:
     //
     // Returns:
     //      Rectangle coordinate
-    f32 GetTop() const { return m_top; }            
+    Proteus::Core::f32 GetTop() const { return m_top; }            
     
     // Method: GetBottom
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle coordinate
-    f32 GetBottom() const { return m_bottom; }
+    Proteus::Core::f32 GetBottom() const { return m_bottom; }
     
     // Method: GetLeft
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle coordinate
-    f32 GetLeft() const { return m_left; }
+    Proteus::Core::f32 GetLeft() const { return m_left; }
         
     // Method: GetRight
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle coordinate
-    f32 GetRight() const { return m_right; }
+    Proteus::Core::f32 GetRight() const { return m_right; }
         
     // Method: GetWidth
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle width
-    f32 GetWidth() const { return m_width; }
+    Proteus::Core::f32 GetWidth() const { return m_width; }
         
     // Method: GetHeight
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle height
-    f32 GetHeight() const { return m_height; }
+    Proteus::Core::f32 GetHeight() const { return m_height; }
                 
     // Method: Intersect
     //      Determine whether the passed rectangle intersects this rectangle.
@@ -192,16 +192,16 @@ public:
     // Parameters:
     //      x    - Adjustment value
     //      y    - Adjustment value
-    void Move(f32 x, f32 y);
+    void Move(Proteus::Core::f32 x, Proteus::Core::f32 y);
     
 
 private:
-    f32     m_top;
-    f32     m_left;
-    f32     m_bottom;
-    f32     m_right;            
-    f32     m_width;
-    f32     m_height;
+    Proteus::Core::f32     m_top;
+    Proteus::Core::f32     m_left;
+    Proteus::Core::f32     m_bottom;
+    Proteus::Core::f32     m_right;            
+    Proteus::Core::f32     m_width;
+    Proteus::Core::f32     m_height;
 
 
 private:

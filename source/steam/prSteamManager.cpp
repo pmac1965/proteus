@@ -24,6 +24,9 @@
 #include "../debug/prLog.h"
 
 
+using namespace Proteus::Core;
+
+
 // __cdecl is PC specific
 #if defined(PLATFORM_PC)
     #define PC_API  __cdecl

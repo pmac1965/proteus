@@ -29,6 +29,9 @@
 #include "../debug/prAssert.h"
 
 
+using namespace Proteus::Core;
+
+
 #if defined(PLATFORM_LINUX)
 #include "../linux/prLinux.h"
 #endif

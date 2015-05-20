@@ -27,6 +27,9 @@
 #include "../display/prSpriteManager.h"
 
 
+using namespace Proteus::Core;
+
+
 #define MAX_PATH_SIZE   260
 
 

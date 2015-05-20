@@ -69,6 +69,9 @@
 #include "../display/prOglUtils.h"
 
 
+using namespace Proteus::Core;
+
+
 #ifndef MAX_PATH
 #define MAX_PATH    260
 #endif

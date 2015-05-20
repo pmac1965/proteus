@@ -83,7 +83,7 @@ public:
     //
     // Parameters:
     //      dt - Delta time
-    void Update(f32 dt);
+    void Update(Proteus::Core::f32 dt);
     
     // Method: Draw
     //      Draws the fade.
@@ -98,7 +98,7 @@ public:
     //
     // See Also:
     //      <prFade>
-    void Start(prFade fade, f32 runtime);
+    void Start(prFade fade, Proteus::Core::f32 runtime);
 
     // Method: Isfading
     //      Determines if a fade is running.
@@ -116,7 +116,7 @@ public:
     //
     // Notes:
     //      The in value will be clamped to between 0 and 255
-    void SetBlack(f32 in = 255.0f);
+    void SetBlack(Proteus::Core::f32 in = 255.0f);
 
     // Method: SetWhite
     //      Set fade to white
@@ -133,12 +133,12 @@ private:
 
 
 private:
-    prFadeColour colour;
-    prFadeType   type;
-    f32          alpha;
-    f32          time;
-    f32          step;
-    bool         fading;
+    prFadeColour        colour;
+    prFadeType          type;
+    Proteus::Core::f32  alpha;
+    Proteus::Core::f32  time;
+    Proteus::Core::f32  step;
+    bool                fading;
 };
 
 

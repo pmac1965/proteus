@@ -73,6 +73,9 @@
 #include "../display/prOglUtils.h"
 
 
+using namespace Proteus::Core;
+
+
 // Defines
 #define MSG_BUFFER_SIZE     1024
 //#define DEBUG_BMAP_FONT

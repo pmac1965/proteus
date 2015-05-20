@@ -54,7 +54,7 @@ namespace Proteus
 
 // Function: prGetPlatformsLanguage
 //      Get the platforms default language.
-s32 prGetPlatformsLanguage();
+Proteus::Core::s32 prGetPlatformsLanguage();
 
 // Function: prGetPlatformsLanguageString
 //      Get the platforms default language as a string.

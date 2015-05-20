@@ -36,6 +36,9 @@
 #include <android/log.h>
 
 
+using namespace Proteus::Core;
+
+
 /// Defines.
 #define SOUND_DEBUG
 

@@ -81,7 +81,7 @@ public:
     //
     // See Also
     //      <SteamNotificationPosition>
-    bool Initialise(u32 id, u32 notificationPosition = STEAM_NOTIFICATION_DEFAULT);
+    bool Initialise(Proteus::Core::u32 id, Proteus::Core::u32 notificationPosition = STEAM_NOTIFICATION_DEFAULT);
 
     // Method: Deinitialise
     //      Deinitialise the steam manager

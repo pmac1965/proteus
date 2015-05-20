@@ -27,6 +27,9 @@
 #include "../debug/prTrace.h"
 
 
+using namespace Proteus::Core;
+
+
 // Stores info about a specific locale.
 typedef struct LocaleInfo
 {

@@ -69,16 +69,16 @@ public:
 
     // Method: Exists
     //      Does the file exist?
-    bool Exists(const char *filename, u32 &size);
+    bool Exists(const char *filename, Proteus::Core::u32 &size);
 
     // Method: Read
     //      Read a file.
-    u32 Read(u8 *pDataBuffer, u32 size, u32 hash);
+    Proteus::Core::u32 Read(Proteus::Core::u8 *pDataBuffer, Proteus::Core::u32 size, Proteus::Core::u32 hash);
 
 #if defined(PLATFORM_ANDROID)
     // Method: Read
     //      Read a file.
-    u32 Read(u8 *pDataBuffer, u32 size, const char *filename);
+    Proteus::Core::u32 Read(Proteus::Core::u8 *pDataBuffer, Proteus::Core::u32 size, const char *filename);
 #endif
 
     // Method: DisplayFiles
@@ -99,24 +99,24 @@ private:
     // This function looks in all registered archives for the file.
     // Returns the last file found as code assumes later archives
     // will contain updated files
-    bool Exists(u32 hash, u32 &size);
+    bool Exists(Proteus::Core::u32 hash, Proteus::Core::u32 &size);
 
 
 private:
 
-    char        dataPath[FILE_MAX_FILENAME_SIZE];               // Path to the data directory
-    char        path[FILE_MAX_FILENAME_SIZE];                   // Used for returning paths
-    u32         count;                                          // Number of registered archives.
-    bool        ready;                                          // Indicates all archives registered
-    bool        exp2;                                           // Expansion use
-    bool        exp1;                                           // Expansion use
-    bool        exp0;                                           // Expansion use
-    prFile     *pArchiveFile[FILE_ARCHIVES_MAX];                // Archive files
-    prArcEntry *pEntries[FILE_ARCHIVES_MAX];                    // Entry tables
-    u32         entryCount[FILE_ARCHIVES_MAX];                  // Entry count
-    s32         table;                                          // Table in which the last file looked for was found.
-    s32         index;                                          // Index of the last file found in its table
-    u32         filehash;                                       // Hash of the last file found
+    char                dataPath[FILE_MAX_FILENAME_SIZE];               // Path to the data directory
+    char                path[FILE_MAX_FILENAME_SIZE];                   // Used for returning paths
+    Proteus::Core::u32  count;                                          // Number of registered archives.
+    bool                ready;                                          // Indicates all archives registered
+    bool                exp2;                                           // Expansion use
+    bool                exp1;                                           // Expansion use
+    bool                exp0;                                           // Expansion use
+    prFile             *pArchiveFile[FILE_ARCHIVES_MAX];                // Archive files
+    prArcEntry         *pEntries[FILE_ARCHIVES_MAX];                    // Entry tables
+    Proteus::Core::u32  entryCount[FILE_ARCHIVES_MAX];                  // Entry count
+    Proteus::Core::s32  table;                                          // Table in which the last file looked for was found.
+    Proteus::Core::s32  index;                                          // Index of the last file found in its table
+    Proteus::Core::u32  filehash;                                       // Hash of the last file found
 };
 
 

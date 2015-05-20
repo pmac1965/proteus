@@ -34,6 +34,9 @@
 #endif
 
 
+using namespace Proteus::Core;
+
+
 /// ---------------------------------------------------------------------------
 /// Set provider data. As its not const the data can be adjusted at runtime.
 /// ---------------------------------------------------------------------------

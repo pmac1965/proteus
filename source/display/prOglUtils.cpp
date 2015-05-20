@@ -68,6 +68,9 @@
 #include "prTexture.h"
 
 
+using namespace Proteus::Core;
+
+
 // Private data
 namespace
 {

@@ -49,11 +49,11 @@ public:
 
     // Method: Update
     //      Perform store specific updates.
-    virtual bool Update(f32 dt);
+    virtual bool Update(Proteus::Core::f32 dt);
     
     // Method: EventNotify
     //      Callback from the game.
-    virtual void EventNotify(s32 type, const char *id);
+    virtual void EventNotify(Proteus::Core::s32 type, const char *id);
 
     // Method: BeginPurchase
     //      Purchase an item.

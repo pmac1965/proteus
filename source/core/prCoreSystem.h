@@ -39,7 +39,7 @@ public:
     // Parameters:
     //      id      - A unique ID which identifies the system.
     //      pName   - The name of the system.
-    prCoreSystem(u32 id, const char *pName);
+    prCoreSystem(Proteus::Core::u32 id, const char *pName);
 
     // Method: ~prCoreSystem
     //      Destructor
@@ -47,7 +47,7 @@ public:
 
     // Method: ID
     //      Fetches the core systems unique ID
-    u32 ID() const { return m_id; }
+    Proteus::Core::u32 ID() const { return m_id; }
 
     // Method: Name
     //      Fetches the core systems name.
@@ -56,8 +56,8 @@ public:
 
 private:
 
-    u32         m_id;           // The systems unique ID.
-    prString    m_name;         // The systems name.
+    Proteus::Core::u32  m_id;           // The systems unique ID.
+    prString            m_name;         // The systems name.
 };
 
 

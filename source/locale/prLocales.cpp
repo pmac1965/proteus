@@ -50,6 +50,9 @@
 #include "../debug/prTrace.h"
 
 
+using namespace Proteus::Core;
+
+
 namespace
 {
     const char *lang_string = "";

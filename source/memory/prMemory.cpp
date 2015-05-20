@@ -38,6 +38,9 @@
 #include "../core/prMacros.h"
 
 
+using namespace Proteus::Core;
+
+
 #define DEBUG_MEMORY_FUNCTIONS
 
 

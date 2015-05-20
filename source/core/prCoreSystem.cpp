@@ -21,6 +21,9 @@
 #include "../debug/prTrace.h"
 
 
+using namespace Proteus::Core;
+
+
 /// ---------------------------------------------------------------------------
 /// @brief      Constructor.
 /// @param      id      - A unique ID which identifies the system.

@@ -33,6 +33,9 @@
 #include <string.h>
 
 
+using namespace Proteus::Core;
+
+
 namespace
 {
     char output[512] = { '\0' };

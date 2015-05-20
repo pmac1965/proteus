@@ -43,13 +43,13 @@ public:
 
 private:
     // Sets the source for a memory based shader
-    void SetSource(u32 shader, const char *src);
+    void SetSource(Proteus::Core::u32 shader, const char *src);
 
     // Shows the shader info log
-    void ShaderInfoLog(u32 shader);
+    void ShaderInfoLog(Proteus::Core::u32 shader);
 
     // Shows the program info log
-    void ProgramInfoLog(u32 shader);
+    void ProgramInfoLog(Proteus::Core::u32 shader);
 };
 
 

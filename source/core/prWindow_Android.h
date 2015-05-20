@@ -56,7 +56,7 @@ public:
     //
     // Returns:
     //      Window created true or false.
-    bool Create(u32 width, u32 height, u32 bits, bool fullScreen);
+    bool Create(Proteus::Core::u32 width, Proteus::Core::u32 height, Proteus::Core::u32 bits, bool fullScreen);
 
     // Method: Destroy
     //      Destroys the application window.
@@ -71,7 +71,7 @@ public:
     //
     // Notes:
     //      Called by engine. *DO NOT USE*
-    void Resize(u32 width, u32 height);
+    void Resize(Proteus::Core::u32 width, Proteus::Core::u32 height);
 
     // Method: SetTitle
     //      Sets the applications window title.

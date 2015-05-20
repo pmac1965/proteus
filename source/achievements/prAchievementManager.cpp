@@ -72,6 +72,9 @@
 #endif
 
 
+using namespace Proteus::Core;
+
+
 // Defines
 #define ACHIEVEMENT_DEBUG
 #define SHOW_ACHIEVEMENT_TIME       3000.0f                 // In milliseconds

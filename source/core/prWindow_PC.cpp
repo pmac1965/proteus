@@ -42,6 +42,9 @@
 #include "../util/prUtility_PC.h"
 
 
+using namespace Proteus::Core;
+
+
 // Local data
 static const TCHAR *g_ClassName = TEXT("Proteus Class");
 

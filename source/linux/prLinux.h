@@ -36,14 +36,14 @@ void prLinuxStoreArgs(int argc, const char *args[]);
 
 // Function: prCreateLinuxDisplay
 //      Creates a linux window
-PRBOOL prLinuxCreateDisplay(u32 width, u32 height);
-
+int prLinuxCreateDisplay(unsigned int width, unsigned int height);
 
 // Function: prLinuxSwapBuffers
 //      Displays the last buffer drawn
 void prLinuxSwapBuffers();
 
-
+// Function: prLinuxLoop
+//		The linux game loop.
 void prLinuxLoop();
 
 

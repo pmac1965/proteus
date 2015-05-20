@@ -103,7 +103,7 @@ public:
     // Parameters:
     //      x - The x coordinate
     //      y - The y coordinate
-    virtual void DrawPoint(f32 x, f32 y) = 0;
+    virtual void DrawPoint(Proteus::Core::f32 x, Proteus::Core::f32 y) = 0;
     
     // Method: DrawLine
     //      Draws a line.
@@ -113,7 +113,7 @@ public:
     //      y1 - The start y coordinate
     //      x2 - The end x coordinate
     //      y2 - The end y coordinate
-    virtual void DrawLine(f32 x1, f32 y1, f32 x2, f32 y2) = 0;
+    virtual void DrawLine(Proteus::Core::f32 x1, Proteus::Core::f32 y1, Proteus::Core::f32 x2, Proteus::Core::f32 y2) = 0;
 
     // Method: DrawLine
     //      Draws a line 3D.
@@ -139,7 +139,7 @@ public:
     //      y1 - The start y coordinate (Top left corner)
     //      x2 - The end x coordinate (Bottom right corner)
     //      y2 - The end y coordinate (Bottom right corner)
-    virtual void DrawRect(f32 x1, f32 y1, f32 x2, f32 y2) = 0;
+    virtual void DrawRect(Proteus::Core::f32 x1, Proteus::Core::f32 y1, Proteus::Core::f32 x2, Proteus::Core::f32 y2) = 0;
     
     // Method: DrawFilledRect
     //      Draws a filled rectangle.
@@ -149,7 +149,7 @@ public:
     //      y1 - The start y coordinate (Top left corner)
     //      x2 - The end x coordinate (Bottom right corner)
     //      y2 - The end y coordinate (Bottom right corner)
-    virtual void DrawFilledRect(f32 x1, f32 y1, f32 x2, f32 y2) = 0;
+    virtual void DrawFilledRect(Proteus::Core::f32 x1, Proteus::Core::f32 y1, Proteus::Core::f32 x2, Proteus::Core::f32 y2) = 0;
     
     // Method: DrawCircle
     //      Draws a hollow circle.
@@ -158,7 +158,7 @@ public:
     //      x      - The start x coordinate (center)
     //      y      - The start y coordinate (center)
     //      radius - The radius
-    virtual void DrawCircle(f32 x, f32 y, f32 radius) = 0;
+    virtual void DrawCircle(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 radius) = 0;
 
     // Method: DrawFilledCircle
     //      Draws a filled circle.
@@ -167,7 +167,7 @@ public:
     //      x      - The start x coordinate (center)
     //      y      - The start y coordinate (center)
     //      radius - The radius
-    virtual void DrawFilledCircle(f32 x, f32 y, f32 radius) = 0;
+    virtual void DrawFilledCircle(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 radius) = 0;
 
     // Method: DrawPolygon
     //      Draws a hollow polygon.
@@ -175,7 +175,7 @@ public:
     // Parameters:
     //      vertices - A pointer to the vertex data
     //      count    - Number of vertices
-    virtual void DrawPolygon(prVertex2D *vertices, s32 count) = 0;
+    virtual void DrawPolygon(prVertex2D *vertices, Proteus::Core::s32 count) = 0;
 
     // Method: DrawFilledPolygon
     //      Draws a filled polygon.
@@ -183,7 +183,7 @@ public:
     // Parameters:
     //      vertices - A pointer to the vertex data
     //      count    - Number of vertices
-    virtual void DrawFilledPolygon(prVertex2D *vertices, s32 count) = 0;
+    virtual void DrawFilledPolygon(prVertex2D *vertices, Proteus::Core::s32 count) = 0;
     
     // Method: DrawQuad
     //      Draws a textured quad
@@ -256,7 +256,7 @@ public:
     // Parameters:
     //      size - The number of squares in either direction.
     //      E.g 2 will give a 4x4 grid
-    virtual void DrawGrid(s32 size) = 0;
+    virtual void DrawGrid(Proteus::Core::s32 size) = 0;
 
 
 protected:

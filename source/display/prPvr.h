@@ -27,19 +27,19 @@
 //      The PVR header structure
 typedef struct prPVRTextureHeader
 {
-    u32     dwHeaderSize;           // Size of the structure 
-    u32     dwHeight;               // Height of surface to be created 
-    u32     dwWidth;                // Width of input surface 
-    u32     dwMipMapCount;          // Number of MIP-map levels requested 
-    u32     dwpfFlags;              // Pixel format flags 
-    u32     dwDataSize;             // Size of the compress data 
-    u32     dwBitCount;             // Number of bits per pixel 
-    u32     dwRBitMask;             // Mask for red bit 
-    u32     dwGBitMask;             // Mask for green bits 
-    u32     dwBBitMask;             // Mask for blue bits 
-    u32     dwAlphaBitMask;         // Mask for alpha channel 
-    u32     dwPVR;                  // Should be 'P' 'V' 'R' '!' 
-    u32     dwNumSurfs;             // Number of slices for volume textures or skyboxes
+    Proteus::Core::u32     dwHeaderSize;           // Size of the structure 
+    Proteus::Core::u32     dwHeight;               // Height of surface to be created 
+    Proteus::Core::u32     dwWidth;                // Width of input surface 
+    Proteus::Core::u32     dwMipMapCount;          // Number of MIP-map levels requested 
+    Proteus::Core::u32     dwpfFlags;              // Pixel format flags 
+    Proteus::Core::u32     dwDataSize;             // Size of the compress data 
+    Proteus::Core::u32     dwBitCount;             // Number of bits per pixel 
+    Proteus::Core::u32     dwRBitMask;             // Mask for red bit 
+    Proteus::Core::u32     dwGBitMask;             // Mask for green bits 
+    Proteus::Core::u32     dwBBitMask;             // Mask for blue bits 
+    Proteus::Core::u32     dwAlphaBitMask;         // Mask for alpha channel 
+    Proteus::Core::u32     dwPVR;                  // Should be 'P' 'V' 'R' '!' 
+    Proteus::Core::u32     dwNumSurfs;             // Number of slices for volume textures or skyboxes
 
 } prPVRTextureHeader;
 

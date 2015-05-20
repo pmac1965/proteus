@@ -48,7 +48,7 @@ public:
     //      d1    - Optional data component.
     //      d2    - Optional data component.
     //      d3    - Optional data component.
-    prGameMessage(u32 atype, u32 d0 = 0, u32 d1 = 0, u32 d2 = 0, u32 d3 = 0)
+    prGameMessage(Proteus::Core::u32 atype, Proteus::Core::u32 d0 = 0, Proteus::Core::u32 d1 = 0, Proteus::Core::u32 d2 = 0, Proteus::Core::u32 d3 = 0)
     {
         type        = atype;
         user0       = d0;
@@ -57,11 +57,11 @@ public:
         user3       = d3;
     }
 
-    u32 type;               // The message type
-    u32 user0;              // Data for message use. Will depend on the message
-    u32 user1;              // Data for message use. Will depend on the message
-    u32 user2;              // Data for message use. Will depend on the message
-    u32 user3;              // Data for message use. Will depend on the message
+    Proteus::Core::u32 type;               // The message type
+    Proteus::Core::u32 user0;              // Data for message use. Will depend on the message
+    Proteus::Core::u32 user1;              // Data for message use. Will depend on the message
+    Proteus::Core::u32 user2;              // Data for message use. Will depend on the message
+    Proteus::Core::u32 user3;              // Data for message use. Will depend on the message
 
 } prGameMessage;
 

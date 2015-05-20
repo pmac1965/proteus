@@ -30,11 +30,11 @@ namespace Math {
 
 // Method: prCos
 //      Returns cosine. In the range of 0 to 360.
-f32 prCos(u32 angle);
+Proteus::Core::f32 prCos(Proteus::Core::u32 angle);
 
 // Method: prSin
 //      Returns sine. In the range of 0 to 360.
-f32 prSin(u32 angle);
+Proteus::Core::f32 prSin(Proteus::Core::u32 angle);
 
 
 }}// Namespaces

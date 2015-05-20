@@ -30,7 +30,7 @@ namespace Math {
 // ------------------------------------------------------------------------------------------------
 // Calculates the magnitude of a vector.
 // ------------------------------------------------------------------------------------------------
-inline f32 prVector3::Length() const
+inline Proteus::Core::f32 prVector3::Length() const
 {
     return sqrt((x * x) + (y * y) + (z * z));
 }
@@ -39,7 +39,7 @@ inline f32 prVector3::Length() const
 // ------------------------------------------------------------------------------------------------
 // Calculates the magnitude of a vector squared.
 // ------------------------------------------------------------------------------------------------
-inline f32 prVector3::LengthSquared() const
+inline Proteus::Core::f32 prVector3::LengthSquared() const
 {
     return ((x * x) + (y * y) + (z * z));
 }
@@ -50,7 +50,7 @@ inline f32 prVector3::LengthSquared() const
 // ------------------------------------------------------------------------------------------------
 inline prVector3& prVector3::Normalize()
 {
-    f32 mag = Length();
+    Proteus::Core::f32 mag = Length();
 
     if (mag > 0.0f)
     {
@@ -66,7 +66,7 @@ inline prVector3& prVector3::Normalize()
 // ------------------------------------------------------------------------------------------------
 // Returns the dot product.
 // ------------------------------------------------------------------------------------------------
-inline f32 prVector3::DotProduct(const prVector3 &v) const
+inline Proteus::Core::f32 prVector3::DotProduct(const prVector3 &v) const
 {
     return ((x * v.x) +
             (y * v.y) +
@@ -94,7 +94,7 @@ inline prVector3 prVector3::operator + (const prVector3& rhs) const
 }
 
 // Operator +
-inline prVector3 prVector3::operator + (const f32& rhs) const
+inline prVector3 prVector3::operator + (const Proteus::Core::f32& rhs) const
 {
     return prVector3(x + rhs, y + rhs, z + rhs);
 }
@@ -109,7 +109,7 @@ inline prVector3 prVector3::operator - (const prVector3& rhs) const
 }
 
 // Operator -
-inline prVector3 prVector3::operator - (const f32& rhs) const
+inline prVector3 prVector3::operator - (const Proteus::Core::f32& rhs) const
 {
     return prVector3(x - rhs, y - rhs, z - rhs);
 }
@@ -124,7 +124,7 @@ inline prVector3 prVector3::operator * (const prVector3& rhs) const
 }
 
 // Operator *
-inline prVector3 prVector3::operator * (const f32& rhs) const
+inline prVector3 prVector3::operator * (const Proteus::Core::f32& rhs) const
 {
     return prVector3(x * rhs, y * rhs, z * rhs);
 }
@@ -139,7 +139,7 @@ inline prVector3 prVector3::operator / (const prVector3& rhs) const
 }
 
 // Operator /
-inline prVector3 prVector3::operator / (const f32& rhs) const
+inline prVector3 prVector3::operator / (const Proteus::Core::f32& rhs) const
 {
     return prVector3(x / rhs, y / rhs, z / rhs);
 }
@@ -174,7 +174,7 @@ inline prVector3& prVector3::operator -= (const prVector3& rhs)
 // ------------------------------------------------------------------------------------------------
 // Operator *=
 // ------------------------------------------------------------------------------------------------
-inline prVector3& prVector3::operator *= (const f32 val)
+inline prVector3& prVector3::operator *= (const Proteus::Core::f32 val)
 {
     x = x * val;
     y = y * val;

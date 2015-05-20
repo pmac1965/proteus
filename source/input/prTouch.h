@@ -48,13 +48,13 @@ class  ITouchListener;
 //      <prTouchEventTypes>
 typedef struct prTouchEvent
 {
-    s32 type;  
-    s32 x;     
-    s32 y;     
-    s32 rx;    
-    s32 ry;    
-    s32 index; 
-    u32 id;    
+    Proteus::Core::s32 type;  
+    Proteus::Core::s32 x;     
+    Proteus::Core::s32 y;     
+    Proteus::Core::s32 rx;    
+    Proteus::Core::s32 ry;    
+    Proteus::Core::s32 index; 
+    Proteus::Core::u32 id;    
 
 } prTouchEvent;
 
@@ -107,7 +107,7 @@ public:
 
     // Method: TouchCount
     //      Returns the number of simultaneous touch events occurring.
-    s32 TouchCount() const;
+    Proteus::Core::s32 TouchCount() const;
 
     // Method: RegisterListener
     //      Registers a listener with the touch system.
@@ -132,25 +132,25 @@ public:
     //
     // Notes:
     //      *This method is called by the game engine. Do not call*
-    void TouchBegin(u32 id, float x, float y);
+    void TouchBegin(Proteus::Core::u32 id, float x, float y);
 
     // Method: TouchMove
     //      Class update method.
     //
     // Notes:
     //      *This method is called by the game engine. Do not call*
-    void TouchMove(u32 id, float x, float y);
+    void TouchMove(Proteus::Core::u32 id, float x, float y);
 
     // Method: TouchEnd
     //      Class update method.
     //
     // Notes:
     //      *This method is called by the game engine. Do not call*
-    void TouchEnd(u32 id, float x, float y);
+    void TouchEnd(Proteus::Core::u32 id, float x, float y);
 
     // Method: GetListenerCount
     //      Gets the listener count.
-    s32 GetListenerCount() const;
+    Proteus::Core::s32 GetListenerCount() const;
 
 #if (defined(PLATFORM_PC) && defined(PROTEUS_TOOL))
     // Method: SetMousePointerAdjust

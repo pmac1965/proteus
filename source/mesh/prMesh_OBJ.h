@@ -30,7 +30,7 @@
 // Tri face
 typedef struct
 {
-    s32 a, b, c;
+    Proteus::Core::s32 a, b, c;
 
 } prFace;
 
@@ -64,7 +64,7 @@ public:
 private:
 
     void Parse(char *buffer);
-    bool ReadLine(char *buffer, s32 &size);
+    bool ReadLine(char *buffer, Proteus::Core::s32 &size);
     void ParseLine(char *buffer);
     
 
@@ -73,7 +73,7 @@ private:
     std::vector<prVertex3D> verts;
     std::list<prFace>       faces;
     prVertex3D             *pVerts;
-    s32                     count;
+    Proteus::Core::s32      count;
 };
 
 

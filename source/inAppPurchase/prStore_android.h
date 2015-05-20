@@ -45,7 +45,7 @@ public:
 
     // Method: EventNotify
     //      Callback from the game.
-    void EventNotify(s32 type, const char *id);
+    void EventNotify(Proteus::Core::s32 type, const char *id);
 
     // Method: BeginPurchase
     //      Purchase an item.

@@ -21,6 +21,9 @@
 #include "../debug/prDebug.h"
 
 
+using namespace Proteus::Core;
+
+
 const prColour  prColour::White         (1.0f,   1.0f,   1.0f);
 const prColour  prColour::Black         (0.0f,   0.0f,   0.0f);
 const prColour  prColour::Red           (1.0f,   0.0f,   0.0f);

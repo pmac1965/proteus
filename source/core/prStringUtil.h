@@ -32,7 +32,7 @@
 //
 // Returns:
 //      The string as a number
-u32 prStringHash(const char* string);
+Proteus::Core::u32 prStringHash(const char* string);
 
 // Function: prStringReplaceChar
 //      Changes every occurrence of the search character with the replace character.
@@ -62,7 +62,7 @@ bool prStringIsNumber(const char *string);
 //
 // Returns:
 //      index of character, or -1 on failure
-s32 prStringFindLastIndex(const char* string, char character);
+Proteus::Core::s32 prStringFindLastIndex(const char* string, char character);
 
 // Function: prStringFindFirstIndex
 //      Finds the index of the first occurrence of the specified character within the supplied string.
@@ -73,7 +73,7 @@ s32 prStringFindLastIndex(const char* string, char character);
 //
 // Returns:
 //      index of character, or -1 on failure
-s32 prStringFindFirstIndex(const char* string, char character);
+Proteus::Core::s32 prStringFindFirstIndex(const char* string, char character);
 
 // Function: prStringWriteNumber
 //      This function outputs a number to the supplied stream.
@@ -88,7 +88,7 @@ s32 prStringFindFirstIndex(const char* string, char character);
 //
 // Returns:
 //      The number of characters written to the output stream
-s32 prStringWriteNumber(u32 number, u32 base, bool sign, s32 leading, bool upper, char *stream);
+Proteus::Core::s32 prStringWriteNumber(Proteus::Core::u32 number, Proteus::Core::u32 base, bool sign, Proteus::Core::s32 leading, bool upper, char *stream);
 
 // Function: prStringIntToString
 //      Converts a number to a text string.
@@ -97,7 +97,7 @@ s32 prStringWriteNumber(u32 number, u32 base, bool sign, s32 leading, bool upper
 //      num        - The number of convert
 //      buffer     - The buffer to write to
 //      bufferSize - Size of the write to buffer
-void prStringIntToString(s32 num, char *buffer, u32 bufferSize);
+void prStringIntToString(Proteus::Core::s32 num, char *buffer, Proteus::Core::u32 bufferSize);
 
 // Function: prStringCopySafe
 //      Safely copies a string.
@@ -109,7 +109,7 @@ void prStringIntToString(s32 num, char *buffer, u32 bufferSize);
 //
 // Returns:
 //      The number of characters copied
-u32 prStringCopySafe(char* dst, const char* src, u32 destSize);
+Proteus::Core::u32 prStringCopySafe(char* dst, const char* src, Proteus::Core::u32 destSize);
 
 // Function: prStringPrintf
 //      Creates then returns a formatted string.
@@ -133,7 +133,7 @@ const char *prStringPrintf(const char* fmt, ...);
 //
 // Returns:
 //      The buffer you passed in
-char *prStringSnprintf(char *buffer, s32 bufferSize, const char* fmt, ...);
+char *prStringSnprintf(char *buffer, Proteus::Core::s32 bufferSize, const char* fmt, ...);
 
 // Function: prStringToLower
 //      Sets a string to lower case.
@@ -157,7 +157,7 @@ void prStringToUpper(char* string);
 //
 // Returns:
 //      The strings length. Zero if null or empty
-s32 prStringLength(const char *string);
+Proteus::Core::s32 prStringLength(const char *string);
 
 // Function: prStringLengthW
 //      Returns the length of a passed string.
@@ -167,7 +167,7 @@ s32 prStringLength(const char *string);
 //
 // Returns:
 //      The strings length. Zero if null or empty
-s32 prStringLengthW(const wchar_t *string);
+Proteus::Core::s32 prStringLengthW(const wchar_t *string);
 
 // Function: prStringWordWrap
 //      Function places '\n' in a string to indicate where word wrapping should take place.
@@ -178,7 +178,7 @@ s32 prStringLengthW(const wchar_t *string);
 //
 // Returns:
 //      The number of lines
-s32 prStringWordWrap(char *string, u32 max_string_width);
+Proteus::Core::s32 prStringWordWrap(char *string, Proteus::Core::u32 max_string_width);
 
 // Function: prStringRemoveNewLines
 //      Changes new lines to spaces. (Part of word wrap group)
@@ -254,7 +254,7 @@ prStringResult prStringCompareNoCase(const char *firstString, const char *second
 //
 // Returns:
 //      The number of characters copied
-s32 prStringCopyUntil(char *src, char *dst, char until);
+Proteus::Core::s32 prStringCopyUntil(char *src, char *dst, char until);
 
 // Function: prStringFindSubString
 //      Finds a sub string within a string.
@@ -276,7 +276,7 @@ char *prStringFindSubString(char *string, char *search);
 //
 // Returns:
 //      The number of characters copied
-s32 prStringCopy(const char *src, char *dst);
+Proteus::Core::s32 prStringCopy(const char *src, char *dst);
 
 // Function: prStringAddString
 //      Adds one string to another.
@@ -287,7 +287,7 @@ s32 prStringCopy(const char *src, char *dst);
 //
 // Returns:
 //      The number of characters added
-s32 prStringAddString(const char *src, char *dst);
+Proteus::Core::s32 prStringAddString(const char *src, char *dst);
 
 // Function: prStringAddChar
 //      Adds a single character to the supplied string.
@@ -305,7 +305,7 @@ void prStringAddChar(char *string, char character);
 //
 // Returns:
 //      The hex number
-u32 prStringToHex(const char* string);
+Proteus::Core::u32 prStringToHex(const char* string);
 
 // Function: prStringContainsCharacters
 //      Returns true if a string contains any NON white space characters, else returns false.
@@ -324,7 +324,7 @@ bool prStringContainsCharacters(const char* text);
 //      text - The string to parse
 //      a    - Variable to receive parsed value
 //      b    - Variable to receive parsed value
-void prStringParseInts(const char* text, s32 &a, s32 &b);
+void prStringParseInts(const char* text, Proteus::Core::s32 &a, Proteus::Core::s32 &b);
 
 // Function: prStringParseInts
 //      Parses a string in the format of "0,0,0" into integer values
@@ -334,7 +334,7 @@ void prStringParseInts(const char* text, s32 &a, s32 &b);
 //      a    - Variable to receive parsed value
 //      b    - Variable to receive parsed value
 //      c    - Variable to receive parsed value
-void prStringParseInts(const char* text, s32 &a, s32 &b, s32 &c);
+void prStringParseInts(const char* text, Proteus::Core::s32 &a, Proteus::Core::s32 &b, Proteus::Core::s32 &c);
 
 // Function: prStringParseFloats
 //      Parses a string in the format of "0,0" into float values
@@ -343,7 +343,7 @@ void prStringParseInts(const char* text, s32 &a, s32 &b, s32 &c);
 //      text - The string to parse
 //      a    - Variable to receive parsed value
 //      b    - Variable to receive parsed value
-void prStringParseFloats(const char* text, f32 &a, f32 &b);
+void prStringParseFloats(const char* text, Proteus::Core::f32 &a, Proteus::Core::f32 &b);
 
 // Function: prStringParseFloats
 //      Parses a string in the format of "0,0,0" into float values
@@ -353,7 +353,7 @@ void prStringParseFloats(const char* text, f32 &a, f32 &b);
 //      a    - Variable to receive parsed value
 //      b    - Variable to receive parsed value
 //      c    - Variable to receive parsed value
-void prStringParseFloats(const char* text, f32 &a, f32 &b, f32 &c);
+void prStringParseFloats(const char* text, Proteus::Core::f32 &a, Proteus::Core::f32 &b, Proteus::Core::f32 &c);
 
 // Function: prStringParseFloats
 //      Parses a string in the format of "0,0,0" into float values
@@ -364,7 +364,7 @@ void prStringParseFloats(const char* text, f32 &a, f32 &b, f32 &c);
 //      b    - Variable to receive parsed value
 //      c    - Variable to receive parsed value
 //      d    - Variable to receive parsed value
-void prStringParseFloats(const char* text, f32 &a, f32 &b, f32 &c, f32 &d);
+void prStringParseFloats(const char* text, Proteus::Core::f32 &a, Proteus::Core::f32 &b, Proteus::Core::f32 &c, Proteus::Core::f32 &d);
 
 // Function: prStringFind
 //      Finds if the specified character exists within the supplied string.
@@ -388,7 +388,7 @@ bool prStringFind(const char* string, char character);
 //
 // Returns:
 //      String adjust value. Size is the number of bytes used to encode the character
-s32 prStringExtractUtf8(const char *string, s32 &extracted);
+Proteus::Core::s32 prStringExtractUtf8(const char *string, Proteus::Core::s32 &extracted);
 
 // Function: prStringParseControls
 //      Parses controls in text docs into the equivalent embedded control codes.
@@ -436,7 +436,7 @@ char *prStringSkipToWhitespace(char* text);
 
 // Function: prStringCountCharsOfType
 //      Counts the specified character in the passed string
-s32 prStringCountCharsOfType(const char* text, char character);
+Proteus::Core::s32 prStringCountCharsOfType(const char* text, char character);
 
 
 #endif//__PRSTRINGUTIL_H

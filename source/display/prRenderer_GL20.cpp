@@ -80,6 +80,7 @@
 
 
 using namespace Proteus::Math;
+using namespace Proteus::Core;
 
 
 //// Use ant tweak bar.

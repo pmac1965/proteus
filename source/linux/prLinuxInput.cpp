@@ -29,10 +29,13 @@
 #include "../input/prMouse.h"
 
 
+using namespace Proteus::Core;
+
+
 /// ---------------------------------------------------------------------------
 /// A wrapper between input and the engine.
 /// ---------------------------------------------------------------------------
-void prLinuxUpdateMouse(s32 x, s32 y, u32 flags)
+void prLinuxUpdateMouse(int x, int y, unsigned int flags)
 {
     static int c=0;
 //    prTrace("%i, %i - %i\n",x,y,flags);
@@ -62,7 +65,7 @@ void prLinuxUpdateMouse(s32 x, s32 y, u32 flags)
     prMouse *pMouse = static_cast<prMouse *>(prCoreGetComponent(PRSYSTEM_MOUSE));
     if (pMouse)
     {
-        pMouse->SetMouseData(x, y, flags);
+        pMouse->SetMouseData(x, y, flags, true);
         pMouse->SetInRect(true);
     }
 }

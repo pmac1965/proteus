@@ -23,6 +23,9 @@
 #include "prLeaderboards.h"
 
 
+using namespace Proteus::Core;
+
+
 // Namespaces
 namespace Proteus {
 namespace Achievements {

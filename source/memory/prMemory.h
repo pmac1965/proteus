@@ -60,7 +60,7 @@ typedef struct prFreeNode
 //      src  - A pointer to the source address
 //      dsu  - A pointer to the destination address
 //      size - The amount to copy in bytes
-void prMemoryCopy(void *src, void *dst, u32 size);
+void prMemoryCopy(void *src, void *dst, Proteus::Core::u32 size);
 
 // Function: prMemoryClear
 //      Performs memory clearing.
@@ -68,7 +68,7 @@ void prMemoryCopy(void *src, void *dst, u32 size);
 // Parameters:
 //      addr - A pointer to an address
 //      size - The size of the pointed to address in bytes
-void prMemoryClear(void *addr, u32 size);
+void prMemoryClear(void *addr, Proteus::Core::u32 size);
 
 // Function: prMemoryFill8
 //      Performs memory filling.
@@ -77,7 +77,7 @@ void prMemoryClear(void *addr, u32 size);
 //      addr - A pointer to an address
 //      size - The size of the pointed to address in bytes
 //      data - The data to fill with
-void prMemoryFill8(void *addr, u32 size, u8 data);
+void prMemoryFill8(void *addr, Proteus::Core::u32 size, Proteus::Core::u8 data);
 
 // Function: prMemoryFill16
 //      Performs memory filling.
@@ -86,7 +86,7 @@ void prMemoryFill8(void *addr, u32 size, u8 data);
 //      addr - A pointer to an address
 //      size - The size of the pointed to address in bytes
 //      data - The data to fill with
-void prMemoryFill16(void *addr, u32 size, u16 data);
+void prMemoryFill16(void *addr, Proteus::Core::u32 size, Proteus::Core::u16 data);
 
 // Function: prMemoryFill32
 //      Performs memory filling.
@@ -95,7 +95,7 @@ void prMemoryFill16(void *addr, u32 size, u16 data);
 //      addr - A pointer to an address
 //      size - The size of the pointed to address in bytes
 //      data - The data to fill with
-void prMemoryFill32(void *addr, u32 size, u32 data);
+void prMemoryFill32(void *addr, Proteus::Core::u32 size, Proteus::Core::u32 data);
 
 
 #endif//__PRMEMORY_H

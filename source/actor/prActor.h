@@ -57,7 +57,7 @@ public:
 
     // Method: prActor
     //      Ctor
-    prActor(s32 type);
+    prActor(Proteus::Core::s32 type);
 
     // Method: ~prActor
     //      Dtor
@@ -67,7 +67,7 @@ public:
 public:
     // Method: Update
     //      Update an actor
-    virtual void Update(f32 step) = 0;
+    virtual void Update(Proteus::Core::f32 step) = 0;
 
     // Method: Draw
     //      Draw an actor
@@ -96,7 +96,7 @@ public:
 
     // Method: GetType
     //      Returns user specified type.
-    s32 GetType() const { return m_type; }
+    Proteus::Core::s32 GetType() const { return m_type; }
 
     // Method: SetVisible
     //      Sets visible.
@@ -131,43 +131,43 @@ public:
 
     // Method: GetID
     //      Unique ID.
-    s32 GetID() const { return m_id; }
+    Proteus::Core::s32 GetID() const { return m_id; }
 
     // Method: GetState
     //      Entity state.
-    s32 GetState() const { return m_state; }
+    Proteus::Core::s32 GetState() const { return m_state; }
 
     // Method: SetState
     //      Entity state.
-    void SetState(s32 state) { m_state = state; }
+    void SetState(Proteus::Core::s32 state) { m_state = state; }
 
     // Method: SetPriority
     //      Entity priority.
-    void SetPriority(s32 priority) { m_priority = priority; }
+    void SetPriority(Proteus::Core::s32 priority) { m_priority = priority; }
 
     // Method: GetPriority
     //      Get entity priority.
-    s32 GetPriority() const { return m_priority; }
+    Proteus::Core::s32 GetPriority() const { return m_priority; }
 
 
 public:
     Proteus::Math::prVector2    pos;
     
-    s32                         user0;            // User data for you to do as you please
-    s32                         user1;            // User data for you to do as you please
-    s32                         user2;            // User data for you to do as you please
-    s32                         user3;            // User data for you to do as you please
+    Proteus::Core::s32          user0;            // User data for you to do as you please
+    Proteus::Core::s32          user1;            // User data for you to do as you please
+    Proteus::Core::s32          user2;            // User data for you to do as you please
+    Proteus::Core::s32          user3;            // User data for you to do as you please
 
 
 protected:
-    s32     m_type;
-    s32     m_state;
-    s32     m_priority;
-    s32     m_id;
-    bool    m_visible;
-    bool    m_active;
-    bool    m_destroy;
-    bool    m_onScreen;
+    Proteus::Core::s32          m_type;
+    Proteus::Core::s32          m_state;
+    Proteus::Core::s32          m_priority;
+    Proteus::Core::s32          m_id;
+    bool                        m_visible;
+    bool                        m_active;
+    bool                        m_destroy;
+    bool                        m_onScreen;
 
 
 private:

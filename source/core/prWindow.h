@@ -56,7 +56,7 @@ public:
     //
     // Returns:
     //      Window created true or false.
-    virtual bool Create(u32 width, u32 height, u32 bits, bool fullScreen) = 0;
+    virtual bool Create(Proteus::Core::u32 width, Proteus::Core::u32 height, Proteus::Core::u32 bits, bool fullScreen) = 0;
 
     // Method: Destroy
     //      Destroys the application window.
@@ -71,7 +71,7 @@ public:
     //
     // Notes:
     //      Called by engine. *DO NOT USE*
-    virtual void Resize(u32 width, u32 height) = 0;
+    virtual void Resize(Proteus::Core::u32 width, Proteus::Core::u32 height) = 0;
 
     // Method: SetActive
     //      Sets whether the window is active or inactive.
@@ -93,29 +93,29 @@ public:
 
     // Method: GetWidth
     //  Gets the windows width
-    u32 GetWidth() const { return m_width; }
+    Proteus::Core::u32 GetWidth() const { return m_width; }
 
     // Method: GetHeight
     //      Gets the windows height
-    u32 GetHeight() const { return m_height; }
+    Proteus::Core::u32 GetHeight() const { return m_height; }
 
     // Method: GetBits
     //      Gets the windows bit depth
-    u32 GetBits() const { return m_bits; }
+    Proteus::Core::u32 GetBits() const { return m_bits; }
 
     // Method: GetMinWidth
     //      Gets the windows minimum width
     //
     // Notes:
     //      This is used during window resizing by the engine
-    u32 GetMinWidth() const { return m_minWidth; }
+    Proteus::Core::u32 GetMinWidth() const { return m_minWidth; }
 
     // Method: GetMinHeight
     //      Gets the windows minimum height
     //
     // Notes:
     //      This is used during window resizing by the engine
-    u32 GetMinHeight() const { return m_minHeight; }
+    Proteus::Core::u32 GetMinHeight() const { return m_minHeight; }
 
     // Method: SetMinSize
     //      Gets the windows minimum size
@@ -129,24 +129,24 @@ public:
     //
     // Notes:
     //      Neither values should be zero
-    void SetMinSize(u32 width, u32 height) { PRASSERT(width > 0);
-                                             PRASSERT(height > 0);
-                                             m_minWidth  = width;
-                                             m_minHeight = height; }
+    void SetMinSize(Proteus::Core::u32 width, Proteus::Core::u32 height) { PRASSERT(width > 0);
+                                                                           PRASSERT(height > 0);
+                                                                           m_minWidth  = width;
+                                                                           m_minHeight = height; }
 
 
 protected:
 
-    u32             m_width;        // Width of the window.
-    u32             m_height;       // Height of the window.
-    u32             m_bits;         // Bits per pixel.
-    u32             m_minWidth;     // Minimum width for windowed OS's like linux, mac and windows
-    u32             m_minHeight;    // Minimum height for windowed OS's like linux, mac and windows
+    Proteus::Core::u32  m_width;        // Width of the window.
+    Proteus::Core::u32  m_height;       // Height of the window.
+    Proteus::Core::u32  m_bits;         // Bits per pixel.
+    Proteus::Core::u32  m_minWidth;     // Minimum width for windowed OS's like linux, mac and windows
+    Proteus::Core::u32  m_minHeight;    // Minimum height for windowed OS's like linux, mac and windows
 
-    bool            m_fullScreen;   // Are we fullscreen or windowed?
-    bool            m_active;       // Is the window active. This is set by the system.
-    bool            m_exp0;         // Expansion.
-    bool            m_exp1;         // Expansion.
+    bool                m_fullScreen;   // Are we fullscreen or windowed?
+    bool                m_active;       // Is the window active. This is set by the system.
+    bool                m_exp0;         // Expansion.
+    bool                m_exp1;         // Expansion.
 };
 
 

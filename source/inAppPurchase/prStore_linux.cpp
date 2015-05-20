@@ -26,7 +26,9 @@
 #include "prStore_linux.h"
 #include "prInAppPurchase.h"
 #include "../core/prMacros.h"
-//#include "../android/JNIInterface.h"
+
+
+using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------
@@ -59,7 +61,6 @@ void prStore_linux::EventNotify(s32 type, const char *id)
 /// ---------------------------------------------------------------------------
 void prStore_linux::BeginPurchase(const char *name, int id)
 {
-    //JNI_ShowPurchaseDialog();
     PRUNUSED(name);
     PRUNUSED(id);
 }

@@ -43,11 +43,11 @@ public:
 
     // Method: Award
     //      Award an achievement.
-    virtual void Award(const char *name, s32 id) = 0;
+    virtual void Award(const char *name, Proteus::Core::s32 id) = 0;
 
     // Method: IsAwarded
     //      Checks if an achievement has been awarded.
-    virtual bool IsAwarded(const char *name, s32 id)
+    virtual bool IsAwarded(const char *name, Proteus::Core::s32 id)
     {
         PRUNUSED(name);
         PRUNUSED(id);

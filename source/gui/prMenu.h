@@ -76,7 +76,7 @@ private:
 public:
     // Method: Update
     //      Updates the menu.
-    void Update(f32 dt);
+    void Update(Proteus::Core::f32 dt);
 
     // Method: Draw
     //      Draws the menu.

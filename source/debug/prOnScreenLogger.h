@@ -86,7 +86,7 @@ public:
     //
     // See Also:
     //      <prFixedWidthFont::prFixedWidthAlignment>
-    void Draw(u32 xpos, u32 ypos, prFixedWidthFont::prFixedWidthAlignment alignment);
+    void Draw(Proteus::Core::u32 xpos, Proteus::Core::u32 ypos, prFixedWidthFont::prFixedWidthAlignment alignment);
 
     // Method: Clear
     //      Remove all the messages.
@@ -94,7 +94,7 @@ public:
 
     // Method: Count
     //      Returns the number of messages.
-    s32 Count() const;
+    Proteus::Core::s32 Count() const;
 
     // Method: SetEnabled
     //      Determines if logger accepts and prints messages.

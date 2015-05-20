@@ -31,6 +31,9 @@
 #include "../core/prMacros.h"
 
 
+using namespace Proteus::Core;
+
+
 #define         MASK2BYTES              0xC0
 #define         MASK3BYTES              0xE0
 #define         MASK4BYTES              0xF0

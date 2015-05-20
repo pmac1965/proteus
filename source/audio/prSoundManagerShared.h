@@ -71,8 +71,8 @@ enum prSongState
 //  const char * - filename;
 typedef struct prSFXInfo
 {
-    u32         hash;
-    const char *filename;
+    Proteus::Core::u32   hash;
+    const char          *filename;
 
 } prSFXInfo;
 
@@ -92,8 +92,8 @@ public:
 
 public:
     // Data
-    u32         uiBuffer;
-    u32         hash;
+    Proteus::Core::u32  uiBuffer;
+    Proteus::Core::u32  hash;
 };
 
 
@@ -106,10 +106,10 @@ public:
 //  u32 - id;
 typedef struct prSoundEffectEntry
 {
-    u32 uiSource;
-    u32 state;
-    u32 hash;
-    u32 id;
+    Proteus::Core::u32 uiSource;
+    Proteus::Core::u32 state;
+    Proteus::Core::u32 hash;
+    Proteus::Core::u32 id;
 
 } prSoundEffectEntry;
 

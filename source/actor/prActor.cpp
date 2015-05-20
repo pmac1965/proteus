@@ -21,6 +21,8 @@
 #include "prActor.h"
 
 
+using namespace Proteus::Core;
+
 // Statics
 s32 prActor::m_baseid = 0;
 

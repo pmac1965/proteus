@@ -86,19 +86,19 @@ public:
 
 // Typedef: prPoint3
 //      Simple 3D point with integer x, y, z
-typedef TPoint3<s32>     prPoint3;
+typedef TPoint3<Proteus::Core::s32>     prPoint3;
 
 // Typedef: prPoint3F
 //      Simple 3D point with float x, y, z
-typedef TPoint3<f32>     prPoint3F;
+typedef TPoint3<Proteus::Core::f32>     prPoint3F;
 
 // Typedef: prPoint2.
 //      Simple 2D point with integer x, y
-typedef TPoint2<s32>     prPoint2;
+typedef TPoint2<Proteus::Core::s32>     prPoint2;
 
 // Typedef: prPoint2F.
 //      Simple 2D point with float x, y
-typedef TPoint2<f32>     prPoint2F;
+typedef TPoint2<Proteus::Core::f32>     prPoint2F;
 
 
 }}// Namespaces

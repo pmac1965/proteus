@@ -28,6 +28,9 @@
 #include "../core/prMacros.h"
 
 
+using namespace Proteus::Core;
+
+
 // Externs found in the iOS code
 extern void IAPInit(prStore_ios *pStore);
 extern void IAPBeginPurchase(const char *name);

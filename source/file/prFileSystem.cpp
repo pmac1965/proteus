@@ -57,6 +57,9 @@
 #include "../core/prMacros.h"
 
 
+using namespace Proteus::Core;
+
+
 // Defines 
 #define BUFFER_SIZE     512
 

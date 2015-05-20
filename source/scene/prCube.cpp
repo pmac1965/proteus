@@ -52,6 +52,9 @@
 #endif
 
 
+using namespace Proteus::Core;
+
+
 namespace
 {
     // A cube constructed by triangles as its designed for OpenGLES too

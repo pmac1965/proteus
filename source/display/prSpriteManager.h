@@ -68,7 +68,7 @@ public:
     //
     // Parameters:
     //      dt - Delta time
-    void Update(f32 dt);
+    void Update(Proteus::Core::f32 dt);
 
     // Method: Draw
     //      Draws all the visible sprites.
@@ -102,7 +102,7 @@ public:
     // 
     // Notes:
     //      This call only exists in the tool build
-    prSprite *ToolCreate(prTexture *pTex, s32 width, s32 height);
+    prSprite *ToolCreate(prTexture *pTex, Proteus::Core::s32 width, Proteus::Core::s32 height);
 
     // Method: ToolRelease
     //      Releases a sprite and any asssociated assets.

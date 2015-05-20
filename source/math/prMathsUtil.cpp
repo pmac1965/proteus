@@ -56,6 +56,9 @@ namespace Proteus {
 namespace Math {
 
 
+using namespace Proteus::Core;
+
+
 /// ---------------------------------------------------------------------------
 /// Returns the specified percentage of a value.
 /// ---------------------------------------------------------------------------

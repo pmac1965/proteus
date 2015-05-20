@@ -67,9 +67,9 @@ void prLinuxStoreArgs(int argc, const char *args[])
 /// ---------------------------------------------------------------------------
 /// Creates a linux window
 /// ------------------------------ ---------------------------------------------
-PRBOOL prLinuxCreateDisplay(u32 width, u32 height)
+int prLinuxCreateDisplay(unsigned int width, unsigned int height)
 {
-    PRBOOL               result = PRFALSE;
+    int                  result = 0;
     int                  dummy;
     Colormap             cmap;
     XSetWindowAttributes swa;
@@ -146,7 +146,7 @@ PRBOOL prLinuxCreateDisplay(u32 width, u32 height)
     XMapWindow(display, win);
 
     // Okay, made it all the way through
-    result = PRTRUE;
+    result = 1;
 
     return result;
 }
@@ -199,7 +199,7 @@ void prLinuxLoop()
             // Mouse move
             case MotionNotify:
                 prLinuxUpdateMouse(event.xbutton.x,event.xbutton.y, 0);
-                    break;
+                break;
 
             // Mouse buttons
             case ButtonRelease:

@@ -61,7 +61,7 @@ public:
 
     // Method: GetID
     //      Returns the unique ID for the scene object.
-    s32 GetID() const { return mID; }
+    Proteus::Core::s32 GetID() const { return mID; }
 
 
 public:
@@ -89,15 +89,15 @@ public:
     //      The objects colour
     prColour    colour;
 
-    PRBOOL      wireframe;
-    PRBOOL      lit;
-    PRBOOL      enabled;
-    PRBOOL      selected;
+    Proteus::Core::PRBOOL      wireframe;
+    Proteus::Core::PRBOOL      lit;
+    Proteus::Core::PRBOOL      enabled;
+    Proteus::Core::PRBOOL      selected;
 
 
 private:
-    static s32  sID;                // As names are not unique. The ID will be
-    s32         mID;
+    static Proteus::Core::s32  sID;                // As names are not unique. The ID will be
+    Proteus::Core::s32         mID;
 };
 
 

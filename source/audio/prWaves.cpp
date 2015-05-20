@@ -59,6 +59,9 @@
 #include "../file/prFileShared.h"
 
 
+using namespace Proteus::Core;
+
+
 // Defines
 #define WAVE_FORMAT_EXTENSIBLE      0xFFFE
 #ifndef WAVE_FORMAT_PCM

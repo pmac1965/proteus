@@ -18,10 +18,11 @@
 
 
 #include "../prConfig.h"
-
-
 #include "prNetwork.h"
 #include "../core/prMacros.h"
+
+
+using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

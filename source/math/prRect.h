@@ -46,7 +46,7 @@ public:
     //      left   - Rectangle coordinate 
     //      bottom - Rectangle coordinate
     //      right  - Rectangle coordinate
-    prRect(s32 top, s32 left, s32 bottom, s32 right);
+    prRect(Proteus::Core::s32 top, Proteus::Core::s32 left, Proteus::Core::s32 bottom, Proteus::Core::s32 right);
 
     // Method: prRect
     //      Constructor
@@ -56,7 +56,7 @@ public:
     //      left   - Rectangle coordinate 
     //      bottom - Rectangle coordinate
     //      right  - Rectangle coordinate
-    prRect(f32 top, f32 left, f32 bottom, f32 right);
+    prRect(Proteus::Core::f32 top, Proteus::Core::f32 left, Proteus::Core::f32 bottom, Proteus::Core::f32 right);
 
     // Method: prRect
     //      Constructor
@@ -80,7 +80,7 @@ public:
     //
     // Returns:
     //      true or false
-    bool PointInside(s32 x, s32 y) const;
+    bool PointInside(Proteus::Core::s32 x, Proteus::Core::s32 y) const;
     
     // Method: PointInside
     //      Determines if the passed coordinates are within the rectangle.
@@ -100,7 +100,7 @@ public:
     //      left   - Adjustment value
     //      bottom - Adjustment value
     //      right  - Adjustment value
-    void Resize(s32 top, s32 left, s32 bottom, s32 right);                    
+    void Resize(Proteus::Core::s32 top, Proteus::Core::s32 left, Proteus::Core::s32 bottom, Proteus::Core::s32 right);                    
 
     // Method: Set
     //      Sets the size of the rectangle.
@@ -110,7 +110,7 @@ public:
     //      left   - Rectangle coordinate 
     //      bottom - Rectangle coordinate
     //      right  - Rectangle coordinate
-    void Set(s32 top, s32 left, s32 bottom, s32 right);
+    void Set(Proteus::Core::s32 top, Proteus::Core::s32 left, Proteus::Core::s32 bottom, Proteus::Core::s32 right);
                    
     // Method: IsEmpty
     //      Determines if the rectangle has zero width and height.
@@ -124,42 +124,42 @@ public:
     //
     // Returns:
     //      Rectangle coordinate
-    s32 GetTop() const { return m_top; }            
+    Proteus::Core::s32 GetTop() const { return m_top; }            
     
     // Method: GetBottom
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle coordinate
-    s32 GetBottom() const { return m_bottom; }
+    Proteus::Core::s32 GetBottom() const { return m_bottom; }
     
     // Method: GetLeft
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle coordinate
-    s32 GetLeft() const { return m_left; }
+    Proteus::Core::s32 GetLeft() const { return m_left; }
         
     // Method: GetRight
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle coordinate
-    s32 GetRight() const { return m_right; }
+    Proteus::Core::s32 GetRight() const { return m_right; }
         
     // Method: GetWidth
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle width
-    s32 GetWidth() const { return m_width; }
+    Proteus::Core::s32 GetWidth() const { return m_width; }
         
     // Method: GetHeight
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle height
-    s32 GetHeight() const { return m_height; }
+    Proteus::Core::s32 GetHeight() const { return m_height; }
                 
     // Method: Intersect
     //      Determine whether the passed rectangle intersects this rectangle.
@@ -177,16 +177,16 @@ public:
     // Parameters:
     //      x    - Adjustment value
     //      y    - Adjustment value
-    void Move(s32 x, s32 y);
+    void Move(Proteus::Core::s32 x, Proteus::Core::s32 y);
     
 
 private:
-    s32     m_top;
-    s32     m_left;
-    s32     m_bottom;
-    s32     m_right;            
-    s32     m_width;
-    s32     m_height;
+    Proteus::Core::s32     m_top;
+    Proteus::Core::s32     m_left;
+    Proteus::Core::s32     m_bottom;
+    Proteus::Core::s32     m_right;            
+    Proteus::Core::s32     m_width;
+    Proteus::Core::s32     m_height;
 
 
 private:

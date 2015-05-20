@@ -27,6 +27,9 @@ namespace Proteus {
 namespace Math {
 
 
+using namespace Proteus::Core;
+
+
 u64 seed = 0x12345678ABCDEF11LL;
 
 

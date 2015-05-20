@@ -46,6 +46,9 @@
 #define SONG_BUFFER_SIZE    PRKB(128)
 
 
+using namespace Proteus::Core;
+
+
 // Locals
 namespace
 {

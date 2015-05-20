@@ -30,14 +30,14 @@ namespace Math {
 
 
 // Maths constants
-const s32   MaxInt32    = 0xFFFFFFFF;                           // Maths constant - was a long, but longs size can vary.
-const f32   MinFloat    = -3.402823466e+38F;                    // Maths constant
-const f32   MaxFloat    =  3.402823466e+38F;                    // Maths constant
-const f32   Pi          = 3.14159265358979323846f;              // Maths constant
-const f32   TwoPi       = Pi * 2;                               // Maths constant
-const f32   PiHalf      = Pi / 2;                               // Maths constant
-const f32   Epsilon     = 0.000001f;                            // Maths constant
-const f32   NaN         = *(const f32*)&MaxInt32;               // Maths constant
+const Proteus::Core::s32   MaxInt32    = 0xFFFFFFFF;                           // Maths constant - was a long, but longs size can vary.
+const Proteus::Core::f32   MinFloat    = -3.402823466e+38F;                    // Maths constant
+const Proteus::Core::f32   MaxFloat    =  3.402823466e+38F;                    // Maths constant
+const Proteus::Core::f32   Pi          = 3.14159265358979323846f;              // Maths constant
+const Proteus::Core::f32   TwoPi       = Pi * 2;                               // Maths constant
+const Proteus::Core::f32   PiHalf      = Pi / 2;                               // Maths constant
+const Proteus::Core::f32   Epsilon     = 0.000001f;                            // Maths constant
+const Proteus::Core::f32   NaN         = *(const Proteus::Core::f32*)&MaxInt32;// Maths constant
 
 
 // Function: prMax    
@@ -149,11 +149,11 @@ inline int prNextPowerOf2(int a)
 
 // Function: prIsPowerOf2
 //      This function tests if a number is power of 2
-inline bool prIsPowerOf2(s32 size)
+inline bool prIsPowerOf2(Proteus::Core::s32 size)
 {
     bool result = false;
     
-    for (s32 i = 1; i < 32; i++)
+    for (Proteus::Core::s32 i = 1; i < 32; i++)
     {
         if (size == (1 << i))
         {
@@ -168,11 +168,11 @@ inline bool prIsPowerOf2(s32 size)
 
 // Function: prPercentageOfValue
 //      Returns the specified percentage of a value.
-s32 prPercentageOfValue(s32 percent, s32 value);
+Proteus::Core::s32 prPercentageOfValue(Proteus::Core::s32 percent, Proteus::Core::s32 value);
 
 // Function: prPercentageOfTotal
 //      Calculates 'amount's percentage in relation to 'total'. E.g. (50, 200) == 25% of total.
-s32 prPercentageOfTotal(s32 amount, s32 total);
+Proteus::Core::s32 prPercentageOfTotal(Proteus::Core::s32 amount, Proteus::Core::s32 total);
 
 // Function: prRoundFloatDownToInt
 //      Converts a float to its integer value without rounding up.
@@ -188,11 +188,11 @@ inline int prRoundFloatDownToInt(float var)
 
 // Function: prWorldToScreen
 //      Converts a world position to a screen position.
-void prWorldToScreen(f32 wx, f32 wy, f32 wz, f64 &ox, f64 &oy, f64 &oz);
+void prWorldToScreen(Proteus::Core::f32 wx, Proteus::Core::f32 wy, Proteus::Core::f32 wz, Proteus::Core::f64 &ox, Proteus::Core::f64 &oy, Proteus::Core::f64 &oz);
 
 // Function: prScreenToWorld
 //      Converts a screen position to a world position.
-void prScreenToWorld(s32 sx, s32 sy, f64 &ox, f64 &oy, f64 &oz);
+void prScreenToWorld(Proteus::Core::s32 sx, Proteus::Core::s32 sy, Proteus::Core::f64 &ox, Proteus::Core::f64 &oy, Proteus::Core::f64 &oz);
 
 
 }}// Namespaces

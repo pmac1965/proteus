@@ -30,7 +30,7 @@ class prGameSessionProvider
 public:
     // Method: prGameSessionProvider
     //      Ctor
-    prGameSessionProvider(s32 type);
+    prGameSessionProvider(Proteus::Core::s32 type);
 
     // Method: ~prGameSessionProvider
     //      Dtor
@@ -38,7 +38,7 @@ public:
 
     // Method: GetProviderType
     //      Gets the game session provider type.
-    s32 GetProviderType() const { return mType; }
+    Proteus::Core::s32 GetProviderType() const { return mType; }
 
     // Method: Initialise
     //      Initialises the game session provider
@@ -57,7 +57,7 @@ public:
 
 
 protected:
-    s32     mType;
+    Proteus::Core::s32     mType;
 };
 
 

@@ -50,13 +50,13 @@ enum
 // Used to link the memory blocks.
 typedef struct LinkNode
 {
-    struct LinkNode* prev;      // Previous node
-    struct LinkNode* next;      // Next node    
+    struct LinkNode* prev;          // Previous node
+    struct LinkNode* next;          // Next node    
 
-    char* func;                 // Allocating function
+    char* func;                     // Allocating function
 
-    u32 size   : 24,            // Size and status.
-        status : 8;
+    Proteus::Core::u32 size   : 24, // Size and status.
+                       status : 8;
 
 } LinkNode;
 
@@ -82,7 +82,7 @@ public:
     // Parameters:
     //      size    - The size of heap required
     //      name    - Optional name of the heap
-    prLinkedHeap(u32 size, const char *name = 0);
+    prLinkedHeap(Proteus::Core::u32 size, const char *name = 0);
 
     // Method: prLinkedHeap
     //      Use this constructor if you already have the address and size of the memory you wish to use.
@@ -91,7 +91,7 @@ public:
     //      start   - The start of your preallocated heap
     //      size    - The size of your preallocated heap
     //      name    - Optional name of the heap
-    prLinkedHeap(u8 *start, u32 size, const char *name = 0);
+    prLinkedHeap(Proteus::Core::u8 *start, Proteus::Core::u32 size, const char *name = 0);
 
     // Method: ~prLinkedHeap
     //      Destructor.
@@ -106,7 +106,7 @@ public:
     //
     // Notes:
     //       Use for standard memory allocation.
-    void* Allocate(u32 size, const char* func = 0);
+    void* Allocate(Proteus::Core::u32 size, const char* func = 0);
 
     // Method: AllocateLocked
     //      Allocates memory from the heap.
@@ -119,7 +119,7 @@ public:
     //      Use when you want to give a block some protection against accidental release.
     //      If you release a locked blocked without first unlocking it, then a warning will be issued,
     //      however, the block will still be released.
-    void* AllocateLocked(u32 size, const char* func = 0);
+    void* AllocateLocked(Proteus::Core::u32 size, const char* func = 0);
 
     // Method: AllocateFixed
     //      Allocates memory from the heap.
@@ -135,7 +135,7 @@ public:
     //
     // See Also:
     //      <ReleaseAll>
-    void* AllocateFixed(u32 size, const char* func = 0);
+    void* AllocateFixed(Proteus::Core::u32 size, const char* func = 0);
 
     // Method: Release
     //      Releases a memory block.
@@ -168,25 +168,25 @@ public:
     //
     // Notes:
     //      You should deduct the size of a LinkNode from the returned size to acquire the size you can actually allocate.
-    u32 GetLargestFreeBlock() const;
+    Proteus::Core::u32 GetLargestFreeBlock() const;
 
     // Method: GetLargestFreeBlock
     //      Returns the size of all the used blocks.
     //
     // Notes:
     //      The returned size includes the link node plus the bounds checking tags.
-    u32 GetSizeOfUsedBlocks() const;
+    Proteus::Core::u32 GetSizeOfUsedBlocks() const;
 
     // Method: GetSizeOfUnusedBlocks
     //      Returns the size of all the unused blocks.
     //
     // Notes:
     //      The returned size includes the link node plus the bounds checking tags.
-    u32 GetSizeOfUnusedBlocks() const;
+    Proteus::Core::u32 GetSizeOfUnusedBlocks() const;
 
     // Method: GetTotalFreeMemory
     //      Returns the total amount of free memory in the heap.
-    u32 GetTotalFreeMemory() const;
+    Proteus::Core::u32 GetTotalFreeMemory() const;
 
     // Method: BoundsCheckEnable
     //      Enable/disable bounds checking.
@@ -242,7 +242,7 @@ private:
     void FreeListAdd(void* p);
 
     // Looks for a suitable unused block for reallocation.
-    LinkNode* FreeListSearch(u32 required_size, void*& p);
+    LinkNode* FreeListSearch(Proteus::Core::u32 required_size, void*& p);
 
     // Removes a released block from the free list.
     void FreeListRemove(void* p);
@@ -253,24 +253,24 @@ private:
     #endif
 
     // Allocates memory from the heap.
-    void* AllocateMemory(u32 size, const char* func, u32 status);
+    void* AllocateMemory(Proteus::Core::u32 size, const char* func, Proteus::Core::u32 status);
 
 
 protected:
-    prFreeNode* m_free;         // Unused, but unreleased blocks.
-    prFreeNode* m_last;         // Unused, but unreleased blocks.
+    prFreeNode* m_free;                 // Unused, but unreleased blocks.
+    prFreeNode* m_last;                 // Unused, but unreleased blocks.
 
-    LinkNode*   m_head;         // First allocated block.
-    LinkNode*   m_tail;         // Last allocated block.
+    LinkNode*   m_head;                 // First allocated block.
+    LinkNode*   m_tail;                 // Last allocated block.
 
-    const char* m_name;         // A name used to uniquely identify the heap during debugging.
+    const char* m_name;                 // A name used to uniquely identify the heap during debugging.
 
-    u8*         m_heap;         // The heap.
-    u32         m_heap_size;    // The size of the heap.
-    u32         m_start;        // Start of the unused part of the heap. (Below contains blocks, Above contains no blocks)
-    u32         m_end;          // The end of the heap.
-    u32         m_bounds_check; // Bounds check?
-    bool        m_user_addr;    // User supplied the heap start address and heap size.
+    Proteus::Core::u8*  m_heap;         // The heap.
+    Proteus::Core::u32  m_heap_size;    // The size of the heap.
+    Proteus::Core::u32  m_start;        // Start of the unused part of the heap. (Below contains blocks, Above contains no blocks)
+    Proteus::Core::u32  m_end;          // The end of the heap.
+    Proteus::Core::u32  m_bounds_check; // Bounds check?
+    bool                m_user_addr;    // User supplied the heap start address and heap size.
 };
 
 

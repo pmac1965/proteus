@@ -41,7 +41,7 @@ public:
 
     // Method: Update
     //      Updates the animation
-    virtual void Update(f32 step) = 0;
+    virtual void Update(Proteus::Core::f32 step) = 0;
 
     // Method: Play
     //      Plays an animation
@@ -49,7 +49,7 @@ public:
 
     // Method: Play
     //      Plays an animation
-    virtual void Play(s32 animation) = 0;
+    virtual void Play(Proteus::Core::s32 animation) = 0;
 
     // Method: Play
     //      Stops the current animation.
@@ -66,12 +66,12 @@ public:
 
 protected:
 
-    bool    mPause;
-    bool    mExp0;
-    bool    mExp1;
-    bool    mExp2;
+    bool                mPause;
+    bool                mExp0;
+    bool                mExp1;
+    bool                mExp2;
 
-    s32     mCurrAnimation;
+    Proteus::Core::s32  mCurrAnimation;
 };
 
 

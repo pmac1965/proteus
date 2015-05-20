@@ -30,7 +30,7 @@ class prAllocator
 public:
     // Method: Allocate
     //      Allocates memory from an prAllocator
-    virtual void *Allocate(u32 size, const char* func = 0) = 0;
+    virtual void *Allocate(Proteus::Core::u32 size, const char* func = 0) = 0;
 
     // Method: Release
     //      Releases memory to an prAllocator.

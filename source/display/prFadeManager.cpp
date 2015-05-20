@@ -64,6 +64,9 @@
 #include "../core/prRegistry.h"
 
 
+using namespace Proteus::Core;
+
+
 #define MINIMUM_FADE_TIME   17.0f
 
 

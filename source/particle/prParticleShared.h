@@ -28,10 +28,10 @@
 //      This struct is used to hold an effect type for a defined emitter
 struct prEffectType
 {
-    u32         mHash;              // The identifying hash key
-    s32         mCount;             // The number of effects
-    f32         mWaitTime;
-    f32         mRunTime;
+    Proteus::Core::u32  mHash;              // The identifying hash key
+    Proteus::Core::s32  mCount;             // The number of effects
+    Proteus::Core::f32  mWaitTime;
+    Proteus::Core::f32  mRunTime;
 };
 
 
@@ -46,7 +46,7 @@ struct prEmitterDefinition
 {
     prEmitterDefinition(const char *name);
     prEffectTypeList    mEffects;
-    u32                 mHash;
+    Proteus::Core::u32  mHash;
 };
 
 
