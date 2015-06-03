@@ -193,7 +193,7 @@ private:
     //
     // Parameters:
     //      filename - A background file
-    prBackground(const char *filename);
+    explicit prBackground(const char *filename);
 
     // Method: ~prBackground
     //      Dtor

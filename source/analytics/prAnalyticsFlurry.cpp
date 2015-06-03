@@ -94,7 +94,7 @@ bool prAnalyticsFlurry::Submit(const char *name, const char *value)
     if (name && *name)
     {
         prIosFlurrySubmit(name);
-        prTrace("Logging event %s\n", name);
+        prTrace(LogError, "Logging event %s\n", name);
     }
     
 #elif defined (PLATFORM_ANDROID)
@@ -104,11 +104,11 @@ bool prAnalyticsFlurry::Submit(const char *name, const char *value)
         if (value && *value)
         {
             //JNI_SubmitFlurry(name, value);
-            prTrace("PROT:(2) Logging event %s\n", name);
+            prTrace(LogError, "PROT:(2) Logging event %s\n", name);
         }
         else
         {
-            prTrace("PROT:(1) Logging event %s\n", name);
+            prTrace(LogError, "PROT:(1) Logging event %s\n", name);
             prJNI_Submit(name);
         }
     }

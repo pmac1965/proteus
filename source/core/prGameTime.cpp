@@ -107,7 +107,7 @@ void prGameTime::Update()
         imp.runTime    += diff;
 
         imp.timePrev = currTime;
-        //prTrace("%0.2f, %0.2f\n", imp.runTime, imp.elapsedTime);
+        //prTrace(LogError, "%0.2f, %0.2f\n", imp.runTime, imp.elapsedTime);
     }
 }
 
@@ -128,7 +128,7 @@ f32 prGameTime::RunTime() const
 f32 prGameTime::ElapsedTime() const
 {
     PRASSERT(pImpl);
-    //prTrace("%0.2f\n", imp.elapsedTime);
+    //prTrace(LogError, "%0.2f\n", imp.elapsedTime);
     return imp.elapsedTime;
 }
 

@@ -97,7 +97,7 @@ void prLanguage::Load(const char *filename)
         bool loaded = doc->LoadFile();      
         if (loaded)
         {
-            prTrace("Loaded language file: %s\n", filename);
+            prTrace(LogError, "Loaded language file: %s\n", filename);
             ParseFile(doc);
         }
         else
@@ -192,7 +192,7 @@ const char *prLanguage::GetString(const char *name) const
         }
     }
 
-    prTrace("Failed to find string: %s\n", name);
+    prTrace(LogError, "Failed to find string: %s\n", name);
     return name;
 }
 
@@ -240,7 +240,7 @@ void prLanguage::ParseAttribs_File(TiXmlElement* pElement)
     if (pElement)
     {
         PRASSERT(pElement->Attribute("version"));
-        prTrace("Language: File version: %s\n", pElement->Attribute("version"));
+        prTrace(LogError, "Language: File version: %s\n", pElement->Attribute("version"));
     }
 
     // Indicate correct file type.
@@ -302,7 +302,7 @@ void prLanguage::ParseAttribs_Entry(TiXmlElement* pElement)
                         entry->text[locale] = new char [strlen(text) + 1];
 
                         prStringCopy((char *)text, entry->text[locale]);
-                        //prTrace("> %s - %s - %i\n", entry->text[locale], text, strlen(text) + 1);
+                        //prTrace(LogError, "> %s - %s - %i\n", entry->text[locale], text, strlen(text) + 1);
                         break;
                     }
                 }
@@ -321,8 +321,8 @@ void prLanguage::ParseAttribs_Entry(TiXmlElement* pElement)
                 // Is a duplicate?
                 if (entry->hash == (*it)->hash)
                 {
-                    prTrace("Language: Duplicate text entry: %s\n", id);
-                    prTrace("Language: First text entries == %s, %s\n", entry->text[0], (*it)->text[0]);
+                    prTrace(LogError, "Language: Duplicate text entry: %s\n", id);
+                    prTrace(LogError, "Language: First text entries == %s, %s\n", entry->text[0], (*it)->text[0]);
                     PRSAFE_DELETE(entry);
                     return;
                 }

@@ -63,7 +63,7 @@ void prGetDocumentsPath(char *buffer)
 
         // Copy
 		strcpy(buffer, (const char *)path_doc);
-        //prTrace("Documents paths: %s\n", buffer);
+        //prTrace(LogError, "Documents paths: %s\n", buffer);
 	}
 }
 
@@ -90,7 +90,7 @@ void *prOpenALAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *outDat
 	err = ExtAudioFileOpenURL(inFileURL, &extRef);
 	if (err) 
     { 
-        prTrace("OpenALAudioData: ExtAudioFileOpenURL FAILED, Error = %ld\n", err);
+        prTrace(LogError, "OpenALAudioData: ExtAudioFileOpenURL FAILED, Error = %ld\n", err);
         return theData;
     }
 	
@@ -99,13 +99,13 @@ void *prOpenALAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *outDat
 	err = ExtAudioFileGetProperty(extRef, kExtAudioFileProperty_FileDataFormat, &thePropertySize, &theFileFormat);
 	if (err) 
     {
-        prTrace("OpenALAudioData: ExtAudioFileGetProperty(kExtAudioFileProperty_FileDataFormat) FAILED, Error = %ld\n", err);
+        prTrace(LogError, "OpenALAudioData: ExtAudioFileGetProperty(kExtAudioFileProperty_FileDataFormat) FAILED, Error = %ld\n", err);
         return theData;
     }
     
 	if (theFileFormat.mChannelsPerFrame > 2)
     { 
-        prTrace("OpenALAudioData - Unsupported Format, channel count is greater than stereo\n");
+        prTrace(LogError, "OpenALAudioData - Unsupported Format, channel count is greater than stereo\n");
         return theData;
     }
     
@@ -124,7 +124,7 @@ void *prOpenALAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *outDat
 	err = ExtAudioFileSetProperty(extRef, kExtAudioFileProperty_ClientDataFormat, sizeof(theOutputFormat), &theOutputFormat);
 	if (err)
     {
-        prTrace("OpenALAudioData: ExtAudioFileSetProperty(kExtAudioFileProperty_ClientDataFormat) FAILED, Error = %ld\n", err);
+        prTrace(LogError, "OpenALAudioData: ExtAudioFileSetProperty(kExtAudioFileProperty_ClientDataFormat) FAILED, Error = %ld\n", err);
         return theData;
     }
 	
@@ -133,7 +133,7 @@ void *prOpenALAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *outDat
 	err = ExtAudioFileGetProperty(extRef, kExtAudioFileProperty_FileLengthFrames, &thePropertySize, &theFileLengthInFrames);
 	if (err)
     {
-        prTrace("OpenALAudioData: ExtAudioFileGetProperty(kExtAudioFileProperty_FileLengthFrames) FAILED, Error = %ld\n", err);
+        prTrace(LogError, "OpenALAudioData: ExtAudioFileGetProperty(kExtAudioFileProperty_FileLengthFrames) FAILED, Error = %ld\n", err);
         return theData;
     }
 	
@@ -162,7 +162,7 @@ void *prOpenALAudioData(CFURLRef inFileURL, ALsizei *outDataSize, ALenum *outDat
 			// failure
 			free (theData);
 			theData = NULL;
-			prTrace("OpenALAudioData: ExtAudioFileRead FAILED, Error = %ld\n", err);
+			prTrace(LogError, "OpenALAudioData: ExtAudioFileRead FAILED, Error = %ld\n", err);
 		}	
 	}
 	

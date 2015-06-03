@@ -105,7 +105,7 @@ void prSpritePointerPool::Add(const char *filename, prSprite* pSprite)
 
             if (index == -1)
             {
-                prTrace("prSpritePointerPool: Failed to add sprite pointer\n");
+                prTrace(LogError, "prSpritePointerPool: Failed to add sprite pointer\n");
                 return;
             }
         }

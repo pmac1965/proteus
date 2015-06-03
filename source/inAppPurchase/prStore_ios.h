@@ -37,7 +37,7 @@ public:
     //
     // Parameters:
     //      iap - The parent iap creator class
-    prStore_ios(prInAppPurchase &iap);
+    explicit prStore_ios(prInAppPurchase &iap);
 
     // Method: ~prStore_ios
     //      Dtor

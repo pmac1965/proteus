@@ -255,13 +255,13 @@ int ALC_ErrorCheck(void *device)
         {
             if (ALC_ErrText(error))
             {
-                prTrace(ALC_ErrText(error));
+                prTrace(LogError, ALC_ErrText(error));
             }
         }
     }
     else
     {
-        prTrace("No OpenAL device exists.\n");
+        prTrace(LogError, "No OpenAL device exists.\n");
     }
 
     return error;
@@ -290,7 +290,7 @@ int AL_ErrorCheck()
     {
         if (AL_ErrText(error))
         {
-            prTrace(AL_ErrText(error));
+            prTrace(LogError, AL_ErrText(error));
         }
     }
 
@@ -317,11 +317,11 @@ int ALUT_ErrorCheck()
 
     if (error != ALUT_ERROR_NO_ERROR)
     {
-        prTrace("%s\n", alutGetErrorString(error));
+        prTrace(LogError, "%s\n", alutGetErrorString(error));
 
         if (ALUT_ErrText(error))
         {
-            prTrace("%s\n", ALUT_ErrText(error));
+            prTrace(LogError, "%s\n", ALUT_ErrText(error));
         }
     }
 

@@ -72,7 +72,7 @@ private:
 
 
     // Keep ctor/dtor private so only the resource manager can create/destroy.
-    prTexture(const char *filename);
+    explicit prTexture(const char *filename);
 
     // Dtor
     ~prTexture();

@@ -141,14 +141,14 @@ typedef struct TrueTypeFontImplementation
         u32 glyphIndex = FT_Get_Char_Index(face, charcode);
         if (glyphIndex == 0)
         {
-            prTrace("Didn't find character %i - %c\n", charcode, charcode);
+            prTrace(LogError, "Didn't find character %i - %c\n", charcode, charcode);
             return;
         }
 
 	    // Load the glyph for our character
 	    if (FT_Load_Glyph(face, glyphIndex, FT_LOAD_DEFAULT))
         {
-		    prTrace("FT_Load_Glyph failed for character %i, Glyph index %i\n", charcode, glyphIndex);
+		    prTrace(LogError, "FT_Load_Glyph failed for character %i, Glyph index %i\n", charcode, glyphIndex);
             return;
         }
 
@@ -156,7 +156,7 @@ typedef struct TrueTypeFontImplementation
         FT_Glyph glyph;
         if (FT_Get_Glyph(face->glyph, &glyph))
         {
-		    prTrace("FT_Get_Glyph failed\n");
+		    prTrace(LogError, "FT_Get_Glyph failed\n");
             return;
         }
 
@@ -170,7 +170,7 @@ typedef struct TrueTypeFontImplementation
 	    // Create texture width/height
 	    int width  = prNextPowerOf2(bitmap.width);
 	    int height = prNextPowerOf2(bitmap.rows);
-        //prTrace("Bitmap: %i, %i, (%i, %i) == %c\n", bitmap.width, bitmap.rows, width, height, charcode);
+        //prTrace(LogError, "Bitmap: %i, %i, (%i, %i) == %c\n", bitmap.width, bitmap.rows, width, height, charcode);
 
 	    // Allocate memory for the texture data.
 	    GLubyte* texData = new GLubyte[2 * width * height];
@@ -190,7 +190,7 @@ typedef struct TrueTypeFontImplementation
         glGenTextures(1, &texID);
         if (glGetError() != GL_NO_ERROR)
         {
-            prTrace("Failed to generate texture for TTF font\n");
+            prTrace(LogError, "Failed to generate texture for TTF font\n");
             prOpenGLErrorCheck(__FILE__, __FUNCTION__, __LINE__);
             PRSAFE_DELETE_ARRAY(texData);
             FT_Done_Glyph(glyph);
@@ -256,7 +256,7 @@ typedef struct TrueTypeFontImplementation
         pGlyph->SetVertexCoords(5, 0,                 0);
 
         mpGlyphs[charcode] = pGlyph;
-        //prTrace("Store character %i - %c\n", charcode, charcode);
+        //prTrace(LogError, "Store character %i - %c\n", charcode, charcode);
 
         // Clean up
         FT_Done_Glyph(glyph);
@@ -271,13 +271,13 @@ typedef struct TrueTypeFontImplementation
     {
         if (glyphCount == 0)
         {
-            prTrace("Glyph count cannot be zero\n");
+            prTrace(LogError, "Glyph count cannot be zero\n");
             return;
         }
 
         if (mpGlyphs != NULL)
         {
-            prTrace("Glyph array already created\n");
+            prTrace(LogError, "Glyph array already created\n");
             return;
         }
 
@@ -353,7 +353,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
     FT_Library library;    
     if (FT_Init_FreeType(&library))
     {
-        prTrace("FT_Init_FreeType failed\n");
+        prTrace(LogError, "FT_Init_FreeType failed\n");
         return;
     }
 
@@ -367,7 +367,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
         u32 size = pFile->Size();
         if (size == 0)
         {
-            prTrace("prTrueTypeFont::Load failed. File was zero length\n");
+            prTrace(LogError, "prTrueTypeFont::Load failed. File was zero length\n");
             return;
         }
 
@@ -383,7 +383,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
         FT_Face face;
         //if (FT_New_Face(library, filename, 0, &face))
         //{
-        //    prTrace("FT_New_Face failed. There is probably a problem with your font file\n");
+        //    prTrace(LogError, "FT_New_Face failed. There is probably a problem with your font file\n");
         //    return;
         //}
         if (FT_New_Memory_Face(library,
@@ -392,7 +392,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
                                0,
                                &face))
         {
-            prTrace("FT_New_Face failed. There is probably a problem with your font file\n");
+            prTrace(LogError, "FT_New_Face failed. There is probably a problem with your font file\n");
             PRSAFE_DELETE_ARRAY(buffer);
             return;
         }
@@ -444,7 +444,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height, const char *characte
     FT_Library library;    
     if (FT_Init_FreeType(&library))
     {
-        prTrace("FT_Init_FreeType failed\n");
+        prTrace(LogError, "FT_Init_FreeType failed\n");
         return;
     }
 
@@ -458,7 +458,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height, const char *characte
         u32 size = pFile->Size();
         if (size == 0)
         {
-            prTrace("prTrueTypeFont::Load failed. File was zero length\n");
+            prTrace(LogError, "prTrueTypeFont::Load failed. File was zero length\n");
             return;
         }
 
@@ -478,7 +478,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height, const char *characte
                                0,
                                &face))
         {
-            prTrace("FT_New_Face failed. There is probably a problem with your font file\n");
+            prTrace(LogError, "FT_New_Face failed. There is probably a problem with your font file\n");
             PRSAFE_DELETE_ARRAY(buffer);
             return;
         }
@@ -565,7 +565,7 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
         switch(alignment)
         {
         default:
-            prTrace("Unsupported alignment\n");
+            prTrace(LogError, "Unsupported alignment\n");
             break;
 
         case ALIGN_LEFT:

@@ -255,14 +255,14 @@ typedef struct AchievementManagerImplementation
                             {
                                 pAchievementProvider->Award(GetIdentifierByIndex(checkIndex), 0);
                                 //SaveState();
-                                //prTrace("Resub %i of %i\n", num, achievementsCount);
+                                //prTrace(LogError, "Resub %i of %i\n", num, achievementsCount);
                             }
                         }
                     }                    
                 }
                 //else
                 //{
-                //    //prTrace("Skipping %i\n", num);
+                //    //prTrace(LogError, "Skipping %i\n", num);
                 //    timer = 64.0f;
                 //}
                 
@@ -319,7 +319,7 @@ typedef struct AchievementManagerImplementation
                         }
                     }
 
-                    prTrace("Failed to find icon\n");
+                    prTrace(LogError, "Failed to find icon\n");
                     return;
                 }
                 
@@ -504,7 +504,7 @@ typedef struct AchievementManagerImplementation
         
             if (!success)
             {
-                prTrace("Failed to save achievements status file.\n");
+                prTrace(LogError, "Failed to save achievements status file.\n");
             }
         }
     }*/
@@ -524,7 +524,7 @@ typedef struct AchievementManagerImplementation
             if (doc->LoadFile())
             {
                 ParseFile(doc);
-                prTrace("Loaded %i achievement definitions\n", achievementsList.size());
+                prTrace(LogError, "Loaded %i achievement definitions\n", achievementsList.size());
             }
             else
             {
@@ -656,7 +656,7 @@ typedef struct AchievementManagerImplementation
             }
         }
 
-        prTrace("prAchievementManager::GetIdentifier - Failed to find identifier: %s\n", name);
+        prTrace(LogError, "prAchievementManager::GetIdentifier - Failed to find identifier: %s\n", name);
         return NULL;
     }
 
@@ -685,7 +685,7 @@ typedef struct AchievementManagerImplementation
             idx++;
         }
 
-        prTrace("prAchievementManager::GetIdentifierByIndex - Failed to find identifier\n");
+        prTrace(LogError, "prAchievementManager::GetIdentifierByIndex - Failed to find identifier\n");
         return NULL;
     }
 
@@ -868,7 +868,7 @@ void prAchievementManager::Award(const char *key, s32 awardValue)
 
         if (!found)
         {
-            prTrace("prAchievementManager::Award - Failed to find achievement: %s\n", key);
+            prTrace(LogError, "prAchievementManager::Award - Failed to find achievement: %s\n", key);
         }
     }
 
@@ -978,21 +978,21 @@ void prAchievementManager::Load(const char *filename)
 
                 if (imp.success)
                 {
-                    prTrace("Saved initial achievements status file.\n");
+                    prTrace(LogError, "Saved initial achievements status file.\n");
                 }
                 else
                 {
-                    prTrace("Failed to save initial achievements status file.\n");
+                    prTrace(LogError, "Failed to save initial achievements status file.\n");
                 }
             }
             else
             {
-                prTrace("Failed to allocate 'AchievementStatus' buffer\n");
+                prTrace(LogError, "Failed to allocate 'AchievementStatus' buffer\n");
             }
         }
         else
         {
-            prTrace("Failed to load achievements\n");
+            prTrace(LogError, "Failed to load achievements\n");
         }
     }
     else
@@ -1000,7 +1000,7 @@ void prAchievementManager::Load(const char *filename)
         // Set number of achievements.
         imp.achievementsCount = size / sizeof(prAchievementStatus);
         PRASSERT(imp.achievementsCount == imp.achievementsList.size());
-        prTrace("Loaded %i achievements\n", imp.achievementsCount);
+        prTrace(LogError, "Loaded %i achievements\n", imp.achievementsCount);
     }
 
 
@@ -1009,7 +1009,7 @@ void prAchievementManager::Load(const char *filename)
     {
         for (u32 i=0; i<imp.achievementsCount; i++)
         {
-            prTrace("Name: %*s, Hash %08x, State: %s, Count %i\n", 24, GetNameByIndex(i), imp.achievements[i].hash, GetAchievementState(imp.achievements[i].state), imp.achievements[i].count);
+            prTrace(LogError, "Name: %*s, Hash %08x, State: %s, Count %i\n", 24, GetNameByIndex(i), imp.achievements[i].hash, GetAchievementState(imp.achievements[i].state), imp.achievements[i].count);
         }
     }
 #endif
@@ -1044,7 +1044,7 @@ void prAchievementManager::Save()
         
         if (!imp.success)
         {
-            prTrace("Failed to save achievements status file.\n");
+            prTrace(LogError, "Failed to save achievements status file.\n");
         }
     }
 }
@@ -1064,7 +1064,7 @@ void prAchievementManager::SaveResult(s32 result)
         imp.success = false;
     }
 
-    prTrace("Achievements loaded %s\n", PRBOOL_TO_STRING(imp.success));
+    prTrace(LogError, "Achievements loaded %s\n", PRBOOL_TO_STRING(imp.success));
 }
 
 
@@ -1082,7 +1082,7 @@ void prAchievementManager::LoadResult(s32 result)
         imp.success = false;
     }
 
-    prTrace("Achievements loaded %s\n", PRBOOL_TO_STRING(imp.success));
+    prTrace(LogError, "Achievements loaded %s\n", PRBOOL_TO_STRING(imp.success));
 }
 
 
@@ -1132,7 +1132,7 @@ const char *prAchievementManager::GetDescriptionText(const char *name, s32 type)
         }
     }
 
-    prTrace("prAchievementManager::GetDescriptionText - Failed to find achievement: %s\n", name);
+    prTrace(LogError, "prAchievementManager::GetDescriptionText - Failed to find achievement: %s\n", name);
     return NULL;
 }
 
@@ -1165,7 +1165,7 @@ const char *prAchievementManager::GetDescriptionTextByIndex(u32 index, s32 type)
         }
     }
 
-    prTrace("prAchievementManager::GetDescriptionTextByIndex - Failed to find achievement: %i\n", index);
+    prTrace(LogError, "prAchievementManager::GetDescriptionTextByIndex - Failed to find achievement: %i\n", index);
     return NULL;
 }
 

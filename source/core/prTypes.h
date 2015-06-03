@@ -28,7 +28,7 @@
   #define PRNAMESPACE_BEG(name) namespace name {
   #define PRNAMESPACE_END       }
 
-// Namespaces for C code
+// No namespaces for C code
 #else
   #define PRNAMESPACE_BEG(name)
   #define PRNAMESPACE_END

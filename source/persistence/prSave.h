@@ -72,7 +72,7 @@ public:
     //      If the system requires a folder name, then it should be supplied.
     //      Normally this would be the games name. Please remember to change for
     //      different game versions. e.g; "game_lite" or "game_free"
-    prSave(const char *folder);
+    explicit prSave(const char *folder);
 
     // Method: ~prSave
     //      Dtor

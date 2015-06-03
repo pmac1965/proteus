@@ -120,9 +120,9 @@ bool prMesh_OBJ::Load(const char *filename)
                     pTempVerts->z = verts[c].z;
                     pTempVerts++;
 
-                    //prTrace("%f, %f, %f, ",  verts[a].x, verts[a].y, verts[a].z);
-                    //prTrace("%f, %f, %f, ",  verts[b].x, verts[b].y, verts[b].z);
-                    //prTrace("%f, %f, %f,\n", verts[c].x, verts[c].y, verts[c].z);
+                    //prTrace(LogError, "%f, %f, %f, ",  verts[a].x, verts[a].y, verts[a].z);
+                    //prTrace(LogError, "%f, %f, %f, ",  verts[b].x, verts[b].y, verts[b].z);
+                    //prTrace(LogError, "%f, %f, %f,\n", verts[c].x, verts[c].y, verts[c].z);
                 }
 
                 verts.clear();
@@ -209,7 +209,7 @@ bool prMesh_OBJ::ReadLine(char *buffer, s32 &size)
             // Line end?
             if (c == '\r')
             {
-                //prTrace("CR\n");
+                //prTrace(LogError, "CR\n");
                 continue; // Until we get '\n'
             }
 
@@ -233,7 +233,7 @@ void prMesh_OBJ::ParseLine(char *buffer)
     {
         s32 len = prStringLength(buffer);//strlen(buffer);
 
-        //prTrace("Size %03i: %s", len, buffer);
+        //prTrace(LogError, "Size %03i: %s", len, buffer);
 
         if (len >= 2)
         {
@@ -255,7 +255,7 @@ void prMesh_OBJ::ParseLine(char *buffer)
                 buffer = prStringSkipWhitespace(buffer);
                 f32 z  = (f32)atof(buffer);
 
-                //prTrace("v %f, %f, %f\n", x,y,z);
+                //prTrace(LogError, "v %f, %f, %f\n", x,y,z);
 
                 prVertex3D v;
                 v.x = x;
@@ -280,7 +280,7 @@ void prMesh_OBJ::ParseLine(char *buffer)
                 buffer = prStringSkipWhitespace(buffer);
                 s32 c  = atoi(buffer);
 
-                //prTrace("f %i, %i, %i\n", a, b, c);
+                //prTrace(LogError, "f %i, %i, %i\n", a, b, c);
                 prFace f;
                 f.a = a - 1;
                 f.b = b - 1;

@@ -284,8 +284,8 @@ void prInAppPurchase::SetTestMode(u32 testEvent)
     // Running a test?
     if (imp.testMode == true)
     {
-        prTrace("IAP test running already\n");
-        prTrace("Please do one at a time\n");
+        prTrace(LogError, "IAP test running already\n");
+        prTrace(LogError, "Please do one at a time\n");
         return;
     }
 
@@ -310,8 +310,8 @@ void prInAppPurchase::SetTestMode(u32 testEvent)
         imp.testEvent = IAPTEST_NONE;
         imp.testTimer = 0.0f;
         imp.testStep  = 0;
-        prTrace("Invalid test mode\n");
-        prTrace("Tests turned off\n");
+        prTrace(LogError, "Invalid test mode\n");
+        prTrace(LogError, "Tests turned off\n");
         break;
     }
 
@@ -345,7 +345,7 @@ void prInAppPurchase::EventNotify(s32 type, const char *id)
             break;
 
         default:
-            prTrace("invalid transaction result\n");
+            prTrace(LogError, "invalid transaction result\n");
             break;
         }
     }

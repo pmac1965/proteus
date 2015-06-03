@@ -38,23 +38,23 @@ using namespace Proteus::Core;
 void prLinuxUpdateMouse(int x, int y, unsigned int flags)
 {
     static int c=0;
-//    prTrace("%i, %i - %i\n",x,y,flags);
+//    prTrace(LogError, "%i, %i - %i\n",x,y,flags);
 
     switch(flags)
     {
     case 1:
         flags = MOUSE_BUTTON_LEFT;
-        prTrace("Left %i - %i\n",c++, flags);
+        prTrace(LogError, "Left %i - %i\n",c++, flags);
         break;
 
     case 2:
         flags = MOUSE_BUTTON_MIDDLE;
-        prTrace("Mid: %i - %i\n",c++, flags);
+        prTrace(LogError, "Mid: %i - %i\n",c++, flags);
         break;
 
     case 3:
         flags = MOUSE_BUTTON_RIGHT;
-        prTrace("Right %i - %i\n",c++, flags);
+        prTrace(LogError, "Right %i - %i\n",c++, flags);
         break;
 
     default:

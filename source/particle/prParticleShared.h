@@ -44,7 +44,7 @@ typedef std::list<prEffectType>::iterator                       prEffectTypeList
 //      This is used to hold the definition data of a particle emitter
 struct prEmitterDefinition
 {
-    prEmitterDefinition(const char *name);
+    explicit prEmitterDefinition(const char *name);
     prEffectTypeList    mEffects;
     Proteus::Core::u32  mHash;
 };

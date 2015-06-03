@@ -113,7 +113,7 @@ bool prKeyboard::IsKeyPressed(u32 charcode, u32 ctrlKeys) const
         // Just character code
         if (charcode && ctrlKeys == 0)
         {
-            //prTrace("charcode == %i (%i, %i)\n", charcode, mPrevKeyBuffer[charcode], mKeyBuffer[charcode]);
+            //prTrace(LogError, "charcode == %i (%i, %i)\n", charcode, mPrevKeyBuffer[charcode], mKeyBuffer[charcode]);
 
             result = (mPrevKeyBuffer[charcode] == 0 &&      // Prev must not be same
                       mKeyBuffer[charcode]     != 0);

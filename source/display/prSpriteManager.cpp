@@ -309,17 +309,17 @@ void prSpriteManager::DisplayUsage()
 
     if (!m_activeSprites.empty())
     {
-        prTrace("Sprites\n");
+        prTrace(LogError, "Sprites\n");
 
         std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
         std::list<prActiveSprite>::iterator end = m_activeSprites.end();
         s32 index = 0;
         for (; it != end; ++index, ++it)
         {
-            prTrace("Sprite %03i: Name: %s, TexID: %ul\n", index, (*it).sprite->Name(), (*it).texture->GetTexID());
+            prTrace(LogError, "Sprite %03i: Name: %s, TexID: %ul\n", index, (*it).sprite->Name(), (*it).texture->GetTexID());
         }
 
-        prTrace("Total sprites: %i\n", m_activeSprites.size());
+        prTrace(LogError, "Total sprites: %i\n", m_activeSprites.size());
     }
 
 #endif

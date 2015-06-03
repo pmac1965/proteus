@@ -86,7 +86,7 @@ public:
     //
     // Parameters:
     //      sprite - The parent sprite
-    prSpriteAnimation(prSprite *sprite);
+    explicit prSpriteAnimation(prSprite *sprite);
 
     // Method: ~prSpriteAnimation
     //      Destructor.

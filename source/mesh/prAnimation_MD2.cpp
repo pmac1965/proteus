@@ -116,7 +116,7 @@ prAnimation_MD2::prAnimation_MD2(prMD2Frame *pFrames, s32 numFrames)
     std::list<prMD2Anim*>::iterator end = mAnimations.end();
     for (;it != end; ++it)
     {
-        prTrace("Anim '%s': start %i, end %i\n", (*it)->name, (*it)->start,  (*it)->end);
+        prTrace(LogError, "Anim '%s': start %i, end %i\n", (*it)->name, (*it)->start,  (*it)->end);
     }
     #endif
 }

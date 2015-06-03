@@ -179,16 +179,16 @@ void prRegistry::ShowKeyValuePairs()
 
     if (!values.empty())
     {
-        prTrace("System keys:-------------------------------------------------------------------\n");
+        prTrace(LogError, "System keys:-------------------------------------------------------------------\n");
 
         std::map<std::string, std::string>::iterator it;
         
         for (it = values.begin(); it != values.end(); ++it)
         {
-            prTrace("Key: %*s, Value: %s\n", 20, ((*it).first).c_str(), ((*it).second).c_str());
+            prTrace(LogError, "Key: %*s, Value: %s\n", 20, ((*it).first).c_str(), ((*it).second).c_str());
         }
 
-        prTrace("-------------------------------------------------------------------------------\n");
+        prTrace(LogError, "-------------------------------------------------------------------------------\n");
     }
 
 #endif

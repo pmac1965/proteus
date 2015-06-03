@@ -133,7 +133,7 @@ bool prSoundManager_Android::Initialise()
     }
     else
     {
-        prTrace("The sound system is already initialised\n");
+        prTrace(LogError, "The sound system is already initialised\n");
     }
 
 
@@ -264,7 +264,7 @@ void prSoundManager_Android::LoadSFX(const prSFXInfo *sfx, s32 count)
     // Called twice?
     if (pLoadedWaves)
     {
-        prTrace("Attempted to load sfx twice\n");
+        prTrace(LogError, "Attempted to load sfx twice\n");
         return;
     }    
 
@@ -373,7 +373,7 @@ void prSoundManager_Android::SongPlayByName(const char *filename)
     // No track?
     if (index == -1)
     {
-        prTrace("Failed to find registered music track %s\n", filename);
+        prTrace(LogError, "Failed to find registered music track %s\n", filename);
         return;
     }    
 
@@ -387,7 +387,7 @@ void prSoundManager_Android::SongPlayByName(const char *filename)
     s32 i = prStringFindLastIndex(android_filename, '/');
     if (i == -1)
     {
-        prTrace("SoundManager: Invalid audio filename.\n");
+        prTrace(LogError, "SoundManager: Invalid audio filename.\n");
         return;
     }        
 
@@ -398,7 +398,7 @@ void prSoundManager_Android::SongPlayByName(const char *filename)
     i = prStringFindLastIndex(android_filename, '.');
     if (i == -1)
     {
-        prTrace("SoundManager: Invalid audio filename.\n");
+        prTrace(LogError, "SoundManager: Invalid audio filename.\n");
         return;
     }            
     android_filename[i] = '\0';
@@ -547,7 +547,7 @@ void prSoundManager_Android::SongSetVolume(f32 volume)
                 }
                 else
                 {
-                    prTrace("Tried to set the volume of a paused song.\n");
+                    prTrace(LogError, "Tried to set the volume of a paused song.\n");
                 }
             }
         }

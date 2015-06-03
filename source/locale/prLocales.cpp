@@ -118,13 +118,13 @@ namespace
             break;
 
         default:
-            prTrace("Platform language: Unknown. Defaulting to English\n");
+            prTrace(LogError, "Platform language: Unknown. Defaulting to English\n");
             lang_string = "EN_US";
             lang = Proteus::Locale::EN_US;
             break;
         }
 
-        prTrace("Platform language: %s\n", lang_string);
+        prTrace(LogError, "Platform language: %s\n", lang_string);
         return lang;
     }
 
@@ -219,7 +219,7 @@ namespace
 		    break;
 	    }
 
-        prTrace("Platform language: %s\n", lang_string);
+        prTrace(LogError, "Platform language: %s\n", lang_string);
         return lang;
     }
 

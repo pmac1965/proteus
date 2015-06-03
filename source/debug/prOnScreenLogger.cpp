@@ -162,7 +162,7 @@ void prOnScreenLogger::Draw(u32 xpos, u32 ypos, prFixedWidthFont::prFixedWidthAl
             break;
 
         default:
-            prTrace("prOnScreenLogger - Invalid alignment");
+            prTrace(LogError, "prOnScreenLogger - Invalid alignment");
             m_pFixedWidthFont->SetAlignment(prFixedWidthFont::FW_ALIGN_LEFT);
             break;
         }

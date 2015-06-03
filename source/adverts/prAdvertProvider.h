@@ -72,7 +72,7 @@ class prAdvertProvider
 public:
     // Method: prAdvertProvider
     //      Ctor
-    prAdvertProvider(prAdvertProviderDetails *);
+    explicit prAdvertProvider(prAdvertProviderDetails *);
 
     // Method: ~prAdvertProvider
     //      Dtor

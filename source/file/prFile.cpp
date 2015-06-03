@@ -171,9 +171,9 @@ prFile::prFile(const char *filename) : pImpl (new FileImplementation())
         prStringReplaceChar(imp.filenameArch, '\\', '/');
         prStringReplaceChar(imp.filenameDisk, '\\', '/');
         
-        //prTrace("ARC: %s\n", imp.filenameArch);
-        //prTrace("DSK: %s\n", imp.filenameDisk);
-        //prTrace("DRI: %s\n", imp.filenameOrig);
+        //prTrace(LogError, "ARC: %s\n", imp.filenameArch);
+        //prTrace(LogError, "DSK: %s\n", imp.filenameDisk);
+        //prTrace(LogError, "DRI: %s\n", imp.filenameOrig);
     }
     else
     {
@@ -270,7 +270,7 @@ bool prFile::Exists()
             }
             else
             {
-                prTrace("File does not exist %s\n", imp.filenameDisk);
+                prTrace(LogError, "File does not exist %s\n", imp.filenameDisk);
             }
 #endif
         }
@@ -357,14 +357,14 @@ bool prFile::Open()
     {
         // Show error
         imp.WasThereAFileError();
-        prTrace("STD: Failed to open file: %s\n", imp.filenameDisk);
-        prTrace("STD: Trying to open file: %s\n", imp.filenameOrig);
+        prTrace(LogError, "STD: Failed to open file: %s\n", imp.filenameDisk);
+        prTrace(LogError, "STD: Trying to open file: %s\n", imp.filenameOrig);
 
         imp.pFile = fopen(imp.filenameOrig, "rb");
         if (imp.pFile == NULL)
         {
             // Show error
-            prTrace("STD: Failed to open file: %s\n", imp.filenameOrig);
+            prTrace(LogError, "STD: Failed to open file: %s\n", imp.filenameOrig);
             imp.WasThereAFileError();
             return false;
         }
@@ -406,7 +406,7 @@ void prFile::Close()
     // Check mode.
     if (imp.filemode == FileMode_Simple)
     {
-        prTrace("You cannot call close on files created by the Load() method\n");
+        prTrace(LogError, "You cannot call close on files created by the Load() method\n");
         return;
     }
 

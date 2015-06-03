@@ -43,7 +43,7 @@ public:
     //
     // Parameters:
     //      filename - A char pointer to the filename
-    prResource(const char *filename);
+    explicit prResource(const char *filename);
 
     // Method: ~prResource
     //      Dtor

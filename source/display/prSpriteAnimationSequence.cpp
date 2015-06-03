@@ -222,7 +222,7 @@ void prSpriteAnimationSequence::ParseFrameData(TiXmlElement* pElement)
             if (user2) { m_pData[i].userData[2] = atoi(user2); }
             if (user3) { m_pData[i].userData[3] = atoi(user3); }
 
-            //prTrace("User data (%i): %i %i %i %i\n", i, pData[i].userData[0],
+            //prTrace(LogError, "User data (%i): %i %i %i %i\n", i, pData[i].userData[0],
             //                                            pData[i].userData[1],
             //                                            pData[i].userData[2],
             //                                            pData[i].userData[3]);
@@ -233,7 +233,7 @@ void prSpriteAnimationSequence::ParseFrameData(TiXmlElement* pElement)
             return;
         }
 
-        //prTrace("  Index %i, Delay %.02f\n", pData[i].index, pData[i].delay);
+        //prTrace(LogError, "  Index %i, Delay %.02f\n", pData[i].index, pData[i].delay);
         i++;
     }
 }

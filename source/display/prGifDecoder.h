@@ -44,7 +44,7 @@ class prGifDecoder
 public:
     // Method: prGifDecoder
     //      Ctor
-    prGifDecoder(const char *filename);
+    explicit prGifDecoder(const char *filename);
 
     // Method: ~prGifDecoder
     //      Dtor

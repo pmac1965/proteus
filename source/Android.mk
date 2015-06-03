@@ -37,7 +37,9 @@ else
 endif
 
 
-LOCAL_CFLAGS   += $(DEBUG_FLAGS) -fno-rtti -fno-exceptions
+LOCAL_CFLAGS	+= $(DEBUG_FLAGS)
+LOCAL_CPPFLAGS	+= $(DEBUG_FLAGS) -fno-rtti -fno-exceptions -std=c++11
+#LOCAL_CFLAGS	+= -Werror -fno-rtti
 
 
 LOCAL_LDLIBS := -ldl -llog -lGLESv1_CM -lstdc++ -lEGL -lGLESv2

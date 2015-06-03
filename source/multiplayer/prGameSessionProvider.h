@@ -30,7 +30,7 @@ class prGameSessionProvider
 public:
     // Method: prGameSessionProvider
     //      Ctor
-    prGameSessionProvider(Proteus::Core::s32 type);
+    explicit prGameSessionProvider(Proteus::Core::s32 type);
 
     // Method: ~prGameSessionProvider
     //      Dtor

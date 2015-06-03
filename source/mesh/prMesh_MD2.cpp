@@ -142,7 +142,7 @@ void prMesh_MD2::Animate()
             mpAnimation->Update(16.0f/1000.0f);
 
             m_frame = static_cast<prAnimation_MD2*>(mpAnimation)->GetFrame();
-            prTrace("Frame %i\n", m_frame);
+            prTrace(LogError, "Frame %i\n", m_frame);
         }
     }
 }
@@ -193,21 +193,21 @@ bool prMesh_MD2::Load(const char *filename)
 
             // Display file details
             #ifdef MD2_DEBUG
-            prTrace("-----------------------------------------\n");
-            prTrace("File       :     %s\n", filename            );
-            prTrace("-----------------------------------------\n");
-            prTrace("Ident      :     %x\n", header.ident        );
-            prTrace("Version    :     %i\n", header.version      );
-            prTrace("Frames     :     %i\n", header.num_frames   );
-            prTrace("commands   :     %i\n", header.num_glcmds   );
-            prTrace("Triangles  :     %i\n", header.num_tris     );
-            prTrace("Tex coords :     %i\n", header.num_st       );
-            prTrace("Vertices   :     %i\n", header.num_vertices );
-            prTrace("Textures   :     %i\n", header.num_skins    );
-            prTrace("Tex width  :     %i\n", header.skinWidth    );
-            prTrace("Tex height :     %i\n", header.skinHeight   );
-            prTrace("Frame size :     %i\n", header.frameSize    );
-            prTrace("-----------------------------------------\n");
+            prTrace(LogError, "-----------------------------------------\n");
+            prTrace(LogError, "File       :     %s\n", filename            );
+            prTrace(LogError, "-----------------------------------------\n");
+            prTrace(LogError, "Ident      :     %x\n", header.ident        );
+            prTrace(LogError, "Version    :     %i\n", header.version      );
+            prTrace(LogError, "Frames     :     %i\n", header.num_frames   );
+            prTrace(LogError, "commands   :     %i\n", header.num_glcmds   );
+            prTrace(LogError, "Triangles  :     %i\n", header.num_tris     );
+            prTrace(LogError, "Tex coords :     %i\n", header.num_st       );
+            prTrace(LogError, "Vertices   :     %i\n", header.num_vertices );
+            prTrace(LogError, "Textures   :     %i\n", header.num_skins    );
+            prTrace(LogError, "Tex width  :     %i\n", header.skinWidth    );
+            prTrace(LogError, "Tex height :     %i\n", header.skinHeight   );
+            prTrace(LogError, "Frame size :     %i\n", header.frameSize    );
+            prTrace(LogError, "-----------------------------------------\n");
             #endif
 
 
@@ -229,18 +229,18 @@ bool prMesh_MD2::Load(const char *filename)
                 #ifdef MD2_DEBUG
                 for (int i=0; i<header.num_skins; i++)
                 {
-                    prTrace("Skin: %s\n", m_skins[i].name);
+                    prTrace(LogError, "Skin: %s\n", m_skins[i].name);
 
                     char buffer[260];
 
                     prStringCopySafe(buffer, m_skins[i].name, sizeof(buffer));
-                    prTrace("Skin 1: %s\n", buffer);
+                    prTrace(LogError, "Skin 1: %s\n", buffer);
 
                     prStringToLower(buffer);
-                    prTrace("Skin 2: %s\n", buffer);
+                    prTrace(LogError, "Skin 2: %s\n", buffer);
 
                     prStringReplaceChar(buffer, '\\', '/');
-                    prTrace("Skin 3: %s\n", buffer);
+                    prTrace(LogError, "Skin 3: %s\n", buffer);
 
                     s32 index = prStringFindLastIndex(buffer, (char)'//');
                     if (index > 0)
@@ -249,7 +249,7 @@ bool prMesh_MD2::Load(const char *filename)
                     }
 
                     //prStringReplaceChar(buffer, '\\', '/');
-                    prTrace("Skin 4: %s\n", buffer);
+                    prTrace(LogError, "Skin 4: %s\n", buffer);
 
                     index = prStringFindLastIndex(buffer, '.');
                     if (index > 0)
@@ -257,18 +257,18 @@ bool prMesh_MD2::Load(const char *filename)
                         buffer[index] = 0;
                     //    prStringCopySafe(buffer, m_skins[i].name, sizeof(buffer));
                     }
-                    prTrace("Skin 5: %s\n", buffer);
+                    prTrace(LogError, "Skin 5: %s\n", buffer);
                     //else
                     //{
                     //}
 
                     prStringAddString(".pvr", buffer);
-                    prTrace("Skin 6: %s\n", buffer);
+                    prTrace(LogError, "Skin 6: %s\n", buffer);
 
                     char fullpath[260];
                     sprintf(fullpath, "data/textures/%s", buffer);
 
-                    prTrace("Texture: '%s'\n", fullpath);
+                    prTrace(LogError, "Texture: '%s'\n", fullpath);
                     
                     // Load the texture
                     prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
@@ -284,7 +284,7 @@ bool prMesh_MD2::Load(const char *filename)
             }
             else
             {
-                prTrace("Model %s has no associated textures\n", filename);
+                prTrace(LogError, "Model %s has no associated textures\n", filename);
             }
 
 
@@ -311,7 +311,7 @@ bool prMesh_MD2::Load(const char *filename)
                 ifs.read(reinterpret_cast<char*>( m_frames[i].verts),    sizeof(prMD2Vertex) * header.num_vertices);
 
                 #ifdef MD2_DEBUG
-                prTrace("Name: %s\n", &m_frames[i].name);
+                prTrace(LogError, "Name: %s\n", &m_frames[i].name);
                 #endif
             }
 
@@ -355,7 +355,7 @@ void prMesh_MD2::RenderFrame(int frame)
     // Valid frame?
     if (!PRBETWEEN(frame, 0, m_numFrames - 1))
     {
-        prTrace("prMesh_MD2 - Invalid frame index\n");
+        prTrace(LogError, "prMesh_MD2 - Invalid frame index\n");
         return;
     }
 

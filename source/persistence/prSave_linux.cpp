@@ -85,7 +85,7 @@ prSaveLinux::prSaveLinux() : pImpl (new SaveLinuxImplementation())
     {
         char path[FILE_MAX_FILENAME_SIZE];
         GetSaveLoadPath(path);
-        prTrace("Save path: %s\n", path);
+        prTrace(LogError, "Save path: %s\n", path);
     }
     #endif
 }
@@ -133,7 +133,7 @@ bool prSaveLinux::SaveBegin()
             {
                 if (mkdir(path, 0777) == -1)
                 {
-                	prTrace("Failed to create directory\n");
+                	prTrace(LogError, "Failed to create directory\n");
                 }
             }
         }
@@ -143,7 +143,7 @@ bool prSaveLinux::SaveBegin()
         imp.pFile = fopen(filename, "wb");
         if (imp.pFile == NULL)
         {
-            prTrace("SaveBegin: Failed to create file: %s\n", filename);
+            prTrace(LogError, "SaveBegin: Failed to create file: %s\n", filename);
             SetError(-1);
             return result;
         }
@@ -178,7 +178,7 @@ bool prSaveLinux::SaveUpdate()
         int bytes = fwrite(&header, 1, sizeof(prSaveHeader), imp.pFile);
         if (bytes != sizeof(prSaveHeader))
         {
-            prTrace("A:SaveUpdate - Bytes written did not match save size\n");
+            prTrace(LogError, "A:SaveUpdate - Bytes written did not match save size\n");
         }
 
         // Write data.
@@ -186,14 +186,14 @@ bool prSaveLinux::SaveUpdate()
         bytes = fwrite(m_saveSata, 1, m_saveSize, imp.pFile);
         if (bytes != m_saveSize)
         {
-            prTrace("B:SaveUpdate - Bytes written did not match save size\n");
+            prTrace(LogError, "B:SaveUpdate - Bytes written did not match save size\n");
         }
 
 
         // Errors?
         if (ferror(imp.pFile))
         {
-            prTrace("SaveUpdate - %s\n", strerror(errno));
+            prTrace(LogError, "SaveUpdate - %s\n", strerror(errno));
             clearerr(imp.pFile);
             SetError(-1);
             fclose(imp.pFile);
@@ -250,7 +250,7 @@ bool prSaveLinux::LoadBegin()
         strcat(filename, "/");
         strcat(filename, m_filename);
 
-        prTrace("Attempt to load: %s\n", filename);
+        prTrace(LogError, "Attempt to load: %s\n", filename);
 
         imp.filesize = 0;
 
@@ -261,7 +261,7 @@ bool prSaveLinux::LoadBegin()
             imp.pFile = fopen(filename, "rb");
             if (imp.pFile == NULL)
             {
-                prTrace("LoadBegin: Failed to open file: %s\n", filename);
+                prTrace(LogError, "LoadBegin: Failed to open file: %s\n", filename);
                 SetError(-1);
                 return result;
             }
@@ -277,14 +277,14 @@ bool prSaveLinux::LoadBegin()
                 // Check size
                 if (imp.filesize == 0)
                 {
-                    prTrace("File is empty. Load cancelled: %s\n", filename);
+                    prTrace(LogError, "File is empty. Load cancelled: %s\n", filename);
                     SetError(-1);
                     return result;
                 }
 
                 if ((u32)imp.filesize < sizeof(prSaveHeader))
                 {
-                    prTrace("File is too small. Load cancelled: %s\n", filename);
+                    prTrace(LogError, "File is too small. Load cancelled: %s\n", filename);
                     SetError(-1);
                     return result;
                 }
@@ -298,7 +298,7 @@ bool prSaveLinux::LoadBegin()
         }
         else
         {
-            prTrace("File doesn't exist. Load cancelled: %s\n", filename);
+            prTrace(LogError, "File doesn't exist. Load cancelled: %s\n", filename);
             SetError(-1);
             return result;
         }
@@ -335,7 +335,7 @@ bool prSaveLinux::LoadUpdate()
             {
                 if (ferror(imp.pFile))
                 {
-                    prTrace("LoadUpdate: fread error: %s\n", strerror(errno));
+                    prTrace(LogError, "LoadUpdate: fread error: %s\n", strerror(errno));
                     clearerr(imp.pFile);
                 }
 
@@ -353,7 +353,7 @@ bool prSaveLinux::LoadUpdate()
             {
                 if (ferror(imp.pFile))
                 {
-                    prTrace("LoadUpdate: fread error: %s\n", strerror(errno));
+                    prTrace(LogError, "LoadUpdate: fread error: %s\n", strerror(errno));
                     clearerr(imp.pFile);
                 }
 
@@ -378,7 +378,7 @@ bool prSaveLinux::LoadUpdate()
                 }
                 else
                 {
-                    prTrace("Invalid save header\n");
+                    prTrace(LogError, "Invalid save header\n");
                     SetError(-1);
                     return result;
                 }
@@ -399,7 +399,7 @@ bool prSaveLinux::LoadUpdate()
         }
         else
         {
-            prTrace("Unable to allocate buffer to load save file.\n");
+            prTrace(LogError, "Unable to allocate buffer to load save file.\n");
         }
     }
 

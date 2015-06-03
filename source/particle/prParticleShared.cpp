@@ -27,5 +27,5 @@
 /// ---------------------------------------------------------------------------
 prEmitterDefinition::prEmitterDefinition(const char *name) : mHash(prStringHash(name))
 {
-    prTrace("New 'prEmitterDefinition' %s - %08x\n", name, mHash);
+    prTrace(LogError, "New 'prEmitterDefinition' %s - %08x\n", name, mHash);
 }

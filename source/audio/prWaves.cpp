@@ -149,7 +149,7 @@ typedef struct prWaveFileInfo
 prWaves::prWaves()
 {
     memset(m_waveID, 0, sizeof(*m_waveID) * MAX_NUM_WAVEID);
-    //prTrace("sizeof(*m_waveID) * MAX_NUM_WAVEID == %i\n", sizeof(*m_waveID) * MAX_NUM_WAVEID);
+    //prTrace(LogError, "sizeof(*m_waveID) * MAX_NUM_WAVEID == %i\n", sizeof(*m_waveID) * MAX_NUM_WAVEID);
     TODO("Remove the wave ID list as its not required")
 }
 
@@ -291,7 +291,7 @@ prWaveResult prWaves::ParseFile(const char *filename, prWaveFileInfo* pWaveInfo)
                         }
                         else
                         {
-                            prTrace("Unsupported wave format\n");
+                            prTrace(LogError, "Unsupported wave format\n");
                         }
                     }
                     else
@@ -325,7 +325,7 @@ prWaveResult prWaves::ParseFile(const char *filename, prWaveFileInfo* pWaveInfo)
             }
             else
             {
-                prTrace("Invalid audio file\n");
+                prTrace(LogError, "Invalid audio file\n");
                 return WR_BADWAVEFILE;
             }
         }

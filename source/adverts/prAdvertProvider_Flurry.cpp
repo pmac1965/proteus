@@ -79,35 +79,35 @@ void prAdvertProvider_Flurry::EventNotify(u32 eventType, u32 data1, u32 data2)
     switch(eventType)
     {
     case FLURRY_ADVERT_OPENED:
-        prTrace("FLURRY_ADVERT_OPENED\n");
+        prTrace(LogError, "FLURRY_ADVERT_OPENED\n");
         break;
 
     case FLURRY_ADVERT_CLICKED:
-        prTrace("FLURRY_ADVERT_CLICKED\n");
+        prTrace(LogError, "FLURRY_ADVERT_CLICKED\n");
         break;
 
     case FLURRY_ADVERT_CLOSED:
-        prTrace("FLURRY_ADVERT_CLOSED\n");
+        prTrace(LogError, "FLURRY_ADVERT_CLOSED\n");
         break;
 
     case FLURRY_ADVERT_RECEIVED:
-        prTrace("FLURRY_ADVERT_RECEIVED\n");
+        prTrace(LogError, "FLURRY_ADVERT_RECEIVED\n");
         break;
 
     case FLURRY_ADVERT_RECEIVE_FAILED:
-        prTrace("FLURRY_ADVERT_RECEIVE_FAILED\n");
+        prTrace(LogError, "FLURRY_ADVERT_RECEIVE_FAILED\n");
         break;
 
     case FLURRY_ADVERT_RENDERED:
-        prTrace("FLURRY_ADVERT_RENDERED\n");
+        prTrace(LogError, "FLURRY_ADVERT_RENDERED\n");
         break;
 
     case FLURRY_ADVERT_RENDER_FAILED:
-        prTrace("FLURRY_ADVERT_RENDER_FAILED\n");
+        prTrace(LogError, "FLURRY_ADVERT_RENDER_FAILED\n");
         break;
 
     case FLURRY_VIDEO_COMPLETED:
-        prTrace("FLURRY_VIDEO_COMPLETED\n");
+        prTrace(LogError, "FLURRY_VIDEO_COMPLETED\n");
         break;
 
     default:
@@ -122,7 +122,7 @@ void prAdvertProvider_Flurry::EventNotify(u32 eventType, u32 data1, u32 data2)
 /// ---------------------------------------------------------------------------
 void prAdvertProvider_Flurry::Init()
 {
-    prTrace("prAdvertProvider_Flurry::Init()\n");
+    prTrace(LogError, "prAdvertProvider_Flurry::Init()\n");
     mInitialised = true;
 }
 
@@ -151,7 +151,7 @@ void prAdvertProvider_Flurry::Load()
 /// ---------------------------------------------------------------------------
 void prAdvertProvider_Flurry::Show(s32 type)
 {
-    prTrace("prAdvertProvider_Flurry::Show()\n");
+    prTrace(LogError, "prAdvertProvider_Flurry::Show()\n");
 
     PRUNUSED(type);
 
@@ -159,14 +159,14 @@ void prAdvertProvider_Flurry::Show(s32 type)
     // Advert loaded?
     if (!mAdvertLoaded)
     {
-        prTrace("prAdvertProvider_Flurry: Advert not loaded\n");
+        prTrace(LogError, "prAdvertProvider_Flurry: Advert not loaded\n");
         return;
     }
 
     // Advert loading?
     if (mAdvertLoading)
     {
-        prTrace("prAdvertProvider_Flurry: Advert is loading\n");
+        prTrace(LogError, "prAdvertProvider_Flurry: Advert is loading\n");
         return;
     }
 
@@ -174,7 +174,7 @@ void prAdvertProvider_Flurry::Show(s32 type)
     // Visible
     if (mVisible)
     {
-        prTrace("prAdvertProvider_Flurry: Advert is visible\n");
+        prTrace(LogError, "prAdvertProvider_Flurry: Advert is visible\n");
         return;
     }
 
@@ -192,7 +192,7 @@ void prAdvertProvider_Flurry::Show(s32 type)
 /// ---------------------------------------------------------------------------
 void prAdvertProvider_Flurry::Hide()
 {
-    prTrace("prAdvertProvider_Flurry::Hide()\n");
+    prTrace(LogError, "prAdvertProvider_Flurry::Hide()\n");
 
     if (mVisible)
     {

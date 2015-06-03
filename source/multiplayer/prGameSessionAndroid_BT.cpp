@@ -51,9 +51,9 @@ prGameSessionAndroid_BT::~prGameSessionAndroid_BT()
 /// ---------------------------------------------------------------------------
 void prGameSessionAndroid_BT::Initialise()
 {
-    prTrace("prGameSessionAndroid_BT::Initialise() - start\n");
+    prTrace(LogError, "prGameSessionAndroid_BT::Initialise() - start\n");
     prJNI_BTInit();
-    prTrace("prGameSessionAndroid_BT::Initialise() - done\n");
+    prTrace(LogError, "prGameSessionAndroid_BT::Initialise() - done\n");
 }
 
 

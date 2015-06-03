@@ -334,7 +334,7 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 }
                 else
                 {
-                    prTrace("Engine system '%s' already exists\n", pSystems[id]->Name());
+                    prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
                 }
                 break;
 
@@ -346,7 +346,7 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 }
                 else
                 {
-                    prTrace("Engine system '%s' already exists\n", pSystems[id]->Name());
+                    prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
                 }
                 break;
 
@@ -358,7 +358,7 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 }
                 else
                 {
-                    prTrace("Engine system '%s' already exists\n", pSystems[id]->Name());
+                    prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
                 }
                 break;
 
@@ -384,7 +384,7 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 }
                 else
                 {
-                    prTrace("Engine system '%s' already exists\n", pSystems[id]->Name());
+                    prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
                 }
                 break;
 
@@ -410,7 +410,7 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 }
                 else
                 {
-                    prTrace("Engine system '%s' already exists\n", pSystems[id]->Name());
+                    prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
                 }
                 break;
 
@@ -422,7 +422,7 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 }
                 else
                 {
-                    prTrace("Engine system '%s' already exists\n", pSystems[id]->Name());
+                    prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
                 }
                 break;
 
@@ -434,7 +434,7 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 }
                 else
                 {
-                    prTrace("Engine system '%s' already exists\n", pSystems[id]->Name());
+                    prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
                 }
                 break;
 
@@ -442,11 +442,11 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
             default:
                 if (id < 0 || id >= PRSYSTEM_MAX)
                 {
-                    prTrace("Invalid ID: %i\n", id);
+                    prTrace(LogError, "Invalid ID: %i\n", id);
                 }
                 else
                 {
-                    prTrace("Yet to implement %i\n", id);
+                    prTrace(LogError, "Yet to implement %i\n", id);
                 }
                 break;
             }
@@ -466,7 +466,7 @@ void prCoreDestroy()
     {
         if (pSystems[i])
         {
-            prTrace("Destroying %s - %i\n", pSystems[i]->Name(), pSystems[i]->ID());
+            prTrace(LogError, "Destroying %s - %i\n", pSystems[i]->Name(), pSystems[i]->ID());
             PRSAFE_DELETE(pSystems[i]);
         }
     }
@@ -497,7 +497,7 @@ PRBOOL prCoreComponentExist(s32 systemID)
         }
         else
         {
-            prTrace("prCoreOptionalExist: Invalid system ID\n");
+            prTrace(LogError, "prCoreOptionalExist: Invalid system ID\n");
         }
     }
 
@@ -519,7 +519,7 @@ prCoreSystem *prCoreGetComponent(u32 systemID)
         }
         else
         {
-            prTrace("prCoreGetComponent: Invalid system ID\n");
+            prTrace(LogError, "prCoreGetComponent: Invalid system ID\n");
         }
     }
 

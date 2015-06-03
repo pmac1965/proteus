@@ -215,7 +215,7 @@ typedef struct BitmapFontImplementation
                 }
                 else
                 {
-                    prTrace("Unsupported element: %s\n", pParent->Value());
+                    prTrace(LogError, "Unsupported element: %s\n", pParent->Value());
                 }
             }
             break;
@@ -255,18 +255,18 @@ typedef struct BitmapFontImplementation
             const char * padding  = pElement->Attribute("padding");
             const char * spacing  = pElement->Attribute("spacing");
             const char * outline  = pElement->Attribute("outline");
-            prTrace("face    : %s\n", face    );
-            prTrace("size    : %s\n", size    );
-            prTrace("bold    : %s\n", bold    );
-            prTrace("italic  : %s\n", italic  );
-            prTrace("charset : %s\n", charset );
-            prTrace("unicode : %s\n", unicode );
-            prTrace("stretchH: %s\n", stretchH);
-            prTrace("smooth  : %s\n", smooth  );
-            prTrace("aa      : %s\n", aa      );
-            prTrace("padding : %s\n", padding );
-            prTrace("spacing : %s\n", spacing );
-            prTrace("outline : %s\n", outline );
+            prTrace(LogError, "face    : %s\n", face    );
+            prTrace(LogError, "size    : %s\n", size    );
+            prTrace(LogError, "bold    : %s\n", bold    );
+            prTrace(LogError, "italic  : %s\n", italic  );
+            prTrace(LogError, "charset : %s\n", charset );
+            prTrace(LogError, "unicode : %s\n", unicode );
+            prTrace(LogError, "stretchH: %s\n", stretchH);
+            prTrace(LogError, "smooth  : %s\n", smooth  );
+            prTrace(LogError, "aa      : %s\n", aa      );
+            prTrace(LogError, "padding : %s\n", padding );
+            prTrace(LogError, "spacing : %s\n", spacing );
+            prTrace(LogError, "outline : %s\n", outline );
         }
 #endif
     }
@@ -293,16 +293,16 @@ typedef struct BitmapFontImplementation
             const char * redChnl    = pElement->Attribute("redChnl");
             const char * greenChnl  = pElement->Attribute("greenChnl");
             const char * blueChnl   = pElement->Attribute("blueChnl");
-            prTrace("lineHeight : %s\n", _lineHeight);
-            prTrace("base       : %s\n", _base      );
-            prTrace("scaleW     : %s\n", _scaleW    );
-            prTrace("scaleH     : %s\n", _scaleH    );
-            prTrace("pages      : %s\n", _pages     );
-            prTrace("packed     : %s\n", packed     ); // Unused
-            prTrace("alphaChnl  : %s\n", alphaChnl  ); // Unused
-            prTrace("redChnl    : %s\n", redChnl    ); // Unused
-            prTrace("greenChnl  : %s\n", greenChnl  ); // Unused
-            prTrace("blueChnl   : %s\n", blueChnl   ); // Unused
+            prTrace(LogError, "lineHeight : %s\n", _lineHeight);
+            prTrace(LogError, "base       : %s\n", _base      );
+            prTrace(LogError, "scaleW     : %s\n", _scaleW    );
+            prTrace(LogError, "scaleH     : %s\n", _scaleH    );
+            prTrace(LogError, "pages      : %s\n", _pages     );
+            prTrace(LogError, "packed     : %s\n", packed     ); // Unused
+            prTrace(LogError, "alphaChnl  : %s\n", alphaChnl  ); // Unused
+            prTrace(LogError, "redChnl    : %s\n", redChnl    ); // Unused
+            prTrace(LogError, "greenChnl  : %s\n", greenChnl  ); // Unused
+            prTrace(LogError, "blueChnl   : %s\n", blueChnl   ); // Unused
 #endif
 
             PRASSERT(_lineHeight);
@@ -403,7 +403,7 @@ typedef struct BitmapFontImplementation
                 characters = atoi(count);
                 if (characters == 0)
                 {
-                    prTrace("Font character count is invalid\n");
+                    prTrace(LogError, "Font character count is invalid\n");
                     return;
                 }
 
@@ -481,7 +481,7 @@ typedef struct BitmapFontImplementation
                 kernings = atoi(count);
                 if (kernings == 0)
                 {
-                    prTrace("Font kernings count is zero\n");
+                    prTrace(LogError, "Font kernings count is zero\n");
                 }
 
                 // Extract kerning data
@@ -660,7 +660,7 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
         switch(alignment)
         {
         default:
-            prTrace("Unsupported alignment\n");
+            prTrace(LogError, "Unsupported alignment\n");
             break;
 
         case ALIGN_LEFT:
@@ -724,7 +724,7 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
                 switch(alignment)
                 {
                 default:
-                    prTrace("Unsupported alignment\n");
+                    prTrace(LogError, "Unsupported alignment\n");
                     break;
 
                 case ALIGN_LEFT:
@@ -836,7 +836,7 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
                 }
                 else
                 {
-                    prTrace("Unsupported character: %i, %c\n", character, character);
+                    prTrace(LogError, "Unsupported character: %i, %c\n", character, character);
                 }
             }
         }
@@ -935,7 +935,7 @@ Proteus::Math::prVector2 prBitmapFont::MeasureString(const char *string, float s
                 }
                 else
                 {
-                    prTrace("Unsupported character: %i, %c\n", character, character);
+                    prTrace(LogError, "Unsupported character: %i, %c\n", character, character);
                 }
             }
         }
@@ -1027,7 +1027,7 @@ Proteus::Math::prVector2 prBitmapFont::MeasureStringUntilTerm(const char *string
                 }
                 else
                 {
-                    prTrace("Unsupported character: %i, %c\n", character, character);
+                    prTrace(LogError, "Unsupported character: %i, %c\n", character, character);
                 }
             }
         }

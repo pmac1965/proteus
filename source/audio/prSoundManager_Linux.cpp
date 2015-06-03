@@ -92,7 +92,7 @@ bool prSoundManager_Linux::Initialise()
                 alcMakeContextCurrent(context);
                 if (ALC_ErrorCheck(device) != ALC_NO_ERROR)
                 {
-                    prTrace("Failed to make OpenAL context current\n");
+                    prTrace(LogError, "Failed to make OpenAL context current\n");
                 }
 
                 // Generate the playback sources
@@ -105,7 +105,7 @@ bool prSoundManager_Linux::Initialise()
                     {
                         soundEffects[i].state    = SFX_STATE_UNAVAILABLE;
                         soundEffects[i].uiSource = 0xFFFFFFFF;
-                        prTrace("OpenAL failed to generate a source\n");
+                        prTrace(LogError, "OpenAL failed to generate a source\n");
                     }
                     else
                     {
@@ -115,7 +115,7 @@ bool prSoundManager_Linux::Initialise()
             }
             else
             {
-            	prTrace("Failed to create OpenAL context\n");
+            	prTrace(LogError, "Failed to create OpenAL context\n");
                 alcCloseDevice(device);
                 context = NULL;
                 device  = NULL;
@@ -123,14 +123,14 @@ bool prSoundManager_Linux::Initialise()
         }
         else
         {
-        	prTrace("Failed to open default OpenAL device\n");
+        	prTrace(LogError, "Failed to open default OpenAL device\n");
         }
 
         initialised = true;
     }
     else
     {
-        prTrace("The sound system is already initialised\n");
+        prTrace(LogError, "The sound system is already initialised\n");
     }
 
 
@@ -261,7 +261,7 @@ void prSoundManager_Linux::LoadSFX(const prSFXInfo *sfx, s32 count)
     // Called twice?
     if (pLoadedWaves)
     {
-        prTrace("Attempted to load sfx twice\n");
+        prTrace(LogError, "Attempted to load sfx twice\n");
         return;
     }    
 
@@ -308,8 +308,8 @@ void prSoundManager_Linux::LoadSFX(const prSFXInfo *sfx, s32 count)
                 }
                 else
                 {
-                	prTrace("Sound effect: %s\n", sfx[i].filename);
-                	prTrace("Failed to create effect\n");
+                	prTrace(LogError, "Sound effect: %s\n", sfx[i].filename);
+                	prTrace(LogError, "Failed to create effect\n");
 
                     //#if defined(SOUND_SHOW_FAILS) && (defined(_DEBUG) || defined(DEBUG))
                     //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveSize           == %i\n", waves.GetWaveSize(id, (u32*)&iDataSize)                 == WR_OK);
@@ -321,8 +321,8 @@ void prSoundManager_Linux::LoadSFX(const prSFXInfo *sfx, s32 count)
             }
             else
             {
-            	prTrace("Failed to load %s\n", sfx[i].filename);
-            	prTrace("If the file is not missing, then check .wav format. Should be PCM\n");
+            	prTrace(LogError, "Failed to load %s\n", sfx[i].filename);
+            	prTrace(LogError, "If the file is not missing, then check .wav format. Should be PCM\n");
             }
         }
     }
@@ -370,7 +370,7 @@ void prSoundManager_Linux::SongPlayByName(const char *filename)
     // No track?
     if (index == -1)
     {
-        prTrace("Failed to find registered music track %s\n", filename);
+        prTrace(LogError, "Failed to find registered music track %s\n", filename);
         return;
     }    
 
@@ -384,7 +384,7 @@ void prSoundManager_Linux::SongPlayByName(const char *filename)
     s32 i = prStringFindLastIndex(android_filename, '/');
     if (i == -1)
     {
-        prTrace("SoundManager: Invalid audio filename.\n");
+        prTrace(LogError, "SoundManager: Invalid audio filename.\n");
         return;
     }        
 
@@ -395,7 +395,7 @@ void prSoundManager_Linux::SongPlayByName(const char *filename)
     i = prStringFindLastIndex(android_filename, '.');
     if (i == -1)
     {
-        prTrace("SoundManager: Invalid audio filename.\n");
+        prTrace(LogError, "SoundManager: Invalid audio filename.\n");
         return;
     }            
     android_filename[i] = '\0';
@@ -549,7 +549,7 @@ void prSoundManager_Linux::SongSetVolume(f32 volume)
                 }
                 else
                 {
-                    prTrace("Tried to set the volume of a paused song.\n");
+                    prTrace(LogError, "Tried to set the volume of a paused song.\n");
                 }
             }
         }

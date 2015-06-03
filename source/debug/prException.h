@@ -37,7 +37,7 @@ public:
     //
     // Parameters:
     //      error - A descriptive error message
-    prException(std::string error);
+    explicit prException(std::string error);
 
     // Method: prException
     //      Constructor.

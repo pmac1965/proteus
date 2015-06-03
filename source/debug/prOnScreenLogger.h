@@ -44,7 +44,7 @@ class prTexture;
     }
 
   #else    
-    #define prLogOsl(text, ...) {                                                                   \
+    #define prLogOsl(text, args...) {                                                               \
         prOnScreenLogger *pOSL = (prOnScreenLogger *)prCoreGetComponent(PRSYSTEM_ONSCREENLOGGER);   \
         if (pOSL) { pOSL->Add(text, ## args); }                                                     \
     }

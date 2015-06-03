@@ -54,7 +54,7 @@ void prKeyboard_PC::KeyboardInjectDown(u32 charcode)
     if (charcode < PRKEY_BUFFER_SIZE)
     {
         mKeyBuffer[charcode] = 1;
-        //prTrace("INJECT CHARCODE: %i - %c\n", charcode, charcode);
+        //prTrace(LogError, "INJECT CHARCODE: %i - %c\n", charcode, charcode);
     }
 }
 
@@ -65,7 +65,7 @@ void prKeyboard_PC::KeyboardInjectDown(u32 charcode)
 void prKeyboard_PC::KeyboardInjectPressed(u32 charcode)
 {
     mLastKey = charcode;
-    //prTrace("PRESSED CHARCODE: %i - %c\n", charcode, charcode);
+    //prTrace(LogError, "PRESSED CHARCODE: %i - %c\n", charcode, charcode);
 }
 
 

@@ -35,7 +35,7 @@ class prSceneNode
 public:
     // Method: prSceneNode
     //      Ctor
-    prSceneNode(prSceneNode *pParent);
+    explicit prSceneNode(prSceneNode *pParent);
 
     // Method: ~prSceneNode
     //      Dtor

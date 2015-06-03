@@ -38,7 +38,7 @@ public:
     // Parameters:
     //      A name for the object. The name does *not* have
     //      to be unique
-    prSceneObject(const char *pName);
+    explicit prSceneObject(const char *pName);
 
     // Method: prSceneObject
     //      Scene object constructor

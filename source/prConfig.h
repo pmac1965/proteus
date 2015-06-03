@@ -22,12 +22,12 @@
 // Audio platform
 #define AUDIO_PC        1
 #define AUDIO_IOS       2
-#define AUDIO_BADA      3           // Bada is dead. This is no longer used
+//#define AUDIO_BADA      3           // Bada is dead. This is no longer used
 #define AUDIO_ANDROID   4
 #define AUDIO_MAC       5
 #define AUDIO_LINUX     6
 #define AUDIO_WINPHONE  7
-#define AUDIO_TIZEN     8           // Bada replacement
+//#define AUDIO_TIZEN     8           // Bada replacement
 
 
 // Determine platform. First check for PC
@@ -64,12 +64,12 @@
 // Or Linux? Android?
 #elif defined(__GNUC__)
     // Linux
-    #if (defined(linux) && !defined(__ANDROID__))
+    #if (defined(linux) && !defined(ANDROID))
         #define PLATFORM_LINUX
         #define AUDIO_TYPE  AUDIO_LINUX
 
     // Android
-    #elif (defined(linux) && defined(__ANDROID__))
+    #elif (ANDROID)//defined(linux) && defined(__ANDROID__))
         #define PLATFORM_ANDROID
         #define AUDIO_TYPE  AUDIO_ANDROID
     #endif

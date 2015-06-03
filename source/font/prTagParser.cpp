@@ -127,7 +127,7 @@ namespace
             }
 
             #if defined(TAG_DEBUG)
-            prTrace("Parsed: commas %i, R:%g, G:%g, B:%g, A:%g\n", commas, r, g, b, a);
+            prTrace(LogError, "Parsed: commas %i, R:%g, G:%g, B:%g, A:%g\n", commas, r, g, b, a);
             #endif
 
 
@@ -179,7 +179,7 @@ u32 prTagIsTag(const char *pString, f32 _a)
                     tag[count - 1] = '\0';
 
                     #if defined(TAG_DEBUG)
-                    prTrace("SEARCH TAG?: '%s'\n", tag);
+                    prTrace(LogError, "SEARCH TAG?: '%s'\n", tag);
                     #endif
 
                     for (u32 i=0; i<PRARRAY_SIZE(tags); i++)
@@ -187,7 +187,7 @@ u32 prTagIsTag(const char *pString, f32 _a)
                         if (strncmp(tags[i].tag, tag, tags[i].length) == 0)
                         {
                             #if defined(TAG_DEBUG)
-                            prTrace("Found: >>%s<<\n", tags[i].tag);
+                            prTrace(LogError, "Found: >>%s<<\n", tags[i].tag);
                             #endif
                             
                             if (tags[i].parser)

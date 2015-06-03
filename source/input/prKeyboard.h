@@ -84,7 +84,7 @@ public:
 
 private:
     // Stops passing by value and assignment.
-    prKeyboard(const prKeyboard&);
+    explicit prKeyboard(const prKeyboard&);
     const prKeyboard& operator = (const prKeyboard&);
 
 

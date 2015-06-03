@@ -134,7 +134,7 @@ prGifDecoder::prGifDecoder(const char *filename)
 
                     // Times four for RGBA
                     mTextureSize = ((mTextureWidth * mTextureHeight) * 4);
-                    //prTrace("GIF.TEX: %i, %i, %i\n", mTextureWidth, mTextureHeight, mTextureSize);
+                    //prTrace(LogError, "GIF.TEX: %i, %i, %i\n", mTextureWidth, mTextureHeight, mTextureSize);
                 }
             }
         }

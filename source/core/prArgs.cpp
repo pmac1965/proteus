@@ -69,7 +69,7 @@ namespace
         }
         else
         {
-            prTrace("Unknown command line parameter was null or empty\n");
+            prTrace(LogError, "Unknown command line parameter was null or empty\n");
         }
 
         return parseFailed;
@@ -275,8 +275,8 @@ bool prArgsParseFailed()
 /// ---------------------------------------------------------------------------
 void prArgsShowHelp()
 {
-    prTrace("-prverb        = Turns on verbose engine logging\n");
-    prTrace("-prlogfile     = Turns on logging to a disk file\n");
-    prTrace("-prhelp        = Displays the help text\n");
-    prTrace("-prnoarc       = Disables archives\n");
+    prTrace(LogError, "-prverb        = Turns on verbose engine logging\n");
+    prTrace(LogError, "-prlogfile     = Turns on logging to a disk file\n");
+    prTrace(LogError, "-prhelp        = Displays the help text\n");
+    prTrace(LogError, "-prnoarc       = Disables archives\n");
 }

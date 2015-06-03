@@ -303,7 +303,7 @@ void prLinkedHeap::DisplayUsage(bool full) const
 {
 #if defined(DEBUG) || defined(_DEBUG)
 
-    prTrace("\nLinked heap: ============================================================================\n");
+    prTrace(LogError, "\nLinked heap: ============================================================================\n");
 
     if (full)
     {
@@ -313,6 +313,7 @@ void prLinkedHeap::DisplayUsage(bool full) const
         {
             prTrace
             (
+                LogError,
                 "Addr: %#08x State: %s Block size: %*i Data size: %*i Func: %s\n",
                 (u32)(u64)node + sizeof(LinkNode) + (m_bounds_check>>1),
                 HeapState(node->status),
@@ -324,16 +325,16 @@ void prLinkedHeap::DisplayUsage(bool full) const
             node = node->next;
         }
 
-        prTrace("\n");    
+        prTrace(LogError, "\n");    
     }
 
-    prTrace("Heap name          : %s\n", (m_name && *m_name) ? m_name : "unnamed");
-    prTrace("Bounds check       : %s\n", m_bounds_check ? "true" : "false"); 
-    prTrace("Size used blocks   : %iK and %i bytes\n", GetSizeOfUsedBlocks()/KILOBYTE,   GetSizeOfUsedBlocks()%KILOBYTE);
-    prTrace("Size unused blocks : %iK and %i bytes\n", GetSizeOfUnusedBlocks()/KILOBYTE, GetSizeOfUnusedBlocks()%KILOBYTE);    
-    prTrace("Largest free block : %iK and %i bytes\n", GetLargestFreeBlock()/KILOBYTE,   GetLargestFreeBlock()%KILOBYTE);
-    prTrace("Heap size          : %iK and %i bytes\n", m_heap_size/KILOBYTE,             m_heap_size%KILOBYTE);
-    prTrace("=========================================================================================\n");
+    prTrace(LogError, "Heap name          : %s\n", (m_name && *m_name) ? m_name : "unnamed");
+    prTrace(LogError, "Bounds check       : %s\n", m_bounds_check ? "true" : "false"); 
+    prTrace(LogError, "Size used blocks   : %iK and %i bytes\n", GetSizeOfUsedBlocks()/KILOBYTE,   GetSizeOfUsedBlocks()%KILOBYTE);
+    prTrace(LogError, "Size unused blocks : %iK and %i bytes\n", GetSizeOfUnusedBlocks()/KILOBYTE, GetSizeOfUnusedBlocks()%KILOBYTE);    
+    prTrace(LogError, "Largest free block : %iK and %i bytes\n", GetLargestFreeBlock()/KILOBYTE,   GetLargestFreeBlock()%KILOBYTE);
+    prTrace(LogError, "Heap size          : %iK and %i bytes\n", m_heap_size/KILOBYTE,             m_heap_size%KILOBYTE);
+    prTrace(LogError, "=========================================================================================\n");
 
 
     if (full)
@@ -420,7 +421,7 @@ void prLinkedHeap::DisplayAllocations() const
     }
 
 
-    prTrace("Allocations by type: ====================================================================\n");
+    prTrace(LogError, "Allocations by type: ====================================================================\n");
 
     // Do we have the allocation stored?
     if (list.Size() > 0)
@@ -429,12 +430,12 @@ void prLinkedHeap::DisplayAllocations() const
 
         while(it.Okay())
         {
-            prTrace("Allocations: %*i - Total size: %*i - %s\n", 5, (*it).count, 10, (*it).size, (*it).name);
+            prTrace(LogError, "Allocations: %*i - Total size: %*i - %s\n", 5, (*it).count, 10, (*it).size, (*it).name);
             ++it;
         }
     }
 
-    prTrace("=========================================================================================\n");
+    prTrace(LogError, "=========================================================================================\n");
     
 #endif
 }
@@ -805,7 +806,7 @@ void prLinkedHeap::FreeListShow() const
 {
     if (m_free)
     {
-        prTrace("Free list entries: ======================================================================\n");
+        prTrace(LogError, "Free list entries: ======================================================================\n");
 
         prFreeNode* freelist = m_free;
 
@@ -813,13 +814,13 @@ void prLinkedHeap::FreeListShow() const
         {
             LinkNode* node = (LinkNode*)((u8*)freelist - sizeof(LinkNode) - (m_bounds_check>>1));
 
-            prTrace("Size : %i, Name: %s, Addr: %08x\n", node->size, node->func ? node->func : "Unknown", freelist);
+            prTrace(LogError, "Size : %i, Name: %s, Addr: %08x\n", node->size, node->func ? node->func : "Unknown", freelist);
 
             freelist = freelist->next;
         }
         while(freelist);
 
-        prTrace("=========================================================================================\n");
+        prTrace(LogError, "=========================================================================================\n");
     }    
 }
 #endif

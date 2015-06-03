@@ -199,7 +199,7 @@ bool prTexture::Bind()
     }
     else
     {
-        prTrace("prTexture::Bind - Failed to bind texture: %s\n", Filename());
+        prTrace(LogError, "prTexture::Bind - Failed to bind texture: %s\n", Filename());
         lastTextureID = 0xFFFFFFFF;
         bound = false;
     }
@@ -265,15 +265,15 @@ void prTexture::Load(s32 extra)
             // Size validation.
             if (!ValidateSize(m_width))
             {
-                prTrace("prTexture: %s\n", Filename());
-                prTrace("Invalid texture width\n");
+                prTrace(LogError, "prTexture: %s\n", Filename());
+                prTrace(LogError, "Invalid texture width\n");
             }
 
             // Size validation.
             if (!ValidateSize(m_height))
             {
-                prTrace("Texture: %s\n", Filename());
-                prTrace("Invalid texture height\n");
+                prTrace(LogError, "Texture: %s\n", Filename());
+                prTrace(LogError, "Invalid texture height\n");
             }
 #endif
 
@@ -281,7 +281,7 @@ void prTexture::Load(s32 extra)
             glGenTextures(1, &m_texID);
             if (glGetError() != GL_NO_ERROR)
             {
-                prTrace("Failed to generate texture: %s\n", Filename());
+                prTrace(LogError, "Failed to generate texture: %s\n", Filename());
                 prOpenGLErrorCheck(__FILE__, __FUNCTION__, __LINE__);
                 PRSAFE_DELETE_ARRAY(pTextureData);
                 PRSAFE_DELETE(file);
@@ -403,15 +403,15 @@ void prTexture::LoadFromMemory(void *pData, u32 size)
             // Size validation.
             if (!ValidateSize(m_width))
             {
-                prTrace("prTexture: %s\n", Filename());
-                prTrace("Invalid texture width\n");
+                prTrace(LogError, "prTexture: %s\n", Filename());
+                prTrace(LogError, "Invalid texture width\n");
             }
 
             // Size validation.
             if (!ValidateSize(m_height))
             {
-                prTrace("prTexture: %s\n", Filename());
-                prTrace("Invalid texture height\n");
+                prTrace(LogError, "prTexture: %s\n", Filename());
+                prTrace(LogError, "Invalid texture height\n");
             }
 #endif
 
@@ -419,7 +419,7 @@ void prTexture::LoadFromMemory(void *pData, u32 size)
             glGenTextures(1, &m_texID);
             if (glGetError() != GL_NO_ERROR)
             {
-                prTrace("Failed to generate texture: %s\n", Filename());
+                prTrace(LogError, "Failed to generate texture: %s\n", Filename());
                 m_width  = 0;
                 m_height = 0;
                 m_texID  = 0xFFFFFFFF;
@@ -502,15 +502,15 @@ void prTexture::LoadFromRaw(void *pData, u32 size, u32 width, u32 height)
         // Size validation.
         if (!ValidateSize(width))
         {
-            prTrace("prTexture: %s\n", Filename());
-            prTrace("Invalid texture width\n");
+            prTrace(LogError, "prTexture: %s\n", Filename());
+            prTrace(LogError, "Invalid texture width\n");
         }
 
         // Size validation.
         if (!ValidateSize(height))
         {
-            prTrace("prTexture: %s\n", Filename());
-            prTrace("Invalid texture height\n");
+            prTrace(LogError, "prTexture: %s\n", Filename());
+            prTrace(LogError, "Invalid texture height\n");
         }
 #endif
 
@@ -518,7 +518,7 @@ void prTexture::LoadFromRaw(void *pData, u32 size, u32 width, u32 height)
         glGenTextures(1, &m_texID);
         if (glGetError() != GL_NO_ERROR)
         {
-            prTrace("Failed to generate texture: %s\n", Filename());
+            prTrace(LogError, "Failed to generate texture: %s\n", Filename());
             m_width  = 0;
             m_height = 0;
             m_texID  = 0xFFFFFFFF;
@@ -707,7 +707,7 @@ bool prTexture::GetTextureFormat(u32 texFormat, int &internalFormat, int &format
     #endif
                 
     default:
-        prTrace("Unknown texture format: %08x\n", texFormat);
+        prTrace(LogError, "Unknown texture format: %08x\n", texFormat);
         result = false;
         break;
     }

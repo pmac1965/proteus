@@ -20,9 +20,10 @@
 #include "../prConfig.h"
 
 
-#include <stdarg.h>
-#include <stdio.h>
-#include <string.h>
+#include <cstdarg>
+#include <cstdio>
+#include <cstring>
+#include "prTrace.h"
 #include "prDebug.h"
 #include "../core/prCore.h"
 #include "../core/prCoreSystem.h"
@@ -35,8 +36,11 @@
 /// Defines
 /// ---------------------------------------------------------------------------
 #define MSG_BUFFER_SIZE     1024
-#define RPT_BUFFER_SIZE     256
+#define RPT_BUFFER_SIZE     128
 #define TRACE_LOG_NAME      "trace.txt"
+
+
+//#define TRACE_TEST
 
 
 /// ---------------------------------------------------------------------------
@@ -44,11 +48,21 @@
 /// ---------------------------------------------------------------------------
 namespace
 {
-    static bool enabled      = true;                    // Is logging enabled?
-    static bool duplicates   = false;                   // Remove duplicate error messages?
-    static int  outputted    = 0;                       // Specifies the number of unique messages output
-    static int  outputLength = 0;                       // Length of the previously output message
-    static char output[MSG_BUFFER_SIZE] = { '\0' };     // Buffer to store the previously output message
+#if (defined(_DEBUG) || defined(DEBUG))
+    bool        enabled         = true;             // Is logging enabled?
+    bool        duplicates      = true;             // Remove duplicate error messages?
+    prLogLevel  logLevel        = LogVerbose;       // Default log level
+
+#else
+    bool        enabled         = false;            // Is logging enabled?
+    bool        duplicates      = true;             // Remove duplicate error messages?
+    prLogLevel  logLevel        = LogError;         // Default log level
+
+#endif
+
+    int  outputted    = 0;                          // Specifies the number of unique messages output
+    int  outputLength = 0;                          // Length of the previously output message
+    char output[MSG_BUFFER_SIZE] = { '\0' };        // Buffer to store the previously output message
 }
 
 
@@ -96,72 +110,75 @@ void prTraceWriteToFile(bool repeat, const char *bufferRpt, const char *bufferMs
 /// ---------------------------------------------------------------------------
 /// Outputs a debug string.
 /// ---------------------------------------------------------------------------
-void prTrace(const char *fmt, ...)
+void prTrace(prLogLevel level, const char *fmt, ...)
 {
     if (enabled)
     {
         if (fmt && *fmt)
         {
-            char bufferMsg[MSG_BUFFER_SIZE];
-            char bufferRpt[RPT_BUFFER_SIZE];
-
-
-            // Format the output.
-            va_list args;
-            va_start(args, fmt);
-            vsnprintf(bufferMsg, MSG_BUFFER_SIZE - 1, fmt, args);
-            va_end(args);
-
-
-            // Duplicate removal?
-            bool repeat = false;
-            if (duplicates)
+            if (level >= logLevel)
             {
-                if (strcmp(bufferMsg, output) == 0)
+                char bufferMsg[MSG_BUFFER_SIZE];
+                char bufferRpt[RPT_BUFFER_SIZE];
+
+
+                // Format the output.
+                va_list args;
+                va_start(args, fmt);
+                vsnprintf(bufferMsg, MSG_BUFFER_SIZE - 1, fmt, args);
+                va_end(args);
+
+
+                // Duplicate removal?
+                bool repeat = false;
+                if (duplicates)
                 {
-                    outputted++;
-                    return;
+                    if (strcmp(bufferMsg, output) == 0)
+                    {
+                        outputted++;
+                        return;
+                    }
+                    else
+                    {
+                        repeat = (outputted > 0);
+
+                        if (repeat)
+                        {
+                            // I know this is pedantic, but this ensures that the repeat message always starts on a new line by checking
+                            // if the last character of the previous string was a carriage return.
+                            const char* msg = (outputLength == 0) ? "(Repeat x %i)\n" : output[outputLength - 1] == '\n' ? "(Repeat x %i)\n" :
+                                                                                                                           "\n(Repeat x %i)\n";
+
+                            sprintf(bufferRpt, msg, outputted + 1);
+                        }
+
+                        // Reset
+                        outputted = 0;
+
+                        // Store string.
+                        strcpy(output, bufferMsg);
+
+                        // Store length
+                        outputLength = (int)strlen(output);
+                    }
+                }
+
+
+                // Write to console.
+                if (repeat)
+                {
+                    prOutputString(bufferRpt);
+                    prOutputString(bufferMsg);
                 }
                 else
                 {
-                    repeat = (outputted > 0);
-
-                    if (repeat)
-                    {
-                        // I know this is pedantic, but this ensures that the repeat message always starts on a new line by checking
-                        // if the last character of the previous string was a carriage return.
-                        const char* msg = (outputLength == 0) ? "(Repeat x %i)\n" : output[outputLength - 1] == '\n' ? "(Repeat x %i)\n" :
-                                                                                                                       "\n(Repeat x %i)\n";
-
-                        sprintf(bufferRpt, msg, outputted + 1);
-                    }
-
-                    // Reset
-                    outputted = 0;
-
-                    // Store string.
-                    strcpy(output, bufferMsg);
-
-                    // Store length
-                    outputLength = (int)strlen(output);
+                    prOutputString(bufferMsg);
                 }
+
+
+                // Write to a file?
+                prTraceWriteToFile(repeat, bufferRpt, bufferMsg);
             }
-
-
-            // Write to console.=
-            if (repeat)
-            {
-                prOutputString(bufferRpt);
-                prOutputString(bufferMsg);
-            }
-            else
-            {
-                prOutputString(bufferMsg);
-            }
-
-
-            // Write to a file?
-            prTraceWriteToFile(repeat, bufferRpt, bufferMsg);
         }
     }
 }
@@ -199,4 +216,41 @@ void prTraceLogClear()
     }
 
 #endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Sets the trace log level
+/// ---------------------------------------------------------------------------
+void prTraceSetLogLevel(prLogLevel level)
+{
+    if (PRBETWEEN(level, LogVerbose, LogError))
+    {
+        logLevel = level;
+
+#ifdef TRACE_TEST
+        switch(logLevel)
+        {
+        case LogVerbose:
+            prOutputString("prTraceSetLogLevel: verbose\n");
+            break;
+
+        case LogDebug:
+            prOutputString("prTraceSetLogLevel: debug\n");
+            break;
+
+        case LogWarning:
+            prOutputString("prTraceSetLogLevel: warning\n");
+            break;
+
+        case LogInformation:
+            prOutputString("prTraceSetLogLevel: information\n");
+            break;
+
+        case LogError:
+            prOutputString("prTraceSetLogLevel: error\n");
+            break;
+        }
+#endif
+    }
 }

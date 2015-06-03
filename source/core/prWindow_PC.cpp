@@ -143,7 +143,7 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
     m_hdc = GetDC(m_hwnd);
     if (!m_hdc)
     {
-        prTrace("Failed to create device context.\n");
+        prTrace(LogError, "Failed to create device context.\n");
         prDebugShowLastError();
         Destroy();
         return false;
@@ -161,7 +161,7 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
     m_glrc = wglCreateContext(m_hdc);
     if (!m_glrc)
     {
-        prTrace("Couldn't create an OpenGL rendering context.\n");
+        prTrace(LogError, "Couldn't create an OpenGL rendering context.\n");
         prDebugShowLastError();
         Destroy();
         return false;
@@ -171,7 +171,7 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
     // Activate rendering context.
     if (!wglMakeCurrent(m_hdc, m_glrc))
     {
-        prTrace("Couldn't activate the OpenGL rendering context.\n");
+        prTrace(LogError, "Couldn't activate the OpenGL rendering context.\n");
         prDebugShowLastError();
         Destroy();
         return false;
@@ -193,23 +193,23 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
     GLenum err = glewInit();
     if (GLEW_OK != err)
     {
-        prTrace("GLEW: Failed to initialise\n");
-        prTrace("GLEW: Error: %s\n", glewGetErrorString(err));
+        prTrace(LogError, "GLEW: Failed to initialise\n");
+        prTrace(LogError, "GLEW: Error: %s\n", glewGetErrorString(err));
     }
     else
     {
-        prTrace("GLEW: Initialised\n");
-        prTrace("GLEW: Version: %s\n", glewGetString(GLEW_VERSION));
+        prTrace(LogError, "GLEW: Initialised\n");
+        prTrace(LogError, "GLEW: Version: %s\n", glewGetString(GLEW_VERSION));
 
 
         if (wglewIsSupported("WGL_EXT_swap_control"))
         {
-            prTrace("GLEW: 'Got WGL_EXT_swap_control'\n");
+            prTrace(LogError, "GLEW: 'Got WGL_EXT_swap_control'\n");
             wglSwapIntervalEXT(1);
         }
         else
         {
-            prTrace("GLEW: Failed to find 'WGL_EXT_swap_control'");
+            prTrace(LogError, "GLEW: Failed to find 'WGL_EXT_swap_control'");
         }
     }
 #endif
@@ -286,7 +286,7 @@ bool prWindow_PC::CreateTool(u32 width, u32 height, u32 menuID, u32 iconID, cons
     m_hdc = GetDC(m_hwnd);
     if (!m_hdc)
     {
-        prTrace("Failed to create device context.\n");
+        prTrace(LogError, "Failed to create device context.\n");
         prDebugShowLastError();
         Destroy();
         return false;
@@ -304,7 +304,7 @@ bool prWindow_PC::CreateTool(u32 width, u32 height, u32 menuID, u32 iconID, cons
     m_glrc = wglCreateContext(m_hdc);
     if (!m_glrc)
     {
-        prTrace("Couldn't create an OpenGL rendering context.\n");
+        prTrace(LogError, "Couldn't create an OpenGL rendering context.\n");
         prDebugShowLastError();
         Destroy();
         return false;
@@ -314,7 +314,7 @@ bool prWindow_PC::CreateTool(u32 width, u32 height, u32 menuID, u32 iconID, cons
     // Activate rendering context.
     if (!wglMakeCurrent(m_hdc, m_glrc))
     {
-        prTrace("Couldn't activate the OpenGL rendering context.\n");
+        prTrace(LogError, "Couldn't activate the OpenGL rendering context.\n");
         prDebugShowLastError();
         Destroy();
         return false;
@@ -356,14 +356,14 @@ void prWindow_PC::Destroy()
         // Make current render context null.
         if (!wglMakeCurrent(m_hdc, NULL))
         {
-            prTrace("Failed to release rendering context.\n");
+            prTrace(LogError, "Failed to release rendering context.\n");
             prDebugShowLastError();
         }
 
         // Delete render context
         if (!wglDeleteContext(m_glrc))
         {
-            prTrace("Failed to delete rendering context.\n");
+            prTrace(LogError, "Failed to delete rendering context.\n");
             prDebugShowLastError();
         }
     }
@@ -372,7 +372,7 @@ void prWindow_PC::Destroy()
     // Release device context.
     if (m_hdc && m_hwnd && !ReleaseDC(m_hwnd, m_hdc))
     {
-        prTrace("Failed to release device context.\n");
+        prTrace(LogError, "Failed to release device context.\n");
         prDebugShowLastError();
     }
 
@@ -392,7 +392,7 @@ void prWindow_PC::Destroy()
         {
             if (GetLastError() != 0)
             {
-                prTrace("Failed to remove user data.\n");
+                prTrace(LogError, "Failed to remove user data.\n");
                 prDebugShowLastError();
             }
         }
@@ -400,14 +400,14 @@ void prWindow_PC::Destroy()
         // Destroy the window.
         if (!DestroyWindow(m_hwnd))
         {
-            prTrace("Failed to destroy window.\n");
+            prTrace(LogError, "Failed to destroy window.\n");
             prDebugShowLastError();
         }
 
         // Unregister the class.
         if (!UnregisterClass(g_ClassName, GetModuleHandle(NULL)))
         {
-            prTrace("Failed to unregister the windows class.\n");
+            prTrace(LogError, "Failed to unregister the windows class.\n");
             prDebugShowLastError();
         }
     }
@@ -580,7 +580,7 @@ bool prWindow_PC::ChangeToFullScreen()
     // Try to set requested mode.  NOTE: CDS_FULLSCREEN gets rid of the start bar.
     if (ChangeDisplaySettings(&dmScreenSettings, CDS_FULLSCREEN) != DISP_CHANGE_SUCCESSFUL)
     {
-        prTrace("Display setting not supported.\n");
+        prTrace(LogError, "Display setting not supported.\n");
         return false;
     }
 
@@ -651,7 +651,7 @@ bool prWindow_PC::CreateOpenGLWindow(u32 menuID, u32 iconID)
     if (m_hwnd == NULL)
     {
         Destroy();
-        prTrace("Window creation failed.\n");
+        prTrace(LogError, "Window creation failed.\n");
         return false;
     }
     else
@@ -697,7 +697,7 @@ bool prWindow_PC::RegisterWindowClass(u32 menuID, u32 iconID)
 
     if (!RegisterClassEx(&wc))
     {
-        prTrace("Window Registration Failed.\n");
+        prTrace(LogError, "Window Registration Failed.\n");
         return false;
     }
 
@@ -738,7 +738,7 @@ bool prWindow_PC::SetOpenGLPixelFormat()
     if (pixelFormat == 0)
     {
         Destroy();
-        prTrace("Can't find a suitable pixel format.\n");
+        prTrace(LogError, "Can't find a suitable pixel format.\n");
         return false;
     }
 
@@ -747,7 +747,7 @@ bool prWindow_PC::SetOpenGLPixelFormat()
     if (SetPixelFormat(m_hdc, pixelFormat, &pfd) == false)
     {
         Destroy();
-        prTrace("Can't set the pixel format.\n");
+        prTrace(LogError, "Can't set the pixel format.\n");
         return false;
     }
 

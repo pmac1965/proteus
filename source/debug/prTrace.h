@@ -16,32 +16,49 @@
  */
 
 
-#ifndef __PRTRACE_H
-#define __PRTRACE_H
+#pragma once
 
 
-#if defined(_DEBUG) || defined(DEBUG)
+// Enum: prLogLevel
+//      The log levels are designed to limit the amount of information logged
+//
+//  - LogVerbose      - Verbose logs all messages. This is the lowest log level
+//  - LogDebug        - Logs messages of debug level or above
+//  - LogInformation  - Logs messages of information level or above
+//  - LogWarning      - Logs messages of warning level or above
+//  - LogError        - Logs messages of error level or above
+typedef enum prLogLevel
+{
+    LogVerbose,
+    LogDebug,
+    LogInformation,
+    LogWarning,
+    LogError
+
+} prLogLevel;
+
 
 // Function: prTrace 
 //      Outputs a debug string to an error log window.
 //      The actual location is platform dependant, but will generally be the debuggers output window.
 //
 // Notes:
-//      The release version of this function compiles to nothing.
+//      Use the macros versions for removeable logging.
 //
 // Parameters:
-//      fmt - The format string.
-//      ... - Format string parameters.
-void prTrace(const char* fmt, ...);
+//      level   - The log level.
+//      fmt     - The format string.
+//      ...     - Format string parameters.
+//
+// See Also:
+//      <prLogLevel>
+void prTrace(prLogLevel level, const char* fmt, ...);
 
 // Function: prTraceEnable 
 //      Allows tracing to be enabled/disabled. By default tracing is enabled
 //
 // Parameters:
 //      state - true or false.
-//
-// Notes:
-//      The release version of this function compiles to nothing.
 void prTraceEnable(bool state);
 
 // Function: prTraceRemoveDuplicates 
@@ -49,28 +66,92 @@ void prTraceEnable(bool state);
 //
 // Parameters:
 //      state - true or false.
-//
-// Notes:
-//      The release version of this function compiles to nothing.
 void prTraceRemoveDuplicates(bool state);
 
 // Function: prTraceLogClear 
 //      Deletes the old file log.
-//      *This function is called by the engine on startup. You do not need to call*
 //
 // Notes:
-//      The release version of this function compiles to nothing.
+//      This function is called by the engine on startup. You do not need to call
 void prTraceLogClear();
 
-#else
+// Function: prTraceSetLogLevel 
+//      Sets the trace log level
+void prTraceSetLogLevel(prLogLevel level);
 
-// Release versions compile to nothing
-#define prTrace(fmt, ...)
-#define prTraceEnable(state)
-#define prTraceRemoveDuplicates(state)
-#define prTraceLogClear()
+
+// Macro versions
+#if (defined(_DEBUG) || defined(DEBUG))
+    #if defined(PLATFORM_PC)
+        #define PRLOGV(msg, ...)        prTrace(LogVerbose,     msg, __VA_ARGS__)
+        #define PRLOGD(msg, ...)        prTrace(LogDebug,       msg, __VA_ARGS__)
+        #define PRLOGI(msg, ...)        prTrace(LogInformation, msg, __VA_ARGS__)
+        #define PRLOGW(msg, ...)        prTrace(LogWarning,     msg, __VA_ARGS__)
+        #define PRLOGE(msg, ...)        prTrace(LogError,       msg, __VA_ARGS__)
+
+    #elif defined(PLATFORM_ANDROID)
+        #define PRLOGV(msg, args...)    prTrace(LogVerbose,     msg, ## args)
+        #define PRLOGD(msg, args...)    prTrace(LogDebug,       msg, ## args)
+        #define PRLOGI(msg, args...)    prTrace(LogInformation, msg, ## args)
+        #define PRLOGW(msg, args...)    prTrace(LogWarning,     msg, ## args)
+        #define PRLOGE(msg, args...)    prTrace(LogError,       msg, ## args)
+
+    #endif
+
+#else
+    // Macro: PRLOGV(msg, ...)
+    //      Logs a verbose log level message
+    //
+    // Parameters:
+    //      msg - The format string.
+    //      ... - Format string parameters.
+    //
+    // See Also:
+    //      <prLogLevel>
+    #define PRLOGV(msg, ...)
+
+    // Macro: PRLOGD(msg, ...)
+    //      Logs a debug log level message
+    //
+    // Parameters:
+    //      msg - The format string.
+    //      ... - Format string parameters.
+    //
+    // See Also:
+    //      <prLogLevel>
+    #define PRLOGD(msg, ...)
+
+    // Macro: PRLOGI(msg, ...)
+    //      Logs an information log level message
+    //
+    // Parameters:
+    //      msg - The format string.
+    //      ... - Format string parameters.
+    //
+    // See Also:
+    //      <prLogLevel>
+    #define PRLOGI(msg, ...)
+
+    // Macro: PRLOGW(msg, ...)
+    //      Logs a warning log level message
+    //
+    // Parameters:
+    //      msg - The format string.
+    //      ... - Format string parameters.
+    //
+    // See Also:
+    //      <prLogLevel>
+    #define PRLOGW(msg, ...)
+
+    // Macro: PRLOGE(msg, ...)
+    //      Logs an error log level message
+    //
+    // Parameters:
+    //      msg - The format string.
+    //      ... - Format string parameters.
+    //
+    // See Also:
+    //      <prLogLevel>
+    #define PRLOGE(msg, ...)
 
 #endif
-
-
-#endif//__PRTRACE_H

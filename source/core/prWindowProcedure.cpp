@@ -536,7 +536,7 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
             break;
 
         default:
-            //prTrace("down: %c\n", wParam);
+            //prTrace(LogError, "down: %c\n", wParam);
             WindowMessage_InjectDown((u32)wParam);
             break;
         }

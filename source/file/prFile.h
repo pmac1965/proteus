@@ -37,7 +37,7 @@ public:
 
     // Method: prFile
     //      Ctor
-    prFile(const char *filename);
+    explicit prFile(const char *filename);
 
     // Method: ~prFile
     //      Dtor

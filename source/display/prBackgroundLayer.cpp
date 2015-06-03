@@ -98,8 +98,8 @@ prBackgroundLayer::prBackgroundLayer(s32 width, s32 height, s32 tileWidth, s32 t
     mTilesAcross        = pTexture->GetWidth()  / tileWidth;
     mTilesDown          = pTexture->GetHeight()  / tileWidth;
 
-    prTrace("prBackgroundLayer: Map:(%i, %i), Tile:(%i, %i), Tile count:(%i, %i)\n", width, height, tileWidth, tileHeight, mTilesAcross, mTilesDown);
-    prTrace("Map size         : %i\n", sizeof(s32) * (width * height));
+    prTrace(LogError, "prBackgroundLayer: Map:(%i, %i), Tile:(%i, %i), Tile count:(%i, %i)\n", width, height, tileWidth, tileHeight, mTilesAcross, mTilesDown);
+    prTrace(LogError, "Map size         : %i\n", sizeof(s32) * (width * height));
 
     memset(mMapData, -1, sizeof(s32) * (width * height));
 }
@@ -143,7 +143,7 @@ prBackgroundLayer::~prBackgroundLayer()
 //#if defined(ALLOW_INVALID_FRAME_WARNING)
 //    else
 //    {
-//        prTrace("Attempted to set an invalid sprite frame index %i. Texture: %s\n", frame, m_pTexture->Filename());
+//        prTrace(LogError, "Attempted to set an invalid sprite frame index %i. Texture: %s\n", frame, m_pTexture->Filename());
 //    }
 //#endif
 
@@ -224,8 +224,8 @@ void prBackgroundLayer::Draw()
 
                         pRenderer->DrawQuad(m_u0, m_v0, m_u1, m_v1, prColour::White);// m_colour);
 
-    //                    prTrace("Tile size %i, %i\n", mTileWidth , mTileHeight);
-    //                    prTrace("Tile %i, at (%i,  %i)\n", tile, mTileWidth * x, mTileHeight * y);
+    //                    prTrace(LogError, "Tile size %i, %i\n", mTileWidth , mTileHeight);
+    //                    prTrace(LogError, "Tile %i, at (%i,  %i)\n", tile, mTileWidth * x, mTileHeight * y);
                 
                         glPopMatrix();
                         ERR_CHECK();

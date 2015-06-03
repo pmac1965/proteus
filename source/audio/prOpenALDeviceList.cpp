@@ -63,7 +63,7 @@ prOpenALDeviceList::prOpenALDeviceList()
             ALCdevice *pDevice = alcOpenDevice(pDeviceList);
             if (pDevice) 
             {
-                prTrace("Audio device %i: %s, Default: %s - Sources %i\n", index, pDeviceList, PRBOOL_TO_STRING(m_defaultDeviceIndex == index), GetNumSources());
+                prTrace(LogError, "Audio device %i: %s, Default: %s - Sources %i\n", index, pDeviceList, PRBOOL_TO_STRING(m_defaultDeviceIndex == index), GetNumSources());
 
                 ALCcontext *pContext = alcCreateContext(pDevice, NULL);
                 if (pContext) 

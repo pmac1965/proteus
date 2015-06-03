@@ -79,14 +79,14 @@ int prLinuxCreateDisplay(unsigned int width, unsigned int height)
     display = XOpenDisplay(NULL);
     if (display == NULL)
     {
-        prTrace("could not open display\n");
+        prTrace(LogError, "could not open display\n");
         return result;
     }
 
     // Make sure OpenGL's GLX extension supported
     if (!glXQueryExtension(display, &dummy, &dummy))
     {
-        prTrace("X server has no OpenGL GLX extension\n");
+        prTrace(LogError, "X server has no OpenGL GLX extension\n");
         return result;
     }
 
@@ -97,7 +97,7 @@ int prLinuxCreateDisplay(unsigned int width, unsigned int height)
         vi = glXChooseVisual(display, DefaultScreen(display), singleBuf);
         if (vi == NULL)
         {
-            prTrace("no RGB visual with depth buffer\n");
+            prTrace(LogError, "no RGB visual with depth buffer\n");
             return result;
         }
         doubleBuffer = GL_FALSE;
@@ -106,7 +106,7 @@ int prLinuxCreateDisplay(unsigned int width, unsigned int height)
     // Test colour mode
     if (vi->class != TrueColor)
     {
-        prTrace("TrueColor visual required for this program\n");
+        prTrace(LogError, "TrueColor visual required for this program\n");
         return result;
     }
 
@@ -114,7 +114,7 @@ int prLinuxCreateDisplay(unsigned int width, unsigned int height)
     cx = glXCreateContext(display, vi, None, GL_TRUE);
     if (cx == NULL)
     {
-        prTrace("Could not create rendering context\n");
+        prTrace(LogError, "Could not create rendering context\n");
         return result;
     }
 

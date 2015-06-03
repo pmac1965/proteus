@@ -92,7 +92,7 @@ void prOpenGLInit()
         initialised = true;
 
         PRGL_VERSION = (f32)atof((const char *)glGetString(GL_VERSION));
-        prTrace("OpenGL version %f\n", PRGL_VERSION);
+        prTrace(LogError, "OpenGL version %f\n", PRGL_VERSION);
     }
 }
 
@@ -103,12 +103,12 @@ void prOpenGLInit()
 void prOpenGLShowExtensions()
 {
     // Show GL details
-    prTrace("OpenGL\n");
-    prTrace("------\n");
-    prTrace("Vendor  : %s\n", (const char *)glGetString(GL_VENDOR));
-    prTrace("Renderer: %s\n", (const char *)glGetString(GL_RENDERER));
-    prTrace("Version : %s\n", (const char *)glGetString(GL_VERSION));
-    prTrace("------\n");
+    prTrace(LogError, "OpenGL\n");
+    prTrace(LogError, "------\n");
+    prTrace(LogError, "Vendor  : %s\n", (const char *)glGetString(GL_VENDOR));
+    prTrace(LogError, "Renderer: %s\n", (const char *)glGetString(GL_RENDERER));
+    prTrace(LogError, "Version : %s\n", (const char *)glGetString(GL_VERSION));
+    prTrace(LogError, "------\n");
 
     // Show extensions.
     const char *extensions = (const char *)glGetString(GL_EXTENSIONS);
@@ -126,7 +126,7 @@ void prOpenGLShowExtensions()
             if (i > 0)
             {
                 i = 0;
-                prTrace("Extension: %s\n", buffer);
+                prTrace(LogError, "Extension: %s\n", buffer);
                 //OnScreenLogger::GetInstance()->Add(buffer);
             }
         }
@@ -140,7 +140,7 @@ void prOpenGLShowExtensions()
     }
     while(c != '\0');
 
-    prTrace("------\n");
+    prTrace(LogError, "------\n");
 }
 
 
@@ -245,8 +245,8 @@ void prOpenGLErrorCheck(const char *file, const char *func, int line)
             break;
         }
 
-        prTrace("prRenderer error: %s\n", err); 
-        prTrace("File: %s\nFunc: %s\nLine: %i\n", file, func, line);
+        prTrace(LogError, "prRenderer error: %s\n", err); 
+        prTrace(LogError, "File: %s\nFunc: %s\nLine: %i\n", file, func, line);
     }
 
 #else

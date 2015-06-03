@@ -149,13 +149,13 @@ public:
 		mDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
         if (mDisplay ==  EGL_NO_DISPLAY)
         {
-            prTrace("EGL: No display\n");
+            prTrace(LogError, "EGL: No display\n");
             return;
         }
 
         // Initialise
 		eglInitialize(mDisplay, &majorVersion, &minorVersion);
-        prTrace("EGL VER %i, %i\n", majorVersion, minorVersion);
+        prTrace(LogError, "EGL VER %i, %i\n", majorVersion, minorVersion);
 
 
 		/* Here, the application chooses the configuration it desires. In this

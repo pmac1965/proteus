@@ -165,7 +165,7 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
 
 
     prStringReplaceChar(dataPath, '\\', '/');
-    prTrace("App data path: %s\n", dataPath);
+    prTrace(LogError, "App data path: %s\n", dataPath);
 }
 
 
@@ -282,12 +282,12 @@ void prFileManager::RegisterArchive(const char *filename)
                                 }
 
                                 #if defined(FILEMANAGER_DEBUG)
-                                prTrace("Found archive: %s\n", filenameArc);
+                                prTrace(LogError, "Found archive: %s\n", filenameArc);
                                 for(u32 i=0; i<header.entries; i++)
                                 {
                                     prArcEntry *pE = pEntries[idx];
                                     pE += i;
-                                    prTrace("File: %s - %x - %s - %s\n", pE->filename, pE->hash, PRBOOL_TO_STRING(pE->accessed), PRBOOL_TO_STRING(pE->exp1));
+                                    prTrace(LogError, "File: %s - %x - %s - %s\n", pE->filename, pE->hash, PRBOOL_TO_STRING(pE->accessed), PRBOOL_TO_STRING(pE->exp1));
                                 }
                                 #endif
                             }
@@ -322,7 +322,7 @@ void prFileManager::RegisterArchive(const char *filename)
         }
         else
         {
-            prTrace("Failed to locate: %s\n", filenameArc);
+            prTrace(LogError, "Failed to locate: %s\n", filenameArc);
         }
 
         PRSAFE_DELETE(fileArc);
@@ -346,7 +346,7 @@ void prFileManager::RegisterArchive(const char *filename)
         }
         else
         {
-            prTrace("Opened APK: %s\n", APKPath);
+            prTrace(LogError, "Opened APK: %s\n", APKPath);
         }
 
         // Print the APK's contents
@@ -361,7 +361,7 @@ void prFileManager::RegisterArchive(const char *filename)
                 {
                     PRPANIC("Error reading zip file name at index %i : %s", i, zip_strerror(APKArchive));
                 }
-                prTrace("File %i, %s\n", i, name);
+                prTrace(LogError, "File %i, %s\n", i, name);
             }
         }
         #endif
@@ -509,7 +509,7 @@ bool prFileManager::Exists(const char *filename, u32 &size)
     bool result = Exists(hash, size);
     if (!result)
     {
-        prTrace("Failed to find file in archive: %s\n", filename);
+        prTrace(LogError, "Failed to find file in archive: %s\n", filename);
     }
 
 #else
@@ -526,18 +526,18 @@ bool prFileManager::Exists(const char *filename, u32 &size)
             zip_fclose(file);
 
             #if defined(ANDROID_APK_DEBUG)
-            prTrace("Size %i -> %s\n", file->bytes_left, GetSystemPath(filename));
-            prTrace("Compressed size %i\n", file->cbytes_left);
+            prTrace(LogError, "Size %i -> %s\n", file->bytes_left, GetSystemPath(filename));
+            prTrace(LogError, "Compressed size %i\n", file->cbytes_left);
             #endif
         }
         else
         {
-            prTrace("Exists: Failed to open file: %s\n", GetSystemPath(filename));
+            prTrace(LogError, "Exists: Failed to open file: %s\n", GetSystemPath(filename));
         }
     }
     else
     {
-        prTrace("Exist test: No archive\n");
+        prTrace(LogError, "Exist test: No archive\n");
     }
 
 #endif
@@ -591,7 +591,7 @@ u32 prFileManager::Read(u8 *pDataBuffer, u32 size, u32 hash)
 
     // Mark as accessed!
     pEntry->accessed = true;
-    //prTrace("Accessed '%s'\n", pEntry->filename);
+    //prTrace(LogError, "Accessed '%s'\n", pEntry->filename);
 
     if (pEntry->compressed)
     {
@@ -647,7 +647,7 @@ void prFileManager::DisplayFiles(bool accessed)
     {
         if (pArchiveFile[i] && pEntries[i])
         {
-            prTrace("Archive %i\n", i);
+            prTrace(LogError, "Archive %i\n", i);
 
             u32 count = entryCount[i];
             if (count)
@@ -658,7 +658,7 @@ void prFileManager::DisplayFiles(bool accessed)
                 {
                     if (static_cast<u8>(accessed) == entry->accessed)
                     {
-                        prTrace("File %i of %i : '%s' - %s\n", j, count, entry->filename, PRBOOL_TO_STRING(entry->accessed));
+                        prTrace(LogError, "File %i of %i : '%s' - %s\n", j, count, entry->filename, PRBOOL_TO_STRING(entry->accessed));
                     }
 
                     entry++;
@@ -695,7 +695,7 @@ bool prFileManager::Exists(u32 hash, u32 &size)
             while(lower <= upper)
             {
                 s32 mid = (lower + upper) / 2;
-                //prTrace("%i %i %i\n", lower, upper, mid);
+                //prTrace(LogError, "%i %i %i\n", lower, upper, mid);
 
                 // Get mid entry
                 prArcEntry *pEntry = pStart;
@@ -716,7 +716,7 @@ bool prFileManager::Exists(u32 hash, u32 &size)
                     result   = true;
                     size     = pEntry->filesize;
                     filehash = hash;
-                    //prTrace("Found in archive: %s\n", pEntry->filename);
+                    //prTrace(LogError, "Found in archive: %s\n", pEntry->filename);
                     break;
                 }
             }
@@ -751,17 +751,17 @@ u32 prFileManager::Read(u8 *pDataBuffer, u32 size, const char *filename)
         {
             if (size != file->bytes_left)
             {
-                prTrace("size not match");
+                prTrace(LogError, "size not match");
             }
 
             filesize = file->bytes_left;
             zip_fread(file, pDataBuffer, size);
             zip_fclose(file);
-            prTrace("AND: Loaded file: %s\n", GetSystemPath(filename));
+            prTrace(LogError, "AND: Loaded file: %s\n", GetSystemPath(filename));
         }
         else
         {
-            prTrace("Read: Failed to open file: %s\n", GetSystemPath(filename));
+            prTrace(LogError, "Read: Failed to open file: %s\n", GetSystemPath(filename));
         }
     }
 

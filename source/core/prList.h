@@ -72,7 +72,7 @@ public:
 
         // Method: prNode
         //      Constructor
-        prNode(T a) : item(a)
+        explicit prNode(T a) : item(a)
         {
             prev = 0;
             next = 0;

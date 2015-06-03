@@ -45,7 +45,7 @@ public:
     //
     // Parameters:
     //      text - The string to set
-    prString(const char *text);
+    explicit prString(const char *text);
 
     // Method: prString
     //      Copy construtor

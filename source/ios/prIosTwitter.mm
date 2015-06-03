@@ -87,7 +87,7 @@ static prIOSTwitter *sharedHelper = nil;
 {
     if ((self = [super init]))
     {
-        prTrace("Construct prIOStwitter\n");
+        prTrace(LogError, "Construct prIOStwitter\n");
     }
     
     return self;

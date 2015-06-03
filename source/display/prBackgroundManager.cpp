@@ -125,18 +125,18 @@ void prBackgroundManager::DisplayUsage()
 {
 #if defined(_DEBUG) || defined(DEBUG)
 
-    prTrace("\nBackground Manager: =============================================================\n");
+    prTrace(LogError, "\nBackground Manager: =============================================================\n");
 
     for (s32 i=0; i<MAX_BACKGROUNDS; i++)
     {
         if (backgrounds[i])
         {
-            prTrace("Slot %i occupied: W: %i, H: %i\n", i, backgrounds[i]->GetWidth(),
+            prTrace(LogError, "Slot %i occupied: W: %i, H: %i\n", i, backgrounds[i]->GetWidth(),
                                                            backgrounds[i]->GetHeight());
         }
         else
         {
-            prTrace("Slot %i unoccupied\n", i);
+            prTrace(LogError, "Slot %i unoccupied\n", i);
         }
     }
 

@@ -330,7 +330,7 @@ void prSprite::AddSequence(prSpriteAnimationSequence* sequence, const char *name
     TODO("Remove name param");
     if (m_animation == NULL)
     {
-        //prTrace("Add sequence: '%s' to '%s'\n", name, Name());
+        //prTrace(LogError, "Add sequence: '%s' to '%s'\n", name, Name());
         m_animation = new prSpriteAnimation(this);
         m_animated  = true;
     }
@@ -376,7 +376,7 @@ void prSprite::SetFrame(s32 frame)
 #if defined(ALLOW_INVALID_FRAME_WARNING)
     else
     {
-        prTrace("Attempted to set an invalid sprite frame index %i. Texture: %s\n", frame, m_pTexture->Filename());
+        prTrace(LogError, "Attempted to set an invalid sprite frame index %i. Texture: %s\n", frame, m_pTexture->Filename());
     }
 #endif
 }

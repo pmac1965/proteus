@@ -48,7 +48,7 @@ namespace
 void prFB_Initialise(prFacebookCallbacks *pCallback)
 {
     #if defined(DEBUG_FACEBOOK)
-    prTrace("Facebook::Initalise\n");
+    prTrace(LogError, "Facebook::Initalise\n");
     #endif
     
     if (pCallback)
@@ -64,7 +64,7 @@ void prFB_Initialise(prFacebookCallbacks *pCallback)
 void prFB_OpenSession(prFacebookCallbacks *pCallback, bool &mIsLoggedIn)
 {
     #if defined(DEBUG_FACEBOOK)
-    prTrace("(1): Facebook::OpenSession\n");
+    prTrace(LogError, "(1): Facebook::OpenSession\n");
     #endif
     
     NSArray *permissions = [[NSArray alloc] initWithObjects:
@@ -75,7 +75,7 @@ void prFB_OpenSession(prFacebookCallbacks *pCallback, bool &mIsLoggedIn)
     [FBSession openActiveSessionWithReadPermissions:permissions allowLoginUI:false completionHandler:^(FBSession *session, FBSessionState status, NSError *error)
     {
         #if defined(DEBUG_FACEBOOK)
-        prTrace("(2): Facebook::OpenSession\n");
+        prTrace(LogError, "(2): Facebook::OpenSession\n");
         #endif
 
         // Error?
@@ -91,7 +91,7 @@ void prFB_OpenSession(prFacebookCallbacks *pCallback, bool &mIsLoggedIn)
             mIsLoggedIn = false;
 
             #if defined(DEBUG_FACEBOOK)
-            prTrace("(4) Facebook::OpenSession\n");
+            prTrace(LogError, "(4) Facebook::OpenSession\n");
             #endif
 
             if (pCallback)
@@ -104,7 +104,7 @@ void prFB_OpenSession(prFacebookCallbacks *pCallback, bool &mIsLoggedIn)
             mIsLoggedIn = true;
             
             #if defined(DEBUG_FACEBOOK)
-            prTrace("(3) Facebook::OpenSession\n");
+            prTrace(LogError, "(3) Facebook::OpenSession\n");
             #endif
             
             if (pCallback)
@@ -122,7 +122,7 @@ void prFB_OpenSession(prFacebookCallbacks *pCallback, bool &mIsLoggedIn)
 void prFB_Login(prFacebookCallbacks *pCallback, bool &mIsLoggedIn)
 {
     #if defined(DEBUG_FACEBOOK)
-    prTrace("(1) Facebook::Login()\n");
+    prTrace(LogError, "(1) Facebook::Login()\n");
     #endif
     
     
@@ -134,7 +134,7 @@ void prFB_Login(prFacebookCallbacks *pCallback, bool &mIsLoggedIn)
      [FBSession openActiveSessionWithReadPermissions:permissions allowLoginUI:true completionHandler:^(FBSession *session, FBSessionState status, NSError *error)
      {
         #if defined(DEBUG_FACEBOOK)
-        prTrace("(2) Facebook::Login()\n");
+        prTrace(LogError, "(2) Facebook::Login()\n");
         #endif
          
         // Did something go wrong during login? I.e. did the user cancel?
@@ -147,7 +147,7 @@ void prFB_Login(prFacebookCallbacks *pCallback, bool &mIsLoggedIn)
             CreateNewSession();
              
             #if defined(DEBUG_FACEBOOK)
-            prTrace("(3) Facebook::Login()\n");
+            prTrace(LogError, "(3) Facebook::Login()\n");
             #endif
             
             mIsLoggedIn = false;
@@ -160,7 +160,7 @@ void prFB_Login(prFacebookCallbacks *pCallback, bool &mIsLoggedIn)
         else
         {
             #if defined(DEBUG_FACEBOOK)
-            prTrace("(4) Facebook::Login()\n");
+            prTrace(LogError, "(4) Facebook::Login()\n");
             #endif
             
             mIsLoggedIn = true;
@@ -182,7 +182,7 @@ void prFB_Login(prFacebookCallbacks *pCallback, bool &mIsLoggedIn)
 void prFB_FetchUserDetails(prFacebookCallbacks *pCallback, prFacebook_Ios *pFacebook)
 {
     #if defined(DEBUG_FACEBOOK)
-    prTrace("(1) prFB_FetchUserDetails\n");
+    prTrace(LogError, "(1) prFB_FetchUserDetails\n");
     #endif
     
     // Start the facebook request
@@ -194,7 +194,7 @@ void prFB_FetchUserDetails(prFacebookCallbacks *pCallback, prFacebook_Ios *pFace
          if (!error && result)
          {
             #if defined(DEBUG_FACEBOOK)
-            prTrace("(2) prFB_FetchUserDetails\n");
+            prTrace(LogError, "(2) prFB_FetchUserDetails\n");
             #endif
              
             // Extract out the player's Facebook ID and first name
@@ -208,7 +208,7 @@ void prFB_FetchUserDetails(prFacebookCallbacks *pCallback, prFacebook_Ios *pFace
          else
          {
             #if defined(DEBUG_FACEBOOK)
-            prTrace("(3) prFB_FetchUserDetails\n");
+            prTrace(LogError, "(3) prFB_FetchUserDetails\n");
             #endif
             
             if (pCallback)
@@ -226,7 +226,7 @@ void prFB_FetchUserDetails(prFacebookCallbacks *pCallback, prFacebook_Ios *pFace
 void prFB_Brag(prFacebookCallbacks *pCallback, u64 fbid)
 {
     #if defined(DEBUG_FACEBOOK)
-    prTrace("(1): Facebook::Brag\n");
+    prTrace(LogError, "(1): Facebook::Brag\n");
     #endif
     
     // This function will invoke the Feed Dialog to post to a user's Timeline and News Feed
@@ -244,7 +244,7 @@ void prFB_Brag(prFacebookCallbacks *pCallback, u64 fbid)
     if ([FBDialogs canPresentShareDialogWithParams:shareParams])
     {
         #if defined(DEBUG_FACEBOOK)
-        prTrace("(2): Facebook::Brag\n");
+        prTrace(LogError, "(2): Facebook::Brag\n");
         #endif
         
         [FBDialogs presentShareDialogWithParams:shareParams
@@ -258,7 +258,7 @@ void prFB_Brag(prFacebookCallbacks *pCallback, u64 fbid)
                                             
                                             if (error)
                                             {
-                                                prTrace("Error publishing story\n");
+                                                prTrace(LogError, "Error publishing story\n");
                                                 // Error publishing story
                                                 if (pCallback)
                                                 {
@@ -267,7 +267,7 @@ void prFB_Brag(prFacebookCallbacks *pCallback, u64 fbid)
                                             }
                                             else if (results[@"completionGesture"] && [results[@"completionGesture"] isEqualToString:@"cancel"])
                                             {
-                                                prTrace("User cancelled publishing story\n");
+                                                prTrace(LogError, "User cancelled publishing story\n");
                                                 // User canceled story publishing
                                                 if (pCallback)
                                                 {
@@ -276,7 +276,7 @@ void prFB_Brag(prFacebookCallbacks *pCallback, u64 fbid)
                                             }
                                             else
                                             {
-                                                prTrace("Story published\n");
+                                                prTrace(LogError, "Story published\n");
                                                 // Story published
                                                 if (pCallback)
                                                 {
@@ -289,7 +289,7 @@ void prFB_Brag(prFacebookCallbacks *pCallback, u64 fbid)
     else
     {
         #if defined(DEBUG_FACEBOOK)
-        prTrace("(3): Facebook::Brag\n");
+        prTrace(LogError, "(3): Facebook::Brag\n");
         #endif
         
         // Prepare the web dialog parameters
@@ -306,7 +306,7 @@ void prFB_Brag(prFacebookCallbacks *pCallback, u64 fbid)
          {
              if (error)
              {
-                 prTrace("Error publishing story\n");
+                 prTrace(LogError, "Error publishing story\n");
                  // Error publishing story
                  if (pCallback)
                  {
@@ -317,7 +317,7 @@ void prFB_Brag(prFacebookCallbacks *pCallback, u64 fbid)
              {
                  if (result == FBWebDialogResultDialogNotCompleted)
                  {
-                     prTrace("User cancelled publishing story\n");
+                     prTrace(LogError, "User cancelled publishing story\n");
                      // User canceled story publishing
                      if (pCallback)
                      {
@@ -326,7 +326,7 @@ void prFB_Brag(prFacebookCallbacks *pCallback, u64 fbid)
                  }
                  else
                  {
-                     prTrace("Story published\n");
+                     prTrace(LogError, "Story published\n");
                      // Story published
                      if (pCallback)
                      {

@@ -32,7 +32,7 @@ using namespace Proteus::Core;
 /// ---------------------------------------------------------------------------
 prEmitter::prEmitter(s32 id, const prEmitterDefinition &ed) : mID(id)
 {
-    prTrace("prEmitter::prEmitter - %i\n", mID);
+    prTrace(LogError, "prEmitter::prEmitter - %i\n", mID);
 
     pEffects = NULL;
     mAlive   = true;
@@ -51,7 +51,7 @@ prEmitter::prEmitter(s32 id, const prEmitterDefinition &ed) : mID(id)
 /// ---------------------------------------------------------------------------
 prEmitter::~prEmitter()
 {
-    prTrace("prEmitter::~prEmitter - %i\n", mID);
+    prTrace(LogError, "prEmitter::~prEmitter - %i\n", mID);
 
     PRSAFE_DELETE(pEffects);
 }

@@ -68,9 +68,9 @@ namespace Proteus
 // The achievement status.
 typedef struct prAchievementStatus
 {
-    Proteus::Core::s32     state;               // State
-    Proteus::Core::u32     hash;                // Hash
-    Proteus::Core::u32     count;               // Count
+    Proteus::Core::s32  state;                  // State
+    Proteus::Core::u32  hash;                   // Hash
+    Proteus::Core::u32  count;                  // Count
 
 } prAchievementStatus;
 
@@ -93,7 +93,7 @@ class prAchievementManager : public prIoResultCallback
 public:
     // Method: prAchievementManager
     //      Ctor
-    prAchievementManager(const char *folder);
+    explicit prAchievementManager(const char *folder);
 
     // Method: ~prAchievementManager
     //      Dtor

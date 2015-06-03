@@ -125,7 +125,7 @@ bool prSoundManager_Ios::Initialise()
             alcMakeContextCurrent(context);
             if (ALC_ErrorCheck(device) != ALC_NO_ERROR)
             {
-                prTrace("Failed to make OpenAL context current\n");
+                prTrace(LogError, "Failed to make OpenAL context current\n");
             }
 
             result = true;
@@ -149,7 +149,7 @@ bool prSoundManager_Ios::Initialise()
         }
         else
         {
-            prTrace("Failed to create OpenAL context\n");
+            prTrace(LogError, "Failed to create OpenAL context\n");
             alcCloseDevice(device);
             context = NULL;
             device  = NULL;
@@ -157,7 +157,7 @@ bool prSoundManager_Ios::Initialise()
     }
     else
     {
-        prTrace("Failed to open default OpenAL device\n");
+        prTrace(LogError, "Failed to open default OpenAL device\n");
     }
 
     initialised = result;
@@ -284,7 +284,7 @@ void prSoundManager_Ios::LoadSFX(const prSFXInfo *sfx, s32 count)
     // Called twice?
     if (pLoadedWaves)
     {
-        prTrace("Attempted to load sfx twice\n");
+        prTrace(LogError, "Attempted to load sfx twice\n");
         return;
     }
     
@@ -318,8 +318,8 @@ void prSoundManager_Ios::LoadSFX(const prSFXInfo *sfx, s32 count)
             }
             else
             {
-                prTrace("Failed to load %s\n", sfx[i].filename);
-                prTrace("If the file is not missing, then check .wav format. Should be PCM\n");
+                prTrace(LogError, "Failed to load %s\n", sfx[i].filename);
+                prTrace(LogError, "If the file is not missing, then check .wav format. Should be PCM\n");
             }
         }
     }
@@ -347,7 +347,7 @@ void prSoundManager_Ios::SongPlayByName(const char *filename)
     s32 hash = prStringHash(filename);
     if (hash == songCurr)
     {
-        prTrace("No replay song\n");
+        prTrace(LogError, "No replay song\n");
         return;
     }
     
@@ -369,7 +369,7 @@ void prSoundManager_Ios::SongPlayByName(const char *filename)
 
     if (index == -1)
     {
-        prTrace("Failed to find registered music track %s\n", filename);
+        prTrace(LogError, "Failed to find registered music track %s\n", filename);
         return;
     }
     
@@ -403,7 +403,7 @@ void prSoundManager_Ios::SongPlayByName(const char *filename)
     s32 i = prStringFindLastIndex(ios_filename, '.');
     if (i == -1)
     {
-        prTrace("prSoundManager_Ios: Invalid audio filename.\n");
+        prTrace(LogError, "prSoundManager_Ios: Invalid audio filename.\n");
         return;
     }        
     ios_filename[i] = '\0';        
@@ -417,7 +417,7 @@ void prSoundManager_Ios::SongPlayByName(const char *filename)
     
     prIosSongPlay(&ios_filename[idx]);
     SongSetVolume(1.0f);
-    prTrace("IOS: Playing song: %s\n", &ios_filename[idx]);
+    prTrace(LogError, "IOS: Playing song: %s\n", &ios_filename[idx]);
 
 #else
     
@@ -478,7 +478,7 @@ void prSoundManager_Ios::SongPause(bool pause)
                         prIosSongPause(pause);
                         
                         // Remove context
-                        prTrace("Remove context\n");
+                        prTrace(LogError, "Remove context\n");
                         alcMakeContextCurrent(NULL);
                     }
                 }
@@ -490,7 +490,7 @@ void prSoundManager_Ios::SongPause(bool pause)
                         prIosSongPause(pause);
                         
                         // Restore context
-                        prTrace("Restore context\n");
+                        prTrace(LogError, "Restore context\n");
                         alcMakeContextCurrent(context);
                     }
                 }
@@ -557,7 +557,7 @@ void prSoundManager_Ios::SongSetVolume(f32 volume)
                 }
                 else
                 {
-                    prTrace("Tried to set the volume of a paused song.\n");
+                    prTrace(LogError, "Tried to set the volume of a paused song.\n");
                 }
             }
         }
@@ -1060,7 +1060,7 @@ void prSoundManager_Ios::SFXSetPosition(const char *name, f32 x, f32 y, f32 z)
 /*void prSoundManager_Ios::DisplayUsage() const
 {
 #ifdef SOUND_ALLOW
-    prTrace("Stubbed call\n");
+    prTrace(LogError, "Stubbed call\n");
 #endif
 }*/
 

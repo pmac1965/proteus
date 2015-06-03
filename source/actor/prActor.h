@@ -57,7 +57,7 @@ public:
 
     // Method: prActor
     //      Ctor
-    prActor(Proteus::Core::s32 type);
+    explicit prActor(Proteus::Core::s32 type);
 
     // Method: ~prActor
     //      Dtor

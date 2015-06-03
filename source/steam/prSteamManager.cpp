@@ -220,5 +220,5 @@ void prSteamManager::Deinitialise()
 
 #endif
 
-    prTrace("prSteamManager::Deinitialise()\n");
+    prTrace(LogError, "prSteamManager::Deinitialise()\n");
 }

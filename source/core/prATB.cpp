@@ -46,7 +46,7 @@ void prATBInit()
         int res = TwInit(TW_OPENGL, NULL);
         if (res == 0)
         {
-            prTrace("prATBInit error: %i\n", TwGetLastError());
+            prTrace(LogError, "prATBInit error: %i\n", TwGetLastError());
             return;
         }
 

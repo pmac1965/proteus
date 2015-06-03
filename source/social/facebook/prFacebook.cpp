@@ -67,6 +67,6 @@ void prFacebook::SetDetails(const char *name, u64 fbid)
         mPlayerName.Set(name);
     }
 
-    prTrace("FB SetDetails: %s\n", mPlayerName.Text());
-    prTrace("FB SetDetails: %llu\n", fbid);
+    prTrace(LogError, "FB SetDetails: %s\n", mPlayerName.Text());
+    prTrace(LogError, "FB SetDetails: %llu\n", fbid);
 }

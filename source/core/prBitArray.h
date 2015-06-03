@@ -30,7 +30,7 @@ class prBitArray
 public:
     // Method: prBitArray
     //      Constructor.
-    prBitArray(Proteus::Core::s32 bitCount);
+    explicit prBitArray(Proteus::Core::s32 bitCount);
 
     // Method: ~prBitArray
     //      Destructor.

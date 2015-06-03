@@ -37,7 +37,7 @@ namespace
         int argc = lua_gettop(lua);
         if (argc == 0)
         {
-            prTrace("lua error - trace has no parameters\n");
+            prTrace(LogError, "lua error - trace has no parameters\n");
             return 0;
         }
 
@@ -46,29 +46,29 @@ namespace
             switch(lua_type(lua, i))
             {
             case LUA_TNIL:
-                prTrace("nil");
+                prTrace(LogError, "nil");
                 break;
 
             case LUA_TBOOLEAN:
                 {
-                    prTrace("%s", (lua_toboolean(lua, i) == 1) ? "true" : "false");
+                    prTrace(LogError, "%s", (lua_toboolean(lua, i) == 1) ? "true" : "false");
                 }
                 break;
 
             case LUA_TNUMBER:
                 {
-                    prTrace("%s", lua_tostring(lua, i));
+                    prTrace(LogError, "%s", lua_tostring(lua, i));
                 }
                 break;
 
             case LUA_TSTRING:
                 {
-                    prTrace("%s", lua_tostring(lua, i));
+                    prTrace(LogError, "%s", lua_tostring(lua, i));
                 }
                 break;
 
             default:
-                prTrace("%s", lua_typename(lua, i));
+                prTrace(LogError, "%s", lua_typename(lua, i));
                 break;
             }
         }

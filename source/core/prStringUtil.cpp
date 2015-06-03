@@ -1141,7 +1141,7 @@ s32 prStringExtractUtf8(const char *string, s32 &extracted)
     }
     else
     {
-        prTrace("Failed to decode utf8 character\n");
+        prTrace(LogError, "Failed to decode utf8 character\n");
     }
 
     return adjust;

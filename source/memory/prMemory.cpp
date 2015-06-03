@@ -84,9 +84,9 @@ void prMemoryFill8(void *addr, u32 size, u8 data)
 
 
     #ifdef DEBUG_MEMORY_FUNCTIONS
-    prTrace("--------------------------\n");
-    prTrace("Fill 8\n");
-    prTrace("--------------------------\n");
+    prTrace(LogError, "--------------------------\n");
+    prTrace(LogError, "Fill 8\n");
+    prTrace(LogError, "--------------------------\n");
     #endif
 
 
@@ -96,7 +96,7 @@ void prMemoryFill8(void *addr, u32 size, u8 data)
     for (u32 i=0; i<size; i++)
     {
         #ifdef DEBUG_MEMORY_FUNCTIONS
-        prTrace("%x = %i\n", ptr, data);
+        prTrace(LogError, "%x = %i\n", ptr, data);
         #endif
 
         *(ptr++) = data;
@@ -104,8 +104,8 @@ void prMemoryFill8(void *addr, u32 size, u8 data)
 
 
     #ifdef DEBUG_MEMORY_FUNCTIONS
-    prTrace("--------------------------\n");
-    prTrace("\n");
+    prTrace(LogError, "--------------------------\n");
+    prTrace(LogError, "\n");
     #endif
 }
 
@@ -121,9 +121,9 @@ void prMemoryFill16(void *addr, u32 size, u16 data)
 
 
     #ifdef DEBUG_MEMORY_FUNCTIONS
-    prTrace("--------------------------\n");
-    prTrace("Fill 16\n");
-    prTrace("--------------------------\n");
+    prTrace(LogError, "--------------------------\n");
+    prTrace(LogError, "Fill 16\n");
+    prTrace(LogError, "--------------------------\n");
     #endif
 
 
@@ -133,7 +133,7 @@ void prMemoryFill16(void *addr, u32 size, u16 data)
     for (u32 i=0; i<size; i += 2)
     {
         #ifdef DEBUG_MEMORY_FUNCTIONS
-        prTrace("%x = %i\n", ptr, data);
+        prTrace(LogError, "%x = %i\n", ptr, data);
         #endif
 
         *(ptr++) = data;
@@ -141,8 +141,8 @@ void prMemoryFill16(void *addr, u32 size, u16 data)
 
 
     #ifdef DEBUG_MEMORY_FUNCTIONS
-    prTrace("--------------------------\n");
-    prTrace("\n");
+    prTrace(LogError, "--------------------------\n");
+    prTrace(LogError, "\n");
     #endif
 }
 
@@ -158,9 +158,9 @@ void prMemoryFill32(void *addr, u32 size, u32 data)
 
 
     #ifdef DEBUG_MEMORY_FUNCTIONS
-    prTrace("--------------------------\n");
-    prTrace("Fill 32\n");
-    prTrace("--------------------------\n");
+    prTrace(LogError, "--------------------------\n");
+    prTrace(LogError, "Fill 32\n");
+    prTrace(LogError, "--------------------------\n");
     #endif
 
 
@@ -170,7 +170,7 @@ void prMemoryFill32(void *addr, u32 size, u32 data)
     for (u32 i=0; i<size; i += 4)
     {
         #ifdef DEBUG_MEMORY_FUNCTIONS
-        prTrace("%x = %i\n", ptr, data);
+        prTrace(LogError, "%x = %i\n", ptr, data);
         #endif
 
         *(ptr++) = data;
@@ -178,7 +178,7 @@ void prMemoryFill32(void *addr, u32 size, u32 data)
 
 
     #ifdef DEBUG_MEMORY_FUNCTIONS
-    prTrace("--------------------------\n");
-    prTrace("\n");
+    prTrace(LogError, "--------------------------\n");
+    prTrace(LogError, "\n");
     #endif
 }

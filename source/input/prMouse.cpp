@@ -131,7 +131,7 @@ void prMouse::Update()
         }
     }
 
-    //prTrace("prMouse: %i %i %i %i %i\n", x, y, m_buttonsPressed, m_buttonsReleased, m_buttonsDown);
+    //prTrace(LogError, "prMouse: %i %i %i %i %i\n", x, y, m_buttonsPressed, m_buttonsReleased, m_buttonsDown);
 }
 
 
