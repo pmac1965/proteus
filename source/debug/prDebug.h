@@ -16,16 +16,19 @@
  */
 
 
-#ifndef __PRDEBUG_H
-#define __PRDEBUG_H
+#pragma once
 
 
 #include "../prConfig.h"
 #include "../core/prMacros.h"
+#include "prTrace.h"
 
 
 // Method: prDebugShowLastError
 //      Displays the last *windows* error message.
+//
+// Parameters:
+//      msg - An optional text message to explain issue
 //
 // Notes:
 //      Compiles on other platforms, but does nothing.
@@ -35,19 +38,22 @@ void prDebugShowLastError(const char *msg = 0);
 //      Outputs a string of text to the platforms debug output window.
 //
 // Parameters:
-//      text - The message to write
-void prOutputString(const char *text);
+//      level   - The log level.
+//      text    - The message to write
+//
+// See Also:
+//      <prLogLevel>
+void prOutputString(prLogLevel level, const char *text);
 
 
 // Cross platform compiler messages.
-#if defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC)
+#if defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC)
     #define DO_PRAGMA(msg)          _Pragma(#msg)
 #endif
 
 
 // In code reminder messages.
 #if defined(SHOW_MESSAGES)
-
     #if defined(PLATFORM_PC)
         // Reminder macro
         #define REMINDER                __FILE__ "(" PRCURRLINE ") : Reminder: " 
@@ -88,12 +94,9 @@ void prOutputString(const char *text);
 #endif
 
 
-// Used to log line numbers (Just a lazy shortcut... I know)
+// Used to log line numbers. Just a lazy shortcut... I know :-)
 #if (defined(DEBUG) || defined(_DEBUG)) && defined(PROTEUS_ALLOW_AT)
-#define AT()                            prTrace(LogError, "In func '%s' at line %i\n", __FUNCTION__, __LINE__)
+    #define AT()    prTrace(LogError, "In func '%s' at line %i\n", __FUNCTION__, __LINE__)
 #else
-#define AT()
+    #define AT()
 #endif
-
-
-#endif//__PRDEBUG_H

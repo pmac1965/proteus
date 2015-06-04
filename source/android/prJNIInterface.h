@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRJNIINTERFACE_H
-#define __PRJNIINTERFACE_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -71,6 +70,3 @@ const char *prJNI_GetActivityName();
 
 
 #endif//PLATFORM_ANDROID
-
-
-#endif//__PRJNIINTERFACE_H

@@ -71,7 +71,7 @@ void prDebugShowLastError(const char *msg)
         LPVOID lpMsgBuf = NULL;
 
         FormatMessageW
-            (
+        (
             FORMAT_MESSAGE_ALLOCATE_BUFFER |
             FORMAT_MESSAGE_FROM_SYSTEM |
             FORMAT_MESSAGE_IGNORE_INSERTS,
@@ -81,7 +81,7 @@ void prDebugShowLastError(const char *msg)
             (LPTSTR)&lpMsgBuf,
             0,
             NULL
-            );
+        );
 
         prTrace(LogError, "============================================================\n");
         prTrace(LogError, "Message   : %s\n", (msg && *msg) ? msg : "None");
@@ -107,7 +107,7 @@ void prDebugShowLastError(const char *msg)
 /// ---------------------------------------------------------------------------
 /// Outputs a string of text to the platforms debug output window.
 /// ---------------------------------------------------------------------------
-void prOutputString(const char *text)
+void prOutputString(prLogLevel level, const char *text)
 {
     if (text && *text)
     {
@@ -127,11 +127,29 @@ void prOutputString(const char *text)
 #elif defined(PLATFORM_LINUX)
         printf("%s", text);
 
-#elif defined(PLATFORM_BADA)
-        AppLog("%s", text);
-
 #elif defined(PLATFORM_ANDROID)
-        __android_log_print(ANDROID_LOG_DEBUG, "Proteus", "%s", text);
+        switch(level)
+        {
+        case LogVerbose:
+            __android_log_print(ANDROID_LOG_VERBOSE, "Proteus", "%s", text);
+            break;
+
+        case LogDebug:
+            __android_log_print(ANDROID_LOG_DEBUG, "Proteus", "%s", text);
+            break;
+
+        case LogInformation:
+            __android_log_print(ANDROID_LOG_INFO, "Proteus", "%s", text);
+            break;
+
+        case LogWarning:
+            __android_log_print(ANDROID_LOG_WARN, "Proteus", "%s", text);
+            break;
+
+        case LogError:
+            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "%s", text);
+            break;
+        }
 
 #else
     #error Unsupported platform.

@@ -167,12 +167,12 @@ void prTrace(prLogLevel level, const char *fmt, ...)
                 // Write to console.
                 if (repeat)
                 {
-                    prOutputString(bufferRpt);
-                    prOutputString(bufferMsg);
+                    prOutputString(level, bufferRpt);
+                    prOutputString(level, bufferMsg);
                 }
                 else
                 {
-                    prOutputString(bufferMsg);
+                    prOutputString(level, bufferMsg);
                 }
 
 

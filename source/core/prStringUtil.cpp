@@ -20,9 +20,9 @@
 #include "../prConfig.h"
 
 
-#include <stdlib.h>
-#include <stdarg.h>
-#include <stdio.h>
+#include <cstdlib>
+#include <cstdarg>
+#include <cstdio>
 #include <ctype.h>
 #include "prStringUtil.h"
 #include "../debug/prAssert.h"
@@ -348,8 +348,13 @@ char *prStringSnprintf(char *buffer, s32 bufferSize, const char* fmt, ...)
     
     #if defined(PLATFORM_PC)
         vsprintf_s(buffer, bufferSize, fmt, args);
+
+    #elif defined(PLATFORM_ANDROID)
+        vsnprintf(buffer, bufferSize, fmt, args);
+
     #else
         snprintf(buffer, bufferSize, fmt, args);
+
     #endif
 
         va_end(args);

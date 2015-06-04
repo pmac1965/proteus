@@ -1,4 +1,10 @@
 // File: prJNIAudio.h
+//      The proteus engine uses the androids own mp3 player to play audio tracks
+//      as it provides a simple and effective method to get audio tracks playing
+//
+// Notes:
+//      This may change in the future
+//
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,8 +22,7 @@
  */
 
 
-#ifndef __PRJNIAUDIO_H
-#define __PRJNIAUDIO_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -28,6 +33,9 @@
 
 // Function: prJNI_SongPlay
 //      Plays a song.
+//
+// Parameters:
+//      filename - The name of the music file to play
 void prJNI_SongPlay(const char *filename);
 
 // Function: prJNI_SongStop
@@ -48,6 +56,3 @@ void prJNI_SongResume();
 
 
 #endif//PLATFORM_ANDROID
-
-
-#endif//__PRJNIAUDIO_H

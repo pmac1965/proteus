@@ -41,16 +41,18 @@ namespace
     /// ---------------------------------------------------------------------------
     /// Makes the final audio class name. 
     /// ---------------------------------------------------------------------------
-    const char *prJNI_MakeAudioClassName(const char *pClassName)
+    char *prJNI_MakeAudioClassName(char *pName, const char *pClassName)
     {
-        TODO("Remove the statics. They're not required")
-        TODO("These functions also need to be improved. Too many duplicates!")
-        static char name[256];
+        PRASSERT(pName);
+        PRASSERT(pClassName && *pClassName);
+        //TODO("Remove the statics. They're not required")
+        //TODO("These functions also need to be improved. Too many duplicates!")
+        //static char name[256];
 
-        strcpy(name, "proteus/audio/");
-        strcat(name, pClassName);
+        strcpy(pName, "com/redcliffeinteractive/proteus/audio/");
+        strcat(pName, pClassName);
 
-        return name;
+        return pName;
     }
 
 
@@ -62,11 +64,14 @@ namespace
         PRASSERT(env);
         PRASSERT(className && *className);
 
-        jclass cls = env->FindClass(prJNI_MakeAudioClassName(className));
+        char name[256];
+
+        jclass cls = env->FindClass(prJNI_MakeAudioClassName(name, className));
         if (!cls) 
         {
             // Warn
-            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to find class %s", className);
+            //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to find class %s", className);
+            prTrace(LogError, "Failed to find class %s\n", className);
 
             if (isAttached)
             {
