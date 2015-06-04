@@ -21,7 +21,6 @@
 #include "../prConfig.h"
 #include "../debug/prAlert.h"
 #include "../debug/prTrace.h"
-#include "../debug/prLog.h"
 
 
 using namespace Proteus::Core;
@@ -50,7 +49,7 @@ using namespace Proteus::Core;
 /// ---------------------------------------------------------------------------
 extern "C" void PC_API SteamAPIDebugTextHook(int nSeverity, const char *pchDebugText)
 {
-    prLog(pchDebugText);
+    prTrace(LogError, pchDebugText);
 
 	// if you're running in the debugger, only warnings (nSeverity >= 1) will be sent
 	// if you add -debug_steamapi to the command-line, a lot of extra informational messages will also be sent

@@ -57,7 +57,7 @@ REM ---------------------------------------------------------------------------
     REM * NOT REQUIRED *
     REM ****************
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_android.h
-    del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_bada.h
+    REM                                                                                    del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_bada.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_base.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_ios.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_pc.h
@@ -71,6 +71,7 @@ REM ---------------------------------------------------------------------------
     del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prFps_PC.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prFps_Android.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prFps_ios.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\debug\prFps_Linux.h
 
     REM ****************
     REM * NOT REQUIRED *

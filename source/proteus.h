@@ -129,7 +129,6 @@
 #include "debug/prDebug.h"
 #include "debug/prException.h"
 #include "debug/prFps.h"
-#include "debug/prLog.h"
 #include "debug/prOnScreenLogger.h"
 #include "debug/prProfileEntry.h"
 #include "debug/prProfileManager.h"

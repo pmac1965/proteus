@@ -58,7 +58,6 @@
 #include "prTexture.h"
 #include "../debug/prAssert.h"
 #include "../debug/prTrace.h"
-#include "../debug/prLog.h"
 #include "../debug/prDebug.h"
 #include "../debug/prAlert.h"
 #include "../core/prResourceManager.h"

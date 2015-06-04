@@ -593,7 +593,6 @@
     <ClInclude Include="..\..\..\..\source\debug\prFps_ios.h" />
     <ClInclude Include="..\..\..\..\source\debug\prFps_Linux.h" />
     <ClInclude Include="..\..\..\..\source\debug\prFps_PC.h" />
-    <ClInclude Include="..\..\..\..\source\debug\prLog.h" />
     <ClInclude Include="..\..\..\..\source\debug\prOnScreenLogger.h" />
     <ClInclude Include="..\..\..\..\source\debug\prProfileEntry.h" />
     <ClInclude Include="..\..\..\..\source\debug\prProfileManager.h" />
@@ -949,7 +948,6 @@
     <ClCompile Include="..\..\..\..\source\debug\prFps_ios.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prFps_Linux.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prFps_PC.cpp" />
-    <ClCompile Include="..\..\..\..\source\debug\prLog.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prOnScreenLogger.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prProfileEntry.cpp" />
     <ClCompile Include="..\..\..\..\source\debug\prProfileManager.cpp" />

@@ -144,7 +144,7 @@ typedef struct TouchImplementation
                         e.index = i;
 #endif
                         e.id    = touchLocation.id;
-                        //prLog("Released: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
+                        //prTrace(LogError, "Released: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
                         Released(e);
                     }
                     
@@ -177,7 +177,7 @@ typedef struct TouchImplementation
                         e.index = i;
 #endif
                         e.id    = touchLocation.id;
-                        //prLog("Axis: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
+                        //prTrace(LogError, "Axis: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
                         Axis(e);
                     }
                     return;
@@ -218,7 +218,7 @@ typedef struct TouchImplementation
                     e.index = i;
 #endif
                     e.id    = touchLocation.id;
-                    //prLog("Pressed: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
+                    //prTrace(LogError, "Pressed: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
                     Pressed(e);
                 }
 
@@ -236,7 +236,7 @@ typedef struct TouchImplementation
                     e.index = i;
 #endif
                     e.id    = touchLocation.id;
-                    //prLog("Axis: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
+                    //prTrace(LogError, "Axis: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
                     Axis(e);
                 }                
                 return;

@@ -28,7 +28,6 @@
 #include <string.h>
 #include <android/log.h>
 #include "../debug/prTrace.h"
-#include "../debug/prLog.h"
 #include "../debug/prAssert.h"
 #include "../core/prDefines.h"
 #include "../core/prStringUtil.h"
@@ -242,7 +241,7 @@ int JNI_SFXLoad(const char *filename)
         jmethodID method = env->GetStaticMethodID(cls, "SFXLoad", "(Ljava/lang/String;)I");
         if (!method)
         {
-            prLog("Failed to get method ID\n");
+            prTrace(LogError, "Failed to get method ID\n");
             if (isAttached)
             {
                 gJavaVM->DetachCurrentThread();
@@ -300,7 +299,7 @@ int JNI_SFXPlay(int sid, float volume)
         jmethodID method = env->GetStaticMethodID(cls, "SFXPlay", "(IF)I");
         if (!method)
         {
-            prLog("Failed to get method ID\n");
+            prTrace(LogError, "Failed to get method ID\n");
             if (isAttached)
             {
                 gJavaVM->DetachCurrentThread();
@@ -346,7 +345,7 @@ void JNI_SFXInit()
         jmethodID method = env->GetStaticMethodID(cls, "SFXInit", "()V");
         if (!method)
         {
-            prLog("Failed to get method ID\n");
+            prTrace(LogError, "Failed to get method ID\n");
             if (isAttached)
             {
                 gJavaVM->DetachCurrentThread();
@@ -390,7 +389,7 @@ void JNI_SFXStop(int sid)
         jmethodID method = env->GetStaticMethodID(cls, "SFXStop", "(I)V");
         if (!method)
         {
-            prLog("Failed to get method ID\n");
+            prTrace(LogError, "Failed to get method ID\n");
             if (isAttached)
             {
                 gJavaVM->DetachCurrentThread();
@@ -443,7 +442,7 @@ void JNI_OpenURL(const char *url)
         jmethodID method = env->GetStaticMethodID(cls, "OpenURL", "(Ljava/lang/String;)V");
         if (!method)
         {
-            prLog("Failed to get method ID\n");
+            prTrace(LogError, "Failed to get method ID\n");
             if (isAttached)
             {
                 gJavaVM->DetachCurrentThread();
@@ -490,7 +489,7 @@ bool JNI_ShowAchievements()
         jmethodID method = env->GetStaticMethodID(cls, "ShowAchievements", "()Z");
         if (!method)
         {
-            prLog("Failed to get method ID\n");
+            prTrace(LogError, "Failed to get method ID\n");
             if (isAttached)
             {
                 gJavaVM->DetachCurrentThread();
@@ -538,7 +537,7 @@ bool JNI_ShowLeaderboards()
         jmethodID method = env->GetStaticMethodID(cls, "ShowLeaderboards", "()Z");
         if (!method)
         {
-            prLog("Failed to get method ID\n");
+            prTrace(LogError, "Failed to get method ID\n");
             if (isAttached)
             {
                 gJavaVM->DetachCurrentThread();
@@ -584,7 +583,7 @@ void JNI_ShowDashboard()
         jmethodID method = env->GetStaticMethodID(cls, "ShowDashboard", "()V");
         if (!method)
         {
-            prLog("Failed to get method ID\n");
+            prTrace(LogError, "Failed to get method ID\n");
             if (isAttached)
             {
                 gJavaVM->DetachCurrentThread();
@@ -630,7 +629,7 @@ bool JNI_ShowPurchaseDialog()
         jmethodID method = env->GetStaticMethodID(cls, "ShowPurchaseDialog", "()Z");
         if (!method)
         {
-            prLog("Failed to get method ID\n");
+            prTrace(LogError, "Failed to get method ID\n");
             if (isAttached)
             {
                 gJavaVM->DetachCurrentThread();
@@ -676,7 +675,7 @@ void JNI_SubmitLeaderboardScore(const char *name, int score)
         jmethodID method = env->GetStaticMethodID(cls, "Leaderboards_Submit", "(Ljava/lang/String;I)V");
         if (!method)
         {
-            prLog("Failed to get method ID\n");
+            prTrace(LogError, "Failed to get method ID\n");
             if (isAttached)
             {
                 gJavaVM->DetachCurrentThread();
@@ -721,7 +720,7 @@ void JNI_AwardAchievement(const char *name)
         jmethodID method = env->GetStaticMethodID(cls, "Achievement_Unlock", "(Ljava/lang/String;)V");
         if (!method)
         {
-            prLog("Failed to get method ID\n");
+            prTrace(LogError, "Failed to get method ID\n");
             if (isAttached)
             {
                 gJavaVM->DetachCurrentThread();
@@ -774,7 +773,7 @@ void JNI_AdvertShow()
         jmethodID method = env->GetStaticMethodID(cls, "Admob_ShowAd", "()V");
         if (!method)
         {
-            prLog("Failed to get method ID");   	
+            prTrace(LogError, "Failed to get method ID");   	
             if (isAttached)
             {
                 gJavaVM->DetachCurrentThread();
@@ -818,7 +817,7 @@ void JNI_AdvertHide()
         jmethodID method = env->GetStaticMethodID(cls, "Admob_HideAd", "()V");
         if (!method)
         {
-            prLog("Failed to get method ID");   	
+            prTrace(LogError, "Failed to get method ID");   	
             if (isAttached)
             {
                 gJavaVM->DetachCurrentThread();
@@ -862,7 +861,7 @@ void JNI_SubmitFlurry(const char *str)
         jmethodID method = env->GetStaticMethodID(cls, "Admob_HideAd", "()V");
         if (!method)
         {
-            prLog("Failed to get method ID");   	
+            prTrace(LogError, "Failed to get method ID");   	
             if (isAttached)
             {
                 gJavaVM->DetachCurrentThread();
@@ -906,7 +905,7 @@ void JNI_SubmitFlurry(const char *str1, const char *str2)
         jmethodID method = env->GetStaticMethodID(cls, "Admob_HideAd", "()V");
         if (!method)
         {
-            prLog("Failed to get method ID");   	
+            prTrace(LogError, "Failed to get method ID");   	
             if (isAttached)
             {
                 gJavaVM->DetachCurrentThread();

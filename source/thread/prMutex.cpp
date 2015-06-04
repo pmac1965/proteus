@@ -18,7 +18,7 @@
 
 
 #include "prMutex.h"
-#include "../debug/prLog.h"
+#include "../debug/prTrace.h"
 #include "../debug/prDebug.h"
 
 
@@ -110,7 +110,7 @@ bool prMutex::TryLock()
     }
     else
     {
-        prLog("Failed to locked mutex\n");
+        prTrace(LogError, "Failed to locked mutex\n");
     }
 
 #elif defined(PLATFORM_PC)
@@ -122,7 +122,7 @@ bool prMutex::TryLock()
     }
     else
     {
-        prLog("Failed to locked mutex\n");
+        prTrace(LogError, "Failed to locked mutex\n");
     }
 
 #elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  

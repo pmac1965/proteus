@@ -34,7 +34,6 @@
 #include "../debug/prTrace.h"
 #include "../debug/prAssert.h"
 #include "../debug/prDebug.h"
-#include "../debug/prLog.h"
 #include "../display/prOglUtils.h"
 #include "../core/prCore.h"
 #include "../core/prRegistry.h"
