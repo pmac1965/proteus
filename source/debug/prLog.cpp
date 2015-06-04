@@ -52,7 +52,7 @@ void prLog(const char *fmt, ...)
             vsnprintf(output, sizeof(output) - 1, fmt, args);
             va_end(args);
 
-            prOutputString(output);
+            prOutputString(LogError, output);
 
             prTraceWriteToFile(false, NULL, output);
         }

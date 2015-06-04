@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRLOG_H
-#define __PRLOG_H
+#pragma once
 
 
 // Function: prLog 
@@ -49,6 +48,3 @@ void prLog(const char *fmt, ...);
 // Notes:
 //      By default this type of logging is disabled.
 void prLogEnable(bool state);
-
-
-#endif//__PRLOG_H
