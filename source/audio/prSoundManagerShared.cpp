@@ -33,20 +33,6 @@
   #include <AudioToolbox/ExtendedAudioFile.h>
   #include <AudioToolbox/AudioServices.h>
 
-#elif defined(PLATFORM_BADA)
-  #if defined(BADA_SDK_2)
-    #include <AL/al.h>
-    #include <AL/alc.h>
-    #include <AL/alut.h>
-    #include <AL/alext.h>
-  
-  #else
-    #ifdef SOUND_ALLOW
-    #undef SOUND_ALLOW
-    #endif
-  
-  #endif
-
 #elif defined(PLATFORM_ANDROID)
     //#ifdef SOUND_ALLOW
     //#undef SOUND_ALLOW

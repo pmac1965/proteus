@@ -773,8 +773,14 @@ void prLinkedHeap::FreeListRemove(void* p)
             // reset the pointer to last entry in the free list.
             else if (p == m_last)
             {
-                prev->next = 0;
-                m_last     = prev;
+                // Added if test because of code analysis warning, but it shouldn't fail,
+                // but... better safe than sorry, as shouldn't is not certain
+                if (prev)
+                {
+                    prev->next = 0;
+                }
+
+                m_last = prev;
             }
             
             // If we get here, then all we need to do is unlink the entry.

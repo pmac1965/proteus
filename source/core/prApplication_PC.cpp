@@ -22,7 +22,7 @@
 
 #if defined(PLATFORM_PC)
 
- 
+
 #include "prApplication_PC.h"
 #include "prWindow_PC.h"
 #include "prWindowProcedure.h"
@@ -42,6 +42,7 @@
 #include "../audio/prSoundManager.h"
 #include "../input/prTouch.h"
 #include "../prVerNum.h"
+#include <versionhelpers.h>
 
 
 // ----------------------------------------------------------------------------
@@ -488,56 +489,80 @@ const char *prApplication_PC::BuildType()
 /// ---------------------------------------------------------------------------
 BOOL prApplication_PC::CheckPlatform()
 {
-    bool isOSInvalid = false;
-    bool initFailed = false;
+    bool isOSInvalid = true;            // Set both to fail
+    bool initFailed  = true;
+    s32  verMajor     = 0;              // Version major/minor. Won't match windows, but that's not important
+    s32  verMinor     = 0;              // as data usage is internal
 
 
-    // Lets get the OS we're running on.
-    OSVERSIONINFOEX osvi;
-    memset(&osvi, 0, sizeof(osvi));
-    osvi.dwOSVersionInfoSize = sizeof(osvi);
-
-
-    // Removes this warning - 'GetVersionExW': was declared deprecated
-    #ifdef _MSC_VER
-    #pragma warning( push )
-    #pragma warning( disable : 4996 )
-    #endif
-
-
-    if (GetVersionEx((LPOSVERSIONINFO)&osvi) == 0)
+    // Lets get the OS we're running on. Vista is used as a base version
+    if (!IsWindowsVistaOrGreater())
     {
-        TODO("Change the above call as its deprecated!")
+        prTrace(LogError, "Failed to acquire windows version\n");
         prDebugShowLastError();
-        initFailed = true;
     }
     else
     {
-        // Is the operating system is Windows 7, Windows Server 2008, Windows Vista, Windows Server 2003, Windows XP, or Windows 2000?
-        if (osvi.dwPlatformId == VER_PLATFORM_WIN32_NT)
+        // Okay, we're on vista at a minimum
+        initFailed = false;
+
+        // Find which version
+        if (IsWindowsVistaOrGreater())
         {
-            // Write startup info.
-            prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
-            if (reg)
-            {
-                if (prStringCompare(reg->GetValue("Verbose"), "true") == CMP_EQUALTO)
-                {
-                    prTrace(LogError, "Windows version %i.%i\n", osvi.dwMajorVersion, osvi.dwMinorVersion);
-                    prTrace(LogError, "%ls\n", osvi.szCSDVersion);
-                }
-            }
+            verMajor    = 6;
+            verMinor    = 0;
+            isOSInvalid = false;
         }
-        else
+
+        if (IsWindowsVistaSP1OrGreater())
         {
-            isOSInvalid = true;
+            verMajor    = 6;
+            verMinor    = 1;
+            isOSInvalid = false;
         }
+
+        if (IsWindowsVistaSP2OrGreater())
+        {
+            verMajor    = 6;
+            verMinor    = 2;
+            isOSInvalid = false;
+        }
+
+        if (IsWindows7OrGreater())
+        {
+            verMajor    = 7;
+            verMinor    = 0;
+            isOSInvalid = false;
+        }
+
+        if (IsWindows7SP1OrGreater())
+        {
+            verMajor    = 7;
+            verMinor    = 1;
+            isOSInvalid = false;
+        }
+
+        if (IsWindows8OrGreater())
+        {
+            verMajor    = 8;
+            verMinor    = 0;
+            isOSInvalid = false;
+        }
+
+        if (IsWindows8Point1OrGreater())
+        {
+            verMajor    = 8;
+            verMinor    = 1;
+            isOSInvalid = false;
+        }
+
+/*        if (IsWindows10OrGreater())
+        {
+            verMajor    = 10;
+            verMinor    = 0;
+            isOSInvalid = false;
+        }//*/
     }
-
-
-    // Restores warning
-    #ifdef _MSC_VER
-    #pragma warning( pop )
-    #endif
 
 
     // Couldn't get info about windows?
@@ -554,6 +579,11 @@ BOOL prApplication_PC::CheckPlatform()
         MessageBoxW(HWND_DESKTOP, L"You cannot run this application as you do not have the correct version of Windows.", L"Error", MB_ICONERROR | MB_OK);
         return FALSE;
     }
+
+
+    // Write startup info.
+    prTrace(LogInformation, "Windows version %i.%i\n", verMajor, verMinor);
+
 
     return TRUE;
 }

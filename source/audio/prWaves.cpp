@@ -433,68 +433,135 @@ prWaveResult prWaves::GetWaveALBufferFormat(prWaveID id, u32 *pulFormat) const
 {
     prWaveResult wr = WR_OK;
 
-#if defined(SOUND_ALLOW)
-
-    if (IsWaveID(id))
-    {
-        if (pulFormat)
+#if defined(PLATFORM_ANDROID)
+    #if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
+        if (IsWaveID(id))
         {
-            *pulFormat = 0;
-
-            if (m_waveID[id]->wfType == WF_EX)
+            if (pulFormat)
             {
-                if (m_waveID[id]->channels == 1)
-                {
-                    switch (m_waveID[id]->bitsPerSample)
-                    {
-                    case 4:
-                        *pulFormat = alGetEnumValue("AL_FORMAT_MONO_IMA4");
-                        break;
-                    case 8:
-                        *pulFormat = alGetEnumValue("AL_FORMAT_MONO8");
-                        break;
-                    case 16:
-                        *pulFormat = alGetEnumValue("AL_FORMAT_MONO16");
-                        break;
-                    }
-                }
-                else if (m_waveID[id]->channels == 2)
-                {
-                    switch (m_waveID[id]->bitsPerSample)
-                    {
-                    case 4:
-                        *pulFormat = alGetEnumValue("AL_FORMAT_STEREO_IMA4");
-                        break;
-                    case 8:
-                        *pulFormat = alGetEnumValue("AL_FORMAT_STEREO8");
-                        break;
-                    case 16:
-                        *pulFormat = alGetEnumValue("AL_FORMAT_STEREO16");
-                        break;
-                    }
-                }
-                else if ((m_waveID[id]->channels == 4) && (m_waveID[id]->bitsPerSample == 16))
-                {
-                    *pulFormat = alGetEnumValue("AL_FORMAT_QUAD16");
-                }
-            }
-            //else if (m_waveID[id]->wfType == WF_EXT)
-            //{
-            //    TODO("Fix and extend")
-            //}
+                *pulFormat = 0;
 
-            if (*pulFormat == 0)
-                wr = WR_INVALIDWAVEFILETYPE;
+                if (m_waveID[id]->wfType == WF_EX)
+                {
+                    if (m_waveID[id]->channels == 1)
+                    {
+                        switch (m_waveID[id]->bitsPerSample)
+                        {
+                        case 4:
+                            *pulFormat = alGetEnumValue("AL_FORMAT_MONO_IMA4");
+                            break;
+                        case 8:
+                            *pulFormat = alGetEnumValue("AL_FORMAT_MONO8");
+                            break;
+                        case 16:
+                            *pulFormat = alGetEnumValue("AL_FORMAT_MONO16");
+                            break;
+                        }
+                    }
+                    else if (m_waveID[id]->channels == 2)
+                    {
+                        switch (m_waveID[id]->bitsPerSample)
+                        {
+                        case 4:
+                            *pulFormat = alGetEnumValue("AL_FORMAT_STEREO_IMA4");
+                            break;
+                        case 8:
+                            *pulFormat = alGetEnumValue("AL_FORMAT_STEREO8");
+                            break;
+                        case 16:
+                            *pulFormat = alGetEnumValue("AL_FORMAT_STEREO16");
+                            break;
+                        }
+                    }
+                    else if ((m_waveID[id]->channels == 4) && (m_waveID[id]->bitsPerSample == 16))
+                    {
+                        *pulFormat = alGetEnumValue("AL_FORMAT_QUAD16");
+                    }
+                }
+                //else if (m_waveID[id]->wfType == WF_EXT)
+                //{
+                //    TODO("Fix and extend")
+                //}
+
+                if (*pulFormat == 0)
+                    wr = WR_INVALIDWAVEFILETYPE;
+            }
+            else
+            {
+                wr = WR_INVALIDPARAM;
+            }
         }
         else
         {
-            wr = WR_INVALIDPARAM;
+            wr = WR_INVALIDWAVEID;
         }
-    }
-    else
-    {
-        wr = WR_INVALIDWAVEID;
-    }
+
+    #endif//(defined(SOUND_ALLOW) && defined(USE_OPENAL))
+
+#else
+    #if defined(SOUND_ALLOW)
+        if (IsWaveID(id))
+        {
+            if (pulFormat)
+            {
+                *pulFormat = 0;
+
+                if (m_waveID[id]->wfType == WF_EX)
+                {
+                    if (m_waveID[id]->channels == 1)
+                    {
+                        switch (m_waveID[id]->bitsPerSample)
+                        {
+                        case 4:
+                            *pulFormat = alGetEnumValue("AL_FORMAT_MONO_IMA4");
+                            break;
+                        case 8:
+                            *pulFormat = alGetEnumValue("AL_FORMAT_MONO8");
+                            break;
+                        case 16:
+                            *pulFormat = alGetEnumValue("AL_FORMAT_MONO16");
+                            break;
+                        }
+                    }
+                    else if (m_waveID[id]->channels == 2)
+                    {
+                        switch (m_waveID[id]->bitsPerSample)
+                        {
+                        case 4:
+                            *pulFormat = alGetEnumValue("AL_FORMAT_STEREO_IMA4");
+                            break;
+                        case 8:
+                            *pulFormat = alGetEnumValue("AL_FORMAT_STEREO8");
+                            break;
+                        case 16:
+                            *pulFormat = alGetEnumValue("AL_FORMAT_STEREO16");
+                            break;
+                        }
+                    }
+                    else if ((m_waveID[id]->channels == 4) && (m_waveID[id]->bitsPerSample == 16))
+                    {
+                        *pulFormat = alGetEnumValue("AL_FORMAT_QUAD16");
+                    }
+                }
+                //else if (m_waveID[id]->wfType == WF_EXT)
+                //{
+                //    TODO("Fix and extend")
+                //}
+
+                if (*pulFormat == 0)
+                    wr = WR_INVALIDWAVEFILETYPE;
+            }
+            else
+            {
+                wr = WR_INVALIDPARAM;
+            }
+        }
+        else
+        {
+            wr = WR_INVALIDWAVEID;
+        }
+
+    #endif
 
 #endif
 

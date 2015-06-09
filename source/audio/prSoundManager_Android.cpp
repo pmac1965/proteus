@@ -68,7 +68,7 @@ prSoundManager_Android::~prSoundManager_Android()
 /// ---------------------------------------------------------------------------
 bool prSoundManager_Android::Initialise()
 {
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
 
     // Already initialised?
     if (!initialised)
@@ -197,7 +197,7 @@ void prSoundManager_Android::Release()
 /// ---------------------------------------------------------------------------
 void prSoundManager_Android::Update(f32 dt)
 {
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
 
     if (initialised)
     {
@@ -255,7 +255,7 @@ void prSoundManager_Android::Update(f32 dt)
 /// ---------------------------------------------------------------------------
 void prSoundManager_Android::LoadSFX(const prSFXInfo *sfx, s32 count)
 {
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
 
     PRASSERT(count > 0);    
     PRASSERT(count <= AUDIO_MAX_EFFECTS);
@@ -344,7 +344,7 @@ void prSoundManager_Android::LoadSFX(const prSFXInfo *sfx, s32 count)
 /// ---------------------------------------------------------------------------
 void prSoundManager_Android::SongPlayByName(const char *filename)
 {
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
 
     PRASSERT(filename && *filename); 
     
@@ -429,7 +429,7 @@ void prSoundManager_Android::SongPlayByName(const char *filename)
 /// ---------------------------------------------------------------------------
 void prSoundManager_Android::SongStop(f32 time)
 {
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
 
     if (songPlaying)
     {
@@ -460,7 +460,7 @@ void prSoundManager_Android::SongStop(f32 time)
 /// ---------------------------------------------------------------------------
 void prSoundManager_Android::SongPause(bool pause)
 {
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
 
     if (initialised)
     {
@@ -503,7 +503,7 @@ bool prSoundManager_Android::SongGetPaused() const
 {
     bool result = false;
 
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
 
     if (initialised)
     {
@@ -530,7 +530,7 @@ bool prSoundManager_Android::SongGetPaused() const
 /// ---------------------------------------------------------------------------
 void prSoundManager_Android::SongSetVolume(f32 volume)
 {
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
 
     if (initialised)
     {
@@ -568,7 +568,7 @@ s32 prSoundManager_Android::SFXPlay(s32 index, f32 volume, bool loop)
 {
     s32 handle = -1;
 
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
 
     if (initialised)
     {
@@ -632,7 +632,7 @@ s32 prSoundManager_Android::SFXPlay(s32 index, f32 volume, bool loop)
 /// ---------------------------------------------------------------------------
 void prSoundManager_Android::SFXStop(s32 index)
 {
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
     
     if (initialised)
     {
@@ -666,7 +666,7 @@ void prSoundManager_Android::SFXStop(s32 index)
 /// ---------------------------------------------------------------------------
 void prSoundManager_Android::SFXStop(const char *name)
 {
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
 
     if (initialised && name && *name)
     {
@@ -700,7 +700,7 @@ void prSoundManager_Android::SFXStop(const char *name)
 /// ---------------------------------------------------------------------------
 void prSoundManager_Android::SFXStopAll()
 {
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
 
     if (initialised)
     {
@@ -729,7 +729,7 @@ bool prSoundManager_Android::SFXIsPlaying(s32 index) const
 {
     bool result = false;
 
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
     
     if (initialised)
     {
@@ -763,7 +763,7 @@ bool prSoundManager_Android::SFXIsPlaying(const char *name) const
 {
     bool result = false;
 
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
 
     PRASSERT(name && *name);
 
@@ -799,7 +799,7 @@ bool prSoundManager_Android::SFXIsPlaying(const char *name) const
 /// ---------------------------------------------------------------------------
 void prSoundManager_Android::SFXPause(s32 index, bool state)
 {
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
 
     if (initialised)
     {
@@ -845,7 +845,7 @@ void prSoundManager_Android::SFXPause(s32 index, bool state)
 /// ---------------------------------------------------------------------------
 void prSoundManager_Android::SFXPause(const char *name, bool state)
 {
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
 
     if (initialised && name && *name)
     {
@@ -893,7 +893,7 @@ void prSoundManager_Android::SFXPause(const char *name, bool state)
 // ----------------------------------------------------------------------------
 void prSoundManager_Android::SFXPauseAll(bool state)
 {
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
     
     if (initialised)
     {
@@ -943,7 +943,7 @@ bool prSoundManager_Android::SFXGetPaused() const
 {
     bool result = false;
 
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
     
     if (initialised)
     {
@@ -961,7 +961,7 @@ bool prSoundManager_Android::SFXGetPaused() const
 // ----------------------------------------------------------------------------
 s32 prSoundManager_Android::SFXGetActive() const
 {
-#ifdef SOUND_ALLOW    
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
     return active;
 #else
     return 0;
@@ -974,7 +974,7 @@ s32 prSoundManager_Android::SFXGetActive() const
 // ----------------------------------------------------------------------------
 void prSoundManager_Android::SFXSetVolume(s32 index, f32 volume)
 {
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
     
     if (initialised)
     {
@@ -1010,7 +1010,7 @@ void prSoundManager_Android::SFXSetVolume(s32 index, f32 volume)
 /// ---------------------------------------------------------------------------
 void prSoundManager_Android::SFXSetPosition(const char *name, f32 x, f32 y, f32 z)
 {
-#ifdef SOUND_ALLOW
+#if (defined(SOUND_ALLOW) && defined(USE_OPENAL))
 
     PRASSERT(name && *name);
 

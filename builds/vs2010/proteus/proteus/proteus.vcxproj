@@ -548,7 +548,6 @@
     <ClInclude Include="..\..\..\..\source\collision\prLine.h" />
     <ClInclude Include="..\..\..\..\source\core\prApplication.h" />
     <ClInclude Include="..\..\..\..\source\core\prApplication_Android.h" />
-    <ClInclude Include="..\..\..\..\source\core\prApplication_Tizen.h" />
     <ClInclude Include="..\..\..\..\source\core\prApplication_IOS.h" />
     <ClInclude Include="..\..\..\..\source\core\prApplication_Linux.h" />
     <ClInclude Include="..\..\..\..\source\core\prApplication_PC.h" />
@@ -911,7 +910,6 @@
     <ClCompile Include="..\..\..\..\source\collision\prLine.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prApplication.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prApplication_Android.cpp" />
-    <ClCompile Include="..\..\..\..\source\core\prApplication_Tizen.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prApplication_IOS.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prApplication_Linux.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prApplication_PC.cpp" />

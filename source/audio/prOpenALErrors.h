@@ -16,11 +16,10 @@
  */
 
 
-#ifndef __PROPENALERRORS_H
-#define __PROPENALERRORS_H
+#pragma once
 
 
-#if defined(PLATFORM_PC) || defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID) || defined(PLATFORM_LINUX)
+#if defined(PLATFORM_PC) || defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID) || defined(PLATFORM_LINUX)
     // Method: ALC_ErrorCheck
     //      Checks for errors
     int ALC_ErrorCheck(void *device);
@@ -28,10 +27,6 @@
     // Method: AL_ErrorCheck
     //      Checks for errors
     int AL_ErrorCheck();
-
-    // Method: ALUT_ErrorCheck
-    //      Checks for errors
-    int ALUT_ErrorCheck();
 
     #if defined(_DEBUG) || defined(DEBUG)
         #define AL_ERROR_CHECK()                                                                \
@@ -52,28 +47,14 @@
             }                                                                                   \
         }
 
-        #define ALUT_ERROR_CHECK()                                                              \
-        {                                                                                       \
-            int error = ALUT_ErrorCheck();                                                      \
-            if (error != 0)                                                                     \
-            {                                                                                   \
-                prTrace(LogError, "ALUT error in '%s' at line %i\n", __FUNCTION__, __LINE__);   \
-            }                                                                                   \
-        }
-
     #else
         #define AL_ERROR_CHECK()
         #define ALC_ERROR_CHECK(device)
-        #define ALUT_ERROR_CHECK()
 
     #endif
 
 #else
     #define AL_ERROR_CHECK()
     #define ALC_ERROR_CHECK(device)
-    #define ALUT_ERROR_CHECK()
 
 #endif
-
-
-#endif//__PROPENALERRORS_H

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRAPPLICATIONPC_H
-#define __PRAPPLICATIONPC_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -150,6 +149,3 @@ private:
 
 
 #endif//PLATFORM_PC
-
-
-#endif//__PRAPPLICATIONPC_H

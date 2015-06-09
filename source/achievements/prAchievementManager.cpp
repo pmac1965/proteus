@@ -52,11 +52,6 @@
   //#include <OpenGLES/ES1/gl.h>
   #include "prAchievement_mac.h"
 
-//#elif defined(PLATFORM_BADA)
-//  #include <FGraphicsOpengl.h>
-//  #include "prAchievement_bada.h"
-//  using namespace Osp::Graphics::Opengl;
-
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
   #include "prAchievement_android.h"
@@ -165,9 +160,6 @@ typedef struct AchievementManagerImplementation
 
 #elif defined(PLATFORM_IOS)
         pAchievementProvider = new prAchievement_Ios();
-
-//#elif defined(PLATFORM_BADA)
-//        pAchievementProvider = new prAchievement_Bada();
 
 #elif defined(PLATFORM_ANDROID)
         pAchievementProvider = new prAchievement_Android();
@@ -761,15 +753,10 @@ void prAchievementManager::Update(f32 dt)
 {
     PRASSERT(pImpl);
 
-#if defined(PLATFORM_BADA)
-    return;
-
-#else
     if (imp.enabled == false)
     {
         imp.Update(dt);
     }
-#endif
 }
 
 
@@ -779,17 +766,10 @@ void prAchievementManager::Update(f32 dt)
 void prAchievementManager::Render()
 {
     PRASSERT(pImpl);
-
-#if defined(PLATFORM_BADA)
-    return;
-
-#else
-    if (imp.enabled == false)
-        return;
-
-    imp.Render();
-
-#endif
+    if (imp.enabled)
+    {
+        imp.Render();
+    }
 }
 
 
@@ -798,81 +778,74 @@ void prAchievementManager::Render()
 /// ---------------------------------------------------------------------------
 void prAchievementManager::Award(const char *key, s32 awardValue)
 {
-#if defined(PLATFORM_BADA)
-    return;
-
-#else
-
-    if (imp.enabled == false)
-        return;
-
-    PRASSERT(pImpl);
-    PRASSERT(key && *key);
-    PRASSERT(imp.achievementsCount > 0);
-
-    if (key && *key)
+    if (imp.enabled)
     {
-        u32 hash   = prStringHash(key);
-        bool found = false;
+        PRASSERT(pImpl);
+        PRASSERT(key && *key);
+        PRASSERT(imp.achievementsCount > 0);
 
-        for (u32 i=0; i<imp.achievementsCount; i++)
+        if (key && *key)
         {
-            if (imp.achievements[i].hash == hash)
+            u32 hash   = prStringHash(key);
+            bool found = false;
+
+            for (u32 i=0; i<imp.achievementsCount; i++)
             {
-                found = true;
-
-                //
-                if (imp.achievements[i].state == Proteus::Achievement::NotAwarded)
+                if (imp.achievements[i].hash == hash)
                 {
-                    imp.achievements[i].count++;
+                    found = true;
 
-                    if (Achieved(imp.achievements[i].count, awardValue, -1))
+                    //
+                    if (imp.achievements[i].state == Proteus::Achievement::NotAwarded)
                     {
-                        // Award
-                        if (imp.pAchievementProvider)
+                        imp.achievements[i].count++;
+
+                        if (Achieved(imp.achievements[i].count, awardValue, -1))
                         {
-/*                            if (!lite_build)
+                            // Award
+                            if (imp.pAchievementProvider)
                             {
-                                // Start the award process.
-                                imp.pAchievementProvider->Award(imp.GetIdentifier(key), 0);
+    /*                            if (!lite_build)
+                                {
+                                    // Start the award process.
+                                    imp.pAchievementProvider->Award(imp.GetIdentifier(key), 0);
 
-                                // Set award is being awarded.
-                                imp.achievements[i].state = Proteus::Achievement::Awarding;
+                                    // Set award is being awarded.
+                                    imp.achievements[i].state = Proteus::Achievement::Awarding;
 
-                                // Add to display handler
-                                imp.AddRenderList(i);
+                                    // Add to display handler
+                                    imp.AddRenderList(i);
 
-                                // Save state change
-                                Save();
+                                    // Save state change
+                                    Save();
+                                }
+                                else
+                                {
+                                    // Start the award process.
+    //                                imp.pAchievementProvider->Award(imp.GetIdentifier(key), 0);
+                                
+                                    // Set award is being awarded.
+                                    imp.achievements[i].state = Proteus::Achievement::Awarding;
+                                
+                                    // Add to display handler
+                                    imp.AddRenderList(i);
+                                
+                                    // Save state change
+                                    Save();
+                                }//*/
                             }
-                            else
-                            {
-                                // Start the award process.
-//                                imp.pAchievementProvider->Award(imp.GetIdentifier(key), 0);
-                                
-                                // Set award is being awarded.
-                                imp.achievements[i].state = Proteus::Achievement::Awarding;
-                                
-                                // Add to display handler
-                                imp.AddRenderList(i);
-                                
-                                // Save state change
-                                Save();
-                            }//*/
                         }
                     }
+                    break;
                 }
-                break;
+            }
+
+            if (!found)
+            {
+                prTrace(LogError, "prAchievementManager::Award - Failed to find achievement: %s\n", key);
             }
         }
-
-        if (!found)
-        {
-            prTrace(LogError, "prAchievementManager::Award - Failed to find achievement: %s\n", key);
-        }
     }
-
-#endif
 }
 
 
@@ -882,17 +855,10 @@ void prAchievementManager::Award(const char *key, s32 awardValue)
 bool prAchievementManager::IsAwarded(const char *key) const
 {
     PRASSERT(pImpl);
-
-#if defined(PLATFORM_BADA)
-    PRUNUSED(key);
-    return false;
-
-#else
-
-    bool result = false;
-
     PRASSERT(key && *key);
     PRASSERT(imp.achievementsCount > 0);
+
+    bool result = false;
 
     if (key && *key)
     {
@@ -912,8 +878,6 @@ bool prAchievementManager::IsAwarded(const char *key) const
     }
 
     return result;
-
-#endif
 }
 
 

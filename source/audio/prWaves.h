@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRWAVES_H
-#define __PRWAVES_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -136,16 +135,11 @@ public:
     prWaveResult DeleteWaveFile(prWaveID id);
 
 
-private:
-    
+private:    
     prWaveResult ParseFile(const char *filename, prWaveFileInfo *pWaveInfo);
     bool         IsWaveID(prWaveID id) const;
 
 
 private:
-
     prWaveFileInfo *m_waveID[MAX_NUM_WAVEID];
 };
-
-
-#endif//__PRWAVES_H
