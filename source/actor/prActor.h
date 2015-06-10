@@ -25,6 +25,29 @@
 #include "../math/prVector2.h"
 
 
+// Enum: prActorLayer
+//      Actor layering
+//
+// Notes:
+//  Actors are sorted by layer, then priority.
+typedef enum prActorLayer
+{
+    Back,           // Default at the back
+    Middle0,    
+    Middle1,
+    Middle2,
+    Middle3,
+    Middle4,
+    Middle5,
+    Middle6,
+    Middle7,
+    Middle8,
+    Middle9,
+    Front
+
+} prActorLayer;
+
+
 // Class: prActor
 //      Actor base class
 //
@@ -171,7 +194,6 @@ protected:
 
 
 private:
-
     static int m_baseid;
 };
 
