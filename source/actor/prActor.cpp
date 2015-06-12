@@ -23,6 +23,12 @@
 
 using namespace Proteus::Core;
 
+
+// Namespaces
+namespace Proteus {
+namespace Actor {
+
+
 // Statics
 s32 prActor::m_baseid = 0;
 
@@ -43,6 +49,7 @@ prActor::prActor(s32 type) : m_type(type)
     user1       = 0;
     user2       = 0;
     user3       = 0;
+    m_layer     = ActorLayerBack;
 }
 
 
@@ -52,3 +59,6 @@ prActor::prActor(s32 type) : m_type(type)
 prActor::~prActor()
 {
 }
+
+
+}}// Namespaces

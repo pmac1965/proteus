@@ -91,6 +91,8 @@ prProfileManager::prProfileManager()
     m_enabled   = (m_frequency > 0.0f);
     m_exp0      = false;
     m_exp1      = false;
+
+    TODO("With create - add reference to the ID var, so it can be cleared on destroy")
 }
 
 

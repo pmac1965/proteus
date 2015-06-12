@@ -576,15 +576,17 @@ void prRenderer_GL11::DrawFilledPolygon(prVertex2D *vertices, s32 count)
     PRASSERT(vertices);
     PRASSERT(count > 0);
 
+
     glVertexPointer(2, GL_FLOAT, 0, vertices);
     ERR_CHECK();
     
     //glEnableClientState(GL_VERTEX_ARRAY);
     //ERR_CHECK();
 
-    glDrawArrays(GL_TRIANGLE_FAN, 0, count);
+//    glDrawArrays(GL_TRIANGLE_FAN, 0, count);GL_LINE_LOOP
+    glDrawArrays(GL_LINE_LOOP, 0, count);
     ERR_CHECK();
-
+//*/
     //glDisableClientState(GL_VERTEX_ARRAY);
     //ERR_CHECK();
 }

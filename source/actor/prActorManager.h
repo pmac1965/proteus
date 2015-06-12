@@ -16,12 +16,16 @@
  */
 
 
-#ifndef __PRACTORMANAGER_H
-#define __PRACTORMANAGER_H
+#pragma once
 
 
 #include "../core/prTypes.h"
 #include <list>
+
+
+// Namespaces
+namespace Proteus {
+namespace Actor {
 
 
 // Forward references
@@ -125,4 +129,4 @@ private:
 };
 
 
-#endif//__PRACTORMANAGER_H
+}}// Namespaces

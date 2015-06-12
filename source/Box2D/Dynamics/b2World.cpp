@@ -34,7 +34,7 @@
 #include <Box2D/Common/b2Timer.h>
 #include <new>
 
-#if defined(SHP) || defined(__ANDROID__)        // PMAC - Bada and android use a different include for memcpy, etc
+#if defined(ANDROID)            // PMAC - Android uses a different include for memcpy, etc
   #include <cstring>
 #else
   #include <memory.h>

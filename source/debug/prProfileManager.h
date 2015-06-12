@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRPROFILEMANAGER_H
-#define __PRPROFILEMANAGER_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -43,8 +42,8 @@ class prProfileEntry;
     #define ProfileCount()                          prProfileManager::GetInstance().Count()
 
     // Use these to declare data for the profiler
-    #define PROF_VAR_DEC(var)                       s32 var = -1;
-    #define PROF_VAR_SET(var)                       var = ProfileCreate(#var);
+    #define PROF_VAR_DEC(var)                       Proteus::Core::s32 var = -1;
+    #define PROF_VAR_SET(var)                       if (var == -1) { var = ProfileCreate(#var); }
 
 #else
     #define ProfileCreate(name)
@@ -149,12 +148,9 @@ private:
 private:
     static prProfileManager m_instance;
     prProfileEntry         *m_entries[PROFILE_MAX_ENTRIES];
-    float                   m_frequency;
+    Proteus::Core::f32      m_frequency;
     bool                    m_update;
     bool                    m_enabled;
     bool                    m_exp0;
     bool                    m_exp1;
 };
-
-
-#endif//__PRPROFILEMANAGER_H

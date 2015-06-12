@@ -29,6 +29,11 @@
 using namespace Proteus::Core;
 
 
+// Namespaces
+namespace Proteus {
+namespace Actor {
+
+
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
@@ -285,3 +290,6 @@ prActor *prActorManager::FindByIndex(s32 type, u32 index)
 
     return actor;
 }
+
+
+}}// Namespaces

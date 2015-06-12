@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRACTOR_H
-#define __PRACTOR_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -25,25 +24,43 @@
 #include "../math/prVector2.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Actor {
+
+
 // Enum: prActorLayer
 //      Actor layering
 //
 // Notes:
-//  Actors are sorted by layer, then priority.
+//      Actors are sorted by layer, then priority.
+//
+// ActorLayerBack       - Default at the back
+// ActorLayerMiddle0    - Middle layer
+// ActorLayerMiddle1    - Middle layer
+// ActorLayerMiddle2    - Middle layer
+// ActorLayerMiddle3    - Middle layer
+// ActorLayerMiddle4    - Middle layer
+// ActorLayerMiddle5    - Middle layer
+// ActorLayerMiddle6    - Middle layer
+// ActorLayerMiddle7    - Middle layer
+// ActorLayerMiddle8    - Middle layer
+// ActorLayerMiddle9    - Middle layer
+// ActorLayerFront      - Highest layer priority
 typedef enum prActorLayer
 {
-    Back,           // Default at the back
-    Middle0,    
-    Middle1,
-    Middle2,
-    Middle3,
-    Middle4,
-    Middle5,
-    Middle6,
-    Middle7,
-    Middle8,
-    Middle9,
-    Front
+    ActorLayerBack,
+    ActorLayerMiddle0,    
+    ActorLayerMiddle1,
+    ActorLayerMiddle2,
+    ActorLayerMiddle3,
+    ActorLayerMiddle4,
+    ActorLayerMiddle5,
+    ActorLayerMiddle6,
+    ActorLayerMiddle7,
+    ActorLayerMiddle8,
+    ActorLayerMiddle9,
+    ActorLayerFront
 
 } prActorLayer;
 
@@ -57,14 +74,15 @@ typedef enum prActorLayer
 //      It is however optional
 //
 // Notes:
-//      Actors default to active, visible and on screen
+//      Actors default to active, visible, on screen and on
+//      the ActorLayerBack layer
 class prActor
 {
 public:
-    // Entity method.
+    // Entity method for the finite state machine.
     typedef void (prActor::*prMethod)();
 
-    // An individual entity state.
+    // An individual entity state used in the state machine.
     typedef struct
     {
         prMethod  entry;
@@ -74,12 +92,18 @@ public:
     } prFsmState;
 
 
-public:
     // Friends
     friend class prActorManager;
 
+
     // Method: prActor
     //      Ctor
+    //
+    // Parameters:
+    //      type - A user defined actor identifier
+    //
+    // Notes:
+    //      type should be unique
     explicit prActor(Proteus::Core::s32 type);
 
     // Method: ~prActor
@@ -87,10 +111,12 @@ public:
     virtual ~prActor();
 
 
-public:
     // Method: Update
     //      Update an actor
-    virtual void Update(Proteus::Core::f32 step) = 0;
+    //
+    // Parameters:
+    //      dt - Delta time
+    virtual void Update(Proteus::Core::f32 dt) = 0;
 
     // Method: Draw
     //      Draw an actor
@@ -157,11 +183,17 @@ public:
     Proteus::Core::s32 GetID() const { return m_id; }
 
     // Method: GetState
-    //      Entity state.
+    //      Get actor state.
+    //
+    // Notes:
+    //      Provided for state machine usage
     Proteus::Core::s32 GetState() const { return m_state; }
 
     // Method: SetState
-    //      Entity state.
+    //      Set actor state.
+    //
+    // Notes:
+    //      Provided for state machine usage
     void SetState(Proteus::Core::s32 state) { m_state = state; }
 
     // Method: SetPriority
@@ -174,8 +206,7 @@ public:
 
 
 public:
-    Proteus::Math::prVector2    pos;
-    
+    Proteus::Math::prVector2    pos;    
     Proteus::Core::s32          user0;            // User data for you to do as you please
     Proteus::Core::s32          user1;            // User data for you to do as you please
     Proteus::Core::s32          user2;            // User data for you to do as you please
@@ -191,11 +222,12 @@ protected:
     bool                        m_active;
     bool                        m_destroy;
     bool                        m_onScreen;
+    prActorLayer                m_layer;
 
 
 private:
-    static int m_baseid;
+    static Proteus::Core::s32   m_baseid;
 };
 
 
-#endif//__PRACTOR_H
+}}// Namespaces
