@@ -79,17 +79,16 @@ typedef enum prActorLayer
 class prActor
 {
 public:
-    // Entity method for the finite state machine.
-    typedef void (prActor::*prMethod)();
+    //// Entity method for the finite state machine.
+    //typedef void (prActor::*prMethod)();
 
-    // An individual entity state used in the state machine.
-    typedef struct
-    {
-        prMethod  entry;
-        prMethod  update;
-        prMethod  exit;
-
-    } prFsmState;
+    //// An individual entity state used in the state machine.
+    //typedef struct prFsmState
+    //{
+    //    prMethod  entry;
+    //    prMethod  update;
+    //    prMethod  exit;
+    //} prFsmState;
 
 
     // Friends
@@ -197,12 +196,51 @@ public:
     void SetState(Proteus::Core::s32 state) { m_state = state; }
 
     // Method: SetPriority
-    //      Entity priority.
+    //      Actor priority.
     void SetPriority(Proteus::Core::s32 priority) { m_priority = priority; }
 
     // Method: GetPriority
-    //      Get entity priority.
+    //      Get actor priority.
     Proteus::Core::s32 GetPriority() const { return m_priority; }
+
+    // Method: OnCollisionEnter2D
+    //      Indicates a collision has started
+    //
+    // Parameters:
+    //      objectType - An optional user supplied type value
+    //
+    // Return:
+    //  A response type. The default value of -1 equals do nothing
+    virtual Proteus::Core::s32 OnCollisionEnter2D(Proteus::Core::s32 objectType = -1) { return -1; }
+
+    // Method: OnCollisionExit2D
+    //      Indicates a collision has ended
+    //
+    // Parameters:
+    //      objectType - An optional user supplied type value
+    //
+    // Return:
+    //  A response type. The default value of -1 equals do nothing
+    virtual Proteus::Core::s32 OnCollisionExit2D(Proteus::Core::s32 objectType = -1) { return -1; }
+
+    // Method: OnCollisionLinger2D
+    //      Indicates a collision is occurring
+    //
+    // Parameters:
+    //      objectType - An optional user supplied type value
+    //
+    // Return:
+    //  A response type. The default value of -1 equals do nothing
+    virtual Proteus::Core::s32 OnCollisionLinger2D(Proteus::Core::s32 objectType = -1) { return -1; }
+
+    // Method: SetCollisionPosition2D
+    //      An overrideable function which allows the collision rectangle start x, y to be
+    //      set by an actor before collision detection takes place.
+    virtual void SetCollisionPosition2D() { m_colPos.x = -1; m_colPos.y = -1; }
+
+    // Method: DebugDrawCollision2D
+    //      An overrideable function which allows the collision to be drawn by the actor
+    virtual void DebugDrawCollision2D() {}
 
 
 public:
@@ -218,6 +256,7 @@ protected:
     Proteus::Core::s32          m_state;
     Proteus::Core::s32          m_priority;
     Proteus::Core::s32          m_id;
+    Proteus::Math::prVector2    m_colPos;    
     bool                        m_visible;
     bool                        m_active;
     bool                        m_destroy;

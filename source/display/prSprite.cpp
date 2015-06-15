@@ -84,8 +84,8 @@ prSprite::prSprite(prTexture *pTexture, const char *name, s32 frameWidth, s32 fr
     PRASSERT(name && *name);
 
     m_pTexture    = pTexture;
-    m_animation   = NULL;
-    m_name        = NULL;
+    m_animation   = nullptr;
+    m_name        = nullptr;
     m_frameWidth  = frameWidth;
     m_frameHeight = frameHeight;
 

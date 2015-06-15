@@ -461,6 +461,7 @@
     <ClInclude Include="..\..\..\..\source\achievements\prLeaderboards.h" />
     <ClInclude Include="..\..\..\..\source\actor\prActor.h" />
     <ClInclude Include="..\..\..\..\source\actor\prActorManager.h" />
+    <ClInclude Include="..\..\..\..\source\actor\prActorStateMachine.h" />
     <ClInclude Include="..\..\..\..\source\adverts\prAdvertProvider.h" />
     <ClInclude Include="..\..\..\..\source\adverts\prAdvertProvider_AdMob.h" />
     <ClInclude Include="..\..\..\..\source\adverts\prAdvertProvider_Flurry.h" />

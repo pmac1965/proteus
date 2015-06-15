@@ -37,9 +37,8 @@ namespace Actor {
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
-prActorManager::prActorManager()
+prActorManager::prActorManager() : callback (nullptr)
 {
-    callback = NULL;
 }
 
 
@@ -67,7 +66,7 @@ void prActorManager::Registerfactory(prFactoryCallback cb)
 /// ---------------------------------------------------------------------------
 prActor *prActorManager::Create(s32 type)
 {
-    prActor *actor = NULL;
+    prActor *actor = nullptr;
 
     if (callback)
     {
@@ -89,10 +88,9 @@ void prActorManager::Release(prActor *actor)
 {
     if (actor)
     {
-        std::list<prActor *>::iterator it  = actors.begin();
-        std::list<prActor *>::iterator end = actors.end();
-
-        for (; it != end; ++it)
+        //std::list<prActor *>::iterator it  = actors.begin();
+        //std::list<prActor *>::iterator end = actors.end();
+        for (auto it = actors.begin(); it != actors.end(); ++it)
         {
             if ((*it) == actor)
             {
@@ -110,10 +108,11 @@ void prActorManager::Release(prActor *actor)
 /// ---------------------------------------------------------------------------
 void prActorManager::ReleaseAll()
 {
-    std::list<prActor *>::iterator it  = actors.begin();
-    std::list<prActor *>::iterator end = actors.end();
+    //std::list<prActor *>::iterator it  = actors.begin();
+    //std::list<prActor *>::iterator end = actors.end();
 
-    for (; it != end; ++it)
+    for (auto it = actors.begin(); it != actors.end(); ++it)
+//    for (; it != end; ++it)
     {
         PRSAFE_DELETE(*it);
     }
@@ -173,10 +172,10 @@ void prActorManager::Update(f32 time)
 /// ---------------------------------------------------------------------------
 void prActorManager::Draw()
 {
-    std::list<prActor *>::iterator it  = actors.begin();
-    std::list<prActor *>::iterator end = actors.end();
-
-    for (; it != end; ++it)
+    //std::list<prActor *>::iterator it  = actors.begin();
+    //std::list<prActor *>::iterator end = actors.end();
+    for (auto it = actors.begin(); it != actors.end(); ++it)
+//    for (; it != end; ++it)
     {
         (*it)->Draw();
     }
@@ -250,9 +249,10 @@ u32 prActorManager::HowMany(s32 type)
 {
     u32 count = 0;
 
-    std::list<prActor *>::iterator it  = actors.begin();
-    std::list<prActor *>::iterator end = actors.end();
-    for (; it != end; ++it)
+//    std::list<prActor *>::iterator it  = actors.begin();
+//    std::list<prActor *>::iterator end = actors.end();
+    for (auto it = actors.begin(); it != actors.end(); ++it)
+//    for (; it != end; ++it)
     {
         if (type == (*it)->m_type)
         {
@@ -272,9 +272,10 @@ prActor *prActorManager::FindByIndex(s32 type, u32 index)
     prActor *actor = NULL;
     u32 count = 0;
 
-    std::list<prActor *>::iterator it  = actors.begin();
-    std::list<prActor *>::iterator end = actors.end();
-    for (; it != end; ++it)
+    //std::list<prActor *>::iterator it  = actors.begin();
+    //std::list<prActor *>::iterator end = actors.end();
+    for (auto it = actors.begin(); it != actors.end(); ++it)
+//    for (; it != end; ++it)
     {
         if (type == (*it)->m_type)
         {

@@ -22,6 +22,7 @@
 
 
 using namespace Proteus::Core;
+using namespace Proteus::Math;
 
 
 // Namespaces
@@ -50,6 +51,7 @@ prActor::prActor(s32 type) : m_type(type)
     user2       = 0;
     user3       = 0;
     m_layer     = ActorLayerBack;
+    m_colPos    = prVector2::MinusOne;
 }
 
 

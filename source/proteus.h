@@ -35,6 +35,7 @@
 #include "achievements/prLeaderboards.h"
 #include "actor/prActor.h"
 #include "actor/prActorManager.h"
+#include "actor/prActorStateMachine.h"
 
 
 // Platform specific includes
@@ -60,11 +61,7 @@
 #endif
 
 
-//// Engine includes
-//#include "achievements/prAchievementManager.h"
-//#include "achievements/prLeaderboards.h"
-//#include "actor/prActor.h"
-//#include "actor/prActorManager.h"
+//
 #include "adverts/prAdvertProvider.h"
 #include "adverts/prAdvertProvider_AdMob.h"
 #include "adverts/prAdvertProvider_iAds.h"
@@ -90,7 +87,6 @@
 #include "collision/prLine.h"
 #include "core/prApplication.h"
 #include "core/prApplication_Android.h"
-//#include "core/prApplication_Bada.h"
 #include "core/prApplication_IOS.h"
 #include "core/prApplication_Linux.h"
 #include "core/prApplication_PC.h"
@@ -174,7 +170,6 @@
 #include "inAppPurchase/prInAppPurchase.h"
 #include "inAppPurchase/prStore.h"
 #include "inAppPurchase/prStore_android.h"
-//#include "inAppPurchase/prStore_bada.h"
 #include "inAppPurchase/prStore_ios.h"
 #include "inAppPurchase/prStore_linux.h"
 #include "inAppPurchase/prStore_mac.h"
@@ -236,7 +231,6 @@
 #include "persistence/prSave.h"
 #include "persistence/prSaveBase.h"
 #include "persistence/prSave_android.h"
-//#include "persistence/prSave_bada.h"
 #include "persistence/prSave_ios.h"
 #include "persistence/prSave_linux.h"
 #include "persistence/prSave_mac.h"
@@ -256,7 +250,6 @@
 #include "thread/prMutex.h"
 #include "thread/prThread.h"
 #include "utf8proc/utf8proc.h"
-//#include "util/prFill.h"
 #include "util/prUtility_PC.h"
 
 
