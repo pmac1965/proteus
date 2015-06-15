@@ -37,6 +37,7 @@ class prVector2
 public:
     static const prVector2 Zero;        // All components set to zero
     static const prVector2 One;         // All components set to one
+    static const prVector2 MinusOne;    // All components set to minus one
     static const prVector2 UnitX;       // X set to one, the rest set to zero
     static const prVector2 UnitY;       // Y set to one, the rest set to zero
 
