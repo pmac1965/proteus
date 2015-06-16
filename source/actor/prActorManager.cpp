@@ -88,8 +88,6 @@ void prActorManager::Release(prActor *actor)
 {
     if (actor)
     {
-        //std::list<prActor *>::iterator it  = actors.begin();
-        //std::list<prActor *>::iterator end = actors.end();
         for (auto it = actors.begin(); it != actors.end(); ++it)
         {
             if ((*it) == actor)
@@ -108,11 +106,7 @@ void prActorManager::Release(prActor *actor)
 /// ---------------------------------------------------------------------------
 void prActorManager::ReleaseAll()
 {
-    //std::list<prActor *>::iterator it  = actors.begin();
-    //std::list<prActor *>::iterator end = actors.end();
-
     for (auto it = actors.begin(); it != actors.end(); ++it)
-//    for (; it != end; ++it)
     {
         PRSAFE_DELETE(*it);
     }
@@ -126,44 +120,33 @@ void prActorManager::ReleaseAll()
 /// ---------------------------------------------------------------------------
 void prActorManager::Update(f32 time)
 {
-    std::list<prActor *> destroy;
-
-
-    std::list<prActor *>::iterator it  = actors.begin();
-    std::list<prActor *>::iterator end = actors.end();
-    for (; it != end; ++it)
+    for (auto it = actors.begin(); it != actors.end(); ++it)
     {
         prActor *actor = *it;
-        if (actor)
+        PRASSERT(actor);
         {
+            // Active?
             if (actor->m_active)
             {
                 actor->Update(time);
-            }
 
-            if (actor->m_destroy)
-            {
-                destroy.push_back(actor);
-            }
-        }
-    }
-
-
-    // Release actors?
-    if (!destroy.empty())
-    {
-        std::list<prActor *>::iterator it  = destroy.begin();
-        std::list<prActor *>::iterator end = destroy.end();     
-        for (; it != end; ++it)
-        {
-            prActor *actor = *it;
-            if (actor)
-            {
-                actors.remove(actor);
-                PRSAFE_DELETE(actor);
+                // Destroy?
+                if (actor->m_destroy)
+                {
+                    it = actors.erase(it);
+                    PRSAFE_DELETE(actor);
+                }
+                else
+                {
+                    // No, actor is still active
+                    actor->UpdateOnScreen();
+                }
             }
         }
     }
+
+
+    //prTrace(LogDebug, "Actors: %i\n", actors.size());
 }
 
 
@@ -172,12 +155,27 @@ void prActorManager::Update(f32 time)
 /// ---------------------------------------------------------------------------
 void prActorManager::Draw()
 {
-    //std::list<prActor *>::iterator it  = actors.begin();
-    //std::list<prActor *>::iterator end = actors.end();
+    int s = 0;
+
     for (auto it = actors.begin(); it != actors.end(); ++it)
-//    for (; it != end; ++it)
     {
-        (*it)->Draw();
+        prActor *actor = *it;
+        PRASSERT(actor);
+        {
+            if (actor->m_visible && actor->IsOnscreen())
+            {
+                (*it)->Draw();
+            }
+            else
+            {
+                s++;
+            }
+        }
+    }
+
+    //
+    {
+        prTrace(LogDebug, "Skipped: %i\n", s);
     }
 }
 
@@ -249,10 +247,7 @@ u32 prActorManager::HowMany(s32 type)
 {
     u32 count = 0;
 
-//    std::list<prActor *>::iterator it  = actors.begin();
-//    std::list<prActor *>::iterator end = actors.end();
     for (auto it = actors.begin(); it != actors.end(); ++it)
-//    for (; it != end; ++it)
     {
         if (type == (*it)->m_type)
         {
@@ -272,10 +267,7 @@ prActor *prActorManager::FindByIndex(s32 type, u32 index)
     prActor *actor = NULL;
     u32 count = 0;
 
-    //std::list<prActor *>::iterator it  = actors.begin();
-    //std::list<prActor *>::iterator end = actors.end();
     for (auto it = actors.begin(); it != actors.end(); ++it)
-//    for (; it != end; ++it)
     {
         if (type == (*it)->m_type)
         {

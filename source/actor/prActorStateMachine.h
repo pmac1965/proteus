@@ -19,17 +19,16 @@
 #pragma once
 
 
-//#include "../core/prTypes.h"
-//#include "../core/prMacros.h"
-//#include "../math/prVector2.h"
+#include "../core/prTypes.h"
+#include "../debug/prAssert.h"
 
 
 // Class: prActorStateMachine
 //      An actor mix in class.
 //
 // Notes:
-//      Actors can derive from this class to add state
-//      functionality
+//      Actors can add this class to get state
+//      machine functionality
 template<typename T>
 class prActorStateMachine
 {
@@ -47,5 +46,89 @@ public:
     } prFsmState;
 
 
-private:
+public:
+    // Method: prActorStateMachine
+    //      Constructor
+    prActorStateMachine()
+    {
+        mpStates    = nullptr;
+        mStateCurr  = 0xFFFFFFFF;
+        mStateCount = -1;
+    }
+
+
+    // Method: StateMachineInitialise
+    //      Initialises the state machine
+    //
+    // Parameters:
+    //      pStates - The list of states
+    //      state   - The default state
+    //      count   - The number of states
+    void StateMachineInitialise(prFsmState *pStates, Proteus::Core::u32 state, Proteus::Core::u32 count)
+    {
+        PRASSERT(pStates);
+        PRASSERT(count > 0);
+        PRASSERT(state < count);
+        mpStates    = pStates;
+        mStateCurr  = state;
+        mStateCount = count;
+
+        // Call default method entry
+        prMethod method = mpStates[state].entry;
+        if (method)
+        {
+            (static_cast<T*>(this)->*method)();
+        }
+    }
+
+
+    // Method: StateMachineUpdate
+    //      Updates the state machine
+    void StateMachineUpdate()
+    {
+        PRASSERT(mStateCurr < mStateCount);
+        PRASSERT(mStateCount > 0);
+        if (mpStates)
+        {
+            // Get the update
+            prMethod method = mpStates[mStateCurr].update;
+            if (method)
+            {
+                (static_cast<T*>(this)->*method)();        
+            }
+        }
+    }
+
+
+    // Method: StateMachineSetState
+    //      Sets the next state
+    void StateMachineSetState(Proteus::Core::u32 state)
+    {
+        PRASSERT(mStateCurr < mStateCount);
+        PRASSERT(mStateCount > 0);
+        if (mStateCurr != state)
+        {
+            // Call old method exit
+            prMethod method = mpStates[mStateCurr].exit;
+            if (method)
+            {
+                (static_cast<T*>(this)->*method)();
+            }
+
+            // Call new method entry
+            method = mpStates[state].entry;
+            if (method)
+            {
+                (static_cast<T*>(this)->*method)();
+            }
+
+            mStateCurr = state;
+        }
+    }
+
+
+protected:
+    prFsmState         *mpStates;
+    Proteus::Core::u32  mStateCurr;
+    Proteus::Core::u32  mStateCount;
 };
