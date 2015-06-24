@@ -49,7 +49,7 @@ namespace
         //TODO("These functions also need to be improved. Too many duplicates!")
         //static char name[256];
 
-        strcpy(pName, "com/redcliffeinteractive/proteus/audio/");
+        strcpy(pName, "com/redcliffeinteractive/engine/audio/");
         strcat(pName, pClassName);
 
         return pName;

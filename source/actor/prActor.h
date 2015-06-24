@@ -221,7 +221,7 @@ public:
     //      pActor - The colliding actor
     //
     // Return:
-    //  A response type. The default value of -1 equals do nothing
+    //      A response type. The default value of -1 equals do nothing
     virtual Proteus::Core::s32 OnCollisionLinger2D(prActor *pActor) { return -1; }
 
     // Method: SetCollisionPosition2D
@@ -232,6 +232,26 @@ public:
     // Method: DebugDrawCollision2D
     //      An overrideable function which allows the collision to be drawn by the actor
     virtual void DebugDrawCollision2D() {}
+
+    // Method: GetActorWidth
+    //      Optional call to get the actor width
+    //
+    // Notes:
+    //      The default return value is 0
+    //
+    // Return:
+    //      User defined width
+    virtual Proteus::Core::u32 GetActorWidth() const { return 0; }
+
+    // Method: GetActorHeight
+    //      Optional call to get the actor height
+    //
+    // Notes:
+    //      The default return value is 0
+    //
+    // Return:
+    //      User defined height
+    virtual Proteus::Core::u32 GetActorHeight() const { return 0; }
 
 
 public:

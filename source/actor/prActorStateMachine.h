@@ -60,6 +60,10 @@ public:
     // Method: StateMachineInitialise
     //      Initialises the state machine
     //
+    // Notes:
+    //      Initialisation causes the defaults states entry method to
+    //      be called. If one exists
+    //
     // Parameters:
     //      pStates - The list of states
     //      state   - The default state
