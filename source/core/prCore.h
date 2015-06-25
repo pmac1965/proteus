@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRCORE_H
-#define __PRCORE_H
+#pragma once
 
 
 #include "prTypes.h"
@@ -220,6 +219,3 @@ Proteus::Core::PRBOOL prCoreComponentExist(Proteus::Core::s32 systemID);
 //      A prCoreSystem pointer.
 //      May return NULL
 prCoreSystem *prCoreGetComponent(Proteus::Core::u32 systemID);
-
-
-#endif//__PRCORE_H

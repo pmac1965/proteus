@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRCORESYSTEM_H
-#define __PRCORESYSTEM_H
+#pragma once
 
 
 #include "prTypes.h"
@@ -59,6 +58,3 @@ private:
     Proteus::Core::u32  m_id;           // The systems unique ID.
     prString            m_name;         // The systems name.
 };
-
-
-#endif//__PRCORESYSTEM_H

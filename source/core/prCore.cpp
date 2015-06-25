@@ -70,6 +70,72 @@ namespace
 {
     PRBOOL          init   = PRFALSE;
     prCoreSystem   *pSystems[PRSYSTEM_MAX];
+
+
+    // Debug assist data
+    static struct CoreSystemName
+    {
+        s32 id;
+        const char *name;
+    }
+    coreSystemNames[] = 
+    {
+        // Core systems
+        { PRSYSTEM_RESOURCEMANAGER,     "PRSYSTEM_RESOURCEMANAGER" },
+        { PRSYSTEM_TOUCH,               "PRSYSTEM_TOUCH" },
+        { PRSYSTEM_MESSAGEMANAGER,      "PRSYSTEM_MESSAGEMANAGER" },
+        { PRSYSTEM_REGISTRY,            "PRSYSTEM_REGISTRY" },
+        { PRSYSTEM_FILEMANAGER,         "PRSYSTEM_FILEMANAGER" },
+        { PRSYSTEM_RENDERER,            "PRSYSTEM_RENDERER" },
+
+        // Desktop only
+    #if defined(PLATFORM_PC)
+        { PRSYSTEM_MOUSE,               "PRSYSTEM_MOUSE" },
+        { PRSYSTEM_KEYBOARD,            "PRSYSTEM_KEYBOARD" },
+
+        // Desktop only
+    #elif defined(PLATFORM_LINUX)
+        { PRSYSTEM_MOUSE,               "PRSYSTEM_MOUSE" },
+    #endif
+
+        // Optional systems
+        { PRSYSTEM_FPS,                 "PRSYSTEM_FPS" },
+        { PRSYSTEM_AUDIO,               "PRSYSTEM_AUDIO" },
+        { PRSYSTEM_ONSCREENLOGGER,      "PRSYSTEM_ONSCREENLOGGER" },
+        { PRSYSTEM_FADEMANAGER,         "PRSYSTEM_FADEMANAGER" },
+        { PRSYSTEM_GUIMANAGER,          "PRSYSTEM_GUIMANAGER" },
+        { PRSYSTEM_BACKGROUNDMANAGER,   "PRSYSTEM_BACKGROUNDMANAGER" },
+        { PRSYSTEM_SPRITEMANAGER,       "PRSYSTEM_SPRITEMANAGER" },
+        { PRSYSTEM_ACCELEROMETER,       "PRSYSTEM_ACCELEROMETER" },
+        { PRSYSTEM_RENDERER,            "PRSYSTEM_RENDERER" },
+        { PRSYSTEM_FONTMANAGER,         "PRSYSTEM_FONTMANAGER" },
+    };
+
+
+    /// -----------------------------------------------------------------------
+    /// Shows the name of a system by its ID
+    /// -----------------------------------------------------------------------
+    const char *CoreGetSystemName(s32 id)
+    {
+        for(s32 i=0; i<PRARRAY_SIZE(coreSystemNames); i++)
+        {
+            if (coreSystemNames[i].id == id)
+            {
+                return coreSystemNames[i].name;
+            }
+        }
+
+        return "Core system not found";
+    }
+
+
+    /// -----------------------------------------------------------------------
+    /// Shows the name of a system by its ID
+    /// -----------------------------------------------------------------------
+    void CoreShowSystemExists(s32 id)
+    {
+        prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
+    }
 }
 
 
@@ -221,31 +287,6 @@ PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version)
                 }
             }
 
-        #elif defined(PLATFORM_BADA)
-            // Check renderer type value.
-            PRASSERT(rendererType == PRRENDERER_OPENGL);
-            PRASSERT(version == PRGLVER_11 || version == PRGLVER_20);
-
-            // Check version numbers
-            if (rendererType == PRRENDERER_OPENGL)
-            {
-                PRASSERT(version == PRGLVER_11 || version == PRGLVER_20 || version == PRGLVER_30);
-                switch (version)
-                {
-                    case PRGLVER_11:
-                        pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
-                        break;
-                    
-                    case PRGLVER_20:
-                        pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
-                        break;
-                    
-                    case PRGLVER_30:
-                        PRPANIC("Under construction");
-                        break;
-                }
-            }
-
         #elif defined(PLATFORM_LINUX)
             // Check renderer type value.
             PRASSERT(rendererType == PRRENDERER_OPENGL);
@@ -328,43 +369,43 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
             {
             // The background manager.
             case PRSYSTEM_BACKGROUNDMANAGER:
-                if (pSystems[id] == NULL)
+                if (pSystems[id] == nullptr)
                 {
                     pSystems[id] = new prBackgroundManager();
                 }
                 else
                 {
-                    prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
+                    CoreShowSystemExists(id);
                 }
                 break;
 
             // The sprite manager.
             case PRSYSTEM_SPRITEMANAGER:
-                if (pSystems[id] == NULL)
+                if (pSystems[id] == nullptr)
                 {
                     pSystems[id] = new prSpriteManager();
                 }
                 else
                 {
-                    prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
+                    CoreShowSystemExists(id);
                 }
                 break;
 
             // The on screen logger.
             case PRSYSTEM_ONSCREENLOGGER:
-                if (pSystems[id] == NULL)
+                if (pSystems[id] == nullptr)
                 {
                     pSystems[id] = new prOnScreenLogger();
                 }
                 else
                 {
-                    prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
+                    CoreShowSystemExists(id);
                 }
                 break;
 
             // The sound manager
             case PRSYSTEM_AUDIO:
-                if (pSystems[id] == NULL)
+                if (pSystems[id] == nullptr)
                 {
                 #if defined(PLATFORM_PC)
                     pSystems[id] = new prSoundManager_PC();
@@ -373,24 +414,22 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 #elif defined(PLATFORM_IOS)
                     pSystems[id] = new prSoundManager_Ios();
                 #elif defined(PLATFORM_MAC)
-                    pSystems[id] = NULL;
+                    pSystems[id] = nullptr;
                 #elif defined(PLATFORM_LINUX)
                     pSystems[id] = new prSoundManager_Linux();
-                #elif defined(PLATFORM_BADA)
-                    pSystems[id] = NULL;
                 #else
                     #error Platform undefined
                 #endif
                 }
                 else
                 {
-                    prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
+                    CoreShowSystemExists(id);
                 }
                 break;
 
             // FPS
             case PRSYSTEM_FPS:
-                if (pSystems[id] == NULL)
+                if (pSystems[id] == nullptr)
                 {
                 #if defined(PLATFORM_PC)
                     pSystems[id] = new prFps_PC();
@@ -399,42 +438,40 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 #elif defined(PLATFORM_IOS)
                     pSystems[id] = new prFps_ios();
                 #elif defined(PLATFORM_MAC)
-                    pSystems[id] = NULL;
+                    pSystems[id] = nullptr;
                 #elif defined(PLATFORM_LINUX)
                     pSystems[id] = new prFps_Linux();
-                #elif defined(PLATFORM_BADA)
-                    pSystems[id] = NULL;
                 #else
                     #error Platform undefined
                 #endif
                 }
                 else
                 {
-                    prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
+                    CoreShowSystemExists(id);
                 }
                 break;
 
             // The fade manager
             case PRSYSTEM_FADEMANAGER:
-                if (pSystems[id] == NULL)
+                if (pSystems[id] == nullptr)
                 {
                     pSystems[id] = new prFadeManager();
                 }
                 else
                 {
-                    prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
+                    CoreShowSystemExists(id);
                 }
                 break;
 
             // Accelerometer
             case PRSYSTEM_ACCELEROMETER:
-                if (pSystems[id] == NULL)
+                if (pSystems[id] == nullptr)
                 {
                     pSystems[id] = new prAccelerometer();
                 }
                 else
                 {
-                    prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
+                    CoreShowSystemExists(id);
                 }
                 break;
 
@@ -442,11 +479,11 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
             default:
                 if (id < 0 || id >= PRSYSTEM_MAX)
                 {
-                    prTrace(LogError, "Invalid ID: %i\n", id);
+                    prTrace(LogError, "Invalid core system ID: %i\n", id);
                 }
                 else
                 {
-                    prTrace(LogError, "Yet to implement %i\n", id);
+                    prTrace(LogError, "Yet to implement %i - %s\n", id, CoreGetSystemName(id));
                 }
                 break;
             }
@@ -493,7 +530,7 @@ PRBOOL prCoreComponentExist(s32 systemID)
     {
         if (PRBETWEEN(systemID, 0, PRSYSTEM_MAX - 1))
         {
-            result = (pSystems[systemID] != NULL);
+            result = (pSystems[systemID] != nullptr);
         }
         else
         {
@@ -523,5 +560,5 @@ prCoreSystem *prCoreGetComponent(u32 systemID)
         }
     }
 
-    return NULL;
+    return nullptr;
 }

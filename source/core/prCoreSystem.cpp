@@ -25,14 +25,12 @@ using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------
-/// @brief      Constructor.
-/// @param      id      - A unique ID which identifies the system.
-/// @param      pName   - The name of the system.
+/// Constructor.
 /// ---------------------------------------------------------------------------
 prCoreSystem::prCoreSystem(u32 id, const char *pName) : m_id  (id)
                                                       , m_name(pName)
 {
-    prTrace(LogError, "Init : %*s - ID: %i\n", 24, (pName && *pName) ? pName : "Unnamed", id);
+    PRLOGD("Init : %*s - ID: %i\n", 24, (pName && *pName) ? pName : "Unnamed", id);
 }
 
 

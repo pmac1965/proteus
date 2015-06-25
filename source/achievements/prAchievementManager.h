@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRACHIEVEMENTMANAGER_H
-#define __PRACHIEVEMENTMANAGER_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -214,6 +213,3 @@ private:
     AchievementManagerImplementation  *pImpl;
     AchievementManagerImplementation  &imp;
 };
-
-
-#endif//__PRACHIEVEMENTMANAGER_H

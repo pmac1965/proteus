@@ -132,18 +132,18 @@ typedef struct AchievementManagerImplementation
 
         save                    = new prSave(folder);
         achievementsCount       = 0;
-        achievements            = NULL;
-        pNotificationBar        = NULL;
-        pFont                   = NULL;
-        pTexture                = NULL;
+        achievements            = nullptr;
+        pNotificationBar        = nullptr;
+        pFont                   = nullptr;
+        pTexture                = nullptr;
         success                 = false;
         render                  = false;
 //        hiRes                   = false;
         enabled                 = true;
         exp0                    = false;
         mode                    = MODE_NONE;
-        pAchievementProvider    = NULL;
-        pLanguage               = NULL;
+        pAchievementProvider    = nullptr;
+        pLanguage               = nullptr;
         delay                   = 0.0f;
         timer                   = AWARDS_TEST_DELAY;
         on_pos                  = 0;
@@ -649,7 +649,7 @@ typedef struct AchievementManagerImplementation
         }
 
         prTrace(LogError, "prAchievementManager::GetIdentifier - Failed to find identifier: %s\n", name);
-        return NULL;
+        return nullptr;
     }
 
 
@@ -678,7 +678,7 @@ typedef struct AchievementManagerImplementation
         }
 
         prTrace(LogError, "prAchievementManager::GetIdentifierByIndex - Failed to find identifier\n");
-        return NULL;
+        return nullptr;
     }
 
 
@@ -992,7 +992,7 @@ void prAchievementManager::Save()
         return;
 
     // No data?
-    if (imp.achievements == NULL)
+    if (imp.achievements == nullptr)
         return;
         
     // Save the file.
@@ -1097,7 +1097,7 @@ const char *prAchievementManager::GetDescriptionText(const char *name, s32 type)
     }
 
     prTrace(LogError, "prAchievementManager::GetDescriptionText - Failed to find achievement: %s\n", name);
-    return NULL;
+    return nullptr;
 }
 
 
@@ -1130,7 +1130,7 @@ const char *prAchievementManager::GetDescriptionTextByIndex(u32 index, s32 type)
     }
 
     prTrace(LogError, "prAchievementManager::GetDescriptionTextByIndex - Failed to find achievement: %i\n", index);
-    return NULL;
+    return nullptr;
 }
 
 
@@ -1184,7 +1184,7 @@ const char *prAchievementManager::GetNameByIndex(u32 index)
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 
