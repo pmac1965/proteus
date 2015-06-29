@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRFPS_ANDROID_H
-#define __PRFPS_ANDROID_H
+#pragma once
 
 
 #include "prFps.h"
@@ -27,6 +26,14 @@
 
 // Class: prFps_Android
 //      Class used to calculate the frame rate.
+//
+// Notes:
+//      Extensive or continuous use of this class will
+//      cause a thread lock on android devices, so it needs
+//      to be used with care
+//
+// See Also:
+//      <prFps>
 class prFps_Android : public prFps
 {
 public:
@@ -40,24 +47,20 @@ public:
 
     // Method: Reset
     //      Resets the timing data, should be called on game entry, etc.
-    void Reset();
+    void Reset() override;
 
     // Method: Begin
     //      Begins the timing period.
-    void Begin();
+    void Begin() override;
 
     // Method: End
     //      Ends the timing period.
-    void End();
+    void End() override {}
 
 
 private:
-
     Proteus::Core::u64     timeStart;
     Proteus::Core::u64     timeEnd;
     Proteus::Core::u64     timeTotal;
     Proteus::Core::u64     ticksPerSecond;
 };
-
-
-#endif//__PRFPS_ANDROID_H

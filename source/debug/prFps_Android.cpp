@@ -50,14 +50,16 @@ prFps_Android::~prFps_Android()
 /// ---------------------------------------------------------------------------
 void prFps_Android::Reset()
 {
+    prFps::Reset();
+
     ticksPerSecond = 0LL;
     timeTotal      = 0LL;
     timeEnd        = 0LL;
     timeStart      = clock();
-    frames         = 0;
-    frameRate      = 0;
-    frameRateMin   = 1000000;
-    frameRateMax   = -1000000;
+    //frames         = 0;
+    //frameRate      = 0;
+    //frameRateMin   = 1000000;
+    //frameRateMax   = -1000000;
 }
 
 
@@ -94,14 +96,6 @@ void prFps_Android::Begin()
         // Okay, completed another frame.
         frames++;
     }
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Ends the timing period.
-/// ---------------------------------------------------------------------------
-void prFps_Android::End()
-{
 }
 
 

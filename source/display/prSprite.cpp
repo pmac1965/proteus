@@ -83,6 +83,7 @@ prSprite::prSprite(prTexture *pTexture, const char *name, s32 frameWidth, s32 fr
     PRASSERT(pTexture);
     PRASSERT(name && *name);
 
+    mpRenderer    = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
     m_pTexture    = pTexture;
     m_animation   = nullptr;
     m_name        = nullptr;
@@ -192,11 +193,8 @@ void prSprite::Draw()
 
             m_pTexture->Bind();
 
-            prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
-            if (pRenderer)
-            {
-                pRenderer->DrawQuad(m_u0, m_v0, m_u1, m_v1, m_colour);
-            }
+            PRASSERT(mpRenderer)
+            mpRenderer->DrawQuad(m_u0, m_v0, m_u1, m_v1, m_colour);
             
             glPopMatrix();
             ERR_CHECK();
@@ -204,23 +202,6 @@ void prSprite::Draw()
         glDisable(GL_BLEND);
         ERR_CHECK();
     }
-
-//#if defined(PLATFORM_PC)
-//    if (PRKEY_DOWN('W'))
-//    {
-//        m_u0 -= (m_pw);
-//    }
-//    if (PRKEY_DOWN('S'))
-//    {
-//    }
-//    if (PRKEY_DOWN('O'))
-//    {
-//    }
-//    if (PRKEY_DOWN('P'))
-//    {
-//        m_u1 -= (m_pw);
-//    }
-//#endif
 }
 
 
@@ -260,13 +241,8 @@ void prSprite::BatchDraw()
             glScalef(width, height, 0);
             ERR_CHECK();
 
-            m_pTexture->Bind();
-
-            prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
-            if (pRenderer)
-            {
-                pRenderer->DrawQuad(m_u0, m_v0, m_u1, m_v1, m_colour);
-            }
+            PRASSERT(mpRenderer)
+            mpRenderer->BatchDrawQuad(m_u0, m_v0, m_u1, m_v1, m_colour);
             
         glPopMatrix();
         ERR_CHECK();

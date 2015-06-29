@@ -1,4 +1,17 @@
 // File: prTouchListener.h
+//      An interface file for game classes that want to receive touch input.
+//
+// Notes:
+//      The handling class needs to register itself with the system class <prTouch>
+//      in order to receive notifications
+//
+//      Class also need to unregister themselves when done
+//
+// See Also:
+//      <prTouch>
+//
+// See Also:
+//      <prTouchEvent>
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,15 +29,14 @@
  */
 
 
-#ifndef __PRITOUCHLISTENER_H
-#define __PRITOUCHLISTENER_H
+#pragma once
 
 
 #include "prTouch.h"
 
 
 // Class: ITouchListener
-//      Interface file for classes which want to receive touch input.
+//      An interface file for classes that want to receive touch input.
 class ITouchListener
 {
 public:
@@ -58,6 +70,3 @@ public:
     //      <prTouchEvent>
     virtual void InputAxis(const prTouchEvent &e) = 0;
 };
-
-
-#endif//__PRITOUCHLISTENER_H

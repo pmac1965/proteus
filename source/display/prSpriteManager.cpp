@@ -329,13 +329,19 @@ void prSpriteManager::DisplayUsage()
 /// ---------------------------------------------------------------------------
 /// Starts batch sprite rendering
 /// ---------------------------------------------------------------------------
-void prSpriteManager::BatchBegin()
+void prSpriteManager::BatchBegin(prSprite *pSprite)
 {
+    PRASSERT(pSprite);
+    
     // Enable blending
     glEnable(GL_BLEND);
     ERR_CHECK();
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     ERR_CHECK();
+
+
+    // Bind the texture for the batch
+    pSprite->m_pTexture->Bind();
 
     // Enable textures
     //glEnable(GL_TEXTURE_2D);

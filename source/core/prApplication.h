@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRAPPLICATION_H
-#define __PRAPPLICATION_H
+#pragma once
 
 
 #include "prTypes.h"
@@ -133,17 +132,29 @@ public:
     //
     // Returns:
     //      PRTRUE if the game is running.
+    // Returns:
     //      PRFALSE if the game is NOT running.
     PRBOOL GetIsRunning() const { return m_running; }
+
+    // Method: BackKeyPressed
+    //      Lets the application know the back key was pressed.
+    //
+    // Notes:
+    //      Intended for use in menu navigation and game exit.
+    //
+    // Notes:
+    //      Only usable in devices with back keys.
+    //
+    // Returns:
+    //      Returns false by default as its up to the user what to
+    //      do with the back key.
+    virtual bool BackKeyPressed() { return false; }
 
 
 protected:    
     prWindow   *m_pWindow;              // The applications window
-    PRBOOL      m_running;              // Whether than app is running or not
+    PRBOOL      m_running;              // Whether the app is running or not
 };
 
 
 }} // Namespaces
-
-
-#endif//__PRAPPLICATION_H

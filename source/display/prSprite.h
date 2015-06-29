@@ -1,4 +1,12 @@
 // File: prSprite.h
+//      Basic 2D sprite entity
+//
+// Notes:
+//      A sprite must be created and destroyed using the sprite manager, as
+//      they cannot be used alone
+//
+// See Also:
+//      <prSpriteManager>
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,8 +24,7 @@
  */
 
 
-#ifndef __PRSPRITE_H
-#define __PRSPRITE_H
+#pragma once
 
 
 #include "prColour.h"
@@ -26,9 +33,10 @@
 
 
 // Forward declarations
-class  prTexture;
-class  prSpriteAnimationSequence;
-class  prSpriteAnimation;
+class prTexture;
+class prSpriteAnimationSequence;
+class prSpriteAnimation;
+class prRenderer;
 
 
 // Defines
@@ -302,6 +310,7 @@ private:
 
 
 private:
+    prRenderer         *mpRenderer;         // A pointer to the renderer.
     prTexture          *m_pTexture;
     prSpriteAnimation  *m_animation;
     char               *m_name;
@@ -327,14 +336,9 @@ private:
     Proteus::Core::f32  m_ph;               // Pixel height
     Proteus::Core::f32  m_angle;
     Proteus::Core::s32  m_priority;         // May not keep.
-
+    prColour            m_colour;
     bool                m_animated;
     bool                m_visible;
     bool                m_exp0;
     bool                m_exp1;
-
-    prColour            m_colour;
 };
-
-
-#endif//__PRSPRITE_H

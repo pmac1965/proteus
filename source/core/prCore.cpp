@@ -176,7 +176,7 @@ void prCoreInit()
     }
     else
     {
-        PRWARN("Waring: You cannot initialise the core twice");
+        PRWARN("Warning: You cannot initialise the core twice");
     }
 }
 
@@ -503,7 +503,7 @@ void prCoreDestroy()
     {
         if (pSystems[i])
         {
-            prTrace(LogError, "Destroying %s - %i\n", pSystems[i]->Name(), pSystems[i]->ID());
+            PRLOGI("Destroying %s - %i\n", pSystems[i]->Name(), pSystems[i]->ID());
             PRSAFE_DELETE(pSystems[i]);
         }
     }

@@ -439,8 +439,19 @@ PRBOOL prApplication_PC::Run()
                     Update(dt);
                     Draw();
 
-                    // Clears keyboard, so do after update.
-                    if (pKeyb) { pKeyb->Update(); }
+                    // Clears keyboard, so do after game update.
+                    if (pKeyb)
+                    {
+                        // First check for keyboard back. Most PC games will ignore this as its really
+                        // just here so we can test the functionality on the PC debug versions
+                        // of any game
+                        if (pKeyb->IsKeyPressed(VK_BACK))
+                        {
+                            BackKeyPressed();
+                        }
+
+                        pKeyb->Update();
+                    }
                 }
             }
 

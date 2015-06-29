@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRTEXTURE_H
-#define __PRTEXTURE_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -66,10 +65,8 @@ public:
 
 
 private:
-
     // A friend 
     friend class prResourceManager;
-
 
     // Keep ctor/dtor private so only the resource manager can create/destroy.
     explicit prTexture(const char *filename);
@@ -108,15 +105,12 @@ private:
 
 
 private:
-
     // Stops passing by value and assignment.
     prTexture(const prTexture&);
     const prTexture& operator = (const prTexture&);
 
 
 private:
-
-    // Data
     Proteus::Core::s32  m_width;
     Proteus::Core::s32  m_height;
     Proteus::Core::u32  m_texID;
@@ -131,6 +125,3 @@ private:
 //      If you bind textures outside the texture class, you'll need to
 //      call this or you'll get invalid textures
 void prTextureClearLastID();
-
-
-#endif//__PRTEXTURE_H

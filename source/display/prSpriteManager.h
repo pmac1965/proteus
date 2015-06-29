@@ -22,8 +22,7 @@
  */
 
 
-#ifndef __PRSPRITEMANAGER_H
-#define __PRSPRITEMANAGER_H
+#pragma once
 
 
 #include <list>
@@ -132,7 +131,10 @@ public:
 
     // Method: BatchBegin
     //      Starts batch sprite rendering
-    void BatchBegin();
+    //
+    // Parameters:
+    //      pSprite - The sprite to start batching with
+    void BatchBegin(prSprite *pSprite);
     
     // Method: BatchEnd
     //      Ends batch sprite rendering
@@ -140,7 +142,6 @@ public:
 
 
 private:
-
     // Loads a sprite file.
     //
     //      filename - Name of the file to load
@@ -168,14 +169,12 @@ private:
 
 
 private:
-
     // Stops passing by value and assignment.
     prSpriteManager(const prSpriteManager&);
     const prSpriteManager& operator = (const prSpriteManager&);
 
 
 private:
-
     bool                        m_correctFileType;
     bool                        m_exp0;
     bool                        m_exp1;
@@ -184,6 +183,3 @@ private:
     prTexture                  *m_texture;
     std::list<prActiveSprite>   m_activeSprites;
 };
-
-
-#endif//__PRSPRITEMANAGER_H

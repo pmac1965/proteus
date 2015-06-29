@@ -33,10 +33,6 @@
   #include <OpenGL/gl.h>
   #include <stdio.h>
 
-#elif defined(PLATFORM_BADA)
-  #include <FGraphicsOpengl.h>
-  using namespace Osp::Graphics::Opengl;
-
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
   #include <GLES/glext.h>
@@ -65,8 +61,8 @@
 #include "../debug/prDebug.h"
 
 
-// prTexture formats.
-#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC)
+// prTexture formats (32 Bit)
+#if (defined(PLATFORM_PC) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))
 enum
 {
     TEX_FMT_OGL888          = 0x00000015,
@@ -77,41 +73,10 @@ enum
     TEX_FMT_OGL8888_TGA_YN  = 0x00018012,
 };
 
-#elif defined(PLATFORM_IOS)
+// prTexture formats (16 Bit)
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID))
 enum
 {
-    TEX_FMT_OGL888          = 0x00000015,
-    TEX_FMT_OGL888_BMP_YN   = 0x00010015,
-    TEX_FMT_OGL8888_BMP_YI  = 0x00000012,
-    TEX_FMT_OGL8888_BMP_YN  = 0x00010012,
-    TEX_FMT_OGL8888_TGA_YI  = 0x00008012,
-    TEX_FMT_OGL8888_TGA_YN  = 0x00018012,
-    TEX_FMT_OGL4444_TGA_YN  = 0x00018010,
-    TEX_FMT_OGL4444_BMP_YN  = 0x00010010,
-    TEX_FMT_OGL565          = 0x00010013,
-    TEX_FMT_OGL5551         = 0x00018011,
-};
-
-#elif defined(PLATFORM_BADA)
-enum
-{
-    // Standard texture formats
-    TEX_FMT_OGL888          = 0x00000015,
-    TEX_FMT_OGL888_BMP_YN   = 0x00010015,
-    TEX_FMT_OGL8888_BMP_YI  = 0x00000012,
-    TEX_FMT_OGL8888_BMP_YN  = 0x00010012,
-    TEX_FMT_OGL8888_TGA_YI  = 0x00008012,
-    TEX_FMT_OGL8888_TGA_YN  = 0x00018012,
-    TEX_FMT_OGL4444_TGA_YN  = 0x00018010,
-    TEX_FMT_OGL4444_BMP_YN  = 0x00010010,
-    TEX_FMT_OGL565          = 0x00010013,
-    TEX_FMT_OGL5551         = 0x00018011,
-};
-
-#elif defined(PLATFORM_ANDROID)
-enum
-{
-    // Standard texture formats
     TEX_FMT_OGL888          = 0x00000015,
     TEX_FMT_OGL888_BMP_YN   = 0x00010015,
     TEX_FMT_OGL8888_BMP_YI  = 0x00000012,
@@ -132,6 +97,10 @@ enum
 
 // Defines
 #define HEADER_MAGIC    0x21525650
+
+
+// Debug defines
+#define SHOW_TEXTURE_TYPES
 
 
 using namespace Proteus::Core;
@@ -666,6 +635,9 @@ bool prTexture::GetTextureFormat(u32 texFormat, int &internalFormat, int &format
         type           = GL_UNSIGNED_BYTE;
         m_alpha        = false;
         compressed     = false;
+        #if (defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID)) && defined(SHOW_TEXTURE_TYPES)
+        prTrace(LogError, "888 Texture %s\n", Filename());
+        #endif
         break;
 
     case TEX_FMT_OGL8888_BMP_YI:
@@ -676,10 +648,13 @@ bool prTexture::GetTextureFormat(u32 texFormat, int &internalFormat, int &format
         format         = GL_RGBA;
         type           = GL_UNSIGNED_BYTE;
         m_alpha        = true;
-        compressed     = false;
+        compressed     = false;    
+        #if (defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID)) && defined(SHOW_TEXTURE_TYPES)
+        prTrace(LogError, "8888 Texture %s\n", Filename());
+        #endif
         break;
                 
-    #if defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
+    #if defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID)
     case TEX_FMT_OGL4444_TGA_YN:
     case TEX_FMT_OGL4444_BMP_YN:
         internalFormat = GL_RGBA;
@@ -687,6 +662,9 @@ bool prTexture::GetTextureFormat(u32 texFormat, int &internalFormat, int &format
         type           = GL_UNSIGNED_SHORT_4_4_4_4;
         m_alpha        = true;
         compressed     = false;
+        #if defined(SHOW_TEXTURE_TYPES)
+        prTrace(LogInformation, "4444 Texture %s\n", Filename());
+        #endif
         break;
 
     case TEX_FMT_OGL5551:
@@ -695,6 +673,9 @@ bool prTexture::GetTextureFormat(u32 texFormat, int &internalFormat, int &format
         type           = GL_UNSIGNED_SHORT_5_5_5_1;
         m_alpha        = true;
         compressed     = false;
+        #if defined(SHOW_TEXTURE_TYPES)
+        prTrace(LogInformation, "5551 Texture %s\n", Filename());
+        #endif
         break;
 
     case TEX_FMT_OGL565:
@@ -703,6 +684,9 @@ bool prTexture::GetTextureFormat(u32 texFormat, int &internalFormat, int &format
         type           = GL_UNSIGNED_SHORT_5_6_5;
         m_alpha        = false;
         compressed     = false;
+        #if defined(SHOW_TEXTURE_TYPES)
+        prTrace(LogInformation, "565 Texture %s\n", Filename());
+        #endif
         break;
     #endif
                 

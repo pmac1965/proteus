@@ -1,4 +1,17 @@
 // File: prFps.h
+//      Class used to calculate the frame rate.
+//
+// Notes:
+//      This class is a core system class and should be acquired using the core
+//      systems component manager.
+//
+// See Also:
+//      <prCoreGetComponent>
+//
+// Warning:
+//      On Android devices extensive or continuous use of this class will
+//      eventually cause a thread lock on actual devices, so this class needs
+//      to be used with care. At least for the moment
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,8 +29,7 @@
  */
 
 
-#ifndef __PRFPS_H
-#define __PRFPS_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -26,6 +38,11 @@
 
 // Class: prFps
 //      Class used to calculate the frame rate.
+//
+// Warning:
+//      On Android devices extensive or continuous use of this class will
+//      eventually cause a thread lock on actual devices, so this class needs
+//      to be used with care. At least for the moment
 class prFps : public prCoreSystem
 {
 public:
@@ -63,12 +80,8 @@ public:
 
 
 protected:
-
     Proteus::Core::s32     frames;
     Proteus::Core::s32     frameRate;
     Proteus::Core::s32     frameRateMin;
     Proteus::Core::s32     frameRateMax;
 };
-
-
-#endif//__PRFPS_H
