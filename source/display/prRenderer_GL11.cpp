@@ -135,6 +135,10 @@ void prRenderer_GL11::Init()
 #if defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS)
     glClearDepthf(1.0f);
     ERR_CHECK();
+
+    glDisable(GL_DITHER);
+    ERR_CHECK();
+
 #else
     glClearDepth(1.0f);
     ERR_CHECK();
