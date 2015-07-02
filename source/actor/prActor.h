@@ -22,6 +22,7 @@
 #include "../core/prTypes.h"
 #include "../core/prMacros.h"
 #include "../math/prVector2.h"
+#include "../math/prPoint.h"
 
 
 // Namespaces
@@ -232,6 +233,13 @@ public:
     // Method: DebugDrawCollision2D
     //      An overrideable function which allows the collision to be drawn by the actor
     virtual void DebugDrawCollision2D() {}
+
+    // Method: OnLineIntersect
+    //      An overrideable function indicates a collision intersection
+    //
+    // Parameters:
+    //      point - The intersection point
+    virtual void OnLineIntersect2D(const Proteus::Math::prPoint2F &point) {}
 
     // Method: GetActorWidth
     //      Optional call to get the actor width
