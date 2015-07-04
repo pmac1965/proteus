@@ -87,6 +87,7 @@ enum
     TEX_FMT_OGL4444_BMP_YN  = 0x00010010,
     TEX_FMT_OGL565          = 0x00010013,
     TEX_FMT_OGL5551         = 0x00018011,
+    TEX_FMT_OGL5551_YI      = 0x00010011,
 };
 
 #else
@@ -668,6 +669,7 @@ bool prTexture::GetTextureFormat(u32 texFormat, int &internalFormat, int &format
         break;
 
     case TEX_FMT_OGL5551:
+    case TEX_FMT_OGL5551_YI:
         internalFormat = GL_RGBA;
         format         = GL_RGBA;
         type           = GL_UNSIGNED_SHORT_5_5_5_1;
@@ -691,7 +693,7 @@ bool prTexture::GetTextureFormat(u32 texFormat, int &internalFormat, int &format
     #endif
                 
     default:
-        prTrace(LogError, "Unknown texture format: %08x\n", texFormat);
+        prTrace(LogError, "Unknown texture format: %08x - '%s'\n", texFormat, Filename());
         result = false;
         break;
     }
