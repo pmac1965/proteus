@@ -144,9 +144,6 @@ void prActorManager::Update(f32 time)
             }
         }
     }
-
-
-    //prTrace(LogDebug, "Actors: %i\n", actors.size());
 }
 
 
@@ -155,8 +152,6 @@ void prActorManager::Update(f32 time)
 /// ---------------------------------------------------------------------------
 void prActorManager::Draw()
 {
-    int s = 0;
-
     for (auto it = actors.begin(); it != actors.end(); ++it)
     {
         prActor *actor = *it;
@@ -166,16 +161,7 @@ void prActorManager::Draw()
             {
                 (*it)->Draw();
             }
-            else
-            {
-                s++;
-            }
         }
-    }
-
-    //
-    {
-        prTrace(LogDebug, "Skipped: %i\n", s);
     }
 }
 

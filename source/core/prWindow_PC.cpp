@@ -580,6 +580,12 @@ bool prWindow_PC::ChangeToFullScreen()
     if (ChangeDisplaySettings(&dmScreenSettings, CDS_FULLSCREEN) != DISP_CHANGE_SUCCESSFUL)
     {
         prTrace(LogError, "Display setting not supported.\n");
+
+        MessageBoxW(HWND_DESKTOP, L"Display setting not supported.\r\n"
+                                  L"Please ensure that the full screen size is available\r\n"
+                                  L"on your PC. Mobile screen sizes are generally not available",
+                                  L"Error",
+                                  MB_ICONERROR | MB_OK);
         return false;
     }
 
@@ -651,6 +657,7 @@ bool prWindow_PC::CreateOpenGLWindow(u32 menuID, u32 iconID)
     {
         Destroy();
         prTrace(LogError, "Window creation failed.\n");
+        MessageBoxW(HWND_DESKTOP, L"Window creation failed.", L"Error", MB_ICONERROR | MB_OK);
         return false;
     }
     else
@@ -697,6 +704,7 @@ bool prWindow_PC::RegisterWindowClass(u32 menuID, u32 iconID)
     if (!RegisterClassEx(&wc))
     {
         prTrace(LogError, "Window Registration Failed.\n");
+        MessageBoxW(HWND_DESKTOP, L"Window Registration Failed.", L"Error", MB_ICONERROR | MB_OK);
         return false;
     }
 
@@ -738,6 +746,7 @@ bool prWindow_PC::SetOpenGLPixelFormat()
     {
         Destroy();
         prTrace(LogError, "Can't find a suitable pixel format.\n");
+        MessageBoxW(HWND_DESKTOP, L"Can't find a suitable pixel format.", L"Error", MB_ICONERROR | MB_OK);
         return false;
     }
 
@@ -747,6 +756,7 @@ bool prWindow_PC::SetOpenGLPixelFormat()
     {
         Destroy();
         prTrace(LogError, "Can't set the pixel format.\n");
+        MessageBoxW(HWND_DESKTOP, L"Can't set the pixel format.", L"Error", MB_ICONERROR | MB_OK);
         return false;
     }
 
