@@ -34,11 +34,6 @@
   #include <OpenGL/gl.h>
   #include <cstdlib>
 
-//#elif defined(PLATFORM_BADA)
-//    #include <FGraphicsOpengl.h>
-//    #include <cstdlib>
-//    using namespace Osp::Graphics::Opengl;
-
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
 

@@ -42,9 +42,6 @@
 #elif defined(PLATFORM_ANDROID)
     #include <android/log.h>
 
-#elif defined(PLATFORM_BADA)
-    #include <FBase.h>
-
 #elif defined(PLATFORM_LINUX)
     #include <stdio.h>
 

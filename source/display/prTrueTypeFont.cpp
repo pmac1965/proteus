@@ -71,10 +71,6 @@
   #include <OpenGL/gl.h>
   #include <string.h>
 
-#elif defined(PLATFORM_BADA)
-	#include <FGraphicsOpengl.h>
-	using namespace Osp::Graphics::Opengl;
-
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
 
@@ -523,13 +519,7 @@ void prTrueTypeFont::Draw(f32 x, f32 y, const char *fmt, ...)
 	// Format the output.
     va_list args;
     va_start(args, fmt);        
-
-    #if defined(PLATFORM_BADA)
-    vsnprintf(message, sizeof(message), fmt, args);
-    #else
     vsprintf(message, fmt, args);
-    #endif
-
     va_end(args);
 
     Draw(x, y, 1.0f, prColour::White, ALIGN_LEFT, message);
@@ -552,14 +542,8 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
 		// Format the output.
         va_list args;
         va_start(args, fmt);        
-
-        #if defined(PLATFORM_BADA)
-        vsnprintf(message, sizeof(message), fmt, args);
-        #else
         vsprintf(message, fmt, args);
-        #endif
         va_end(args);
-
 
         // Set alignment
         switch(alignment)

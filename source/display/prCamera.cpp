@@ -40,9 +40,6 @@
 #elif defined(PLATFORM_MAC)
   #include "../display/prLookAt.h"
 
-#elif defined(PLATFORM_BADA)
-  #include "../display/prLookAt.h"
-
 #elif defined(PLATFORM_ANDROID)
   #include "../display/prLookAt.h"
 

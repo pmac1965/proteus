@@ -115,7 +115,6 @@
 #include "core/prWindow.h"
 #include "core/prWindowProcedure.h"
 #include "core/prWindow_Android.h"
-//#include "core/prWindow_Bada.h"
 #include "core/prWindow_Ios.h"
 #include "core/prWindow_Linux.h"
 #include "core/prWindow_PC.h"

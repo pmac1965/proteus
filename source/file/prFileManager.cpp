@@ -50,9 +50,6 @@
   #include <stdlib.h>
   //#include "../ios/prIos.h"
 
-#elif defined(PLATFORM_BADA)
-  #include <stdlib.h>
-
 #elif defined(PLATFORM_LINUX)
   #include <stdlib.h>
   #include <unistd.h>
@@ -140,11 +137,6 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
             int index = prStringFindLastIndex(dataPath, '\\');
             dataPath[index] = 0;
         }
-
-    // Bada
-    #elif defined(PLATFORM_BADA)
-        // Copy the app path.
-        strcpy(dataPath, "/Home");
 
     // Android
     #elif defined(PLATFORM_ANDROID)
@@ -419,11 +411,6 @@ const char *prFileManager::GetSystemPath(const char *filename)
             {
                 strcat(path, tempPath);
             }
-
-        #elif defined(PLATFORM_BADA)
-            strcpy(path, "/Home/");
-            // Bypass data/
-            strcat(path, &filename[5]);
 
         #elif defined(PLATFORM_ANDROID)
             // Make path

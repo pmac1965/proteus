@@ -24,7 +24,7 @@
 #include "../prConfig.h"
 
 
-#if defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_ANDROID)
   #include <cstring>
 #else
   #include <memory.h>

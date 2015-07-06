@@ -74,11 +74,6 @@
   #include <GL/glu.h>
   #include <math.h>
 
-#elif defined(PLATFORM_BADA)
-  #include <FGraphicsOpengl.h>
-  #include <math.h>
-  using namespace Osp::Graphics::Opengl;
-
 #else
   #error Platform not specified
 
@@ -108,7 +103,7 @@ void prPerspective(double fovy, double aspect, double zNear, double zFar)
 #if defined(PLATFORM_PC) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC)
     glFrustum(xmin, xmax, ymin, ymax, zNear, zFar);
 
-#elif defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
+#elif defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID)
     glFrustumf(xmin, xmax, ymin, ymax, zNear, zFar);
 
 #else

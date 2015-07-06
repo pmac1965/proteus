@@ -29,7 +29,7 @@
 #elif defined(PLATFORM_PC)
     #include <windows.h>
 
-#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))
     // Allows class to compile for the other platforms.
 
 #else
@@ -71,7 +71,7 @@ private:
 #elif defined(PLATFORM_PC)
     CRITICAL_SECTION    m_cs;
 
-#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
     // Allows class to compile for the other platforms.
 
 #else

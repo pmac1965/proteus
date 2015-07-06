@@ -32,10 +32,6 @@
   #include <errno.h>
   #include <string.h>
 
-#elif defined(PLATFORM_BADA)
-  #include <errno.h>
-  #include <string.h>
-
 #elif defined(PLATFORM_ANDROID)
   #include <errno.h>
   #include <string.h>

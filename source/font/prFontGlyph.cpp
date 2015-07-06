@@ -39,11 +39,6 @@
   #include <GLES/gl.h>
   #include <cstring>
 
-#elif defined(PLATFORM_BADA)
-  #include <FGraphicsOpengl.h>
-  #include <cstring>
-  using namespace Osp::Graphics::Opengl;
-
 #elif defined(PLATFORM_IOS)
   #include <OpenGLES/ES1/gl.h>
   #include <cstring>

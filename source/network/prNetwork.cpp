@@ -83,9 +83,6 @@ PRBOOL prNetwork::IsConnected()
 #elif defined(PLATFORM_PC)
     result = PRTRUE;
 
-#elif defined(PLATFORM_BADA)
-    result = PRTRUE;
-
 #elif defined(PLATFORM_ANDROID)
     result = PRTRUE;
     

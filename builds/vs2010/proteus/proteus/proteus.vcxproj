@@ -647,7 +647,6 @@
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prInAppPurchase.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_android.h" />
-    <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_bada.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_ios.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_linux.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_mac.h" />
@@ -784,7 +783,6 @@
     <ClInclude Include="..\..\..\..\source\persistence\prSave.h" />
     <ClInclude Include="..\..\..\..\source\persistence\prSaveBase.h" />
     <ClInclude Include="..\..\..\..\source\persistence\prSave_android.h" />
-    <ClInclude Include="..\..\..\..\source\persistence\prSave_bada.h" />
     <ClInclude Include="..\..\..\..\source\persistence\prSave_ios.h" />
     <ClInclude Include="..\..\..\..\source\persistence\prSave_linux.h" />
     <ClInclude Include="..\..\..\..\source\persistence\prSave_mac.h" />
@@ -995,7 +993,6 @@
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prInAppPurchase.cpp" />
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore.cpp" />
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_android.cpp" />
-    <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_bada.cpp" />
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_ios.cpp" />
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_linux.cpp" />
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_mac.cpp" />
@@ -1828,7 +1825,6 @@
     <ClCompile Include="..\..\..\..\source\multiplayer\prMultiplayerProvider.cpp" />
     <ClCompile Include="..\..\..\..\source\network\prNetwork.cpp" />
     <ClCompile Include="..\..\..\..\source\online\prWeb_android.cpp" />
-    <ClCompile Include="..\..\..\..\source\online\prWeb_bada.cpp" />
     <ClCompile Include="..\..\..\..\source\online\prWeb_ios.cpp" />
     <ClCompile Include="..\..\..\..\source\online\prWeb_pc.cpp" />
     <ClCompile Include="..\..\..\..\source\particle\prEmitter.cpp" />
@@ -1839,7 +1835,6 @@
     <ClCompile Include="..\..\..\..\source\persistence\prSave.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSaveBase.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave_android.cpp" />
-    <ClCompile Include="..\..\..\..\source\persistence\prSave_bada.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave_ios.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave_linux.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave_mac.cpp" />

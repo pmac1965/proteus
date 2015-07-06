@@ -254,13 +254,7 @@ void prString::Sprintf(const char *fmt, ...)
         va_list args;        
         va_start(args, fmt);  
 
-#if defined(PLATFORM_PC)
-        vsprintf_s(buffer, sizeof(buffer), fmt, args);
-#elif defined(PLATFORM_BADA)
-        vsnprintf(buffer, sizeof(buffer), fmt, args);
-#else
         vsprintf(buffer, fmt, args);
-#endif
 
         va_end(args);
         Set(buffer);
@@ -292,11 +286,7 @@ prString prString::operator + (const char rhs) const
 {
     prString s(*this);
     char buffer[32];
-#if defined(PLATFORM_BADA)
-    snprintf(buffer, sizeof(buffer), "%c", rhs);
-#else
     sprintf(buffer, "%c", rhs);
-#endif
     s.Append(buffer);
     return s;
 }
@@ -309,11 +299,7 @@ prString prString::operator + (const s8 rhs) const
 {
     prString s(*this);
     char buffer[32];
-#if defined(PLATFORM_BADA)
-    snprintf(buffer, sizeof(buffer), "%i", rhs);
-#else
     sprintf(buffer, "%i", rhs);
-#endif
     s.Append(buffer);
     return s;
 }
@@ -326,12 +312,8 @@ prString prString::operator + (const s16 rhs) const
 {
     prString s(*this);
     char buffer[32];
-#if defined(PLATFORM_BADA)
-    snprintf(buffer, sizeof(buffer), "%hi", rhs);
-#else
     sprintf(buffer, "%hi", rhs);
     s.Append(buffer);
-#endif
     return s;
 }
 
@@ -343,11 +325,7 @@ prString prString::operator + (const s32 rhs) const
 {
     prString s(*this);
     char buffer[32];
-#if defined(PLATFORM_BADA)
-    snprintf(buffer, sizeof(buffer), "%i", rhs);
-#else
     sprintf(buffer, "%i", rhs);
-#endif
     s.Append(buffer);
     return s;
 }
@@ -360,11 +338,7 @@ prString prString::operator + (const f32 rhs) const
 {
     prString s(*this);
     char buffer[32];
-#if defined(PLATFORM_BADA)
-    snprintf(buffer, sizeof(buffer), "%f", rhs);
-#else
     sprintf(buffer, "%f", rhs);
-#endif
     s.Append(buffer);
     return s;
 }
@@ -377,11 +351,7 @@ prString prString::operator + (const s64 rhs) const
 {
     prString s(*this);
     char buffer[32];
-#if defined(PLATFORM_BADA)
-    snprintf(buffer, sizeof(buffer), "%lli", rhs);
-#else
     sprintf(buffer, "%lli", rhs);
-#endif
     s.Append(buffer);
     return s;
 }
@@ -394,11 +364,7 @@ prString prString::operator + (const f64 rhs) const
 {
     prString s(*this);
     char buffer[32];
-#if defined(PLATFORM_BADA)
-    snprintf(buffer, sizeof(buffer), "%lf", rhs);
-#else
     sprintf(buffer, "%lf", rhs);
-#endif
     s.Append(buffer);
     return s;
 }

@@ -515,7 +515,7 @@ void prTouch::TouchBegin(u32 id, float x, float y)
 {
     PRASSERT(pImpl);
 
-#if defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID)
     
     // Test down event duplication
 /*    if (imp.IsDownAlready(id))
@@ -567,7 +567,7 @@ void prTouch::TouchMove(u32 id, float x, float y)
 {
     PRASSERT(pImpl);
 
-#if defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID)
 
     TouchLocation touch;
     touch.state = TouchState::Down;
@@ -609,7 +609,7 @@ void prTouch::TouchEnd(u32 id, float x, float y)
 {
     PRASSERT(pImpl);
 
-#if defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID)
 
     imp.touches--;
     imp.down = (imp.touches > 0);

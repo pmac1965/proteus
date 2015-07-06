@@ -36,12 +36,6 @@
   #include <OpenGL/gl.h>
   #include <string.h>
 
-#elif defined(PLATFORM_BADA)
-  #include <string.h>
-  #include <stdio.h>
-  #include <FGraphicsOpengl.h>
-  using namespace Osp::Graphics::Opengl;
-
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
   #include <string.h>
@@ -181,13 +175,7 @@ void prFixedWidthFont::Draw(f32 x, f32 y, const char *fmt, ...)
         // Format the output.
         va_list args;
         va_start(args, fmt);        
-
-
-        #if defined(PLATFORM_BADA)
-        vsnprintf(message, sizeof(message), fmt, args);
-        #else
         vsprintf(message, fmt, args);
-        #endif
         va_end(args);
 
 

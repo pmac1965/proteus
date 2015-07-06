@@ -36,11 +36,6 @@
   #include <OpenGL/gl.h>
   #include <string.h>
 
-#elif defined(PLATFORM_BADA)
-  #include <string.h>
-  #include <FGraphicsOpengl.h>
-  using namespace Osp::Graphics::Opengl;
-
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
   #include <string.h>

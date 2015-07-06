@@ -61,20 +61,11 @@
 // Not thread safe (unless auto-initialization is avoided and each thread has
 // its own MTRand object)
 #include "../prConfig.h"
-
-#if defined(PLATFORM_BADA) && !defined(BADA_SDK_2)
-#include <iostream>
-#include <climits>
-#include <stdio.h>
-#include <ctime>
-#include <cmath>
-#else
 #include <iostream>
 #include <climits>
 #include <cstdio>
 #include <ctime>
 #include <cmath>
-#endif
 
 class MTRand {
 // Data

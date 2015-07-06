@@ -22,11 +22,10 @@
 // Audio platform
 #define AUDIO_PC        1
 #define AUDIO_IOS       2
-//#define AUDIO_BADA      3           // Bada is dead. This is no longer used
-#define AUDIO_ANDROID   4
-#define AUDIO_MAC       5
-#define AUDIO_LINUX     6
-#define AUDIO_WINPHONE  7
+#define AUDIO_ANDROID   3
+#define AUDIO_MAC       4
+#define AUDIO_LINUX     5
+#define AUDIO_WINPHONE  6
 //#define AUDIO_TIZEN     8           // Bada replacement
 
 
@@ -108,7 +107,7 @@
 #endif
 
 #ifndef SHOW_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.
-//#define SHOW_MESSAGES
+#define SHOW_MESSAGES
 #endif
 
 #ifndef PROTEUS_ALLOW_CONSOLE                           // Allows the debug console to be optionally removed. (PC only)

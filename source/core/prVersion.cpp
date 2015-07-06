@@ -50,11 +50,7 @@ const char *prGetVersionAsString()
 {
     static char buffer[256];
 
-#if defined(PLATFORM_BADA)
-    snprintf(buffer, sizeof(buffer), "%i.%i.%i", versionMajor, versionMinor, versionRevision);
-#else
     sprintf(buffer, "%i.%i.%i", versionMajor, versionMinor, versionRevision);
-#endif
 
     return buffer;
 }

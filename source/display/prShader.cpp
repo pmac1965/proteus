@@ -41,10 +41,6 @@
   #include <GLES2/gl2ext.h>
   #include <EGL/egl.h>
 
-#elif defined(PLATFORM_BADA)
-  #include <FGraphicsOpengl.h>
-  using namespace Osp::Graphics::Opengl;
-
 #elif defined(PLATFORM_IOS)
   #include <OpenGLES/ES1/gl.h>
 

@@ -1214,11 +1214,7 @@ void prSprintf(char *buffer, const char* fmt, ...)
         va_list args;        
         va_start(args, fmt);
     
-    #if defined(PLATFORM_BADA)
-        vsnprintf(buffer, 4096, fmt, args);
-    #else
         vsprintf(buffer, fmt, args);
-    #endif
 
         va_end(args);
     }

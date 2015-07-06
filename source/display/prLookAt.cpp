@@ -42,11 +42,6 @@
   #include <GLES/gl.h>
   #include <math.h>
 
-#elif defined(PLATFORM_BADA)
-  #include <FGraphicsOpengl.h>
-  #include <math.h>
-  using namespace Osp::Graphics::Opengl;
-
 #elif defined(PLATFORM_LINUX)
   #include <GL/gl.h>
   #include <math.h>

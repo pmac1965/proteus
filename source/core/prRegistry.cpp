@@ -66,9 +66,6 @@ prRegistry::prRegistry() : prCoreSystem(PRSYSTEM_REGISTRY, "prRegistry")
     #elif defined(PLATFORM_ANDROID)
         SetValue("Platform", "ANDROID");
 
-    #elif defined(PLATFORM_BADA)
-        SetValue("Platform", "BADA");
-
     #elif defined(PLATFORM_IOS)
         SetValue("Platform", "IOS");
 

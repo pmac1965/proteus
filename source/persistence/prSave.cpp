@@ -39,9 +39,6 @@
 #elif defined(PLATFORM_IOS)
   #include "prSave_ios.h"
 
-#elif defined(PLATFORM_BADA)
-  #include "prSave_bada.h"
-
 #elif defined(PLATFORM_ANDROID)
   #include "prSave_android.h"
 
@@ -90,9 +87,6 @@ typedef struct SaveImplementation
 
         #elif defined(PLATFORM_IOS)
           pSave = new prSaveIos();
-
-        #elif defined(PLATFORM_BADA)
-          pSave = new prSaveBada();
 
         #elif defined(PLATFORM_ANDROID)
           pSave = new prSaveAndroid();

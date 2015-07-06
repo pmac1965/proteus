@@ -41,10 +41,6 @@
   #include <EGL/egl.h>
   //#include "../core/prWindow_PC.h"
 
-#elif defined(PLATFORM_BADA)
-  #include <FGraphicsOpengl.h>
-  using namespace Osp::Graphics::Opengl;
-
 #elif defined(PLATFORM_IOS)
   #include <OpenGLES/ES2/gl.h>
 

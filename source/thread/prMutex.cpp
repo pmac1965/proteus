@@ -38,7 +38,7 @@ prMutex::prMutex()
     // Init lock.
     InitializeCriticalSection(&m_cs);
 
-#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
     // Allows class to compile for the other platforms.
 
 #else
@@ -61,7 +61,7 @@ prMutex::~prMutex()
     // Destroy lock.
     DeleteCriticalSection(&m_cs);
 
-#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
     // Allows class to compile for the other platforms.
 
 #else
@@ -84,7 +84,7 @@ void prMutex::Lock()
     // Lock
     EnterCriticalSection(&m_cs);
 
-#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
     // Allows class to compile for the other platforms.
 
 #else
@@ -125,7 +125,7 @@ bool prMutex::TryLock()
         prTrace(LogError, "Failed to locked mutex\n");
     }
 
-#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
     // Allows class to compile for the other platforms.
 
 #else
@@ -150,7 +150,7 @@ void prMutex::Unlock()
     // Unlock
     LeaveCriticalSection(&m_cs);
 
-#elif (defined(PLATFORM_IOS) || defined(PLATFORM_BADA) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
+#elif (defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  
     // Allows class to compile for the other platforms.
 
 #else

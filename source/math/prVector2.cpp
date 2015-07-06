@@ -41,11 +41,7 @@ const char *prVector2::ToString() const
 {
     static char buffer[256];
 
-#if defined(PLATFORM_BADA)
-    snprintf(buffer, sizeof(buffer), "%f, %f", x, y);
-#else
     sprintf(buffer, "%f, %f", x, y);
-#endif
 
     return buffer;
 }

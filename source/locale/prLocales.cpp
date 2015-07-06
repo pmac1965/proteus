@@ -23,11 +23,6 @@
 #if defined(PLATFORM_PC)
   #include <windows.h>
 
-#elif defined(PLATFORM_BADA)
-  #include <FBase.h>
-  #include <FLocales.h>
-  using namespace Osp::Locales;
-
 #elif defined(PLATFORM_IOS)
     // To be added
 
@@ -162,65 +157,6 @@ namespace
     s32 prGetPlatformsLanguage()
     {
         return Proteus::Locale::EN_US;
-    }
-
-#elif defined(PLATFORM_BADA)
-    /// -----------------------------------------------------------------------
-    /// Get the platforms default language.
-    /// -----------------------------------------------------------------------
-    s32 prGetPlatformsLanguage()
-    {
-        int lang;
-
-	    LocaleManager localeManager;
-	    localeManager.Construct();
-
-	    // Get the system locale information.
-	    Osp::Locales::Locale systemLocale = localeManager.GetSystemLocale();
-
-	    switch(systemLocale.GetLanguageCode())
-	    {
-	    case LANGUAGE_ENG:
-		    if (COUNTRY_US == systemLocale.GetCountryCode())
-		    {
-                lang_string = "EN_US";
-                lang = Proteus::Locale::EN_US;
-		    }
-            else
-            {
-                lang_string = "EN_GB";
-                lang = Proteus::Locale::EN_GB;
-            }
-		    break;
-
-	    case LANGUAGE_FRA:
-            lang_string = "FR_FR";
-            lang = Proteus::Locale::FR_FR;
-		    break;
-
-	    case LANGUAGE_SPA:
-            lang_string = "ES_ES";
-            lang = Proteus::Locale::ES_ES;
-		    break;
-
-	    case LANGUAGE_DEU:
-            lang_string = "DE_DE";
-            lang = Proteus::Locale::DE_DE;
-		    break;
-
-	    case LANGUAGE_ITA:
-            lang_string = "IT_IT";
-            lang = Proteus::Locale::IT_IT;
-		    break;
-
-	    default:
-            lang_string = "EN_US";
-            lang = Proteus::Locale::EN_US;
-		    break;
-	    }
-
-        prTrace(LogError, "Platform language: %s\n", lang_string);
-        return lang;
     }
 
 #else

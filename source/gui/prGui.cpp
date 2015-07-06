@@ -29,12 +29,8 @@
 #include "../core/prCore.h"
 
 
-#if defined(PLATFORM_BADA)
-#include <FBase.h>
-
-#elif defined(PLATFORM_LINUX)
+#if defined(PLATFORM_LINUX)
 #include <cstring>
-
 #endif
 
 

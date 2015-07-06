@@ -35,10 +35,6 @@
 #elif defined(PLATFORM_MAC)
   #include <OpenGL/gl.h>
 
-#elif defined(PLATFORM_BADA)
-  #include <FGraphicsOpengl.h>
-  using namespace Osp::Graphics::Opengl;
-
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
 

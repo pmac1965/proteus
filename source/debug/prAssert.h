@@ -96,12 +96,6 @@
             while (true) {}                                                         \
         }
 
-    #elif defined(PLATFORM_BADA)
-        #define PRBREAKPOINT()                                                      \
-        {                                                                           \
-            while (true) {}                                                         \
-        }
-
     #elif defined(PLATFORM_ANDROID)
         #define PRBREAKPOINT()                                                      \
         {                                                                           \
@@ -126,7 +120,7 @@
     #endif
 
 
-    #if defined(PLATFORM_BADA) || defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC)
+    #if defined(PLATFORM_IOS) || defined(PLATFORM_ANDROID) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC)
 
         // Assertion macro which allows additional information to be displayed.
         #define PRASSERT(cond, args...)                                             \

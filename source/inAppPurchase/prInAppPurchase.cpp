@@ -39,9 +39,6 @@
 #elif defined(PLATFORM_MAC)
     #include "prStore_mac.h"
 
-#elif defined(PLATFORM_BADA)
-    #include "prStore_bada.h"
-
 #elif defined(PLATFORM_LINUX)
     #include "prStore_linux.h"
 
@@ -137,10 +134,6 @@ void prInAppPurchase::Init()
 
 #elif defined(PLATFORM_IOS)
         pStore = new prStore_ios(*this);
-        pStore->Init();
-
-#elif defined(PLATFORM_BADA)
-        pStore = new prStore_bada(*this);
         pStore->Init();
 
 #elif defined(PLATFORM_LINUX)
