@@ -1,4 +1,7 @@
 // File: prleaderboards.h
+// About:
+//      This class is a cross platform interface to leaderboards.
+//      If they are available on your chosen platform
 /**
  *  Copyright 2014 Paul Michael McNab
  *
@@ -16,8 +19,7 @@
  */
 
 
-#ifndef __PRLEADERBOARDS_H
-#define __PRLEADERBOARDS_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -50,6 +52,3 @@ public:
 
 
 }}// Namespaces
-
-
-#endif//__PRLEADERBOARDS_H

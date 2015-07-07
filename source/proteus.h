@@ -39,29 +39,14 @@
 
 
 // Platform specific includes
-#if defined(PLATFORM_PC)
-
-// Platform specific includes
-#elif defined(PLATFORM_LINUX)
-
-// Platform specific includes
-#elif defined(PLATFORM_MAC)
-
-// Platform specific includes
-#elif defined(PLATFORM_IOS)
-
-// Platform specific includes
-#elif defined(PLATFORM_TIZEN)
-
-// Platform specific includes
-#elif defined(PLATFORM_ANDROID)
+#if defined(PLATFORM_ANDROID)
 #include "android/prJNIAudio.h"
 #include "android/prJNIInterface.h"
 #include "android/prJNINetwork.h"
 #endif
 
 
-//
+// Includes
 #include "adverts/prAdvertProvider.h"
 #include "adverts/prAdvertProvider_AdMob.h"
 #include "adverts/prAdvertProvider_iAds.h"
@@ -70,20 +55,8 @@
 #include "analytics/prAnalytics.h"
 #include "analytics/prAnalyticsBase.h"
 #include "analytics/prAnalyticsFlurry.h"
-//#include "android/AL/al.h"
-//#include "android/AL/alc.h"
-//#include "android/AL/alext.h"
-//#include "android/AL/efx-creative.h"
-//#include "android/AL/efx.h"
-//#include "audio/prOpenALDeviceList.h"
-//#include "audio/prOpenALErrors.h"
 #include "audio/prSoundManager.h"
 #include "audio/prSoundManagerShared.h"
-//#include "audio/external/codec.h"
-//#include "audio/external/ogg.h"
-//#include "audio/external/os_types.h"
-//#include "audio/external/vorbisenc.h"
-//#include "audio/external/vorbisfile.h"
 #include "collision/prLine.h"
 #include "core/prApplication.h"
 #include "core/prApplication_Android.h"
@@ -234,8 +207,6 @@
 #include "persistence/prSave_linux.h"
 #include "persistence/prSave_mac.h"
 #include "persistence/prSave_pc.h"
-//#include "scene/prScene.h"
-//#include "scene/prSceneNode.h"
 #include "script/prLua.h"
 #include "script/prLuaDebug.h"
 #include "social/facebook/prFacebook.h"

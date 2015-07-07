@@ -23,6 +23,12 @@
 #include "prLeaderboards.h"
 
 
+// Platform specific includes
+#if defined(PLATFORM_ANDROID)
+#include "../android/prJNIInterface.h"
+#endif
+
+
 using namespace Proteus::Core;
 
 

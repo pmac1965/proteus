@@ -93,6 +93,7 @@ prProfileManager::prProfileManager()
     m_exp1      = false;
 
     TODO("With create - add reference to the ID var, so it can be cleared on destroy")
+    TODO("Add cursor class to mouse")
 }
 
 
