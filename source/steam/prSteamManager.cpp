@@ -128,6 +128,13 @@ bool prSteamManager::Initialise(u32 id, u32 notificationPosition)
             return result;
 	    }
 
+        // Dependand on the windows settings cpmparing equal values is unavoidable,
+        // hence we temporarily disable these warnings
+#if defined(PLATFORM_PC)
+#pragma warning( push )
+#pragma warning( disable : 4127 )
+#endif
+
 	    // Init Steam CEG
 	    if (!Steamworks_InitCEGLibrary())
 	    {
@@ -135,6 +142,10 @@ bool prSteamManager::Initialise(u32 id, u32 notificationPosition)
 		    prAlertShowError("Fatal Error", "Steam must be running to play this game (InitDrmLibrary() failed).");
             return result;
 	    }
+
+#if defined(PLATFORM_PC)
+#pragma warning( pop )
+#endif
 
 	    // Initialize SteamAPI, if this fails we bail out since we depend on Steam for lots of stuff.
 	    // You don't necessarily have to though if you write your code to check whether all the Steam

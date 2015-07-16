@@ -109,6 +109,7 @@ void prOutputString(prLogLevel level, const char *text)
     if (text && *text)
     {
 #if defined(PLATFORM_PC)
+        PRUNUSED(level);
         #if defined(PROTEUS_ALLOW_CONSOLE)
         fprintf(stderr, "%s", text);
         #endif
@@ -116,12 +117,15 @@ void prOutputString(prLogLevel level, const char *text)
         OutputDebugStringA(text);
 
 #elif defined(PLATFORM_IOS)
+        PRUNUSED(level);
         printf("%s", text);
         
 #elif defined(PLATFORM_MAC)
+        PRUNUSED(level);
         printf("%s", text);
 
 #elif defined(PLATFORM_LINUX)
+        PRUNUSED(level);
         printf("%s", text);
 
 #elif defined(PLATFORM_ANDROID)

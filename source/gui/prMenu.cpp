@@ -18,6 +18,7 @@
 
 
 #include "prMenu.h"
+#include "../debug/prDebug.h"
 //#include "../core/prCore.h"
 //#include "../core/prRegistry.h"
 //#include "../display/prRenderer.h"
@@ -52,6 +53,7 @@ prMenu::~prMenu()
 /// ---------------------------------------------------------------------------
 void prMenu::Update(f32 dt)
 {
+    PRUNUSED(dt);
 }
 
 
@@ -79,6 +81,7 @@ void prMenu::Draw()
 /// ---------------------------------------------------------------------------
 void prMenu::OnPressed(const prTouchEvent &e)
 {
+    PRUNUSED(e);
 }
 
 
@@ -87,6 +90,7 @@ void prMenu::OnPressed(const prTouchEvent &e)
 /// ---------------------------------------------------------------------------
 void prMenu::OnMove(const prTouchEvent &e)
 {
+    PRUNUSED(e);
 }
 
 
@@ -95,6 +99,7 @@ void prMenu::OnMove(const prTouchEvent &e)
 /// ---------------------------------------------------------------------------
 void prMenu::OnReleased(const prTouchEvent &e)
 {
+    PRUNUSED(e);
 }
 
 

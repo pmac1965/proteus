@@ -242,7 +242,7 @@ bool prMesh_MD2::Load(const char *filename)
                     prStringReplaceChar(buffer, '\\', '/');
                     prTrace(LogError, "Skin 3: %s\n", buffer);
 
-                    s32 index = prStringFindLastIndex(buffer, (char)'//');
+                    s32 index = prStringFindLastIndex(buffer, '/');
                     if (index > 0)
                     {
                         prStringCopySafe(buffer, &buffer[index + 1], sizeof(buffer));

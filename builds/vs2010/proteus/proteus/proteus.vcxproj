@@ -241,6 +241,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
+      <MultiProcessorCompilation>false</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -578,7 +579,6 @@
     <ClInclude Include="..\..\..\..\source\core\prWindow.h" />
     <ClInclude Include="..\..\..\..\source\core\prWindowProcedure.h" />
     <ClInclude Include="..\..\..\..\source\core\prWindow_Android.h" />
-    <ClInclude Include="..\..\..\..\source\core\prWindow_Bada.h" />
     <ClInclude Include="..\..\..\..\source\core\prWindow_Ios.h" />
     <ClInclude Include="..\..\..\..\source\core\prWindow_Linux.h" />
     <ClInclude Include="..\..\..\..\source\core\prWindow_PC.h" />
@@ -928,7 +928,6 @@
     <ClCompile Include="..\..\..\..\source\core\prWindow.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prWindowProcedure.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prWindow_Android.cpp" />
-    <ClCompile Include="..\..\..\..\source\core\prWindow_Bada.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prWindow_Ios.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prWindow_Linux.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prWindow_PC.cpp" />

@@ -21,6 +21,7 @@
 
 
 #include "../math/prVector2.h"
+#include "../debug/prDebug.h"
 
 
 // Namespaces
@@ -57,7 +58,7 @@ public:
     // Parameters:
     //      name - The name of the button being drawn
     //      pos  - The buttons sprites position
-    virtual void PreDraw(const char *name, Proteus::Math::prVector2& pos) {}
+    virtual void PreDraw(const char *name, Proteus::Math::prVector2& pos) { PRUNUSED(name); PRUNUSED(pos); }
 
     // Method: PostDraw
     //      An optional method which the handling class can chose to implement or ignore
@@ -69,7 +70,7 @@ public:
     // Parameters:
     //      name - The name of the button being drawn
     //      pos  - The buttons sprites position
-    virtual void PostDraw(const char *name, Proteus::Math::prVector2& pos) {}
+    virtual void PostDraw(const char *name, Proteus::Math::prVector2& pos) { PRUNUSED(name); PRUNUSED(pos); }
 
     // Method: SetButtonFrame
     //      An optional method which the handling class can chose to implement or ignore
@@ -87,7 +88,7 @@ public:
     //
     // See Also:
     //      <prButtonStates>
-    virtual bool SetButtonFrame(const char *name, Proteus::Core::s32 frame, Proteus::Core::s32 &newFrame) { return true; }
+    virtual bool SetButtonFrame(const char *name, Proteus::Core::s32 frame, Proteus::Core::s32 &newFrame) {  PRUNUSED(name);  PRUNUSED(frame);  PRUNUSED(newFrame); return true; }
 };
 
 

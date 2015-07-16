@@ -154,6 +154,7 @@ void prMouse::SetMouseData(s32 x, s32 y, u32 flags, bool state)
     }
 
 #else
+    PRUNUSED(state);
 
     if (m_reset)
     {

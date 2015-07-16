@@ -182,7 +182,7 @@ bool prSavePC::SaveUpdate()
         // Write data.
         prEncrypt(m_saveSata, m_saveSize);
         bytes = fwrite(m_saveSata, 1, m_saveSize, imp.pFile);
-        if (bytes != m_saveSize)
+        if (bytes != (size_t)m_saveSize)
         {
             prTrace(LogError, "B:SaveUpdate - Bytes written did not match save size\n");
         }

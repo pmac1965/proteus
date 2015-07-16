@@ -276,6 +276,8 @@ namespace
     {
         MINMAXINFO* mmi = (MINMAXINFO*)lParam;
         bool handled = false;
+
+        PRUNUSED(wParam);
         
         if (window)
         {
@@ -492,6 +494,7 @@ LRESULT CALLBACK prWindowProcedure(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lP
     // Set min/max size
 #if defined(PROTEUS_TOOL) || defined(PLATFORM_PC)
     case WM_GETMINMAXINFO:
+        TODO("Remove wParam");
         WindowMessage_GetMinMaxInfo(window, wParam, lParam);
         return DefWindowProc(hwnd, msg, wParam, lParam);
         break;

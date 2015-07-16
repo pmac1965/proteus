@@ -26,6 +26,7 @@
 #include "../display/prTrueTypeFont.h"
 #include "../math/prVector2.h"
 #include "../debug/prAssert.h"
+#include "../debug/prDebug.h"
 #include <cstdlib>
 #include <cstdio>
 
@@ -67,6 +68,7 @@ prMenuStrip::~prMenuStrip()
 /// ---------------------------------------------------------------------------
 void prMenuStrip::Update(f32 dt)
 {
+    PRUNUSED(dt);
 }
 
 
@@ -130,6 +132,7 @@ void prMenuStrip::Draw()
 /// ---------------------------------------------------------------------------
 void prMenuStrip::OnPressed(const prTouchEvent &e)
 {
+    PRUNUSED(e);
 }
 
 
@@ -138,6 +141,7 @@ void prMenuStrip::OnPressed(const prTouchEvent &e)
 /// ---------------------------------------------------------------------------
 void prMenuStrip::OnMove(const prTouchEvent &e)
 {
+    PRUNUSED(e);
 }
 
 
@@ -146,6 +150,7 @@ void prMenuStrip::OnMove(const prTouchEvent &e)
 /// ---------------------------------------------------------------------------
 void prMenuStrip::OnReleased(const prTouchEvent &e)
 {
+    PRUNUSED(e);
 }
 
 

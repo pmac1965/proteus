@@ -26,7 +26,7 @@
 #define AUDIO_MAC       4
 #define AUDIO_LINUX     5
 #define AUDIO_WINPHONE  6
-//#define AUDIO_TIZEN     8           // Bada replacement
+//#define AUDIO_TIZEN     7           // Bada replacement
 
 
 // Determine platform. First check for PC
@@ -102,12 +102,12 @@
 #define ALLOW_STEAM
 #endif
 
-#ifndef ALLOW_GLEW                                      // Allows the glew to be used
+#ifndef ALLOW_GLEW                                      // Allows glew to be used
 #define ALLOW_GLEW
 #endif
 
 #ifndef SHOW_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.
-#define SHOW_MESSAGES
+//#define SHOW_MESSAGES
 #endif
 
 #ifndef PROTEUS_ALLOW_CONSOLE                           // Allows the debug console to be optionally removed. (PC only)

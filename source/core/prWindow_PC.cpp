@@ -665,7 +665,12 @@ bool prWindow_PC::CreateOpenGLWindow(u32 menuID, u32 iconID)
         CenterWindow(m_hwnd);
     }
 
-    
+
+    // Dependand on the windows settings cpmparing zero with zero is unavoidable,
+    // hence we temporarily disable these warnings
+#pragma warning( push )
+#pragma warning( disable : 4127 )
+
     if (PR_MAXIMIZEBOX == 0)
     {
         prDisableMaximizeButton(m_hwnd);
@@ -676,6 +681,8 @@ bool prWindow_PC::CreateOpenGLWindow(u32 menuID, u32 iconID)
     {
         prDisableMinimizeButton(m_hwnd);
     }
+
+#pragma warning( pop )
 
     return true;        
 }

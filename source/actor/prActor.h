@@ -189,7 +189,7 @@ public:
     //
     // Return:
     //  A response type. The default value of -1 equals do nothing
-    virtual Proteus::Core::s32 OnCollisionEnter2D(prActor *pActor) { return -1; }
+    virtual Proteus::Core::s32 OnCollisionEnter2D(prActor *pActor) { PRUNUSED(pActor); return -1; }
 
     // Method: OnCollisionExit2D
     //      Indicates a collision has ended
@@ -199,7 +199,7 @@ public:
     //
     // Return:
     //  A response type. The default value of -1 equals do nothing
-    virtual Proteus::Core::s32 OnCollisionExit2D(prActor *pActor) { return -1; }
+    virtual Proteus::Core::s32 OnCollisionExit2D(prActor *pActor) { PRUNUSED(pActor); return -1; }
 
     // Method: OnCollisionLinger2D
     //      Indicates a collision is occurring
@@ -209,7 +209,7 @@ public:
     //
     // Return:
     //      A response type. The default value of -1 equals do nothing
-    virtual Proteus::Core::s32 OnCollisionLinger2D(prActor *pActor) { return -1; }
+    virtual Proteus::Core::s32 OnCollisionLinger2D(prActor *pActor) { PRUNUSED(pActor); return -1; }
 
     // Method: SetCollisionPosition2D
     //      An overrideable function which allows the collision rectangle start x, y to be
@@ -225,7 +225,7 @@ public:
     //
     // Parameters:
     //      point - The intersection point
-    virtual void OnLineIntersect2D(const Proteus::Math::prPoint2F &point) {}
+    virtual void OnLineIntersect2D(const Proteus::Math::prPoint2F &point) { PRUNUSED(point); }
 
     // Method: GetActorWidth
     //      Optional call to get the actor width
