@@ -131,6 +131,11 @@ public:
     }
 
 
+    // Method: GetState
+    //      Gets the current state.
+    Proteus::Core::u32 GetState() const { return mStateCurr; }
+
+
 protected:
     prFsmState         *mpStates;
     Proteus::Core::u32  mStateCurr;

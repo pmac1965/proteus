@@ -173,20 +173,6 @@ public:
     //      Unique ID.
     Proteus::Core::s32 GetID() const { return m_id; }
 
-    // Method: GetState
-    //      Get actor state.
-    //
-    // Notes:
-    //      Provided for state machine usage
-    Proteus::Core::s32 GetState() const { return m_state; }
-
-    // Method: SetState
-    //      Set actor state.
-    //
-    // Notes:
-    //      Provided for state machine usage
-    void SetState(Proteus::Core::s32 state) { m_state = state; }
-
     // Method: SetPriority
     //      Actor priority.
     void SetPriority(Proteus::Core::s32 priority) { m_priority = priority; }
@@ -272,7 +258,7 @@ public:
 
 protected:
     Proteus::Core::s32          m_type;
-    Proteus::Core::s32          m_state;
+    //Proteus::Core::s32          m_state;
     Proteus::Core::s32          m_priority;
     Proteus::Core::s32          m_id;
     Proteus::Math::prVector2    m_colPos;    

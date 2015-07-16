@@ -43,7 +43,6 @@ prActor::prActor(s32 type) : m_type(type)
     m_active    = true;
     m_destroy   = false;
     m_onScreen  = true;
-    m_state     = 0;
     m_priority  = 0;
     m_id        = m_baseid++;
     user0       = 0;
