@@ -1,4 +1,19 @@
 // File: prRegistry.h
+// 
+// Notes:
+//      The registry class stores global data for use by the engine,
+//      such as screen width and height.
+//
+//      These values are used and changed by the engine and they cannot
+//      be deleted
+//
+// Notes:
+//      The user is free to add their own key/value pairs, but the name
+//      of the key must be unique. Use *ShowKeyValuePairs* to see the
+//      default values
+//
+// Notes:
+//      This class is a core system class and it created by default
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,8 +31,7 @@
  */
 
 
-#ifndef __PRREGISTRY_H
-#define __PRREGISTRY_H
+#pragma once
 
 
 #include "prTypes.h"
@@ -27,19 +41,18 @@
 
 
 // Class: prRegistry
-//      The registry class stores global data used by the engine,
+//      The registry class stores global data for use by the engine,
 //      such as screen width and height.
 class prRegistry : public prCoreSystem
 {
 public:
-
     // Method: prRegistry
     //      Ctor.
     prRegistry();
 
     // Method: ~prRegistry
     //      Dtor.
-    virtual ~prRegistry();
+    virtual ~prRegistry() {}
 
     // Method: AddKey
     //      Adds a new key to the registry
@@ -47,7 +60,10 @@ public:
     // Parameters:
     //      key   - The keys name
     //      value - The keys value
-    void AddKey(std::string key, std::string value);
+    //
+    // Returns:
+    //      true if added, false otherwise
+    bool AddKey(std::string key, std::string value);
     
     // Method: SetValue
     //      Sets the value of a key in the registry.
@@ -55,6 +71,9 @@ public:
     // Parameters:
     //      key   - The keys name
     //      value - The keys value
+    //
+    // Notes:
+    //      All entries are stored as string
     //
     // Returns:
     //      true if value set, false otherwise
@@ -67,9 +86,40 @@ public:
     //      key   - The keys name
     //      value - The keys value
     //
+    // Notes:
+    //      All entries are stored as string
+    //
     // Returns:
     //      true if value set, false otherwise
     bool SetValue(std::string key, Proteus::Core::s32 value);
+    
+    // Method: SetValue
+    //      Sets the value of a key in the registry.
+    //
+    // Parameters:
+    //      key   - The keys name
+    //      value - The keys value
+    //
+    // Notes:
+    //      All entries are stored as string
+    //
+    // Returns:
+    //      true if value set, false otherwise
+    bool SetValue(std::string key, Proteus::Core::u32 value);
+    
+    // Method: SetValue
+    //      Sets the value of a key in the registry.
+    //
+    // Parameters:
+    //      key   - The keys name
+    //      value - The keys value
+    //
+    // Notes:
+    //      All entries are stored as string
+    //
+    // Returns:
+    //      true if value set, false otherwise
+    bool SetValue(std::string key, Proteus::Core::f32 value);
     
     // Method: GetValue
     //      Gets the value of a key in the registry.
@@ -79,7 +129,7 @@ public:
     //
     // Returns:
     //          The keys value as a string, or
-    //          NULL if the key does not exist
+    //          nullptr if the key does not exist
     const char *GetValue(std::string key);
     
     // Method: ShowKeyValuePairs
@@ -90,11 +140,7 @@ public:
     void ShowKeyValuePairs();
 
 
-private:
-    
+private:    
     // The registry data
     std::map<std::string, std::string>  values;
 };
-
-
-#endif//__PRREGISTRY_H

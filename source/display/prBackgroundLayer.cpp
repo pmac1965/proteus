@@ -21,6 +21,7 @@
 #include "prColour.h"
 #include "prRenderer.h"
 #include "../core/prCore.h"
+#include "../core/prDefines.h"
 #include "../display/prOglUtils.h"
 #include "../display/prTexture.h"
 #include <cstring>

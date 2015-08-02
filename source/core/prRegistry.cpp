@@ -25,10 +25,11 @@
 
 
 using namespace Proteus::Core;
+using namespace std;
 
 
 /// ---------------------------------------------------------------------------
-/// @brief      Ctor.
+/// Ctor
 /// ---------------------------------------------------------------------------
 prRegistry::prRegistry() : prCoreSystem(PRSYSTEM_REGISTRY, "prRegistry")
 {
@@ -51,8 +52,6 @@ prRegistry::prRegistry() : prCoreSystem(PRSYSTEM_REGISTRY, "prRegistry")
         {"UseArchives",     "true"},
         {"Help",            "false"},
         {"Exit",            "false"},
-//        {"PhysicalWidth",   "-1"},
-//        {"PhysicalHeight",  "-1"},
     };
 
     for (u32 i=0; i<PRARRAY_SIZE(systemKeys); i++)
@@ -73,45 +72,41 @@ prRegistry::prRegistry() : prCoreSystem(PRSYSTEM_REGISTRY, "prRegistry")
         SetValue("Platform", "LINUX");
 
     #else
-        SetValue("Platform", "Unknown");
+        #error No platform defined
 
     #endif
 }
 
 
 /// ---------------------------------------------------------------------------
-/// @brief      Ctor.
-/// ---------------------------------------------------------------------------
-prRegistry::~prRegistry()
-{
-}
-
-
-/// ---------------------------------------------------------------------------
 /// Adds a new key to the registry.
 /// ---------------------------------------------------------------------------
-void prRegistry::AddKey(std::string key, std::string value)
+bool prRegistry::AddKey(string key, string value)
 {
+    bool added = false;
+
     if (values.find(key) == values.end())
     {
         values.insert
         (
-            std::pair<std::string, std::string>(key, value)
+            pair<string, string>(key, value)
         );
+
+        added = true;
     }
+
+    return added;
 }
 
 
 /// ---------------------------------------------------------------------------
 /// Sets the value of a key in the registry.
 /// ---------------------------------------------------------------------------
-bool prRegistry::SetValue(std::string key, std::string value)
+bool prRegistry::SetValue(string key, string value)
 {
     bool result = false;
 
-    std::map<std::string, std::string>::iterator it;
-        
-    for (it = values.begin(); it != values.end(); ++it)
+    for (auto it = values.begin(); it != values.end(); ++it)        
     {
         if (key.compare((*it).first) == 0)
         {
@@ -128,13 +123,11 @@ bool prRegistry::SetValue(std::string key, std::string value)
 /// ---------------------------------------------------------------------------
 /// Sets the value of a key in the registry.
 /// ---------------------------------------------------------------------------
-bool prRegistry::SetValue(std::string key, s32 value)
+bool prRegistry::SetValue(string key, s32 value)
 {
     bool result = false;
-
-    std::map<std::string, std::string>::iterator it;
         
-    for (it = values.begin(); it != values.end(); ++it)
+    for (auto it = values.begin(); it != values.end(); ++it)        
     {
         if (key.compare((*it).first) == 0)
         {
@@ -149,13 +142,53 @@ bool prRegistry::SetValue(std::string key, s32 value)
 
 
 /// ---------------------------------------------------------------------------
+/// Sets the value of a key in the registry.
+/// ---------------------------------------------------------------------------
+bool prRegistry::SetValue(string key, u32 value)
+{
+    bool result = false;
+        
+    for (auto it = values.begin(); it != values.end(); ++it)        
+    {
+        if (key.compare((*it).first) == 0)
+        {
+            (*it).second = prStringPrintf("%u", value);
+            result = true;
+            break;
+        }
+    }
+
+    return result;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Sets the value of a key in the registry.
+/// ---------------------------------------------------------------------------
+bool prRegistry::SetValue(string key, f32 value)
+{
+    bool result = false;
+        
+    for (auto it = values.begin(); it != values.end(); ++it)        
+    {
+        if (key.compare((*it).first) == 0)
+        {
+            (*it).second = prStringPrintf("%f", value);
+            result = true;
+            break;
+        }
+    }
+
+    return result;
+}
+
+
+/// ---------------------------------------------------------------------------
 /// Gets the value of a key in the registry.
 /// ---------------------------------------------------------------------------
-const char *prRegistry::GetValue(std::string key)
+const char *prRegistry::GetValue(string key)
 {
-    std::map<std::string, std::string>::iterator it;
-        
-    for (it = values.begin(); it != values.end(); ++it)
+    for (auto it = values.begin(); it != values.end(); ++it)        
     {
         if (key.compare((*it).first) == 0)
         {
@@ -163,7 +196,7 @@ const char *prRegistry::GetValue(std::string key)
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 
@@ -176,16 +209,14 @@ void prRegistry::ShowKeyValuePairs()
 
     if (!values.empty())
     {
-        prTrace(LogError, "System keys:-------------------------------------------------------------------\n");
+        PRLOGI("System keys:-------------------------------------------------------------------\n");
 
-        std::map<std::string, std::string>::iterator it;
-        
-        for (it = values.begin(); it != values.end(); ++it)
+        for (auto it = values.begin(); it != values.end(); ++it)        
         {
-            prTrace(LogError, "Key: %*s, Value: %s\n", 20, ((*it).first).c_str(), ((*it).second).c_str());
+            PRLOGI("Key: %*s, Value: %s\n", 20, ((*it).first).c_str(), ((*it).second).c_str());
         }
 
-        prTrace(LogError, "-------------------------------------------------------------------------------\n");
+        PRLOGI("-------------------------------------------------------------------------------\n");
     }
 
 #endif

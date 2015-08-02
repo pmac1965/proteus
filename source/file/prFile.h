@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRFILE_H
-#define __PRFILE_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -94,6 +93,3 @@ private:
     FileImplementation  *pImpl;
     FileImplementation  &imp;
 };
-
-
-#endif//__PRFILE_H

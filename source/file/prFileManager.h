@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRFILEMANAGER_H
-#define __PRFILEMANAGER_H
+#pragma once
 
 
 #include "prFileShared.h"
@@ -163,6 +162,3 @@ const char *prGetSavePath();
 //      *Android only*
 zip *prGetAPKArchive();
 #endif
-
-
-#endif//__PRFILEMANAGER_H

@@ -85,8 +85,8 @@ typedef struct prInAppPurchaseImplementation
 /// ---------------------------------------------------------------------------
 prInAppPurchase::prInAppPurchase() : pImpl                     (new prInAppPurchaseImplementation())
                                    , imp                       (*pImpl)
-                                   , pStore                    (NULL)
-                                   , pTransactionResultHandler (NULL)
+                                   , pStore                    (nullptr)
+                                   , pTransactionResultHandler (nullptr)
 {
     PRASSERT(pImpl);
 }
@@ -99,7 +99,7 @@ prInAppPurchase::~prInAppPurchase()
 {
     PRSAFE_DELETE(pImpl);
     PRSAFE_DELETE(pStore);
-    pTransactionResultHandler = NULL;
+    pTransactionResultHandler = nullptr;
 }
 
 
@@ -122,7 +122,7 @@ void prInAppPurchase::Register(prTransactionResult *handler)
 /// ---------------------------------------------------------------------------
 void prInAppPurchase::Init()
 {
-    if (pStore == NULL)
+    if (pStore == nullptr)
     {
 #if defined(PLATFORM_PC)
         pStore = new prStore_pc(*this);
@@ -175,7 +175,7 @@ void prInAppPurchase::Update(f32 dt)
                     // Fire off purchase start
                     case 0:
                         if (pTransactionResultHandler)
-                            pTransactionResultHandler->TransactionResult(TRANSACTION_PURCHASING, NULL);
+                            pTransactionResultHandler->TransactionResult(TRANSACTION_PURCHASING, nullptr);
 
                         // Buy time to random value
                         imp.testTimer = (float)(prRandomNumber(2, 8) * 1000);
@@ -184,7 +184,7 @@ void prInAppPurchase::Update(f32 dt)
                     // Fire off purchased
                     case 1:
                         if (pTransactionResultHandler)
-                            pTransactionResultHandler->TransactionResult(TRANSACTION_PURCHASED, NULL);
+                            pTransactionResultHandler->TransactionResult(TRANSACTION_PURCHASED, nullptr);
 
                         imp.testEvent = IAPTEST_NONE;
                         imp.testTimer = 0.0f;
@@ -355,5 +355,5 @@ const char *prInAppPurchase::FindProductPrice(const char *name)
         return pStore->FindPrice(name, 0);
     }
     
-    return NULL;
+    return nullptr;
 }

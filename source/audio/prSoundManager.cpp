@@ -44,8 +44,8 @@ prSoundManager::prSoundManager() : prCoreSystem(PRSYSTEM_AUDIO, "prSoundManager"
     initialised             = false;
     sfxPaused               = false;
     exp2                    = false;
-    pLoadedWaves            = NULL;
-    pMusicTracks            = NULL;
+    pLoadedWaves            = nullptr;
+    pMusicTracks            = nullptr;
     numTracks               = 0;
     numEffects              = 0;
     active                  = 0;

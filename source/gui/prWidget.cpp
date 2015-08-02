@@ -57,8 +57,8 @@ prWidget::prWidget(prWidgetType type, const char *name, prSpriteManager *pSprite
     m_exp1      = false;
     m_exp2      = false;
     m_layer     = 0;
-    m_pBmpfont  = NULL;
-    m_pTtfFont  = NULL;
+    m_pBmpfont  = nullptr;
+    m_pTtfFont  = nullptr;
 }
 
 

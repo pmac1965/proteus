@@ -35,7 +35,7 @@ typedef struct AdvertsImplementation
 {
     AdvertsImplementation()
     {
-        pProvider = NULL;
+        pProvider = nullptr;
     }
 
     ~AdvertsImplementation()

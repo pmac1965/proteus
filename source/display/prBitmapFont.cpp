@@ -524,7 +524,7 @@ typedef struct BitmapFontImplementation
     {
         f32 amount = 0.0f;
 
-        if (pKerningData != null)
+        if (pKerningData != nullptr)
         {
 		    s32 kern = 0;
 		    while(kern < kernings && pKerningData[kern].first <= first)

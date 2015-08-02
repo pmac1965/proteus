@@ -41,6 +41,9 @@
 #endif
 
 
+//#define FILE_LOG_CREATE
+
+
 using namespace Proteus::Core;
 
 
@@ -182,6 +185,13 @@ prFile::prFile(const char *filename) : pImpl (new FileImplementation())
         imp.filenameDisk[0] = 0;
         imp.filenameOrig[0] = 0;
     }
+
+#ifdef FILE_LOG_CREATE
+    {
+        static int c = 0;
+        PRLOGD("Created prFile: %i - '%s'\n", c++, filename);
+    }
+#endif
 }
 
 

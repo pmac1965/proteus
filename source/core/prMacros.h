@@ -1,3 +1,4 @@
+// File: prMacros.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -15,24 +16,25 @@
  */
 
 
-#ifndef __PRMACROS_H
-#define __PRMACROS_H
+#pragma once
 
 
 #include "prTypes.h"
-#include "prDefines.h"
 
 
 // ------------------------------------------------------------------------------------------
 // Range macros.
 // ------------------------------------------------------------------------------------------
 
-/// @def PRBETWEEN
-/// Used to test if a variable is between the minimum and maximum range specified.
+/// Macro: PRBETWEEN
+///     Used to test if a variable is between the minimum and maximum range specified.
 #define PRBETWEEN(var, min, max)   ((var) >= (min)  &&  (var) <= (max))
 
-/// @def PRCLAMP
-/// Ensures a variable is between the minimum and maximum range specified.
+/// Macro:  PRCLAMP
+///     Ensures a variable is between the minimum and maximum range specified.
+///
+/// Notes:
+///     Doesn't work well with unsigned or floating point numbers
 #define PRCLAMP(var, min, max)     ((var) < (min) ? (min) : (var) > (max) ? (max) : (var))
 
 
@@ -43,7 +45,7 @@
 /// @def PRSAFE_RELEASE
 /// DirectX safe release macro.
 #ifndef PRSAFE_RELEASE
-#define PRSAFE_RELEASE(p) { if ((p)) { (p)->Release(); (p) = NULL; } }
+#define PRSAFE_RELEASE(p) { if ((p)) { (p)->Release(); (p) = nullptr; } }
 #endif
 
 
@@ -83,17 +85,17 @@
 
 /// @def PRSAFE_DELETE_ARRAY
 /// Allows delete to be called only on valid pointers.
-#define PRSAFE_DELETE_ARRAY(ptr)      if ((ptr) != NULL) {delete [] (ptr); (ptr) = NULL;}
+#define PRSAFE_DELETE_ARRAY(ptr)      if ((ptr) != nullptr) {delete [] (ptr); (ptr) = nullptr;}
 
 
 /// @def PRSAFE_DELETE
 /// Allows delete to be called only on valid pointers.
-#define PRSAFE_DELETE(ptr)            if ((ptr) != NULL) {delete (ptr); (ptr) = NULL;}
+#define PRSAFE_DELETE(ptr)            if ((ptr) != nullptr) {delete (ptr); (ptr) = nullptr;}
 
 
 /// @def PRSAFE_FREE
 /// Allows free to be called only on valid pointers.
-#define PRSAFE_FREE(ptr)              if ((ptr) != NULL) {free((ptr)); (ptr) = NULL;}
+#define PRSAFE_FREE(ptr)              if ((ptr) != nullptr) {free((ptr)); (ptr) = nullptr;}
 
 
 /// @def PRARRAY_SIZE
@@ -301,7 +303,3 @@
 /// @def PRKEY_DOWN
 /// Simple key down macro.
 #define PRKEY_DOWN(vk_code)             ((GetAsyncKeyState(vk_code) & 0x8000) ? 1 : 0)
-
-
-#endif//__PRMACROS_H
-

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRFILESHARED_H
-#define __PRFILESHARED_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -168,6 +167,3 @@ typedef struct prArcEntry
 // Returns:
 //      The checksum value
 Proteus::Core::u32 prCalculateChecksum(Proteus::Core::u8 *data, Proteus::Core::u32 datasize);
-
-
-#endif//__PRFILESHARED_H

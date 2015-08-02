@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRFILESYSTEM_H
-#define __PRFILESYSTEM_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -65,6 +64,3 @@ bool prFileLoad(const char *filename, Proteus::Core::u32 filesize, void *buffer,
 // Function: prFileChangeExtension
 //      Changes a filenames extension.
 void prFileChangeExtension(char* filename, const char* extension, Proteus::Core::s32 bufferSize);
-
-
-#endif//__PRFILESYSTEM_H

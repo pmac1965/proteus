@@ -16,13 +16,11 @@
  */
 
 
-#ifndef __PRSINGLETON_H
-#define __PRSINGLETON_H
+#pragma once
 
 
 #include "prMacros.h"
 #include "../debug/prAssert.h"
-#include "../core/prDefines.h"
 
 
 // Class: prSingleton
@@ -35,7 +33,7 @@ public:
     //      Returns a reference to this instance.
     static T *GetInstance()
     {
-        if (Instance() == NULL)
+        if (Instance() == nullptr)
         {
             SingletonCreate();
         }
@@ -47,7 +45,7 @@ public:
     //      Create the singleton.
     static void *SingletonCreate() 
     { 
-        if (Instance() == NULL)
+        if (Instance() == nullptr)
         {
             Instance() = new T(); 
         }
@@ -66,17 +64,16 @@ public:
     //      Determines if the singleton exists.
     static bool SingletonExists()
     {
-        return (Instance() != NULL);
+        return (Instance() != nullptr);
     }
 
 
 protected:
-
     // Method: Instance
     //      Returns a reference to this instance.
     static T *& Instance()
     {
-        static T *instance = NULL;
+        static T *instance = nullptr;
         return instance;
     }
 };
@@ -94,6 +91,3 @@ private:                                                                \
     /* Stops passing by value and assignment. */                        \
     cls(const cls&);                                                    \
     const cls& operator = (const cls&);
-
-
-#endif// __PRSINGLETON_H
