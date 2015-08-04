@@ -40,7 +40,7 @@ prBackgroundManager::prBackgroundManager() : prCoreSystem(PRSYSTEM_BACKGROUNDMAN
 {
     for (int i=0; i<MAX_BACKGROUNDS; i++)
     {
-        backgrounds[i] = NULL;
+        backgrounds[i] = nullptr;
     }
 }
 
@@ -66,7 +66,7 @@ prBackground *prBackgroundManager::Create(const char *filename)
 
     for (int i=0; i<MAX_BACKGROUNDS; i++)
     {
-        if (backgrounds[i] == NULL)
+        if (backgrounds[i] == nullptr)
         {
             #if !defined(REMOVE_EXCEPTIONS)
             try
@@ -84,7 +84,7 @@ prBackground *prBackgroundManager::Create(const char *filename)
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 

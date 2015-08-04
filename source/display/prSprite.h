@@ -127,6 +127,10 @@ public:
     //      Gets the current frame.
     Proteus::Core::s32 GetFrame() const;
 
+    // Method: GetTotalFrames
+    //      Gets the total number of frames.
+    Proteus::Core::s32 GetTotalFrames() const { return m_framesTotal; }
+
     // Method: PlayAnim
     //      Play an animation.
     //

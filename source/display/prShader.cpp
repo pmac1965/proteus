@@ -20,6 +20,9 @@
 #include "../prConfig.h"
 
 
+#define TEMP_DEFINE	1
+
+
 #if defined(PLATFORM_PC)
   #include <Windows.h>
   #include <glew.h>
@@ -31,6 +34,10 @@
   #include <GL/glu.h>
   #include "../core/prWindow_PC.h"
   #include "../linux/prLinux.h"
+
+  #ifdef TEMP_DEFINE
+  #undef TEMP_DEFINE
+  #endif
 
 #elif defined(PLATFORM_MAC)
   #include <OpenGL/gl.h>
@@ -80,6 +87,8 @@ prShader::~prShader()
 /// ---------------------------------------------------------------------------
 bool prShader::LoadFromMemory(const char *vertexSrc, const char *fragmentSrc)
 {
+#ifdef TEMP_DEFINE
+
     PRASSERT(vertexSrc && *vertexSrc);
     PRASSERT(fragmentSrc && *fragmentSrc);
 
@@ -156,6 +165,7 @@ bool prShader::LoadFromMemory(const char *vertexSrc, const char *fragmentSrc)
         return false;
     }
 
+#endif
 
     return true;
 }
@@ -167,11 +177,13 @@ bool prShader::LoadFromMemory(const char *vertexSrc, const char *fragmentSrc)
 void prShader::SetSource(u32 shader, const char *src)
 {
     PRASSERT(src && *src);
+#ifdef TEMP_DEFINE
 
     GLchar *stringPtr[] = { (GLchar *)src };
 
     glShaderSource(shader, 1, (const GLchar **)stringPtr, NULL);
     ERR_CHECK();
+#endif
 }
 
 
@@ -180,6 +192,8 @@ void prShader::SetSource(u32 shader, const char *src)
 /// ---------------------------------------------------------------------------
 void prShader::ShaderInfoLog(u32 shader)
 {
+#ifdef TEMP_DEFINE
+
     GLint logLength;
 
     glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logLength);
@@ -196,6 +210,8 @@ void prShader::ShaderInfoLog(u32 shader)
         prTrace(LogError, "%s\n", log);
         free(log);
     }
+
+#endif
 }
 
 
@@ -204,7 +220,9 @@ void prShader::ShaderInfoLog(u32 shader)
 /// ---------------------------------------------------------------------------
 void prShader::ProgramInfoLog(u32 shader)
 {
-    GLint logLength;
+#ifdef TEMP_DEFINE
+
+	GLint logLength;
 
     glGetProgramiv(shader, GL_INFO_LOG_LENGTH, &logLength);
     ERR_CHECK();
@@ -220,4 +238,5 @@ void prShader::ProgramInfoLog(u32 shader)
         prTrace(LogError, "%s\n", log);
         free(log);
     }
+#endif
 }

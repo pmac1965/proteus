@@ -19,6 +19,11 @@
 #pragma once
 
 
+#if defined(__cplusplus)
+  extern "C" {
+#endif
+
+
 // Enum: prLogLevel
 //      The log levels are designed to limit the amount of information logged
 //
@@ -59,14 +64,14 @@ void prTrace(prLogLevel level, const char* fmt, ...);
 //
 // Parameters:
 //      state - true or false.
-void prTraceEnable(bool state);
+void prTraceEnable(int state);
 
 // Function: prTraceRemoveDuplicates 
 //      Enables or disables duplicate string output. This prevents logging from spamming the debug output window.
 //
 // Parameters:
 //      state - true or false.
-void prTraceRemoveDuplicates(bool state);
+void prTraceRemoveDuplicates(int state);
 
 // Function: prTraceLogClear 
 //      Deletes the old file log.
@@ -154,4 +159,9 @@ void prTraceSetLogLevel(prLogLevel level);
     //      <prLogLevel>
     #define PRLOGE(msg, ...)
 
+#endif
+
+
+#if defined(__cplusplus)
+  }
 #endif

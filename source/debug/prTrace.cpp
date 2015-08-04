@@ -29,6 +29,7 @@
 #include "../core/prCoreSystem.h"
 #include "../core/prRegistry.h"
 #include "../core/prStringUtil.h"
+#include "../core/prDefines.h"
 #include "../file/prFileSystem.h"
 
 
@@ -49,13 +50,13 @@
 namespace
 {
 #if (defined(_DEBUG) || defined(DEBUG))
-    bool        enabled         = true;             // Is logging enabled?
-    bool        duplicates      = true;             // Remove duplicate error messages?
+    int         enabled         = TRUE;             // Is logging enabled?
+    int         duplicates      = TRUE;             // Remove duplicate error messages?
     prLogLevel  logLevel        = LogVerbose;       // Default log level
 
 #else
-    bool        enabled         = false;            // Is logging enabled?
-    bool        duplicates      = true;             // Remove duplicate error messages?
+    int         enabled         = FALSE;            // Is logging enabled?
+    int         duplicates      = TRUE;             // Remove duplicate error messages?
     prLogLevel  logLevel        = LogError;         // Default log level
 
 #endif
@@ -69,7 +70,7 @@ namespace
 /// ---------------------------------------------------------------------------
 /// Write a trace message to file if enabled.
 /// ---------------------------------------------------------------------------
-void prTraceWriteToFile(bool repeat, const char *bufferRpt, const char *bufferMsg)
+void prTraceWriteToFile(int repeat, const char *bufferRpt, const char *bufferMsg)
 {
 #if defined(PLATFORM_PC)
 
@@ -130,7 +131,7 @@ void prTrace(prLogLevel level, const char *fmt, ...)
 
 
                 // Duplicate removal?
-                bool repeat = false;
+                int repeat = FALSE;
                 if (duplicates)
                 {
                     if (strcmp(bufferMsg, output) == 0)
@@ -187,7 +188,7 @@ void prTrace(prLogLevel level, const char *fmt, ...)
 /// ---------------------------------------------------------------------------
 /// Allows tracing to be enabled/disabled.
 /// ---------------------------------------------------------------------------
-void prTraceEnable(bool state)
+void prTraceEnable(int state)
 {
     enabled = state;
 }
@@ -196,7 +197,7 @@ void prTraceEnable(bool state)
 /// ---------------------------------------------------------------------------
 /// Enables or disables duplicate string output.
 /// ---------------------------------------------------------------------------
-void prTraceRemoveDuplicates(bool state)
+void prTraceRemoveDuplicates(int state)
 {
     duplicates = state;
 }

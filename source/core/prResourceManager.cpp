@@ -116,7 +116,7 @@ prResource *prResourceManager::Find(const char *filename)
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 

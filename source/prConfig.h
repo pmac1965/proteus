@@ -63,7 +63,7 @@
 // Or Linux? Android?
 #elif defined(__GNUC__)
     // Linux
-    #if (defined(linux) && !defined(ANDROID))
+    #if ((defined(linux) || (__linux__)) && !defined(ANDROID))
         #define PLATFORM_LINUX
         #define AUDIO_TYPE  AUDIO_LINUX
 

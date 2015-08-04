@@ -37,7 +37,7 @@ using namespace Proteus::Core;
 /// ---------------------------------------------------------------------------
 prSpriteAnimation::prSpriteAnimation(prSprite *sprite) : m_sprite(*sprite)
 {
-    m_currSequence = NULL;
+    m_currSequence = nullptr;
 }
 
 
