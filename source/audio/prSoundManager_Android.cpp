@@ -24,7 +24,7 @@
 
 
 #include <string.h>
-#include "prsoundManager_Android.h"
+#include "prSoundManager_Android.h"
 #include "../debug/prTrace.h"
 #include "../debug/prDebug.h"
 #include "../core/prMacros.h"
