@@ -27,16 +27,8 @@
 /// ---------------------------------------------------------------------------
 prRenderer::prRenderer() : prCoreSystem(PRSYSTEM_RENDERER, "prRenderer")
 {
-    m_pWindow    = NULL;
-    m_pWatermark = NULL;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Dtor
-/// ---------------------------------------------------------------------------
-prRenderer::~prRenderer()
-{
+    m_pWindow    = nullptr;
+    m_pWatermark = nullptr;
 }
 
 

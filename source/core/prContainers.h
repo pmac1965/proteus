@@ -16,16 +16,16 @@
  */
 
 
-#ifndef __PRCONTAINERS_H
-#define __PRCONTAINERS_H
+#pragma once
 
 
-// Used to specify whether an item is inserted in a list before or after the current item.
+// Enum: prInsertPos
+//      Used to specify whether an item is inserted in a list before or after the current item.
+//
+// - INSERT_POS_BEFORE 
+// - INSERT_POS_AFTER 
 enum prInsertPos
 {
      INSERT_POS_BEFORE,
      INSERT_POS_AFTER    
 };
-
-
-#endif//__PRCONTAINERS_H

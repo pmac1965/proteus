@@ -108,40 +108,6 @@ prBackgroundLayer::~prBackgroundLayer()
 {
     PRSAFE_DELETE_ARRAY(mMapData);
 }
-//    if (PRBETWEEN(frame, 0, m_framesTotal - 1))
-//    {
-//        // Set the frame source rect position indices
-//        s32 x = frame % m_framesAcross;
-//        s32 y = frame / m_framesAcross;
-//
-//        m_u0 = x * m_fw;
-//        m_u1 = m_u0 + m_fw;
-//
-//        m_v0 = 1.0f - ((y * m_fh) + m_fh);
-//        m_v1 = m_v0 + m_fh;
-//
-//#if defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS)
-//        // Left/right
-//        m_u0 += (m_pw / 2);             // Add half pixel to stop blurring.
-//
-//        // Top/bottom
-//        m_v0 += (m_ph / 2);             // Add half pixel to stop blurring
-//#endif
-//
-//
-//#if defined(PLATFORM_PC)
-//        m_v0 += (m_ph / 2);             // Sub half pixel to stop blurring
-//#endif
-//
-//        // Set frame
-//        m_frame = frame;
-//    }
-//#if defined(ALLOW_INVALID_FRAME_WARNING)
-//    else
-//    {
-//        prTrace(LogError, "Attempted to set an invalid sprite frame index %i. Texture: %s\n", frame, m_pTexture->Filename());
-//    }
-//#endif
 
 
 /// ---------------------------------------------------------------------------

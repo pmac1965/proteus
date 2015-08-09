@@ -77,11 +77,14 @@ using namespace Proteus::Core;
 prSpriteManager::prSpriteManager() : prCoreSystem(PRSYSTEM_SPRITEMANAGER, "prSpriteManager")
 {
     m_correctFileType = false;
-    m_sprite          = NULL;
-    m_texture         = NULL;
+    m_sprite          = nullptr;
+    m_texture         = nullptr;
     m_exp0            = false;
     m_exp1            = false;
     m_exp2            = false;
+    m_pBatchQuads     = nullptr;
+    m_numQuads        = 0;
+    m_numQuadsAdded   = 0;
 }
 
 
@@ -142,8 +145,8 @@ prSprite *prSpriteManager::Create(const char *filename, bool draw)
     PRASSERT(filename && *filename);
 
     // Create sprite.
-    m_sprite          = NULL;
-    m_texture         = NULL;
+    m_sprite          = nullptr;
+    m_texture         = nullptr;
     m_correctFileType = false;
 
 
@@ -214,7 +217,7 @@ prSprite *prSpriteManager::ToolCreate(prTexture *pTex, s32 width, s32 height)
     if (pTex)
     {
         m_texture = pTex;
-        m_sprite  = new prSprite(pTex, "sprite", width, height);
+        m_sprite  = new prSprite(this, pTex, "sprite", width, height);
     }
 
     return m_sprite;
@@ -324,10 +327,20 @@ void prSpriteManager::DisplayUsage()
 /// ---------------------------------------------------------------------------
 /// Starts batch sprite rendering
 /// ---------------------------------------------------------------------------
-void prSpriteManager::BatchBegin(prSprite *pSprite)
+void prSpriteManager::BatchBegin(prSprite *pSprite, s32 batchSize)
 {
     PRASSERT(pSprite);
-    
+
+    // Creat batch memory
+    if (batchSize > 0) 
+    {
+        m_pBatchQuads   = new QuadData[(sizeof(QuadData) *  4) * batchSize];        // 4 quads per sprite
+        m_pBatchColours = new      f32[(sizeof(f32)      * 16) * batchSize];        // 16 colours per sprite
+        m_numQuads      = 0;
+        m_numQuadsAdded = 0;
+    }
+
+
     // Enable blending
     glEnable(GL_BLEND);
     ERR_CHECK();
@@ -372,6 +385,25 @@ void prSpriteManager::BatchEnd()
     // Disable blending
     glDisable(GL_BLEND);
     ERR_CHECK();
+
+    // Clean batch memory
+    if (m_numQuads > 0) 
+    {
+        PRSAFE_DELETE(m_pBatchQuads);
+        m_numQuads = 0;
+    }
+}
+
+
+void prSpriteManager::BatchAdd(f32 *pColours, QuadData* pQuadData)
+{
+    PRASSERT(m_pBatchQuads);
+    PRASSERT(m_pBatchColours);
+
+    QuadData* pQuadDest = m_pBatchQuads;
+
+    memcpy(m_pBatchQuads, pQuadData, sizeof(QuadData) * 4);
+    memcpy(m_pBatchColours, pQuadData, sizeof(f32)      * 16);
 }
 
 
@@ -510,7 +542,7 @@ void prSpriteManager::ParseAttribs_Sprite(TiXmlElement* pElement)
 
             if (m_texture)
             {
-                m_sprite = new prSprite(m_texture, name, frameWidth, frameHeight);
+                m_sprite = new prSprite(this, m_texture, name, frameWidth, frameHeight);
             }
         }
         else

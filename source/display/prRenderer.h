@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRRENDERER_H
-#define __PRRENDERER_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -53,7 +52,7 @@ public:
 
     // Method: ~prRenderer
     //      Dtor
-    virtual ~prRenderer();
+    virtual ~prRenderer() {}
 
     // Method: SetWindow
     //      Sets the window that the renderer draws to.
@@ -260,10 +259,6 @@ public:
 
 
 protected:
-
     prWindow    *m_pWindow;
     prTexture   *m_pWatermark;
 };
-
-
-#endif//__PRRENDERER_H

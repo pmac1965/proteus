@@ -31,7 +31,6 @@
 class prCoreSystem
 {
 public:
-
     // Method: prCoreSystem
     //      Constructor
     //
@@ -42,7 +41,7 @@ public:
 
     // Method: ~prCoreSystem
     //      Destructor
-    virtual ~prCoreSystem();
+    virtual ~prCoreSystem() {}
 
     // Method: ID
     //      Fetches the core systems unique ID
@@ -54,7 +53,6 @@ public:
 
 
 private:
-
     Proteus::Core::u32  m_id;           // The systems unique ID.
     prString            m_name;         // The systems name.
 };

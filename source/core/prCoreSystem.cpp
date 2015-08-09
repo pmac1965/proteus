@@ -21,6 +21,9 @@
 #include "../debug/prTrace.h"
 
 
+#define CORE_SHOW_INIT
+
+
 using namespace Proteus::Core;
 
 
@@ -30,13 +33,8 @@ using namespace Proteus::Core;
 prCoreSystem::prCoreSystem(u32 id, const char *pName) : m_id  (id)
                                                       , m_name(pName)
 {
+#ifdef CORE_SHOW_INIT
     PRLOGD("Init : %*s - ID: %i\n", 24, (pName && *pName) ? pName : "Unnamed", id);
-}
 
-
-/// ---------------------------------------------------------------------------
-/// Destructor.
-/// ---------------------------------------------------------------------------
-prCoreSystem::~prCoreSystem()
-{
+#endif
 }

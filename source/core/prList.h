@@ -15,7 +15,7 @@
 // Method 2:
 //          Adding a previously created node.
 //
-//          Method 2 is faster and helps prevent memory fragmentation.
+//          Method 2 is much faster and helps prevent memory fragmentation.
 // 
 //          Method 2 is intended to be used in conjunction with node memory pools.
 // 
@@ -24,7 +24,7 @@
 //          Method 2 requires knowledge up front of how many nodes required.
 //
 // Warning:
-//          Do not mix methods when adding items to a list.
+//          *Do not mix methods when adding items to a list.*
 //
 /**
  *  Copyright 2014 Paul Michael McNab
@@ -43,8 +43,7 @@
  */
 
 
-#ifndef __PRLIST_H
-#define __PRLIST_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -352,7 +351,7 @@ public:
             node = node->next;
         }
 
-        if (node == NULL)
+        if (node == nullptr)
         {
             PRPANIC("Exceeded array bounds");
         }
@@ -397,6 +396,3 @@ private:
 
 
 #include "prList.inl"
-
-
-#endif//__PRLIST_H

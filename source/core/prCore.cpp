@@ -31,7 +31,6 @@
 #include "../file/prFileManager.h"
 #include "../display/prRenderer_GL11.h"
 #include "../display/prRenderer_GL20.h"
-#include "../display/prRenderer_DX9.h"
 #include "../display/prBackgroundManager.h"
 #include "../display/prSpriteManager.h"
 #include "../display/prFadeManager.h"
@@ -196,8 +195,7 @@ PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version)
         // Platform specific initialisation
         #if defined(PLATFORM_PC)
             // Check renderer type value.
-            PRASSERT(rendererType == PRRENDERER_OPENGL || rendererType == PRRENDERER_DIRECTX);
-
+            PRASSERT(rendererType == PRRENDERER_OPENGL);
             if (rendererType == PRRENDERER_OPENGL)
             {
                 // Check version numbers
@@ -213,25 +211,6 @@ PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version)
                     break;
 
                 case PRGLVER_30:
-                    PRPANIC("Under construction");
-                    break;
-                }
-            }
-            else if (rendererType == PRRENDERER_DIRECTX)
-            {
-                // Check version numbers
-                PRASSERT(version == PRDXVER_9 || version == PRDXVER_10 || version == PRDXVER_11);
-                switch(version)
-                {
-                case PRDXVER_9:
-                    PRPANIC("Under construction");
-                    break;
-
-                case PRDXVER_10:
-                    PRPANIC("Under construction");
-                    break;
-
-                case PRDXVER_11:
                     PRPANIC("Under construction");
                     break;
                 }
@@ -503,7 +482,7 @@ void prCoreDestroy()
     {
         if (pSystems[i])
         {
-            PRLOGI("Destroying %s - %i\n", pSystems[i]->Name(), pSystems[i]->ID());
+            //PRLOGI("Destroying %s - %i\n", pSystems[i]->Name(), pSystems[i]->ID());
             PRSAFE_DELETE(pSystems[i]);
         }
     }

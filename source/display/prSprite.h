@@ -34,6 +34,7 @@
 
 // Forward declarations
 class prTexture;
+class prSpriteManager;
 class prSpriteAnimationSequence;
 class prSpriteAnimation;
 class prRenderer;
@@ -286,11 +287,12 @@ private:
 
 
     // Ctor
-    //      pTexture    - The sprites texture
-    //      name        - The sprites name
-    //      frameWidth  - The sprites width
-    //      frameHeight - The sprites height
-    prSprite(prTexture *pTexture, const char *name, Proteus::Core::s32 frameWidth, Proteus::Core::s32 frameHeight);
+    //      pSpriteManager  - The sprite manager
+    //      pTexture        - The sprites texture
+    //      name            - The sprites name
+    //      frameWidth      - The sprites width
+    //      frameHeight     - The sprites height
+    prSprite(prSpriteManager *pSpriteManager, prTexture *pTexture, const char *name, Proteus::Core::s32 frameWidth, Proteus::Core::s32 frameHeight);
 
     // Dtor
     ~prSprite();
@@ -314,11 +316,11 @@ private:
 
 
 private:
+    prSpriteManager    *mpSpriteManager;    // The parent class
     prRenderer         *mpRenderer;         // A pointer to the renderer.
     prTexture          *m_pTexture;
     prSpriteAnimation  *m_animation;
-    char               *m_name;
-    
+    char               *m_name;    
     Proteus::Core::s32  m_frameWidth;
     Proteus::Core::s32  m_frameHeight;
     Proteus::Core::s32  m_framesAcross;

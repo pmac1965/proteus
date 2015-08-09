@@ -53,6 +53,7 @@
 #include "prRenderer.h"
 #include "prSprite.h"
 #include "prSpriteAnimation.h"
+#include "prSpriteManager.h"
 #include "prOglUtils.h"
 #include "../core/prMacros.h"
 #include "../core/prCore.h"
@@ -67,28 +68,28 @@ using namespace Proteus::Core;
 
 // Defines
 #define DEFAULT_SCALE                   1.0f
-#define ALLOW_INVALID_FRAME_WARNING
+//#define ALLOW_INVALID_FRAME_WARNING
 
 
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
-prSprite::prSprite(prTexture *pTexture, const char *name, s32 frameWidth, s32 frameHeight) : m_colour(prColour::White)
+prSprite::prSprite(prSpriteManager *pSpriteManager, prTexture *pTexture, const char *name, s32 frameWidth, s32 frameHeight) : m_colour(prColour::White)
 {
     PRASSERT(pTexture);
     PRASSERT(name && *name);
 
-    mpRenderer    = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
-    m_pTexture    = pTexture;
-    m_animation   = nullptr;
-    m_name        = nullptr;
-    m_frameWidth  = frameWidth;
-    m_frameHeight = frameHeight;
-
-    m_framesAcross = pTexture->GetWidth()  / frameWidth;
-    m_framesDown   = pTexture->GetHeight() / frameHeight;
-    m_framesTotal  = m_framesAcross * m_framesDown;
-    m_frame        = 0;
+    mpRenderer      = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
+    m_pTexture      = pTexture;
+    mpSpriteManager = pSpriteManager;
+    m_animation     = nullptr;
+    m_name          = nullptr;
+    m_frameWidth    = frameWidth;
+    m_frameHeight   = frameHeight;
+    m_framesAcross  = pTexture->GetWidth()  / frameWidth;
+    m_framesDown    = pTexture->GetHeight() / frameHeight;
+    m_framesTotal   = m_framesAcross * m_framesDown;
+    m_frame         = 0;
 
     m_pw = 1.0f / pTexture->GetWidth();     // Get pixel width/height
     m_ph = 1.0f / pTexture->GetHeight();
@@ -236,8 +237,33 @@ void prSprite::BatchDraw()
             glScalef(width, height, 0);
             ERR_CHECK();
 
-            PRASSERT(mpRenderer)
-            mpRenderer->BatchDrawQuad(m_u0, m_v0, m_u1, m_v1, m_colour);
+            // Render
+            if (mpSpriteManager->BatchAvailable())
+            {
+                f32 colors[] =
+                {
+                    m_colour.red, m_colour.green, m_colour.blue, m_colour.alpha,
+                    m_colour.red, m_colour.green, m_colour.blue, m_colour.alpha,
+                    m_colour.red, m_colour.green, m_colour.blue, m_colour.alpha,
+                    m_colour.red, m_colour.green, m_colour.blue, m_colour.alpha
+                };
+
+                QuadData quadData[] =
+                {
+                    {-0.5f,  0.5f, m_u0, m_v0, },
+                    {-0.5f, -0.5f, m_u0, m_v1, },
+                    { 0.5f,  0.5f, m_u1, m_v0, },
+                    { 0.5f, -0.5f, m_u1, m_v1, },
+                };
+
+                mpSpriteManager->BatchAdd(colors, quadData);
+            }
+            else
+            {
+                // Use old method
+                PRASSERT(mpRenderer)
+                mpRenderer->BatchDrawQuad(m_u0, m_v0, m_u1, m_v1, m_colour);
+            }
             
         glPopMatrix();
         ERR_CHECK();
@@ -328,18 +354,15 @@ void prSprite::SetFrame(s32 frame)
         m_v0 = 1.0f - ((y * m_fh) + m_fh);
         m_v1 = m_v0 + m_fh;
 
-#if defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS)
+//#if defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS)
         // Left/right
         m_u0 += (m_pw / 2);             // Add half pixel to stop blurring.
+        m_u1 -= (m_pw / 2);             // Sub half pixel to stop blurring.
 
         // Top/bottom
         m_v0 += (m_ph / 2);             // Add half pixel to stop blurring
-#endif
-
-
-#if defined(PLATFORM_PC)
-        m_v0 += (m_ph / 2);             // Sub half pixel to stop blurring
-#endif
+        m_v1 -= (m_ph / 2);             // Sub half pixel to stop blurring
+//#endif
 
         // Set frame
         m_frame = frame;

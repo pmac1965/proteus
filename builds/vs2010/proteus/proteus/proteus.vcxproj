@@ -614,9 +614,6 @@
     <ClInclude Include="..\..\..\..\source\display\prPerspective.h" />
     <ClInclude Include="..\..\..\..\source\display\prPvr.h" />
     <ClInclude Include="..\..\..\..\source\display\prRenderer.h" />
-    <ClInclude Include="..\..\..\..\source\display\prRenderer_DX10.h" />
-    <ClInclude Include="..\..\..\..\source\display\prRenderer_DX11.h" />
-    <ClInclude Include="..\..\..\..\source\display\prRenderer_DX9.h" />
     <ClInclude Include="..\..\..\..\source\display\prRenderer_GL11.h" />
     <ClInclude Include="..\..\..\..\source\display\prRenderer_GL20.h" />
     <ClInclude Include="..\..\..\..\source\display\prShader.h" />
@@ -963,9 +960,6 @@
     <ClCompile Include="..\..\..\..\source\display\prOglUtils.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prPerspective.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer.cpp" />
-    <ClCompile Include="..\..\..\..\source\display\prRenderer_DX10.cpp" />
-    <ClCompile Include="..\..\..\..\source\display\prRenderer_DX11.cpp" />
-    <ClCompile Include="..\..\..\..\source\display\prRenderer_DX9.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer_GL11.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer_GL20.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prShader.cpp" />

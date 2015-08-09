@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRBITARRAY_H
-#define __PRBITARRAY_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -82,11 +81,7 @@ public:
 
 
 protected:
-
     Proteus::Core::s32  m_boxes;
     Proteus::Core::s32  m_count;
     Proteus::Core::u32 *m_array;
 };
-
-
-#endif//__PRBITARRAY_H

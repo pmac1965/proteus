@@ -30,11 +30,9 @@ class prCoreSystem;
 //      The types of renderer supported
 //
 //  PRRENDERER_OPENGL   - Use OpenGL
-//  PRRENDERER_DIRECTX  - Use DirectX
 typedef enum
 {
     PRRENDERER_OPENGL,
-    PRRENDERER_DIRECTX,
 
 } prRendererType;
 
@@ -45,19 +43,11 @@ typedef enum
 //  PRGLVER_11  - OpenGL Version 1.1
 //  PRGLVER_20  - OpenGL Version 2.0
 //  PRGLVER_30  - OpenGL Version 3.0
-//  PRDXVER_9   - DirectX Version 9
-//  PRDXVER_10  - DirectX Version 10
-//  PRDXVER_11  - DirectX Version 11
 typedef enum
 {
     PRGLVER_11,
     PRGLVER_20,
     PRGLVER_30,
-#if defined(WIN32)
-    PRDXVER_9,
-    PRDXVER_10,
-    PRDXVER_11,
-#endif
 
 } prVerType;
 
@@ -217,5 +207,5 @@ Proteus::Core::PRBOOL prCoreComponentExist(Proteus::Core::s32 systemID);
 // 
 // Returns:
 //      A prCoreSystem pointer.
-//      May return NULL
+//      May return nullptr
 prCoreSystem *prCoreGetComponent(Proteus::Core::u32 systemID);

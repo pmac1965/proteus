@@ -15,8 +15,7 @@
  */
 
 
-#ifndef __PRTYPES_H
-#define __PRTYPES_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -141,6 +140,3 @@ PRCOMPILER_ASSERT(sizeof(f64) == 8);
 
 PRNAMESPACE_END
 PRNAMESPACE_END // Namespaces
-
-
-#endif//__PRTYPES_H

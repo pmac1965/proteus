@@ -30,14 +30,11 @@
 #elif defined(PLATFORM_LINUX)
   #include <GL/gl.h>
   #include <GL/glu.h>
-  //#include "../core/prWindow_PC.h"
   #include "../linux/prLinux.h"
 
 #elif defined(PLATFORM_MAC)
   #include <OpenGL/gl.h>
   #include <OpenGL/glu.h>
-  //#include "../core/prWindow_PC.h"
-  //#include "../linux/prLinux.h"
 
 #elif defined(PLATFORM_ANDROID)
   #include <GLES/gl.h>
@@ -52,7 +49,7 @@
 #endif
 
 
-#include <math.h>
+#include <cmath>
 #include "prRenderer_GL11.h"
 #include "prColour.h"
 #include "../debug/prTrace.h"
@@ -82,7 +79,7 @@
 #endif
 
 
-//
+// Namespaces
 using namespace Proteus::Math;
 using namespace Proteus::Core;
 
@@ -164,14 +161,13 @@ void prRenderer_GL11::Init()
 
     // Load watermark
     #if defined(PLATFORM_PC) && defined(PROTEUS_ALLOW_WATERMARK)
-    prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
-    PRASSERT(pRM)
-    //m_pWatermark = pRM->LoadFromMemory<prTexture>("proteusImg", proteusImg, sizeof(proteusImg));
-    m_pWatermark = pRM->LoadFromMemory<prTexture>("proteusImg", proteusImg, prSplashSize());
-    PRASSERT(m_pWatermark);
+        prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));
+        PRASSERT(pRM)
+        m_pWatermark = pRM->LoadFromMemory<prTexture>("proteusImg", proteusImg, prSplashSize());
+        PRASSERT(m_pWatermark);
 
     #else
-    m_pWatermark = NULL;
+        m_pWatermark = NULL;
 
     #endif
 
@@ -237,7 +233,8 @@ void prRenderer_GL11::End()
 /// ---------------------------------------------------------------------------
 void prRenderer_GL11::Present()
 {
-    if (m_pWindow)
+    PRASSERT(m_pWindow);
+    //if (m_pWindow)
     {
         // Draw watermark
         #if defined(PLATFORM_PC) && defined(PROTEUS_ALLOW_WATERMARK) && !defined(PROTEUS_TOOL)
@@ -265,7 +262,8 @@ void prRenderer_GL11::Present()
 /// ---------------------------------------------------------------------------
 void prRenderer_GL11::SetOrthographicView()
 {
-    if (m_pWindow)
+    PRASSERT(m_pWindow);
+    //if (m_pWindow)
     {
         glMatrixMode(GL_PROJECTION);
         ERR_CHECK();
@@ -295,12 +293,6 @@ void prRenderer_GL11::SetOrthographicView()
 
         glDisable(GL_CULL_FACE);
         ERR_CHECK();
-
-//#if defined(PLATFORM_ANDROID)
-//        // Displacement trick for exact pixelization
-//        glTranslatef(0.375f, 0.375f, 0.0f);
-//        ERR_CHECK();
-//#endif
     }
 }
 
@@ -310,7 +302,8 @@ void prRenderer_GL11::SetOrthographicView()
 /// ---------------------------------------------------------------------------
 void prRenderer_GL11::RestorePerspectiveView()
 {
-    if (m_pWindow)
+    PRASSERT(m_pWindow);
+    //if (m_pWindow)
     {
         glMatrixMode(GL_PROJECTION);
         ERR_CHECK();
@@ -345,15 +338,9 @@ void prRenderer_GL11::DrawPoint(f32 x, f32 y)
 
     glVertexPointer(2, GL_FLOAT, 0, vertices);
     ERR_CHECK();
-    
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 
     glDrawArrays(GL_POINTS, 0, 1);
     ERR_CHECK();
-
-    //glDisableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 }
 
 
@@ -370,15 +357,9 @@ void prRenderer_GL11::DrawLine(f32 x1, f32 y1, f32 x2, f32 y2)
 
     glVertexPointer(2, GL_FLOAT, 0, vertices);
     ERR_CHECK();
-    
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 
     glDrawArrays(GL_LINES, 0, 2);
     ERR_CHECK();
-
-    //glDisableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 }
 
 
@@ -395,15 +376,9 @@ void prRenderer_GL11::DrawLine(Proteus::Math::prVector3 &from, Proteus::Math::pr
 
     glVertexPointer(3, GL_FLOAT, 0, vertices);
     ERR_CHECK();
-    
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 
     glDrawArrays(GL_LINES, 0, 2);
     ERR_CHECK();
-
-    //glDisableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 }
 
 
@@ -420,15 +395,9 @@ void prRenderer_GL11::DrawLine(const Proteus::Math::prVector3 &from, const Prote
 
     glVertexPointer(3, GL_FLOAT, 0, vertices);
     ERR_CHECK();
-    
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 
     glDrawArrays(GL_LINES, 0, 2);
     ERR_CHECK();
-
-    //glDisableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 }
 
 
@@ -447,15 +416,9 @@ void prRenderer_GL11::DrawRect(f32 x1, f32 y1, f32 x2, f32 y2)
     
     glVertexPointer(2, GL_FLOAT, 0, vertices);
     ERR_CHECK();
-    
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 
     glDrawArrays(GL_LINE_LOOP, 0, 4);
     ERR_CHECK();
-
-    //glDisableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 }
 
 
@@ -476,15 +439,9 @@ void prRenderer_GL11::DrawFilledRect(f32 x1, f32 y1, f32 x2, f32 y2)
     
     glVertexPointer(2, GL_FLOAT, 0, vertices);
     ERR_CHECK();
-    
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
     ERR_CHECK();
-
-    //glDisableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 }
 
 
@@ -505,15 +462,9 @@ void prRenderer_GL11::DrawCircle(f32 x, f32 y, f32 radius)
 
     glVertexPointer(2, GL_FLOAT, 0, vertices);
     ERR_CHECK();
-    
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 
     glDrawArrays(GL_LINE_LOOP, 0, VERTICES);
     ERR_CHECK();
-
-    //glDisableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 }
 
 
@@ -534,15 +485,9 @@ void prRenderer_GL11::DrawFilledCircle(f32 x, f32 y, f32 radius)
 
     glVertexPointer(2, GL_FLOAT, 0, vertices);
     ERR_CHECK();
-    
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 
     glDrawArrays(GL_TRIANGLE_FAN, 0, VERTICES);
     ERR_CHECK();
-
-    //glDisableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 }
 
 
@@ -556,15 +501,9 @@ void prRenderer_GL11::DrawPolygon(prVertex2D *vertices, s32 count)
 
     glVertexPointer(2, GL_FLOAT, 0, vertices);
     ERR_CHECK();
-    
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 
     glDrawArrays(GL_LINE_STRIP, 0, count);
     ERR_CHECK();
-
-    //glDisableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 }
 
 
@@ -579,16 +518,9 @@ void prRenderer_GL11::DrawFilledPolygon(prVertex2D *vertices, s32 count)
 
     glVertexPointer(2, GL_FLOAT, 0, vertices);
     ERR_CHECK();
-    
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 
-//    glDrawArrays(GL_TRIANGLE_FAN, 0, count);GL_LINE_LOOP
     glDrawArrays(GL_LINE_LOOP, 0, count);
     ERR_CHECK();
-//*/
-    //glDisableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 }
 
 
@@ -635,16 +567,6 @@ void prRenderer_GL11::DrawQuad()
 /// ---------------------------------------------------------------------------
 void prRenderer_GL11::DrawQuad(float u0, float v0, float u1, float v1)
 {
-    TODO("Remove colour set from draw quad")
-
-    static float Colors[] =
-    {
-        1.0f, 1.0f, 1.0f, 1.0f,
-        1.0f, 1.0f, 1.0f, 1.0f,
-        1.0f, 1.0f, 1.0f, 1.0f,
-        1.0f, 1.0f, 1.0f, 1.0f
-    };
-
     QuadData quadData[] =
     {
         {-0.5f,  0.5f, u0, v0, },
@@ -658,17 +580,10 @@ void prRenderer_GL11::DrawQuad(float u0, float v0, float u1, float v1)
     PRUNUSED(quadData->v);
 
     // Set states
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
-    glEnableClientState(GL_COLOR_ARRAY);
-    ERR_CHECK();
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
     ERR_CHECK();
 
         glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->x);
-        ERR_CHECK();
-        
-        glColorPointer(4, GL_FLOAT, 0,  Colors);
         ERR_CHECK();
 
         glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->u);
@@ -680,10 +595,6 @@ void prRenderer_GL11::DrawQuad(float u0, float v0, float u1, float v1)
     // Reset states
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
     ERR_CHECK();
-    glDisableClientState(GL_COLOR_ARRAY);
-    ERR_CHECK();
-    //glDisableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 }
 
 
@@ -710,8 +621,6 @@ void prRenderer_GL11::DrawQuad(float u0, float v0, float u1, float v1, prColour 
 
 
     // Set states
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
     glEnableClientState(GL_COLOR_ARRAY);
     ERR_CHECK();
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -734,8 +643,6 @@ void prRenderer_GL11::DrawQuad(float u0, float v0, float u1, float v1, prColour 
     ERR_CHECK();
     glDisableClientState(GL_COLOR_ARRAY);
     ERR_CHECK();
-    //glDisableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
 }
 
 
@@ -760,31 +667,14 @@ void prRenderer_GL11::BatchDrawQuad(float u0, float v0, float u1, float v1, prCo
         { 0.5f, -0.5f, u1, v1, },
     };
 
-
- //   // Set states
- //   glEnableClientState(GL_VERTEX_ARRAY);
- //   ERR_CHECK();
- //   glEnableClientState(GL_COLOR_ARRAY);
- //   ERR_CHECK();
-    //glEnableClientState(GL_TEXTURE_COORD_ARRAY);
- //   ERR_CHECK();
-
-        glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->x);
-        ERR_CHECK();        
-        glColorPointer(4, GL_FLOAT, 0,  Colors);
-        ERR_CHECK();
-        glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->u);
-        ERR_CHECK();
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-        ERR_CHECK();
-
- //   // Reset states
-    //glDisableClientState(GL_TEXTURE_COORD_ARRAY);
- //   ERR_CHECK();
- //   glDisableClientState(GL_COLOR_ARRAY);
- //   ERR_CHECK();
- //   glDisableClientState(GL_VERTEX_ARRAY);
- //   ERR_CHECK();
+    glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->x);
+    ERR_CHECK();        
+    glColorPointer(4, GL_FLOAT, 0,  Colors);
+    ERR_CHECK();
+    glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->u);
+    ERR_CHECK();
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    ERR_CHECK();
 }
 
 
@@ -843,14 +733,13 @@ void prRenderer_GL11::DrawGrid(s32 size)
 
         from = prVector3((f32)x, 0, (f32)-size);
         to   = prVector3((f32)x, 0, (f32) size);
-        DrawLine(from, to);//prVector3((f32)x, 0, (f32)-size),
-                           //prVector3((f32)x, 0, (f32) size));
+        DrawLine(from, to);                           
     }
         
     from = prVector3((f32)size, 0, (f32)-size);
     to   = prVector3((f32)size, 0, (f32) size);
-    DrawLine(from, to);//prVector3((f32)size, 0, (f32)-size),
-                       //prVector3((f32)size, 0, (f32) size));
+    DrawLine(from, to);
+                       
 
     for (s32 z = -size; z< size; z++)
     {
@@ -858,14 +747,12 @@ void prRenderer_GL11::DrawGrid(s32 size)
 
         from = prVector3((f32)-size, 0, (f32)z);
         to   = prVector3((f32) size, 0, (f32)z);
-        DrawLine(from, to);//prVector3((f32)-size, 0, (f32)z),
-                          //prVector3((f32) size, 0, (f32)z));
+        DrawLine(from, to);                          
     }
 
     from = prVector3((f32)-size, 0, (f32)size);
     to   = prVector3((f32) size, 0, (f32)size);
-    DrawLine(from, to);//prVector3((f32)-size, 0, (f32)size),
-                       //prVector3((f32) size, 0, (f32)size));
+    DrawLine(from, to);                       
 
     TexturesEnabled(true);
 }

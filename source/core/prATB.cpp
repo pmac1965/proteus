@@ -43,7 +43,7 @@ void prATBInit()
 {
     if (!antTweakBarInit)
     {
-        int res = TwInit(TW_OPENGL, NULL);
+        int res = TwInit(TW_OPENGL, nullptr);
         if (res == 0)
         {
             prTrace(LogError, "prATBInit error: %i\n", TwGetLastError());

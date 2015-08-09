@@ -117,7 +117,6 @@
 #include "display/prPerspective.h"
 #include "display/prPvr.h"
 #include "display/prRenderer.h"
-#include "display/prRenderer_DX9.h"
 #include "display/prRenderer_GL11.h"
 #include "display/prRenderer_GL20.h"
 #include "display/prSprite.h"

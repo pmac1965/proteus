@@ -53,7 +53,6 @@ typedef struct prActiveSprite
 class prSpriteManager : public prCoreSystem
 {
 public:
-
     // Method: prSpriteManager
     //      Constructs the sprite manager.
     prSpriteManager();
@@ -133,12 +132,19 @@ public:
     //      Starts batch sprite rendering
     //
     // Parameters:
-    //      pSprite - The sprite to start batching with
-    void BatchBegin(prSprite *pSprite);
+    //      pSprite   - The sprite to start batching with
+    //      batchSize - The number of supported draw calls (32 equals 32 sprites, 0 equals don't use)
+    void BatchBegin(prSprite *pSprite, Proteus::Core::s32 batchSize = 0);
     
     // Method: BatchEnd
     //      Ends batch sprite rendering
     void BatchEnd();
+
+    // Method: BatchAvailable
+    //      Is batching available?
+    bool BatchAvailable() const { return m_numQuads > 0; }
+
+    void BatchAdd(Proteus::Core::f32 *pColours, Proteus::Core::QuadData* pQuadData);
 
 
 private:
@@ -182,4 +188,8 @@ private:
     prSprite                   *m_sprite;
     prTexture                  *m_texture;
     std::list<prActiveSprite>   m_activeSprites;
+    Proteus::Core::QuadData    *m_pBatchQuads;
+    Proteus::Core::f32         *m_pBatchColours;
+    Proteus::Core::s32          m_numQuads;
+    Proteus::Core::s32          m_numQuadsAdded;
 };
