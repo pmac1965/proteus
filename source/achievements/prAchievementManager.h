@@ -92,6 +92,9 @@ class prAchievementManager : public prIoResultCallback
 public:
     // Method: prAchievementManager
     //      Ctor
+    //
+    // Parameters:
+    //      folder - The location to save the achievements data
     explicit prAchievementManager(const char *folder);
 
     // Method: ~prAchievementManager

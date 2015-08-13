@@ -16,11 +16,15 @@
  */
 
 
-#ifndef __PRSTORE_ANDROID_H
-#define __PRSTORE_ANDROID_H
+#pragma once
 
 
 #include "prStore.h"
+
+
+// Namespaces
+namespace Proteus {
+namespace IAP {
 
 
 // Forward declarations
@@ -45,6 +49,13 @@ public:
 
     // Method: EventNotify
     //      Callback from the game.
+    //
+    // Parameters:
+    //      result - The result of a transaction
+    //      id     - Identifier of the item involved
+    //
+    // See also:
+    //      <prTransactionResultType>
     void EventNotify(Proteus::Core::s32 type, const char *id);
 
     // Method: BeginPurchase
@@ -53,4 +64,4 @@ public:
 };
 
 
-#endif//__PRSTORE_ANDROID_H
+}}// Namespace

@@ -16,11 +16,15 @@
  */
 
 
-#ifndef __PRSTORE_H
-#define __PRSTORE_H
+#pragma once
 
 
 #include "../core/prTypes.h"
+
+
+// Namespaces
+namespace Proteus {
+namespace IAP {
 
 
 // Forward declarations.
@@ -53,28 +57,52 @@ public:
     
     // Method: EventNotify
     //      Callback from the game.
+    //
+    // Parameters:
+    //      result - The result of a transaction
+    //      id     - Identifier of the item involved
+    //
+    // See also:
+    //      <prTransactionResultType>
+    //
+    // See also:
+    //      <prTransactionResult>
     virtual void EventNotify(Proteus::Core::s32 type, const char *id);
 
     // Method: BeginPurchase
     //      Purchase an item.
+    //
+    // Parameters:
+    //      name - Name of the item to purchase, *OR*
+    //      id   - ID of the item to purchase
+    //
+    // Notes:
+    //      Allows for multiple platforms, hence the two
+    //      parameters types
     virtual void BeginPurchase(const char *name, int id);
     
     // Method: FindPrice
     //      Find an items price.
+    //
+    // Parameters:
+    //      name - Name of the item to purchase, *OR*
+    //      id   - ID of the item to purchase
+    //
+    // Notes:
+    //      Allows for multiple platforms, hence the two
+    //      parameters types
     virtual const char *FindPrice(const char *name, int id);
 
 
 private:
-
     // Stops passing by value and assignment.
     prStore(const prStore&);
     const prStore& operator = (const prStore&);
 
 
 protected:
-
     prInAppPurchase &m_prInAppPurchase;
 };
 
 
-#endif//__PRSTORE_H
+}}// Namespaces

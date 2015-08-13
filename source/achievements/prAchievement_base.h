@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRACHIEVEMENTBASE_H
-#define __PRACHIEVEMENTBASE_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -58,6 +57,3 @@ public:
     //      Checks if the provider is ready to be used
     virtual bool IsReady() { return false; }
 };
-
-
-#endif//__PRACHIEVEMENTBASE_H

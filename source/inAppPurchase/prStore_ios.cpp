@@ -38,6 +38,11 @@ extern bool IAPFindPrice(const char *name, char *buffer);
 extern bool DoWeHaveAConnection();
 
 
+// Namespaces
+namespace Proteus {
+namespace IAP {
+
+
 /// ---------------------------------------------------------------------------
 /// Ctor.
 /// ---------------------------------------------------------------------------
@@ -114,8 +119,11 @@ const char *prStore_ios::FindPrice(const char *name, int id)
         }
     }
 
-    return NULL;
+    return nullptr;
 }
+
+
+}}// Namespaces
 
 
 #endif//PLATFORM_IOS

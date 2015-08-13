@@ -84,6 +84,15 @@ REM ---------------------------------------------------------------------------
     REM ****************
     REM * NOT REQUIRED *
     REM ****************
+    del %PROTEUS_ENGINE_DIR%\include\proteus\inAppPurchase\prStore_pc.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\inAppPurchase\prStore_mac.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\inAppPurchase\prStore_linux.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\inAppPurchase\prStore_android.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\inAppPurchase\prStore_ios.h
+
+    REM ****************
+    REM * NOT REQUIRED *
+    REM ****************
     del %PROTEUS_ENGINE_DIR%\include\proteus\analytics\Flurry.h
 
     REM ****************

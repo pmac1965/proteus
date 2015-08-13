@@ -52,6 +52,11 @@ using namespace Proteus::Math;
 using namespace Proteus::Core;
 
 
+// Namespaces
+namespace Proteus {
+namespace IAP {
+
+
 /// ---------------------------------------------------------------------------
 /// Implementation data
 /// ---------------------------------------------------------------------------
@@ -72,7 +77,6 @@ typedef struct prInAppPurchaseImplementation
     bool    testMode;
     bool    exp1;
     bool    exp0;
-    
     f32     testTimer;
     s32     testEvent;
     s32     testStep;
@@ -106,10 +110,9 @@ prInAppPurchase::~prInAppPurchase()
 /// ---------------------------------------------------------------------------
 /// Register callback handler.
 /// ---------------------------------------------------------------------------
-void prInAppPurchase::Register(prTransactionResult *handler)
+void prInAppPurchase::Register(Proteus::IAP::prTransactionResult *handler)
 {
     PRASSERT(pImpl);
-
     if (handler)
     {
         pTransactionResultHandler = handler;
@@ -158,7 +161,6 @@ void prInAppPurchase::Init()
 void prInAppPurchase::Update(f32 dt)
 {
 #if defined(_DEBUG) || defined(DEBUG)
-
     if (imp.testMode)
     {
         if (imp.testTimer > 0.0f)
@@ -208,7 +210,6 @@ void prInAppPurchase::Update(f32 dt)
             }
         }
     }
-
 #endif
 
 
@@ -357,3 +358,6 @@ const char *prInAppPurchase::FindProductPrice(const char *name)
     
     return nullptr;
 }
+
+
+}}// Namespaces

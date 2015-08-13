@@ -336,8 +336,18 @@ void prSpriteManager::BatchBegin(prSprite *pSprite, s32 batchSize)
     {
         m_pBatchQuads   = new QuadData[(sizeof(QuadData) *  4) * batchSize];        // 4 quads per sprite
         m_pBatchColours = new      f32[(sizeof(f32)      * 16) * batchSize];        // 16 colours per sprite
-        m_numQuads      = 0;
+        m_numQuads      = batchSize;
         m_numQuadsAdded = 0;
+        //PRLOGD("Starting batch size %i\n", (sizeof(QuadData) *  4) * batchSize);
+
+        glPushMatrix();
+        ERR_CHECK();
+
+        // translate to quad center, the translate for position
+        //glTranslatef((float)(m_frameWidth >> 1), (float)(m_frameHeight >> 1), 0);
+        //ERR_CHECK();
+        //glTranslatef(pSprite->pos.x, pSprite->pos.y, 0);
+        //ERR_CHECK();
     }
 
 
@@ -351,13 +361,7 @@ void prSpriteManager::BatchBegin(prSprite *pSprite, s32 batchSize)
     // Bind the texture for the batch
     pSprite->m_pTexture->Bind();
 
-    // Enable textures
-    //glEnable(GL_TEXTURE_2D);
-    //ERR_CHECK();
-
     // Set states
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
     glEnableClientState(GL_COLOR_ARRAY);
     ERR_CHECK();
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -369,29 +373,44 @@ void prSpriteManager::BatchBegin(prSprite *pSprite, s32 batchSize)
 /// Ends batch sprite rendering
 /// ---------------------------------------------------------------------------
 void prSpriteManager::BatchEnd()
-{    
+{
+    // Clean batch memory
+    if (m_numQuads > 0) 
+    {
+        if (m_numQuadsAdded > 0)
+        {
+            //m_numQuadsAdded = 1;
+
+            glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &m_pBatchQuads->x);
+            ERR_CHECK();        
+            glColorPointer(4, GL_FLOAT, 0,  m_pBatchColours);
+            ERR_CHECK();
+            glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &m_pBatchQuads->u);
+            ERR_CHECK();
+            glDrawArrays(GL_TRIANGLE_STRIP, 0, 4 * m_numQuadsAdded);
+            ERR_CHECK();
+        }
+
+        //PRLOGD("Batch end %i - %i\n", m_numQuadsAdded, 4 * m_numQuadsAdded);
+
+        PRSAFE_DELETE_ARRAY(m_pBatchQuads);
+        PRSAFE_DELETE_ARRAY(m_pBatchColours);
+        m_numQuads      = 0;
+        m_numQuadsAdded = 0;
+
+        glPopMatrix();
+        ERR_CHECK();
+    }
+
     // Reset states
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
     ERR_CHECK();
     glDisableClientState(GL_COLOR_ARRAY);
     ERR_CHECK();
-    //glDisableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
-
-    // Disable textures
-    //glEnable(GL_TEXTURE_2D);
-    //ERR_CHECK();
 
     // Disable blending
     glDisable(GL_BLEND);
     ERR_CHECK();
-
-    // Clean batch memory
-    if (m_numQuads > 0) 
-    {
-        PRSAFE_DELETE(m_pBatchQuads);
-        m_numQuads = 0;
-    }
 }
 
 
@@ -399,11 +418,24 @@ void prSpriteManager::BatchAdd(f32 *pColours, QuadData* pQuadData)
 {
     PRASSERT(m_pBatchQuads);
     PRASSERT(m_pBatchColours);
+    PRASSERT(m_numQuads > 0);
 
-    QuadData* pQuadDest = m_pBatchQuads;
+    if (m_numQuadsAdded < m_numQuads)
+    {
 
-    memcpy(m_pBatchQuads, pQuadData, sizeof(QuadData) * 4);
-    memcpy(m_pBatchColours, pQuadData, sizeof(f32)      * 16);
+        QuadData* pQuadDest = m_pBatchQuads + (m_numQuadsAdded * 4);
+        //PRLOGD("Added quad %i : Base %p. Dest %p. Size %i\n", m_numQuadsAdded, m_pBatchQuads, pQuadDest, (u8*)pQuadDest - (u8*)m_pBatchQuads);
+
+
+        f32 *pColrDest = m_pBatchColours + (m_numQuadsAdded * 16);
+        //PRLOGD("Added cols %i : Base %p. Dest %p. Size %i\n", m_numQuadsAdded, pColours, pColrDest, (u8*)pColrDest - (u8*)m_pBatchColours);
+
+        memcpy(pQuadDest,  pQuadData, sizeof(QuadData) * 4);
+        memcpy(pColrDest, pColours, sizeof(f32) * 16);
+        //PRLOGD("Added %i : Quads %i. Cols %i.\n", m_numQuadsAdded, sizeof(QuadData) * 4, sizeof(f32) * 16);
+
+        m_numQuadsAdded++;
+    }
 }
 
 

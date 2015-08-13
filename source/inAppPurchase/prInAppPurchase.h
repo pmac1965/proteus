@@ -16,12 +16,15 @@
  */
 
 
-#ifndef __PRINAPPPURCHASE_H
-#define __PRINAPPPURCHASE_H
+#pragma once
 
 
 #include "../core/prTypes.h"
 
+
+// Namespaces
+namespace Proteus {
+namespace IAP {
 
 // Tests
 enum IapTestEvent
@@ -30,6 +33,17 @@ enum IapTestEvent
     IAPTEST_CONNECTTION_FAILED  = 0x00000001,
     IAPTEST_PURCHASE            = 0x00000002,
 };
+
+
+// Items status
+typedef enum IapItemStatus
+{
+    IAPITEMSTATUS_AVAILABLE     = 0x00000001,           // Item is available to be bought
+    IAPITEMSTATUS_PURCHASED     = 0x00000002,           // Item has been purchased
+    IAPITEMSTATUS_REPEAT        = 0x00020000,           // Item can be bought more than once (Like a coin pack)
+    IAPITEMSTATUS_ONCE          = 0x00040000,           // Item can only be bought once (Like a special weapon)
+
+} IapItemStatus;
 
 
 // Forward declarations
@@ -53,10 +67,11 @@ public:
 
     // Method: Register
     //      Register callback handler.
+    //      The handler receives *prTransactionResult* messages
     //
     // See Also:
     //      <prTransactionResult>
-    void Register(prTransactionResult *handler);
+    void Register(Proteus::IAP::prTransactionResult *handler);
 
     // Method: Init
     //      Initialisation call.
@@ -83,6 +98,16 @@ public:
 
     // Method: EventNotify
     //      Callback from the game. This is then passed on to the appropriate handler
+    //
+    // Parameters:
+    //      result - The result of a transaction
+    //      id     - Identifier of the item involved
+    //
+    // See also:
+    //      <prTransactionResultType>
+    //
+    // See also:
+    //      <prTransactionResult>
     void EventNotify(Proteus::Core::s32 type, const char *id);
 
     // Method: FindProductPrice
@@ -91,20 +116,18 @@ public:
 
 
 private:
-
     // Stops passing by value and assignment.
     prInAppPurchase(const prInAppPurchase&);
     const prInAppPurchase& operator = (const prInAppPurchase&);
 
 
 private:
-
     // Don't change order.
-	prInAppPurchaseImplementation	*pImpl;
-	prInAppPurchaseImplementation	&imp;
-    prStore                         *pStore;
-    prTransactionResult             *pTransactionResultHandler;
+	prInAppPurchaseImplementation  *pImpl;
+	prInAppPurchaseImplementation  &imp;
+    prStore                        *pStore;
+    prTransactionResult            *pTransactionResultHandler;
 };
 
 
-#endif//__PRINAPPPURCHASE_H
+}}// Namespaces

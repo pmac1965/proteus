@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRACHIEVEMENT_PC_H
-#define __PRACHIEVEMENT_PC_H
+#pragma once
 
 
 #include "prAchievement_base.h"
@@ -34,16 +33,13 @@ class prAchievement_PC : public prAchievementBase
 public:
     // Method: Award
     //      Award an achievement.
-    void Award(const char *name, Proteus::Core::s32 id);
+    void Award(const char *name, Proteus::Core::s32 id) override;
 
     // Method: IsAwarded
     //      Checks if an achievement has been award.
-    bool IsAwarded(const char *name, Proteus::Core::s32 id);
+    bool IsAwarded(const char *name, Proteus::Core::s32 id)  override;
     
     // Method: IsReady
     //      Checks if the provider is ready to be used
-    bool IsReady();
+    bool IsReady() override;
 };
-
-
-#endif//__PRACHIEVEMENT_PC_H

@@ -121,9 +121,7 @@ typedef struct prAchievementDefinition
 // Implementation data.
 typedef struct AchievementManagerImplementation
 {
-    /// -----------------------------------------------------------------------
     /// Ctor
-    /// -----------------------------------------------------------------------
     AchievementManagerImplementation(const char *folder) : colour(prColour::White)
     {
         PRASSERT(folder && *folder);
@@ -177,9 +175,7 @@ typedef struct AchievementManagerImplementation
     }
 
 
-    /// -----------------------------------------------------------------------
     /// Dtor
-    /// -----------------------------------------------------------------------
     ~AchievementManagerImplementation()
     {
         PRSAFE_DELETE(save);
@@ -187,7 +183,7 @@ typedef struct AchievementManagerImplementation
         PRSAFE_DELETE_ARRAY(achievements);
     }
     
-    
+    // Unused copy constructor.
     AchievementManagerImplementation(AchievementManagerImplementation& other);// : colour(other.colour)
     
     
@@ -228,41 +224,44 @@ typedef struct AchievementManagerImplementation
         if (!enabled)
             return;
 
-        // Check if awards given have been registered with the OS!
-        timer -= dt;
-        if (timer < 0.0f && mode == MODE_NONE)
+        // Check if any awards given have been set as awarding, but not awarded.
+        if (pAchievementProvider && pAchievementProvider->IsReady())
         {
-            timer = AWARDS_TEST_DELAY;
+            //timer -= dt;
+            //if (timer < 0.0f && mode == MODE_NONE)
+            //{
+            //    timer = AWARDS_TEST_DELAY;
 
-            if (achievements && achievementsCount > 0 && checkIndex < achievementsCount)
-            {
-                // If an achievement state is awarding, try to verify awarded state
-                if (achievements[checkIndex].state == Proteus::Achievement::Awarding)
-                {
-                    //if (!lite_build)
-                    {
-                        if (pAchievementProvider)
-                        {
-                            if (pAchievementProvider->IsReady())
-                            {
-                                pAchievementProvider->Award(GetIdentifierByIndex(checkIndex), 0);
-                                //SaveState();
-                                //prTrace(LogError, "Resub %i of %i\n", num, achievementsCount);
-                            }
-                        }
-                    }                    
-                }
-                //else
-                //{
-                //    //prTrace(LogError, "Skipping %i\n", num);
-                //    timer = 64.0f;
-                //}
-                
-                if (++checkIndex >= achievementsCount)
-                {
-                    checkIndex = 0;                
-                }
-            }
+            //    if (achievements && achievementsCount > 0)// && checkIndex < achievementsCount)
+            //    {
+            //        // If an achievement state is awarding, try to verify awarded state
+            //        if (achievements[checkIndex].state == Proteus::Achievement::Awarding)
+            //        {
+            //            //if (!lite_build)
+            //            {
+            //                if (pAchievementProvider)
+            //                {
+            //                    if (pAchievementProvider->IsReady())
+            //                    {
+            //                        pAchievementProvider->Award(GetIdentifierByIndex(checkIndex), 0);
+            //                        //SaveState();
+            //                        //prTrace(LogError, "Resub %i of %i\n", num, achievementsCount);
+            //                    }
+            //                }
+            //            }                    
+            //        }
+            //        //else
+            //        //{
+            //        //    //prTrace(LogError, "Skipping %i\n", num);
+            //        //    timer = 64.0f;
+            //        //}
+            //    
+            //        //if (++checkIndex >= achievementsCount)
+            //        //{
+            //        //    checkIndex = 0;                
+            //        //}
+            //    }
+            //}
         }
 
 

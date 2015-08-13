@@ -32,6 +32,11 @@
 using namespace Proteus::Core;
 
 
+// Namespaces
+namespace Proteus {
+namespace IAP {
+
+
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
@@ -69,6 +74,9 @@ void prStore_android::BeginPurchase(const char *name, int id)
         prJNI_BeginPurchase(name);
     }
 }
+
+
+}}// Namespaces
 
 
 #endif//PLATFORM_ANDROID

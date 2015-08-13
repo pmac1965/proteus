@@ -24,6 +24,11 @@
 using namespace Proteus::Core;
 
 
+// Namespaces
+namespace Proteus {
+namespace IAP {
+
+
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
@@ -87,3 +92,6 @@ const char *prStore::FindPrice(const char *name, int id)
     PRUNUSED(id);
     return "$0.99";
 }
+
+
+}}// Namespaces

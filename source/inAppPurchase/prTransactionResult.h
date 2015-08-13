@@ -1,4 +1,6 @@
 // File: prTransactionResult.h
+//      A simple interface class that allows a handler class to receive IAP notifications
+//
 /**
  *  Copyright 2014 Paul Michael McNab
  *
@@ -16,14 +18,26 @@
  */
 
 
-#ifndef __PRTRANSACTIONRESULT_H
-#define __PRTRANSACTIONRESULT_H
+#pragma once
 
 
 #include "../core/prTypes.h"
 
 
-// The result of a transaction
+// Namespaces
+namespace Proteus {
+namespace IAP {
+
+
+// Enum: prTransactionResultType
+//      The result of a transaction
+//
+// TRANSACTION_PURCHASING   - Starting transaction
+// TRANSACTION_PURCHASED    - Transaction completed successfully
+// TRANSACTION_FAILED       - Transaction failed
+// TRANSACTION_CANCELLED    - Transaction was cancelled
+// TRANSACTION_REFUNDED     - Transaction was refunded (Needs to be removed)
+// TRANSACTION_RESTORED     - Transaction was restored (Needs to be set at completed)
 enum prTransactionResultType
 {
     TRANSACTION_PURCHASING,
@@ -42,16 +56,33 @@ class prTransactionResult
 public:
     // Method: TransactionResult
     //      Lets you know the result of a transaction
+    //
+    // Parameters:
+    //      result - The result of a transaction
+    //      id     - Identifier of the item involved
+    //
+    // See also:
+    //      <prTransactionResultType>
     virtual void TransactionResult(Proteus::Core::s32 result, const char *id) = 0;
 
     // Method: ConnectionStateChanged
     //      Lets you know when the connection state has changed.
+    //
+    // Parameters:
+    //      connected - Connection status
+    //
+    // Notes:
+    //      This is only called if the connection state changes.
+    //      Use *UpdateConnection* to get current state
     virtual void ConnectionStateChanged(bool connected) = 0;
 
     // Method: UpdateConnection
     //      Lets you know the current connection state.
+    //
+    // Parameters:
+    //      connected - Connection status
     virtual void UpdateConnection(bool connected) = 0;
 };
 
 
-#endif//__PRTRANSACTIONRESULT_H
+}}// Namespaces

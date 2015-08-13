@@ -16,12 +16,16 @@
  */
 
 
-#ifndef __PRSTORE_MAC_H
-#define __PRSTORE_MAC_H
+#pragma once
 
 
 #include "prStore.h"
 #include "../core/prTypes.h"
+
+
+// Namespaces
+namespace Proteus {
+namespace IAP {
 
 
 // Forward declarations
@@ -46,12 +50,19 @@ public:
 
     // Method: EventNotify
     //      Callback from the game.
-    void EventNotify(Proteus::Core::s32 type, const char *id);
+    //
+    // Parameters:
+    //      result - The result of a transaction
+    //      id     - Identifier of the item involved
+    //
+    // See also:
+    //      <prTransactionResultType>
+    void EventNotify(Proteus::Core::s32 type, const char *id) override;
 
     // Method: BeginPurchase
     //      Purchase an item.
-    void BeginPurchase(const char *name, int id);
+    void BeginPurchase(const char *name, int id) override;
 };
 
 
-#endif//__PRSTORE_MAC_H
+}}// Namespace

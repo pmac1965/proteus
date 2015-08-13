@@ -31,6 +31,11 @@
 using namespace Proteus::Core;
 
 
+// Namespaces
+namespace Proteus {
+namespace IAP {
+
+
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
@@ -64,6 +69,9 @@ void prStore_linux::BeginPurchase(const char *name, int id)
     PRUNUSED(name);
     PRUNUSED(id);
 }
+
+
+}}// Namespaces
 
 
 #endif//PLATFORM_LINUX

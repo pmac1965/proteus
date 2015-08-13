@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRDIALOG_H
-#define __PRDIALOG_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -246,6 +245,3 @@ private:
 
 
 }}// Namespaces
-
-
-#endif//__PRDIALOG_H

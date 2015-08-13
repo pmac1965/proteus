@@ -209,15 +209,9 @@ void prSprite::BatchDraw()
     PRASSERT(m_pTexture);
     if (m_visible)
     {
-        glPushMatrix();
-        ERR_CHECK();
-            
-            // translate to quad center, the translate for position
-            glTranslatef((float)(m_frameWidth >> 1), (float)(m_frameHeight >> 1), 0);
-            ERR_CHECK();
-            glTranslatef(pos.x, pos.y, 0);
-            ERR_CHECK();
-
+        // Render
+        if (mpSpriteManager->BatchAvailable())
+        {
             float width  = (GLfloat)(m_frameWidth  * m_scaleX);
             float height = (GLfloat)(m_frameHeight * m_scaleY);
 
@@ -232,41 +226,72 @@ void prSprite::BatchDraw()
                 height = -height;
             }
 
-            glRotatef(m_rotation, 0.0f, 0.0f, 1.0f);
-            ERR_CHECK();
-            glScalef(width, height, 0);
-            ERR_CHECK();
+            //glRotatef(m_rotation, 0.0f, 0.0f, 1.0f);
+            //ERR_CHECK();
+            //glScalef(width, height, 0);
+            //ERR_CHECK();
 
-            // Render
-            if (mpSpriteManager->BatchAvailable())
+            f32 x = pos.x;
+            f32 y = pos.y;
+
+            width  /= 2;
+            height /= 2;
+
+            f32 colors[] =
             {
-                f32 colors[] =
-                {
-                    m_colour.red, m_colour.green, m_colour.blue, m_colour.alpha,
-                    m_colour.red, m_colour.green, m_colour.blue, m_colour.alpha,
-                    m_colour.red, m_colour.green, m_colour.blue, m_colour.alpha,
-                    m_colour.red, m_colour.green, m_colour.blue, m_colour.alpha
-                };
+                m_colour.red, m_colour.green, m_colour.blue, m_colour.alpha,
+                m_colour.red, m_colour.green, m_colour.blue, m_colour.alpha,
+                m_colour.red, m_colour.green, m_colour.blue, m_colour.alpha,
+                m_colour.red, m_colour.green, m_colour.blue, m_colour.alpha
+            };
 
-                QuadData quadData[] =
-                {
-                    {-0.5f,  0.5f, m_u0, m_v0, },
-                    {-0.5f, -0.5f, m_u0, m_v1, },
-                    { 0.5f,  0.5f, m_u1, m_v0, },
-                    { 0.5f, -0.5f, m_u1, m_v1, },
-                };
-
-                mpSpriteManager->BatchAdd(colors, quadData);
-            }
-            else
+            QuadData quadData[] =
             {
-                // Use old method
+                {x + -width, y +  height, m_u0, m_v0, },
+                {x + -width, y + -height, m_u0, m_v1, },
+                {x +  width, y +  height, m_u1, m_v0, },
+                {x +  width, y + -height, m_u1, m_v1, },
+            };
+
+            mpSpriteManager->BatchAdd(colors, quadData);
+        }
+        else
+        {
+            glPushMatrix();
+            ERR_CHECK();
+            
+                // translate to quad center, the translate for position
+                glTranslatef((float)(m_frameWidth >> 1), (float)(m_frameHeight >> 1), 0);
+                ERR_CHECK();
+                glTranslatef(pos.x, pos.y, 0);
+                ERR_CHECK();
+
+                float width  = (GLfloat)(m_frameWidth  * m_scaleX);
+                float height = (GLfloat)(m_frameHeight * m_scaleY);
+
+                // Set flips
+                if ((m_flip & FLIP_LEFTRIGHT) == FLIP_LEFTRIGHT)
+                {
+                    width = -width;
+                }
+
+                if ((m_flip & FLIP_UPDOWN) == FLIP_UPDOWN)
+                {
+                    height = -height;
+                }
+
+                glRotatef(m_rotation, 0.0f, 0.0f, 1.0f);
+                ERR_CHECK();
+                glScalef(width, height, 0);
+                ERR_CHECK();
+
+                // Render - Using old method
                 PRASSERT(mpRenderer)
                 mpRenderer->BatchDrawQuad(m_u0, m_v0, m_u1, m_v1, m_colour);
-            }
             
-        glPopMatrix();
-        ERR_CHECK();
+            glPopMatrix();
+            ERR_CHECK();
+        }
     }
 }
 
