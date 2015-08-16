@@ -22,6 +22,7 @@
 #include "prTransactionResult.h"
 #include "prStore.h"
 #include "../core/prMacros.h"
+#include"../core/prString.h"
 #include "../debug/prTrace.h"
 #include "../math/prRandom.h"
 
@@ -73,13 +74,14 @@ typedef struct prInAppPurchaseImplementation
         testStep    = 0;
 	}
 
-    bool    connected;
-    bool    testMode;
-    bool    exp1;
-    bool    exp0;
-    f32     testTimer;
-    s32     testEvent;
-    s32     testStep;
+    bool        connected;
+    bool        testMode;
+    bool        exp1;
+    bool        exp0;
+    f32         testTimer;
+    s32         testEvent;
+    s32         testStep;
+    prString    purchaseID;
 
 } prInAppPurchaseImplementation;
 
@@ -177,7 +179,7 @@ void prInAppPurchase::Update(f32 dt)
                     // Fire off purchase start
                     case 0:
                         if (pTransactionResultHandler)
-                            pTransactionResultHandler->TransactionResult(TRANSACTION_PURCHASING, nullptr);
+                            pTransactionResultHandler->TransactionResult(TRANSACTION_PURCHASING, imp.purchaseID.Text());
 
                         // Buy time to random value
                         imp.testTimer = (float)(prRandomNumber(2, 8) * 1000);
@@ -186,7 +188,7 @@ void prInAppPurchase::Update(f32 dt)
                     // Fire off purchased
                     case 1:
                         if (pTransactionResultHandler)
-                            pTransactionResultHandler->TransactionResult(TRANSACTION_PURCHASED, nullptr);
+                            pTransactionResultHandler->TransactionResult(TRANSACTION_PURCHASED, imp.purchaseID.Text());
 
                         imp.testEvent = IAPTEST_NONE;
                         imp.testTimer = 0.0f;
@@ -243,18 +245,13 @@ bool prInAppPurchase::BeginPurchase(const char *name)
     PRASSERT(pImpl);
     PRASSERT(name && *name);
 
-//#if defined(IAP_TEST)
-//    UNUSED(name);
-//    imp.testTimer = 1;
-//    imp.testEvent = 0;
-//
-//#else
+    // Store the purchase ID. Used by test code
+    imp.purchaseID.Set(name);
+
     if (pStore)
     {
         pStore->BeginPurchase(name, 0);
     }
-
-//#endif
 
     return true;
 }

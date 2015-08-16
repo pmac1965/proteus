@@ -26,22 +26,36 @@
 namespace Proteus {
 namespace IAP {
 
-// Tests
+
+// Enum: IapTestEvent
+//      IAP test events
+//
+// IAPTEST_NONE                 - Default setting
+// IAPTEST_CONNECTTION_FAILED   - Generates a connection failed event
+// IAPTEST_PURCHASE             - Generates a purchase event
+// IAPTEST_REFUND               - Generates a refund event
 enum IapTestEvent
 {
     IAPTEST_NONE                = 0x00000000,
-    IAPTEST_CONNECTTION_FAILED  = 0x00000001,
-    IAPTEST_PURCHASE            = 0x00000002,
+    IAPTEST_CONNECTTION_FAILED  = 0x20040001,
+    IAPTEST_PURCHASE            = 0x20040002,
+    IAPTEST_REFUND              = 0x20040004,
 };
 
 
-// Items status
+// Typedef: IapItemStatus
+//      IAP items status
+//
+// IAPITEMSTATUS_AVAILABLE     -  Item is available to be bought
+// IAPITEMSTATUS_PURCHASED     -  Item has been purchased
+// IAPITEMSTATUS_REPEAT        -  Item can be bought more than once (Like a coin pack)
+// IAPITEMSTATUS_ONCE          -  Item can only be bought once (Like a special weapon)
 typedef enum IapItemStatus
 {
-    IAPITEMSTATUS_AVAILABLE     = 0x00000001,           // Item is available to be bought
-    IAPITEMSTATUS_PURCHASED     = 0x00000002,           // Item has been purchased
-    IAPITEMSTATUS_REPEAT        = 0x00020000,           // Item can be bought more than once (Like a coin pack)
-    IAPITEMSTATUS_ONCE          = 0x00040000,           // Item can only be bought once (Like a special weapon)
+    IAPITEMSTATUS_AVAILABLE     = 0x00000001,
+    IAPITEMSTATUS_PURCHASED     = 0x00000002,
+    IAPITEMSTATUS_REPEAT        = 0x00020000,
+    IAPITEMSTATUS_ONCE          = 0x00040000,
 
 } IapItemStatus;
 
@@ -94,6 +108,13 @@ public:
     //
     // Parameters:
     //      testEvent - Which event to test.
+    //
+    // Notes:
+    //      To test purchases on PC call <BeginPurchase>, then call
+    //      <SetTestMode> with *IAPTEST_PURCHASE*
+    //
+    // See also:
+    //      <IapTestEvent>
     void SetTestMode(Proteus::Core::u32 testEvent);
 
     // Method: EventNotify
