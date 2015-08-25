@@ -53,7 +53,7 @@ void prOutputString(prLogLevel level, const char *text);
 
 
 // In code reminder messages.
-#if defined(SHOW_MESSAGES)
+#if !defined(HIDE_MESSAGES)
     #if defined(PLATFORM_PC)
         // Reminder macro
         #define REMINDER                __FILE__ "(" PRCURRLINE ") : Reminder: " 
@@ -74,7 +74,7 @@ void prOutputString(prLogLevel level, const char *text);
     // Release version
     #define TODO(msg)
 
-#endif// SHOW_MESSAGES
+#endif// HIDE_MESSAGES
 
 
 // Compiler messages

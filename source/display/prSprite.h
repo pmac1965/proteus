@@ -104,11 +104,11 @@ public:
 
     // Method: GetFrameWidth
     //      Returns the sprite frame width.
-    Proteus::Core::s32 GetFrameWidth() const;
+    inline Proteus::Core::s32 GetFrameWidth() const { return m_frameWidth; }
 
     // Method: GetFrameHeight
     //      Returns the sprite frame height.
-    Proteus::Core::s32 GetFrameHeight() const;
+    inline Proteus::Core::s32 GetFrameHeight() const { return m_frameHeight; }
 
     // Method: Name
     //      Returns the sprites name.
@@ -126,7 +126,7 @@ public:
 
     // Method: GetFrame
     //      Gets the current frame.
-    Proteus::Core::s32 GetFrame() const;
+    Proteus::Core::s32 GetFrame() const { return m_frame; }
 
     // Method: GetTotalFrames
     //      Gets the total number of frames.

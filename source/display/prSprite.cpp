@@ -163,9 +163,10 @@ void prSprite::Draw()
             ERR_CHECK();
             
             // translate to quad center, then translate for position
-            glTranslatef((float)(m_frameWidth >> 1), (float)(m_frameHeight >> 1), 0);
-            ERR_CHECK();
-            glTranslatef(pos.x, pos.y, 0);
+            //glTranslatef((float)(m_frameWidth >> 1), (float)(m_frameHeight >> 1), 0);
+            //ERR_CHECK();
+            //glTranslatef(pos.x, pos.y, 0);
+            glTranslatef(pos.x + (float)(m_frameWidth >> 1), pos.y + (float)(m_frameHeight >> 1), 0);
             ERR_CHECK();
 
             float width  = (GLfloat)(m_frameWidth  * m_scaleX);
@@ -261,9 +262,9 @@ void prSprite::BatchDraw()
             ERR_CHECK();
             
                 // translate to quad center, the translate for position
-                glTranslatef((float)(m_frameWidth >> 1), (float)(m_frameHeight >> 1), 0);
-                ERR_CHECK();
-                glTranslatef(pos.x, pos.y, 0);
+                //glTranslatef((float)(m_frameWidth >> 1), (float)(m_frameHeight >> 1), 0);
+                //ERR_CHECK();
+                glTranslatef(pos.x + (float)(m_frameWidth >> 1), pos.y + (float)(m_frameHeight >> 1), 0);
                 ERR_CHECK();
 
                 float width  = (GLfloat)(m_frameWidth  * m_scaleX);
@@ -311,24 +312,6 @@ bool prSprite::GetVisible() const
 void prSprite::SetVisible(bool value)
 {
     m_visible = value;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Returns the sprite frame width.
-/// ---------------------------------------------------------------------------
-s32 prSprite::GetFrameWidth() const
-{
-    return m_frameWidth;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Returns the sprite frame height.
-/// ---------------------------------------------------------------------------
-s32 prSprite::GetFrameHeight() const
-{
-    return m_frameHeight;
 }
 
 
@@ -402,15 +385,6 @@ void prSprite::SetFrame(s32 frame)
 
 
 /// ---------------------------------------------------------------------------
-/// Gets the frame.
-/// ---------------------------------------------------------------------------
-s32 prSprite::GetFrame() const
-{
-    return m_frame;
-}
-
-
-/// ---------------------------------------------------------------------------
 /// Play an animation.
 /// ---------------------------------------------------------------------------
 void prSprite::PlayAnim(const char* name)
@@ -429,7 +403,7 @@ void prSprite::PlayAnim(const char* name)
 /// ---------------------------------------------------------------------------
 void prSprite::SetFlip(u32 flip)
 {
-    m_flip     |= flip;
+    m_flip |= flip;
 }
 
 
