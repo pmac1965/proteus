@@ -387,7 +387,7 @@ void prSpriteManager::BatchEnd()
             ERR_CHECK();
             glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &m_pBatchQuads->u);
             ERR_CHECK();
-            glDrawArrays(GL_TRIANGLES, 0, 4 * m_numQuadsAdded);
+            glDrawArrays(GL_QUADS, 0, 4 * m_numQuadsAdded);
             ERR_CHECK();
         }
 

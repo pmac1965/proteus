@@ -19,8 +19,17 @@
 #pragma once
 
 
+//#define NEW_ACTORMANAGER // Single lists proved to be faster when profiled
+
+
 #include "../core/prTypes.h"
-#include <list>
+
+
+#ifdef NEW_ACTORMANAGER
+  #include "../core/prList.h"
+#else
+  #include <list>
+#endif
 
 
 // Namespaces
@@ -53,8 +62,9 @@ public:
     //      Registers a function which creates the games actors.
     //
     // Parameters:
-    //      cb - A function pointer
-    void Registerfactory(prFactoryCallback cb);
+    //      cb         - A function pointer
+    //      actorTypes - The number of supported actor types
+    void Registerfactory(prFactoryCallback cb, Proteus::Core::s32 actorTypes = 32);
 
     // Method: Create
     //      Creates an actor
@@ -123,9 +133,18 @@ private:
 
 
 private:
+#ifdef NEW_ACTORMANAGER
+    // Data
+    prList<prActor *>     **mActors;
+    prFactoryCallback       mCallback;
+    Proteus::Core::s32      mActorTypes;
+
+#else
     // Data
     std::list<prActor *>    actors;
     prFactoryCallback       callback;
+
+#endif
 };
 
 

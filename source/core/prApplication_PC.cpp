@@ -567,7 +567,7 @@ BOOL prApplication_PC::CheckPlatform()
             isOSInvalid = false;
         }
 
-/*        if (IsWindows10OrGreater())
+        /*if (IsWindows10OrGreater())
         {
             verMajor    = 10;
             verMinor    = 0;

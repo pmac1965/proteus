@@ -44,6 +44,31 @@ class prRenderer;
 #define MAX_USER_VALUES     4
 
 
+// Enum: SpriteDebug 
+//      Bit flags which allow sprite animation debugging
+//
+//  SPRITE_DBG_NONE                 - Default value
+//  SPRITE_DBG_SHOW_ANIM_NAMES      - Show animation name as play is called
+//  SPRITE_DBG_SHOW_ANIM_FRAMES     - Show current frame
+//  SPRITE_DBG_SHOW_SEQ_NAMES       - Show animation sequence names as they're added
+//  SPRITE_DBG_SHOW_INVALID_FRAME   - Show if any invalid frames indices are set
+//
+// Notes:
+//      For use in debug mode only. Doesn't work in release mode
+//
+// Notes:
+//      Every sprite has a public u32 variable called debug. You can 
+//      set and clear the bit flags as required
+enum SpriteDebug
+{
+    SPRITE_DBG_NONE                 = 0x00000000,       // Default value
+    SPRITE_DBG_SHOW_ANIM_NAMES      = 0x00000001,       // Show animation name as play is called
+    SPRITE_DBG_SHOW_ANIM_FRAMES     = 0x00000002,       // Show current frame
+    SPRITE_DBG_SHOW_SEQ_NAMES       = 0x00000004,       // Show animation sequence names as they're added
+    SPRITE_DBG_SHOW_INVALID_FRAME   = 0x00000008,       // Show if any invalid frames indices are set
+};
+
+
 // Class: prSprite
 //      Basic 2D sprite entity
 //
@@ -56,6 +81,10 @@ public:
     // enum: prFlipType
     //      Sprite bitfield flip flags
     //
+    //  FLIP_NONE       - No flips. Default value
+    //  FLIP_LEFTRIGHT  - Flips sprite on the X axis
+    //  FLIP_UPDOWN     - Flips sprite on the Y axis
+    //
     // See Also:
     //      <SetFlip>
     //
@@ -63,9 +92,9 @@ public:
     //      <ClearFlip>
     enum prFlipType
     {
-        FLIP_NONE      = 0x00000000,        ///< No flips. Default value
-        FLIP_LEFTRIGHT = 0x00000001,        ///< Flips sprite on the X axis
-        FLIP_UPDOWN    = 0x00000020,        ///< Flips sprite on the Y axis
+        FLIP_NONE      = 0x00000000,
+        FLIP_LEFTRIGHT = 0x00000001,
+        FLIP_UPDOWN    = 0x00000020,
     };
 
 
@@ -93,14 +122,15 @@ public:
 
     // Method: GetVisible
     //      Gets the sprite visible state.
-    bool GetVisible() const;
+    bool GetVisible() const { return m_visible; }
 
     // Method: SetVisible
     //      Sets the sprite visible state.
     //
     // Parameters:
     //      value - true or false
-    void SetVisible(bool value);
+    void SetVisible(bool value) { m_visible = value; }
+
 
     // Method: GetFrameWidth
     //      Returns the sprite frame width.
@@ -202,11 +232,11 @@ public:
     //
     // Parameters:
     //      rot - The rotation value
-    void SetRotation(Proteus::Core::f32 rot);
+    void SetRotation(Proteus::Core::f32 rot) { m_rotation = rot; }
 
     // Method: GetRotation
     //      Returns the current rotation
-    Proteus::Core::f32 GetRotation() const;
+    Proteus::Core::f32 GetRotation() const { return m_rotation; }
 
     // Method: SetUser
     //      User data support.
@@ -274,6 +304,8 @@ public:
     Proteus::Core::s32          user1;  // This is free for game programmer use.
     Proteus::Core::s32          user2;  // This is free for game programmer use.
     Proteus::Core::s32          user3;  // This is free for game programmer use.
+
+    Proteus::Core::u32          debug;  // This is for game engine debug use.
 
 
 private:

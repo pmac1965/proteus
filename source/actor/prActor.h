@@ -254,11 +254,14 @@ public:
     Proteus::Core::s32          user1;            // User data for you to do as you please
     Proteus::Core::s32          user2;            // User data for you to do as you please
     Proteus::Core::s32          user3;            // User data for you to do as you please
+    Proteus::Core::u32          collision0;       // For passing additional collision info, such as ground type
+    Proteus::Core::u32          collision1;       // For passing additional collision info, such as ground type
+    Proteus::Core::u32          collision2;       // For passing additional collision info, such as ground type
+    Proteus::Core::u32          collision3;       // For passing additional collision info, such as ground type
 
 
 protected:
     Proteus::Core::s32          m_type;
-    //Proteus::Core::s32          m_state;
     Proteus::Core::s32          m_priority;
     Proteus::Core::s32          m_id;
     Proteus::Math::prVector2    m_colPos;    

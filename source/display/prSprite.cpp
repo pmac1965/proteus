@@ -68,7 +68,6 @@ using namespace Proteus::Core;
 
 // Defines
 #define DEFAULT_SCALE                   1.0f
-//#define ALLOW_INVALID_FRAME_WARNING
 
 
 /// ---------------------------------------------------------------------------
@@ -117,6 +116,8 @@ prSprite::prSprite(prSpriteManager *pSpriteManager, prTexture *pTexture, const c
     m_exp0      = false;
     m_exp1      = false;
     m_priority  = 0;
+    
+    debug       = SPRITE_DBG_NONE;
 
     SetName(name);
     SetFrame(m_frame);
@@ -142,6 +143,13 @@ void prSprite::Update(float dt)
     {
         m_animation->Update(dt);
     }
+
+    #if (defined(_DEBUG) || defined(DEBUG))
+    if ((debug & SPRITE_DBG_SHOW_ANIM_FRAMES) == SPRITE_DBG_SHOW_ANIM_FRAMES)
+    {
+        PRLOGD("Frame '%i'\n", m_frame);
+    }
+    #endif
 }
 
 
@@ -298,24 +306,6 @@ void prSprite::BatchDraw()
 
 
 /// ---------------------------------------------------------------------------
-/// Gets the sprite visible state.
-/// ---------------------------------------------------------------------------
-bool prSprite::GetVisible() const
-{
-    return m_visible;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Sets the sprite visible state.
-/// ---------------------------------------------------------------------------
-void prSprite::SetVisible(bool value)
-{
-    m_visible = value;
-}
-
-
-/// ---------------------------------------------------------------------------
 /// Returns the sprites name.
 /// ---------------------------------------------------------------------------
 const char *prSprite::Name() const
@@ -332,10 +322,15 @@ void prSprite::AddSequence(prSpriteAnimationSequence* sequence, const char *name
     PRASSERT(sequence);
     PRASSERT(name && *name);
 
-    TODO("Remove name param");
     if (m_animation == NULL)
     {
-        //prTrace(LogError, "Add sequence: '%s' to '%s'\n", name, Name());
+        #if (defined(_DEBUG) || defined(DEBUG))
+        if ((debug & SPRITE_DBG_SHOW_SEQ_NAMES) == SPRITE_DBG_SHOW_SEQ_NAMES)
+        {
+            PRLOGD("Add sequence: '%s' to '%s'\n", name, Name());
+        }
+        #endif
+
         m_animation = new prSpriteAnimation(this);
         m_animated  = true;
     }
@@ -362,7 +357,6 @@ void prSprite::SetFrame(s32 frame)
         m_v0 = 1.0f - ((y * m_fh) + m_fh);
         m_v1 = m_v0 + m_fh;
 
-//#if defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS)
         // Left/right
         m_u0 += (m_pw / 2);             // Add half pixel to stop blurring.
         m_u1 -= (m_pw / 2);             // Sub half pixel to stop blurring.
@@ -370,17 +364,19 @@ void prSprite::SetFrame(s32 frame)
         // Top/bottom
         m_v0 += (m_ph / 2);             // Add half pixel to stop blurring
         m_v1 -= (m_ph / 2);             // Sub half pixel to stop blurring
-//#endif
 
         // Set frame
         m_frame = frame;
     }
-#if defined(ALLOW_INVALID_FRAME_WARNING)
+    #if (defined(_DEBUG) || defined(DEBUG))
     else
     {
-        prTrace(LogError, "Attempted to set an invalid sprite frame index %i. Texture: %s\n", frame, m_pTexture->Filename());
+        if ((debug & SPRITE_DBG_SHOW_ANIM_FRAMES) == SPRITE_DBG_SHOW_ANIM_FRAMES)
+        {
+            PRLOGE("Attempted to set an invalid sprite frame index %i. Texture: %s\n", frame, m_pTexture->Filename());
+        }
     }
-#endif
+    #endif
 }
 
 
@@ -394,6 +390,13 @@ void prSprite::PlayAnim(const char* name)
     if (m_animation && m_animated)
     {
         m_animation->PlaySequence(name);
+
+        #if (defined(_DEBUG) || defined(DEBUG))
+        if ((debug & SPRITE_DBG_SHOW_ANIM_NAMES) == SPRITE_DBG_SHOW_ANIM_NAMES)
+        {
+            PRLOGD("Play anim '%s'\n", name);
+        }
+        #endif
     }
 }
 
@@ -473,22 +476,22 @@ f32 prSprite::GetScaleY() const
 }
 
 
-/// ---------------------------------------------------------------------------
-/// Set rotation
-/// ---------------------------------------------------------------------------
-void prSprite::SetRotation(f32 rot)
-{
-    m_rotation = rot;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Get rotation
-/// ---------------------------------------------------------------------------
-f32 prSprite::GetRotation() const
-{
-    return m_rotation;
-}
+///// ---------------------------------------------------------------------------
+///// Set rotation
+///// ---------------------------------------------------------------------------
+//void prSprite::SetRotation(f32 rot)
+//{
+//    m_rotation = rot;
+//}
+//
+//
+///// ---------------------------------------------------------------------------
+///// Get rotation
+///// ---------------------------------------------------------------------------
+//f32 prSprite::GetRotation() const
+//{
+//    return m_rotation;
+//}
 
 
 /// ---------------------------------------------------------------------------

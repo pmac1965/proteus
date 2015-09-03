@@ -282,14 +282,87 @@ public:
     //
     // Warning:
     //      The current node pointer will be rendered invalid by this method.
-    void Remove(const T &item);
+    prIterator Remove(const T &item)
+    {
+        prNode* node = Find(item);
+        return Remove(node);
+    }
 
     // Method: Remove
     //      Removes an items if it is held within the list.
     //
     // Warning:
     //       The current node pointer will be rendered invalid by this method.
-    void Remove(prNode* node);
+    prIterator Remove(prNode* node)
+    {
+        prNode* next = nullptr;
+
+        if (node)
+        {
+            // Keep a pointer to the current node, so we can delete it.
+            prNode* temp = node;
+
+            // Remove the head node?
+            if (node == head)
+            {
+                // Are there any nodes left?
+                if (head->next)
+                {
+                    // Remove old head node.
+                    head  = head->next;                
+                    head->prev = 0;
+                    next = head;                    // If head set next as new head
+                }
+                else
+                {
+                    head = 0;
+                    tail = 0;
+                }
+            }
+
+            // Remove the tail node?
+            else if (node == tail)
+            {
+                // Are there any nodes left?
+                if (tail->prev)
+                {
+                    // Remove old tail node.
+                    tail = tail->prev;                
+                    tail->next = 0;
+                                                    // No next
+                }
+                else
+                {
+                    head = 0;
+                    tail = 0;
+                }
+            }
+
+            // Remove inbetween node.
+            else
+            {
+                node->prev->next = node->next;
+                node->next->prev = node->prev;
+                next = node->next;                  // If between set next as well 'next'
+            }
+
+    
+            // Now we can call delete on the node that has been unlinked.
+            if (method == LIST_METHOD_CREATE)
+            {   
+                delete temp;
+            }
+    
+    
+            // Reduce count.
+            if (--count == 0)
+            {
+                method = LIST_METHOD_NONE;
+            }
+        }
+
+        return prIterator(head, tail, next);
+    }
 
     // Method: Size
     //      Returns the number of items in the list.
