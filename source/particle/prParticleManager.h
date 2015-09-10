@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRPARTICLEMANAGER_H
-#define __PRPARTICLEMANAGER_H
+#pragma once
 
 
 // Forward declarations
@@ -100,6 +99,3 @@ private:
     std::map<std::string, prEmitterDefinition*>     mDefinitions;       // The definitions of the emitters
     bool                                            mCorrectFileType;   // Used to ensure its the correct file type during loading.
 };
-
-
-#endif//__PRPARTICLEMANAGER_H

@@ -38,22 +38,6 @@ prStore::prStore(prInAppPurchase &iap) : m_prInAppPurchase(iap)
 
 
 /// ---------------------------------------------------------------------------
-/// Dtor
-/// ---------------------------------------------------------------------------
-prStore::~prStore()
-{
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Perform store specific initialisation. 
-/// ---------------------------------------------------------------------------
-void prStore::Init()
-{
-}
-
-
-/// ---------------------------------------------------------------------------
 /// Perform store specific updates.
 /// ---------------------------------------------------------------------------
 bool prStore::Update(f32 dt)
@@ -76,9 +60,8 @@ void prStore::EventNotify(s32 type, const char *id)
 /// ---------------------------------------------------------------------------
 /// Purchase an item.
 /// ---------------------------------------------------------------------------
-void prStore::BeginPurchase(const char *name, int id)
+void prStore::BeginPurchase(const char *id)
 {
-    PRUNUSED(name);
     PRUNUSED(id);
 }
 
@@ -86,9 +69,8 @@ void prStore::BeginPurchase(const char *name, int id)
 /// ---------------------------------------------------------------------------
 /// Find an items price.
 /// ---------------------------------------------------------------------------
-const char *prStore::FindPrice(const char *name, int id)
+const char *prStore::FindPrice(const char *id)
 {
-    PRUNUSED(name);
     PRUNUSED(id);
     return "$0.99";
 }

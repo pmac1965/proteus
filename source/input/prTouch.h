@@ -155,7 +155,7 @@ public:
 #if (defined(PLATFORM_PC) && defined(PROTEUS_TOOL))
     // Method: SetMousePointerAdjust
     //      Sets valuea to adjust the mouse pointer with due to windows tool bar
-    void SetMousePointerAdjust(s32 x, s32 y);
+    void SetMousePointerAdjust(Proteus::Core::s32 x, Proteus::Core::s32 y);
 #endif
 
 

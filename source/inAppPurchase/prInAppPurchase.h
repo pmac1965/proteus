@@ -28,7 +28,8 @@ namespace IAP {
 
 
 // Enum: IapTestEvent
-//      IAP test events
+//      IAP test events for the desktop allow testing of the purchase
+//      code. Specifically rare events like failure and refunds
 //
 // IAPTEST_NONE                 - Default setting
 // IAPTEST_CONNECTTION_FAILED   - Generates a connection failed event
@@ -43,21 +44,17 @@ enum IapTestEvent
 };
 
 
-// Typedef: IapItemStatus
-//      IAP items status
+// Typedef: IapConfig
+//      IAP item configuration data.
 //
-// IAPITEMSTATUS_AVAILABLE     -  Item is available to be bought
-// IAPITEMSTATUS_PURCHASED     -  Item has been purchased
-// IAPITEMSTATUS_REPEAT        -  Item can be bought more than once (Like a coin pack)
-// IAPITEMSTATUS_ONCE          -  Item can only be bought once (Like a special weapon)
-typedef enum IapItemStatus
+// IAPCONFIG_INLINE     -  Item is bought by inline a consumeable item, like coins
+// IAPCONFIG_ONLINE     -  Item is bought by cash via online store
+typedef enum IapConfig
 {
-    IAPITEMSTATUS_AVAILABLE     = 0x00000001,
-    IAPITEMSTATUS_PURCHASED     = 0x00000002,
-    IAPITEMSTATUS_REPEAT        = 0x00020000,
-    IAPITEMSTATUS_ONCE          = 0x00040000,
+    IAPCONFIG_INLINE    = 0x00000001,
+    IAPCONFIG_ONLINE    = 0x00000002,
 
-} IapItemStatus;
+} IapConfig;
 
 
 // Forward declarations
@@ -83,21 +80,37 @@ public:
     //      Register callback handler.
     //      The handler receives *prTransactionResult* messages
     //
+    // Parameters:
+    //      handler - The results handler
+    //
     // See Also:
     //      <prTransactionResult>
     void Register(Proteus::IAP::prTransactionResult *handler);
 
     // Method: Init
     //      Initialisation call.
+    //
+    // Notes:
+    //      Initialisation is performed separately in case its problematic
     void Init();
 
     // Method: Update
     //      Updates the in app purchase manager.
+    //
+    // Parameters:
+    //      dt - Delta time
     void Update(Proteus::Core::f32 dt);
 
     // Method: BeginPurchase
     //      Begins a purchase
-    bool BeginPurchase(const char *name);
+    //
+    // Parameters:
+    //      name - Identifier of item to purchase
+    //      type - The type of purchase (inline, online)
+    //
+    // See Also:
+    //      <IapConfig>
+    bool BeginPurchase(const char *name, Proteus::Core::u32 type);
 
     // Method: GetTestMode
     //      Is class in test mode

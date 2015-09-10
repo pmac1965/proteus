@@ -65,13 +65,11 @@ void prStore_android::EventNotify(s32 type, const char *id)
 /// ---------------------------------------------------------------------------
 /// Purchase an item.
 /// ---------------------------------------------------------------------------
-void prStore_android::BeginPurchase(const char *name, int id)
+void prStore_android::BeginPurchase(const char *id)
 {
-    PRUNUSED(id);
-
-    if (name && *name)
+    if (id && *id)
     {
-        prJNI_BeginPurchase(name);
+        prJNI_BeginPurchase(id);
     }
 }
 

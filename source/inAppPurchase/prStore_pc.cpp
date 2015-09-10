@@ -64,9 +64,8 @@ void prStore_pc::EventNotify(s32 type, const char *id)
 /// ---------------------------------------------------------------------------
 /// Purchase an item.
 /// ---------------------------------------------------------------------------
-void prStore_pc::BeginPurchase(const char *name, int id)
+void prStore_pc::BeginPurchase(const char *id)
 {
-    PRUNUSED(name);
     PRUNUSED(id);
 }
 

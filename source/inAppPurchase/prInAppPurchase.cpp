@@ -53,6 +53,10 @@ using namespace Proteus::Math;
 using namespace Proteus::Core;
 
 
+#define IAP_TEST_MIN_TIME   2
+#define IAP_TEST_MAX_TIME   4
+
+
 // Namespaces
 namespace Proteus {
 namespace IAP {
@@ -65,6 +69,7 @@ typedef struct prInAppPurchaseImplementation
 {
     prInAppPurchaseImplementation()
     {
+    #if defined(PROTEUS_IAP_TEST)
         connected   = false;
         testMode    = false;
         exp1        = false;
@@ -72,8 +77,17 @@ typedef struct prInAppPurchaseImplementation
         testTimer   = 0.0f;
         testEvent   = IAPTEST_NONE;
         testStep    = 0;
+
+    #else
+        connected   = false;
+        exp2        = false;
+        exp1        = false;
+        exp0        = false;    
+
+    #endif
 	}
 
+#if defined(PROTEUS_IAP_TEST)
     bool        connected;
     bool        testMode;
     bool        exp1;
@@ -82,6 +96,14 @@ typedef struct prInAppPurchaseImplementation
     s32         testEvent;
     s32         testStep;
     prString    purchaseID;
+
+#else
+    bool        connected;
+    bool        exp2;
+    bool        exp1;
+    bool        exp0;
+
+#endif
 
 } prInAppPurchaseImplementation;
 
@@ -115,10 +137,7 @@ prInAppPurchase::~prInAppPurchase()
 void prInAppPurchase::Register(Proteus::IAP::prTransactionResult *handler)
 {
     PRASSERT(pImpl);
-    if (handler)
-    {
-        pTransactionResultHandler = handler;
-    }
+    pTransactionResultHandler = handler;
 }
 
 
@@ -162,7 +181,7 @@ void prInAppPurchase::Init()
 /// ---------------------------------------------------------------------------
 void prInAppPurchase::Update(f32 dt)
 {
-#if defined(_DEBUG) || defined(DEBUG)
+#if defined(PROTEUS_IAP_TEST)
     if (imp.testMode)
     {
         if (imp.testTimer > 0.0f)
@@ -178,17 +197,17 @@ void prInAppPurchase::Update(f32 dt)
                     {
                     // Fire off purchase start
                     case 0:
-                        if (pTransactionResultHandler)
-                            pTransactionResultHandler->TransactionResult(TRANSACTION_PURCHASING, imp.purchaseID.Text());
+                        PRASSERT(pTransactionResultHandler);
+                        pTransactionResultHandler->TransactionResult(TRANSACTION_PURCHASING, imp.purchaseID.Text());
 
                         // Buy time to random value
-                        imp.testTimer = (float)(prRandomNumber(2, 8) * 1000);
+                        imp.testTimer = (float)(prRandomNumber(IAP_TEST_MIN_TIME, IAP_TEST_MAX_TIME) * 1000);
                         break;
 
                     // Fire off purchased
                     case 1:
-                        if (pTransactionResultHandler)
-                            pTransactionResultHandler->TransactionResult(TRANSACTION_PURCHASED, imp.purchaseID.Text());
+                        PRASSERT(pTransactionResultHandler);
+                        pTransactionResultHandler->TransactionResult(TRANSACTION_PURCHASED, imp.purchaseID.Text());
 
                         imp.testEvent = IAPTEST_NONE;
                         imp.testTimer = 0.0f;
@@ -211,6 +230,7 @@ void prInAppPurchase::Update(f32 dt)
                 }
             }
         }
+        return;
     }
 #endif
 
@@ -226,13 +246,13 @@ void prInAppPurchase::Update(f32 dt)
         {
             imp.connected = connected;
 
-            if (pTransactionResultHandler)
-                pTransactionResultHandler->ConnectionStateChanged(connected);
+            PRASSERT(pTransactionResultHandler);
+            pTransactionResultHandler->ConnectionStateChanged(connected);
         }
 
         // Show the connection state.
-        if (pTransactionResultHandler)
-            pTransactionResultHandler->UpdateConnection(connected);
+        PRASSERT(pTransactionResultHandler);
+        pTransactionResultHandler->UpdateConnection(connected);
     }
 }
 
@@ -240,17 +260,30 @@ void prInAppPurchase::Update(f32 dt)
 /// ---------------------------------------------------------------------------
 /// Begins a purchase
 /// ---------------------------------------------------------------------------
-bool prInAppPurchase::BeginPurchase(const char *name)
+bool prInAppPurchase::BeginPurchase(const char *name, u32 type)
 {
     PRASSERT(pImpl);
     PRASSERT(name && *name);
 
     // Store the purchase ID. Used by test code
+    #if defined(PROTEUS_IAP_TEST)
     imp.purchaseID.Set(name);
+    #endif
 
     if (pStore)
     {
-        pStore->BeginPurchase(name, 0);
+        // Inline purchase?
+        if ((type & IAPCONFIG_INLINE) == IAPCONFIG_INLINE)
+        {
+            PRASSERT(pTransactionResultHandler);
+            pTransactionResultHandler->TransactionResult(TRANSACTION_PURCHASING, name);
+            pTransactionResultHandler->TransactionResult(TRANSACTION_PURCHASED, name);
+        }
+
+        else if ((type & IAPCONFIG_ONLINE) == IAPCONFIG_ONLINE)
+        {
+            pStore->BeginPurchase(name);
+        }
     }
 
     return true;
@@ -262,7 +295,13 @@ bool prInAppPurchase::BeginPurchase(const char *name)
 /// ---------------------------------------------------------------------------
 bool prInAppPurchase::GetTestMode() const
 {
+#if defined(PROTEUS_IAP_TEST)
     return imp.testMode;
+
+#else
+    return false;
+
+#endif
 }
 
 
@@ -271,12 +310,11 @@ bool prInAppPurchase::GetTestMode() const
 /// ---------------------------------------------------------------------------
 void prInAppPurchase::SetTestMode(u32 testEvent)
 {
-#if defined(_DEBUG) || defined(DEBUG)
+#if defined(PROTEUS_IAP_TEST)
     // Running a test?
     if (imp.testMode == true)
     {
         prTrace(LogError, "IAP test running already\n");
-        prTrace(LogError, "Please do one at a time\n");
         return;
     }
 
@@ -285,14 +323,14 @@ void prInAppPurchase::SetTestMode(u32 testEvent)
     case IAPTEST_CONNECTTION_FAILED:
         imp.testMode  = true;
         imp.testEvent = IAPTEST_CONNECTTION_FAILED;
-        imp.testTimer = (float)(prRandomNumber(2, 8) * 1000);
+        imp.testTimer = (float)(prRandomNumber(IAP_TEST_MIN_TIME, IAP_TEST_MAX_TIME) * 1000);
         imp.testStep  = 0;
         break;
 
     case IAPTEST_PURCHASE:
         imp.testMode  = true;
         imp.testEvent = IAPTEST_PURCHASE;
-        imp.testTimer = (float)(prRandomNumber(2, 8) * 1000);
+        imp.testTimer = (float)(prRandomNumber(IAP_TEST_MIN_TIME, IAP_TEST_MAX_TIME) * 1000);
         imp.testStep  = 0;
         break;
 
@@ -302,13 +340,12 @@ void prInAppPurchase::SetTestMode(u32 testEvent)
         imp.testTimer = 0.0f;
         imp.testStep  = 0;
         prTrace(LogError, "Invalid test mode\n");
-        prTrace(LogError, "Tests turned off\n");
         break;
     }
 
 #else
-
     PRUNUSED(testEvent);
+    prTrace(LogError, "IAP test code is not enabled in engine\n");
 
 #endif
 }
@@ -348,12 +385,8 @@ void prInAppPurchase::EventNotify(s32 type, const char *id)
 /// ---------------------------------------------------------------------------
 const char *prInAppPurchase::FindProductPrice(const char *name)
 {
-    if (pStore)
-    {
-        return pStore->FindPrice(name, 0);
-    }
-    
-    return nullptr;
+    PRASSERT(pStore);
+    return pStore->FindPrice(name);
 }
 
 

@@ -61,7 +61,10 @@ public:
 
     // Method: BeginPurchase
     //      Purchase an item.
-    void BeginPurchase(const char *name, int id) override;
+    //
+    // Parameters:
+    //      id - ID of the item to purchase
+    void BeginPurchase(const char *id) override;
 };
 
 

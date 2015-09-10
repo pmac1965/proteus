@@ -59,19 +59,19 @@ public:
 #if defined(PROTEUS_TOOL)
     // Method: GetLayerWidth
     //      Gets the layers width. *Only available on tool builds*
-    s32 GetLayerWidth() const { return mLayerWidth; }
+    Proteus::Core::s32 GetLayerWidth() const { return mLayerWidth; }
 
     // Method: GetLayerHeight
     //      Gets the layers height. *Only available on tool builds*
-    s32 GetLayerHeight() const { return mLayerHeight; }
+    Proteus::Core::s32 GetLayerHeight() const { return mLayerHeight; }
 
     // Method: GetTileWidth
     //      Gets the width of the tiles used. *Only available on tool builds*
-    s32 GetTileWidth() const { return mTileWidth; }
+    Proteus::Core::s32 GetTileWidth() const { return mTileWidth; }
 
     // Method: GetTileHeight
     //      Gets the height of the tiles used. *Only available on tool builds*
-    s32 GetTileHeight() const { return mTileHeight; }
+    Proteus::Core::s32 GetTileHeight() const { return mTileHeight; }
 
     // Method: SetTextureFilename
     //      Sets the textures filename. *Only available on tool builds*
@@ -83,7 +83,7 @@ public:
 
     // Method: GetMapData
     //      Gets the map data. *Only available on tool builds*
-    s32 *GetMapData() { return mMapData; }
+    Proteus::Core::s32 *GetMapData() { return mMapData; }
 #endif
 
 

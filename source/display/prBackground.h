@@ -177,7 +177,7 @@ public:
 
     // Method: GetMapSize
     //      Adds a new map layer
-    prBackgroundLayer *AddNewLayer(s32 width, s32 height, s32 tileWidth, s32 tileHeight, prTexture *pTexture);
+    prBackgroundLayer *AddNewLayer(Proteus::Core::s32 width, Proteus::Core::s32 height, Proteus::Core::s32 tileWidth, Proteus::Core::s32 tileHeight, prTexture *pTexture);
 #endif
 
 

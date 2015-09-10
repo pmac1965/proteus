@@ -89,14 +89,11 @@ void prStore_ios::EventNotify(s32 type, const char *id)
 /// ---------------------------------------------------------------------------
 /// Purchase an item.
 /// ---------------------------------------------------------------------------
-void prStore_ios::BeginPurchase(const char *name, int id)
+void prStore_ios::BeginPurchase(const char *id)
 {
-    PRASSERT(name && *name);
-    PRUNUSED(id);
-
-    if (name && *name)
+    if (id && *id)
     {
-        IAPBeginPurchase(name);
+        IAPBeginPurchase(id);
     }
 }
 
@@ -104,12 +101,9 @@ void prStore_ios::BeginPurchase(const char *name, int id)
 /// ----------------------------------------------------------------------------
 /// Find an items price.
 /// ----------------------------------------------------------------------------
-const char *prStore_ios::FindPrice(const char *name, int id)
+const char *prStore_ios::FindPrice(const char *id)
 {
-    PRASSERT(name && *name);
-    PRUNUSED(id);
-    
-    if (name && *name)
+    if (id && *id)
     {
         static char buffer[64];
         

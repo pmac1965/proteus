@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRPARTICLE_H
-#define __PRPARTICLE_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -74,6 +73,3 @@ private:
     bool        mExp1;
     bool        mExp0;
 };
-
-
-#endif//__PRPARTICLE_H

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PREMITTER_H
-#define __PREMITTER_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -75,6 +74,3 @@ private:
 
     bool                mAlive;             //
 };
-
-
-#endif//__PREMITTER_H

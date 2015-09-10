@@ -45,15 +45,18 @@ public:
 
     // Method: ~prStore
     //      Dtor
-    virtual ~prStore();
+    virtual ~prStore() {}
 
     // Method: Init
     //      Perform store specific initialisation.
-    virtual void Init();
+    virtual void Init() {}
 
     // Method: Update
     //      Perform store specific updates.
-    virtual bool Update(Proteus::Core::f32 dt);
+    //
+    // Parameters:
+    //      dt - Delta time
+    virtual bool Update(Proteus::Core::f32);
     
     // Method: EventNotify
     //      Callback from the game.
@@ -73,25 +76,15 @@ public:
     //      Purchase an item.
     //
     // Parameters:
-    //      name - Name of the item to purchase, *OR*
-    //      id   - ID of the item to purchase
-    //
-    // Notes:
-    //      Allows for multiple platforms, hence the two
-    //      parameters types
-    virtual void BeginPurchase(const char *name, int id);
+    //      name - ID of the item to purchase
+    virtual void BeginPurchase(const char *id);
     
     // Method: FindPrice
     //      Find an items price.
     //
     // Parameters:
-    //      name - Name of the item to purchase, *OR*
-    //      id   - ID of the item to purchase
-    //
-    // Notes:
-    //      Allows for multiple platforms, hence the two
-    //      parameters types
-    virtual const char *FindPrice(const char *name, int id);
+    //      id - ID of the item to purchase
+    virtual const char *FindPrice(const char *id);
 
 
 private:

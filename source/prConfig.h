@@ -130,6 +130,10 @@
 #define PROTEUS_ALLOW_AT
 #endif
 
+#ifndef PROTEUS_IAP_TEST                                // Allows the in app purchase test code
+//#define PROTEUS_IAP_TEST
+#endif
+
 
 // ----------------------------------------------------------------------------
 // Android config

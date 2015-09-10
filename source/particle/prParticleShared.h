@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRPARTICLESHARED_H
-#define __PRPARTICLESHARED_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -48,6 +47,3 @@ struct prEmitterDefinition
     prEffectTypeList    mEffects;
     Proteus::Core::u32  mHash;
 };
-
-
-#endif//__PRPARTICLESHARED_H

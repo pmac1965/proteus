@@ -24,7 +24,11 @@
 
 
 #include "prWeb.h"
+#include "../debug/prTrace.h"
 #include <Windows.h>
+
+
+#define SHELL_EXECUTE_SUCCESS   32
 
 
 /// ---------------------------------------------------------------------------
@@ -50,7 +54,75 @@ void prWeb::OpenURL(const char *address)
 {
     if (address && *address)
     {
-        ShellExecuteA(NULL, "open", address, NULL, NULL, SW_SHOWNORMAL);
+        int result = (int)ShellExecuteA(NULL, "open", address, NULL, NULL, SW_SHOWNORMAL);
+
+        if (result != SHELL_EXECUTE_SUCCESS)
+        {
+            switch(result)
+            {
+            case 0:
+                PRLOGE("The operating system is out of memory or resources.\n");
+                break;
+
+            case ERROR_FILE_NOT_FOUND:
+                PRLOGE("The specified file was not found '%s'\n", address);
+                break;
+
+            case ERROR_PATH_NOT_FOUND:
+                PRLOGE("The specified path was not found '%s'\n", address);
+                break;
+
+            case ERROR_BAD_FORMAT:
+                PRLOGE("The .exe file is invalid (non-Win32 .exe or error in .exe image).\n");
+                break;
+
+            case SE_ERR_ACCESSDENIED:
+                PRLOGE("The operating system denied access to the specified file.\n");
+                break;
+
+            case SE_ERR_ASSOCINCOMPLETE:
+                PRLOGE("The file name association is incomplete or invalid.\n");
+                break;
+
+            case SE_ERR_DDEBUSY:
+                PRLOGE("The DDE transaction could not be completed because other DDE transactions were being processed.\n");
+                break;
+
+            case SE_ERR_DDEFAIL:
+                PRLOGE("The DDE transaction failed.\n");
+                break;
+
+            case SE_ERR_DDETIMEOUT:
+                PRLOGE("The DDE transaction could not be completed because the request timed out.\n");
+                break;
+
+            case SE_ERR_DLLNOTFOUND:
+                PRLOGE("The DDE transaction could not be completed because the request timed out '%s'\n", address);
+                break;
+
+            case SE_ERR_NOASSOC:
+                PRLOGE("There is no application associated with the given file name extension. This error will also be returned if you attempt to print a file that is not printable.\n");
+                break;
+
+            case SE_ERR_OOM:
+                PRLOGE("There was not enough memory to complete the operation.\n");
+                break;
+
+            case SE_ERR_SHARE:
+                PRLOGE("A sharing violation occurred.\n");
+                break;
+
+            default:
+                PRLOGE("prWeb::OpenURL - Unknown error.\n");
+                break;
+            }
+        }
+#if defined(_DEBUG) || defined(DEBUG) 
+        else
+        {
+            PRLOGE("Opened URL '%s'\n", address);
+        }
+#endif
     }
 }
 
