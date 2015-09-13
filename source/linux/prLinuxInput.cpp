@@ -27,34 +27,32 @@
 #include "../core/prCore.h"
 #include "../debug/prTrace.h"
 #include "../input/prMouse.h"
+#include "../input/prKeyboard.h"
 
 
 using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------
-/// A wrapper between input and the engine.
+/// A wrapper between mouse input and the engine.
 /// ---------------------------------------------------------------------------
-void prLinuxUpdateMouse(int x, int y, unsigned int flags)
+void prLinuxUpdateMouse(int x, int y, unsigned int flags, int pressed)
 {
-    static int c=0;
-//    prTrace(LogError, "%i, %i - %i\n",x,y,flags);
-
     switch(flags)
     {
     case 1:
         flags = MOUSE_BUTTON_LEFT;
-        prTrace(LogError, "Left %i - %i\n",c++, flags);
+        //prTrace(LogError, "Left: (%i, %i), flags: %i, pressed: %i\n",x,y,flags,pressed ? true : false);
         break;
 
     case 2:
         flags = MOUSE_BUTTON_MIDDLE;
-        prTrace(LogError, "Mid: %i - %i\n",c++, flags);
+        //prTrace(LogError, "Mid: (%i, %i), flags: %i, pressed: %i\n",x,y,flags,pressed ? true : false);
         break;
 
     case 3:
         flags = MOUSE_BUTTON_RIGHT;
-        prTrace(LogError, "Right %i - %i\n",c++, flags);
+        //prTrace(LogError, "Right: (%i, %i), flags: %i, pressed: %i\n",x,y,flags,pressed ? true : false);
         break;
 
     default:
@@ -65,10 +63,30 @@ void prLinuxUpdateMouse(int x, int y, unsigned int flags)
     prMouse *pMouse = static_cast<prMouse *>(prCoreGetComponent(PRSYSTEM_MOUSE));
     if (pMouse)
     {
-        pMouse->SetMouseData(x, y, flags, true);
+        pMouse->SetMouseData(x, y, flags, pressed ? true : false);
         pMouse->SetInRect(true);
     }
 }
 
+
+/// ---------------------------------------------------------------------------
+/// A wrapper between keyboard input and the engine
+/// ---------------------------------------------------------------------------
+void prLinuxUpdateKeyboard(unsigned int keycode, int pressed)
+{
+	prKeyboard *pKeyboard  = (prKeyboard *)prCoreGetComponent(PRSYSTEM_KEYBOARD);
+	if (pKeyboard)
+	{
+		if (pressed)
+		{
+			pKeyboard->KeyboardInjectPressed(keycode);
+		}
+		else
+		{
+			//pKeyboard->K(keycode);
+		}
+		//pKeyboard->
+	}
+}
 
 #endif//PLATFORM_LINUX

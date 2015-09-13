@@ -34,6 +34,12 @@
 #include "../linux/prLinux.h"
 
 
+//#if defined(ALLOW_GLEW)
+//#include <glew.h>
+//#include <wglew.h>
+//#endif
+
+
 using namespace Proteus::Core;
 
 

@@ -20,6 +20,7 @@
 #include "../prConfig.h"
 #include "prSoundManagerShared.h"
 #include "prOpenALErrors.h"
+#include "../debug/prDebug.h"
 
 
 #if defined(PLATFORM_PC)
@@ -37,6 +38,8 @@
     //#ifdef SOUND_ALLOW
     //#undef SOUND_ALLOW
     //#endif
+	#include "../android/AL/al.h"
+	#include "../android/AL/alc.h"
 
 #elif defined(PLATFORM_LINUX)
     #include <AL/al.h>
@@ -63,17 +66,20 @@ prLoadedWave::prLoadedWave()
 /// ---------------------------------------------------------------------------
 prLoadedWave::~prLoadedWave()
 {
+	TODO("Look at this code in details as android uses openal!");
+
 #if defined(SOUND_ALLOW)
 
     if (uiBuffer != 0xFFFFFFFF)
     {
-        #if !defined(PLATFORM_ANDROID)
+//        #if !defined(PLATFORM_ANDROID)
         alDeleteBuffers(1, &uiBuffer);
         AL_ERROR_CHECK();
-        #endif
+  //      #endif
     }
 
 #endif
 
     uiBuffer = 0xFFFFFFFF;
+    hash     = 0;
 }

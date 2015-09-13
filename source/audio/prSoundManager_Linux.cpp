@@ -149,15 +149,13 @@ bool prSoundManager_Linux::Initialise()
 /// ---------------------------------------------------------------------------
 void prSoundManager_Linux::Release()
 {
-#if defined(SOUND_ALLOW)// && defined(USE_OPENAL)
+#if defined(SOUND_ALLOW)
 
     ALCcontext *pContext = alcGetCurrentContext();
     ALCdevice  *pDevice  = alcGetContextsDevice(pContext);
 
     if (pContext)
     {
-        //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "Cleaning OpenAL\n");
-
         // Release the current context.
         if (!alcMakeContextCurrent(NULL))
         {
@@ -274,7 +272,6 @@ void prSoundManager_Linux::LoadSFX(const prSFXInfo *sfx, s32 count)
         {
             prWaveID id = -1;
             waves.LoadWaveFile(sfx[i].filename, &id);
-            //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "Loading %s\n", sfx[i].filename);
 
             if (id != -1)
             {
@@ -303,20 +300,11 @@ void prSoundManager_Linux::LoadSFX(const prSFXInfo *sfx, s32 count)
 
                     // Set the hash
                     entry->hash = sfx[i].hash;
-
-                    //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "Loaded %s\n", sfx[i].filename);
                 }
                 else
                 {
                 	prTrace(LogError, "Sound effect: %s\n", sfx[i].filename);
                 	prTrace(LogError, "Failed to create effect\n");
-
-                    //#if defined(SOUND_SHOW_FAILS) && (defined(_DEBUG) || defined(DEBUG))
-                    //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveSize           == %i\n", waves.GetWaveSize(id, (u32*)&iDataSize)                 == WR_OK);
-	                //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveData           == %i\n", waves.GetWaveData(id, (void**)&pData)                   == WR_OK);
-	                //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveFrequency      == %i\n", waves.GetWaveFrequency(id, (u32*)&iFrequency)           == WR_OK);
-	                //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveALBufferFormat == %i\n", waves.GetWaveALBufferFormat(id, (u32*)&eBufferFormat)   == WR_OK);
-                    //#endif
                 }
             }
             else

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRACCELEROMETER_H
-#define __PRACCELEROMETER_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -64,6 +63,3 @@ private:
     prAccelerometer(const prAccelerometer&);
     const prAccelerometer& operator = (const prAccelerometer&);
 };
-
-
-#endif//__PRACCELEROMETER_H

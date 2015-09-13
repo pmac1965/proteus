@@ -91,6 +91,7 @@ enum prSystems
     // Desktop only
 #elif defined(PLATFORM_LINUX)
     PRSYSTEM_MOUSE,
+    PRSYSTEM_KEYBOARD,
 #endif
 
     // Optional systems

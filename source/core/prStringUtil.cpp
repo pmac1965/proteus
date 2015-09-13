@@ -349,7 +349,7 @@ char *prStringSnprintf(char *buffer, s32 bufferSize, const char* fmt, ...)
     #if defined(PLATFORM_PC)
         vsprintf_s(buffer, bufferSize, fmt, args);
 
-    #elif defined(PLATFORM_ANDROID)
+    #elif (defined(PLATFORM_ANDROID) || defined(PLATFORM_LINUX))
         vsnprintf(buffer, bufferSize, fmt, args);
 
     #else

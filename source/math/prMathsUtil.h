@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRMATHSUTIL_H
-#define __PRMATHSUTIL_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -30,14 +29,19 @@ namespace Math {
 
 
 // Maths constants
-const Proteus::Core::s32   MaxInt32    = 0xFFFFFFFF;                           // Maths constant - was a long, but longs size can vary.
+const Proteus::Core::s32   MaxInt32    = 0xFFFFFFFF;                           // Maths constant
 const Proteus::Core::f32   MinFloat    = -3.402823466e+38F;                    // Maths constant
 const Proteus::Core::f32   MaxFloat    =  3.402823466e+38F;                    // Maths constant
 const Proteus::Core::f32   Pi          = 3.14159265358979323846f;              // Maths constant
 const Proteus::Core::f32   TwoPi       = Pi * 2;                               // Maths constant
 const Proteus::Core::f32   PiHalf      = Pi / 2;                               // Maths constant
 const Proteus::Core::f32   Epsilon     = 0.000001f;                            // Maths constant
+
+#ifdef NAN
+const Proteus::Core::f32   NaN         = NAN;
+#else
 const Proteus::Core::f32   NaN         = *(const Proteus::Core::f32*)&MaxInt32;// Maths constant
+#endif
 
 
 // Function: prMax    
@@ -207,6 +211,3 @@ void prScreenToWorld(Proteus::Core::s32 sx, Proteus::Core::s32 sy, Proteus::Core
 // Notes:
 //      x should be a float/double
 #define IS_ZERO(x)      ((x) > -Proteus::Math::Epsilon && (x) < Proteus::Math::Epsilon)
-
-
-#endif//__PRMATHSUTIL_H

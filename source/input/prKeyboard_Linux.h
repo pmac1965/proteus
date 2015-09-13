@@ -1,4 +1,4 @@
-// File: prKeyboard_PC.h
+// File: prKeyboard_Linux.h
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -22,18 +22,18 @@
 #include "prKeyboard.h"
 
 
-// Class: prKeyboard_PC
-//      PC Keyboard
-class prKeyboard_PC : public prKeyboard
+// Class: prKeyboard_Linux
+//      Linux Keyboard
+class prKeyboard_Linux : public prKeyboard
 {
 public:
-    // Method: prKeyboard_PC
+    // Method: prKeyboard_Linux
     //      Ctor
-    prKeyboard_PC();
+	prKeyboard_Linux();
     
-    // Method: ~prKeyboard_PC
+    // Method: ~prKeyboard_Linux
     //      Dtor
-    ~prKeyboard_PC();
+    ~prKeyboard_Linux();
 
     // Method: KeyboardInjectDown
     //      Engine call. Injects the held down keys

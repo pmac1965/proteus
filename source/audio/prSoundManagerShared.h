@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSOUNDMANAGERSHARED_H
-#define __PRSOUNDMANAGERSHARED_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -112,6 +111,3 @@ typedef struct prSoundEffectEntry
     Proteus::Core::u32 id;
 
 } prSoundEffectEntry;
-
-
-#endif//__PRSOUNDMANAGERSHARED_H

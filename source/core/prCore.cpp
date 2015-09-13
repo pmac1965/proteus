@@ -49,13 +49,15 @@
 #include "../input/prAccelerometer.h"
 
 
-#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
+#if defined(PLATFORM_PC)
 #include "../input/prMouse.h"
+#include "../input/prKeyboard_PC.h"
 #endif
 
 
-#if defined(PLATFORM_PC)
-#include "../input/prKeyboard_PC.h"
+#if defined(PLATFORM_LINUX)
+#include "../input/prMouse.h"
+#include "../input/prKeyboard_Linux.h"
 #endif
 
 
@@ -95,6 +97,7 @@ namespace
         // Desktop only
     #elif defined(PLATFORM_LINUX)
         { PRSYSTEM_MOUSE,               "PRSYSTEM_MOUSE" },
+        { PRSYSTEM_KEYBOARD,            "PRSYSTEM_KEYBOARD" },
     #endif
 
         // Optional systems
@@ -116,7 +119,7 @@ namespace
     /// -----------------------------------------------------------------------
     const char *CoreGetSystemName(s32 id)
     {
-        for(s32 i=0; i<PRARRAY_SIZE(coreSystemNames); i++)
+        for(u32 i=0; i<PRARRAY_SIZE(coreSystemNames); i++)
         {
             if (coreSystemNames[i].id == id)
             {
@@ -166,6 +169,7 @@ void prCoreInit()
 
         #if defined(PLATFORM_LINUX)
         pSystems[PRSYSTEM_MOUSE]     = new prMouse();
+        pSystems[PRSYSTEM_KEYBOARD]  = new prKeyboard_Linux();
         #endif
 
         // Set the locale to English.

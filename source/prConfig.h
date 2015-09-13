@@ -26,7 +26,6 @@
 #define AUDIO_MAC       4
 #define AUDIO_LINUX     5
 #define AUDIO_WINPHONE  6
-//#define AUDIO_TIZEN     7           // Bada replacement
 
 
 // Determine platform. First check for PC

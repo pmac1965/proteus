@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSOUNDMANAGER_H
-#define __PRSOUNDMANAGER_H
+#pragma once
 
 
 #include "prSoundManagerShared.h"
@@ -26,7 +25,6 @@
 
 
 // Forward declarations
-//struct prSFXInfo;
 class prLoadedWave;
 
 
@@ -239,6 +237,3 @@ protected:
 
     prSoundEffectEntry  soundEffects[AUDIO_MAX_ACTIVE];
 };
-
-
-#endif//__PRSOUNDMANAGER_H

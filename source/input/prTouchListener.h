@@ -7,6 +7,8 @@
 //
 //      Class also need to unregister themselves when done
 //
+//      *On desktops touch is simulated via the mouse
+//
 // See Also:
 //      <prTouch>
 //

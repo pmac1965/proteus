@@ -36,6 +36,7 @@
 #include "../debug/prFps.h"
 #include "../input/prMouse.h"
 #include "../input/prTouch.h"
+#include "../input/prKeyboard.h"
 #include "../display/prRenderer.h"
 #include "../core/prStringUtil.h"
 #include "../linux/prLinux.h"
@@ -207,44 +208,36 @@ PRBOOL prApplication_Linux::DisplayCreate(u32 width, u32 height, const char *pWi
 /// ---------------------------------------------------------------------------
 PRBOOL prApplication_Linux::Run()
 {
-      while (1)
-      {
-          prLinuxLoop();
+	while (1)
+	{
+		prLinuxLoop();
 
-          // Get systems
-          prMouse         *pMouse = static_cast<prMouse *>       (prCoreGetComponent(PRSYSTEM_MOUSE));
-          prSoundManager  *pSound = static_cast<prSoundManager *>(prCoreGetComponent(PRSYSTEM_AUDIO));
-          prTouch         *pTouch = static_cast<prTouch *>       (prCoreGetComponent(PRSYSTEM_TOUCH));
-          prFps           *pFps   = static_cast<prFps *>         (prCoreGetComponent(PRSYSTEM_FPS));
+		// Get systems
+		prMouse         *pMouse    = static_cast<prMouse *>       (prCoreGetComponent(PRSYSTEM_MOUSE));
+		prSoundManager  *pSound    = static_cast<prSoundManager *>(prCoreGetComponent(PRSYSTEM_AUDIO));
+		prTouch         *pTouch    = static_cast<prTouch *>       (prCoreGetComponent(PRSYSTEM_TOUCH));
+		prFps           *pFps      = static_cast<prFps *>         (prCoreGetComponent(PRSYSTEM_FPS));
+		prKeyboard      *pKeyboard = static_cast<prKeyboard *>    (prCoreGetComponent(PRSYSTEM_KEYBOARD));
 
+		// Update game
+		if (m_pWindow && m_pWindow->GetActive())
+		{
+			// System updates
+			if (pMouse)    { pMouse->Update(); }
+			if (pSound)    { pSound->Update(16.0f); }
+			if (pTouch)    { pTouch->Update(); }
+			if (pKeyboard) { pKeyboard->Update(); }
+			if (pFps)      { pFps->Begin(); }
 
-//            GameTime::GetInstance()->Update();
+			// Update and draw the game
+			Update(16.0f);
+			Draw();
+	    }
 
-          // Update game
-          if (m_pWindow && m_pWindow->GetActive())
-          {
-//                float dt = GameTime::GetInstance()->ElapsedTime();
+	  //Sleep(1);
 
-              // System updates
-              if (pMouse) { pMouse->Update(); }
-              if (pSound) { pSound->Update(16.0f); }
-              if (pTouch) { pTouch->Update(); }
-              if (pFps)   { pFps->Begin(); }
-
-              // Update and draw the game
-              Update(16.0f);
-              Draw();
-
-              //if (pMouse) { pMouse->ClearButtons(); }
-          }
-
-          // Needs modified to track game speed!
-//          Sleep(14);
-          //TODO("Needs modified to track game speed!")
-          //Sleep(1);
-
-          if (pFps)   { pFps->End(); }
-      }
+	  if (pFps)   { pFps->End(); }
+	}
 
     return PRFALSE;
 }

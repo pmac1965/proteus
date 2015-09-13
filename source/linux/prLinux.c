@@ -29,6 +29,7 @@
 #include <X11/keysym.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "../core/prTypes.h"
 #include "../core/prDefines.h"
 #include "../debug/prTrace.h"
@@ -42,12 +43,12 @@ static Display         *display      = NULL;
 static XVisualInfo     *vi           = NULL;
 static GLboolean        doubleBuffer = GL_TRUE;
 static Window           win;
-static long             eventMask    =  KeyPressMask         |
-//                                        ExposureMask         |
-                                        ButtonPressMask      |       // Pointer button down events wanted
-                                        ButtonReleaseMask    |       // Pointer button up events wanted
-                                        PointerMotionMask    |       // Pointer motion
-                                        StructureNotifyMask;
+static long             eventMask    =  KeyPressMask         |		// Keys
+                                        KeyReleaseMask       |		// Keys
+                                        ButtonPressMask      |      // Pointer button down events wanted
+                                        ButtonReleaseMask    |      // Pointer button up events wanted
+                                        PointerMotionMask    |      // Pointer motion
+                                        StructureNotifyMask;		// Events like destroy
 
 // Local data
 static int singleBuf[] = {GLX_RGBA, GLX_DEPTH_SIZE, 16, None};
@@ -74,6 +75,15 @@ int prLinuxCreateDisplay(unsigned int width, unsigned int height)
     Colormap             cmap;
     XSetWindowAttributes swa;
     GLXContext           cx;
+    XSizeHints			 sizeHints;
+
+    // Set hints
+    memset(&sizeHints, 0, sizeof(sizeHints));
+    sizeHints.min_width  = width;
+    sizeHints.max_width  = width;
+    sizeHints.min_height = height;
+    sizeHints.max_height = height;
+    sizeHints.flags      = PMinSize | PMaxSize;
 
     // Open a connection to the X server
     display = XOpenDisplay(NULL);
@@ -137,7 +147,7 @@ int prLinuxCreateDisplay(unsigned int width, unsigned int height)
                         CWBorderPixel | CWColormap | CWEventMask,
                         &swa);
 
-    XSetStandardProperties(display, win, "main", "main", None, (char **)argValues, argCount, NULL);
+    XSetStandardProperties(display, win, "main", "main", None, (char **)argValues, argCount, &sizeHints);
 
     // Bind the rendering context to the window
     glXMakeCurrent(display, win, cx);
@@ -177,42 +187,67 @@ void prLinuxLoop()
 {
     // http://stackoverflow.com/questions/125806/capturing-input-in-linux
     XEvent event;
-    if (XCheckWindowEvent(display, win, eventMask, &event))
+    while (XCheckWindowEvent(display, win, eventMask, &event))
     {
         //XNextEvent(display, &event);
         switch (event.type)
         {
             case KeyPress:
-            {
-                KeySym     keysym;
-                char       buffer[1];
+            	{
+            		KeySym     keysym;
+            		char       buffer[1];
 
-                // It is necessary to convert the keycode to a keysym before checking if it is an escape
-                if ((XLookupString((XKeyEvent*)&event, buffer, 1, &keysym,NULL) == 1) && (keysym == (KeySym)XK_Escape))
-                {
-                    printf("1: Quit app\n");
-                    exit(0);
-                }
-            }
-			break;
+            		// It is necessary to convert the keycode to a keysym before checking if it is an escape
+            		//if ((XLookupString((XKeyEvent*)&event, buffer, 1, &keysym,NULL) == 1) && (keysym == (KeySym)XK_Escape))
+            		//{
+            		//    printf("1: Quit app\n");
+            		//    exit(0);
+            		//}
+            		XLookupString((XKeyEvent*)&event, buffer, 1, &keysym, NULL);
+
+  //          		char c = buffer[0];
+  //          		printf("Press: %c - %i\n", c, c);
+
+            		prLinuxUpdateKeyboard((unsigned int)buffer[0], TRUE);
+            	}
+				break;
+
+            case KeyRelease:
+/*				{
+            		KeySym     keysym;
+            		char       buffer[1];
+
+            		XLookupString((XKeyEvent*)&event, buffer, 1, &keysym, NULL);
+
+            		char c = buffer[0];
+            		printf("Release: %c - %i\n", c, c);
+
+            		prLinuxUpdateKeyboard((unsigned int)buffer[0], FALSE);
+				}//*/
+            	break;
 
             // Mouse move
             case MotionNotify:
-                prLinuxUpdateMouse(event.xbutton.x,event.xbutton.y, 0);
+                prLinuxUpdateMouse(event.xbutton.x,event.xbutton.y, 0, 0);
                 break;
 
             // Mouse buttons
             case ButtonRelease:
+                prLinuxUpdateMouse(event.xbutton.x,event.xbutton.y, event.xbutton.button, 0);
+                break;
+
             case ButtonPress:
-                prLinuxUpdateMouse(event.xbutton.x,event.xbutton.y, event.xbutton.button);
-                    break;
-                }
+                prLinuxUpdateMouse(event.xbutton.x,event.xbutton.y, event.xbutton.button, 1);
+                break;
+        }
     }
 }
 
 #else
 
-// Just to stop the translation unit being consider empty!
+/// ---------------------------------------------------------------------------
+/// Just to stop the translation unit being considered empty!
+/// ---------------------------------------------------------------------------
 static void Filler()
 {
 }

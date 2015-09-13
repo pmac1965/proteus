@@ -652,6 +652,7 @@
     <ClInclude Include="..\..\..\..\source\input\prAccelerometer.h" />
     <ClInclude Include="..\..\..\..\source\input\prJoystick.h" />
     <ClInclude Include="..\..\..\..\source\input\prKeyboard.h" />
+    <ClInclude Include="..\..\..\..\source\input\prKeyboard_Linux.h" />
     <ClInclude Include="..\..\..\..\source\input\prKeyboard_PC.h" />
     <ClInclude Include="..\..\..\..\source\input\prKeys.h" />
     <ClInclude Include="..\..\..\..\source\input\prMouse.h" />
@@ -993,6 +994,7 @@
     <ClCompile Include="..\..\..\..\source\input\prAccelerometer.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prJoystick.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prKeyboard.cpp" />
+    <ClCompile Include="..\..\..\..\source\input\prKeyboard_Linux.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prKeyboard_PC.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prMouse.cpp" />
     <ClCompile Include="..\..\..\..\source\input\prOnScreenKeyboard.cpp" />

@@ -66,7 +66,7 @@ PRNAMESPACE_BEG(Core)
     typedef float                   f32;
     typedef double                  f64;
 
-// Basic types - android, linux, tizen
+// Basic types - android, linux
 #elif (defined(PLATFORM_ANDROID) || defined(PLATFORM_LINUX))
     typedef   signed char           s8;
     typedef unsigned char           u8;

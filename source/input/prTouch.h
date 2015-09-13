@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRTOUCH_H
-#define __PRTOUCH_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -168,6 +167,3 @@ private:
     TouchImplementation *pImpl;
     TouchImplementation &imp;
 };
-
-
-#endif//__PRTOUCH_H

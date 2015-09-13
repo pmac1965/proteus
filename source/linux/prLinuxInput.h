@@ -26,8 +26,22 @@ extern "C" {
 
 
 // Function: prLinuxUpdateMouse
-//      A wrapper between input and the engine.
-void prLinuxUpdateMouse(int x, int y, unsigned int flags);
+//      A wrapper between mouse input and the engine.
+//
+// Parameters:
+//		x 		- Mouse X
+//		y 		- Mouse Y
+//		flags 	- MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT, MOUSE_BUTTON_MIDDLE
+//		pressed - 1 == pressed, 0 == released
+void prLinuxUpdateMouse(int x, int y, unsigned int flags, int pressed);
+
+// Function:
+//		A wrapper between keyboard input and the engine
+//
+// Parameters:
+//		keycode - The keycode
+//		pressed - 1 == pressed, 0 == released
+void prLinuxUpdateKeyboard(unsigned int keycode, int pressed);
 
 
 #ifdef __cplusplus

@@ -177,7 +177,7 @@ typedef struct TouchImplementation
                         e.index = i;
 #endif
                         e.id    = touchLocation.id;
-                        //prTrace(LogError, "Axis: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
+                        //prTrace(LogError, "(A)Axis: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
                         Axis(e);
                     }
                     return;
@@ -236,7 +236,7 @@ typedef struct TouchImplementation
                     e.index = i;
 #endif
                     e.id    = touchLocation.id;
-                    //prTrace(LogError, "Axis: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
+                    //prTrace(LogError, "(N)Axis: X:%i, Y:%i, Index: %i, ID: %i\n", e.x, e.x, e.index, e.index, e.id);
                     Axis(e);
                 }                
                 return;

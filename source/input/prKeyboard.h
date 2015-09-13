@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRKEYBOARD_H
-#define __PRKEYBOARD_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -33,7 +32,6 @@
 #define PRCTRL_KEY_ALT          0x00000080                                              // Control key
 #define PRCTRL_KEY_CONTROL      (PRCTRL_KEY_CTRL_LEFT | PRCTRL_KEY_CTRL_RIGHT)          // Control key
 #define PRCTRL_KEY_SHIFT        (PRCTRL_KEY_SHIFT_LEFT | PRCTRL_KEY_SHIFT_RIGHT)        // Control key
-
 #define PRKEY_BUFFER_SIZE       256                                                     // Keyboard buffer size
 
 
@@ -92,10 +90,6 @@ protected:
     Proteus::Core::u32 mLastKey;                               // Last key pressed
     Proteus::Core::u32 mControlKeys;                           // Control keys pressed
     Proteus::Core::u32 mPrevControlKeys;                       // Control keys pressed
-
     Proteus::Core::u32 mPrevKeyBuffer[PRKEY_BUFFER_SIZE];      // Keycodes for pressed buttons
     Proteus::Core::u32 mKeyBuffer    [PRKEY_BUFFER_SIZE];      // Keycodes for pressed buttons
 };
-
-
-#endif//__PRKEYBOARD_H
