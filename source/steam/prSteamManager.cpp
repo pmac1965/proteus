@@ -40,7 +40,6 @@ using namespace Proteus::Core;
     #if defined(PLATFORM_PC)
     #include <steam/steam_api.h>
     #endif
-
 #endif
 
 
@@ -69,7 +68,8 @@ extern "C" void PC_API SteamAPIDebugTextHook(int nSeverity, const char *pchDebug
 /// ---------------------------------------------------------------------------
 prSteamManager::prSteamManager()
 {
-    mUseVR = false;
+    mEnabled    = true;
+    mUseVR      = false;
 }
 
 
@@ -87,18 +87,15 @@ prSteamManager::~prSteamManager()
 bool prSteamManager::IsAvailable() const
 {
 #if defined(ALLOW_STEAM)
-
-    // PC  
     #if defined(PLATFORM_PC)
-    return true;
+        return true;
     
     #else
-    return false;
+        return false;
 
     #endif
 
 #else
-
     return false;
 
 #endif
@@ -110,6 +107,13 @@ bool prSteamManager::IsAvailable() const
 /// ---------------------------------------------------------------------------
 bool prSteamManager::Initialise(u32 id, u32 notificationPosition)
 {
+    // Can be disabled
+    if (!mEnabled)
+    {
+        return true;
+    }
+
+
     bool result = false;
 
 #if (defined(ALLOW_STEAM) && defined(PLATFORM_PC))
@@ -216,19 +220,20 @@ bool prSteamManager::Initialise(u32 id, u32 notificationPosition)
 void prSteamManager::Deinitialise()
 {
 #if (defined(ALLOW_STEAM) && defined(PLATFORM_PC))
-
-    // Shutdown the SteamAPI
-    if (SteamController())
+    
+    if (mEnabled)
     {
-	    SteamController()->Shutdown();
+        // Shutdown the SteamAPI
+        if (SteamController())
+        {
+	        SteamController()->Shutdown();
+        }
+
+	    SteamAPI_Shutdown();
+
+	    // Shutdown Steam CEG
+	    Steamworks_TermCEGLibrary();
     }
 
-	SteamAPI_Shutdown();
-
-	// Shutdown Steam CEG
-	Steamworks_TermCEGLibrary();
-
 #endif
-
-    prTrace(LogError, "prSteamManager::Deinitialise()\n");
 }

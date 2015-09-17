@@ -657,7 +657,7 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
             break;
 
         case ALIGN_CENTER:
-            x -= MeasureString(message, scale).x / 2;
+            x -= MeasureStringUntilTerm(message, scale).x / 2;
             break;
         }
 

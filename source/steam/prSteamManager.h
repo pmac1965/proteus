@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRESTEAMMANAGER_H
-#define __PRESTEAMMANAGER_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -69,6 +68,21 @@ public:
     //      Dtor
     ~prSteamManager();
 
+    // Method: Enable
+    //      Enable/disable steam
+    //
+    // Notes:
+    //      Intended for tester use to disable steam on start-up
+    //      via a command line option.
+    //
+    // Notes:
+    //      Should not be used on a release build
+    void Enable(bool state) { mEnabled = state; }
+
+    // Method: IsEnabled
+    //      determines if steam is enabled
+    bool IsEnabled() const { return mEnabled; }
+
     // Method: IsAvailable
     //      Is steam available on this platform
     bool IsAvailable() const;
@@ -89,8 +103,6 @@ public:
 
 
 private:
+    bool    mEnabled;   // Steam is enabled.
     bool    mUseVR;     // Using VR
 };
-
-
-#endif//__PRESTEAMMANAGER_H
