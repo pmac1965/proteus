@@ -198,6 +198,7 @@
 #include "particle/prEmitter.h"
 #include "particle/prParticle.h"
 #include "particle/prParticleManager.h"
+#include "particle/prParticleShared.h"
 #include "persistence/prEncryption.h"
 #include "persistence/prSave.h"
 #include "persistence/prSaveBase.h"
