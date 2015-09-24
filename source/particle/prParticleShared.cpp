@@ -25,7 +25,8 @@
 /// ---------------------------------------------------------------------------
 /// Constructor
 /// ---------------------------------------------------------------------------
-prEmitterDefinition::prEmitterDefinition(const char *name) : mHash(prStringHash(name))
+prEmitterDefinition::prEmitterDefinition(const char *name) : mHash  (prStringHash(name))
+                                                           , mName  (name)
 {
-    prTrace(LogError, "New 'prEmitterDefinition' %s - %08x\n", name, mHash);
+    prTrace(LogError, "New 'prEmitterDefinition' %s - %08x\n", mName.c_str(), mHash);
 }

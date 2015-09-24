@@ -31,7 +31,7 @@ using namespace Proteus::Core;
 
 
 // Types
-typedef std::map<s32, prEmitter*>::iterator                     prEmitterIt;
+//typedef std::map<s32, prEmitter*>::iterator                     prEmitterIt;
 typedef std::map<std::string, prEmitterDefinition*>::iterator   prEmitterDefinitionIt;
 
 
@@ -64,19 +64,16 @@ bool prParticleManager::Load(const char *filename)
 {
     PRASSERT(filename && *filename);
 
-    // Init
+    // Set wrong file type.
     mCorrectFileType = false;
 
     TiXmlDocument* doc = new TiXmlDocument(filename);    
-    bool result = false;
     if (doc)
     {
-        bool loaded = doc->LoadFile();
-      
+        bool loaded = doc->LoadFile();      
         if (loaded)
         {
             ParseParticleFile(doc);
-            result = true;
         }
         else
         {
@@ -86,8 +83,7 @@ bool prParticleManager::Load(const char *filename)
         delete doc;
     }
 
-    return result;
-
+    return mCorrectFileType;
 }
 
 
@@ -99,12 +95,12 @@ void prParticleManager::Clear()
     // Clean the emitters
     if (!mEmitters.empty())
     {
-        prEmitterIt it;
-        for (it = mEmitters.begin(); it != mEmitters.end(); ++it)
+        //prEmitterIt it;
+        for (auto it = mEmitters.begin(); it != mEmitters.end(); ++it)
         {
             PRSAFE_DELETE((*it).second);
         }
-        //prTrace(LogError, "Clean emitters\n");
+        prTrace(LogError, "Clean emitters\n");
     }
 
     // Clean the definitions
@@ -115,7 +111,7 @@ void prParticleManager::Clear()
         {
             PRSAFE_DELETE((*it).second);
         }
-        //prTrace(LogError, "Clean definitions\n");
+        prTrace(LogError, "Clean definitions\n");
     }
 
     // And clear
@@ -131,8 +127,8 @@ void prParticleManager::Update(f32 dt)
 {
     if (!mEmitters.empty())
     {
-        prEmitterIt it;
-        for (it = mEmitters.begin(); it != mEmitters.end(); ++it)
+        //prEmitterIt it;
+        for (auto it = mEmitters.begin(); it != mEmitters.end(); ++it)
         {
             prEmitter *pEmitter = (*it).second;
             if (pEmitter)
@@ -162,13 +158,13 @@ s32 prParticleManager::Fire(const char *name, const Proteus::Math::prVector3 &po
 
 
         // Find an emitters definition
-        prEmitterDefinitionIt it;
-        for (it = mDefinitions.begin(); it != mDefinitions.end(); ++it)
+        //prEmitterDefinitionIt it;
+        for (auto it = mDefinitions.begin(); it != mDefinitions.end(); ++it)
         {
             const prEmitterDefinition *ed = (*it).second;
-            if (hash == ed->mHash)
+            if (hash == ed->GetHash())
             {
-                //prTrace(LogError, "Found definition\n");
+                prTrace(LogError, "Found definition\n");
                 
                 // Ensure emitter is always positive
                 sEmitterID++;
@@ -188,6 +184,36 @@ s32 prParticleManager::Fire(const char *name, const Proteus::Math::prVector3 &po
 
 
     return handle;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Returns the number of emitter definitions
+/// ---------------------------------------------------------------------------
+s32 prParticleManager::GetEmitterDefinitionCount() const
+{
+    return mDefinitions.size();
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Returns an emitter definition by index
+/// ---------------------------------------------------------------------------
+prEmitterDefinition *prParticleManager::GetEmitterDefinitionByIndex(s32 index)
+{
+    prEmitterDefinition *pDefinition = nullptr;
+
+    s32 count = 0;
+
+    for (auto it = mDefinitions.begin(); it != mDefinitions.end(); ++it, count++)
+    {
+        if (index == count)
+        {
+            pDefinition = (*it).second;
+        }
+    }
+
+    return pDefinition;
 }
 
 
@@ -223,7 +249,8 @@ void prParticleManager::ParseParticleFile(TiXmlNode* pParent)
             // So lets validate it
             if (mCorrectFileType == false)
             {
-                PRPANIC("Incorrect file type!");
+                prTrace(LogError, "Incorrect file type. Not particle file\n");
+                return;
             }
         }
         break;
@@ -268,23 +295,22 @@ void prParticleManager::ParseAttribs_Emitter(TiXmlElement* pElement)
     {
         // Sanity checks
         const char *pEmitterName = pElement->Attribute("name");
-        PRASSERT(pEmitterName);
-        PRASSERT(prStringLength(pEmitterName) > 0);
+        PRASSERT(pEmitterName && *pEmitterName);
 
         
         // Create the emitters definition
         prEmitterDefinition *ed = new prEmitterDefinition(pEmitterName);        
 
 
-        // Acquire the effects data.
+        // Acquire the effect data.
         TiXmlHandle   root(pElement);
         TiXmlElement *pElem  = root.FirstChild("effectType").Element();
         for (; pElem; pElem = pElem->NextSiblingElement())
         {
-            const char *pName     = pElem->Attribute("name");
-            const char *pCount    = pElem->Attribute("count");
-            const char *pWaitTime = pElem->Attribute("waitTime");
-            const char *pRuntime  = pElem->Attribute("runTime");
+            const char *pName     = pElem->Attribute("name");               // Name of the effect
+            const char *pCount    = pElem->Attribute("count");              // How many particles to emit
+            const char *pWaitTime = pElem->Attribute("waitTime");           // How long before we kick off the effect
+            const char *pRuntime  = pElem->Attribute("runTime");            // How long to take to run the effect
 
             PRASSERT(pName);
             PRASSERT(pCount);
@@ -297,7 +323,7 @@ void prParticleManager::ParseAttribs_Emitter(TiXmlElement* pElement)
             et.mRunTime  = (f32)atof(pWaitTime);
             et.mWaitTime = (f32)atof(pRuntime);
 
-            ed->mEffects.push_back(et);
+            ed->GetEffectsList().push_back(et);
         }
 
         // Store the definition

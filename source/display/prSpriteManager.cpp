@@ -83,6 +83,7 @@ prSpriteManager::prSpriteManager() : prCoreSystem(PRSYSTEM_SPRITEMANAGER, "prSpr
     m_exp1            = false;
     m_exp2            = false;
     m_pBatchQuads     = nullptr;
+    m_pBatchColours   = nullptr;
     m_numQuads        = 0;
     m_numQuadsAdded   = 0;
 }

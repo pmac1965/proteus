@@ -77,7 +77,7 @@ void prMenuStrip::Update(f32 dt)
 /// ---------------------------------------------------------------------------
 void prMenuStrip::Draw()
 {
-    prRenderer *pRenderer = (prRenderer *)prCoreGetComponent(PRSYSTEM_RENDERER);
+    prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
     if (pRenderer)
     {
         f32 stripSize = 32.0f;

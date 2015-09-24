@@ -122,7 +122,7 @@ typedef struct prAchievementDefinition
 typedef struct AchievementManagerImplementation
 {
     /// Ctor
-    AchievementManagerImplementation(const char *folder) : colour(prColour::White)
+    explicit AchievementManagerImplementation(const char *folder) : colour(prColour::White)
     {
         PRASSERT(folder && *folder);
 

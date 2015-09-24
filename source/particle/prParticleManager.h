@@ -75,6 +75,20 @@ public:
     //      Returns an ID for the emitter, or -1 on failure
     Proteus::Core::s32 Fire(const char *name, const Proteus::Math::prVector3 &pos);
 
+    // Method: GetEmitterDefinitionCount
+    //      Returns the number of emitter definitions
+    //
+    // Notes:
+    //      If you have a defintion called 'smokey' and a definition called 'fireball', 
+    //      the returned count would be two.
+    //
+    //      *PLEASE REMEMBER THIS IS THE COUNT OF EMITTER TYPES, NOT ACTIVE EMITTERS*
+    Proteus::Core::s32 GetEmitterDefinitionCount() const;
+
+    //
+    //
+    prEmitterDefinition *GetEmitterDefinitionByIndex(Proteus::Core::s32 index);
+
 
 private:
     static Proteus::Core::s32 sEmitterID;                                              // Used to give emitters a unique ID

@@ -21,6 +21,7 @@
 
 #include "../core/prTypes.h"
 #include <list>
+#include <string>
 
 
 // Struct: prEffectType
@@ -35,15 +36,44 @@ struct prEffectType
 
 
 // Types
-typedef std::list<prEffectType>                                 prEffectTypeList;
-typedef std::list<prEffectType>::iterator                       prEffectTypeListIt;
+typedef std::list<prEffectType>     prEffectTypeList;
 
 
 // struct: prEmitterDefinition
 //      This is used to hold the definition data of a particle emitter
+//
+// Notes:
+//      Each defined emitter uses one or more effects that are updated at the same time.
+//
+// Notes:
+//      For example. It could store effects called smoulder, burn, explode, smoke
+//
+//      Each effect has a wait time before it starts.
+//      A runtime and a count
 struct prEmitterDefinition
 {
+   
+    // Method: prEmitterDefinition
+    //      Ctor
     explicit prEmitterDefinition(const char *name);
-    prEffectTypeList    mEffects;
+
+    // Method: GetHash
+    //      Gets the hash for this emitter definition
+    Proteus::Core::u32  GetHash() const { return mHash; }
+
+    // Method: GetName
+    //      Gets the name for this emitter definition
+    const char *GetName() const { return mName.c_str(); }
+
+    // Method: GetNumEffects
+    //      Gets the number of effects for this emitter
+    Proteus::Core::u32 GetNumEffects() const { return (Proteus::Core::u32)mEffects.size(); }
+
+    prEffectTypeList &GetEffectsList() { return mEffects; }
+
+
+private:
     Proteus::Core::u32  mHash;
+    std::string         mName;
+    prEffectTypeList    mEffects;
 };
