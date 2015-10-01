@@ -42,15 +42,15 @@ prOpenALDeviceList::prOpenALDeviceList()
 
     m_defaultDeviceIndex = 0;
 
-    if (alcIsExtensionPresent(NULL, "ALC_ENUMERATION_EXT"))
+    if (alcIsExtensionPresent(nullptr, "ALC_ENUMERATION_EXT"))
     {
-        char *pDeviceList    = (char *)alcGetString(NULL, ALC_DEVICE_SPECIFIER);
-        char *pDefaultDevice = (char *)alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER);
+        char *pDeviceList    = (char *)alcGetString(nullptr, ALC_DEVICE_SPECIFIER);
+        char *pDefaultDevice = (char *)alcGetString(nullptr, ALC_DEFAULT_DEVICE_SPECIFIER);
         s32   index          = 0;
 
 
-        // Go through device list (each device terminated with a single NULL, list terminated with double NULL)
-        while (*pDeviceList != NULL) 
+        // Go through device list (each device terminated with a single nullptr, list terminated with double nullptr)
+        while (*pDeviceList != nullptr) 
         {
             // Default device?
             if (strcmp(pDefaultDevice, pDeviceList) == 0) 
@@ -63,9 +63,8 @@ prOpenALDeviceList::prOpenALDeviceList()
             ALCdevice *pDevice = alcOpenDevice(pDeviceList);
             if (pDevice) 
             {
-                prTrace(LogError, "Audio device %i: %s, Default: %s - Sources %i\n", index, pDeviceList, PRBOOL_TO_STRING(m_defaultDeviceIndex == index), GetNumSources());
-
-                ALCcontext *pContext = alcCreateContext(pDevice, NULL);
+                //prTrace(LogError, "Audio device %i: %s, Default: %s - Sources %i\n", index, pDeviceList, PRBOOL_TO_STRING(m_defaultDeviceIndex == index), GetNumSources());
+                ALCcontext *pContext = alcCreateContext(pDevice, nullptr);
                 if (pContext) 
                 {
                     alcMakeContextCurrent(pContext);
@@ -99,7 +98,7 @@ prOpenALDeviceList::prOpenALDeviceList()
                     }
 
 
-                    alcMakeContextCurrent(NULL);
+                    alcMakeContextCurrent(nullptr);
                     alcDestroyContext(pContext);
                 }
 
@@ -132,9 +131,11 @@ prOpenALDeviceList::~prOpenALDeviceList()
 s32 prOpenALDeviceList::GetNumDevices() const
 {
 #if defined(SOUND_ALLOW)
-    return (s32)m_deviceList.size();    
+    return (s32)m_deviceList.size();
+
 #else
     return 0;
+
 #endif
 }
 
@@ -157,7 +158,7 @@ char *prOpenALDeviceList::GetDeviceName(s32 index)
 
 #endif
 
-    return NULL;
+    return nullptr;
 }
 
 

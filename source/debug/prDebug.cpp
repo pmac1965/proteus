@@ -32,6 +32,7 @@
 
     #include <windows.h>
     #include <stdio.h>
+    #include "prConsoleWindow.h"
 
 #elif defined(PLATFORM_IOS)
     #include <stdio.h>
@@ -53,6 +54,15 @@
 
 #include "prTrace.h"
 #include "../core/prMacros.h"
+
+
+// Platform specific consoles
+#if defined(PLATFORM_PC)
+namespace
+{
+    prConsoleWindow *pConsole = nullptr;
+}
+#endif
 
 
 /// ---------------------------------------------------------------------------
@@ -102,6 +112,20 @@ void prDebugShowLastError(const char *msg)
 
 
 /// ---------------------------------------------------------------------------
+/// Allows the console windows to be registered with the debug system.
+/// ---------------------------------------------------------------------------
+void prDebugRegisterConsoleWindow(void *pConsoleWindow)
+{
+#if defined(PLATFORM_PC)
+    if (pConsoleWindow)
+    {
+        pConsole = reinterpret_cast<prConsoleWindow *>(pConsoleWindow);
+    }
+#endif
+}
+
+
+/// ---------------------------------------------------------------------------
 /// Outputs a string of text to the platforms debug output window.
 /// ---------------------------------------------------------------------------
 void prOutputString(prLogLevel level, const char *text)
@@ -109,10 +133,34 @@ void prOutputString(prLogLevel level, const char *text)
     if (text && *text)
     {
 #if defined(PLATFORM_PC)
-        PRUNUSED(level);
-        #if defined(PROTEUS_ALLOW_CONSOLE)
-        fprintf(stderr, "%s", text);
-        #endif
+        
+        switch(level)
+        {
+        case LogVerbose:
+            if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightCyan, prConsoleWindow::ConsoleColourBlack); }
+            fprintf(stderr, "%s", text);
+            break;
+
+        case LogDebug:
+            if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightWhite, prConsoleWindow::ConsoleColourBlack); }
+            fprintf(stderr, "%s", text);
+            break;
+
+        case LogInformation:
+            if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightGreen, prConsoleWindow::ConsoleColourBlack); }
+            fprintf(stderr, "%s", text);
+            break;
+
+        case LogWarning:
+            if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightYellow, prConsoleWindow::ConsoleColourBlack); }
+            fprintf(stderr, "%s", text);
+            break;
+
+        case LogError:
+            if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightRed, prConsoleWindow::ConsoleColourBlack); }
+            fprintf(stderr, "%s", text);
+            break;
+        }
         
         OutputDebugStringA(text);
 

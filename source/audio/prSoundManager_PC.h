@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSOUNDMANAGER_PC_H
-#define __PRSOUNDMANAGER_PC_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -56,130 +55,95 @@ public:
 
     // Method: Initialise
     //      Initialises the sound system.
-    bool Initialise();
+    bool Initialise() override;
 
     // Method: Release
     //      Releases all sound system assets.
-    void Release();
+    void Release() override;
 
     // Method: Update
     //      Updates the sound system.
-    //
-    // Parameters:
-    //      dt - Delta time
-    //
-    // Notes:
-    //      This is handled by the engine. *Do_not_call*
-    void Update(Proteus::Core::f32 dt);
+    void Update(Proteus::Core::f32 dt) override;
 
     // Method: LoadSFX
     //      Loads the sound effects into sound memory.
-    //
-    // Parameters:
-    //      sfc    - A list of the effects
-    //      count  - List size
-    //
-    // See Also:
-    //      <prSFXInfo>
-    void LoadSFX(const prSFXInfo *sfx, Proteus::Core::s32 count);
+    void LoadSFX(const prSFXInfo *sfx, Proteus::Core::s32 count) override;
 
     // Method: SongPlayByName
     //      Starts playing a song.
-    //
-    // Parameters:
-    //      filename - The song to play
-    void SongPlayByName(const char *filename);
+    void SongPlayByName(const char *filename) override;
 
     // Method: SongStop
     //      Stops the current song.
-    //
-    // Parameters:
-    //      time - The fade time.
-    void SongStop(Proteus::Core::f32 time = 0.0f);
+    void SongStop(Proteus::Core::f32 time = 0.0f) override;
 
     // Method: SongPause
     //      Pauses the active song.
-    void SongPause(bool pause);
+    void SongPause(bool pause) override;
 
-    // Method: SongPause
+    // Method: SongGetPaused
     //      Determines if the current song is paused.
-    bool SongGetPaused() const;
+    bool SongGetPaused() const override;
 
     // Method: SongSetVolume
     //      Sets the volume of the current song.
-    void SongSetVolume(Proteus::Core::f32 volume);
+    void SongSetVolume(Proteus::Core::f32 volume) override;
 
     // Method: SFXPlay
     //      Plays a sound effect.
-    Proteus::Core::s32 SFXPlay(Proteus::Core::s32 index, Proteus::Core::f32 volume = 1.0f, bool loop = false);
+    Proteus::Core::s32 SFXPlay(Proteus::Core::s32 index, Proteus::Core::f32 volume = 1.0f, bool loop = false) override;
 
     // Method: SFXStop
     //      Stops the specified effect.
-    void SFXStop(Proteus::Core::s32 id);
+    void SFXStop(Proteus::Core::s32 id) override;
 
     // Method: SFXStop
     //      Stops the specified effect.
-    void SFXStop(const char *name);
+    void SFXStop(const char *name) override;
 
     // Method: SFXStopAll
     //      Stops all the sound effects.
-    void SFXStopAll();
+    void SFXStopAll() override;
 
     // Method: SFXIsPlaying
     //      Determines if a particular sound effect is playing.
-    bool SFXIsPlaying(Proteus::Core::s32 index) const;
+    bool SFXIsPlaying(Proteus::Core::s32 index) const override;
 
     // Method: SFXIsPlaying
     //      Determines if a particular sound effect is playing.
-    bool SFXIsPlaying(const char *name) const;
+    bool SFXIsPlaying(const char *name) const override;
 
     // Method: SFXPause
     //      Pauses a specific sound effect
-    void SFXPause(Proteus::Core::s32 index, bool state);
+    void SFXPause(Proteus::Core::s32 index, bool state) override;
 
     // Method: SFXPause
     //      Pauses a specific sound effect
-    void SFXPause(const char *name, bool state);
+    void SFXPause(const char *name, bool state) override;
 
-    // Method: SFXPause
+    // Method: SFXPauseAll
     //      Pauses all the sound effects
-    void SFXPauseAll(bool state);
+    void SFXPauseAll(bool state) override;
 
-    // Method: SFXPause
+    // Method: SFXGetPaused
     //      Determines if all the sound effects are paused. This applies for all effects, not individual effects.
-    bool SFXGetPaused() const;
+    bool SFXGetPaused() const override;
 
     // Method: SFXGetActive
     //      Returns the number of active sound effects
-    Proteus::Core::s32 SFXGetActive() const;
+    Proteus::Core::s32 SFXGetActive() const override;
 
     // Method: SFXSetVolume
     //      Sets the volume of the specified effect.
-    void SFXSetVolume(Proteus::Core::s32 id, Proteus::Core::f32 volume);
+    void SFXSetVolume(Proteus::Core::s32 id, Proteus::Core::f32 volume) override;
 
     // Method: SFXSetPosition
     //      Sets the position of a sound effect.
-    //
-    // Notes:
-    //      It's best if a sound effect is mono, or openal will not set the position
-    //      correctly
-    void SFXSetPosition(const char *name, Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 z);
+    void SFXSetPosition(const char *name, Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 z) override;
 
-/*    // Method: DisplayUsage
+    // Method: DisplayUsage
     //      Displays debug information on the sound player.
-    void DisplayUsage() const;
-
-    // Method: IsSoundAvailable
-    //      Debug function which determines if the sound system is available.
-    bool IsSoundAvailable() const;
-
-    // Method: Mute
-    //      Mute all sound
-    void Mute(bool state);
-
-    // Method: IsMuted
-    //      Is sound muted?
-    bool IsMuted() const;//*/
+    void DisplayUsage() const override;
 
 
 private:
@@ -218,6 +182,3 @@ private:
 
 
 #endif//PLATFORM_PC
-
-
-#endif//__PRSOUNDMANAGER_PC_H

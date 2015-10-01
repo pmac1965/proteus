@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRARGS_H
-#define __PRARGS_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -149,6 +148,3 @@ bool prArgsParseFailed();
 //      functionality, the help information is not displayed on release
 //      builds.
 void prArgsShowHelp();
-
-
-#endif//__PRARGS_H

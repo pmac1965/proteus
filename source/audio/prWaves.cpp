@@ -176,7 +176,7 @@ prWaves::~prWaves()
 /// ---------------------------------------------------------------------------
 prWaveResult prWaves::LoadWaveFile(const char *filename, prWaveID *pWaveID)
 {
-    PRUNUSED(pWaveID);
+    //PRUNUSED(pWaveID);
     PRASSERT(filename && *filename);
 
     prWaveResult    wr        = WR_OUTOFMEMORY;

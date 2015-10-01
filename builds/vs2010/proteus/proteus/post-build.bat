@@ -77,6 +77,7 @@ REM ---------------------------------------------------------------------------
     del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prSoundManager_PC.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prSoundManager_Ios.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prSoundManager_Android.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prSoundManager_Linux.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prWaves.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prOpenALDeviceList.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\audio\prOpenALErrors.h

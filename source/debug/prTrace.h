@@ -82,7 +82,28 @@ void prTraceLogClear();
 
 // Function: prTraceSetLogLevel 
 //      Sets the trace log level
+//
+// Parameters:
+//      level - The log level
+//
+// See Also:
+//      <prLogLevel>
 void prTraceSetLogLevel(prLogLevel level);
+
+// Function: prTraceGetLogLevel 
+//      Gets the currently set trace log level as a string
+//
+// Notes:
+//      Used by the boot code
+const char *prTraceGetLogLevel();
+
+// Function: prTraceIsEnabled 
+//      Returns whether tracing to be enabled/disabled
+//
+// Returns:
+//      zero        - disabled
+//      non zero    - enabled
+int prTraceIsEnabled();
 
 
 // Macro versions

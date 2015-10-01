@@ -23,16 +23,6 @@
 #if defined(PLATFORM_PC)
 
 
-// Exclude MFC
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-#ifndef WIN32_EXTRA_LEAN
-#define WIN32_EXTRA_LEAN
-#endif
-
-
-#include <windows.h>
 #include <conio.h>
 #include <iostream>
 #include "prConsoleWindow.h"
@@ -54,10 +44,9 @@ BOOL HandlerRoutine(DWORD dwCtrlType)
 /// ---------------------------------------------------------------------------
 /// Constructor.
 /// ---------------------------------------------------------------------------
-prConsoleWindow::prConsoleWindow(const TCHAR *name, int width, int height)
+prConsoleWindow::prConsoleWindow(const char *name, int width, int height)
 {
     PRASSERT(name && *name);
-
 
     scrbuf  = INVALID_HANDLE_VALUE;
     fstdin  = 0;
@@ -80,7 +69,7 @@ prConsoleWindow::prConsoleWindow(const TCHAR *name, int width, int height)
 
 
     // Create
-    SetConsoleTitle(name);
+    SetConsoleTitleA(name);
 
     scrbuf = CreateConsoleScreenBuffer
     (
@@ -119,6 +108,9 @@ prConsoleWindow::prConsoleWindow(const TCHAR *name, int width, int height)
         height = GetSystemMetrics(SM_CYMIN);
     }
 
+    mConsoleWidth   = width;
+    mConsoleHeight  = height;
+
     COORD coord;
     coord.X = (SHORT)width;
     coord.Y = (SHORT)height;
@@ -150,6 +142,186 @@ prConsoleWindow::~prConsoleWindow()
 
     CloseHandles();
     FreeConsole();
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Sets the console text and background colours
+/// ---------------------------------------------------------------------------
+void prConsoleWindow::SetConsoleColours(prConsoleColour foreground, prConsoleColour background)
+{
+    if (scrbuf != INVALID_HANDLE_VALUE)
+    {
+        WORD fore = SetTextColour(foreground);
+        WORD back = SetBackgroundColour(background);
+        SetConsoleTextAttribute(scrbuf, fore | back);
+
+        //DWORD written = 0;
+        //COORD writeCoord = {0};
+        //WORD attribute;
+        //for (int y = 0; y < mConsoleHeight; y++)
+        //{
+        //    for (int x = 0; x < mConsoleWidth; x++)
+        //    {
+        //        writeCoord.X = x; 
+        //        writeCoord.Y = y;
+        //        ReadConsoleOutputAttribute(scrbuf, &attribute, 1, writeCoord, &written);
+        //        attribute &= 0xFF0F;    // Clear background color
+        //        attribute |= back;      // Change to new background color
+        //        FillConsoleOutputAttribute(scrbuf, attribute, 1, writeCoord, &written);
+        //    }
+        //}
+    }
+    else
+    {
+        prTrace(LogError, "Failed to set console colours. Invalid screen buffer\n");
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Destructor.
+/// ---------------------------------------------------------------------------
+WORD prConsoleWindow::SetTextColour(prConsoleColour colour)
+{
+    WORD attribs = 0;
+
+    switch(colour)
+    {
+    case ConsoleColourDarkRed:
+        attribs = FOREGROUND_RED;
+        break;
+
+    case ConsoleColourDarkGreen:
+        attribs = FOREGROUND_GREEN;
+        break;
+
+    case ConsoleColourDarkBlue:
+        attribs = FOREGROUND_BLUE;
+        break;
+
+    case ConsoleColourDarkWhite:
+        attribs = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE;
+        break;
+
+    case ConsoleColourDarkYellow:
+        attribs = FOREGROUND_RED | FOREGROUND_GREEN;
+        break;
+
+    case ConsoleColourDarkCyan:
+        attribs = FOREGROUND_GREEN | FOREGROUND_BLUE;
+        break;
+
+    case ConsoleColourDarkMagenta:
+        attribs = FOREGROUND_RED | FOREGROUND_BLUE;
+        break;
+
+    case ConsoleColourLightRed:
+        attribs = FOREGROUND_RED | FOREGROUND_INTENSITY;
+        break;
+
+    case ConsoleColourLightGreen:
+        attribs = FOREGROUND_GREEN | FOREGROUND_INTENSITY;
+        break;
+
+    case ConsoleColourLightBlue:
+        attribs = FOREGROUND_BLUE | FOREGROUND_INTENSITY;
+        break;
+
+    case ConsoleColourLightWhite:
+        attribs = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY;
+        break;
+
+    case ConsoleColourLightYellow:
+        attribs = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_INTENSITY;
+        break;
+
+    case ConsoleColourLightCyan:
+        attribs = FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_INTENSITY;
+        break;
+
+    case ConsoleColourLightMagenta:
+        attribs = FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_INTENSITY;
+        break;
+
+    default:
+        break;
+    }        
+
+    return attribs;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Destructor.
+/// ---------------------------------------------------------------------------
+WORD prConsoleWindow::SetBackgroundColour(prConsoleColour colour)
+{
+    WORD attribs = 0;
+
+    switch(colour)
+    {
+    case ConsoleColourDarkRed:
+        attribs = BACKGROUND_RED;
+        break;
+
+    case ConsoleColourDarkGreen:
+        attribs = BACKGROUND_GREEN;
+        break;
+
+    case ConsoleColourDarkBlue:
+        attribs = BACKGROUND_BLUE;
+        break;
+
+    case ConsoleColourDarkWhite:
+        attribs = BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE;
+        break;
+
+    case ConsoleColourDarkYellow:
+        attribs = BACKGROUND_RED | BACKGROUND_GREEN;
+        break;
+
+    case ConsoleColourDarkCyan:
+        attribs = BACKGROUND_GREEN | BACKGROUND_BLUE;
+        break;
+
+    case ConsoleColourDarkMagenta:
+        attribs = BACKGROUND_RED | BACKGROUND_BLUE;
+        break;
+
+    case ConsoleColourLightRed:
+        attribs = BACKGROUND_RED | BACKGROUND_INTENSITY;
+        break;
+
+    case ConsoleColourLightGreen:
+        attribs = BACKGROUND_GREEN | BACKGROUND_INTENSITY;
+        break;
+
+    case ConsoleColourLightBlue:
+        attribs = BACKGROUND_BLUE | BACKGROUND_INTENSITY;
+        break;
+
+    case ConsoleColourLightWhite:
+        attribs = BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY;
+        break;
+
+    case ConsoleColourLightYellow:
+        attribs = BACKGROUND_RED | BACKGROUND_GREEN | BACKGROUND_INTENSITY;
+        break;
+
+    case ConsoleColourLightCyan:
+        attribs = BACKGROUND_GREEN | BACKGROUND_BLUE | BACKGROUND_INTENSITY;
+        break;
+
+    case ConsoleColourLightMagenta:
+        attribs = BACKGROUND_RED | BACKGROUND_BLUE | BACKGROUND_INTENSITY;
+        break;
+
+    default:
+        break;
+    }        
+
+    return attribs;
 }
 
 

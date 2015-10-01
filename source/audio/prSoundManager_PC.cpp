@@ -89,20 +89,20 @@ prSoundManager_PC::prSoundManager_PC()
 #ifdef SOUND_ALLOW
 
     pPCMBuffer          = new u8[SONG_BUFFER_SIZE];
-    device              = NULL;
-    context             = NULL;
-    ov_open_callbacks   = NULL;
-    ov_info             = NULL;
-    ov_clear            = NULL;
-    ov_read             = NULL;
-    dll                 = NULL;
+    device              = nullptr;
+    context             = nullptr;
+    ov_open_callbacks   = nullptr;
+    ov_info             = nullptr;
+    ov_clear            = nullptr;
+    ov_read             = nullptr;
+    dll                 = nullptr;
     frequency           = 0;
     channels            = 0;
     format              = 0;
     songSource          = 0;
     songBuffers[0]      = 0xFFFFFFFF;
     songBuffers[1]      = 0xFFFFFFFF;
-    pOggFile            = NULL;
+    pOggFile            = nullptr;
 
 
     memset(&oggStream, 0, sizeof(oggStream));
@@ -140,7 +140,7 @@ prSoundManager_PC::~prSoundManager_PC()
 {
 #ifdef SOUND_ALLOW
     // Stop the music
-    //SongStop();
+    //SongStop(); // Causes crash!
         
     // Delete the SFX sources
     for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
@@ -164,7 +164,7 @@ prSoundManager_PC::~prSoundManager_PC()
     if (dll)
     {
         FreeLibrary(dll);
-        dll = NULL;
+        dll = nullptr;
     }
 
     PRSAFE_DELETE_ARRAY(pPCMBuffer);
@@ -207,7 +207,7 @@ bool prSoundManager_PC::Initialise()
                 if (device)
                 {
                     // Create a Context
-                    context = alcCreateContext(device, NULL);
+                    context = alcCreateContext(device, nullptr);
                     ALC_ErrorCheck(device);
                     if (context)
                     {
@@ -251,7 +251,7 @@ bool prSoundManager_PC::Initialise()
                         if (context)
                         {
                             // Remove context.
-                            alcMakeContextCurrent(NULL);
+                            alcMakeContextCurrent(nullptr);
                             ALC_ErrorCheck(device);
 
                             // Destroy context
@@ -260,8 +260,8 @@ bool prSoundManager_PC::Initialise()
                         }
 
                         alcCloseDevice(device);
-                        context = NULL;
-                        device  = NULL;
+                        context = nullptr;
+                        device  = nullptr;
                     }
                     else
                     {
@@ -305,7 +305,7 @@ void prSoundManager_PC::Release()
     if (pContext)
     {
         // Release the current context.
-        if (!alcMakeContextCurrent(NULL))
+        if (!alcMakeContextCurrent(nullptr))
         {
             prTrace(LogError, "OpenAL shutdown error\n");
         }
@@ -434,7 +434,6 @@ void prSoundManager_PC::LoadSFX(const prSFXInfo *sfx, s32 count)
         {
             prWaveID id = -1;
             waves.LoadWaveFile(sfx[i].filename, &id);
-            //prTrace(LogError, "Load %s\n",sfx[i].filename);
 
             if (id != -1)
             {
@@ -447,8 +446,7 @@ void prSoundManager_PC::LoadSFX(const prSFXInfo *sfx, s32 count)
                 if (waves.GetWaveSize(id, (u32*)&iDataSize)                 == WR_OK &&
                     waves.GetWaveData(id, (void**)&pData)                   == WR_OK &&
                     waves.GetWaveFrequency(id, (u32*)&iFrequency)           == WR_OK &&
-                    waves.GetWaveALBufferFormat(id, (u32*)&eBufferFormat)   == WR_OK
-                   )
+                    waves.GetWaveALBufferFormat(id, (u32*)&eBufferFormat)   == WR_OK)
                 {
                     // Generate a buffer
                     alGenBuffers(1, &entry->uiBuffer);
@@ -506,7 +504,7 @@ void prSoundManager_PC::SongPlayByName(const char *filename)
     // Open file.
     PRASSERT(filename && *filename);
     pOggFile = fopen(filename, "rb");
-    if (pOggFile == NULL)
+    if (pOggFile == nullptr)
     {
         prTrace(LogError, "Couldn't open .ogg file: %s\n", filename);
         return;
@@ -553,7 +551,7 @@ void prSoundManager_PC::SongPlayByName(const char *filename)
 
     // Create an OggVorbis file stream
     PRASSERT(ov_open_callbacks);
-    if (ov_open_callbacks(pOggFile , &oggStream, NULL, 0, callbacks) == 0)
+    if (ov_open_callbacks(pOggFile , &oggStream, nullptr, 0, callbacks) == 0)
     {
         // Get some information about the file (Channels, Format, and Frequency)
         PRASSERT(ov_info);
@@ -1298,6 +1296,14 @@ void prSoundManager_PC::SFXSetPosition(const char *name, f32 x, f32 y, f32 z)
     PRUNUSED(z);
 
 #endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Displays debug information on the sound player.
+/// ---------------------------------------------------------------------------
+void prSoundManager_PC::DisplayUsage() const
+{
 }
 
 

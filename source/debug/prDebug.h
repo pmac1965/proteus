@@ -34,6 +34,19 @@
 //      Compiles on other platforms, but does nothing.
 void prDebugShowLastError(const char *msg = 0);
 
+// Method: prDebugRegisterConsoleWindow
+//      Allows the console windows to be registered with the debug system.
+//
+// Parameters:
+//      pConsoleWindow - A pointer to a valid console window
+//
+// Notes:
+//      A void pointer is used so we can use it with 'C' code
+//
+// Notes:
+//      We register the console so we can changes colours, etc
+void prDebugRegisterConsoleWindow(void *pConsoleWindow);
+
 // Method: prOutputString
 //      Outputs a string of text to the platforms debug output window.
 //

@@ -230,28 +230,54 @@ void prTraceSetLogLevel(prLogLevel level)
         logLevel = level;
 
 #ifdef TRACE_TEST
-        switch(logLevel)
-        {
-        case LogVerbose:
-            prOutputString("prTraceSetLogLevel: verbose\n");
-            break;
-
-        case LogDebug:
-            prOutputString("prTraceSetLogLevel: debug\n");
-            break;
-
-        case LogWarning:
-            prOutputString("prTraceSetLogLevel: warning\n");
-            break;
-
-        case LogInformation:
-            prOutputString("prTraceSetLogLevel: information\n");
-            break;
-
-        case LogError:
-            prOutputString("prTraceSetLogLevel: error\n");
-            break;
-        }
+        prOutputString("prTraceSetLogLevel: %s\n", prTraceGetLogLevel());
 #endif
     }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Gets the currently set trace log level as a string
+/// ---------------------------------------------------------------------------
+const char *prTraceGetLogLevel()
+{
+    const char *pLevel = nullptr;
+
+    switch(logLevel)
+    {
+    case LogVerbose:
+        pLevel = "Verbose";
+        break;
+
+    case LogDebug:
+        pLevel = "Debug";
+        break;
+
+    case LogWarning:
+        pLevel = "Warning";
+        break;
+
+    case LogInformation:
+        pLevel = "Information";
+        break;
+
+    case LogError:
+        pLevel = "Error";
+        break;
+
+    default:
+        pLevel = "Unknown";
+        break;
+    }
+
+    return pLevel;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Returns whether tracing to be enabled/disabled
+/// ---------------------------------------------------------------------------
+int prTraceIsEnabled()
+{
+    return enabled;
 }

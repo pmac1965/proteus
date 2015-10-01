@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRGAMETIME_H
-#define __PRGAMETIME_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -64,6 +63,3 @@ private:
 	GameTimeImplementation	*pImpl;
 	GameTimeImplementation	&imp;
 };
-
-
-#endif//__PRGAMETIME_H

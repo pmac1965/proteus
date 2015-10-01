@@ -46,8 +46,8 @@ using namespace Proteus::Core;
 prSoundManager_Linux::prSoundManager_Linux()
 {
     songCurr                = 0xFFFFFFFF;
-    device                  = NULL;
-    context                 = NULL;
+    device                  = nullptr;
+    context                 = nullptr;
 }
 
 
@@ -79,12 +79,12 @@ bool prSoundManager_Linux::Initialise()
 
 
 	    // Open default OpenAL device
-        device = alcOpenDevice(NULL);
+        device = alcOpenDevice(nullptr);
         ALC_ErrorCheck(device);
         if (device)
         {
             // Create a Context
-            context = alcCreateContext(device, NULL);
+            context = alcCreateContext(device, nullptr);
             ALC_ErrorCheck(device);
             if (context)
             {
@@ -117,8 +117,8 @@ bool prSoundManager_Linux::Initialise()
             {
             	prTrace(LogError, "Failed to create OpenAL context\n");
                 alcCloseDevice(device);
-                context = NULL;
-                device  = NULL;
+                context = nullptr;
+                device  = nullptr;
             }
         }
         else
@@ -157,7 +157,7 @@ void prSoundManager_Linux::Release()
     if (pContext)
     {
         // Release the current context.
-        if (!alcMakeContextCurrent(NULL))
+        if (!alcMakeContextCurrent(nullptr))
         {
             PRWARN("OpenAL shutdown error");
         }

@@ -45,21 +45,22 @@ using namespace Proteus::Core;
 
 /// ---------------------------------------------------------------------------
 /// Purpose: callback hook for debug text emitted from the Steam API
+///
+///     if you're running in the debugger, only warnings (nSeverity >= 1) will be sent
+///     if you add -debug_steamapi to the command-line, a lot of extra informational messages will also be sent
 /// ---------------------------------------------------------------------------
 extern "C" void PC_API SteamAPIDebugTextHook(int nSeverity, const char *pchDebugText)
 {
-    prTrace(LogError, pchDebugText);
+    PRASSERT(pchDebugText && *pchDebugText);
 
-	// if you're running in the debugger, only warnings (nSeverity >= 1) will be sent
-	// if you add -debug_steamapi to the command-line, a lot of extra informational messages will also be sent
-/*	::OutputDebugString( pchDebugText ); */
+    prTrace(LogError, "STEAM API DEBUG:\n");
+    prTrace(LogError, pchDebugText);
 
 	if (nSeverity >= 1)
 	{
-		// place to set a breakpoint for catching API errors
-		//int x = 3;
-		//x = x;
-	}//*/
+		// Place to set a breakpoint for catching API errors
+        PRBREAKPOINT();
+	}
 }
 
 
@@ -132,7 +133,7 @@ bool prSteamManager::Initialise(u32 id, u32 notificationPosition)
             return result;
 	    }
 
-        // Dependand on the windows settings cpmparing equal values is unavoidable,
+        // Dependand on the windows settings comparing equal values is unavoidable,
         // hence we temporarily disable these warnings
 #if defined(PLATFORM_PC)
 #pragma warning( push )
@@ -194,8 +195,8 @@ bool prSteamManager::Initialise(u32 id, u32 notificationPosition)
 	    // will return false.
 	    if ( !SteamUser()->BLoggedOn() )
 	    {
-//		    OutputDebugString( "Steam user is not logged in\n" );
-		    prAlertShowError("Fatal Error", "Steam user must be logged in to play this game (SteamUser()->BLoggedOn() returned false).\n" );
+		    prTrace(LogError, "Steam user must be logged in to play this game (SteamUser()->BLoggedOn() returned false).\n");
+		    prAlertShowError("Error", "The steam user must be logged in to play this game.");
             return result;
 	    }
 
@@ -233,6 +234,8 @@ void prSteamManager::Deinitialise()
 
 	    // Shutdown Steam CEG
 	    Steamworks_TermCEGLibrary();
+
+        mEnabled = false;
     }
 
 #endif

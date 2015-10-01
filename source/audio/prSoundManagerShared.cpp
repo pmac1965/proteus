@@ -35,9 +35,6 @@
   #include <AudioToolbox/AudioServices.h>
 
 #elif defined(PLATFORM_ANDROID)
-    //#ifdef SOUND_ALLOW
-    //#undef SOUND_ALLOW
-    //#endif
 	#include "../android/AL/al.h"
 	#include "../android/AL/alc.h"
 
@@ -66,16 +63,17 @@ prLoadedWave::prLoadedWave()
 /// ---------------------------------------------------------------------------
 prLoadedWave::~prLoadedWave()
 {
-	TODO("Look at this code in details as android uses openal!");
-
 #if defined(SOUND_ALLOW)
-
+    // Delete the sound buffer
     if (uiBuffer != 0xFFFFFFFF)
     {
-//        #if !defined(PLATFORM_ANDROID)
-        alDeleteBuffers(1, &uiBuffer);
-        AL_ERROR_CHECK();
-  //      #endif
+        #if defined(PLATFORM_ANDROID) && defined(USE_OPENAL)
+            alDeleteBuffers(1, &uiBuffer);
+            AL_ERROR_CHECK();
+        #else
+            alDeleteBuffers(1, &uiBuffer);
+            AL_ERROR_CHECK();
+        #endif
     }
 
 #endif

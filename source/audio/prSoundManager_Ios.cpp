@@ -62,15 +62,15 @@ prSoundManager_Ios::prSoundManager_Ios()
     initialised             = false;
     sfxPaused               = false;
     exp2                    = false;
-    pLoadedWaves            = NULL;
-    pMusicTracks            = NULL;
+    pLoadedWaves            = nullptr;
+    pMusicTracks            = nullptr;
     numTracks               = 0;
     numEffects              = 0;
     active                  = 0;
     effectId                = 1;//*/
     songCurr                = -1;
-    device                  = NULL;
-    context                 = NULL;
+    device                  = nullptr;
+    context                 = nullptr;
 
     // Set default states
     /*for (s32 i=0; i<AUDIO_MAX_ACTIVE; i++)
@@ -112,12 +112,12 @@ bool prSoundManager_Ios::Initialise()
     
     
 	// Open default OpenAL device
-    device = alcOpenDevice(NULL);
+    device = alcOpenDevice(nullptr);
     ALC_ErrorCheck(device);
     if (device)
     {
         // Create a Context
-        context = alcCreateContext(device, NULL);
+        context = alcCreateContext(device, nullptr);
         ALC_ErrorCheck(device);
         if (context)
         {
@@ -151,8 +151,8 @@ bool prSoundManager_Ios::Initialise()
         {
             prTrace(LogError, "Failed to create OpenAL context\n");
             alcCloseDevice(device);
-            context = NULL;
-            device  = NULL;
+            context = nullptr;
+            device  = nullptr;
         }
     }
     else
@@ -185,7 +185,7 @@ void prSoundManager_Ios::Release()
     if (pContext)
     {
         // Release the current context.
-        if (!alcMakeContextCurrent(NULL))
+        if (!alcMakeContextCurrent(nullptr))
         {
             PRWARN("OpenAL shutdown error");
         }
@@ -479,7 +479,7 @@ void prSoundManager_Ios::SongPause(bool pause)
                         
                         // Remove context
                         prTrace(LogError, "Remove context\n");
-                        alcMakeContextCurrent(NULL);
+                        alcMakeContextCurrent(nullptr);
                     }
                 }
                 else

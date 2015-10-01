@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRAPPLICATIONANDROID_H
-#define __PRAPPLICATIONANDROID_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -70,7 +69,7 @@ public:
     // Returns:
     //      PRTRUE if the display was created successfully.
     //      PRFALSE if the display was NOT created successfully.
-    PRBOOL DisplayCreate(u32 width, u32 height, const char *pWindowName, bool fullscreen);
+    PRBOOL DisplayCreate(u32 width, u32 height, const char *pWindowName, bool fullscreen) override;
 
     // Method: Run
     //      Runs the game.
@@ -81,11 +80,10 @@ public:
     //
     // Returns:
     //      Will return PRFALSE when the game is complete.
-    PRBOOL Run();
+    PRBOOL Run() override;
 
 
 private:
-
     const char *BuildType();
 };
 
@@ -94,6 +92,3 @@ private:
 
 
 #endif//PLATFORM_ANDROID
-
-
-#endif//__PRAPPLICATIONANDROID_H

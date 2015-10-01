@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PROPENALDEVICELIST_H
-#define __PROPENALDEVICELIST_H
+#pragma once
 
 
 #include <vector>
@@ -63,16 +62,11 @@ public:
 
 
 private:
-
     // Internal function to detemine max number of Sources that can be generated
     Proteus::Core::u32 GetNumSources() const;
 
 
 private:
-
   std::vector<prAudioDeviceInfo> m_deviceList;
   Proteus::Core::s32             m_defaultDeviceIndex;
 };
-
-
-#endif//__PROPENALDEVICELIST_H

@@ -17,8 +17,7 @@
  */
 
 
-#ifndef __PRALERT_H
-#define __PRALERT_H
+#pragma once
 
 
 // Forward declarations
@@ -71,6 +70,3 @@ void prAlertShowInformation(const char *title, const char *message, prWindow *pW
 // Notes:
 //      If a dialog is not available, then message will be logged to the console
 void prAlertShowWarning(const char *title, const char *message, prWindow *pWindow = 0);
-
-
-#endif//__PRALERT_H

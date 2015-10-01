@@ -47,7 +47,7 @@ prRegistry::prRegistry() : prCoreSystem(PRSYSTEM_REGISTRY, "prRegistry")
         {"Platform",        "Unknown"},
         {"AppName",         "Proteus"},
         {"WindowName",      "Proteus"},
-        {"Verbose",         "false"},
+        {"Console",         "false"},
         {"LogToFile",       "false"},
         {"UseArchives",     "true"},
         {"Help",            "false"},
@@ -205,19 +205,15 @@ const char *prRegistry::GetValue(string key)
 /// ---------------------------------------------------------------------------
 void prRegistry::ShowKeyValuePairs()
 {
-#if defined(DEBUG) || defined(_DEBUG)
-
     if (!values.empty())
     {
-        PRLOGI("System keys:-------------------------------------------------------------------\n");
+        prTrace(LogInformation, "System keys:-------------------------------------------------------------------\n");
 
         for (auto it = values.begin(); it != values.end(); ++it)        
         {
-            PRLOGI("Key: %*s, Value: %s\n", 20, ((*it).first).c_str(), ((*it).second).c_str());
+            prTrace(LogInformation, "Key: %*s, Value: %s\n", 20, ((*it).first).c_str(), ((*it).second).c_str());
         }
 
-        PRLOGI("-------------------------------------------------------------------------------\n");
+        prTrace(LogInformation, "-------------------------------------------------------------------------------\n");
     }
-
-#endif
 }

@@ -56,56 +56,39 @@ static const char *embedded[] =
 /// ---------------------------------------------------------------------------
 prApplication_Ios::prApplication_Ios() : prApplication()
 {
-#if defined(_DEBUG) || defined(DEBUG)
     // Write startup info.
-    prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+    prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
     if (reg)
     {
-        if (prStringCompare(reg->GetValue("Verbose"), "true") == CMP_EQUALTO)
-        {
-            prTrace(LogError, "-------------------------------------------------------------------------------\n");
-            prTrace(LogError, "Engine version : %s\n", prGetVersionAsString());
-            prTrace(LogError, "-------------------------------------------------------------------------------\n");
-            prTrace(LogError, "Components:\n");
-            prTrace(LogError, "Lua              : 5.2.3 - Copyright (C) 1994-2013 Lua.org, PUC-Rio.\n");
-            prTrace(LogError, "Box2D            : 2.3.0 - Copyright (C) 2006-2013 Erin Catto\n");
-            prTrace(LogError, "TinyXML          : 2.6.2 - Copyright (C) 2000-2006 Lee Thomason.\n");
-            prTrace(LogError, "Zlib             : 1.2.8 - Copyright (C) 1995-2013 Jean-loup Gailly and\n");
-            prTrace(LogError, "                           Mark Adler.\n");
-            prTrace(LogError, "Ogg              : 1.2.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
-            prTrace(LogError, "Vorbis           : 1.3.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
-            prTrace(LogError, "AntTweakBar      : 1.16  - Copyright (C) 2005-2013 Philippe Decaudin.\n");        
-            prTrace(LogError, "libutf8proc      : 1.1.5 - Copyright (C) 2009 Public Software Group e. V.,\n");
-            prTrace(LogError, "                                                         Berlin, Germany\n");
-            prTrace(LogError, "Mersenne Twister : 1.1   - Copyright (C) 1997 - 2002, Makoto Matsumoto and\n");        
-            prTrace(LogError, "                           Takuji Nishimura,\n");        
-            prTrace(LogError, "                           Copyright (C) 2000 - 2009, Richard J. Wagner\n");        
-            prTrace(LogError, "Based on code by Makoto Matsumoto, Takuji Nishimura, and Shawn Cokus\n");        
-            prTrace(LogError, "Richard J. Wagner  v1.1  28 September 2009  wagnerr@umich.edu\n");        
-            prTrace(LogError, "-------------------------------------------------------------------------------\n");
-            prTrace(LogError, "Config         : %s - IOS - Debug\n", BuildType());
-            prTrace(LogError, "-------------------------------------------------------------------------------\n");
-            prTrace(LogError, "Options        : Verbose      %s\n", reg->GetValue("Verbose"));
-            prTrace(LogError, "               : Use archives %s\n", reg->GetValue("UseArchives"));
-            prTrace(LogError, "               : Log to file  %s\n", reg->GetValue("LogToFile"));
-            prTrace(LogError, "               : Help         %s\n", reg->GetValue("Help"));
-            prTrace(LogError, "-------------------------------------------------------------------------------\n");
-            prTrace(LogError, "Build number   : %i\n", BUILD_NUMBER);
-            prTrace(LogError, "-------------------------------------------------------------------------------\n");
-        }
-        else
-        {
-            // Write startup info.
-            prTrace(LogError, "-------------------------------------------------------------------------------\n");
-            prTrace(LogError, "Engine version : %s\n", prGetVersionAsString());
-            prTrace(LogError, "Build number   : %i\n", BUILD_NUMBER);
-            prTrace(LogError, "-------------------------------------------------------------------------------\n");
-        }
+        prTrace(LogError, "-------------------------------------------------------------------------------\n");
+        prTrace(LogError, "Engine version : %s\n", prGetVersionAsString());
+        prTrace(LogError, "-------------------------------------------------------------------------------\n");
+        prTrace(LogError, "Components:\n");
+        prTrace(LogError, "Lua              : 5.2.3 - Copyright (C) 1994-2013 Lua.org, PUC-Rio.\n");
+        prTrace(LogError, "Box2D            : 2.3.0 - Copyright (C) 2006-2013 Erin Catto\n");
+        prTrace(LogError, "TinyXML          : 2.6.2 - Copyright (C) 2000-2006 Lee Thomason.\n");
+        prTrace(LogError, "Zlib             : 1.2.8 - Copyright (C) 1995-2013 Jean-loup Gailly and\n");
+        prTrace(LogError, "                           Mark Adler.\n");
+        prTrace(LogError, "Ogg              : 1.2.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
+        prTrace(LogError, "Vorbis           : 1.3.1 - Copyright (C) 1995-2011 The Xiph.Org Foundation.\n");
+        prTrace(LogError, "AntTweakBar      : 1.16  - Copyright (C) 2005-2013 Philippe Decaudin.\n");        
+        prTrace(LogError, "libutf8proc      : 1.1.5 - Copyright (C) 2009 Public Software Group e. V.,\n");
+        prTrace(LogError, "                                                         Berlin, Germany\n");
+        prTrace(LogError, "Mersenne Twister : 1.1   - Copyright (C) 1997 - 2002, Makoto Matsumoto and\n");        
+        prTrace(LogError, "                           Takuji Nishimura,\n");        
+        prTrace(LogError, "                           Copyright (C) 2000 - 2009, Richard J. Wagner\n");        
+        prTrace(LogError, "Based on code by Makoto Matsumoto, Takuji Nishimura, and Shawn Cokus\n");        
+        prTrace(LogError, "Richard J. Wagner  v1.1  28 September 2009  wagnerr@umich.edu\n");        
+        prTrace(LogError, "-------------------------------------------------------------------------------\n");
+        prTrace(LogError, "Config         : %s - IOS - Debug\n", BuildType());
+        prTrace(LogError, "-------------------------------------------------------------------------------\n");
+        prTrace(LogError, "Options        : Use archives %s\n", reg->GetValue("UseArchives"));
+        prTrace(LogError, "               : Log to file  %s\n", reg->GetValue("LogToFile"));
+        prTrace(LogError, "               : Help         %s\n", reg->GetValue("Help"));
+        prTrace(LogError, "-------------------------------------------------------------------------------\n");
+        prTrace(LogError, "Build number   : %i\n", BUILD_NUMBER);
+        prTrace(LogError, "-------------------------------------------------------------------------------\n");
     }
-#endif
-
-    // Keeps CppCheck happy
-    BuildType();
 
     // Access the embedded data, so it'll stay linked into the game.
     for (u32 j=0; j<PRARRAY_SIZE(embedded); j++)
@@ -171,14 +154,7 @@ PRBOOL prApplication_Ios::DisplayCreate(u32 width, u32 height, const char *pWind
             reg->SetValue("ScreenHeight", height);
 
             // Show startup entries
-            prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
-            if (reg)
-            {
-                if (prStringCompare(reg->GetValue("Verbose"), "true") == CMP_EQUALTO)
-                {
-                   reg->ShowKeyValuePairs();
-                }
-            }
+            reg->ShowKeyValuePairs();
         }
     }
     else

@@ -1,4 +1,11 @@
 // File: prUtility_PC.h
+//      Contains utility functions for windows builds.
+//
+// Notes:
+//      These functions exist for use by the *proteus engine tools*
+//
+// Notes:
+//      Available for game use if required
 /**
  *  Copyright 2014 Paul Michael McNab
  *
@@ -16,8 +23,7 @@
  */
 
 
-#ifndef __PRUTILITY_PC_H
-#define __PRUTILITY_PC_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -40,30 +46,45 @@
 
 // Function: prDisableMinimizeButton
 //      Disable window button
+//
+// Parameters:
+//      hwnd - The window to use
 void prDisableMinimizeButton(HWND hwnd);
     
 // Function: prEnableMinimizeButton
 //      Enable window button
+//
+// Parameters:
+//      hwnd - The window to use
 void prEnableMinimizeButton(HWND hwnd);
     
 // Function: prDisableMaximizeButton
 //      Disable window button
+//
+// Parameters:
+//      hwnd - The window to use
 void prDisableMaximizeButton(HWND hwnd);
 
 // Function: prEnableMaximizeButton
 //      Enable window button
+//
+// Parameters:
+//      hwnd - The window to use
 void prEnableMaximizeButton(HWND hwnd);
 
 // Function: prDisableCloseButton
 //      Disable window button
+//
+// Parameters:
+//      hwnd - The window to use
 void prDisableCloseButton(HWND hwnd);
 
 // Function: prEnableCloseButton
 //      Enable window button
+//
+// Parameters:
+//      hwnd - The window to use
 void prEnableCloseButton(HWND hwnd);
 
 
 #endif//PLATFORM_PC
-
-
-#endif//__PRUTILITY_PC_H

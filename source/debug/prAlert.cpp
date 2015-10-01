@@ -50,7 +50,7 @@ void prAlertShowError(const char *title, const char *message, prWindow *pWindow)
     PRASSERT(title && *title);
     PRASSERT(message && *message);
 
-    char buffer[256];
+    char buffer[512];
 
 #if defined(PLATFORM_PC)
 
@@ -86,7 +86,7 @@ void prAlertShowInformation(const char *title, const char *message, prWindow *pW
     PRASSERT(title && *title);
     PRASSERT(message && *message);
 
-    char buffer[256];
+    char buffer[512];
 
 #if defined(PLATFORM_PC)
 
@@ -122,7 +122,7 @@ void prAlertShowWarning(const char *title, const char *message, prWindow *pWindo
     PRASSERT(title && *title);
     PRASSERT(message && *message);
 
-    char buffer[256];
+    char buffer[512];
 
 #if defined(PLATFORM_PC)
 

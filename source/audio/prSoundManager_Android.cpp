@@ -33,7 +33,7 @@
 #include "../android/AL/al.h"
 #include "../android/AL/alc.h"
 #include "prOpenALErrors.h"
-#include <android/log.h>
+//#include <android/log.h>
 
 
 using namespace Proteus::Core;
@@ -48,9 +48,9 @@ using namespace Proteus::Core;
 /// ---------------------------------------------------------------------------
 prSoundManager_Android::prSoundManager_Android()
 {
-    songCurr                = 0xFFFFFFFF;
-    device                  = NULL;
-    context                 = NULL;
+    songCurr    = 0xFFFFFFFF;
+    device      = nullptr;
+    context     = nullptr;
 }
 
 
@@ -82,12 +82,12 @@ bool prSoundManager_Android::Initialise()
 
 
 	    // Open default OpenAL device
-        device = alcOpenDevice(NULL);
+        device = alcOpenDevice(nullptr);
         ALC_ErrorCheck(device);
         if (device)
         {
             // Create a Context
-            context = alcCreateContext(device, NULL);
+            context = alcCreateContext(device, nullptr);
             ALC_ErrorCheck(device);
             if (context)
             {
@@ -95,7 +95,7 @@ bool prSoundManager_Android::Initialise()
                 alcMakeContextCurrent(context);
                 if (ALC_ErrorCheck(device) != ALC_NO_ERROR)
                 {
-                    __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to make OpenAL context current\n");
+                    prTrace(LogError, "Failed to make OpenAL context current\n");
                 }
 
                 // Generate the playback sources
@@ -108,7 +108,7 @@ bool prSoundManager_Android::Initialise()
                     {
                         soundEffects[i].state    = SFX_STATE_UNAVAILABLE;
                         soundEffects[i].uiSource = 0xFFFFFFFF;
-                        __android_log_print(ANDROID_LOG_ERROR, "Proteus", "OpenAL failed to generate a source\n");
+                        prTrace(LogError, "OpenAL failed to generate a source\n");
                     }
                     else
                     {
@@ -118,15 +118,15 @@ bool prSoundManager_Android::Initialise()
             }
             else
             {
-                __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to create OpenAL context\n");
+                prTrace(LogError, "Failed to create OpenAL context\n");
                 alcCloseDevice(device);
-                context = NULL;
-                device  = NULL;
+                context = nullptr;
+                device  = nullptr;
             }
         }
         else
         {
-            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to open default OpenAL device\n");
+            prTrace(LogError, "Failed to open default OpenAL device\n");
         }
 
         initialised = true;
@@ -159,10 +159,10 @@ void prSoundManager_Android::Release()
 
     if (pContext)
     {
-        __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Cleaning OpenAL\n");
+        prTrace(LogError, "Cleaning OpenAL\n");
 
         // Release the current context.
-        if (!alcMakeContextCurrent(NULL))
+        if (!alcMakeContextCurrent(nullptr))
         {
             PRWARN("OpenAL shutdown error");
         }
@@ -277,7 +277,7 @@ void prSoundManager_Android::LoadSFX(const prSFXInfo *sfx, s32 count)
         {
             prWaveID id = -1;
             waves.LoadWaveFile(sfx[i].filename, &id);
-            //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "Loading %s\n", sfx[i].filename);
+            //prTrace(LogError, "Loading %s\n", sfx[i].filename);
 
             if (id != -1)
             {
@@ -306,26 +306,24 @@ void prSoundManager_Android::LoadSFX(const prSFXInfo *sfx, s32 count)
 
                     // Set the hash
                     entry->hash = sfx[i].hash;
-
-                    //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "Loaded %s\n", sfx[i].filename);
                 }
                 else
                 {
-                    __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Sound effect: %s\n", sfx[i].filename);
-                    __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to create effect\n");
+                    prTrace(LogError, "Sound effect: %s\n", sfx[i].filename);
+                    prTrace(LogError, "Failed to create effect\n");
 
                     #if defined(SOUND_SHOW_FAILS) && (defined(_DEBUG) || defined(DEBUG))
-                    __android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveSize           == %i\n", waves.GetWaveSize(id, (u32*)&iDataSize)                 == WR_OK);
-	                __android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveData           == %i\n", waves.GetWaveData(id, (void**)&pData)                   == WR_OK);
-	                __android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveFrequency      == %i\n", waves.GetWaveFrequency(id, (u32*)&iFrequency)           == WR_OK);
-	                __android_log_print(ANDROID_LOG_ERROR, "Proteus", "GetWaveALBufferFormat == %i\n", waves.GetWaveALBufferFormat(id, (u32*)&eBufferFormat)   == WR_OK);
+                    prTrace(LogError, "GetWaveSize           == %i\n", waves.GetWaveSize(id, (u32*)&iDataSize)                 == WR_OK);
+	                prTrace(LogError, "GetWaveData           == %i\n", waves.GetWaveData(id, (void**)&pData)                   == WR_OK);
+	                prTrace(LogError, "GetWaveFrequency      == %i\n", waves.GetWaveFrequency(id, (u32*)&iFrequency)           == WR_OK);
+	                prTrace(LogError, "GetWaveALBufferFormat == %i\n", waves.GetWaveALBufferFormat(id, (u32*)&eBufferFormat)   == WR_OK);
                     #endif
                 }
             }
             else
             {
-                __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to load %s\n", sfx[i].filename);
-                __android_log_print(ANDROID_LOG_ERROR, "Proteus", "If the file is not missing, then check .wav format. Should be PCM\n");
+                prTrace(LogError, "Failed to load %s\n", sfx[i].filename);
+                prTrace(LogError, "If the file is not missing, then check .wav format. Should be PCM\n");
             }
         }
     }

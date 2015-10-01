@@ -25,8 +25,10 @@
 #include "prDefines.h"
 #include "prCore.h"
 #include "prRegistry.h"
+#include "prStringUtil.h"
 #include "../debug/prTrace.h"
 #include "../debug/prAssert.h"
+#include "../debug/prAlert.h"
 
 
 using namespace Proteus::Core;
@@ -113,15 +115,50 @@ void prArgsParseCommandLine(LPTSTR lpCmdLine)
                             {
                                 reg->SetValue("UseArchives", "false");
                             }
-                            // Turn on verbose logging?
-                            else if (_tcsicmp(L"-prverb", pArgv[paramIndex]) == 0)
+                            // Turn on console?
+                            else if (_tcsicmp(L"-prconsole", pArgv[paramIndex]) == 0)
                             {
-                                reg->SetValue("Verbose", "true");
+                                reg->SetValue("Console", "true");
+                                prTraceEnable(true);
+                                prTraceRemoveDuplicates(true);
                             }
                             // Turn on file logging?
                             else if (_tcsicmp(L"-prlogfile", pArgv[paramIndex]) == 0)
                             {
                                 reg->SetValue("LogToFile", "true");
+                                prTraceEnable(true);
+                                prTraceRemoveDuplicates(true);
+                            }
+                            // Log level
+                            else if (_tcsicmp(L"-prloglev", pArgv[paramIndex]) == 0)
+                            {
+                                // Needs one arg
+                                if (prArgsGetRemainingArgCount() >= 1)
+                                {
+                                    char buffer[256];
+                                    prArgsPopNextArg(buffer, sizeof(buffer));
+
+                                    if (prStringCompare(buffer, "verb") == 0)
+                                    {
+                                        prTraceSetLogLevel(prLogLevel::LogVerbose);
+                                    }
+                                    else if (prStringCompare(buffer, "debug") == 0)
+                                    {
+                                        prTraceSetLogLevel(prLogLevel::LogDebug);
+                                    }
+                                    else if (prStringCompare(buffer, "info") == 0)
+                                    {
+                                        prTraceSetLogLevel(prLogLevel::LogInformation);
+                                    }
+                                    else if (prStringCompare(buffer, "warn") == 0)
+                                    {
+                                        prTraceSetLogLevel(prLogLevel::LogWarning);
+                                    }
+                                    else if (prStringCompare(buffer, "error") == 0)
+                                    {
+                                        prTraceSetLogLevel(prLogLevel::LogError);
+                                    }
+                                }
                             }
                             // Show help?
                             else if (_tcsicmp(L"-prhelp", pArgv[paramIndex]) == 0)
@@ -275,8 +312,39 @@ bool prArgsParseFailed()
 /// ---------------------------------------------------------------------------
 void prArgsShowHelp()
 {
-    prTrace(LogError, "-prverb        = Turns on verbose engine logging\n");
-    prTrace(LogError, "-prlogfile     = Turns on logging to a disk file\n");
-    prTrace(LogError, "-prhelp        = Displays the help text\n");
-    prTrace(LogError, "-prnoarc       = Disables archives\n");
+#if defined(PLATFORM_PC)
+    const char *pHelpMessage =  "-prlogfile\t\t- Turns on logging to a disk file\r\n"
+                                "\t\t    Enables logging\r\n"
+                                "-prconsole\t- Turns on the console window\r\n"
+                                "\t\t    Enables logging\r\n"
+                                "-prloglev param\t- Sets the error log level\r\n"
+                                "\t\t    (Parameters)\r\n"
+                                "\t\t    verb = Verbose or above\r\n"
+                                "\t\t    debug = Debug or above\r\n"
+                                "\t\t    info = Information or above\r\n"
+                                "\t\t    warn = Warnings or above\r\n"
+                                "\t\t    error = Errors\r\n"
+                                "-prhelp\t\t- Displays the help text\r\n"
+                                "-prnoarc\t\t- Disables archives\r\n";
+
+    prAlertShowInformation("Help", pHelpMessage);
+
+#else
+    const char *pHelpMessage =  "-prlogfile      - Turns on logging to a disk file\n"
+                                "                  Enables logging\n"
+                                "-prconsole      - Turns on the console window\n"
+                                "                  Enables logging\n"
+                                "-prloglev param - Sets the error log level\n"
+                                "                  (Parameters)\n"
+                                "                  verb  = Verbose or above\n"
+                                "                  debug = Debug or above\n"
+                                "                  info  = Information or above\n"
+                                "                  warn  = Warnings or above\n"
+                                "                  error = Errors\n"
+                                "-prhelp         - Displays the help text\n"
+                                "-prnoarc        - Disables archives\n";
+
+    prTrace(LogError, "%s", pHelpMessage);
+
+#endif
 }

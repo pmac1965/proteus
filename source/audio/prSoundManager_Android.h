@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSOUNDMANAGERANDROID_H
-#define __PRSOUNDMANAGERANDROID_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -55,44 +54,25 @@ public:
 
     // Method: Update
     //      Updates the sound system.
-    //
-    // Parameters:
-    //      dt - Delta time
-    //
-    // Notes:
-    //      This is handled by the engine. *Do_not_call*
     void Update(Proteus::Core::f32 dt);
 
     // Method: LoadSFX
     //      Loads the sound effects into sound memory.
-    //
-    // Parameters:
-    //      sfc    - A list of the effects
-    //      count  - List size
-    //
-    // See Also:
-    //      <prSFXInfo>
     void LoadSFX(const prSFXInfo *sfx, Proteus::Core::s32 count);
 
     // Method: SongPlayByName
     //      Starts playing a song.
-    //
-    // Parameters:
-    //      filename - The song to play
     void SongPlayByName(const char *filename);
 
     // Method: SongStop
     //      Stops the current song.
-    //
-    // Parameters:
-    //      time - The fade time.
     void SongStop(Proteus::Core::f32 time = 0.0f);
 
     // Method: SongPause
     //      Pauses the active song.
     void SongPause(bool pause);
 
-    // Method: SongPause
+    // Method: SongGetPaused
     //      Determines if the current song is paused.
     bool SongGetPaused() const;
 
@@ -132,11 +112,11 @@ public:
     //      Pauses a specific sound effect
     void SFXPause(const char *name, bool state);
 
-    // Method: SFXPause
+    // Method: SFXPauseAll
     //      Pauses all the sound effects
     void SFXPauseAll(bool state);
 
-    // Method: SFXPause
+    // Method: SFXGetPaused
     //      Determines if all the sound effects are paused. This applies for all effects, not individual effects.
     bool SFXGetPaused() const;
 
@@ -150,10 +130,6 @@ public:
 
     // Method: SFXSetPosition
     //      Sets the position of a sound effect.
-    //
-    // Notes:
-    //      It's best if a sound effect is mono, or openal will not set the position
-    //      correctly
     void SFXSetPosition(const char *name, Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 z);
 
 
@@ -166,6 +142,3 @@ private:
 
 
 #endif//PLATFORM_ANDROID
-
-
-#endif//__PRSOUNDMANAGERANDROID_H

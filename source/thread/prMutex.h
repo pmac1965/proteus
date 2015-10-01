@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRMUTEX_H
-#define __PRMUTEX_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -79,6 +78,3 @@ private:
 
 #endif
 };
-
-
-#endif//__PRMUTEX_H

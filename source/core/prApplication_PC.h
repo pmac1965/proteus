@@ -78,7 +78,7 @@ public:
     // Returns:
     //      PRTRUE if the display was created successfully.
     //      PRFALSE if the display was NOT created successfully.
-    PRBOOL DisplayCreate(u32 width, u32 height, const char *pWindowName, bool fullscreen);
+    PRBOOL DisplayCreate(u32 width, u32 height, const char *pWindowName, bool fullscreen) override;
 
     // Method: DisplayCreateTool
     //      Creates the application display for tools
@@ -108,7 +108,7 @@ public:
     //
     // Returns:
     //      Will return PRFALSE when the game is complete.
-    PRBOOL Run();
+    PRBOOL Run() override;
 
     // Method: WindowsCommand
     //      Passes along windows commands
@@ -129,9 +129,17 @@ public:
     //      Otherwise return false and the command is passed to the standard handler.
     virtual bool WindowsCommand(int command, WPARAM wParam, LPARAM lParam) = 0;
 
+    // Method: GetConsoleWindow
+    //      Returns a pointer to the console window
+    //
+    // Notes:
+    //      Returned pointer may be NULL
+    prConsoleWindow *GetConsoleWindow() { return m_pCW; }
+
 
 private:
     const char *BuildType();
+    const char *BuildIsDebug();
     BOOL CheckPlatform();
     bool RunningAlready(const char *pWindowName);
     bool RunningAlreadyW(const TCHAR *pWindowName);

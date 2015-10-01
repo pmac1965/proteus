@@ -23,7 +23,7 @@
 
 
 // Max wave ID's
-#define MAX_NUM_WAVEID          1024
+#define MAX_NUM_WAVEID          512
 
 
 // Enum: prWaveResult

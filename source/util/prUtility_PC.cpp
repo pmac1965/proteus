@@ -24,6 +24,7 @@
 
 
 #include "prUtility_PC.h"
+#include "../debug/prDebug.h"
 
 
 /// ---------------------------------------------------------------------------
@@ -31,6 +32,7 @@
 /// ---------------------------------------------------------------------------
 void prDisableMinimizeButton(HWND hwnd)
 {
+    PRASSERT(hwnd);
     SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_MINIMIZEBOX);
 }
     
@@ -40,6 +42,7 @@ void prDisableMinimizeButton(HWND hwnd)
 /// ---------------------------------------------------------------------------
 void prEnableMinimizeButton(HWND hwnd)
 {
+    PRASSERT(hwnd);
     SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) | WS_MINIMIZEBOX);
 }
     
@@ -49,6 +52,7 @@ void prEnableMinimizeButton(HWND hwnd)
 /// ---------------------------------------------------------------------------
 void prDisableMaximizeButton(HWND hwnd)
 {
+    PRASSERT(hwnd);
     SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_MAXIMIZEBOX);
 }
 
@@ -58,6 +62,7 @@ void prDisableMaximizeButton(HWND hwnd)
 /// ---------------------------------------------------------------------------
 void prEnableMaximizeButton(HWND hwnd)
 {
+    PRASSERT(hwnd);
     SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) | WS_MAXIMIZEBOX);
 }
 
@@ -67,6 +72,7 @@ void prEnableMaximizeButton(HWND hwnd)
 /// ---------------------------------------------------------------------------
 void prDisableCloseButton(HWND hwnd)
 {
+    PRASSERT(hwnd);
     EnableMenuItem(GetSystemMenu(hwnd, FALSE), SC_CLOSE, MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
 }
 
@@ -76,6 +82,7 @@ void prDisableCloseButton(HWND hwnd)
 /// ---------------------------------------------------------------------------
 void prEnableCloseButton(HWND hwnd)
 {
+    PRASSERT(hwnd);
     EnableMenuItem(GetSystemMenu(hwnd, FALSE), SC_CLOSE, MF_BYCOMMAND | MF_ENABLED);
 }
 

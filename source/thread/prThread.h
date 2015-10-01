@@ -17,8 +17,6 @@
 
 
 #pragma once
-#ifndef __PRTHREAD_H
-#define __PRTHREAD_H
 
 
 #include "../prConfig.h"
@@ -90,6 +88,3 @@ private:
 
 #endif
 };
-
-
-#endif//__PRTHREAD_H

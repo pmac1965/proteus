@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSYSTEM_H
-#define __PRSYSTEM_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -25,7 +24,7 @@
 
 // Class: prSystem
 //      Class that abstracts system calls for single use functions,
-//      like vibrate, which may not exist
+//      like vibrate, which may not exist on all platforms
 class prSystem
 {
 public:
@@ -45,6 +44,3 @@ public:
     //      Vibrates the devices if possible
     void Vibrate();
 };
-
-
-#endif//__PRSYSTEM_H
