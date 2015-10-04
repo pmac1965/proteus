@@ -36,8 +36,6 @@ prResourceManager::prResourceManager() : prCoreSystem(PRSYSTEM_RESOURCEMANAGER, 
     TODO("Perhaps add handles to resource manager? Access pointers by handles?")
     TODO("Perhaps give priorities to resources? for automatic unload/load of resources")
     TODO("Add more binary data types, so Less xml parsing for the bigger games to improve loading times")
-    TODO("Add ignore to assert message")
-    TODO("Add ignore to warning message")
     TODO("Add clipboard trick - page 111 to 113 gems 1")
     TODO("Complete quaternion")
 }
