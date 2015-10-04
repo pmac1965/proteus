@@ -37,13 +37,13 @@
 #include "prAssert.h"
 
 
-#define TEXT_BUFFER_SIZE    1024
+#define TEXT_BUFFER_SIZE    2048
 
 
 /// ---------------------------------------------------------------------------
 /// Prints an assertion failure message with additional explanaton text.
 /// ---------------------------------------------------------------------------
-bool prAssertPrint(const char *cond, const char *file, const char *function, int line, const char *fmt, ...)
+int prAssertPrint(const char *cond, const char *file, const char *function, int line, const char *fmt, ...)
 {
     char buffer[TEXT_BUFFER_SIZE];
     char message[TEXT_BUFFER_SIZE];
@@ -56,7 +56,9 @@ bool prAssertPrint(const char *cond, const char *file, const char *function, int
         "Function\t\t: %s\n"
         "\n"
         "Do you wish to continue?\n"
-        "Clicking no will trigger a breakpoint";
+        "Clicking 'abort' will trigger a breakpoint\n"
+        "Clicking 'retry' will continue execution\n"
+        "Clicking 'ignore' will disable this assertion\n";
 
     // Create message message
     if (fmt && *fmt)
@@ -75,10 +77,23 @@ bool prAssertPrint(const char *cond, const char *file, const char *function, int
     sprintf_s(buffer, sizeof(buffer), format, cond, message, file, line, function);
 
     // Create dialog
-    int result = MessageBoxA(HWND_DESKTOP, buffer, "Assertion failure", MB_YESNO | MB_ICONERROR | MB_TASKMODAL);
+    int result = MessageBoxA(HWND_DESKTOP, buffer, "Assertion failure", MB_ABORTRETRYIGNORE | MB_ICONERROR | MB_TASKMODAL);
 
     // Stop?
-    return (result == IDNO);
+    if (result == IDABORT)
+    {
+        return prAssertResultAbort;
+    }
+    // Continue
+    else if (result == IDRETRY)
+    {
+        return prAssertResultRetry;
+    }
+    // Ignore, then!
+    else
+    {
+        return prAssertResultIgnore;
+    }
 }
 
 
@@ -119,7 +134,7 @@ void prPanicPrint(const char *file, const char *function, int line, const char *
 /// ---------------------------------------------------------------------------
 /// Prints a message.
 /// ---------------------------------------------------------------------------
-void prWarnPrint(const char *file, const char *function, int line, const char *fmt, ...)
+int prWarnPrint(const char *file, const char *function, int line, const char *fmt, ...)
 {
     char buffer[TEXT_BUFFER_SIZE];
     char message[TEXT_BUFFER_SIZE];
@@ -127,7 +142,11 @@ void prWarnPrint(const char *file, const char *function, int line, const char *f
     char *format = "Message \t: %s\n"
         "File    \t: %s\n"
         "Line    \t: %i\n"
-        "Function\t: %s\n";
+        "Function\t: %s\n"
+        "\n"
+        "Do you wish to ignore this warning?\n"
+        "\n"
+        "Click 'Yes' to disable this warning\n";
 
     // Create message message
     if (fmt && *fmt)
@@ -146,7 +165,9 @@ void prWarnPrint(const char *file, const char *function, int line, const char *f
     sprintf_s(buffer, sizeof(buffer), format, message, file, line, function);
 
     // Create dialog
-    MessageBoxA(HWND_DESKTOP, buffer, "Warning", MB_OK | MB_ICONWARNING | MB_TASKMODAL);
+    int result = MessageBoxA(HWND_DESKTOP, buffer, "Warning", MB_YESNO | MB_ICONWARNING | MB_TASKMODAL);
+
+    return (result == IDYES) ? 1 : 0;
 }
 
 

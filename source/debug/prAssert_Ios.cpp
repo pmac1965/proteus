@@ -32,7 +32,7 @@
 /// ---------------------------------------------------------------------------
 /// Prints an assertion failure message with additional explanaton text.
 /// ---------------------------------------------------------------------------
-bool prAssertPrint(const char *cond, const char *file, const char *function, int line, const char *fmt, ...)
+int prAssertPrint(const char *cond, const char *file, const char *function, int line, const char *fmt, ...)
 {
     char buffer [TEXT_BUFFER_SIZE];
     char message[TEXT_BUFFER_SIZE];
@@ -61,7 +61,7 @@ bool prAssertPrint(const char *cond, const char *file, const char *function, int
 	// Display
 	printf("%s", buffer);
 
-    return true;
+    return 1;
 }
 
 
@@ -102,7 +102,7 @@ void prPanicPrint(const char *file, const char *function, int line, const char *
 /// ---------------------------------------------------------------------------
 /// Prints a message.
 /// ---------------------------------------------------------------------------
-void prWarnPrint(const char *file, const char *function, int line, const char *fmt, ...)
+int prWarnPrint(const char *file, const char *function, int line, const char *fmt, ...)
 {
     char buffer [TEXT_BUFFER_SIZE];
     char message[TEXT_BUFFER_SIZE];
@@ -130,6 +130,8 @@ void prWarnPrint(const char *file, const char *function, int line, const char *f
 
 	// Display
 	printf("%s", buffer);
+
+    return 0;
 }
 
 

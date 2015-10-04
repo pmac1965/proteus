@@ -28,6 +28,14 @@
 #endif
 
 
+enum
+{
+    prAssertResultIgnore,
+    prAssertResultAbort,
+    prAssertResultRetry,
+};
+
+
 #if defined(_DEBUG) || defined(DEBUG)
 
     // Function: prAssertPrint
@@ -43,7 +51,7 @@
     //
     // Notes:
     //      *Do not call this function directly*
-    bool prAssertPrint(const char *cond, const char *file, const char *function, int line, const char *fmt = 0, ...);
+    int prAssertPrint(const char *cond, const char *file, const char *function, int line, const char *fmt = 0, ...);
 
     // Function: prPanicPrint
     //      Prints the panic message
@@ -71,7 +79,7 @@
     //
     // Notes:
     //      *Do not call this function directly*
-    void prWarnPrint(const char *file, const char *function, int line, const char *fmt = 0, ...);
+    int prWarnPrint(const char *file, const char *function, int line, const char *fmt = 0, ...);
 
 
     // Macro: PRBREAKPOINT
@@ -151,13 +159,22 @@
 
         /// @def PRASSERT
         /// Assertion macro which allows additional information to be displayed if required.
-        #define PRASSERT(cond, ...)                                                 \
-        if (!(cond))                                                                \
-        {                                                                           \
-            if (prAssertPrint(#cond, __FILE__, __FUNCTION__, __LINE__, __VA_ARGS__))\
-            {                                                                       \
-                PRBREAKPOINT();                                                     \
-            }                                                                       \
+        #define PRASSERT(cond, ...)                                                                 \
+        if (!(cond))                                                                                \
+        {                                                                                           \
+            static bool ignore = false;                                                             \
+            if (!ignore)                                                                            \
+            {                                                                                       \
+                int result = prAssertPrint(#cond, __FILE__, __FUNCTION__, __LINE__, __VA_ARGS__);   \
+                if (result == prAssertResultAbort)                                                  \
+                {                                                                                   \
+                    PRBREAKPOINT();                                                                 \
+                }                                                                                   \
+                else if (result == prAssertResultIgnore)                                            \
+                {                                                                                   \
+                    ignore = true;                                                                  \
+                }                                                                                   \
+            }                                                                                       \
         }
 
 
@@ -172,9 +189,16 @@
 
         /// @def PRWARN
         /// Use when you need to issue a serious warning.
-        #define PRWARN(fmt, ...)                                                    \
-        {                                                                           \
-            prWarnPrint(__FILE__, __FUNCTION__, __LINE__, fmt, __VA_ARGS__);        \
+        #define PRWARN(fmt, ...)                                                        \
+        {                                                                               \
+            static bool ignore = false;                                                 \
+            if (!ignore)                                                                \
+            {                                                                           \
+                if (prWarnPrint(__FILE__, __FUNCTION__, __LINE__, fmt, __VA_ARGS__))    \
+                {                                                                       \
+                    ignore = true;                                                      \
+                }                                                                       \
+            }                                                                           \
         }
 
     #endif
