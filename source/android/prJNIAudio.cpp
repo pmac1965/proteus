@@ -45,9 +45,6 @@ namespace
     {
         PRASSERT(pName);
         PRASSERT(pClassName && *pClassName);
-        //TODO("Remove the statics. They're not required")
-        //TODO("These functions also need to be improved. Too many duplicates!")
-        //static char name[256];
 
         strcpy(pName, "com/redcliffeinteractive/engine/audio/");
         strcat(pName, pClassName);
@@ -69,8 +66,6 @@ namespace
         jclass cls = env->FindClass(prJNI_MakeAudioClassName(name, className));
         if (!cls) 
         {
-            // Warn
-            //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to find class %s", className);
             prTrace(LogError, "Failed to find class %s\n", className);
 
             if (isAttached)
@@ -110,7 +105,7 @@ void prJNI_SongPlay(const char *filename)
         jmethodID method = env->GetStaticMethodID(cls, "songPlay", "(Ljava/lang/String;)V");
         if (!method)
         {
-            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "songPlay");
+            prTrace(LogError, "Failed to get method ID %s", "songPlay");
             if (isAttached)
             {
                 pJavaVM->DetachCurrentThread();
@@ -156,7 +151,7 @@ void prJNI_SongStop()
         jmethodID method = env->GetStaticMethodID(cls, "songStop", "()V");
         if (!method)
         {
-            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "songStop");
+            prTrace(LogError, "Failed to get method ID %s", "songStop");
             if (isAttached)
             {
                 pJavaVM->DetachCurrentThread();
@@ -201,7 +196,7 @@ void prJNI_SongSetVolume(float volume)
         jmethodID method = env->GetStaticMethodID(cls, "songSetVolume", "(F)V");
         if (!method)
         {
-            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "songSetVolume");
+            prTrace(LogError, "Failed to get method ID %s", "songSetVolume");
             if (isAttached)
             {
                 pJavaVM->DetachCurrentThread();
@@ -246,7 +241,7 @@ void prJNI_SongPause()
         jmethodID method = env->GetStaticMethodID(cls, "songPause", "()V");
         if (!method)
         {
-            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "songPause");
+            prTrace(LogError, "Failed to get method ID %s", "songPause");
             if (isAttached)
             {
                 pJavaVM->DetachCurrentThread();
@@ -291,7 +286,7 @@ void prJNI_SongResume()
         jmethodID method = env->GetStaticMethodID(cls, "songResume", "()V");
         if (!method)
         {
-            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "songResume");
+            prTrace(LogError, "Failed to get method ID %s", "songResume");
             if (isAttached)
             {
                 pJavaVM->DetachCurrentThread();

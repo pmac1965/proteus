@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRFACEBOOK_H
-#define __PRFACEBOOK_H
+#pragma once
 
 
 #include "../../core/prTypes.h"
@@ -141,6 +140,3 @@ protected:
     Proteus::Core::u64      mPlayerFBID;
     bool                    mIsLoggedIn;
 };
-
-
-#endif//__PRFACEBOOK_H

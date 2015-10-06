@@ -797,6 +797,7 @@
     <ClInclude Include="..\..\..\..\source\social\facebook\prFacebook_Android.h" />
     <ClInclude Include="..\..\..\..\source\social\facebook\prFacebook_ios.h" />
     <ClInclude Include="..\..\..\..\source\social\twitter\prTwitter.h" />
+    <ClInclude Include="..\..\..\..\source\social\twitter\prTwitterBase.h" />
     <ClInclude Include="..\..\..\..\source\social\twitter\prTwitter_Android.h" />
     <ClInclude Include="..\..\..\..\source\social\twitter\prTwitter_ios.h" />
     <ClInclude Include="..\..\..\..\source\steam\prSteamAchievements.h" />

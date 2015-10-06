@@ -99,6 +99,12 @@ REM ---------------------------------------------------------------------------
     REM ****************
     REM * NOT REQUIRED *
     REM ****************
+    del %PROTEUS_ENGINE_DIR%\include\proteus\social\twitter\prTwitter_Android.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\social\twitter\prTwitter_ios.h
+
+    REM ****************
+    REM * NOT REQUIRED *
+    REM ****************
     rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\libzip
     rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\android\AL
     rd /Q /S %PROTEUS_ENGINE_DIR%\include\proteus\audio\external

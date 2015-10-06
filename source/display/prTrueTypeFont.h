@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRTRUETYPEFONT_H
-#define __PRTRUETYPEFONT_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -125,6 +124,3 @@ private:
 	TrueTypeFontImplementation	*pImpl;
 	TrueTypeFontImplementation	&imp;
 };
-
-
-#endif//__PRTRUETYPEFONT_H

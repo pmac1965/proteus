@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRFACEBOOK_IOS_H
-#define __PRFACEBOOK_IOS_H
+#pragma once
 
 
 #include "prFacebook.h"
@@ -61,6 +60,3 @@ public:
     //      Send a brag to facebook
     void Brag(const char *initialText);
 };
-
-
-#endif//__PRFACEBOOK_IOS_H

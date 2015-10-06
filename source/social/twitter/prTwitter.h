@@ -1,4 +1,5 @@
 // File: prTwitter.h
+//      Cross platform format twitter access
 /**
  *  Copyright 2014 Paul Michael McNab
  *
@@ -16,37 +17,21 @@
  */
 
 
-#ifndef __PRTWITTER_H
-#define __PRTWITTER_H
+#pragma once
 
 
-#include "../../core/prTypes.h"
-#include "../../core/prString.h"
-#include "../../core/prMacros.h"
+// Namespaces
+namespace Proteus {
+namespace Social {
 
 
-// Class: prTwitterCallbacks
-//      Class provides an easy way to get callbacks from the engine
-class prTwitterCallbacks
-{
-public:
-    // Method: Twitter_Initialise
-    //      Twitter initialisation callback
-    virtual void Twitter_Initialise(bool state) = 0;
-    
-    // Method: Twitter_Sent
-    //      Twitter callback
-    virtual void Twitter_Sent(bool state) = 0;
-
-    // Method: Twitter_Cancel
-    //      Twitter callback
-    virtual void Twitter_Cancel(bool state) = 0;
-};
+// Forward declarations
+class prTwitterBase;
+class prTwitterCallbacks;
 
 
 // Class: prTwitter
-//      A base class for abstracting application specific twitter
-//      functionality into a cross platform format
+//      Cross platform format twitter access
 class prTwitter
 {
 public:
@@ -59,25 +44,34 @@ public:
     virtual ~prTwitter();
 
     // Method: RegisterCallbackHandler
-    //      Allows twitter to call us
+    //      Allows twitter to call us back
+    //
+    // Parameters:
+    //      A pointer to the callback class
+    //
+    // See Also:
+    //      <prTwitterCallbacks>
     void RegisterCallbackHandler(prTwitterCallbacks *pcb);
 
     // Method: Initialise
-    //      Initialise twitter for a specific platform
-    virtual bool Initialise() { return false; }
+    //      Initialise twitter
+    bool Initialise();
 
     // Method: Update
-    //      Update twitter for a specific platform
-    virtual bool Update() { return false; }
+    //      Update twitter
+    bool Update();
 
     // Method: ShowTweetSheet
     //      Show the tweet sheet
-    virtual bool ShowTweetSheet(const char *initialText) { PRUNUSED(initialText); return false; }
+    //
+    // Parameters:
+    //      Initial text message for the tweet sheet.
+    bool ShowTweetSheet(const char *initialText);
 
 
 protected:
-    prTwitterCallbacks    *mpCallbacks;
+    prTwitterBase   *mpTwitter;
 };
 
 
-#endif//__PRTWITTER_H
+}}// Namespaces

@@ -18,8 +18,24 @@
 
 
 #include "prTwitter.h"
+#include "prTwitterBase.h"
 #include "../../core/prDefines.h"
 #include "../../core/prMacros.h"
+
+
+#if defined(PLATFORM_ANDROID)
+#include "prTwitter_Android.h"
+#endif
+
+
+#if defined(PLATFORM_IOS)
+#include "prTwitter_ios.h"
+#endif
+
+
+// Namespaces
+namespace Proteus {
+namespace Social {
 
 
 /// ----------------------------------------------------------------------------
@@ -27,15 +43,27 @@
 /// ----------------------------------------------------------------------------
 prTwitter::prTwitter()
 {
-    mpCallbacks = NULL;
+#if defined(PLATFORM_ANDROID)
+    mpTwitter = new prTwitter_Android();
+    //Initialise();
+
+#elif defined(PLATFORM_IOS)
+    mpTwitter = new prTwitter_Ios();
+    //Initialise();
+
+#else
+    mpTwitter = nullptr;
+
+#endif
 }
 
 
 /// ----------------------------------------------------------------------------
-/// Dtor
+/// Ctor
 /// ----------------------------------------------------------------------------
 prTwitter::~prTwitter()
 {
+    PRSAFE_DELETE(mpTwitter);
 }
 
 
@@ -44,5 +72,59 @@ prTwitter::~prTwitter()
 /// ----------------------------------------------------------------------------
 void prTwitter::RegisterCallbackHandler(prTwitterCallbacks *pcb)
 {
-    mpCallbacks = pcb;
+    if (mpTwitter)
+    {
+        mpTwitter->RegisterCallbackHandler(pcb);
+    }
 }
+
+
+/// ----------------------------------------------------------------------------
+/// Initialise twitter for a specific platform
+/// ----------------------------------------------------------------------------
+bool prTwitter::Initialise()
+{
+    bool result = false;
+
+    if (mpTwitter)
+    {
+        result = mpTwitter->Initialise();
+    }
+
+    return result;
+}
+
+
+/// ----------------------------------------------------------------------------
+/// Update twitter for a specific platform
+/// ----------------------------------------------------------------------------
+bool prTwitter::Update()
+{
+    bool result = false;
+
+    if (mpTwitter)
+    {
+        result = mpTwitter->Update();
+    }
+
+    return result;
+}
+
+
+/// ----------------------------------------------------------------------------
+/// Show the tweet sheet
+/// ----------------------------------------------------------------------------
+bool prTwitter::ShowTweetSheet(const char *initialText)
+{
+    bool result = false;
+
+    if (mpTwitter)
+    {
+        result = mpTwitter->ShowTweetSheet(initialText);
+    }
+
+    return result;
+}
+
+
+}}// Namespaces

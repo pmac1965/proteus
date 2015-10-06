@@ -31,6 +31,11 @@
 #include "../../ios/prIosTwitter.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Social {
+
+
 /// ----------------------------------------------------------------------------
 /// Ctor
 /// ----------------------------------------------------------------------------
@@ -77,6 +82,9 @@ bool prTwitter_Ios::ShowTweetSheet(const char *initialText)
     
     return true;
 }
+
+
+}}// Namespaces
 
 
 #endif

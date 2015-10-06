@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSPRITECALLBACKS_H
-#define __PRSPRITECALLBACKS_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -33,8 +32,5 @@ public:
     //
     // Parameters:
     //      dt - Delta time
-    virtual void SpriteCurrentFrameIndex(const char *name, s32 index) = 0;
+    virtual void SpriteCurrentFrameIndex(const char *name, Proteus::Core::s32 index) = 0;
 };
-
-
-#endif//__PRSPRITECALLBACKS_H

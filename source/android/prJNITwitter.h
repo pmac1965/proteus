@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRJNITWITTER_H
-#define __PRJNITWITTER_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -28,10 +27,10 @@
 
 // Function: prJNI_ShowTweet
 //      Show tweet sheet
+//
+// Parameters:
+//      initialText - Initial text message for the tweet sheet.
 void prJNI_ShowTweet(const char *initialText);
 
 
 #endif//PLATFORM_ANDROID
-
-
-#endif//__PRJNITWITTER_H

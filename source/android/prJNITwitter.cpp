@@ -40,14 +40,15 @@ namespace
     /// ---------------------------------------------------------------------------
     /// Makes the final class name. 
     /// ---------------------------------------------------------------------------
-    const char *prJNI_MakeTwitterClassName(const char *pClassName)
+    char *prJNI_MakeTwitterClassName(char *pName, const char *pClassName)
     {
-        static char name[256];
+        PRASSERT(pName);
+        PRASSERT(pClassName && *pClassName);
 
-        strcpy(name, "proteus/social/");
-        strcat(name, pClassName);
+        strcpy(pName, "com/redcliffeinteractive/engine/social/");
+        strcat(pName, pClassName);
 
-        return name;
+        return pName;
     }
 
 
@@ -59,11 +60,13 @@ namespace
         PRASSERT(env);
         PRASSERT(className && *className);
 
-        jclass cls = env->FindClass(prJNI_MakeTwitterClassName(className));
+        char name[256];
+
+        jclass cls = env->FindClass(prJNI_MakeTwitterClassName(name, className));
         if (!cls) 
         {
             // Warn
-            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to find class %s", className);
+            prTrace(LogError, "Failed to find class %s", className);
             if (isAttached)
             {
                 PRASSERT(prJNI_GetVM());
@@ -83,6 +86,7 @@ void prJNI_ShowTweet(const char *initialText)
 {
     JavaVM *pJavaVM = prJNI_GetVM();
     PRASSERT(pJavaVM);
+
     if (pJavaVM)
     {
         bool    isAttached  = false;
@@ -93,7 +97,7 @@ void prJNI_ShowTweet(const char *initialText)
             return;
 
         // Find class
-        jclass cls = prJNI_GetTwitterClass(env, "Twitter", isAttached);
+        jclass cls = prJNI_GetTwitterClass(env, "TwitterManager", isAttached);
         if (!cls)
             return;
         
@@ -101,7 +105,7 @@ void prJNI_ShowTweet(const char *initialText)
         jmethodID method = env->GetStaticMethodID(cls, "showTweetSheet", "(Ljava/lang/String;)V");
         if (!method)
         {
-            __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get method ID %s", "showTweetSheet");
+            prTrace(LogError, "Failed to get method ID %s", "showTweetSheet");
             if (isAttached)
             {
                 pJavaVM->DetachCurrentThread();

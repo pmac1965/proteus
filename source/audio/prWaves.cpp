@@ -150,7 +150,7 @@ prWaves::prWaves()
 {
     memset(m_waveID, 0, sizeof(*m_waveID) * MAX_NUM_WAVEID);
     //prTrace(LogError, "sizeof(*m_waveID) * MAX_NUM_WAVEID == %i\n", sizeof(*m_waveID) * MAX_NUM_WAVEID);
-    TODO("Remove the wave ID list as its not required")
+    //TODO("Remove the wave ID list as its not required")
 }
 
 
@@ -176,8 +176,8 @@ prWaves::~prWaves()
 /// ---------------------------------------------------------------------------
 prWaveResult prWaves::LoadWaveFile(const char *filename, prWaveID *pWaveID)
 {
-    //PRUNUSED(pWaveID);
     PRASSERT(filename && *filename);
+    PRASSERT(pWaveID);
 
     prWaveResult    wr        = WR_OUTOFMEMORY;
     prWaveFileInfo *pWaveInfo = new prWaveFileInfo;

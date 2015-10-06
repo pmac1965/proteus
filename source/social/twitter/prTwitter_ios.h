@@ -16,17 +16,21 @@
  */
 
 
-#ifndef __PRTWITTER_IOS_H
-#define __PRTWITTER_IOS_H
+#pragma once
 
 
-#include "prTwitter.h"
+#include "prTwitterBase.h"
+
+
+// Namespaces
+namespace Proteus {
+namespace Social {
 
 
 // Class: prTwitter_Ios
 //      A base class for abstracting application specific twitter
 //      functionality into a cross platform format
-class prTwitter_Ios : public prTwitter
+class prTwitter_Ios : public prTwitterBase
 {
 public:
     // Method: prTwitter_Ios
@@ -39,16 +43,16 @@ public:
 
     // Method: Initialise
     //      Initialise twitter for a specific platform
-    bool Initialise();
+    bool Initialise() override;
 
     // Method: Update
     //      Update twitter for a specific platform
-    bool Update();
+    bool Update() override;
 
     // Method: ShowTweetSheet
     //      Show the tweet sheet
-    bool ShowTweetSheet(const char *initialText);
+    bool ShowTweetSheet(const char *initialText) override;
 };
 
 
-#endif//__PRTWITTER_IOS_H
+}}// Namespaces

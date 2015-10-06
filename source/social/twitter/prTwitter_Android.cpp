@@ -31,6 +31,11 @@
 #include "../../debug/prTrace.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Social {
+
+
 /// ----------------------------------------------------------------------------
 /// Ctor
 /// ----------------------------------------------------------------------------
@@ -72,6 +77,9 @@ bool prTwitter_Android::ShowTweetSheet(const char *initialText)
 {
     prJNI_ShowTweet(initialText);
 }
+
+
+}}// Namespaces
 
 
 #endif

@@ -98,6 +98,7 @@
 #include "../display/prTexture.h"
 #include "../math/prMathsUtil.h"
 #include "../file/prFile.h"
+#include "../utf8proc/utf8proc.h"
 
 
 using namespace Proteus::Math;
@@ -411,8 +412,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
         }
 
         // We need this character too
-        TODO("Add the utf8 translation code");
-        imp.GenerateCharacter(face, 0x00A9); // '�'
+        imp.GenerateCharacter(face, 0x00A9); // Its the copright symbol
 
         // Clean up
         FT_Done_Face(face);
@@ -580,25 +580,29 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
         ERR_CHECK();
 
         // Set states
-        //glEnableClientState(GL_VERTEX_ARRAY);
-        //ERR_CHECK();
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
         ERR_CHECK();
 		    
         // Draw
         s32 len = (s32)strlen(message);
-        //s32 character;
+        s32 character;
         f32 lineWidth = 0.0f;
 
-        for (s32 i=0; i<len; i++)
+        for (s32 i=0; i<len;)
         {
-            s32 character = message[i];
+            //    character = 0x00A9;
+            char  c = message[i];
 
-            TODO("Add the utf8 translation code");
-
-            // Special hack
-            if (character == '�')
-                character = 0x00a9;
+            // utf-8?
+            if (c < 0)
+            {
+                i += (s32)utf8proc_iterate((const ::uint8_t*)&message[i], -1, (::int32_t*)&character);
+            }
+            else
+            {
+                character = c;
+                i++;
+            }
 
             if (character == '#')
             {
@@ -639,8 +643,6 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
         // Reset states
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         ERR_CHECK();
-        //glDisableClientState(GL_VERTEX_ARRAY);
-        //ERR_CHECK();
         glDisable(GL_BLEND);
         ERR_CHECK();
 
@@ -666,17 +668,24 @@ Proteus::Math::prVector2 prTrueTypeFont::MeasureString(const char *string, float
 
     f32 max = 0.0f;
     s32 len = (s32)strlen(string);
-    //s32 character;
+    s32 character;
 
-    for (s32 i=0; i<len; i++)
+    for (s32 i=0; i<len;)
     {
-        u32 character = string[i];
+        char  c = string[i];
 
-        TODO("Add the utf8 translation code");
+        // utf-8?
+        if (c < 0)
+        {
+            i += (s32)utf8proc_iterate((const ::uint8_t*)&string[i], -1, (::int32_t*)&character);
+        }
+        else
+        {
+            character = c;
+            i++;
+        }
 
-        // Special hack
-        if (character == '�')
-            character = 0x00a9;
+        //character = 0x00A9;
 
         // Get size.
         if (character == '#')

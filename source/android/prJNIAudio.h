@@ -39,11 +39,14 @@
 void prJNI_SongPlay(const char *filename);
 
 // Function: prJNI_SongStop
-//      Stops a song.
+//      Stops the current song.
 void prJNI_SongStop();
 
 // Function: prJNI_SongSetVolume
 //      Sets song volume.
+//
+// Parameters:
+//      volume - The volume to set
 void prJNI_SongSetVolume(float volume);
 
 // Function: prJNI_SongPause
