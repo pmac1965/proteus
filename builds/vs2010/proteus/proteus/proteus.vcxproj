@@ -794,6 +794,7 @@
     <ClInclude Include="..\..\..\..\source\script\prLua.h" />
     <ClInclude Include="..\..\..\..\source\script\prLuaDebug.h" />
     <ClInclude Include="..\..\..\..\source\social\facebook\prFacebook.h" />
+    <ClInclude Include="..\..\..\..\source\social\facebook\prFaceBookBase.h" />
     <ClInclude Include="..\..\..\..\source\social\facebook\prFacebook_Android.h" />
     <ClInclude Include="..\..\..\..\source\social\facebook\prFacebook_ios.h" />
     <ClInclude Include="..\..\..\..\source\social\twitter\prTwitter.h" />

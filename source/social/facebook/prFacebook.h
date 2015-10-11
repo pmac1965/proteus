@@ -24,6 +24,11 @@
 #include "../../core/prMacros.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Social {
+
+
 // Class: prFacebookCallbacks
 //      Class provides an easy way to get callbacks from the engine
 class prFacebookCallbacks
@@ -67,76 +72,91 @@ public:
 };
 
 
+// Forward declarations
+class prFacebookBase;
+
+
 // Class: prFacebook
-//      A base class for abstracting application specific facebook
-//      functionality into a cross platform format
+//      Class for abstracting facebook functionality into a cross platform format
 class prFacebook
 {
 public:
     // Method: prFacebook
     //      Ctor
-    prFacebook();
+    //
+    // Parameters:
+    //      pcb - A pointer to the class which handles callbacks
+    //
+    // See Also:
+    //      <prFacebookCallbacks>
+    prFacebook(prFacebookCallbacks *pcb);
 
     // Method: ~prFacebook
     //      Ctor
-    virtual ~prFacebook();
-
-    // Method: RegisterCallbackHandler
-    //      Allows facebook to call us
-    void RegisterCallbackHandler(prFacebookCallbacks *pcb);
+    ~prFacebook();
 
     // Method: IsLoggedIn
     //      Returns the logged in state
-    bool IsLoggedIn() const { return mIsLoggedIn; }
-
-    // Method: SetLoggedIn
-    //      Allows facebook to call us
-    void SetLoggedIn(bool state) { mIsLoggedIn = state; }
-
-    // Method: SetDetails
-    //      Allows facebook to set the user details
-    void SetDetails(const char *name, Proteus::Core::u64 fbid);
+    bool IsLoggedIn() const;
     
     // Method: GetPlayerID
-    //      Returns the facebook players ID
-    Proteus::Core::u64 GetPlayerID() const { return mPlayerFBID; }
+    //      Returns the players facebook ID
+    Proteus::Core::u64 GetPlayerID() const;
     
     // Method: GetPlayerName
     //      Returns the facebook players name
-    const char *GetPlayerName() const { return mPlayerName.Text(); }
+    //
+    // Returns:
+    //      May return nullptr
+    const char *GetPlayerName() const;
 
     // Method: Initialise
     //      Initialise facebook for a specific platform
-    virtual bool Initialise() { return false; }
+    //
+    // Notes:
+    //      Kept separate so initialisation can be performed when required,
+    //      rather than at class creation. In case initialisation causes issues
+    bool Initialise();
 
     // Method: Update
     //      Update facebook for a specific platform
-    virtual bool Update() { return false; }
+    bool Update() { return false; }
 
     // Method: OpenSession
     //      Open a session
-    virtual bool OpenSession() { return false; }
+    bool OpenSession() { return false; }
 
     // Method: Login
     //      login to facebook
-    virtual bool Login() { return false; }
+    bool Login() { return false; }
 
     // Method: Logout
     //      logout off facebook
-    virtual bool Logout() { return false; }
+    bool Logout() { return false; }
 
     // Method: FetchUserDetails
     //      login to facebook
-    virtual void FetchUserDetails() {}
+    void FetchUserDetails() {}
         
     // Method: Brag
     //      Send a brag to facebook
-    virtual void Brag(const char *initialText) { PRUNUSED(initialText); }
+    void Brag(const char *initialText) { PRUNUSED(initialText); }
 
 
-protected:
-    prFacebookCallbacks    *mpCallbacks;
-    prString                mPlayerName;
-    Proteus::Core::u64      mPlayerFBID;
-    bool                    mIsLoggedIn;
+private:
+    // Allows facebook to set logged in state
+    //void SetLoggedIn(bool state) { mIsLoggedIn = state; }
+
+    // Allows facebook to set the user details
+    void SetDetails(const char *name, Proteus::Core::u64 fbid);
+
+
+private:
+    prFacebookBase         *mpFacebook;
+    //prString                mPlayerName;
+    //Proteus::Core::u64      mPlayerFBID;
+    //bool                    mIsLoggedIn;
 };
+
+
+}}// Namespaces

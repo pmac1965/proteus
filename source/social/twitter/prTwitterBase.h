@@ -28,23 +28,8 @@ namespace Proteus {
 namespace Social {
 
 
-// Class: prTwitterCallbacks
-//      This mix in class provides an easy way to get callbacks from the engine
-class prTwitterCallbacks
-{
-public:
-    // Method: Twitter_Initialise
-    //      Twitter initialisation callback
-    virtual void Twitter_Initialise(bool state) = 0;
-    
-    // Method: Twitter_Sent
-    //      Twitter callback
-    virtual void Twitter_Sent(bool state) = 0;
-
-    // Method: Twitter_Cancel
-    //      Twitter callback
-    virtual void Twitter_Cancel(bool state) = 0;
-};
+// Forward declarations
+class prTwitterCallbacks;
 
 
 // Class: prTwitterBase
@@ -54,24 +39,13 @@ class prTwitterBase
 public:
     // Method: prTwitterBase
     //      Ctor
-    prTwitterBase()
-    {
-        mpCallbacks = nullptr;
-    }
+    prTwitterBase(prTwitterCallbacks *pcb) : mpCallbacks(pcb)
+    {}
 
     // Method: ~prTwitterBase
     //      Ctor
-    virtual ~prTwitterBase() {}
-
-    // Method: RegisterCallbackHandler
-    //      Allows twitter to call us
-    //
-    // Parameters:
-    //      A pointer to the callback class
-    void RegisterCallbackHandler(prTwitterCallbacks *pcb)
-    {
-        mpCallbacks = pcb;
-    }
+    virtual ~prTwitterBase()
+    {}
 
     // Method: Initialise
     //      Initialise twitter for a specific platform

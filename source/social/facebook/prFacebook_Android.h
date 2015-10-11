@@ -19,48 +19,60 @@
 #pragma once
 
 
-#include "prFacebook.h"
+#include "prFacebookBase.h"
+
+
+// Namespaces
+namespace Proteus {
+namespace Social {
+
+
+// Forward declarations
+class prFacebookCallbacks;
 
 
 // Class: prFacebook_Android
 //      A base class for abstracting application specific facebook
 //      functionality into a cross platform format
-class prFacebook_Android : public prFacebook
+class prFacebook_Android : public prFacebookBase
 {
 public:
     // Method: prFacebook_Android
     //      Ctor
-    prFacebook_Android();
+    prFacebook_Android(prFacebookCallbacks *pcb);
 
     // Method: ~prFacebook_Android
     //      Ctor
-    virtual ~prFacebook_Android();
+    ~prFacebook_Android();
 
     // Method: Initialise
     //      Initialise facebook for a specific platform
-    bool Initialise();
+    bool Initialise() override;
 
     // Method: Update
     //      Update facebook for a specific platform
-    bool Update();
+    bool Update() override;
 
     // Method: OpenSession
     //      Open a session
-    bool OpenSession();
+    bool OpenSession() override;
 
     // Method: Login
     //      login to facebook
-    bool Login();
+    bool Login() override;
 
     // Method: Logout
     //      logout of facebook
-    bool Logout();
+    bool Logout() override;
     
     // Method: FetchUserDetails
     //      login to facebook
-    void FetchUserDetails();
+    void FetchUserDetails() override;
     
     // Method: Brag
     //      Send a brag to facebook
-    void Brag(const char *initialText);
+    void Brag(const char *initialText) override;
 };
+
+
+}}// Namespaces

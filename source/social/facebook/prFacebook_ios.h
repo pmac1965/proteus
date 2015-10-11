@@ -1,4 +1,6 @@
 // File: prFacebook_ios.h
+//      Class for abstracting application specific facebook
+//      functionality
 /**
  *  Copyright 2014 Paul Michael McNab
  *
@@ -19,44 +21,56 @@
 #pragma once
 
 
-#include "prFacebook.h"
+#include "prFacebookBase.h"
+
+
+// Namespaces
+namespace Proteus {
+namespace Social {
+
+
+// Forward declarations
+class prFacebookCallbacks;
 
 
 // Class: prFacebook_Ios
-//      A base class for abstracting application specific facebook
-//      functionality into a cross platform format
-class prFacebook_Ios : public prFacebook
+//      Class for abstracting application specific facebook
+//      functionality
+class prFacebook_Ios : public prFacebookBase
 {
 public:
     // Method: prFacebook_Ios
     //      Ctor
-    prFacebook_Ios();
+    prFacebook_Ios(prFacebookCallbacks *pcb);
 
     // Method: ~prFacebook_Ios
     //      Ctor
-    ~prFacebook_Ios();
+    ~prFacebook_Ios() override;
 
     // Method: Initialise
     //      Initialise facebook for a specific platform
-    bool Initialise();
+    bool Initialise() override;
 
     // Method: Update
     //      Update facebook for a specific platform
-    bool Update();
+    bool Update() override;
 
     // Method: OpenSession
     //      Open a session
-    bool OpenSession();
+    bool OpenSession() override;
 
     // Method: Login
     //      login to facebook
-    bool Login();
+    bool Login() override;
     
     // Method: FetchUserDetails
     //      login to facebook
-    void FetchUserDetails();
+    void FetchUserDetails() override;
     
     // Method: Brag
     //      Send a brag to facebook
-    void Brag(const char *initialText);
+    void Brag(const char *initialText) override;
 };
+
+
+}}// Namespaces

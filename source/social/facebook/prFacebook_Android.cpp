@@ -27,13 +27,19 @@
 #include "../../core/prTypes.h"
 #include "../../core/prDefines.h"
 #include "../../core/prMacros.h"
+#include "../../debug/prTrace.h"
 #include "../../android/prJNIFacebook.h"
+
+
+// Namespaces
+namespace Proteus {
+namespace Social {
 
 
 /// ----------------------------------------------------------------------------
 /// Ctor
 /// ----------------------------------------------------------------------------
-prFacebook_Android::prFacebook_Android()
+prFacebook_Android::prFacebook_Android(prFacebookCallbacks *pcb) : prFacebookBase(pcb)
 {
 }
 
@@ -43,6 +49,7 @@ prFacebook_Android::prFacebook_Android()
 /// ----------------------------------------------------------------------------
 prFacebook_Android::~prFacebook_Android()
 {
+    prTrace(LogError, "AND:FB:KILL\n");
 }
 
 
@@ -92,7 +99,7 @@ bool prFacebook_Android::Logout()
     // Clear the facebook details
     mIsLoggedIn = false;
     mPlayerFBID = 0LL;
-
+    
     prJNI_FacebookLogout();
 
     return mIsLoggedIn;
@@ -116,6 +123,9 @@ void prFacebook_Android::Brag(const char *initialText)
     prJNI_FacebookBrag();
     //prFB_Brag(mpCallbacks, mPlayerFBID);
 }
+
+
+}}// Namespaces
 
 
 #endif

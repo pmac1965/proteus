@@ -41,15 +41,13 @@ namespace Social {
 /// ----------------------------------------------------------------------------
 /// Ctor
 /// ----------------------------------------------------------------------------
-prTwitter::prTwitter()
+prTwitter::prTwitter(prTwitterCallbacks *pcb)
 {
 #if defined(PLATFORM_ANDROID)
-    mpTwitter = new prTwitter_Android();
-    //Initialise();
+    mpTwitter = new prTwitter_Android(pcb);
 
 #elif defined(PLATFORM_IOS)
-    mpTwitter = new prTwitter_Ios();
-    //Initialise();
+    mpTwitter = new prTwitter_Ios(pcb);
 
 #else
     mpTwitter = nullptr;
@@ -64,18 +62,6 @@ prTwitter::prTwitter()
 prTwitter::~prTwitter()
 {
     PRSAFE_DELETE(mpTwitter);
-}
-
-
-/// ----------------------------------------------------------------------------
-/// Allows twitter to call us
-/// ----------------------------------------------------------------------------
-void prTwitter::RegisterCallbackHandler(prTwitterCallbacks *pcb)
-{
-    if (mpTwitter)
-    {
-        mpTwitter->RegisterCallbackHandler(pcb);
-    }
 }
 
 

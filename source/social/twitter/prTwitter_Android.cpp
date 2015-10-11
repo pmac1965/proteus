@@ -39,7 +39,7 @@ namespace Social {
 /// ----------------------------------------------------------------------------
 /// Ctor
 /// ----------------------------------------------------------------------------
-prTwitter_Android::prTwitter_Android()
+prTwitter_Android::prTwitter_Android(prTwitterCallbacks *pcb) : prTwitterBase(pcb)
 {
 }
 

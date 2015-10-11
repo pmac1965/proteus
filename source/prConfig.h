@@ -15,8 +15,7 @@
  */
 
 
-#ifndef __PRCONFIG_H
-#define __PRCONFIG_H
+#pragma once
 
 
 // Audio platform
@@ -167,6 +166,3 @@
 #define PROTEUS_OPTIMISE_REMOVE_ISTEXTURE               // If defined this removes the IsTexture text in texture release
 //#define PROTEUS_OPTIMISE_NO_VECTOR2_INIT                // If defined then the prVector2 class does not zero its members in the constructor
 //#define PROTEUS_OPTIMISE_NO_VECTOR3_INIT                // If defined then the prVector3 class does not zero its members in the constructor
-
-
-#endif//__PRCONFIG_H

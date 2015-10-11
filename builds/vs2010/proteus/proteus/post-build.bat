@@ -101,6 +101,10 @@ REM ---------------------------------------------------------------------------
     REM ****************
     del %PROTEUS_ENGINE_DIR%\include\proteus\social\twitter\prTwitter_Android.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\social\twitter\prTwitter_ios.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\social\twitter\prTwitterBase.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\social\facebook\prFacebook_Android.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\social\facebook\prFacebook_ios.h
+    del %PROTEUS_ENGINE_DIR%\include\proteus\social\facebook\prFacebookBase.h
 
     REM ****************
     REM * NOT REQUIRED *

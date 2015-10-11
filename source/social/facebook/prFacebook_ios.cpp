@@ -37,10 +37,15 @@
 #include "../../ios/prIosFacebook.h"
 
 
+// Namespaces
+namespace Proteus {
+namespace Social {
+
+
 /// ----------------------------------------------------------------------------
 /// Ctor
 /// ----------------------------------------------------------------------------
-prFacebook_Ios::prFacebook_Ios()
+prFacebook_Ios::prFacebook_Ios(prFacebookCallbacks *pcb) : prFacebookBase(pcb)
 {
 }
 
@@ -118,6 +123,9 @@ void prFacebook_Ios::Brag(const char *initialText)
     
 #endif
 }
+
+
+}}// Namespaces
 
 
 #endif

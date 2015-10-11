@@ -1,5 +1,9 @@
 // File: prTwitter.h
-//      Cross platform format twitter access
+//      Cross platform twitter access
+//
+// Notes:
+//      A mix-in class is used to receive callbacks from the twitter
+//      code.
 /**
  *  Copyright 2014 Paul Michael McNab
  *
@@ -25,36 +29,54 @@ namespace Proteus {
 namespace Social {
 
 
+// Class: prTwitterCallbacks
+//      This mix-in class provides an easy way to get callbacks from the engine
+class prTwitterCallbacks
+{
+public:
+    // Method: Twitter_Initialise
+    //      Twitter initialised
+    virtual void Twitter_Initialise() = 0;
+    
+    // Method: Twitter_Sent
+    //      Twitter update sent
+    virtual void Twitter_Sent() = 0;
+
+    // Method: Twitter_Cancel
+    //      Twitter update cancelled
+    virtual void Twitter_Cancel() = 0;
+};
+
+
 // Forward declarations
 class prTwitterBase;
-class prTwitterCallbacks;
 
 
 // Class: prTwitter
-//      Cross platform format twitter access
+//      Class to provide cross platform twitter access
 class prTwitter
 {
 public:
     // Method: prTwitter
     //      Ctor
-    prTwitter();
-
-    // Method: ~prTwitter
-    //      Ctor
-    virtual ~prTwitter();
-
-    // Method: RegisterCallbackHandler
-    //      Allows twitter to call us back
     //
     // Parameters:
-    //      A pointer to the callback class
+    //      pcb - A pointer to the class which handles callbacks
     //
     // See Also:
     //      <prTwitterCallbacks>
-    void RegisterCallbackHandler(prTwitterCallbacks *pcb);
+    prTwitter(prTwitterCallbacks *pcb);
+
+    // Method: ~prTwitter
+    //      Dtor
+    ~prTwitter();
 
     // Method: Initialise
     //      Initialise twitter
+    //
+    // Notes:
+    //      Kept separate so initialisation can be performed when required,
+    //      rather than at class creation. In case initialisation causes issues
     bool Initialise();
 
     // Method: Update

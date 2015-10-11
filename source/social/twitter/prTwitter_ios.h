@@ -27,6 +27,10 @@ namespace Proteus {
 namespace Social {
 
 
+// Forward declarations
+class prTwitterCallbacks;
+
+
 // Class: prTwitter_Ios
 //      A base class for abstracting application specific twitter
 //      functionality into a cross platform format
@@ -35,7 +39,7 @@ class prTwitter_Ios : public prTwitterBase
 public:
     // Method: prTwitter_Ios
     //      Ctor
-    prTwitter_Ios();
+    prTwitter_Ios(prTwitterCallbacks *pcb);
 
     // Method: ~prTwitter_Ios
     //      Ctor
