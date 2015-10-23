@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRADVERTS_H
-#define __PRADVERTS_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -107,6 +106,3 @@ private:
     prAdverts(const prAdverts&);
     const prAdverts& operator = (const prAdverts&);
 };
-
-
-#endif//__PRADVERTS_H

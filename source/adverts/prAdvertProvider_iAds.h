@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRADVERTPROVIDER_IADS_H
-#define __PRADVERTPROVIDER_IADS_H
+#pragma once
 
 
 #include "prAdvertProvider.h"
@@ -59,12 +58,8 @@ public:
 
 
 private:
-
     bool    m_visible;
     bool    m_exp0;
     bool    m_exp1;
     bool    m_exp2;
 };
-
-
-#endif//__PRADVERTPROVIDER_IADS_H

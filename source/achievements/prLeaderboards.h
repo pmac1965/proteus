@@ -2,6 +2,9 @@
 // About:
 //      This class is a cross platform interface to leaderboards.
 //      If they are available on your chosen platform
+//
+//      Leaderboards are quite simple and don't require a large interface
+//
 /**
  *  Copyright 2014 Paul Michael McNab
  *
@@ -23,6 +26,7 @@
 
 
 #include "../core/prTypes.h"
+#include "../core/prCoreSystem.h"
 
 
 // Namespaces
@@ -32,22 +36,34 @@ namespace Achievements {
 
 // Class: prLeaderboard
 //      Simple cross platform interface for leaderboards
-class prLeaderboard
+class prLeaderboard : public prCoreSystem
 {
 public:
+    // Method: prRenderer
+    //      Ctor
+    prLeaderboard();
+
+    // Method: prRenderer
+    //      Ctor
+    ~prLeaderboard();
+
     // Method: Submit
     //      Submit a value to a leaderboard.
     //
     // Parameters:
-    //      name  - The name of the leaderboard item
+    //      name  - The name of the leaderboard
     //      value - The value to submit to the leaderboard
     void Submit(const char *name, Proteus::Core::u64 value);
 
-    // Method: SubmitEnabled
+    // Method: Enable
     //      Allows submit to be disabled in case you need to remove it.
     //      For example in a free build where leaderboards may be disabled
     //      to encourage purchase of the full product
-    void SubmitEnabled(Proteus::Core::PRBOOL state);
+    void Enable(bool state);
+
+    // Method: Available
+    //      Determines if the leaderboard interface is available for the current platform
+    bool Available() const;
 };
 
 

@@ -39,7 +39,7 @@ class prFacebook_Android : public prFacebookBase
 public:
     // Method: prFacebook_Android
     //      Ctor
-    prFacebook_Android(prFacebookCallbacks *pcb);
+    explicit prFacebook_Android(prFacebookCallbacks *pcb);
 
     // Method: ~prFacebook_Android
     //      Ctor

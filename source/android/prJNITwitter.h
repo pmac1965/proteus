@@ -1,4 +1,6 @@
 // File: prJNITwitter.h
+//      Shows a post to twitter dialog for the android platform
+//
 /**
  * Copyright 2014 Paul Michael McNab
  * 

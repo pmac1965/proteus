@@ -22,6 +22,7 @@
 
 
 #define CORE_SHOW_INIT
+#define CORE_SHOW_SIZE  24
 
 
 using namespace Proteus::Core;
@@ -34,7 +35,7 @@ prCoreSystem::prCoreSystem(u32 id, const char *pName) : m_id  (id)
                                                       , m_name(pName)
 {
 #ifdef CORE_SHOW_INIT
-    PRLOGD("Init : %*s - ID: %i\n", 24, (pName && *pName) ? pName : "Unnamed", id);
+    PRLOGD("Init : %*s - ID: %i\n", CORE_SHOW_SIZE, (pName && *pName) ? pName : "Unnamed", id);
 
 #endif
 }

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRJNIINAPPPURCHASE_H
-#define __PRJNIINAPPPURCHASE_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -32,6 +31,3 @@ void prJNI_BeginPurchase(const char *item);
 
 
 #endif//PLATFORM_ANDROID
-
-
-#endif//__PRJNIINAPPPURCHASE_H

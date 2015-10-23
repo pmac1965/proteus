@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRJNISLEEP_H
-#define __PRJNISLEEP_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -32,6 +31,3 @@ void prJNI_SleepSetState(bool state);
 
 
 #endif//PLATFORM_ANDROID
-
-
-#endif//__PRJNISLEEP_H

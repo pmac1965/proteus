@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRACHIEVEMENTANDROID_H
-#define __PRACHIEVEMENTANDROID_H
+#pragma once
 
 
 #include "prAchievement_base.h"
@@ -40,6 +39,3 @@ public:
     //      Checks if the provider is ready to be used
     bool IsReady();
 };
-
-
-#endif//__PRACHIEVEMENTANDROID_H

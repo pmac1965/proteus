@@ -65,7 +65,7 @@ public:
     //
     // See Also:
     //      <prTwitterCallbacks>
-    prTwitter(prTwitterCallbacks *pcb);
+    explicit prTwitter(prTwitterCallbacks *pcb);
 
     // Method: ~prTwitter
     //      Dtor
@@ -93,6 +93,12 @@ public:
 
 protected:
     prTwitterBase   *mpTwitter;
+
+    
+private:
+    // Stops passing by value and assignment.
+    prTwitter(const prTwitter&);
+    const prTwitter& operator = (const prTwitter&);
 };
 
 

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRADVERTPROVIDER_H
-#define __PRADVERTPROVIDER_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -143,6 +142,3 @@ protected:
      bool                       mVisible;
      bool                       mInitialised;
 };
-
-
-#endif//__PRADVERTPROVIDER_H

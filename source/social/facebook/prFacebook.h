@@ -89,7 +89,7 @@ public:
     //
     // See Also:
     //      <prFacebookCallbacks>
-    prFacebook(prFacebookCallbacks *pcb);
+    explicit prFacebook(prFacebookCallbacks *pcb);
 
     // Method: ~prFacebook
     //      Ctor
@@ -156,6 +156,12 @@ private:
     //prString                mPlayerName;
     //Proteus::Core::u64      mPlayerFBID;
     //bool                    mIsLoggedIn;
+    
+    
+private:
+    // Stops passing by value and assignment.
+    prFacebook(const prFacebook&);
+    const prFacebook& operator = (const prFacebook&);
 };
 
 

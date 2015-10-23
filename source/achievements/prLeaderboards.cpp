@@ -21,6 +21,7 @@
 #include "../debug/prTrace.h"
 #include "../debug/prDebug.h"
 #include "prLeaderboards.h"
+#include "../core/prCore.h"
 
 
 // Platform specific includes
@@ -40,7 +41,41 @@ namespace Achievements {
 // Locals
 namespace
 {
-    PRBOOL submitAllowed = PRTRUE;
+    #if defined(PLATFORM_IOS)    
+        bool submitAllowed = true;
+
+    #elif defined(PLATFORM_ANDROID)
+        bool submitAllowed = true;
+
+    #elif defined(PLATFORM_PC)
+        bool submitAllowed = false;
+
+    #elif defined(PLATFORM_LINUX)
+        bool submitAllowed = false;
+
+    #elif defined(PLATFORM_MAC)
+        bool submitAllowed = false;
+
+    #else
+        #error Unsupported platfrom
+
+    #endif
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Ctor
+/// ---------------------------------------------------------------------------
+prLeaderboard::prLeaderboard() : prCoreSystem(PRSYSTEM_LEADERBOARDS, "prLeaderboard")
+{
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Dtor
+/// ---------------------------------------------------------------------------
+prLeaderboard::~prLeaderboard()
+{
 }
 
 
@@ -49,7 +84,7 @@ namespace
 /// ---------------------------------------------------------------------------
 void prLeaderboard::Submit(const char *name, u64 value)
 {
-    TODO("Finish leaderboards")
+    TODO("Finish leaderboards - original code removed so we can improve")
 
     if (name && *name && value > 0)
     {
@@ -68,6 +103,12 @@ void prLeaderboard::Submit(const char *name, u64 value)
         #elif defined(PLATFORM_LINUX)
             //
 
+        #elif defined(PLATFORM_MAC)
+            //
+
+        #else
+            #error Unsupported platfrom
+
         #endif
 
             prTrace(LogError, "Submit to leaderboard '%s' - %llu\n", name, value);        
@@ -79,9 +120,36 @@ void prLeaderboard::Submit(const char *name, u64 value)
 /// ---------------------------------------------------------------------------
 /// Allows submit to be disable in case you need to remove it.
 /// ---------------------------------------------------------------------------
-void prLeaderboard::SubmitEnabled(PRBOOL state)
+void prLeaderboard::Enable(bool state)
 {
     submitAllowed = state;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Determines if leaderboards are available for the current platform
+/// ---------------------------------------------------------------------------
+bool prLeaderboard::Available() const
+{
+    #if defined(PLATFORM_IOS)    
+        return false;
+
+    #elif defined(PLATFORM_ANDROID)
+        return false;
+
+    #elif defined(PLATFORM_PC)
+        return false;
+
+    #elif defined(PLATFORM_LINUX)
+        return false;
+
+    #elif defined(PLATFORM_MAC)
+        return false;
+
+    #else
+        #error Unsupported platfrom
+
+    #endif
 }
 
 

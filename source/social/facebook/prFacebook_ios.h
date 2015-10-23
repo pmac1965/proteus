@@ -41,7 +41,7 @@ class prFacebook_Ios : public prFacebookBase
 public:
     // Method: prFacebook_Ios
     //      Ctor
-    prFacebook_Ios(prFacebookCallbacks *pcb);
+    explicit prFacebook_Ios(prFacebookCallbacks *pcb);
 
     // Method: ~prFacebook_Ios
     //      Ctor

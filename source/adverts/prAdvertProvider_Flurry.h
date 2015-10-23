@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRADVERTPROVIDER_FLURRY_H
-#define __PRADVERTPROVIDER_FLURRY_H
+#pragma once
 
 
 #include "prAdvertProvider.h"
@@ -98,6 +97,3 @@ public:
     //      Draws the provider
     void Draw();
 };
-
-
-#endif//__PRADVERTPROVIDER_FLURRY_H

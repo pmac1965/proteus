@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRACHIEVEMENTIOS_H
-#define __PRACHIEVEMENTIOS_H
+#pragma once
 
 
 #include "prAchievement_base.h"
@@ -40,6 +39,3 @@ public:
     //      Checks if the provider is ready to be used
     bool IsReady();
 };
-
-
-#endif//__PRACHIEVEMENTIOS_H

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRLINE_H
-#define __PRLINE_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -42,6 +41,3 @@
 //      true if intersects, false otherwise
 bool prLineIntersect(Proteus::Core::s32 x1, Proteus::Core::s32 y1, Proteus::Core::s32 x2, Proteus::Core::s32 y2, 
                      Proteus::Core::s32 x3, Proteus::Core::s32 y3, Proteus::Core::s32 x4, Proteus::Core::s32 y4, Proteus::Math::prPoint2F &p);
-
-
-#endif//__PRLINE_H

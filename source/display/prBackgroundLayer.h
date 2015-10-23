@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRBACKGROUNDLAYER_H
-#define __PRBACKGROUNDLAYER_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -111,6 +110,3 @@ private:
     prTexture                 *mpTexture;
     Proteus::Core::PRBOOL      mWrap;
 };
-
-
-#endif//__PRBACKGROUNDLAYER_H

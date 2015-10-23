@@ -39,7 +39,7 @@ class prTwitterBase
 public:
     // Method: prTwitterBase
     //      Ctor
-    prTwitterBase(prTwitterCallbacks *pcb) : mpCallbacks(pcb)
+    explicit  prTwitterBase(prTwitterCallbacks *pcb) : mpCallbacks(pcb)
     {}
 
     // Method: ~prTwitterBase

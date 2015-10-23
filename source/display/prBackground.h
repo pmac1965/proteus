@@ -24,8 +24,7 @@
  */
 
 
-#ifndef __PRBACKGROUND_H
-#define __PRBACKGROUND_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -251,6 +250,3 @@ private:
     prString        m_filenameBackground;
     #endif
 };
-
-
-#endif//__PRBACKGROUND_H

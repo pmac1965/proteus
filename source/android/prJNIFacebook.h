@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRJNIFACEBOOK_H
-#define __PRJNIFACEBOOK_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -44,6 +43,3 @@ void prJNI_FacebookLogout();
 
 
 #endif//PLATFORM_ANDROID
-
-
-#endif//__PRJNIFACEBOOK_H

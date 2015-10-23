@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRANALYTICSFLURRY_H
-#define __PRANALYTICSFLURRY_H
+#pragma once
 
 
 #include "prAnalyticsBase.h"
@@ -38,16 +37,13 @@ public:
 
     // Method: Construct
     //      Construct the provider.
-    void Construct(const char *appId, const char *secret);
+    void Construct(const char *appId, const char *secret) override;
 
     // Method: Submit
     //      Submits to the provider.
-    bool Submit(const char *name, const char *value);
+    bool Submit(const char *name, const char *value) override;
 
     // Method: Commit
     //      Commits the submitted key/values to the provider.
-    void Commit();
+    void Commit() override;
 };
-
-
-#endif//__PRANALYTICSFLURRY_H

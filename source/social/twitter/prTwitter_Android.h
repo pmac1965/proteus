@@ -39,7 +39,7 @@ class prTwitter_Android : public prTwitterBase
 public:
     // Method: prTwitter_Android
     //      Ctor
-    prTwitter_Android(prTwitterCallbacks *pcb);
+    explicit prTwitter_Android(prTwitterCallbacks *pcb);
 
     // Method: ~prTwitter_Android
     //      Ctor

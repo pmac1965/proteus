@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRJNIANALYTICS_H
-#define __PRJNIANALYTICS_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -32,6 +31,3 @@ void prJNI_Submit(const char *message);
 
 
 #endif//PLATFORM_ANDROID
-
-
-#endif//__PRJNIANALYTICS_H

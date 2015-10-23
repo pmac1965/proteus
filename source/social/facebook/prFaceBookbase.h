@@ -41,9 +41,9 @@ class prFacebookBase
 public:
     // Method: prFacebookBase
     //      Ctor
-    prFacebookBase(prFacebookCallbacks *pcb) : mpCallbacks  (pcb)
-                                             , mPlayerFBID  (0LL)
-                                             , mIsLoggedIn  (false)
+    explicit prFacebookBase(prFacebookCallbacks *pcb) : mpCallbacks  (pcb)
+                                                      , mPlayerFBID  (0LL)
+                                                      , mIsLoggedIn  (false)
     {}
 
     // Method: ~prFacebookBase

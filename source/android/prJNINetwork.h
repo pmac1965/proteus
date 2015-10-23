@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRJNINETWORK_H
-#define __PRJNINETWORK_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -40,6 +39,3 @@ bool prJNI_BTIsServer();
 
 
 #endif//PLATFORM_ANDROID
-
-
-#endif//__PRJNINETWORK_H

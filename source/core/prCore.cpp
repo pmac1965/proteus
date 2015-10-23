@@ -28,6 +28,7 @@
 #include "prMacros.h"
 #include "prRegistry.h"
 #include "prResourceManager.h"
+#include "../achievements/prLeaderboards.h"
 #include "../file/prFileManager.h"
 #include "../display/prRenderer_GL11.h"
 #include "../display/prRenderer_GL20.h"
@@ -62,6 +63,7 @@
 
 
 using namespace Proteus::Core;
+using namespace Proteus::Achievements;
 
 
 /// ---------------------------------------------------------------------------
@@ -82,35 +84,36 @@ namespace
     coreSystemNames[] = 
     {
         // Core systems
-        { PRSYSTEM_RESOURCEMANAGER,     "PRSYSTEM_RESOURCEMANAGER" },
-        { PRSYSTEM_TOUCH,               "PRSYSTEM_TOUCH" },
-        { PRSYSTEM_MESSAGEMANAGER,      "PRSYSTEM_MESSAGEMANAGER" },
-        { PRSYSTEM_REGISTRY,            "PRSYSTEM_REGISTRY" },
-        { PRSYSTEM_FILEMANAGER,         "PRSYSTEM_FILEMANAGER" },
-        { PRSYSTEM_RENDERER,            "PRSYSTEM_RENDERER" },
+        { PRSYSTEM_RESOURCEMANAGER,     "PRSYSTEM_RESOURCEMANAGER"      },
+        { PRSYSTEM_TOUCH,               "PRSYSTEM_TOUCH"                },
+        { PRSYSTEM_MESSAGEMANAGER,      "PRSYSTEM_MESSAGEMANAGER"       },
+        { PRSYSTEM_REGISTRY,            "PRSYSTEM_REGISTRY"             },
+        { PRSYSTEM_FILEMANAGER,         "PRSYSTEM_FILEMANAGER"          },
+        { PRSYSTEM_RENDERER,            "PRSYSTEM_RENDERER"             },
 
         // Desktop only
     #if defined(PLATFORM_PC)
-        { PRSYSTEM_MOUSE,               "PRSYSTEM_MOUSE" },
-        { PRSYSTEM_KEYBOARD,            "PRSYSTEM_KEYBOARD" },
+        { PRSYSTEM_MOUSE,               "PRSYSTEM_MOUSE"                },
+        { PRSYSTEM_KEYBOARD,            "PRSYSTEM_KEYBOARD"             },
 
         // Desktop only
     #elif defined(PLATFORM_LINUX)
-        { PRSYSTEM_MOUSE,               "PRSYSTEM_MOUSE" },
-        { PRSYSTEM_KEYBOARD,            "PRSYSTEM_KEYBOARD" },
+        { PRSYSTEM_MOUSE,               "PRSYSTEM_MOUSE"                },
+        { PRSYSTEM_KEYBOARD,            "PRSYSTEM_KEYBOARD"             },
     #endif
 
         // Optional systems
-        { PRSYSTEM_FPS,                 "PRSYSTEM_FPS" },
-        { PRSYSTEM_AUDIO,               "PRSYSTEM_AUDIO" },
-        { PRSYSTEM_ONSCREENLOGGER,      "PRSYSTEM_ONSCREENLOGGER" },
-        { PRSYSTEM_FADEMANAGER,         "PRSYSTEM_FADEMANAGER" },
-        { PRSYSTEM_GUIMANAGER,          "PRSYSTEM_GUIMANAGER" },
-        { PRSYSTEM_BACKGROUNDMANAGER,   "PRSYSTEM_BACKGROUNDMANAGER" },
-        { PRSYSTEM_SPRITEMANAGER,       "PRSYSTEM_SPRITEMANAGER" },
-        { PRSYSTEM_ACCELEROMETER,       "PRSYSTEM_ACCELEROMETER" },
-        { PRSYSTEM_RENDERER,            "PRSYSTEM_RENDERER" },
-        { PRSYSTEM_FONTMANAGER,         "PRSYSTEM_FONTMANAGER" },
+        { PRSYSTEM_FPS,                 "PRSYSTEM_FPS"                  },
+        { PRSYSTEM_AUDIO,               "PRSYSTEM_AUDIO"                },
+        { PRSYSTEM_ONSCREENLOGGER,      "PRSYSTEM_ONSCREENLOGGER"       },
+        { PRSYSTEM_FADEMANAGER,         "PRSYSTEM_FADEMANAGER"          },
+        { PRSYSTEM_GUIMANAGER,          "PRSYSTEM_GUIMANAGER"           },
+        { PRSYSTEM_BACKGROUNDMANAGER,   "PRSYSTEM_BACKGROUNDMANAGER"    },
+        { PRSYSTEM_SPRITEMANAGER,       "PRSYSTEM_SPRITEMANAGER"        },
+        { PRSYSTEM_ACCELEROMETER,       "PRSYSTEM_ACCELEROMETER"        },
+        { PRSYSTEM_RENDERER,            "PRSYSTEM_RENDERER"             },
+        { PRSYSTEM_FONTMANAGER,         "PRSYSTEM_FONTMANAGER"          },
+        { PRSYSTEM_LEADERBOARDS,        "PRSYSTEM_LEADERBOARDS"         },
     };
 
 
@@ -451,6 +454,18 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
                 if (pSystems[id] == nullptr)
                 {
                     pSystems[id] = new prAccelerometer();
+                }
+                else
+                {
+                    CoreShowSystemExists(id);
+                }
+                break;
+
+            // Leaderboards
+            case PRSYSTEM_LEADERBOARDS:
+                if (pSystems[id] == nullptr)
+                {
+                    pSystems[id] = new prLeaderboard();
                 }
                 else
                 {

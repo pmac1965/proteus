@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRANALYTICSBASE_H
-#define __PRANALYTICSBASE_H
+#pragma once
 
 
 // Class: prAnalyticsBase
@@ -45,6 +44,3 @@ public:
     //      Commits the submitted key/values to the provider.
     virtual void Commit();
 };
-
-
-#endif//__PRANALYTICSBASE_H

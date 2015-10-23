@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRJNIADVERTS_H
-#define __PRJNIADVERTS_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -42,6 +41,3 @@ void prJNI_FlurryLoadAdvert();
 
 
 #endif//PLATFORM_ANDROID
-
-
-#endif//__PRJNIADVERTS_H

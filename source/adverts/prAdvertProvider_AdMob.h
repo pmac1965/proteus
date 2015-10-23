@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRADVERTPROVIDER_ADMOB_H
-#define __PRADVERTPROVIDER_ADMOB_H
+#pragma once
 
 
 #include "prAdvertProvider.h"
@@ -63,6 +62,3 @@ private:
     bool    m_exp1;
     bool    m_exp2;
 };
-
-
-#endif//__PRADVERTPROVIDER_ADMOB_H

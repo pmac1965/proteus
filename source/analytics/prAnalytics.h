@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRANALYTICS_H
-#define __PRANALYTICS_H
+#pragma once
 
 
 // Forward declarations
@@ -58,6 +57,3 @@ private:
 
     prAnalyticsBase *m_pProvider;
 };
-
-
-#endif//__PRANALYTICS_H
