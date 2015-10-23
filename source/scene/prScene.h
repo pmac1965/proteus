@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSCENE_H
-#define __PRSCENE_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -54,6 +53,3 @@ public:
     //
     //void Render();
 };
-
-
-#endif//__PRSCENE_H
