@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRCUBE_H
-#define __PRCUBE_H
+#pragma once
 
 
 #include "prSceneObject.h"
@@ -43,6 +42,3 @@ public:
     //      Draws this primitive
     void Draw();
 };
-
-
-#endif//__PRCUBE_H
