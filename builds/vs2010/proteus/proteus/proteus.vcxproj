@@ -568,6 +568,7 @@
     <ClInclude Include="..\..\..\..\source\core\prRegistry.h" />
     <ClInclude Include="..\..\..\..\source\core\prResource.h" />
     <ClInclude Include="..\..\..\..\source\core\prResourceManager.h" />
+    <ClInclude Include="..\..\..\..\source\core\prSettings.h" />
     <ClInclude Include="..\..\..\..\source\core\prSingleton.h" />
     <ClInclude Include="..\..\..\..\source\core\prString.h" />
     <ClInclude Include="..\..\..\..\source\core\prStringShared.h" />
@@ -922,6 +923,7 @@
     <ClCompile Include="..\..\..\..\source\core\prRegistry.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prResource.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prResourceManager.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prSettings.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prString.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prStringUtil.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prVersion.cpp" />

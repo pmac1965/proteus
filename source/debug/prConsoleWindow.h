@@ -76,7 +76,7 @@ public:
         ConsoleColourLightWhite,
         ConsoleColourLightYellow,
         ConsoleColourLightCyan,
-        ConsoleColourLightMagenta,
+        ConsoleColourLightMagenta
     };
 
 

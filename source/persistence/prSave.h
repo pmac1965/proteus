@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSAVE_H
-#define __PRSAVE_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -39,8 +38,8 @@ public:
          IO_RESULT_FAILURE,                        
     };
 
-public:
 
+public:
     // Method: SaveResult
     //      This method needs to be added to a load/save handling class.
     //
@@ -122,7 +121,6 @@ public:
 
 
 private:
-
     // Report result to user
     void Report(int result);
 
@@ -138,18 +136,13 @@ private:
 
 
 private:
-
     // Stops passing by value and assignment.
     prSave(const prSave&);
     const prSave& operator = (const prSave&);
 
 
 private:
-
     // Don't change order.
     SaveImplementation  *pImpl;
     SaveImplementation  &imp;
 };
-
-
-#endif//__PRSAVE_H

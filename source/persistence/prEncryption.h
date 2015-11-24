@@ -1,4 +1,12 @@
 // File: prEncryption.h
+//      Performs a very simple form of XOR encryption. Designed to
+//      stop people from messing with text data files easily.
+//
+// Notes:
+//      If you want serious encryption, then you'll need to add it separately
+//
+// Notes:
+//      Basic saving includes encyption.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,8 +24,7 @@
  */
 
 
-#ifndef __PRENCRYPTION_H
-#define __PRENCRYPTION_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -25,11 +32,16 @@
 
 // Function: prEncrypt
 //      Encrypts a block of data.
+//
+// Parameters:
+//      pData   - Address of the data block to encrypt
+//      length  - Length of the data block to encrypt
 void prEncrypt(Proteus::Core::u8 *pData, Proteus::Core::u32 length);
 
 // Function: prDecrypt
 //      Decrypts a block of data.
+//
+// Parameters:
+//      pData   - Address of the data block to decrypt
+//      length  - Length of the data block to decrypt
 void prDecrypt(Proteus::Core::u8 *pData, Proteus::Core::u32 length);
-
-
-#endif//__PRENCRYPTION_H

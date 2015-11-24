@@ -77,6 +77,7 @@
 #include "core/prRegistry.h"
 #include "core/prResource.h"
 #include "core/prResourceManager.h"
+#include "core/prSettings.h"
 #include "core/prSingleton.h"
 #include "core/prString.h"
 #include "core/prStringShared.h"

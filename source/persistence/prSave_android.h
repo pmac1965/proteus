@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSAVEANDROID_H
-#define __PRSAVEANDROID_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -85,6 +84,3 @@ private:
 
 
 #endif
-
-
-#endif//__PRSAVEANDROID_H

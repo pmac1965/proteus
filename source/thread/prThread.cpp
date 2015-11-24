@@ -17,15 +17,12 @@
  */
 
 
+#include <thread>
 #include "prThread.h"
 
 
 // http://www.bogotobogo.com/cplusplus/multithreading_win32A.php
-
-
 // http://www.yolinux.com/TUTORIALS/LinuxTutorialPosixThreads.html
-
-
 // https://computing.llnl.gov/tutorials/pthreads/
 
 
