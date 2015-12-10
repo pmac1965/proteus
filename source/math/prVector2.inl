@@ -32,7 +32,7 @@ namespace Math {
 // ------------------------------------------------------------------------------------------------
 inline Proteus::Core::f32 prVector2::Length() const
 {
-    return sqrt((x * x) + (y * y));
+    return sqrtf((x * x) + (y * y));
 }
 
 

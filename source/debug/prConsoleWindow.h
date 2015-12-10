@@ -60,7 +60,7 @@ public:
     //  ConsoleColourLightYellow    - Light YELLOW
     //  ConsoleColourLightCyan      - Light CYAN
     //  ConsoleColourLightMagenta   - Light MAGENTA
-    typedef enum prConsoleColour
+    /*typedef*/ enum prConsoleColour
     {
         ConsoleColourBlack,
         ConsoleColourDarkRed,

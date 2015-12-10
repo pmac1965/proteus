@@ -60,7 +60,7 @@ static void normalize(float v[3])
 {
     float r;
 
-    r = sqrt( v[0]*v[0] + v[1]*v[1] + v[2]*v[2] );
+    r = sqrtf( v[0]*v[0] + v[1]*v[1] + v[2]*v[2] );
     if (r == 0.0) return;
 
     v[0] /= r;

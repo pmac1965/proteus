@@ -143,22 +143,22 @@ void prCamera::Rotate(f32 x, f32 y, f32 z)
 
     if (x) 
 	{
-		m_at.z = (m_eye.z + sin(x)*vector.y + cos(x)*vector.z);
-		m_at.y = (m_eye.y + cos(x)*vector.y - sin(x)*vector.z);
+		m_at.z = (m_eye.z + sinf(x)*vector.y + cosf(x)*vector.z);
+		m_at.y = (m_eye.y + cosf(x)*vector.y - sinf(x)*vector.z);
 	}
 
 	if (y) 
 	{
 	//prVector3 vector = m_at - m_eye;
-		m_at.z = (m_eye.z + (sin(y) * vector.x) + (cos(y) * vector.z));
-		m_at.x = (m_eye.x + (cos(y) * vector.x) - (sin(y) * vector.z));
+		m_at.z = (m_eye.z + (sinf(y) * vector.x) + (cosf(y) * vector.z));
+		m_at.x = (m_eye.x + (cosf(y) * vector.x) - (sinf(y) * vector.z));
 	}
 
 	if (z) 
 	{
 	//prVector3 vector = m_at - m_eye;
-		m_at.x = (m_eye.x + sin(z)*vector.y + cos(z)*vector.x);		
-		m_at.y = (m_eye.y + cos(z)*vector.y - sin(z)*vector.x);
+		m_at.x = (m_eye.x + sinf(z)*vector.y + cosf(z)*vector.x);		
+		m_at.y = (m_eye.y + cosf(z)*vector.y - sinf(z)*vector.x);
 	}
 }
 
