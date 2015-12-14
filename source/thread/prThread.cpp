@@ -17,8 +17,13 @@
  */
 
 
-#include <thread>
 #include "prThread.h"
+
+
+// PC
+#if defined(PLATFORM_PC)
+#include <thread>
+#endif
 
 
 // http://www.bogotobogo.com/cplusplus/multithreading_win32A.php
