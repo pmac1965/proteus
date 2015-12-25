@@ -1,4 +1,4 @@
-// File: prleaderboards.h
+// File: prLeaderboardManager.h
 // About:
 //      This class is a cross platform interface to leaderboards.
 //      If they are available on your chosen platform
@@ -25,8 +25,8 @@
 #pragma once
 
 
-#include "../core/prTypes.h"
-#include "../core/prCoreSystem.h"
+//#include "../core/prTypes.h"
+//#include "../core/prCoreSystem.h"
 
 
 // Namespaces
@@ -36,34 +36,34 @@ namespace Achievements {
 
 // Class: prLeaderboard
 //      Simple cross platform interface for a leaderboard
-class prLeaderboard : public prCoreSystem
+class prLeaderboardManager //: public prCoreSystem
 {
 public:
     // Method: prRenderer
     //      Ctor
-    prLeaderboard();
+    prLeaderboardManager();
 
     // Method: prRenderer
     //      Ctor
-    ~prLeaderboard();
+    ~prLeaderboardManager();
 
-    // Method: Submit
-    //      Submit a value to a leaderboard.
-    //
-    // Parameters:
-    //      name  - The name of the leaderboard
-    //      value - The value to submit to the leaderboard
-    void Submit(const char *name, Proteus::Core::u64 value);
+    //// Method: Submit
+    ////      Submit a value to a leaderboard.
+    ////
+    //// Parameters:
+    ////      name  - The name of the leaderboard
+    ////      value - The value to submit to the leaderboard
+    //void Submit(const char *name, Proteus::Core::u64 value);
 
-    // Method: Enable
-    //      Allows submit to be disabled in case you need to remove it.
-    //      For example in a free build where leaderboards may be disabled
-    //      to encourage purchase of the full product
-    void Enable(bool state);
+    //// Method: Enable
+    ////      Allows submit to be disabled in case you need to remove it.
+    ////      For example in a free build where leaderboards may be disabled
+    ////      to encourage purchase of the full product
+    //void Enable(bool state);
 
-    // Method: Available
-    //      Determines if the leaderboard interface is available for the current platform
-    bool Available() const;
+    //// Method: Available
+    ////      Determines if the leaderboard interface is available for the current platform
+    //bool Available() const;
 };
 
 

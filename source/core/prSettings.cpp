@@ -20,10 +20,15 @@
 #include "prSettings.h"
 #include "prStringUtil.h"
 #include "../debug/prTrace.h"
+#include "../debug/prDebug.h"
 #include "../file/prFileSystem.h"
+
+
+#if defined(PLATFORM_PC)
 #include <windows.h>
 #include <shlobj.h>
 #include <stdio.h>
+#endif
 
 
 /// ---------------------------------------------------------------------------
@@ -36,6 +41,8 @@ prSettings::prSettings(const char *folder, const char *filename, prSettingsCallb
     PRASSERT(folder && *folder);
     PRASSERT(filename && *filename);
     mCorrectFileType = false;
+
+    TODO("Make work across all platforms")
 }
 
 
@@ -75,6 +82,8 @@ void prSettings::Add(const char *key, const char *value)
 /// ---------------------------------------------------------------------------
 void prSettings::Save()
 {
+#if defined(PLATFORM_PC)
+
     char filename[MAX_PATH] = { '\0' };
     GenerateFileName(filename);
 
@@ -118,6 +127,8 @@ void prSettings::Save()
 
     // Now save
     doc.SaveFile(filename);
+
+#endif
 }
 
 
@@ -128,6 +139,7 @@ bool prSettings::Load()
 {
     bool result = false;
 
+#if defined(PLATFORM_PC)
 
     char filename[MAX_PATH] = { '\0' };    
     GenerateFileName(filename);
@@ -150,6 +162,8 @@ bool prSettings::Load()
 
         delete doc;
     }
+
+#endif
 
     return (result && mCorrectFileType);
 }
@@ -217,6 +231,8 @@ void prSettings::SetValueForKey(const char *key, const char *value)
 /// ---------------------------------------------------------------------------
 void prSettings::GenerateFileName(char *pBuffer)
 {
+#if defined(PLATFORM_PC)
+
     if (pBuffer)
     {
         if (SHGetFolderPathA(HWND_DESKTOP, CSIDL_LOCAL_APPDATA, NULL, SHGFP_TYPE_CURRENT, pBuffer) != S_OK)
@@ -232,6 +248,8 @@ void prSettings::GenerateFileName(char *pBuffer)
             strcat_s(pBuffer, MAX_PATH, mFilename.c_str());
         }
     }
+
+#endif
 }
 
 
@@ -240,6 +258,8 @@ void prSettings::GenerateFileName(char *pBuffer)
 /// ---------------------------------------------------------------------------
 void prSettings::GenerateFolderName(char *pBuffer)
 {
+#if defined(PLATFORM_PC)
+
     if (pBuffer)
     {
         if (SHGetFolderPathA(HWND_DESKTOP, CSIDL_LOCAL_APPDATA, NULL, SHGFP_TYPE_CURRENT, pBuffer) != S_OK)
@@ -253,6 +273,8 @@ void prSettings::GenerateFolderName(char *pBuffer)
             strcat_s(pBuffer, MAX_PATH, mFolder.c_str());
         }
     }
+
+#endif
 }
 
 

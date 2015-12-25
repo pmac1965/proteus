@@ -130,6 +130,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	core/prRegistry.cpp	\
 	core/prResource.cpp	\
 	core/prResourceManager.cpp	\
+	core/prSettings.cpp	\
 	core/prString.cpp	\
 	core/prStringUtil.cpp	\
 	core/prVersion.cpp	\

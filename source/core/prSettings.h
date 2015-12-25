@@ -7,7 +7,10 @@
 //
 // Notes:
 //      As you can supply the folder/filename you can use the class for more than settings,
-//      but this is not recommended, as well as its not its intended use
+//      but this is *not* recommended, as well as its not its intended use
+//
+// Warning:
+//      *Do not use for game saves. The XML files are not secure and human readable*
 //
 /**
  * Copyright 2014 Paul Michael McNab

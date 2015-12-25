@@ -460,6 +460,7 @@
     <ClInclude Include="..\..\..\..\source\achievements\prAchievement_linux.h" />
     <ClInclude Include="..\..\..\..\source\achievements\prAchievement_mac.h" />
     <ClInclude Include="..\..\..\..\source\achievements\prAchievement_pc.h" />
+    <ClInclude Include="..\..\..\..\source\achievements\prLeaderboardManager.h" />
     <ClInclude Include="..\..\..\..\source\achievements\prLeaderboards.h" />
     <ClInclude Include="..\..\..\..\source\actor\prActor.h" />
     <ClInclude Include="..\..\..\..\source\actor\prActorManager.h" />
@@ -833,6 +834,7 @@
     <ClCompile Include="..\..\..\..\source\achievements\prAchievement_linux.cpp" />
     <ClCompile Include="..\..\..\..\source\achievements\prAchievement_mac.cpp" />
     <ClCompile Include="..\..\..\..\source\achievements\prAchievement_pc.cpp" />
+    <ClCompile Include="..\..\..\..\source\achievements\prLeaderboardManager.cpp" />
     <ClCompile Include="..\..\..\..\source\achievements\prLeaderboards.cpp" />
     <ClCompile Include="..\..\..\..\source\actor\prActor.cpp" />
     <ClCompile Include="..\..\..\..\source\actor\prActorManager.cpp" />

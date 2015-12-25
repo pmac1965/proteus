@@ -4,6 +4,7 @@
 *.tlog
 *.obj
 *.opensdf
+*.opendb
 *.sdf
 *.user
 *.ipch

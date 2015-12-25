@@ -42,31 +42,31 @@ public:
 
     // Method: Init
     //      Inits the renderer with basic settings.
-    void Init();
+    void Init() override;
 
     // Method: Destroy
     //      Destroys the renderer.
-    void Destroy();
+    void Destroy() override;
 
     // Method: Begin
     //      Begins the image rendering cycle.
-    void Begin();
+    void Begin() override;
 
     // Method: End
     //      Ends the image rendering cycle.
-    void End();
+    void End() override;
 
     // Method: Present
     //      Shows the previously rendered image.
-    void Present();
+    void Present() override;
 
     // Method: SetOrthographicView
     //      Set orthographic view in preparation for 2D rendering.
-    void SetOrthographicView();
+    void SetOrthographicView() override;
 
     // Method: RestorePerspectiveView
     //      Restore perspective projection.
-    void RestorePerspectiveView();
+    void RestorePerspectiveView() override;
     
     // Method: DrawPoint
     //      Draws a single point.
@@ -74,7 +74,7 @@ public:
     // Parameters:
     //      x - The x coordinate
     //      y - The y coordinate
-    void DrawPoint(Proteus::Core::f32 x, Proteus::Core::f32 y);
+    void DrawPoint(Proteus::Core::f32 x, Proteus::Core::f32 y) override;
     
     // Method: DrawLine
     //      Draws a line.
@@ -84,7 +84,7 @@ public:
     //      y1 - The start y coordinate
     //      x2 - The end x coordinate
     //      y2 - The end y coordinate
-    void DrawLine(Proteus::Core::f32 x1, Proteus::Core::f32 y1, Proteus::Core::f32 x2, Proteus::Core::f32 y2);
+    void DrawLine(Proteus::Core::f32 x1, Proteus::Core::f32 y1, Proteus::Core::f32 x2, Proteus::Core::f32 y2) override;
 
     // Method: DrawLine
     //      Draws a line 3D.
@@ -92,7 +92,7 @@ public:
     // Parameters:
     //      from - The start coordinate
     //      to   - The end coordinate
-    void DrawLine(Proteus::Math::prVector3 &from, Proteus::Math::prVector3 &to);
+    void DrawLine(Proteus::Math::prVector3 &from, Proteus::Math::prVector3 &to) override;
 
     // Method: DrawLine
     //      Draws a line 3D.
@@ -100,7 +100,7 @@ public:
     // Parameters:
     //      from - The start coordinate
     //      to   - The end coordinate
-    void DrawLine(const Proteus::Math::prVector3 &from, const Proteus::Math::prVector3 &to);
+    void DrawLine(const Proteus::Math::prVector3 &from, const Proteus::Math::prVector3 &to) override;
     
     // Method: DrawRect
     //      Draws a hollow rectangle.
@@ -110,7 +110,7 @@ public:
     //      y1 - The start y coordinate (Top left corner)
     //      x2 - The end x coordinate (Bottom right corner)
     //      y2 - The end y coordinate (Bottom right corner)
-    void DrawRect(Proteus::Core::f32 x1, Proteus::Core::f32 y1, Proteus::Core::f32 x2, Proteus::Core::f32 y2);
+    void DrawRect(Proteus::Core::f32 x1, Proteus::Core::f32 y1, Proteus::Core::f32 x2, Proteus::Core::f32 y2) override;
     
     // Method: DrawFilledRect
     //      Draws a filled rectangle.
@@ -120,7 +120,7 @@ public:
     //      y1 - The start y coordinate (Top left corner)
     //      x2 - The end x coordinate (Bottom right corner)
     //      y2 - The end y coordinate (Bottom right corner)
-    void DrawFilledRect(Proteus::Core::f32 x1, Proteus::Core::f32 y1, Proteus::Core::f32 x2, Proteus::Core::f32 y2);
+    void DrawFilledRect(Proteus::Core::f32 x1, Proteus::Core::f32 y1, Proteus::Core::f32 x2, Proteus::Core::f32 y2) override;
     
     // Method: DrawCircle
     //      Draws a hollow circle.
@@ -129,7 +129,7 @@ public:
     //      x      - The start x coordinate (center)
     //      y      - The start y coordinate (center)
     //      radius - The radius
-    void DrawCircle(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 radius);
+    void DrawCircle(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 radius) override;
 
     // Method: DrawFilledCircle
     //      Draws a filled circle.
@@ -138,7 +138,7 @@ public:
     //      x      - The start x coordinate (center)
     //      y      - The start y coordinate (center)
     //      radius - The radius
-    void DrawFilledCircle(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 radius);
+    void DrawFilledCircle(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 radius) override;
 
     // Method: DrawPolygon
     //      Draws a hollow polygon.
@@ -146,7 +146,7 @@ public:
     // Parameters:
     //      vertices - A pointer to the vertex data
     //      count    - Number of vertices
-    void DrawPolygon(prVertex2D *vertices, Proteus::Core::s32 count);
+    void DrawPolygon(prVertex2D *vertices, Proteus::Core::s32 count) override;
 
     // Method: DrawFilledPolygon
     //      Draws a filled polygon.
@@ -154,11 +154,11 @@ public:
     // Parameters:
     //      vertices - A pointer to the vertex data
     //      count    - Number of vertices
-    void DrawFilledPolygon(prVertex2D *vertices, Proteus::Core::s32 count);
+    void DrawFilledPolygon(prVertex2D *vertices, Proteus::Core::s32 count) override;
     
     // Method: DrawQuad
     //      Draws a textured quad
-    void DrawQuad();
+    void DrawQuad() override;
     
     // Method: DrawQuad
     //      Draws a textured quad
@@ -168,7 +168,7 @@ public:
     //      v0 - Vertex coordinate
     //      u1 - Vertex coordinate
     //      v1 - Vertex coordinate
-    void DrawQuad(float u0, float v0, float u1, float v1);
+    void DrawQuad(float u0, float v0, float u1, float v1) override;
 
     // Method: DrawQuad
     //      Draws a textured quad
@@ -179,7 +179,7 @@ public:
     //      u1 - Vertex coordinate
     //      v1 - Vertex coordinate
     //      c  - Colour
-    void DrawQuad(float u0, float v0, float u1, float v1, prColour c);
+    void DrawQuad(float u0, float v0, float u1, float v1, prColour c) override;
 
     // Method: BatchDrawQuad
     //      Draws a textured quad
@@ -190,35 +190,35 @@ public:
     //      u1 - Vertex coordinate
     //      v1 - Vertex coordinate
     //      c  - Colour
-    void BatchDrawQuad(float u0, float v0, float u1, float v1, prColour c);
+    void BatchDrawQuad(float u0, float v0, float u1, float v1, prColour c) override;
 
     // Method: SetColour
     //      Sets the draw colour.
     //
     // Parameters:
     //      colour - Colour
-    void SetColour(const prColour &colour);
+    void SetColour(const prColour &colour) override;
 
     // Method: SetClearColour
     //      Sets the clear colour.
     //
     // Parameters:
     //      colour - Colour
-    void SetClearColour(const prColour &colour);
+    void SetClearColour(const prColour &colour) override;
 
     // Method: TexturesEnabled
     //      Enables/disables textures.
     //
     // Parameters:
     //      state - true or false
-    void TexturesEnabled(bool state);
+    void TexturesEnabled(bool state) override;
 
     // Method: BlendEnabled
     //      Enables/disables blending.
     //
     // Parameters:
     //      state - true or false
-    void BlendEnabled(bool state);
+    void BlendEnabled(bool state) override;
 
     // Method: DrawGrid
     //      Draws a positioning grid
@@ -226,7 +226,7 @@ public:
     // Parameters:
     //      size - The number of squares in either direction.
     //      E.g 2 will give a 4x4 grid
-    void DrawGrid(Proteus::Core::s32 size);
+    void DrawGrid(Proteus::Core::s32 size) override;
 
 
 private:
