@@ -16,14 +16,11 @@
  */
 
 
-#ifndef __PRRESOURCE_H
-#define __PRRESOURCE_H
+#pragma once
 
 
 #include "prTypes.h"
-
-
-#define RESOURCE_FILENAME_SIZE      260
+#include "../file/prFileShared.h"
 
 
 // Class: prResource
@@ -101,7 +98,6 @@ private:
 
 
 protected:
-
     // Method: SetSize
     //      Used to set the resources size.
     //
@@ -111,8 +107,7 @@ protected:
 
 
 private:
-
-    char                m_filename[RESOURCE_FILENAME_SIZE];
+    char                m_filename[FILE_MAX_FILENAME_SIZE];
     Proteus::Core::u32  m_hash;
     Proteus::Core::u32  m_references;
     Proteus::Core::u32  m_size;
@@ -121,6 +116,3 @@ private:
     bool                m_exp1;
     bool                m_exp2;
 };
-
-
-#endif//__PRRESOURCE_H

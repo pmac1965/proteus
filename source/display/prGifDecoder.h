@@ -21,6 +21,7 @@
 
 
 #include "../core/prTypes.h"
+#include "../file/prFileShared.h"
 #include "../freeImage/FreeImage.h"
 
 

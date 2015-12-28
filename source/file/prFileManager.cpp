@@ -29,6 +29,7 @@
 #include "../core/prCore.h"
 #include "../core/prCoreSystem.h"
 #include "../core/prStringUtil.h"
+#include "../file/prFileShared.h"
 #include "../zlib/zlib.h"
 
 
@@ -54,27 +55,19 @@
   #include <stdlib.h>
   #include <unistd.h>
 
-  #ifndef MAX_PATH
-  #define MAX_PATH    256
-  #endif
-
 #elif defined(PLATFORM_ANDROID)
   #include <stdlib.h>
   #include <libzip\zip.h>
   #include <libzip\zipint.h>
-
-  #ifndef MAX_PATH
-  #define MAX_PATH    260
-  #endif
 
   #define ANDROID_APK_DEBUG
   //#define ANDROID_APK_DEBUG_SHOW_CONTENTS
 
   namespace
   {
-    char APKPath [MAX_PATH] = { '\0' };
-    char CardPath[MAX_PATH] = { '\0' };
-    char SavePath[MAX_PATH] = { '\0' };
+    char APKPath [FILE_MAX_FILENAME_SIZE] = { '\0' };
+    char CardPath[FILE_MAX_FILENAME_SIZE] = { '\0' };
+    char SavePath[FILE_MAX_FILENAME_SIZE] = { '\0' };
     zip *APKArchive = NULL;
   }
 

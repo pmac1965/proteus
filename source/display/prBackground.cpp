@@ -60,16 +60,12 @@
 #include "../core/prStringUtil.h"
 #include "../core/prCore.h"
 #include "../core/prRegistry.h"
+#include "../file/prFileShared.h"
 #include "../tinyxml/tinyxml.h"
 #include "../display/prOglUtils.h"
 
 
 using namespace Proteus::Core;
-
-
-#ifndef MAX_PATH
-#define MAX_PATH    260
-#endif
 
 
 /// ---------------------------------------------------------------------------
@@ -581,7 +577,7 @@ void prBackground::ParseAttribs_Background(TiXmlElement* pElement)
                 // If we're a tool we cannot use the older .bgd files, they need to be
                 // converted as their textures may not be for the PC
                 #if defined(PROTEUS_TOOL)
-                    char filename[MAX_PATH];
+                    char filename[FILE_MAX_FILENAME_SIZE];
                     prStringCopySafe(filename, m_filenameTexture.Text(), sizeof(filename));
                     s32 index = prStringFindLastIndex(filename, '.');
                     if (index > -1)
@@ -599,7 +595,7 @@ void prBackground::ParseAttribs_Background(TiXmlElement* pElement)
                 #else
                     // Tool created background files use the path to the textures image, so we need to
                     // create the path to the .pvr data for games
-                    char filename[MAX_PATH];
+                    char filename[FILE_MAX_FILENAME_SIZE];
                     prStringCopySafe(filename, m_filenameTexture.Text(), sizeof(filename));
                     prStringReplaceChar(filename, '\\', '/');
 
@@ -612,7 +608,7 @@ void prBackground::ParseAttribs_Background(TiXmlElement* pElement)
                         // If not .pvr, create path to .pvr
                         if (prStringCompareNoCase(&filename[indexExt], ".pvr") != 0)
                         {
-                            char path[MAX_PATH];
+                            char path[FILE_MAX_FILENAME_SIZE];
                             filename[indexExt] = 0;
                             prStringSnprintf(path, sizeof(path), "data/textures/%s.pvr", &filename[indexNme + 1]);
                             m_filenameTexture.Set(path);

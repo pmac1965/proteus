@@ -127,6 +127,7 @@ typedef struct AchievementManagerImplementation
         PRASSERT(folder && *folder);
 
         TODO("Finish converting achievement manager")
+        TODO("CHECK FILE NAME/PATH SIZES WITH LINUX")
 
         save                    = new prSave(folder);
         achievementsCount       = 0;

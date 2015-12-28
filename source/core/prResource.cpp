@@ -29,7 +29,7 @@
 prResource::prResource(const char *filename)
 {
     PRASSERT(filename && *filename);
-    PRASSERT(strlen(filename) < RESOURCE_FILENAME_SIZE);
+    PRASSERT(strlen(filename) < FILE_MAX_FILENAME_SIZE);
 
     // Save filename.
     prStringCopySafe(m_filename, filename, sizeof(m_filename));

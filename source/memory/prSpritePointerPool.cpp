@@ -25,12 +25,10 @@
 #include "../debug/prAssert.h"
 #include "../display/prSprite.h"
 #include "../display/prSpriteManager.h"
+#include "../file/prFileShared.h"
 
 
 using namespace Proteus::Core;
-
-
-#define MAX_PATH_SIZE   260
 
 
 /// ---------------------------------------------------------------------------
@@ -59,8 +57,8 @@ void prSpritePointerPool::Add(const char *filename, prSprite* pSprite)
     PRASSERT(pSprite);
 
     // Create a safe hash
-    char buffer[MAX_PATH_SIZE];
-    prStringCopySafe(buffer, filename, MAX_PATH_SIZE);
+    char buffer[FILE_MAX_FILENAME_SIZE];
+    prStringCopySafe(buffer, filename, FILE_MAX_FILENAME_SIZE);
     prStringToLower(buffer);
     u32 hash  = prStringHash(buffer);
     s32 index = Find(hash);
@@ -122,8 +120,8 @@ prSprite* prSpritePointerPool::Fetch(const char *filename)
     PRASSERT(filename && *filename);
 
     // Create a safe hash
-    char buffer[MAX_PATH_SIZE];
-    prStringCopySafe(buffer, filename, MAX_PATH_SIZE);
+    char buffer[FILE_MAX_FILENAME_SIZE];
+    prStringCopySafe(buffer, filename, FILE_MAX_FILENAME_SIZE);
     prStringToLower(buffer);
     u32 hash  = prStringHash(buffer);
     s32 index = Find(hash);
@@ -197,8 +195,8 @@ s32 prSpritePointerPool::Count(const char *filename) const
     PRASSERT(filename && *filename);
 
     // Create a safe hash
-    char buffer[MAX_PATH_SIZE];
-    prStringCopySafe(buffer, filename, MAX_PATH_SIZE);
+    char buffer[FILE_MAX_FILENAME_SIZE];
+    prStringCopySafe(buffer, filename, FILE_MAX_FILENAME_SIZE);
     prStringToLower(buffer);
     u32 hash  = prStringHash(buffer);
     s32 index = Find(hash);

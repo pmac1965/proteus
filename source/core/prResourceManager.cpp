@@ -22,6 +22,7 @@
 #include "../debug/prAssert.h"
 #include "../debug/prTrace.h"
 #include "../debug/prDebug.h"
+#include "../file/prFileShared.h"
 #include "prCore.h"
 
 
@@ -89,7 +90,7 @@ prResource *prResourceManager::Find(const char *filename)
     PRASSERT(filename && *filename);
     
     // Create hash from constant filename format
-    char buffer[RESOURCE_FILENAME_SIZE];
+    char buffer[FILE_MAX_FILENAME_SIZE];
     prStringCopySafe(buffer, filename, sizeof(buffer));
     prStringToLower(buffer);
     prStringReplaceChar(buffer, '\\', '/');

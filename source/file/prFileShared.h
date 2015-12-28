@@ -19,6 +19,7 @@
 #pragma once
 
 
+#include "../prConfig.h"
 #include "../core/prTypes.h"
 
 
@@ -31,10 +32,24 @@
 
 
 // ----------------------------------------------------------------------------
-// Misc
+// File name/path defines
 // ----------------------------------------------------------------------------
 #define FILE_ARCHIVES_MAX           8
-#define FILE_MAX_FILENAME_SIZE      260
+#if defined(PLATFORM_PC)
+  #include <Windows.h>
+  #define FILE_MAX_FILENAME_SIZE      MAX_PATH
+  #define FILE_MAX_FILEPATH_SIZE      MAX_PATH
+
+#elif defined(PLATFORM_LINUX)
+  #include <linux/limits.h>
+  #define FILE_MAX_FILENAME_SIZE      NAME_MAX
+  #define FILE_MAX_FILEPATH_SIZE      PATH_MAX
+
+#else
+  #define FILE_MAX_FILENAME_SIZE      256
+  #define FILE_MAX_FILEPATH_SIZE      256
+
+#endif
 
 
 // ----------------------------------------------------------------------------

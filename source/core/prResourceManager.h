@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRRESOURCEMANAGER_H
-#define __PRRESOURCEMANAGER_H
+#pragma once
 
 
 #include <list>
@@ -188,6 +187,3 @@ private:
 
     std::list<prResource*>    m_resources[RESOURCE_TABLE_SIZE];
 };
-
-
-#endif//__PRRESOURCEMANAGER_H

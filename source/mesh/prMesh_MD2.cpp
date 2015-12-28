@@ -32,6 +32,7 @@
 #include "../debug/prAssert.h"
 #include "../debug/prTrace.h"
 #include "../display/prTexture.h"
+#include "../file/prFileShared.h"
 #include <stdio.h>
 #include <fstream>
 #include <windows.h>
@@ -231,7 +232,7 @@ bool prMesh_MD2::Load(const char *filename)
                 {
                     prTrace(LogError, "Skin: %s\n", m_skins[i].name);
 
-                    char buffer[260];
+                    char buffer[FILE_MAX_FILENAME_SIZE];
 
                     prStringCopySafe(buffer, m_skins[i].name, sizeof(buffer));
                     prTrace(LogError, "Skin 1: %s\n", buffer);
@@ -265,7 +266,7 @@ bool prMesh_MD2::Load(const char *filename)
                     prStringAddString(".pvr", buffer);
                     prTrace(LogError, "Skin 6: %s\n", buffer);
 
-                    char fullpath[260];
+                    char fullpath[FILE_MAX_FILENAME_SIZE];
                     sprintf(fullpath, "data/textures/%s", buffer);
 
                     prTrace(LogError, "Texture: '%s'\n", fullpath);

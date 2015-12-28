@@ -815,6 +815,7 @@
     <ClInclude Include="..\..\..\..\source\tool\AntTweakBar.h" />
     <ClInclude Include="..\..\..\..\source\utf8proc\utf8proc.h" />
     <ClInclude Include="..\..\..\..\source\utf8proc\utf8proc_data.h" />
+    <ClInclude Include="..\..\..\..\source\util\prDictionarySearch.h" />
     <ClInclude Include="..\..\..\..\source\util\prUtility_PC.h" />
     <ClInclude Include="..\..\..\..\source\zlib\crc32.h" />
     <ClInclude Include="..\..\..\..\source\zlib\deflate.h" />
@@ -1864,6 +1865,7 @@
     <ClCompile Include="..\..\..\..\source\tinyxml\tinyxmlerror.cpp" />
     <ClCompile Include="..\..\..\..\source\tinyxml\tinyxmlparser.cpp" />
     <ClCompile Include="..\..\..\..\source\utf8proc\utf8proc.cpp" />
+    <ClCompile Include="..\..\..\..\source\util\prDictionarySearch.cpp" />
     <ClCompile Include="..\..\..\..\source\util\prUtility_PC.cpp" />
     <ClCompile Include="..\..\..\..\source\zlib\adler32.c" />
     <ClCompile Include="..\..\..\..\source\zlib\compress.c" />
