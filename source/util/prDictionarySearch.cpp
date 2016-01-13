@@ -26,12 +26,12 @@
 #include "../core/prStringUtil.h"
 #include "../core/prMacros.h"
 #include "../file/prFile.h"
+#include "../file/prFileShared.h"
 
 
 // Defines
 #define WORD_MIN_SIZE           2
 #define WORD_MAX_SIZE           32
-#define WORD_FILENAME_SIZE      260
 
 
 // Enums
@@ -47,7 +47,7 @@ enum
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
-prDictionarySearch::prDictionarySearch(int minLength, int maxLength)
+prDictionarySearch::prDictionarySearch(int minLength, int maxLength, prDictionaryCallbacks *pcb)
 {
     PRASSERT(minLength >= WORD_MIN_SIZE);
     PRASSERT(maxLength >= WORD_MIN_SIZE);
@@ -55,10 +55,11 @@ prDictionarySearch::prDictionarySearch(int minLength, int maxLength)
     PRASSERT(minLength <= WORD_MAX_SIZE);
     PRASSERT(maxLength <= WORD_MAX_SIZE);
     PRASSERT(maxLength >  minLength);
+    PRASSERT(pcb != nullptr);
 
-    m_minLength = minLength;
-    m_maxLength = maxLength;
-
+    m_minLength  = minLength;
+    m_maxLength  = maxLength;
+    m_callback   = pcb;
     m_file       = NULL;
     m_fileBuffer = NULL;
     m_exp0       = false;
@@ -84,10 +85,8 @@ prDictionarySearch::~prDictionarySearch()
 /// ---------------------------------------------------------------------------
 // Starts a search
 /// ---------------------------------------------------------------------------
-void prDictionarySearch::Start(const char *word, prDictionaryCallback callback)
+void prDictionarySearch::Start(const char *word)
 {
-    PRASSERT(callback);
-
     // Are we searching already?
     if (m_searching)
     {
@@ -95,41 +94,36 @@ void prDictionarySearch::Start(const char *word, prDictionaryCallback callback)
         return;
     }
 
-    // Prep
-    if (callback)
+    // Search
+    if (word && *word)
     {
-        m_callback  = callback;
-
-        if (word && *word)
+        // Check word size.
+        m_wordSize = prStringLength(word);
+        if (m_wordSize < m_minLength || m_wordSize > m_maxLength)
         {
-            // Check word size.
-            m_wordSize = prStringLength(word);
-            if (m_wordSize < m_minLength || m_wordSize > m_maxLength)
-            {
-                prTrace(LogError, "prDictionarySearch::Start - Word size is invalid.\n");
-                Report(SEARCH_RESULT_ERROR);
-                return;
-            }
-
-            // Do we have a start letter?
-            char c = *word;
-            if (!PRBETWEEN(c, 'a', 'z'))
-            {
-                prTrace(LogError, "prDictionarySearch::Start - Initial character is invalid.\n");
-                Report(SEARCH_RESULT_ERROR);
-                return;
-            }
-
-            // Start search
-            m_mode      = WSM_START_LOAD;
-            m_searching = true;
-            prStringCopySafe(m_word, word, sizeof(m_word));
-        }
-        else
-        {
-            prTrace(LogError, "prDictionarySearch::Start - Word pointer was either null or empty.\n");
+            prTrace(LogError, "prDictionarySearch::Start - Word size is invalid.\n");
             Report(SEARCH_RESULT_ERROR);
+            return;
         }
+
+        // Do we have a start letter?
+        char c = *word;
+        if (!PRBETWEEN(c, 'a', 'z'))
+        {
+            prTrace(LogError, "prDictionarySearch::Start - Initial character is invalid.\n");
+            Report(SEARCH_RESULT_ERROR);
+            return;
+        }
+
+        // Start search
+        m_mode      = WSM_START_LOAD;
+        m_searching = true;
+        prStringCopySafe(m_word, word, sizeof(m_word));
+    }
+    else
+    {
+        prTrace(LogError, "prDictionarySearch::Start - Word pointer was either null or empty.\n");
+        Report(SEARCH_RESULT_ERROR);
     }
 }
 
@@ -168,7 +162,7 @@ void prDictionarySearch::Update()
 /// ---------------------------------------------------------------------------
 void prDictionarySearch::Clear()
 {
-    m_callback  = NULL;
+    //m_callback  = NULL;
     m_searching = false;
     m_mode      = WSM_NONE;
     m_wordSize  = 0;
@@ -185,7 +179,7 @@ void prDictionarySearch::Report(prDictionarySearchResult result)
 {
     if (m_callback)
     {
-        m_callback(result);
+        m_callback->prDictionaryCallback(result);
     }
 
     Clear();
@@ -197,7 +191,7 @@ void prDictionarySearch::Report(prDictionarySearchResult result)
 /// ---------------------------------------------------------------------------
 void prDictionarySearch::StartLoad()
 {
-    char filename[WORD_FILENAME_SIZE];
+    char filename[FILE_MAX_FILENAME_SIZE];
 
 #if defined (PLATFORM_PC)
     sprintf_s(filename, sizeof(filename), "data/dictionary/%c_%i.dic", m_word[0], m_wordSize);
@@ -289,7 +283,7 @@ void prDictionarySearch::SearchFile()
         else
         {
             Report(SEARCH_RESULT_FOUND);
-            prTrace(LogDebug, "Found %s\n", m_word);
+            //prTrace(LogDebug, "Found %s\n", m_word);
             return;
         }
     }

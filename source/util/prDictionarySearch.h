@@ -44,9 +44,16 @@ typedef enum //prDictionarySearchResult
 } prDictionarySearchResult;
 
 
-// Typedef: prDictionaryCallback
-//      The dictionary callback type.
-typedef void (*prDictionaryCallback)(prDictionarySearchResult result);
+// Class: prDictionaryCallbacks
+//      A mix-in class to receive notifications about settings
+//
+// Notes:
+//      This class is optional
+class prDictionaryCallbacks
+{
+public:
+    virtual void prDictionaryCallback(prDictionarySearchResult result) = 0;
+};
 
 
 // Defines
@@ -72,7 +79,8 @@ public:
     // Parameters:
     //      minLength   - The minimum length of words which can be searched for.
     //      maxLength   - The maximum length of words which can be searched for.
-    prDictionarySearch(int minLength, int maxLength);
+    //      pcb         - A callback class. *Must not be NULL.*
+    prDictionarySearch(int minLength, int maxLength, prDictionaryCallbacks *pcb);
 
     // Method: ~prDictionarySearch
     //      Destructor
@@ -83,12 +91,11 @@ public:
     //
     // Parameters:
     //      word        - The to search for.
-    //      callback    - A callback pointer. *Must not be NULL.*
     //
     // Notes:
     //      Do not start a search while one is in progress, as the secondary search @n
     //      will be ignored.
-    void Start(const char *word, prDictionaryCallback callback);
+    void Start(const char *word);
 
     // Method: Update
     //      Updates the dictionary search.
@@ -103,7 +110,7 @@ public:
 
 
 private:
-    prDictionaryCallback    m_callback;
+    prDictionaryCallbacks  *m_callback;
     Proteus::Core::s32      m_minLength;
     Proteus::Core::s32      m_maxLength;
     Proteus::Core::s32      m_mode;
