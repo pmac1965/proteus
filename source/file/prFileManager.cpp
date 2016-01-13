@@ -651,7 +651,8 @@ void prFileManager::DisplayFiles(bool accessed)
 
 // ------------------------------------------------------------------------
 // This function looks in all archives for the file.
-// Returns the last file found as code assumes later archives will contain updated files
+// Returns the last file found as code assumes later archives will contain
+// updated files
 // ------------------------------------------------------------------------
 bool prFileManager::Exists(u32 hash, u32 &size)
 {
