@@ -224,6 +224,7 @@
 #include "thread/prThread.h"
 #include "utf8proc/utf8proc.h"
 #include "util/prUtility_PC.h"
+#include "util/prDictionarySearch.h"
 
 
 // Include the PC libraries
