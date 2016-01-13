@@ -42,6 +42,9 @@ LOCAL_CPPFLAGS	+= $(DEBUG_FLAGS) -fno-rtti -fno-exceptions -std=c++11
 #LOCAL_CFLAGS	+= -Werror -fno-rtti
 
 
+NDK_TOOLCHAIN_VERSION := 4.8
+
+
 LOCAL_LDLIBS := -ldl -llog -lGLESv1_CM -lstdc++ -lEGL -lGLESv2
 LOCAL_C_INCLUDES := D:/engine/freetype2/include
 
@@ -237,6 +240,7 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	tinyxml/tinyxmlerror.cpp	\
 	tinyxml/tinyxmlparser.cpp	\
 	utf8proc/utf8proc.cpp	\
+	util/prDictionarySearch.cpp	\
 	libzip/mkstemp.c	\
 	libzip/zip_add.c	\
 	libzip/zip_add_dir.c	\
