@@ -229,10 +229,9 @@ void prSettings::SetValueForKey(const char *key, const char *value)
 /// ---------------------------------------------------------------------------
 /// Generate the filename
 /// ---------------------------------------------------------------------------
+#if defined(PLATFORM_PC)
 void prSettings::GenerateFileName(char *pBuffer)
 {
-#if defined(PLATFORM_PC)
-
     if (pBuffer)
     {
         if (SHGetFolderPathA(HWND_DESKTOP, CSIDL_LOCAL_APPDATA, NULL, SHGFP_TYPE_CURRENT, pBuffer) != S_OK)
@@ -248,18 +247,16 @@ void prSettings::GenerateFileName(char *pBuffer)
             strcat_s(pBuffer, MAX_PATH, mFilename.c_str());
         }
     }
-
-#endif
 }
+#endif
 
 
 /// ---------------------------------------------------------------------------
 /// Generate the folder name
 /// ---------------------------------------------------------------------------
+#if defined(PLATFORM_PC)
 void prSettings::GenerateFolderName(char *pBuffer)
 {
-#if defined(PLATFORM_PC)
-
     if (pBuffer)
     {
         if (SHGetFolderPathA(HWND_DESKTOP, CSIDL_LOCAL_APPDATA, NULL, SHGFP_TYPE_CURRENT, pBuffer) != S_OK)
@@ -273,9 +270,8 @@ void prSettings::GenerateFolderName(char *pBuffer)
             strcat_s(pBuffer, MAX_PATH, mFolder.c_str());
         }
     }
-
-#endif
 }
+#endif
 
 
 /// ---------------------------------------------------------------------------

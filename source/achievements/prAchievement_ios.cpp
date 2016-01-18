@@ -39,6 +39,69 @@
 using namespace Proteus::Core;
 
 
+/// ---------------------------------------------------------------------------
+/// Initialises the achievement system for a specific platform
+/// ---------------------------------------------------------------------------
+void prAchievement_Ios::Initialise()
+{
+    // Start engine initialisation process, which essentially mimics a more complex process with
+    // network sign-in, to keep status messages similar.
+    SetStatus(InitialisingStart);
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Called when the status has changed.
+/// ---------------------------------------------------------------------------
+void prAchievement_Ios::StatusUpdate(prAchievementProviderStatus status)
+{
+    switch(status)
+    {
+            // We've started, so set success
+        case InitialisingStart:
+            SetStatus(InitialisingSuccess);
+            break;
+            
+            // Okay, succeeded
+        case InitialisingSuccess:
+            SetStatus(None);
+            SetReady(true);
+            break;
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Updates the achievement system for a specific platform
+/// ---------------------------------------------------------------------------
+void prAchievement_Ios::Update(f32 dt)
+{
+    prAchievementBase::Update(dt);
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Award an achievement.
+/// ---------------------------------------------------------------------------
+void prAchievement_Ios::Award(const char *name, s32 id)
+{
+    PRUNUSED(name);
+    PRUNUSED(id);
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Checks if an achievement has been award.
+/// ---------------------------------------------------------------------------
+bool prAchievement_Ios::IsAwarded(const char *name, s32 id)
+{
+    PRUNUSED(name);
+    PRUNUSED(id);
+    return false;
+}
+
+
+#if 0
 // ----------------------------------------------------------------------------
 // Award an achievement.
 // ----------------------------------------------------------------------------
@@ -94,6 +157,8 @@ bool prAchievement_Ios::IsReady()
     
     return result;
 }
+#endif
 
 
 #endif
+

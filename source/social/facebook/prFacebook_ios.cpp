@@ -63,7 +63,9 @@ prFacebook_Ios::~prFacebook_Ios()
 /// ----------------------------------------------------------------------------
 bool prFacebook_Ios::Initialise()
 {
+#if 0
     prFB_Initialise(mpCallbacks);
+#endif
     return true;
 }
 
@@ -82,7 +84,9 @@ bool prFacebook_Ios::Update()
 /// ----------------------------------------------------------------------------
 bool prFacebook_Ios::OpenSession()
 {
+#if 0
     prFB_OpenSession(mpCallbacks, mIsLoggedIn);
+#endif
     return mIsLoggedIn;
 }
 
@@ -92,7 +96,9 @@ bool prFacebook_Ios::OpenSession()
 /// ----------------------------------------------------------------------------
 bool prFacebook_Ios::Login()
 {
+#if 0
     prFB_Login(mpCallbacks, mIsLoggedIn);
+#endif
     return mIsLoggedIn;
 }
 
@@ -102,7 +108,9 @@ bool prFacebook_Ios::Login()
 /// ----------------------------------------------------------------------------
 void prFacebook_Ios::FetchUserDetails()
 {
+#if 0
     prFB_FetchUserDetails(mpCallbacks, this);
+#endif
 }
     
     

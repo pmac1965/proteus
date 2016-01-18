@@ -21,6 +21,7 @@
 #include "../display/prOglUtils.h"
 #include "../display/prOglConfig.h"
 #include "../core/prMacros.h"
+#include "../debug/prDebug.h"
 
 
 #if defined(PLATFORM_PC)
@@ -41,6 +42,7 @@
 
 #elif defined(PLATFORM_IOS)
   #include <OpenGLES/ES1/gl.h>
+  //#include <OpenGLES/ES1/glu.h>
 
 #else
   #error No platform defined.
@@ -152,6 +154,8 @@ void prCube::Draw()
 
             // Turn on offset mode
             glPolygonOffset(-1, -1);
+    TODO("Sort this");
+#ifndef PLATFORM_IOS
             glEnable(GL_POLYGON_OFFSET_LINE);
 
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -164,7 +168,7 @@ void prCube::Draw()
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
             glDisable(GL_POLYGON_OFFSET_LINE);
-
+#endif
             glDisable(GL_LINE_SMOOTH);//*/
 
         glDisable(GL_BLEND);

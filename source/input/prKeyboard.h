@@ -19,6 +19,12 @@
 #pragma once
 
 
+#include "../prConfig.h"
+
+
+#if (defined(PLATFORM_PC) || defined(PLATFORM_LINUX))
+
+
 #include "../core/prTypes.h"
 #include "../core/prCore.h"
 #include "../core/prCoreSystem.h"
@@ -93,3 +99,6 @@ protected:
     Proteus::Core::u32 mPrevKeyBuffer[PRKEY_BUFFER_SIZE];      // Keycodes for pressed buttons
     Proteus::Core::u32 mKeyBuffer    [PRKEY_BUFFER_SIZE];      // Keycodes for pressed buttons
 };
+
+
+#endif

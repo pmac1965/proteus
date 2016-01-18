@@ -27,15 +27,35 @@
 class prAchievement_Ios : public prAchievementBase
 {
 public:
+    // Method: prAchievement_Ios
+    //      Ctor
+    //
+    // Parameters:
+    //      provider - The provider to use
+    //
+    // See Also:
+    //      <prAchievementProvider>
+    explicit prAchievement_Ios(prAchievementProvider provider) : prAchievementBase(provider)
+    {
+    }
+    
+    // Method: Initialise
+    //      Initialises the achievement system for a specific platform
+    void Initialise() override;
+    
+    // Method: StatusUpdate
+    //      Called when the status has changed.
+    void StatusUpdate(prAchievementProviderStatus status) override;
+    
+    // Method: Update
+    //      Updates the achievement system for a specific platform
+    virtual void Update(Proteus::Core::f32 dt) override;
+    
     // Method: Award
     //      Award an achievement.
-    void Award(const char *name, Proteus::Core::s32 id);
-
-    // Method: IsAwarded
-    //      Checks if an achievement has been award.
-    bool IsAwarded(const char *name, Proteus::Core::s32 id);
+    void Award(const char *name, Proteus::Core::s32 id) override;
     
-    // Method: IsReady
-    //      Checks if the provider is ready to be used
-    bool IsReady();
+    // Method: IsAwarded
+    //      Checks if an achievement has been awarded.
+    bool IsAwarded(const char *name, Proteus::Core::s32 id)  override;
 };

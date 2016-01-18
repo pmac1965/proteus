@@ -82,7 +82,11 @@ void prIosSongStop()
     if (audioPlayer)
     {
         [audioPlayer stop];
+#if !__has_feature(objc_arc)
         [audioPlayer release];
+#else
+        // Do nothing
+#endif
         audioPlayer = NULL;
     }
 }

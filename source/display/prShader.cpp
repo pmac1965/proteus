@@ -49,7 +49,8 @@
   #include <EGL/egl.h>
 
 #elif defined(PLATFORM_IOS)
-  #include <OpenGLES/ES1/gl.h>
+  #include <OpenGLES/ES2/gl.h>
+  #include <cstdlib>
 
 #else
   #error No platform defined.
@@ -58,6 +59,7 @@
 
 
 #include "prShader.h"
+//#include "../core/prdefines"
 #include "../debug/prAssert.h"
 #include "../debug/prTrace.h"
 #include "../display/prOglUtils.h"

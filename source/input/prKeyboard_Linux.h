@@ -22,6 +22,9 @@
 #include "prKeyboard.h"
 
 
+#if defined(PLATFORM_LINUX)
+
+
 // Class: prKeyboard_Linux
 //      Linux Keyboard
 class prKeyboard_Linux : public prKeyboard
@@ -47,3 +50,6 @@ public:
     //      Engine call. Injects the controls keys
     void KeyboardInjectControl(Proteus::Core::u32 charcode) override;
 };
+
+
+#endif

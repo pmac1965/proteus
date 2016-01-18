@@ -32,7 +32,7 @@ using namespace Proteus::Core;
 
 
 // Externs found in the iOS code
-extern void IAPInit(prStore_ios *pStore);
+extern void IAPInit(Proteus::IAP::prStore_ios *pStore);
 extern void IAPBeginPurchase(const char *name);
 extern bool IAPFindPrice(const char *name, char *buffer);
 extern bool DoWeHaveAConnection();
@@ -107,7 +107,7 @@ const char *prStore_ios::FindPrice(const char *id)
     {
         static char buffer[64];
         
-        if (IAPFindPrice(name, buffer))
+        if (IAPFindPrice(id, buffer))
         {
             return buffer;
         }

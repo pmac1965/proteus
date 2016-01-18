@@ -78,4 +78,4 @@ void prKeyboard_Linux::KeyboardInjectControl(u32 charcode)
 }
 
 
-#endif//PLATFORM_PC
+#endif//PLATFORM_LINUX

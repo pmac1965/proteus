@@ -22,8 +22,9 @@
 
 #if defined(PLATFORM_IOS)
 
-
+#if 0
 #import <FacebookSDK/FacebookSDK.h>
+#endif
 #include "../social/facebook/prFacebook.h"
 #include "../social/facebook/prFacebook_Ios.h"
 #include "../debug/prTrace.h"
@@ -36,8 +37,10 @@ namespace
 {
     void CreateNewSession()
     {
+#if 0
         FBSession* session = [[FBSession alloc] init];
-        [FBSession setActiveSession: session];        
+        [FBSession setActiveSession: session];
+#endif
     }
 }
 
@@ -45,6 +48,7 @@ namespace
 /// ----------------------------------------------------------------------------
 /// Initialise facebook for ios
 /// ----------------------------------------------------------------------------
+#if 0
 void prFB_Initialise(prFacebookCallbacks *pCallback)
 {
     #if defined(DEBUG_FACEBOOK)
@@ -337,6 +341,7 @@ void prFB_Brag(prFacebookCallbacks *pCallback, u64 fbid)
          }];
     }    
 }
+#endif
 
 
 #endif//PLATFORM_IOS

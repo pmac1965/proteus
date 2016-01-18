@@ -4,7 +4,7 @@
 #include "../../prConfig.h"
 
 
-#if (defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS))
+/*#if (defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS))
     #include "gpg/achievement.h"
     #include "gpg/achievement_manager.h"
     #include "gpg/builder.h"
@@ -19,7 +19,7 @@
     #include "gpg/types.h"
 #else
 
-#endif
+#endif*/
 
 
 
@@ -33,12 +33,12 @@ public:
     static void Init();
 
 private:
-#if (defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS))
+//#if (defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS))
 
-    static bool is_auth_in_progress_;
-    static std::unique_ptr<gpg::GameServices> game_services_;
+    //static bool is_auth_in_progress_;
+    //static std::unique_ptr<gpg::GameServices> game_services_;
 
 
 
-#endif
+//#endif
 };

@@ -37,7 +37,11 @@ void prIosFlurryConstruct(const char *appID)
 
     [Flurry startSession:thisAppID];
     
+#if !__has_feature(objc_arc)
     [thisAppID release];
+#else
+    // Do nothing
+#endif
 
     DBG(@"%@", [Flurry getFlurryAgentVersion]);
 }
@@ -52,7 +56,11 @@ void prIosFlurrySubmit(const char *event)
     
     [Flurry logEvent:thisEvent];
     
+#if !__has_feature(objc_arc)
     [thisEvent release];
+#else
+    // Do nothing
+#endif
 }
 
 

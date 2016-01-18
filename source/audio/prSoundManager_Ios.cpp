@@ -42,6 +42,9 @@
 #include "prOpenALErrors.h"
 
 
+using namespace Proteus::Core;
+
+
 /// Defines.
 #define SOUND_DEBUG
 

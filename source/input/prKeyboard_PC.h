@@ -22,6 +22,9 @@
 #include "prKeyboard.h"
 
 
+#if defined(PLATFORM_PC)
+
+
 // Class: prKeyboard_PC
 //      PC Keyboard
 class prKeyboard_PC : public prKeyboard
@@ -47,3 +50,6 @@ public:
     //      Engine call. Injects the controls keys
     void KeyboardInjectControl(Proteus::Core::u32 charcode) override;
 };
+
+
+#endif

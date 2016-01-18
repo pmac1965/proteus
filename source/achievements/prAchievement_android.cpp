@@ -30,21 +30,58 @@ using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------
-/// Award an achievement.
+/// Initialises the achievement system for a specific platform
 /// ---------------------------------------------------------------------------
-void prAchievement_Android::Award(const char *name, s32 id)
+void prAchievement_Android::Initialise()
 {
-    PRUNUSED(id);
+    // Start engine initialisation process, which essentially mimics a more complex process with
+    // network sign-in, to keep status messages similar.
+    SetStatus(InitialisingStart);
+}
 
-    if (name && *name)
+
+/// ---------------------------------------------------------------------------
+/// Called when the status has changed.
+/// ---------------------------------------------------------------------------
+void prAchievement_Android::StatusUpdate(prAchievementProviderStatus status)
+{
+    switch(status)
     {
-        //JNI_AwardAchievement(name);
+            // We've started, so set success
+        case InitialisingStart:
+            SetStatus(InitialisingSuccess);
+            break;
+            
+            // Okay, succeeded
+        case InitialisingSuccess:
+            SetStatus(None);
+            SetReady(true);
+            break;
     }
 }
 
 
 /// ---------------------------------------------------------------------------
-/// Checks if an achievement has been awarded.
+/// Updates the achievement system for a specific platform
+/// ---------------------------------------------------------------------------
+void prAchievement_Android::Update(f32 dt)
+{
+    prAchievementBase::Update(dt);
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Award an achievement.
+/// ---------------------------------------------------------------------------
+void prAchievement_Android::Award(const char *name, s32 id)
+{
+    PRUNUSED(name);
+    PRUNUSED(id);
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Checks if an achievement has been award.
 /// ---------------------------------------------------------------------------
 bool prAchievement_Android::IsAwarded(const char *name, s32 id)
 {
@@ -54,13 +91,39 @@ bool prAchievement_Android::IsAwarded(const char *name, s32 id)
 }
 
 
-/// ---------------------------------------------------------------------------
-/// Checks if the provider is ready to be used
-/// ---------------------------------------------------------------------------
-bool prAchievement_Android::IsReady()
-{ 
-    return true;
-}
+
+///// ---------------------------------------------------------------------------
+///// Award an achievement.
+///// ---------------------------------------------------------------------------
+//void prAchievement_Android::Award(const char *name, s32 id)
+//{
+//    PRUNUSED(id);
+//
+//    if (name && *name)
+//    {
+//        //JNI_AwardAchievement(name);
+//    }
+//}
+//
+//
+///// ---------------------------------------------------------------------------
+///// Checks if an achievement has been awarded.
+///// ---------------------------------------------------------------------------
+//bool prAchievement_Android::IsAwarded(const char *name, s32 id)
+//{
+//    PRUNUSED(name);
+//    PRUNUSED(id);
+//    return false;
+//}
+//
+//
+///// ---------------------------------------------------------------------------
+///// Checks if the provider is ready to be used
+///// ---------------------------------------------------------------------------
+//bool prAchievement_Android::IsReady()
+//{ 
+//    return true;
+//}
 
 
 #endif

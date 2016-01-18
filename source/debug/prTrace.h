@@ -122,6 +122,13 @@ int prTraceIsEnabled();
         #define PRLOGW(msg, args...)    prTrace(LogWarning,     msg, ## args)
         #define PRLOGE(msg, args...)    prTrace(LogError,       msg, ## args)
 
+    #elif defined(PLATFORM_IOS)
+        #define PRLOGV(msg, args...)    prTrace(LogVerbose,     msg, ## args)
+        #define PRLOGD(msg, args...)    prTrace(LogDebug,       msg, ## args)
+        #define PRLOGI(msg, args...)    prTrace(LogInformation, msg, ## args)
+        #define PRLOGW(msg, args...)    prTrace(LogWarning,     msg, ## args)
+        #define PRLOGE(msg, args...)    prTrace(LogError,       msg, ## args)
+      
     #endif
 
 #else

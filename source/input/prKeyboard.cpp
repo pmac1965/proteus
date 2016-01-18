@@ -17,11 +17,13 @@
  */
 
 
-#include "../prConfig.h"
+#include "prKeyboard.h"
+
+
+#if (defined(PLATFORM_PC) || defined(PLATFORM_LINUX))
 
 
 #include <cstring>
-#include "prKeyboard.h"
 #include "../core/prMacros.h"
 #include "../debug/prTrace.h"
 
@@ -125,3 +127,6 @@ bool prKeyboard::IsKeyPressed(u32 charcode, u32 ctrlKeys) const
 
     return result;
 }
+
+
+#endif

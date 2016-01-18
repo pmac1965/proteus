@@ -202,12 +202,18 @@ void *prLoadAudioFile(const char *filename, ALsizei *size, ALsizei *freq, ALenum
         musicFileName = [musicFileName lowercaseString];
         musicFileType = [musicFileType lowercaseString];
         
+#if !__has_feature(objc_arc)
+        TODO("Investigate this");
         CFURLRef  fileURL       = (CFURLRef)[[NSURL fileURLWithPath:[bundle pathForResource:musicFileName ofType:musicFileType]] retain];
-
-        if (fileURL)
+#else
+        //CFURLRef  fileURL       = (CFURLRef)[NSURL fileURLWithPath:[bundle pathForResource:musicFileName ofType:musicFileType]];
+#endif
+        //if (fileURL)
         {	
-            pAudioData = prOpenALAudioData(fileURL, size, format, freq);
+            //pAudioData = prOpenALAudioData(fileURL, size, format, freq);
+#if !__has_feature(objc_arc)
             CFRelease(fileURL);
+#endif
         }
     }
     
