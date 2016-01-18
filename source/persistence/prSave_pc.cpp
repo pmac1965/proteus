@@ -38,9 +38,7 @@
 using namespace Proteus::Core;
 
 
-/// ---------------------------------------------------------------------------
-/// Implementation data.
-/// ---------------------------------------------------------------------------
+// Implementation data.
 typedef struct SavePCImplementation
 {
     SavePCImplementation()
@@ -55,20 +53,25 @@ typedef struct SavePCImplementation
 } SavePCImplementation;
 
 
-/// ---------------------------------------------------------------------------
-/// Gets the save/load path.
-/// ---------------------------------------------------------------------------
-void GetSaveLoadPath(char *pBuffer)
+namespace
 {
-    if (pBuffer)
+    // Gets the save/load path.
+    void GetSaveLoadPath(char *pBuffer)
     {
-        if (SHGetFolderPathA(HWND_DESKTOP, CSIDL_LOCAL_APPDATA, NULL, SHGFP_TYPE_CURRENT, pBuffer) != S_OK)
+        if (pBuffer)
         {
-            prTrace(LogError, "Failed to acquire save/load path.\n");
-            *pBuffer = 0;
+            if (SHGetFolderPathA(HWND_DESKTOP, CSIDL_LOCAL_APPDATA, NULL, SHGFP_TYPE_CURRENT, pBuffer) != S_OK)
+            {
+                prTrace(LogError, "Failed to acquire save/load path.\n");
+                *pBuffer = 0;
+            }
         }
     }
 }
+
+
+// Debug
+//#define PCSAVE_SHOW_SAVE_PATH
 
 
 /// ---------------------------------------------------------------------------
@@ -80,11 +83,11 @@ prSavePC::prSavePC() : pImpl (new SavePCImplementation())
     PRASSERT(pImpl);
 
     // Write startup info?
-    #if defined(_DEBUG) || defined(DEBUG)
+    #ifdef PCSAVE_SHOW_SAVE_PATH
     {
         char path[MAX_PATH];
         GetSaveLoadPath(path);
-        prTrace(LogError, "Save path: %s\n", path);
+        prTrace(LogError, "PC Save path: %s\n", path);
     }
     #endif
 }

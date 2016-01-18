@@ -32,6 +32,7 @@
 #pragma once
 
 
+#include "../prConfig.h"
 #include "../tinyxml/tinyxml.h"
 #include <string>
 #include <map>
@@ -130,11 +131,13 @@ public:
 
 
 private:
+#if defined(PLATFORM_PC)                    // Isolate until we do for other platforms
     // Generate the filename
     void GenerateFileName(char *pBuffer);
 
     // Generate the folder name
     void GenerateFolderName(char *pBuffer);
+#endif
 
     // Setting file reading
     void ParseFile(TiXmlNode* pParent);

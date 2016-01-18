@@ -39,6 +39,10 @@
 #endif
 
 
+// Misc debug defines
+//#define FILEMANAGER_SHOW_DATA_PATH
+
+
 // Platform specific includes.
 #if defined(PLATFORM_PC)  
   #include <windows.h>
@@ -83,8 +87,10 @@ using namespace Proteus::Core;
 /// ---------------------------------------------------------------------------
 /// Creates a path to the applications data.
 /// ---------------------------------------------------------------------------
-prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManager")
+prFileManager::prFileManager(const char *saveFolder) : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManager")
 {
+    PRASSERT(saveFolder && *saveFolder);
+
     // Init data
     count    = 0;
     ready    = false;
@@ -104,6 +110,10 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
 
     memset(path, 0, sizeof(path));
     memset(dataPath, 0, sizeof(dataPath));
+    memset(mSaveDataPath, 0, sizeof(mSaveDataPath));
+
+    // Copy the save data path
+    strcpy(mSaveDataPath, saveFolder);
 
     // IOS
     #if defined(PLATFORM_IOS)    
@@ -148,9 +158,13 @@ prFileManager::prFileManager() : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManag
 
     #endif
 
-
+    // Ensure same slashes
     prStringReplaceChar(dataPath, '\\', '/');
+
+
+    #ifdef FILEMANAGER_SHOW_DATA_PATH
     prTrace(LogError, "App data path: %s\n", dataPath);
+    #endif
 }
 
 

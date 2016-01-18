@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSAVEBASE_H
-#define __PRSAVEBASE_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -34,7 +33,7 @@ public:
 
     // Method: ~prSaveBase
     //      Dtor
-    virtual ~prSaveBase();
+    virtual ~prSaveBase() {}
 
     // Method: Init
     //      Save initialisation.
@@ -80,9 +79,7 @@ public:
     //      Draws when saving is occuring
     virtual void Draw() {}
 
-
 protected:
-
     Proteus::Core::s32     m_error;
     char                  *m_folder;
     char                  *m_filename;
@@ -91,6 +88,3 @@ protected:
     Proteus::Core::s32    *m_loadSize;
     Proteus::Core::u8    **m_loadData;
 };
-
-
-#endif//__PRSAVEBASE_H

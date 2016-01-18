@@ -133,13 +133,21 @@ void prLua::Run(const char *filename)
 
 
 /// ---------------------------------------------------------------------------
+/// Runs a script (On a thread)
+/// ---------------------------------------------------------------------------
+void prLua::RunThreaded(const char *filename)
+{
+}
+
+
+/// ---------------------------------------------------------------------------
 /// Check for any lua errors 
 /// ---------------------------------------------------------------------------
 void prLua::CheckForErrors(lua_State *lua, int status)
 {
     PRASSERT(lua);
 
-    if (status != 0 )
+    if (status != 0)
     {        
         prTrace(LogError, "%s\n", lua_tostring(lua, -1));
 

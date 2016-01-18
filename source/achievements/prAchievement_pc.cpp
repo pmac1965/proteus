@@ -25,6 +25,47 @@ using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------
+/// Initialises the achievement system for a specific platform
+/// ---------------------------------------------------------------------------
+void prAchievement_PC::Initialise()
+{
+    // Start engine initialisation process, which essentially mimics a more complex process with
+    // network sign-in, to keep status messages similar.
+    SetStatus(InitialisingStart);
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Called when the status has changed.
+/// ---------------------------------------------------------------------------
+void prAchievement_PC::StatusUpdate(prAchievementProviderStatus status)
+{
+    switch(status)
+    {
+    // We've started, so set success
+    case InitialisingStart:
+        SetStatus(InitialisingSuccess);
+        break;
+
+    // Okay, succeeded
+    case InitialisingSuccess:
+        SetStatus(None);
+        SetReady(true);
+        break;
+    }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Updates the achievement system for a specific platform
+/// ---------------------------------------------------------------------------
+void prAchievement_PC::Update(f32 dt)
+{
+    prAchievementBase::Update(dt);
+}    
+
+
+/// ---------------------------------------------------------------------------
 /// Award an achievement.
 /// ---------------------------------------------------------------------------
 void prAchievement_PC::Award(const char *name, s32 id)
@@ -42,13 +83,4 @@ bool prAchievement_PC::IsAwarded(const char *name, s32 id)
     PRUNUSED(name);
     PRUNUSED(id);
     return false;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Checks if the provider is ready to be used
-/// ---------------------------------------------------------------------------
-bool prAchievement_PC::IsReady()
-{ 
-    return true;
 }

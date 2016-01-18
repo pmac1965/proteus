@@ -38,7 +38,6 @@ public:
          IO_RESULT_FAILURE,                        
     };
 
-
 public:
     // Method: SaveResult
     //      This method needs to be added to a load/save handling class.
@@ -58,20 +57,20 @@ public:
 
 // Class: prSave
 //      A class designed to handle cross platform saving.
+//
+// Notes:
+//      Game saves also include basic encryption, so this system is also
+//      used by other systems to save state data. For example the
+//      Achievement manager
+//
+// See Also:
+//      <prAchievementManager>
 class prSave
 {
 public:
     // Method: prSave
     //      Ctor
-    //
-    // Parameters:
-    //      folder  - A folder to make for the save data
-    //
-    // Notes:
-    //      If the system requires a folder name, then it should be supplied.
-    //      Normally this would be the games name. Please remember to change for
-    //      different game versions. e.g; "game_lite" or "game_free"
-    explicit prSave(const char *folder);
+    prSave();
 
     // Method: ~prSave
     //      Dtor
@@ -119,7 +118,6 @@ public:
     //      Are we saving or loading.
     bool IsWorking() const;
 
-
 private:
     // Report result to user
     void Report(int result);
@@ -134,12 +132,10 @@ private:
     void ReadLoad();
     void CloseLoad();
 
-
 private:
     // Stops passing by value and assignment.
     prSave(const prSave&);
     const prSave& operator = (const prSave&);
-
 
 private:
     // Don't change order.

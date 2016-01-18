@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRLUA_H
-#define __PRLUA_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -50,11 +49,16 @@ public:
     //      This version is for single run scripts
     void Run(const char *filename);
 
+    // Method: RunThreaded
+    //      Runs a script on a thread
+    //
+    // Notes:
+    //      Designed for scripts that control cutscenes, and other
+    //      long running events
+    void RunThreaded(const char *filename);
+
 
 private:
     // Check for any errors after running a script
     void CheckForErrors(lua_State *lua, int status);
 };
-
-
-#endif//__PRLUA_H

@@ -245,6 +245,7 @@ void prTexture::Load(s32 extra)
                 prTrace(LogError, "Texture: %s\n", Filename());
                 prTrace(LogError, "Invalid texture height\n");
             }
+            TODO("DEBUG BUILD");
 #endif
 
             // allocate a texture name

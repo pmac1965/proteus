@@ -19,6 +19,21 @@
 
 #include "prLeaderboardManager.h"
 
+
+#if defined(PLATFORM_ANDROID)
+    //
+
+#elif defined(PLATFORM_IOS)
+    //
+
+#elif defined(PLATFORM_PC)
+    //
+
+#else
+    // Unsupported platform
+
+#endif
+
  
 // Namespaces
 namespace Proteus {

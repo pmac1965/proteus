@@ -112,6 +112,9 @@ enum prSystems
 // Function: prCoreInit
 //      Initialises the engine core components
 //
+// Parameters:
+//      saveDataPath - The name of a folder
+//
 // Notes:
 //      These are;
 //      - The resource manager
@@ -126,11 +129,21 @@ enum prSystems
 //      *THIS FUNCTION MUST BE CALLED FIRST*
 //
 // Notes:
-//      After this function you will still need to specify a renderer
+//      If the system requires a folder name, then it should be supplied.
+//      Normally this would be the games name. Please remember to change for
+//      different game versions. e.g; "game_lite" or "game_free"
+//
+// Notes:
+//      After this function you will still need to specify a renderer, as
+//      strictly speaking a renderer isn't a requirement for some tools
+//
+// Notes:
+//      A save folder name for saveDataPath must be supplied, as
+//      it is expected that all games will save data.
 //
 // See Also:
 //      <prCoreSetRenderer>
-void prCoreInit();
+void prCoreInit(const char *saveDataPath);
 
 
 // Function: prCoreSetRenderer

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRLUADEBUG_H
-#define __PRLUADEBUG_H
+#pragma once
 
 
 struct lua_State;
@@ -30,6 +29,3 @@ struct lua_State;
 //      Functions available
 //      - trace     usage example:  trace("Line: ", i, " ", 3.01, " ", true, " ", nil, "\n")
 void prLuaDebugRegisterDebugFunctions(lua_State *lua);
-
-
-#endif//__PRLUADEBUG_H

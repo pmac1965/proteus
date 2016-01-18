@@ -37,7 +37,7 @@ class prFileManager : public prCoreSystem
 public:
     // Method: prFileManager
     //      Ctor
-    prFileManager();
+    explicit prFileManager(const char *saveFolder);
 
     // Method: ~prFileManager
     //      Dtor
@@ -89,9 +89,14 @@ public:
     //      For any build which uses the archives. (PC, LINUX, IOS, MAC)
     //
     // Notes:
-    //      Only works if archives are loaded and being used as this methed uses
+    //      Only works if archives are loaded and being used as this method uses
     //      the archive entries
     void DisplayFiles(bool accessed);
+
+    // Method: GetSaveDataPath()
+    //      Gets the path to the folder that all game save data is loaded from
+    //      and save to.
+    const char *GetSaveDataPath() const { return mSaveDataPath; }
 
 
 private:
@@ -102,7 +107,7 @@ private:
 
 
 private:
-
+    char                mSaveDataPath[FILE_MAX_FILENAME_SIZE];          // Path to the save data directory (Used by multiple systems)
     char                dataPath[FILE_MAX_FILENAME_SIZE];               // Path to the data directory
     char                path[FILE_MAX_FILENAME_SIZE];                   // Used for returning paths
     Proteus::Core::u32  count;                                          // Number of registered archives.

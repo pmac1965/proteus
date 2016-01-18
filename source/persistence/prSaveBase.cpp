@@ -30,20 +30,12 @@ using namespace Proteus::Core;
 prSaveBase::prSaveBase()
 {
     m_error     = 0;
-    m_folder    = NULL;
-    m_filename  = NULL;
-    m_saveSata  = NULL;
+    m_folder    = nullptr;
+    m_filename  = nullptr;
+    m_saveSata  = nullptr;
     m_saveSize  = 0;
-    m_loadSize  = NULL;
-    m_loadData  = NULL;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Dtor.
-/// ---------------------------------------------------------------------------
-prSaveBase::~prSaveBase()
-{
+    m_loadSize  = nullptr;
+    m_loadData  = nullptr;
 }
 
 
@@ -62,8 +54,8 @@ void prSaveBase::Init(char *folder, char *filename, void *saveData, s32 saveSize
     m_filename  = filename;
     m_saveSata  = (u8*)saveData;
     m_saveSize  = saveSize;
-    m_loadSize  = NULL;
-    m_loadData  = NULL;
+    m_loadSize  = nullptr;
+    m_loadData  = nullptr;
 }
 
 
@@ -80,7 +72,7 @@ void prSaveBase::Init(char *folder, char *filename, void **loadData, s32 *loadSi
     m_error     = 0;
     m_folder    = folder;
     m_filename  = filename;
-    m_saveSata  = NULL;
+    m_saveSata  = nullptr;
     m_saveSize  = 0;
     m_loadSize  = loadSize;
     m_loadData  = (u8**)loadData;

@@ -1,4 +1,5 @@
 // File: prAchievement_base.h
+//      Achievements base class.
 /**
  *  Copyright 2014 Paul Michael McNab
  *
@@ -19,8 +20,42 @@
 #pragma once
 
 
+#include "../prConfig.h"
 #include "../core/prTypes.h"
 #include "../core/prMacros.h"
+
+
+// Enum: prAchievementProvider
+//      A enumeration of all the providers by platform
+//
+// Engine       - All platforms
+// Steam        - PC
+// GooglePlay   - Android, iOS
+enum prAchievementProvider
+{
+#if defined(PLATFORM_PC)
+    Engine,
+    Steam
+
+#elif defined(PLATFORM_ANDROID)
+    Engine,
+    GooglePlay
+
+#elif defined(PLATFORM_IOS)
+    Engine,
+    GooglePlay
+
+#elif defined(PLATFORM_MAC)
+    Engine,
+
+#elif defined(PLATFORM_LINUX)
+    Engine,
+
+#else
+    Engine,
+
+#endif
+};
 
 
 // Class: prAchievementBase
@@ -28,17 +63,52 @@
 class prAchievementBase
 {
 public:
+    enum prAchievementProviderStatus
+    {
+        None,
+        InitialisingStart,              // Achievements initialisation has started
+        InitialisingSuccess,            // Achievements initialisation has succeeded
+        InitialisingFailed,             // Achievements initialisation has faileded
+        AwardingStart,                  // An award has started
+        AwardingPending,                // An award is pending
+        AwardingSuccess,                // An award has been given
+        AwardingFailure,                // An award has failed
+    };
+
+
+public:
     // Method: prAchievementBase
     //      Ctor
-    prAchievementBase() {}
+    //
+    // Parameters:
+    //      provider - The provider to use
+    //
+    // See Also:
+    //      <prAchievementProvider>
+    explicit prAchievementBase(prAchievementProvider provider) : mAchievementProvider(provider)
+                                                               , mReady              (false)
+                                                               , mExp0               (false)
+                                                               , mExp1               (false)
+                                                               , mExp2               (false)
+                                                               , mPrevStatus         (None)
+                                                               , mCurrStatus         (None)
+    {}
 
     // Method: ~prAchievementBase
     //      Dtor
     virtual ~prAchievementBase() {}
 
     // Method: Initialise
-    //      Initialises the achievement system
-    virtual void Initialise() {}    
+    //      Initialises the achievement system for a specific platform
+    virtual void Initialise() = 0;
+
+    // Method: StatusUpdate
+    //      Called when the status has changed.
+    virtual void StatusUpdate(prAchievementProviderStatus status) = 0;
+
+    // Method: Update
+    //      Updates the achievement system for a specific platform
+    virtual void Update(Proteus::Core::f32 dt);
 
     // Method: Award
     //      Award an achievement.
@@ -55,5 +125,32 @@ public:
 
     // Method: IsReady
     //      Checks if the provider is ready to be used
-    virtual bool IsReady() { return false; }
+    bool IsReady() const { return mReady; }
+
+    // Method: SetReady
+    //      Sets the ready state
+    void SetReady(bool state) { mReady = state; }
+
+    // Method: GetProvider
+    //      Gets the provider that is being used
+    //
+    // See Also:
+    //      <prAchievementProvider>
+    const prAchievementProvider GetProvider() const { return mAchievementProvider; }
+
+    // Method: SetStatus
+    //      Sets the status of the provider
+    void SetStatus(prAchievementProviderStatus status) { mCurrStatus = status; }
+
+
+private:
+    const prAchievementProvider mAchievementProvider;           // The provider (Engine, Steam, etc)
+    bool                        mReady;                         // Is the provider ready (Fully initialised)
+    bool                        mExp0;                          // Expansion purposes
+    bool                        mExp1;                          // Expansion purposes
+    bool                        mExp2;                          // Expansion purposes
+
+protected:
+    prAchievementProviderStatus mPrevStatus;                    // Previous Provider status
+    prAchievementProviderStatus mCurrStatus;                    // Current Provider status
 };

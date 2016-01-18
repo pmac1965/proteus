@@ -56,7 +56,7 @@ REM ---------------------------------------------------------------------------
     REM * NOT REQUIRED *
     REM ****************
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_android.h
-    del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_base.h
+    REM del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_base.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_ios.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_pc.h
     del %PROTEUS_ENGINE_DIR%\include\proteus\achievements\prAchievement_linux.h

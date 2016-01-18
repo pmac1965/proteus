@@ -87,7 +87,7 @@ void prOpenGLInit()
         initialised = true;
 
         PRGL_VERSION = (f32)atof((const char *)glGetString(GL_VERSION));
-        prTrace(LogError, "OpenGL version %f\n", PRGL_VERSION);
+        //prTrace(LogError, "OpenGL version %f\n", PRGL_VERSION);
     }
 }
 

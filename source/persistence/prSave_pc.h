@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSAVEPC_H
-#define __PRSAVEPC_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -70,15 +69,12 @@ public:
     //      Overridden method to finish loading
     bool LoadEnd();
 
-
 private:
-
     // Stops passing by value and assignment.
     prSavePC(const prSavePC&);
     const prSavePC& operator = (const prSavePC&);
 
 private:
-
     // Don't change order.
     SavePCImplementation  *pImpl;
     SavePCImplementation  &imp;
@@ -86,6 +82,3 @@ private:
 
 
 #endif
-
-
-#endif//__PRSAVEPC_H

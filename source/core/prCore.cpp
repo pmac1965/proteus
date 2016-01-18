@@ -147,7 +147,7 @@ namespace
 /// ---------------------------------------------------------------------------
 /// Creates the engine core components
 /// ---------------------------------------------------------------------------
-void prCoreInit()
+void prCoreInit(const char *saveDataPath)
 {
     if (init == PRFALSE)
     {
@@ -162,13 +162,12 @@ void prCoreInit()
         pSystems[PRSYSTEM_TOUCH]            = new prTouch();
         pSystems[PRSYSTEM_MESSAGEMANAGER]   = new prMessageManager();
         pSystems[PRSYSTEM_REGISTRY]         = new prRegistry();
-        pSystems[PRSYSTEM_FILEMANAGER]      = new prFileManager();
+        pSystems[PRSYSTEM_FILEMANAGER]      = new prFileManager(saveDataPath);
 
         #if defined(PLATFORM_PC)
         pSystems[PRSYSTEM_MOUSE]     = new prMouse();
         pSystems[PRSYSTEM_KEYBOARD]  = new prKeyboard_PC();
         #endif
-
 
         #if defined(PLATFORM_LINUX)
         pSystems[PRSYSTEM_MOUSE]     = new prMouse();

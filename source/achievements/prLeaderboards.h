@@ -35,16 +35,16 @@ namespace Achievements {
 
 
 // Class: prLeaderboard
-//      Simple cross platform interface for a leaderboard
+//      Cross platform interface for a leaderboard
 class prLeaderboard : public prCoreSystem
 {
 public:
-    // Method: prRenderer
+    // Method: prLeaderboard
     //      Ctor
     prLeaderboard();
 
-    // Method: prRenderer
-    //      Ctor
+    // Method: prLeaderboard
+    //      ~Dtor
     ~prLeaderboard();
 
     // Method: Submit

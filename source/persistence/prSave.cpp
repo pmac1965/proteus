@@ -25,6 +25,8 @@
 #include "prSave.h"
 #include "prSaveBase.h"
 #include "../file/prFile.h"
+#include "../file/prFileManager.h"
+#include "../core/prCore.h"
 #include "../core/prDefines.h"
 #include "../core/prStringUtil.h"
 #include "../core/prMacros.h"
@@ -76,8 +78,8 @@ typedef struct SaveImplementation
     // Ctor
     SaveImplementation()
     {
-        pSave       = NULL;
-        pSaveData   = NULL;
+        pSave       = nullptr;
+        pSaveData   = nullptr;
 
         Reset();
         memset(folder, 0, sizeof(folder));
@@ -122,9 +124,9 @@ typedef struct SaveImplementation
 
         mode        = SAVE_MODE_NONE;
         saveSize    = -1;
-        pLoadSize   = NULL;
-        ppLoadData  = NULL;
-        callback    = NULL;
+        pLoadSize   = nullptr;
+        ppLoadData  = nullptr;
+        callback    = nullptr;
 
         memset(filename, 0, sizeof(filename));
     }
@@ -146,12 +148,15 @@ typedef struct SaveImplementation
 /// ---------------------------------------------------------------------------
 /// Constructor 
 /// ---------------------------------------------------------------------------
-prSave::prSave(const char *folder)  : pImpl (new SaveImplementation())
-                                    , imp   (*pImpl)
+prSave::prSave()  : pImpl (new SaveImplementation())
+                  , imp   (*pImpl)
 {
     PRASSERT(pImpl);
-    PRASSERT(folder && *folder);
-    prStringCopySafe(imp.folder, folder, sizeof(imp.folder));
+
+    // Get the file manager, so we can get save data folder/path
+    prFileManager *pFileManager = static_cast<prFileManager *>(prCoreGetComponent(PRSYSTEM_FILEMANAGER));
+    PRASSERT(pFileManager);
+    prStringCopySafe(imp.folder, pFileManager->GetSaveDataPath(), sizeof(imp.folder));
 }
 
 
@@ -238,7 +243,7 @@ void prSave::StartSave(void *pData, s32 size, prIoResultCallback *cb, const char
 
     // Create copy of the save data.
     imp.pSaveData = malloc(size);
-    if (imp.pSaveData == NULL)
+    if (imp.pSaveData == nullptr)
     {
         prTrace(LogError, "Error: Unable to allocate enough memory for the save data.\n");
         return;

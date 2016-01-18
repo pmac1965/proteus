@@ -25,8 +25,9 @@
 #pragma once
 
 
-//#include "../core/prTypes.h"
-//#include "../core/prCoreSystem.h"
+#include "../prConfig.h"
+#include "../core/prTypes.h"
+#include "../core/prCoreSystem.h"
 
 
 // Namespaces
@@ -39,12 +40,12 @@ namespace Achievements {
 class prLeaderboardManager //: public prCoreSystem
 {
 public:
-    // Method: prRenderer
+    // Method: prLeaderboardManager
     //      Ctor
     prLeaderboardManager();
 
-    // Method: prRenderer
-    //      Ctor
+    // Method: ~prLeaderboardManager
+    //      Dtor
     ~prLeaderboardManager();
 
     //// Method: Submit

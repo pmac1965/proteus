@@ -50,6 +50,7 @@ LOCAL_C_INCLUDES := D:/engine/freetype2/include
 
 
 LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
+	achievements/prAchievement_base.cpp	\
 	achievements/prAchievement_android.cpp	\
 	achievements/prLeaderboards.cpp	\
 	actor/prActor.cpp	\
