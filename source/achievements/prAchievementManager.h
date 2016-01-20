@@ -69,12 +69,21 @@ namespace Proteus
         // Enum: NotificationPos
         //      Notification position. Allows for a total of nine default positions
         //
-        // Top      - Top of the screen.
-        // Centre   - Middle of the screen (Y axis)
-        // Bottom   - Botton of the screen.
-        // Left     - Left of the screen.
-        // Middle   - Middle of the screen (X axis)
-        // Right    - Right of the screen.
+        // Top          - Top of the screen.
+        // Centre       - Middle of the screen (Y axis)
+        // Bottom       - Botton of the screen.
+        // Left         - Left of the screen.
+        // Middle       - Middle of the screen (X axis)
+        // Right        - Right of the screen.
+        // TopLeft      - Top | Left,
+        // TopMiddle    - Top | Middle,
+        // TopRight     - Top | Right,
+        // CentreLeft   - Centre | Left,
+        // CentreMiddle - Centre | Middle,
+        // CentreRight  - Centre | Right,
+        // BottomLeft   - Bottom | Left,
+        // BottomMiddle - Bottom | Middle,
+        // BottomRight  - Bottom | Right,
         //
         // Notes:
         //      Defaults to (Top | Middle)
@@ -155,7 +164,7 @@ public:
     // Parameters:
     //      step   - The discreet step
     //      pPanel - The display panel sprite
-    //      time   - The run iome discreet step
+    //      time   - The run time
     //
     // See Also:
     //      <AchievementStep>
@@ -197,20 +206,35 @@ public:
     void Render();
 
     // Method: Award
-    //      Award an achievement
+    //      Awards an achievement
     //
     // Parameters:
-    //      key         - key desc
-    //      awardValue  - desc
+    //      key         - The achievements key
+    //      awardValue  - A value which when reached, the achievement is given.
+    //
+    // Notes:
+    //      The achievement manager tracks counts each time its called, and the
+    //      achievements is awarded once the award value is reached.
+    //
+    //      For example:
+    //         Award("EnemiesKilled", 500);
+    //
+    //      Would award the achievement once the method has been called 500 times
     void Award(const char *key, Proteus::Core::s32 awardValue);
 
-    // Is an achievement awarded
+    // Method: IsAwarded
+    //      Tests if an achievement has been awarded
     bool IsAwarded(const char *key) const;
 
-    // Loads the achievement definition file and the achievement status file.
+    // Method: Load
+    //      Loads the achievement definition file and the achievement status file.
     void Load(const char *filename);
 
-    // Saves the achievements states.
+    // Method: Saves
+    //      Saves the achievements states.
+    //
+    // Notes:
+    //      This is done automatically. *DO NOT CALL*
     void Save();
 
     // Method: SaveResult
@@ -342,6 +366,9 @@ private:
     // Gets the identifer for the achievement.
     const char *GetIdentifierByIndex(Proteus::Core::u32 index);
 
+    // Gets the identifer for the achievement.
+    const char *prAchievementManager::GetIdentifier(const char *name);
+
 private:
     // Stops passing by value and assignment.
     prAchievementManager(const prAchievementManager&);
@@ -354,17 +381,20 @@ private:
     prAchievementStatus                 *mpAchievements;                        // Status data about the achievements
     prLanguage                          *mpLanguage;                            // The language class (Optional)
     prSprite                            *mpNotificationBar;                     // The notification bar sprite
+    prSprite                            *mpNotificationIcon;                    // The notification bar icon
     prAchievementDisplayCallback        *mprAchievementDisplayCallback;         // Callback notifier (Optional)
     prColour                            mTextColour;                            // The text colour
     std::list<prAchievementDefinition>  mAchievementsList;                      // The achievement definitions
+    std::list<Proteus::Core::s32>       mRenderList;                            // Any achievements to be rendered.
     Proteus::Core::s32                  mAchievementsCount;                     // The number of achievements
     Proteus::Core::s32                  mCheckIndex;                            // The index of an achievement to check
-    Proteus::Core::s32                  mDisplayMode;                           // The index of an achievement to check
+    Proteus::Core::s32                  mDisplayMode;                           // The current display mode (Bring on, Show, remove, etc)
     Proteus::Core::f32                  mTestTimer;                             // Test for awards given?
     Proteus::Core::f32                  mDefaultPanelXPos;                      // Default panel position
     Proteus::Core::f32                  mDefaultPanelYPos;                      // Default panel position
+    Proteus::Core::f32                  mRunTime;                               // The run time for each display mode
     bool                                mIoSuccess;                             // Allows tracking of io sucess/failure
     bool                                mCorrectFile;                           // Ensures we loaded a achievements file
     bool                                mRender;                                // Does the engine render?
-    bool                                mEnabled;                               // Update/render?
+    bool                                mEnabled;                               // Update?
 };

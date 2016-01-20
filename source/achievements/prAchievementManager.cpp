@@ -74,7 +74,7 @@ using namespace Proteus::Achievement;
 
 
 // Defines
-#define ACHIEVEMENT_DEBUG
+//#define ACHIEVEMENT_DEBUG
 #define SHOW_ACHIEVEMENT_TIME       3000.0f                 // In milliseconds
 #define TEXT_DISPLAY_WIDTH          260.0f
 #define AWARDS_TEST_DELAY           60.f                    // One minute delay.
@@ -83,10 +83,12 @@ using namespace Proteus::Achievement;
 // Enums
 enum
 {
-    MODE_NONE,
-    MODE_ON,
-    MODE_WAIT,
-    MODE_OFF,
+    MODE_NONE,                                              // Do nothing
+    MODE_PRE,                                               // Pre-initialisation step
+    MODE_ON,                                                // Bring on achievement
+    MODE_WAIT,                                              // Show achievement
+    MODE_OFF,                                               // Remove achievement
+    MODE_POST,                                              // Okay we're done
 };
 
 
@@ -121,185 +123,6 @@ typedef struct prAchievementDefinition
 } prAchievementDefinition;
 
 
-#if 0
-// Implementation data.
-typedef struct AchievementManagerImplementation
-{
-    // ------------------------------------------------------------------------
-    // Render
-    // ------------------------------------------------------------------------
-    void Render()
-    {
-        /*if (render)
-        {
-            if (!renderList.empty())
-            {
-                if (pNotificationBar)
-                {
-                    pNotificationBar->Draw();
-
-                    if (pFont)
-                    {
-                        char temp [256] = {0};
-
-                        strcpy(temp, text_description);
-                        int cnt = StringWordWrap(temp, 30);
-
-                        if (hiRes && cnt > -1)
-                        {
-                            // Draw achievement name and description.
-                            pFont->Draw(pNotificationBar->pos.x + 260, pNotificationBar->pos.y + 22, fontScale, colour, BitmapFont::ALIGN_CENTER, text_title);
-
-                            if (cnt == 1)
-                            {
-                                pFont->Draw(pNotificationBar->pos.x + 110, pNotificationBar->pos.y + 48, fontScale, colour, BitmapFont::ALIGN_LEFT, text_description);
-                            }
-                            else
-                            {
-                                int i = StringFindFirstIndex(temp, '\n');
-                                temp[i] = '\0';
-
-                                pFont->Draw(pNotificationBar->pos.x + 110, pNotificationBar->pos.y + 48, fontScale, colour, BitmapFont::ALIGN_LEFT, temp);
-                                pFont->Draw(pNotificationBar->pos.x + 110, pNotificationBar->pos.y + 64, fontScale, colour, BitmapFont::ALIGN_LEFT, &temp[i+1]);
-                            }
-                        }
-                        else
-                        {
-                            if (cnt > -1)
-                            {
-                            // Draw achievement name and description.
-                            pFont->Draw(pNotificationBar->pos.x + 270, pNotificationBar->pos.y + 11, fontScale, colour, BitmapFont::ALIGN_CENTER, text_title);
-                            if (cnt == 1)
-                            {
-                                pFont->Draw(pNotificationBar->pos.x + 172, pNotificationBar->pos.y + 24, fontScale, colour, BitmapFont::ALIGN_LEFT, text_description);
-                            }
-                            else
-                            {
-                                int i = StringFindFirstIndex(temp, '\n');
-                                temp[i] = '\0';
-
-                                pFont->Draw(pNotificationBar->pos.x + 172, pNotificationBar->pos.y + 24, fontScale, colour, BitmapFont::ALIGN_LEFT, temp);
-                                pFont->Draw(pNotificationBar->pos.x + 172, pNotificationBar->pos.y + 36, fontScale, colour, BitmapFont::ALIGN_LEFT, &temp[i+1]);
-                            }
-                        }
-                    }
-                    }
-                }
-            }
-        }//*/
-    }
-
-
-    // ------------------------------------------------------------------------
-    // Add achievement to render list.
-    // ------------------------------------------------------------------------
-    void AddRenderList(u32 index)
-    {
-        if (render)
-        {            
-            renderList.push_back(index);
-        }
-    }
-
-
-    // ----------------------------------------------------------------------------
-    // Gets the identifer for the achievement.
-    // ----------------------------------------------------------------------------
-    const char *GetIdentifier(const char *name)
-    {
-        PRASSERT(name && *name);
-
-        if (name && *name)
-        {
-            std::list<prAchievementDefinition>::iterator itr = achievementsList.begin();
-            std::list<prAchievementDefinition>::iterator end = achievementsList.end();
-
-            u32 hash = prStringHash(name);
-
-            for (; itr != end; ++itr)
-            {
-                if (hash == (*itr).hash)
-                {
-//#if defined(PLATFORM_ANDROID)
-//                    return (*itr).of.c_str();
-//#else
-                    return (*itr).identifier.c_str();
-//#endif
-                }
-            }
-        }
-
-        prTrace(LogError, "prAchievementManager::GetIdentifier - Failed to find identifier: %s\n", name);
-        return nullptr;
-    }
-
-
-    // ----------------------------------------------------------------------------
-    // Gets the identifer for the achievement.
-    // ----------------------------------------------------------------------------
-    const char *GetIdentifierByIndex(u32 index)
-    {
-        std::list<prAchievementDefinition>::iterator itr = achievementsList.begin();
-        std::list<prAchievementDefinition>::iterator end = achievementsList.end();
-
-        u32 idx = 0;
-
-        for (; itr != end; ++itr)
-        {
-            if (idx == index)
-            {
-//#if defined(PLATFORM_ANDROID)
-//                return (*itr).of.c_str();
-//#else
-                return (*itr).identifier.c_str();
-//#endif
-            }
-
-            idx++;
-        }
-
-        prTrace(LogError, "prAchievementManager::GetIdentifierByIndex - Failed to find identifier\n");
-        return nullptr;
-    }
-
-
-    // --
-    std::list<prAchievementDefinition>    achievementsList;
-    std::list<u32>                        updateList;
-    std::list<u32>                        renderList;
-
-    // --
-    u32                 achievementsCount;
-    prSave              *save;
-    prAchievementStatus *achievements;
-    prAchievementBase   *pAchievementProvider;
-    prSprite            *pNotificationBar;
-    prTexture           *pTexture;
-    prBitmapFont        *pFont;
-    prLanguage          *pLanguage;
-    u32                 mode;
-    f32                 delay;
-    f32                 timer;
-    bool                render;
-    bool                enabled;
-    bool                success;
-    bool                exp0;
-    s32                 on_pos;
-    s32                 off_pos;
-    s32                 step;
-    f32                 fontScale;
-    prColour            colour;
-
-    u32                 checkIndex;
-
-    // --
-    char                text_title[512];
-    char                text_description[512];
-
-} AchievementManagerImplementation;
-#endif
-
-
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
@@ -310,6 +133,7 @@ prAchievementManager::prAchievementManager(prAchievementProvider provider)
     mpAchievements                  = nullptr;
     mpLanguage                      = nullptr;
     mpNotificationBar               = nullptr;
+    mpNotificationIcon              = nullptr;
     mprAchievementDisplayCallback   = nullptr;
     mIoSuccess                      = false;
     mCorrectFile                    = false;
@@ -317,10 +141,11 @@ prAchievementManager::prAchievementManager(prAchievementProvider provider)
     mEnabled                        = true;
     mAchievementsCount              = 0;
     mCheckIndex                     = 0;
-    mDisplayMode                    = 0;
+    mDisplayMode                    = MODE_NONE;
     mTestTimer                      = AWARDS_TEST_DELAY;
     mDefaultPanelXPos               = 0.0f;
     mDefaultPanelYPos               = 0.0f;
+    mRunTime                        = 0.0f;
     
     mpSave          = new prSave();                 // A save class to load/save status data
     mpSpriteManager = new prSpriteManager();        // Our own sprite manager, so they can't be unloaded
@@ -406,103 +231,139 @@ void prAchievementManager::Update(f32 dt)
             }
         }
 
-        //if ()
+        // Update the render state
+        if (mRender)
         {
-        }
+            PRASSERT(mpSpriteManager);
+            PRASSERT(mpNotificationBar);
 
-
-        /*if (render)
-        {
-            if (!renderList.empty())
+            switch(mDisplayMode)
             {
-                if (pTexture == NULL)
+            // Do nothing
+            case MODE_NONE:
+                break;
+
+            // Pre-initialisation step
+            case MODE_PRE:
+                mRunTime = 0.0f;
+                mDisplayMode++;
+
+                // Set panel default position
+                mpNotificationBar->pos.x = mDefaultPanelXPos;
+                mpNotificationBar->pos.y = mDefaultPanelYPos;
+
+                // Set icons position
+                if (mpNotificationIcon)
                 {
-                    // Get the achievement index.
-                    std::list<u32>::iterator i = renderList.begin();
-                    u32 index = (*i);
+                    mpNotificationIcon->pos.x = mDefaultPanelXPos;
+                    mpNotificationIcon->pos.y = mDefaultPanelYPos;
+                    mpNotificationIcon->SetVisible(true);
+                }
 
-                    // Search for and load its icon
-                    std::list<AchievementDefinition>::iterator itr = achievementsList.begin();
-                    std::list<AchievementDefinition>::iterator end = achievementsList.end();
-                    for (u32 currIndex = 0; itr != end; ++itr, currIndex++)
+                // Let the user know if case they want to do something
+                if (mprAchievementDisplayCallback)
+                    mprAchievementDisplayCallback->AwardDisplayNotification(prAchievementDisplayCallback::BeginDisplay, mpNotificationBar, mRunTime);
+
+                mpNotificationBar->SetVisible(true);
+                break;
+
+            // Bring on achievement
+            case MODE_ON:
+                mRunTime += (dt / 1000.f);
+                mRunTime  = PRMIN(mRunTime, 1.0f);
+                
+                // Let the user know if case they want to do something
+                if (mprAchievementDisplayCallback)
+                    mprAchievementDisplayCallback->AwardDisplayNotification(prAchievementDisplayCallback::PanelOn, mpNotificationBar, mRunTime);
+
+                if (mRunTime > 0.999f)
+                {
+                    mDisplayMode++;
+                    mRunTime = 0.0f;
+                }
+                break;
+
+            // Show achievement
+            case MODE_WAIT:
+                mRunTime += (dt / 1000.f);
+                mRunTime  = PRMIN(mRunTime, 3.0f);
+
+                // Let the user know if case they want to do something
+                if (mprAchievementDisplayCallback)
+                    mprAchievementDisplayCallback->AwardDisplayNotification(prAchievementDisplayCallback::PanelShow, mpNotificationBar, mRunTime);
+                
+                if (mRunTime > 2.999f)
+                {
+                    mDisplayMode++;
+                    mRunTime = 0.0f;
+                }
+                break;
+
+            // Remove achievement
+            case MODE_OFF:
+                mRunTime += (dt / 1000.f);
+                mRunTime  = PRMIN(mRunTime, 1.0f);
+
+                // Let the user know if case they want to do something
+                if (mprAchievementDisplayCallback)
+                    mprAchievementDisplayCallback->AwardDisplayNotification(prAchievementDisplayCallback::PanelOff, mpNotificationBar, mRunTime);
+                
+                if (mRunTime > 0.999f)
+                {
+                    mDisplayMode++;
+                    mRunTime = 0.0f;
+                }
+                break;
+
+            // We're done
+            case MODE_POST:
+                mpNotificationBar->SetVisible(false);
+
+                if (mprAchievementDisplayCallback)
+                    mprAchievementDisplayCallback->AwardDisplayNotification(prAchievementDisplayCallback::EndDisplay, nullptr, 0.0f);
+
+                mDisplayMode = MODE_NONE;
+
+                // Release the icon
+                mpSpriteManager->Release(mpNotificationIcon);
+                mpNotificationIcon = nullptr;
+                break;
+            }
+
+
+            // Got anything to render?
+            if (mDisplayMode == MODE_NONE && !mRenderList.empty())
+            {
+                // Get the achievements index.
+                auto idx = mRenderList.begin();
+                u32 index = (*idx);
+
+                // Remove the first index
+                mRenderList.pop_front();
+
+                // Search for and load the icon for this achievement
+                auto itr = mAchievementsList.begin();
+                auto end = mAchievementsList.end();
+                for (u32 currIndex = 0; itr != end; ++itr, currIndex++)
+                {
+                    if (currIndex == index)
                     {
-                        if (currIndex == index)
+                        // Create the icon
+                        mpNotificationIcon = mpSpriteManager->Create((*itr).image.c_str());
+                        if (mpNotificationIcon == nullptr)
                         {
-                            pTexture = prSystemResourceManager::Get()->Load<Texture>((*itr).image.c_str());
-                            mode     = MODE_ON;
-                            delay    = SHOW_ACHIEVEMENT_TIME;
-
-                            // Set the title and description text.
-                            memset(text_title, 0, sizeof(text_title));
-                            memset(text_description, 0, sizeof(text_description));
-
-                            strcpy(text_title, (*itr).description.c_str());
-
-                            if (pLanguage)
-                            {
-                                char temp[512];
-                                PRUNUSED(temp);
-
-                                strcpy(temp, (*itr).achieved.c_str());
-                                strcpy(temp, pLanguage->GetString(temp));
-
-                                StringParseControls(temp, text_description);
-                            }
-                            else
-                            {
-                                strcpy(text_description, (*itr).achieved.c_str());
-                            }
-                            return;
+                            prTrace(LogError, "Failed to find achievement icon\n");
+                            mDisplayMode = MODE_PRE;
+                        }
+                        else
+                        {
+                            mDisplayMode = MODE_PRE;
+                            mpNotificationIcon->SetVisible(false);
                         }
                     }
-
-                    prTrace(LogError, "Failed to find icon\n");
-                    return;
-                }
-                
-                switch(mode)
-                {
-                // Slide the bar on.
-                case MODE_ON:
-                    if (pNotificationBar->pos.y > on_pos)
-                    {
-                        pNotificationBar->pos.y -= step;
-                    }
-                    else
-                    {
-                        pNotificationBar->pos.y = (f32)on_pos;
-                        mode = MODE_WAIT;
-                    }
-                    break;
-
-                // Pause to allow viewing.
-                case MODE_WAIT:
-                    delay -= dt;
-                    if (delay < 0)
-                    {
-                        mode = MODE_OFF;
-                    }
-                    break;
-
-                // Slide the bar off.
-                case MODE_OFF:
-                    if (pNotificationBar->pos.y < off_pos)
-                    {
-                        pNotificationBar->pos.y += step;
-                    }
-                    else
-                    {
-                        pNotificationBar->pos.y = (f32)off_pos;
-                        prSystemResourceManager::Get()->Unload(pTexture);
-                        renderList.pop_front();
-                        pTexture = NULL;
-                        mode     = MODE_NONE;
-                        //m_bloody_hack = 0;
-                    }
-                    break;
                 }
             }
-        }//*/
+        }
     }
 }
 
@@ -514,10 +375,13 @@ void prAchievementManager::Render()
 {
     if (mEnabled && mRender)
     {
-        //    imp.Render();
         if (mpNotificationBar)
         {
             mpNotificationBar->Draw();
+        }
+        if (mpNotificationIcon)
+        {
+            mpNotificationIcon->Draw();
         }
     }
 }
@@ -528,74 +392,51 @@ void prAchievementManager::Render()
 /// ---------------------------------------------------------------------------
 void prAchievementManager::Award(const char *key, s32 awardValue)
 {
-    //PRASSERT(pImpl);
-    //if (imp.enabled)
-    //{
-    //    PRASSERT(key && *key);
-    //    PRASSERT(imp.achievementsCount > 0);
+    PRASSERT(mpAchievementProvider);
 
-    //    if (key && *key)
-    //    {
-    //        u32 hash   = prStringHash(key);
-    //        bool found = false;
+    if (mEnabled)
+    {
+        PRASSERT(key && *key);
+        PRASSERT(mAchievementsCount > 0);
 
-    //        for (u32 i=0; i<imp.achievementsCount; i++)
-    //        {
-    //            if (imp.achievements[i].hash == hash)
-    //            {
-    //                found = true;
+        u32 hash   = prStringHash(key);
+        bool found = false;
 
-    //                //
-    //                if (imp.achievements[i].state == Proteus::Achievement::NotAwarded)
-    //                {
-    //                    imp.achievements[i].count++;
+        for (s32 i=0; i<mAchievementsCount; i++)
+        {
+            if (mpAchievements[i].hash == hash)
+            {
+                found = true;
 
-    //                    if (Achieved(imp.achievements[i].count, awardValue, -1))
-    //                    {
-    //                        // Award
-    //                        if (imp.pAchievementProvider)
-    //                        {
-    ///*                            if (!lite_build)
-    //                            {
-    //                                // Start the award process.
-    //                                imp.pAchievementProvider->Award(imp.GetIdentifier(key), 0);
+                if (mpAchievements[i].state == Proteus::Achievement::NotAwarded)
+                {
+                    mpAchievements[i].count++;
 
-    //                                // Set award is being awarded.
-    //                                imp.achievements[i].state = Proteus::Achievement::Awarding;
+                    if (Achieved(mpAchievements[i].count, awardValue, -1))
+                    {
+                        // Start the award process.
+                        mpAchievementProvider->Award(GetIdentifier(key), 0);
+                                
+                        // Set award is being awarded.
+                        mpAchievements[i].state = Proteus::Achievement::Awarding;
+                                
+                        // Add to display handler
+                        mRenderList.push_back(i);
+                    }
+                                
+                    // Save state change
+                    Save();
+                }
 
-    //                                // Add to display handler
-    //                                imp.AddRenderList(i);
+                break;
+            }
+        }
 
-    //                                // Save state change
-    //                                Save();
-    //                            }
-    //                            else
-    //                            {
-    //                                // Start the award process.
-    ////                                imp.pAchievementProvider->Award(imp.GetIdentifier(key), 0);
-    //                            
-    //                                // Set award is being awarded.
-    //                                imp.achievements[i].state = Proteus::Achievement::Awarding;
-    //                            
-    //                                // Add to display handler
-    //                                imp.AddRenderList(i);
-    //                            
-    //                                // Save state change
-    //                                Save();
-    //                            }//*/
-    //                        }
-    //                    }
-    //                }
-    //                break;
-    //            }
-    //        }
-
-    //        if (!found)
-    //        {
-    //            prTrace(LogError, "prAchievementManager::Award - Failed to find achievement: %s\n", key);
-    //        }
-    //    }
-    //}
+        if (!found)
+        {
+            prTrace(LogError, "prAchievementManager::Award - Failed to find achievement: %s\n", key);
+        }
+    }
 }
 
 
@@ -606,6 +447,7 @@ bool prAchievementManager::IsAwarded(const char *key) const
 {
     PRASSERT(key && *key);
     PRASSERT(mAchievementsCount > 0);
+    PRASSERT(mpAchievements);
 
     bool result = false;
     u32 hash    = prStringHash(key);
@@ -614,11 +456,11 @@ bool prAchievementManager::IsAwarded(const char *key) const
     {
         if (mpAchievements[i].hash == hash)
         {
-//            if (imp.achievements[i].state == Proteus::Achievement::Awarding)
-//            {
-//                result = true;
-//            }
-//            break;
+            if (mpAchievements[i].state == Proteus::Achievement::Awarding)
+            {
+                result = true;
+            }
+            break;
         }
     }
 
@@ -691,7 +533,9 @@ void prAchievementManager::Load(const char *filename)
         // Set number of achievements.
         mAchievementsCount = size / sizeof(prAchievementStatus);
         PRASSERT(mAchievementsCount == mAchievementsList.size());
+#if defined(ACHIEVEMENT_DEBUG)
         prTrace(LogError, "Loaded %i achievements\n", mAchievementsCount);
+#endif
     }
 
 
@@ -920,6 +764,9 @@ void prAchievementManager::SetNotificationBar(const char *filename, Notification
     // Store default panel position
     mDefaultPanelXPos = xpos;
     mDefaultPanelYPos = ypos;
+
+    // Hide the panel
+    mpNotificationBar->SetVisible(false);
 }
 
 
@@ -934,9 +781,6 @@ void prAchievementManager::SetNotificationBarFont(prBitmapFont *font, float widt
     //imp.pFont = font;
     //imp.fontScale = scale;
 }
-
-
-/// -- PRIVATE ----------------------------------------------------------------
 
 
 /// ---------------------------------------------------------------------------
@@ -972,8 +816,9 @@ void prAchievementManager::LoadAchievementDescriptions(const char *filename)
         {
             ParseFile(doc);
             PRASSERT(mCorrectFile);
-
+#if defined(ACHIEVEMENT_DEBUG)
             prTrace(LogError, "Loaded %i achievement definitions\n", mAchievementsList.size());
+#endif
         }
         else
         {
@@ -1092,5 +937,32 @@ const char *prAchievementManager::GetIdentifierByIndex(u32 index)
     }
 
     prTrace(LogError, "prAchievementManager::GetIdentifierByIndex - Failed to find identifier\n");
+    return nullptr;
+}
+
+
+/// -----------------------------------------------------------------------
+/// Gets the identifer for the achievement.
+/// -----------------------------------------------------------------------
+const char *prAchievementManager::GetIdentifier(const char *name)
+{
+    PRASSERT(name && *name);
+
+    if (name && *name)
+    {
+        auto itr = mAchievementsList.begin();
+        auto end = mAchievementsList.end();
+        u32 hash = prStringHash(name);
+
+        for (; itr != end; ++itr)
+        {
+            if (hash == (*itr).hash)
+            {
+                return (*itr).identifier.c_str();
+            }
+        }
+    }
+
+    prTrace(LogError, "prAchievementManager::GetIdentifier - Failed to find identifier: %s\n", name);
     return nullptr;
 }
