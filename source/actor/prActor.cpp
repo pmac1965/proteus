@@ -44,6 +44,7 @@ prActor::prActor(s32 type) : m_type(type)
     m_destroy   = false;
     m_onScreen  = true;
     m_priority  = 0;
+    m_state     = 0;
     m_id        = m_baseid++;
     user0       = 0;
     user1       = 0;
@@ -51,14 +52,6 @@ prActor::prActor(s32 type) : m_type(type)
     user3       = 0;
     m_layer     = ActorLayerBack;
     m_colPos    = prVector2::MinusOne;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Dtor.
-/// ---------------------------------------------------------------------------
-prActor::~prActor()
-{
 }
 
 

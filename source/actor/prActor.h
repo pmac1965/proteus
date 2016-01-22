@@ -100,7 +100,7 @@ public:
 
     // Method: ~prActor
     //      Dtor
-    virtual ~prActor();
+    virtual ~prActor() {}
 
 
     // Method: Update
@@ -248,6 +248,26 @@ public:
     //      User defined height
     virtual Proteus::Core::u32 GetActorHeight() const { return 0; }
 
+    // Method: GetState
+    //      Entity state.
+    //
+    // Notes:
+    //      Included for older state machine games
+    //
+    // Notes:
+    //      *This call is deprecated*
+    Proteus::Core::s32 GetState() const { return m_state; }
+
+    // Method: SetState
+    //      Entity state.
+    //
+    // Notes:
+    //      Included for older state machine games
+    //
+    // Notes:
+    //      *This call is deprecated*
+    void SetState(Proteus::Core::s32 state) { m_state = state; }
+
 
 public:
     Proteus::Math::prVector2    pos;    
@@ -262,10 +282,11 @@ public:
 
 
 protected:
-    prString                    m_name;         //
+    prString                    m_name;
     Proteus::Core::s32          m_type;
     Proteus::Core::s32          m_priority;
     Proteus::Core::s32          m_id;
+    Proteus::Core::s32          m_state;
     Proteus::Math::prVector2    m_colPos;    
     bool                        m_visible;
     bool                        m_active;
