@@ -144,6 +144,11 @@ public:
 
 
 private:
+    // Stops passing by value and assignment.
+    prAchievementBase(const prAchievementBase&);
+    const prAchievementBase& operator = (const prAchievementBase&);
+
+private:
     const prAchievementProvider mAchievementProvider;           // The provider (Engine, Steam, etc)
     bool                        mReady;                         // Is the provider ready (Fully initialised)
     bool                        mExp0;                          // Expansion purposes
