@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRMATRIX4_H
-#define __PRMATRIX4_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -151,6 +150,3 @@ private:
 
 // Inline code
 #include "prMatrix4.inl"
-
-
-#endif//__PRMATRIX4_H

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRRANDOM_H
-#define __PRRANDOM_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -49,6 +48,3 @@ Proteus::Core::s32 prRand();
 
 
 }}// Namespaces
-
-
-#endif//__PRRANDOM_H

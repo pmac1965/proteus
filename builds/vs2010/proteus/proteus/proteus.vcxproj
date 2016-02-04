@@ -575,6 +575,7 @@
     <ClInclude Include="..\..\..\..\source\core\prString.h" />
     <ClInclude Include="..\..\..\..\source\core\prStringShared.h" />
     <ClInclude Include="..\..\..\..\source\core\prStringUtil.h" />
+    <ClInclude Include="..\..\..\..\source\core\prTransform.h" />
     <ClInclude Include="..\..\..\..\source\core\prTypes.h" />
     <ClInclude Include="..\..\..\..\source\core\prVersion.h" />
     <ClInclude Include="..\..\..\..\source\core\prVertex.h" />

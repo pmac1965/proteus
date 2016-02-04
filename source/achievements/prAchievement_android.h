@@ -27,7 +27,7 @@
 class prAchievement_Android : public prAchievementBase
 {
 public:
-    // Method: prAchievement_Ios
+    // Method: prAchievement_Android
     //      Ctor
     //
     // Parameters:
@@ -36,8 +36,7 @@ public:
     // See Also:
     //      <prAchievementProvider>
     explicit prAchievement_Android(prAchievementProvider provider) : prAchievementBase(provider)
-    {
-    }
+    {}
     
     // Method: Initialise
     //      Initialises the achievement system for a specific platform

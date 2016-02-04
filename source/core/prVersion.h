@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRVERSION_H
-#define __PRVERSION_H
+#pragma once
 
 
 // Function: prGetVersion
@@ -35,6 +34,3 @@ void prGetVersion(int &major, int &minor, int &revision);
 // Returns:
 //      A string in the format of "major.minor.revision"
 const char *prGetVersionAsString();
-
-
-#endif//__PRVERSION_H

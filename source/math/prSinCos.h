@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSINCOS_H
-#define __PRSINCOS_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -38,6 +37,3 @@ Proteus::Core::f32 prSin(Proteus::Core::u32 angle);
 
 
 }}// Namespaces
-
-
-#endif//__PRSINCOS_H

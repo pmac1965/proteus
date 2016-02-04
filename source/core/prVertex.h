@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRVERTEX_H
-#define __PRVERTEX_H
+#pragma once
 
 
 #include "prTypes.h"
@@ -42,6 +41,3 @@ typedef struct prVertex3D
     Proteus::Core::f32 z;
 
 } prVertex3D;
-
-
-#endif//__PRVERTEX_H

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSTRINGUTIL_H
-#define __PRSTRINGUTIL_H
+#pragma once
 
 
 #include "prTypes.h"
@@ -437,6 +436,3 @@ char *prStringSkipToWhitespace(char* text);
 // Function: prStringCountCharsOfType
 //      Counts the specified character in the passed string
 Proteus::Core::s32 prStringCountCharsOfType(const char* text, char character);
-
-
-#endif//__PRSTRINGUTIL_H

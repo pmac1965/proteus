@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRWAYPOINT_H
-#define __PRWAYPOINT_H
+#pragma once
 
 
 #include "prTypes.h"
@@ -30,11 +29,8 @@ class prWaypoint
 public:
     // Method: prWaypoint
     //      Constructor.
-    prWaypoint()
+    prWaypoint() : x(0), y(0), index(0)
     {
-        x     = 0;
-        y     = 0;
-        index = 0;
     }
     
     // Method: prWaypoint
@@ -44,11 +40,8 @@ public:
     //      _x     - X coordinate
     //      _y     - Y coordinate
     //      _index - Waypoints index
-    prWaypoint(Proteus::Core::s32 _x, Proteus::Core::s32 _y, Proteus::Core::s32 _index)
+    prWaypoint(Proteus::Core::s32 _x, Proteus::Core::s32 _y, Proteus::Core::s32 _index)  : x(_x), y(_y), index(_index)
     {
-        x     = _x;
-        y     = _y;
-        index = _index;
     }
 
     // Method: prWaypoint
@@ -64,12 +57,8 @@ public:
     }
 
 
-public:
-    
+public:    
     Proteus::Core::s32 x;              // public for fast access
     Proteus::Core::s32 y;
     Proteus::Core::s32 index;
 };
-
-
-#endif//__PRWAYPOINT_H

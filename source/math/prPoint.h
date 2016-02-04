@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRPOINT_H
-#define __PRPOINT_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -102,6 +101,3 @@ typedef TPoint2<Proteus::Core::f32>     prPoint2F;
 
 
 }}// Namespaces
-
-
-#endif//__PRPOINT_H

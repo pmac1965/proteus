@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRRECTF_H
-#define __PRRECTF_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -211,6 +210,3 @@ private:
 
 
 }}// Namespaces
-
-
-#endif//__PRRECTF_H

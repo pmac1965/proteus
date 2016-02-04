@@ -16,8 +16,10 @@
  */
 
 
-#ifndef __PRPLANE_H
-#define __PRPLANE_H
+#pragma once
+
+
+#include "prVector3.h"
 
 
 // Namespaces
@@ -30,10 +32,15 @@ class prPlane
 public:
     prPlane();
     ~prPlane();
+
+
+private:
+    // Normal vector of the plane.
+    prVector3   normal;
+
+    // Distance from origin.
+    Proteus::Core::f32  distance;
 };
 
 
 }}// Namespaces
-
-
-#endif//__PRPLANE_H

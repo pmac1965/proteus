@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRVECTOR2_H
-#define __PRVECTOR2_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -168,7 +167,3 @@ public:
 
 
 #include "prVector2.inl"
-
-
-#endif//__PRVECTOR2_H
-

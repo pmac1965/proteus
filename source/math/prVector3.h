@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRVECTOR3_H
-#define __PRVECTOR3_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -198,6 +197,3 @@ public:
 
 
 #include "prVector3.inl"
-
-
-#endif//__PRVECTOR3_H

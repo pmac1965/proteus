@@ -17,8 +17,7 @@
  */
 
 
-#ifndef __PRFIXEDPOINT_H
-#define __PRFIXEDPOINT_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -51,6 +50,3 @@
 // Macro: FIXED_DIV
 //      Divides a fixed point number.
 #define FIXED_DIV(var, div)     (((var) << FIXED_PRECISION) / (div))
-
-
-#endif//__PRFIXEDPOINT_H
