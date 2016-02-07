@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRASSERT_H
-#define __PRASSERT_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -218,6 +217,3 @@ enum
 #ifndef PRCOMPILER_ASSERT
 #define PRCOMPILER_ASSERT(check) typedef int COMPILER_ASSERT__[(check) ? 1 : -1]
 #endif
-
-
-#endif//__PRASSERT_H

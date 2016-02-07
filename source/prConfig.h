@@ -112,16 +112,16 @@
 #define PROTEUS_ALLOW_CONSOLE
 #endif
 
-#ifndef PROTEUS_ALLOW_WINDOW_MINIMIZE                   // Allows the PC window to have a minimize button
-//#define PROTEUS_ALLOW_WINDOW_MINIMIZE
+#ifndef PROTEUS_ALLOW_WINDOW_MINIMIZE                   // Allows the game window to have a minimize button
+#define PROTEUS_ALLOW_WINDOW_MINIMIZE
 #endif
 
-#ifndef PROTEUS_ALLOW_WINDOW_MAXIMIZE                   // Allows the PC window to have a maximize button
-//#define PROTEUS_ALLOW_WINDOW_MAXIMIZE
+#ifndef PROTEUS_ALLOW_WINDOW_MAXIMIZE                   // Allows the game window to have a maximize button
+#define PROTEUS_ALLOW_WINDOW_MAXIMIZE
 #endif
 
-#ifndef PROTEUS_ALLOW_RESIZEABLE_WINDOW                 // Allows the PC window to be resizeable.
-//#define PROTEUS_ALLOW_RESIZEABLE_WINDOW
+#ifndef PROTEUS_ALLOW_RESIZEABLE_WINDOW                 // Allows the game window to be resizeable.
+#define PROTEUS_ALLOW_RESIZEABLE_WINDOW
 #endif
 
 #ifndef PROTEUS_ALLOW_AT                                // Allows the AT define to exist

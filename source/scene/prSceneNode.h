@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSCENENODE_H
-#define __PRSCENENODE_H
+#pragma once
 
 
 #include <list>
@@ -50,9 +49,6 @@ public:
     void RemoveChild(prSceneNode *pNode);
 
 private:
-    prSceneNode *mParent;
+    prSceneNode            *mParent;
     std::list<prSceneNode*> mChildren;
 };
-
-
-#endif//__PRSCENENODE_H

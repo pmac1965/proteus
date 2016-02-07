@@ -135,8 +135,8 @@ void prGui::Update(f32 dt)
 {
     if (m_enabled)
     {
-        std::list<prWidget *>::iterator it  = m_widgets.begin();
-        std::list<prWidget *>::iterator end = m_widgets.end();
+        auto it  = m_widgets.begin();
+        auto end = m_widgets.end();
         for (; it != end;)
         {
             prWidget *pWidget = (*it++);
@@ -176,8 +176,8 @@ void prGui::Draw()
 {
     if (m_visible)
     {
-        std::list<prWidget *>::iterator it  = m_widgets.begin();
-        std::list<prWidget *>::iterator end = m_widgets.end();
+        auto it  = m_widgets.begin();
+        auto end = m_widgets.end();
         for (; it != end;)
         {
             prWidget *widget = (*it);
@@ -197,8 +197,8 @@ void prGui::Draw()
 /// ---------------------------------------------------------------------------
 void prGui::Clear()
 {
-    std::list<prWidget *>::iterator it  = m_widgets.begin();
-    std::list<prWidget *>::iterator end = m_widgets.end();
+    auto it  = m_widgets.begin();
+    auto end = m_widgets.end();
     for (; it != end;)
     {
         PRSAFE_DELETE(*it);
@@ -219,8 +219,8 @@ prWidget *prGui::Find(const char *name)
 {
     PRASSERT(name && *name);
 
-    std::list<prWidget *>::iterator it  = m_widgets.begin();
-    std::list<prWidget *>::iterator end = m_widgets.end();
+    auto it  = m_widgets.begin();
+    auto end = m_widgets.end();
     for (; it != end; ++it)
     {
         if (strcmp(name, (*it)->GetName()) == 0)
@@ -240,8 +240,8 @@ void prGui::InputPressed(const prTouchEvent &e)
 {
     if (m_enabled)
     {
-        std::list<prWidget *>::iterator it  = m_widgets.begin();
-        std::list<prWidget *>::iterator end = m_widgets.end();
+        auto it  = m_widgets.begin();
+        auto end = m_widgets.end();
         for (; it != end;)
         {
             prWidget *widget = (*it);
@@ -270,8 +270,8 @@ void prGui::InputReleased(const prTouchEvent &e)
 {
     if (m_enabled)
     {
-        std::list<prWidget *>::iterator it  = m_widgets.begin();
-        std::list<prWidget *>::iterator end = m_widgets.end();
+        auto it  = m_widgets.begin();
+        auto end = m_widgets.end();
         for (; it != end;)
         {
             prWidget *widget = (*it);
@@ -300,8 +300,8 @@ void prGui::InputAxis(const prTouchEvent &e)
 {
     if (m_enabled)
     {
-        std::list<prWidget *>::iterator it  = m_widgets.begin();
-        std::list<prWidget *>::iterator end = m_widgets.end();
+        auto it  = m_widgets.begin();
+        auto end = m_widgets.end();
         for (; it != end;)
         {
             prWidget *widget = (*it);

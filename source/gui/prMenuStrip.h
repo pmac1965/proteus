@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRMENUSTRIP_H
-#define __PRMENUSTRIP_H
+#pragma once
 
 
 #include "prWidget.h"
@@ -99,6 +98,3 @@ private:
 
 
 }}// Namespaces
-
-
-#endif//__PRMENUSTRIP_H

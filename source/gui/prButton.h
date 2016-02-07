@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRBUTTON_H
-#define __PRBUTTON_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -184,6 +183,3 @@ private:
 
 
 }}// Namespaces
-
-
-#endif//__PRBUTTON_H

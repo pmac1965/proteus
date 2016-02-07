@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRMENU_H
-#define __PRMENU_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -72,7 +71,6 @@ private:
     //      Dtor
     ~prMenu();
 
-
 public:
     // Method: Update
     //      Updates the menu.
@@ -109,6 +107,3 @@ private:
 
 
 }}// Namespaces
-
-
-#endif//__PRMENU_H

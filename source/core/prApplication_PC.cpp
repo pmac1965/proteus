@@ -446,7 +446,7 @@ PRBOOL prApplication_PC::Run()
             // Needs modified to track game speed!
             Sleep(1);
 
-            if (pFps)   { pFps->End(); }
+            if (pFps) { pFps->End(); }
         }
     }
 

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRMESSAGE_H
-#define __PRMESSAGE_H
+#pragma once
 
 
 #include "prTypes.h"
@@ -102,6 +101,3 @@ public:
     //      false if NOT handled.
     virtual bool Receive(prGameMessage &msg) = 0;
 };
-
-
-#endif//__PRMESSAGE_H

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRGUI_H
-#define __PRGUI_H
+#pragma once
 
 
 #include "prWidget.h"
@@ -178,6 +177,3 @@ private:
 
 
 }}// Namespaces
-
-
-#endif//__PRGUI_H

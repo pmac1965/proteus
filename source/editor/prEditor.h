@@ -1,6 +1,6 @@
-// File: prStringShared.h
+// File: prEditor.h
 /**
- * Copyright 2014 Paul Michael McNab
+ * Copyright 2016 Paul Michael McNab
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,18 +19,16 @@
 #pragma once
 
 
-// Enum:   prStringResult
-//      String comparison results
-//
-// Returns:
-//      CMP_ERROR       - An error occurred
-//      CMP_LESSTHAN    - Less than
-//      CMP_EQUALTO     - Equal to
-//      CMP_GREATERTHAN - Greater than
-enum prStringResult
-{
-    CMP_ERROR       = -2,
-    CMP_LESSTHAN    = -1,
-    CMP_EQUALTO     =  0,
-    CMP_GREATERTHAN =  1
-};
+#include "../prConfig.h"
+
+
+#if defined(PLATFORM_PC)
+    #define WIN32_LEAN_AND_MEAN
+    #include <windows.h>
+    #else
+
+#elif defined(PLATFORM_LINUX)
+
+#else
+
+#endif

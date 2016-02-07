@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRWINDOW_LINUX_H
-#define __PRWINDOW_LINUX_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -89,7 +88,3 @@ private:
 
 
 #endif//PLATFORM_LINUX
-
-
-#endif//__PRWINDOW_LINUX_H
-

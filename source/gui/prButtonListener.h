@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRBUTTONLISTENER_H
-#define __PRBUTTONLISTENER_H
+#pragma once
 
 
 #include "../math/prVector2.h"
@@ -93,6 +92,3 @@ public:
 
 
 }}// Namespaces
-
-
-#endif//__PRBUTTONLISTENER_H

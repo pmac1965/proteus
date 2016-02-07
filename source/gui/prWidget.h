@@ -1,4 +1,5 @@
 // File: prWidget.h
+//      Base GUI widget class
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,8 +17,7 @@
  */
 
 
-#ifndef __PRWIDGET_H
-#define __PRWIDGET_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -215,11 +215,9 @@ public:
     //      <prTouchEvent>
     virtual void OnReleased(const prTouchEvent &e) = 0;
 
-
 private:
     prWidgetType    m_type;
     prString        m_name;
-
 
 protected:
     bool                m_visible;
@@ -236,10 +234,6 @@ protected:
     prColour            m_colour;
     Proteus::Core::s32  m_layer;
 
-
 public:
     Proteus::Math::prVector2    pos;
 };
-
-
-#endif//__PRWIDGET_H

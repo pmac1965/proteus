@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRWINDOW_H
-#define __PRWINDOW_H
+#pragma once
 
 
 #include "prTypes.h"
@@ -36,7 +35,6 @@
 class prWindow
 {
 public:
-
     // Method: prWindow
     //      Ctor    
     prWindow();
@@ -134,7 +132,6 @@ public:
                                                                            m_minWidth  = width;
                                                                            m_minHeight = height; }
 
-
 protected:
 
     Proteus::Core::u32  m_width;        // Width of the window.
@@ -148,6 +145,3 @@ protected:
     bool                m_exp0;         // Expansion.
     bool                m_exp1;         // Expansion.
 };
-
-
-#endif//__PRWINDOW_H

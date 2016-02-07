@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSTRING_H
-#define __PRSTRING_H
+#pragma once
 
 
 #include "prTypes.h"
@@ -35,7 +34,6 @@
 class prString
 {
 public:
-
     // Method: prString
     //      Default construtor
     prString();
@@ -178,14 +176,9 @@ public:
     // Array access.
     char& operator [] (unsigned int index);
 
-
 private:
-
     char               *m_text;
     char                m_buffer[STRING_BUFFER_SIZE];
     Proteus::Core::s32  m_length;
     Proteus::Core::u32  m_hash;
 };
-
-
-#endif//_PRSTRING_H

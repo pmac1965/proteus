@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRMESSAGEMANAGER_H
-#define __PRMESSAGEMANAGER_H
+#pragma once
 
 
 #include <list>
@@ -33,7 +32,6 @@
 class prMessageManager : public prCoreSystem
 {
 public:
-
     // Method: prMessageManager
     //      Ctor
     prMessageManager();
@@ -71,11 +69,6 @@ public:
     //      msg - The message
     void Send(prGameMessage &msg);
 
-
 private:
-
     std::list<prMessageHandler*>    m_handlers;
 };
-
-
-#endif//__PRMESSAGEMANAGER_H

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRWINDOWPROCEDURE_H
-#define __PRWINDOWPROCEDURE_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -102,6 +101,3 @@ void prSubclassSetTextFilter(const TCHAR *pChars);
 
 
 #endif//PLATFORM_PC
-
-
-#endif//__PRWINDOWPROCEDURE_H

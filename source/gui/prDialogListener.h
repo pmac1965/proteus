@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRDIALOGLISTENER_H
-#define __PRDIALOGLISTENER_H
+#pragma once
 
 
 // Namespaces
@@ -47,6 +46,3 @@ public:
 
 
 }}// Namespaces
-
-
-#endif//__PRDIALOGLISTENER_H

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRNETWORK_H
-#define __PRNETWORK_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -52,6 +51,3 @@ public:
     //      Do we have a connection to the internet?
     Proteus::Core::PRBOOL IsConnected();
 };
-
-
-#endif// __PRNETWORK_H

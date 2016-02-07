@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PREXCEPTION_H
-#define __PREXCEPTION_H
+#pragma once
 
 
 #include <string>
@@ -69,13 +68,9 @@ public:
     //      Gets the function/method name where the exception occurred.
     const std::string GetFunction() const { return m_function; }
 
-
 protected:
     int         m_line;           // line number of the source file containing the error.
     std::string	m_error;          // The error causing the exception.
     std::string	m_filename;       // Filename of source file containing error.
     std::string	m_function;       // Function name containing error.
 };
-
-
-#endif//__PREXCEPTION_H

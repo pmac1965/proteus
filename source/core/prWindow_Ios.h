@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRWINDOW_IOS_H
-#define __PRWINDOW_IOS_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -79,16 +78,9 @@ public:
     //      title      - The windows title.
     void SetTitle(const char *title);
 
-
 private:
-
-    //
     const char     *m_title;        // Text displayed in the title bar.
 };
 
 
 #endif//PLATFORM_IOS
-
-
-#endif//__PRWINDOW_IOS_H
-

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSCENEOBJECT_H
-#define __PRSCENEOBJECT_H
+#pragma once
 
 
 //#include "../core/prString.h"
@@ -99,6 +98,3 @@ private:
     static Proteus::Core::s32  sID;                // As names are not unique. The ID will be
     Proteus::Core::s32         mID;
 };
-
-
-#endif//__PRSCENEOBJECT_H
