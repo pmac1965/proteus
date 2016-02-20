@@ -1,4 +1,5 @@
 // File: prColour.h
+//      A class represent an RGBA colour
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,11 +17,11 @@
  */
 
 
-#ifndef __PRCOLOUR_H
-#define __PRCOLOUR_H
+#pragma once
 
 
 #include "../core/prTypes.h"
+#include "../core/prMacros.h"
 
 
 // Typedef: prRGBA
@@ -45,20 +46,16 @@ class prColour
 {
 public:
     // Method: prColour
-    //      Ctor
-    prColour()
-    {
-        red   = 1.0f;
-        green = 1.0f;
-        blue  = 1.0f;
-        alpha = 1.0f;
-    }
+    //      Plain constructor
+    prColour() : red(1.0f), green(1.0f), blue(1.0f), alpha(1.0f)
+    {}
     
     // Method: prColour
-    //      Ctor
+    //      Float constructor
     //
     // Notes:
-    //      Value range should be between 0.0f and 1.0f
+    //      Value range should be between 0.0f and 1.0f, but is clamped
+    //      to ensure compliance
     //
     // Parameters:
     //      r - The red component
@@ -67,17 +64,17 @@ public:
     //      a - The alpha component
     prColour(Proteus::Core::f32 r, Proteus::Core::f32 g, Proteus::Core::f32 b, Proteus::Core::f32 a = 1.0f)
     {
-        red   = r;
-        green = g;
-        blue  = b;
-        alpha = a;
+        red   = PRCLAMP(r, 0.0f, 1.0f);
+        green = PRCLAMP(g, 0.0f, 1.0f);
+        blue  = PRCLAMP(g, 0.0f, 1.0f);
+        alpha = PRCLAMP(a, 0.0f, 1.0f);
     }
     
     // Method: prColour
-    //      Ctor
+    //      Byte constructor
     //
     // Notes:
-    //      Value range should be between 0 and 255
+    //      Value range is between 0 and 255 and is clamped by virtue of data size
     //
     // Parameters:
     //      r - The red component
@@ -91,6 +88,51 @@ public:
         blue  = RGB_ELE * b;
         alpha = RGB_ELE * a;
     }
+    
+    // Method: prColour
+    //      s32 constructor
+    //
+    // Notes:
+    //      Value range is between 0 and 255, but it is clamped
+    //      to ensure compliance
+    //
+    // Parameters:
+    //      r - The red component
+    //      g - The green component
+    //      b - The blue component
+    //      a - The alpha component
+    prColour(Proteus::Core::s32 r, Proteus::Core::s32 g, Proteus::Core::s32 b, Proteus::Core::s32 a = 255)
+    {
+        red   = RGB_ELE * (r & 255);
+        green = RGB_ELE * (g & 255);
+        blue  = RGB_ELE * (b & 255);
+        alpha = RGB_ELE * (a & 255);
+    }
+
+    // Method: prColour
+    //      Copy constructor.
+    prColour(const prColour& colour) : red(colour.red), green(colour.green), blue(colour.blue), alpha(colour.alpha)
+    {}
+
+    // Method: RGBA
+    //      Converts to the RGBA colour format
+    Proteus::Core::u32 RGBA() const;
+    
+    // Method: BGRA
+    //      Converts to the BGRA colour format
+    Proteus::Core::u32 BGRA() const;
+
+
+    // ------------------------------------------------------------------------
+
+
+    // Operator: +
+    //      Operator +
+    inline prColour operator + (const prColour& rhs) const;
+
+    // Operator: -
+    //      Operator -
+    inline prColour operator - (const prColour& rhs) const;
 
 
 public:
@@ -119,6 +161,19 @@ public:
 };
 
 
+// Operator +
+inline prColour prColour::operator + (const prColour& rhs) const
+{
+    return prColour(red + rhs.red, green + rhs.green, blue + rhs.blue, alpha + rhs.alpha);
+}
+
+// Operator -
+inline prColour prColour::operator - (const prColour& rhs) const
+{
+    return prColour(red - rhs.red, green - rhs.green, blue - rhs.blue, alpha - rhs.alpha);
+}
+
+
 // Function: prSwitchRGBAToBGRA
 //      Switches RGBA to BGRA 
 //
@@ -126,6 +181,3 @@ public:
 //      pData - A pointer to the colour data
 //      size  - Size of the colour data
 void prSwitchRGBAToBGRA(Proteus::Core::u8 *pData, Proteus::Core::u32 size);
-
-
-#endif//__PRCOLOUR_H
