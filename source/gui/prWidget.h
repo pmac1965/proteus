@@ -1,5 +1,5 @@
 // File: prWidget.h
-//      Base GUI widget class
+//      The base GUI widget class
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -35,6 +35,9 @@
 // - WT_Dialog
 // - WT_MenuStrip
 // - WT_Menu
+// - WT_Pane
+// - WT_TextBox
+// - WT_CheckBox
 //
 typedef enum
 {
@@ -42,6 +45,8 @@ typedef enum
     WT_Dialog,
     WT_MenuStrip,
     WT_Menu,
+    WT_Pane,
+    WT_CheckBox
 
 } prWidgetType;
 
@@ -77,11 +82,12 @@ public:
     //
     // See Also:
     //      <prWidgetType>
+    //      <prSpriteManager>
     prWidget(prWidgetType type, const char *name, prSpriteManager *pSpriteManager);
 
     // Method: ~prWidget
     //      Dtor
-    virtual ~prWidget();
+    virtual ~prWidget() {}
 
     // Method: GetName
     //      Get the widget name.
@@ -216,8 +222,8 @@ public:
     virtual void OnReleased(const prTouchEvent &e) = 0;
 
 private:
-    prWidgetType    m_type;
-    prString        m_name;
+    prWidgetType        m_type;
+    prString            m_name;
 
 protected:
     bool                m_visible;

@@ -33,6 +33,13 @@
 /// ---------------------------------------------------------------------------
 prFps_ios::prFps_ios()
 {
+    // These four lines are duplicated in Reset(), but cppcheck complains,
+    // but this shuts it up.
+    ticksPerSecond = 0LL;
+    timeEnd        = 0LL;
+    timeTotal      = 0LL;
+    timeStart      = 0LL;
+    
     Reset();
 }
 

@@ -33,7 +33,7 @@
 /// ---------------------------------------------------------------------------
 prFps_Android::prFps_Android()
 {
-    // Repeated these four to keep cppcheco happy
+    // Repeated these four to keep cppcheck happy
     ticksPerSecond = 0LL;
     timeTotal      = 0LL;
     timeEnd        = 0LL;

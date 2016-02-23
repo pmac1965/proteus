@@ -1,6 +1,6 @@
 // File: prGameObject.h
 /**
- * Copyright 2014 Paul Michael McNab
+ * Copyright 2016 Paul Michael McNab
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,19 +21,25 @@
 
 #include "prTypes.h"
 #include "prString.h"
+#include "../editor/prEditorObject.h"
 //#include "../math/prVector3.h"
 
 //
 //
-class prGameObject
+class prGameObject PROT_EDITOR_INCL
 {
 public:
-    prGameObject() : mActive    (PRTRUE) 
-                   , mEnabled   (PRTRUE) 
-                   , mVisible   (PRTRUE)
+    prGameObject() PROT_EDITOR_CTOR
     {}
 
-    virtual ~prGameObject() {}
+    virtual ~prGameObject() 
+    {}
+
+    //
+    void Update() {}
+
+    //
+    void Draw() {}
 
     //
     inline Proteus::Core::PRBOOL IsActive() const { return mActive; }
@@ -44,6 +50,27 @@ public:
     inline void SetActive(Proteus::Core::PRBOOL active) { mActive = active; }
     inline void SetEnabled(Proteus::Core::PRBOOL active) { mEnabled = active; }
     inline void SetVisible(Proteus::Core::PRBOOL active) { mVisible = active; }
+
+    //
+    void AddComponent() {}
+
+    //
+    void FindComponentByName() {}
+
+    //
+    void FindComponentByType() {}
+
+    //
+    void FindComponentByTag() {}
+
+    //
+    void DestroyComponent() {}
+
+    // serialize out
+    void Save();
+
+    // serialize in
+    void Load();
 
     
 private:

@@ -29,10 +29,9 @@ using namespace Proteus::Core;
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
-prWidget::prWidget(prWidgetType type, const char *name, prSpriteManager *pSpriteManager) 
-    : m_type            (type)
-    , m_pSpriteManager  (pSpriteManager)
-    , m_colour          (prColour::White)
+prWidget::prWidget(prWidgetType type, const char *name, prSpriteManager *pSpriteManager) : m_type            (type)
+                                                                                         , m_pSpriteManager  (pSpriteManager)
+                                                                                         , m_colour          (prColour::White)
 {
     PRASSERT(pSpriteManager);
 
@@ -59,12 +58,4 @@ prWidget::prWidget(prWidgetType type, const char *name, prSpriteManager *pSprite
     m_layer     = 0;
     m_pBmpfont  = nullptr;
     m_pTtfFont  = nullptr;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Dtor
-/// ---------------------------------------------------------------------------
-prWidget::~prWidget()
-{
 }

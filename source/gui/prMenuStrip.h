@@ -23,6 +23,11 @@
 #include <list>
 
 
+// Forward declarations
+class prRegistry;
+class prMouse;
+
+
 // Namespaces
 namespace Proteus {
 namespace Gui {
@@ -91,9 +96,23 @@ public:
 
 
 private:
-    std::list<prMenu*>  mMenus;
+    // Tests if a touch is *over* a menu strip item
+    bool InMenuRect(Proteus::Core::s32 x, Proteus::Core::s32 y, Proteus::Core::s32 width, Proteus::Core::s32 height, Proteus::Core::s32 xpos, Proteus::Core::s32 ypos);
 
-    Proteus::Core::f32 mScreenWidth;
+    // Closes all the menus
+    void SetAllMenusClosed();
+
+
+private:
+    std::list<prMenu*>      mMenus;
+    prRegistry             *mpRegistry;
+    prMouse                *mpMouse;
+    Proteus::Core::PRBOOL   mInit;
+    Proteus::Core::f32      mStripHeight;
+    Proteus::Core::f32      mScreenWidth;
+    Proteus::Core::f32      mStartX;
+    Proteus::Core::f32      mStartY;
+    Proteus::Core::f32      mOpen;
 };
 
 

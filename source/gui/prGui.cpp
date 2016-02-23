@@ -23,6 +23,7 @@
 #include "prDialog.h"
 #include "prMenuStrip.h"
 #include "prMenu.h"
+#include "prPane.h"
 #include "../debug/prTrace.h"
 #include "../core/prStringUtil.h"
 #include "../core/prMacros.h"
@@ -112,6 +113,13 @@ prWidget *prGui::Create(prWidgetType type, const char *name)
         widget->SetLayer(m_layer);
         widget->SetBMPFont(m_pBmpfont);
         widget->SetTTFFont(m_pTtfFont);
+        break;
+
+    case WT_Pane:
+        widget = new prPane(name, &m_spriteManager);
+        //widget->SetLayer(m_layer);
+        //widget->SetBMPFont(m_pBmpfont);
+        //widget->SetTTFFont(m_pTtfFont);
         break;
 
     default:

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRFPS_LINUX_H
-#define __PRFPS_LINUX_H
+#pragma once
 
 
 #include "prFps.h"
@@ -40,24 +39,19 @@ public:
 
     // Method: Reset
     //      Resets the timing data, should be called on game entry, etc.
-    void Reset();
+    void Reset() override;
 
     // Method: Begin
     //      Begins the timing period.
-    void Begin();
+    void Begin() override;
 
     // Method: End
     //      Ends the timing period.
-    void End();
-
+    void End() override;
 
 private:
-
     Proteus::Core::u64     timeStart;
     Proteus::Core::u64     timeEnd;
     Proteus::Core::u64     timeTotal;
     Proteus::Core::u64     ticksPerSecond;
 };
-
-
-#endif//__PRFPS_LINUX_H

@@ -88,11 +88,9 @@ void prFps_PC::Reset()
 void prFps_PC::Begin()
 {
     LARGE_INTEGER timenow;
-
     if (QueryPerformanceCounter(&timenow))
     {
         timeStart = timenow.QuadPart;
-        //prTrace(LogError, "beg\n");
     }
 }
 
@@ -103,16 +101,13 @@ void prFps_PC::Begin()
 void prFps_PC::End()
 {
     LARGE_INTEGER timenow;
-
     if (QueryPerformanceCounter(&timenow))
     {
         // Find the time taken.
         timeEnd    = timenow.QuadPart;
         timeTotal += (timeEnd - timeStart);
 
-
         //prTrace(LogError, "FPS: %llu, %llu, %llu\n", timeEnd, timeTotal, ticksPerSecond);
-
 
         // Exceeded one second?
         if (timeTotal >= ticksPerSecond)
@@ -138,4 +133,3 @@ void prFps_PC::End()
 
 
 #endif//PLATFORM_PC
-

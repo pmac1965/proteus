@@ -51,9 +51,9 @@ prFacebook::prFacebook(prFacebookCallbacks *pcb)
     mpFacebook = new prFacebook_Android(pcb);
 
 #elif defined(PLATFORM_IOS)
-#if 0
-    mpFacebook = new prFacebook_Ios(pcb);
-#endif
+//#if 0
+    mpFacebook = nullptr;//new prFacebook_Ios(pcb);
+//#endif
     
 #else
     mpFacebook = nullptr;

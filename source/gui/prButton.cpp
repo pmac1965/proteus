@@ -45,22 +45,14 @@ using namespace Proteus::Core;
 prButton::prButton(const char *name, prSpriteManager *pSpriteManager) : prWidget(WT_Button, name, pSpriteManager)
                                                                       , m_textColour(prColour::White)
 {
-    m_sprite            = NULL;
+    m_sprite            = nullptr;
     m_width             = 0;
     m_height            = 0;
     m_buttonState       = BS_NORMAL;
     m_prevX             = -1;
     m_prevY             = -1;
-    m_prButtonListener  = NULL;
+    m_prButtonListener  = nullptr;
     m_textScale         = 1.0f;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Dtor
-/// ---------------------------------------------------------------------------
-prButton::~prButton()
-{
 }
 
 

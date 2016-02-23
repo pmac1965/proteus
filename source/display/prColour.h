@@ -66,7 +66,7 @@ public:
     {
         red   = PRCLAMP(r, 0.0f, 1.0f);
         green = PRCLAMP(g, 0.0f, 1.0f);
-        blue  = PRCLAMP(g, 0.0f, 1.0f);
+        blue  = PRCLAMP(b, 0.0f, 1.0f);
         alpha = PRCLAMP(a, 0.0f, 1.0f);
     }
     

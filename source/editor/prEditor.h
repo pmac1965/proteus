@@ -1,4 +1,6 @@
 // File: prEditor.h
+//      Creates a bunch of menus for adjusting the games behaviour
+//      at runtime
 /**
  * Copyright 2016 Paul Michael McNab
  * 
@@ -22,13 +24,9 @@
 #include "../prConfig.h"
 
 
-#if defined(PLATFORM_PC)
-    #define WIN32_LEAN_AND_MEAN
-    #include <windows.h>
-    #else
-
-#elif defined(PLATFORM_LINUX)
+#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC)
 
 #else
+    // Not supported on mobile
 
 #endif

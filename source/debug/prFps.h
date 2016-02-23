@@ -52,7 +52,7 @@ public:
 
     // Method: ~prFps
     //      Dtor
-    virtual ~prFps();
+    virtual ~prFps() {}
 
     // Method: Reset
     //      Resets the timing data, should be called on game entry, etc.

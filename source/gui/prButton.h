@@ -1,4 +1,5 @@
 // File: prButton.h
+//      Standard GUI button
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -79,7 +80,7 @@ private:
 
     // Method: ~prButton
     //      Dtor
-    ~prButton();
+    ~prButton() {}
 
 
 public:
@@ -88,11 +89,11 @@ public:
     //
     // Parameters:
     //      dt - Delta time
-    void Update(Proteus::Core::f32 dt);
+    void Update(Proteus::Core::f32 dt) final override;
 
     // Method: Draw
     //      Draws the button
-    void Draw();
+    void Draw() final override;
 
     // Method: OnPressed
     //      A touch event handler.
@@ -102,7 +103,7 @@ public:
     //
     // See Also:
     //      <prTouchEvent>
-    void OnPressed(const prTouchEvent &e);
+    void OnPressed(const prTouchEvent &e) final override;
 
     // Method: OnMove
     //      A touch event handler
@@ -112,7 +113,7 @@ public:
     //
     // See Also:
     //      <prTouchEvent>
-    void OnMove(const prTouchEvent &e);
+    void OnMove(const prTouchEvent &e) final override;
 
     // Method: OnReleased
     //      A touch event handler
@@ -122,7 +123,7 @@ public:
     //
     // See Also:
     //      <prTouchEvent>
-    void OnReleased(const prTouchEvent &e);
+    void OnReleased(const prTouchEvent &e) final override;
 
     // Method: SetSprite
     //      Sets the buttons sprite
