@@ -57,14 +57,6 @@ public:
     ~prMenuItem()
     {}
 
-    // Method: Update
-    //      Updates the menu item
-    void Update();
-
-    // Method: Draw
-    //      Draws the menu item
-    void Draw();
-
     // Method: SetIcon
     //      Sets the icon for the menu item
     void SetIcon(prSprite *pIcon) { mIcon = pIcon; }
