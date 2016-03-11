@@ -49,6 +49,7 @@ namespace Gui {
 const f32 icon_gap   = 24.0f;
 const f32 text_gap_x = 8.0f;
 const f32 text_gap_y = 8.0f;
+const f32 keys_Width = 100.0f;
 
 
 /// ---------------------------------------------------------------------------
@@ -56,11 +57,11 @@ const f32 text_gap_y = 8.0f;
 /// ---------------------------------------------------------------------------
 prMenu::prMenu(const char *name, prSpriteManager *pSpriteManager) : prWidget(WT_Menu, name, pSpriteManager)
 {
-    mMaxWidth        = 0;
-    mMaxHeight       = 0;
-    mOpened          = PRFALSE;
-    mpGrayTextBMF    = nullptr;
-    mpMessageManager = nullptr;
+    mMaxWidth         = 0;
+    mMaxHeight        = 0;
+    mOpened           = PRFALSE;
+    mpGrayTextBMF     = nullptr;
+    mpMessageManager  = nullptr;
     
     // Get the mouse if correct system
     #if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
@@ -87,26 +88,12 @@ prMenu::~prMenu()
 
 
 /// ---------------------------------------------------------------------------
-/// Updates the menu strip.
-/// ---------------------------------------------------------------------------
-void prMenu::Update(f32 dt)
-{
-    PRUNUSED(dt);
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Draw the menu. Default version is not used
-/// ---------------------------------------------------------------------------
-void prMenu::Draw()
-{
-}
-
-/// ---------------------------------------------------------------------------
 /// Draws the menu.
 /// ---------------------------------------------------------------------------
-void prMenu::DrawMenu(f32 x, f32 y, f32 width)
+bool prMenu::DrawMenu(f32 x, f32 y, f32 width)
 {
+    bool result = false;
+
     prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
     if (pRenderer)
     {
@@ -172,7 +159,7 @@ void prMenu::DrawMenu(f32 x, f32 y, f32 width)
                     f32 xPosEnd = mMaxWidth - text_gap_x - icon_gap;
 
                     // On desktop we highlight the mouse cursor
-                    if (InMenuItemRect(xPos, y - 3.0f, xPosEnd, mSize.y, mpMouse->x, mpMouse->y))
+                    if (InMenuItemRect((s32)xPos, (s32)(y - 3.0f), (s32)xPosEnd, (s32)mSize.y, mpMouse->x, mpMouse->y))
                     {
                         pRenderer->TexturesEnabled(false);
                         pRenderer->SetColour(prColour::LiteGray + prColour(.2f, .2f, .2f, 0.f));
@@ -187,15 +174,37 @@ void prMenu::DrawMenu(f32 x, f32 y, f32 width)
                                 msg.type = (*it).second->GetID();
                                 mpMessageManager->Send(msg);
                             }
+
+                            result = true;
                         }
                     }
                     #endif
 
                     m_pBmpfont->Draw(x + icon_gap + text_gap_x, y, (*it).second->GetText());
+
+                    // Command key text
+                    if ((*it).second->GotCommandKeys())
+                    {
+                        const char *text = (*it).second->GetCommandKeyText();
+                        if (text && *text)
+                        {
+                            m_pBmpfont->Draw(x + mMaxWidth - 10.0f, y, 1.0f, prColour::White, prBitmapFont::ALIGN_RIGHT, (*it).second->GetCommandKeyText());
+                        }
+                    }
                 }
                 else
                 {
                     mpGrayTextBMF->Draw(x + icon_gap + text_gap_x, y, (*it).second->GetText());
+
+                    // Command key text
+                    if ((*it).second->GotCommandKeys())
+                    {
+                        const char *text = (*it).second->GetCommandKeyText();
+                        if (text && *text)
+                        {
+                            mpGrayTextBMF->Draw(x + mMaxWidth - 10.0f, y, 1.0f, prColour::White, prBitmapFont::ALIGN_RIGHT, (*it).second->GetCommandKeyText());
+                        }
+                    }
                 }
             }
 
@@ -203,6 +212,7 @@ void prMenu::DrawMenu(f32 x, f32 y, f32 width)
             prSprite *pIcon = (*it).second->GetIcon();
             if (pIcon)
             {
+                pIcon->SetFrame((*it).second->GetEnabled() ? 0 : 1);
                 pIcon->pos.x = x + (icon_gap / 2)   - (pIcon->GetFrameWidth() / 2);
                 pIcon->pos.y = y + (mMaxHeight / 2) - (pIcon->GetFrameHeight() / 2) - (text_gap_y / 2);
                 pIcon->Draw();
@@ -213,38 +223,13 @@ void prMenu::DrawMenu(f32 x, f32 y, f32 width)
                     
         pRenderer->SetColour(prColour::LiteGray);
     }
+
+    return result;
 }
 
 
 /// ---------------------------------------------------------------------------
-/// Input handler.
-/// ---------------------------------------------------------------------------
-void prMenu::OnPressed(const prTouchEvent &e)
-{
-    PRUNUSED(e);
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Input handler.
-/// ---------------------------------------------------------------------------
-void prMenu::OnMove(const prTouchEvent &e)
-{
-    PRUNUSED(e);
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Input handler.
-/// ---------------------------------------------------------------------------
-void prMenu::OnReleased(const prTouchEvent &e)
-{
-    PRUNUSED(e);
-}
-
-
-/// ---------------------------------------------------------------------------
-///
+/// Adds a menu item to the menu
 /// ---------------------------------------------------------------------------
 bool prMenu::AddMenuItem(prMenuItem *pMenuItem)
 {
@@ -265,12 +250,12 @@ bool prMenu::AddMenuItem(prMenuItem *pMenuItem)
             if (m_pBmpfont)
             {
                 prVector2 size = m_pBmpfont->MeasureString(pMenuItem->GetText(), 1.0f);
-                AdjustSize(size);
+                AdjustSize(size, pMenuItem);
             }
             else if (m_pTtfFont)
             {
                 prVector2 size = m_pTtfFont->MeasureString(pMenuItem->GetText(), 1.0f);
-                AdjustSize(size);
+                AdjustSize(size, pMenuItem);
             }
 
             added = true;
@@ -282,6 +267,24 @@ bool prMenu::AddMenuItem(prMenuItem *pMenuItem)
     }
 
     return added;
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Finds a menu item in the menu if it exists
+/// ---------------------------------------------------------------------------
+prMenuItem *prMenu::FindMenuItem(Proteus::Core::u32 id)
+{
+    prMenuItem *pMenuItem = nullptr;
+
+    auto it = mItems.find(id);
+
+    if (it != mItems.end())
+    {
+        pMenuItem = (*it).second;
+    }
+
+    return pMenuItem;
 }
 
 
@@ -308,9 +311,17 @@ void prMenu::SetText(const char *text)
 /// ---------------------------------------------------------------------------
 /// Sets the text max width and height, includes icon and text gaps, etc
 /// ---------------------------------------------------------------------------
-void prMenu::AdjustSize(const prVector2 &size)
+void prMenu::AdjustSize(const prVector2 &size, prMenuItem *pMenuItem)
 {
+    PRASSERT(pMenuItem);
+
     s32 xWidth = (s32)(size.x + icon_gap + text_gap_x + text_gap_x);
+
+    // Adjust for 'Ctrl+S' text
+    if (pMenuItem->GotCommandKeys())
+    {
+        xWidth += (s32)keys_Width;
+    }
 
     if (xWidth > mMaxWidth)
     {

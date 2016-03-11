@@ -178,10 +178,14 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	font/prFontGlyph.cpp	\
 	font/prTagParser.cpp	\
 	gui/prButton.cpp	\
+	gui/prCheckbox.cpp	\
 	gui/prDialog.cpp	\
 	gui/prGui.cpp	\
 	gui/prMenu.cpp	\
+	gui/prMenuItem.cpp	\
 	gui/prMenuStrip.cpp	\
+	gui/prPane.cpp	\
+	gui/prSlider.cpp	\
 	gui/prWidget.cpp	\
 	inAppPurchase/prInAppPurchase.cpp	\
 	inAppPurchase/prStore.cpp	\

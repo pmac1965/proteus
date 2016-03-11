@@ -82,14 +82,6 @@ prMenuStrip::prMenuStrip(const char *name, prSpriteManager *pSpriteManager) : pr
 
 
 /// ---------------------------------------------------------------------------
-/// Dtor
-/// ---------------------------------------------------------------------------
-prMenuStrip::~prMenuStrip()
-{
-}
-
-
-/// ---------------------------------------------------------------------------
 /// Updates the menu strip.
 /// ---------------------------------------------------------------------------
 void prMenuStrip::Update(f32 dt)
@@ -97,6 +89,8 @@ void prMenuStrip::Update(f32 dt)
     PRUNUSED(dt);
     PRASSERT(mpRegistry);
 
+    // Initialise strip height on first update (put in ctor once fonts have base class)
+    TODO("(Put fonts in ctor once fonts have base class)")
     if (!mInit)
     {
         // Set the strip height
@@ -112,11 +106,8 @@ void prMenuStrip::Update(f32 dt)
         }
         else
         {
-            prTrace(LogError, "-----------------------------------------------------------------------------\n");
-            prTrace(LogError, "Using the default menu strip height\n");
-            prTrace(LogError, "-----------------------------------------------------------------------------\n");
-
             mStripHeight = MS_YPIXEL_BUFFER + MS_STRIP_HEIGHT + MS_YPIXEL_BUFFER;
+            PRLOGI("Using the default menu strip height\n");
         }
 
         mInit = PRTRUE;
@@ -169,11 +160,14 @@ void prMenuStrip::Draw()
                     //pRenderer->SetColour(prColour::LiteGray);
                     pRenderer->TexturesEnabled(true);
 
-                    (*it)->DrawMenu(xpos - MS_XPIXEL_BUFFER_HALF, ypos + size.y, MS_XPIXEL_BUFFER_HALF + size.x + MS_XPIXEL_BUFFER_HALF);
+                    if ((*it)->DrawMenu(xpos - MS_XPIXEL_BUFFER_HALF, ypos + size.y, MS_XPIXEL_BUFFER_HALF + size.x + MS_XPIXEL_BUFFER_HALF))
+                    {
+                        SetAllMenusClosed();
+                    }
                 }
                 // On desktop we highlight the mouse cursor
                 #if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
-                else if (InMenuRect(xpos - MS_XPIXEL_BUFFER_HALF, ypos, (s32)size.x + MS_XPIXEL_BUFFER - 1.0f, (s32)size.y, mpMouse->x, mpMouse->y))
+                else if (InMenuRect((s32)(xpos - MS_XPIXEL_BUFFER_HALF), (s32)ypos, (s32)(size.x + MS_XPIXEL_BUFFER - 1.0f), (s32)size.y, mpMouse->x, mpMouse->y))
                 {
                     pRenderer->TexturesEnabled(false);
 
@@ -200,104 +194,49 @@ void prMenuStrip::Draw()
             }
         }
     }
-}
 
-
-/// ---------------------------------------------------------------------------
-/// Input handler.
-/// ---------------------------------------------------------------------------
-void prMenuStrip::OnPressed(const prTouchEvent &e)
-{
-    //PRUNUSED(e);
-    f32 xpos = mStartX;
-    f32 ypos = mStartY;
-
-    SetAllMenusClosed();
-
-    auto it  = mMenus.begin();
-    auto end = mMenus.end();
-    for (s32 i=0; it != end; ++it, ++i)
+    // On desktop we check for mouse input here, as normal touch input is for
+    // game use and has some issues on tool builds
+    #if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
+    if (mpMouse->ButtonPressed(prMouseButton::MOUSE_BUTTON_LEFT))
     {
-        if (m_pBmpfont)
-        {
-            const prVector2 &size = (*it)->GetTextSize();
+        f32 xpos = mStartX;
+        f32 ypos = mStartY;
 
-            if (InMenuRect(xpos, ypos, (s32)size.x, (s32)size.y, e.x, e.y))
+        auto it  = mMenus.begin();
+        auto end = mMenus.end();
+        for (s32 i=0; it != end; ++it, i++)
+        {
+            if (m_pBmpfont)
             {
-                prTrace(LogDebug, "Pressed menu %i\n", i);
-                //SetAllMenusClosed();
+                const prVector2 &size = (*it)->GetTextSize();
 
-                (*it)->SetOpened(PRTRUE);
-                return;
+                // On menu? Toggle
+                if (InMenuRect((s32)xpos, (s32)ypos, (s32)size.x, (s32)size.y, mpMouse->x, mpMouse->y))
+                {
+                    if ((*it)->IsOpened())
+                    {
+                        (*it)->SetOpened(PRFALSE);
+                    }
+                    else
+                    {
+                        (*it)->SetOpened(PRTRUE);
+                    }
+                }
+                // else close
+                else
+                {
+                    (*it)->SetOpened(PRFALSE);
+                }
+
+                xpos += (size.x + MS_XPIXEL_BUFFER);
             }
-
-            xpos += (size.x + MS_XPIXEL_BUFFER);
-        }
-        else if (m_pTtfFont)
-        {
+            else if (m_pTtfFont)
+            {
+            }
         }
     }
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Input handler.
-/// ---------------------------------------------------------------------------
-void prMenuStrip::OnMove(const prTouchEvent &e)
-{
-//index=-1;
-//    //PRUNUSED(e);
-    //prTrace(LogDebug, "At %i, %i\n", e.x, e.y);
-//    //mx = e.x;
-//    //my = e.y;
-//    xpos = MS_XPIXEL_BUFFER;// / 2;
-//    ypos = MS_YPIXEL_BUFFER / 2;
-//
-//        auto it  = mMenus.begin();
-//        auto end = mMenus.end();
-//        for (s32 i=0; it != end; ++it, ++i)
-//        {
-//            if (m_pBmpfont)
-//            {
-//                //char name[256];
-//                //sprintf(name, "%s", (*it)->GetText());
-//
-//                //prVector2 size = m_pBmpfont->MeasureString(name, 1.0f);
-//                const prVector2 &size = (*it)->GetTextSize();
-//
-//                prTrace(LogDebug, "check (%i): %0.2f, %0.2f, %0.2f, %0.2f - (%i, %i)\n", i, xpos, ypos, size.x, size.y, e.x, e.y);
-//
-//                if (InMenuRect(xpos, ypos, (s32)size.x, (s32)size.y, e.x, e.y))
-//                {
-//                    prTrace(LogDebug, "Over (%i) \n", i);
-//                    index = i;
-//                    //pRenderer->TexturesEnabled(false);
-//                    //pRenderer->SetColour(prColour::White);
-//
-//                    //pRenderer->DrawRect(xpos, ypos, xpos + size.x, ypos + size.y);
-//                    
-//                    //pRenderer->SetColour(prColour::LiteGray);
-//                    //pRenderer->TexturesEnabled(true);
-//                }//*/
-//
-//                //m_pBmpfont->Draw(xpos, ypos, name);
-//
-//                xpos += (size.x + MS_XPIXEL_BUFFER);
-//            }
-//            else if (m_pTtfFont)
-//            {
-//            }
-//        }
-//
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Input handler.
-/// ---------------------------------------------------------------------------
-void prMenuStrip::OnReleased(const prTouchEvent &e)
-{
-    PRUNUSED(e);
+    #endif
 }
 
 
@@ -308,24 +247,12 @@ void prMenuStrip::AddMenu(prMenu *pMenu)
 {
     if (pMenu)
     {
-        //pMenu->GetText();
-
         mMenus.push_back(pMenu);
     }
     else
     {
         PRWARN("You cannot add a null pointer to a menu strip");
     }
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Tests if a touch is *over* a menu strip item
-/// ---------------------------------------------------------------------------
-bool prMenuStrip::InMenuRect(s32 x, s32 y, s32 width, s32 height, s32 xpos, s32 ypos)
-{
-    prRect rect = prRect(y, x, y + height, x + width);
-    return rect.PointInside(xpos, ypos);
 }
 
 
@@ -340,6 +267,16 @@ void prMenuStrip::SetAllMenusClosed()
     {
         (*it)->SetOpened(PRFALSE);
     }
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Tests if a touch is *over* a menu strip item
+/// ---------------------------------------------------------------------------
+bool prMenuStrip::InMenuRect(s32 x, s32 y, s32 width, s32 height, s32 xpos, s32 ypos)
+{
+    prRect rect = prRect(y, x, y + height, x + width);
+    return rect.PointInside(xpos, ypos);
 }
 
 

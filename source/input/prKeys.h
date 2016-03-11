@@ -16,22 +16,26 @@
  */
 
 
-#ifndef __PRKEYS_H
-#define __PRKEYS_H
+#pragma once
 
 
 #include "../prConfig.h"
 
 
-#if defined(PLATFORM_PC)
+#if defined(PLATFORM_PC)   
+
     // We need these defines
     #include "../core/prDefines.h"
 
-
+    #define PRKEY_LCONTROL      VK_LCONTROL
+    #define PRKEY_RCONTROL      VK_RCONTROL
+    #define PRKEY_LSHIFT        VK_LSHIFT
+    #define PRKEY_RSHIFT        VK_RSHIFT
     #define PRKEY_BACKSPACE     8
     #define PRKEY_ENTER         13
     #define PRKEY_ESCAPE        27
     #define PRKEY_TAB           9
+    #define PRKEY_DEL           127
     #define PRKEY_A             VK_A
     #define PRKEY_B             VK_B
     #define PRKEY_C             VK_C
@@ -61,6 +65,3 @@
 
 
 #endif//PLATFORM_PC
-
-
-#endif//__PRKEYS_H

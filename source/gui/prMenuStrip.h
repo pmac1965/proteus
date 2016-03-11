@@ -57,50 +57,50 @@ private:
 
     // Method: ~prMenuStrip
     //      Dtor
-    ~prMenuStrip();
+    ~prMenuStrip() {}
 
 
 public:
     // Method: Update
     //      Updates the menu strip.
-    void Update(Proteus::Core::f32 dt);
+    void Update(Proteus::Core::f32 dt) override;
 
     // Method: Draw
     //      Draw the menu strip.
-    void Draw();
+    void Draw() override;
 
     // Method: OnPressed
     //      Input handler.
     //
     // Notes:
     //      *Do not call*
-    void OnPressed(const prTouchEvent &e);
+    void OnPressed(const prTouchEvent &e) override {}
 
     // Method: OnMove
     //      Input handler.
     //
     // Notes:
     //      *Do not call*
-    void OnMove(const prTouchEvent &e);
+    void OnMove(const prTouchEvent &e) override {}
 
     // Method: OnReleased
     //      Input handler.
     //
     // Notes:
     //      *Do not call*
-    void OnReleased(const prTouchEvent &e);
+    void OnReleased(const prTouchEvent &e) override {}
 
     // Method: AddMenu
     //      Adds a menu to the menu strip
     void AddMenu(prMenu *pMenu);
 
+    // Closes all the menus
+    void SetAllMenusClosed();
+
 
 private:
     // Tests if a touch is *over* a menu strip item
     bool InMenuRect(Proteus::Core::s32 x, Proteus::Core::s32 y, Proteus::Core::s32 width, Proteus::Core::s32 height, Proteus::Core::s32 xpos, Proteus::Core::s32 ypos);
-
-    // Closes all the menus
-    void SetAllMenusClosed();
 
 
 private:

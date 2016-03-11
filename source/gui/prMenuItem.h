@@ -1,5 +1,6 @@
 // File: prMenuItem.h
-//      A menu item for the engine menus
+//      A menu item for the engine menus. Intended 
+//      primarily for game engine tools
 //
 // Notes:
 //      Once added the menus are resonsible for deleting the menu items, so
@@ -36,6 +37,22 @@ namespace Proteus {
 namespace Gui {
 
 
+// Enum: prMenuItemControlKey
+//      Optional activation keys
+//
+// - None
+// - Control
+// - Shift
+// - Alt
+enum prMenuItemControlKey
+{
+    None    = 0x00000000,
+    Control = 0x00000001,
+    Shift   = 0x00000002,
+    Alt     = 0x00000004
+};
+
+
 // Class: prMenuItem
 //      A menu item for the engine menus
 //
@@ -57,6 +74,21 @@ public:
     ~prMenuItem()
     {}
 
+    // Method: SetCommandKeys
+    //      Sets the keyboard command keys for the menu item
+    //
+    // Parameters:
+    //      keys      - The keyboard control key to activate this menu item (Ctrl, Alt, Shift)
+    //      character - The key to activate this menu item. 'A, Z, Delete, Tab, etc)
+    //
+    // See Also:
+    //      <prMenuItemControlKey>
+    void SetCommandKeys(prMenuItemControlKey controlKeys = prMenuItemControlKey::None, Proteus::Core::u32 character = 0);
+
+    // Method: GotCommandKeys
+    //      Do we have a command key sequence?
+    Proteus::Core::PRBOOL GotCommandKeys() const { return mControlKey; }
+
     // Method: SetIcon
     //      Sets the icon for the menu item
     void SetIcon(prSprite *pIcon) { mIcon = pIcon; }
@@ -64,13 +96,6 @@ public:
     // Method: GetIcon
     //      Gets the icon for the menu item
     prSprite *GetIcon() { return mIcon; }
-
-    // Method: SetCommandKeys
-    //      Sets the keyboard command keys for the menu item
-    //
-    // Parameters:
-    //      keys - The keyboard command keys to activate this menu item
-    void SetCommandKeys(Proteus::Core::u32 keys) { mKeys = keys; }
 
     // Method: SetEnabled
     //      Sets the enabled status
@@ -88,12 +113,17 @@ public:
     //      Gets the menu items text
     const char *GetText() const { return mText.Text(); }
 
+    // Method: GetCommandKeyText
+    //      Gets the menu items command key text
+    const char *GetCommandKeyText() const { return mCommandKeyText.Text(); }
+
 
 private:
     Proteus::Core::u32      mId;
     prString                mText;
+    prString                mCommandKeyText;
     prSprite               *mIcon;
-    Proteus::Core::u32      mKeys;
+    Proteus::Core::PRBOOL   mControlKey;
     Proteus::Core::PRBOOL   mEnabled;
 };
 

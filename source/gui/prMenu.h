@@ -1,5 +1,6 @@
 // File: prMenu.h
-//      The standard GUI menu designed to simulate the OS menus
+//      The standard GUI menu designed to simulate the OS menus. Intended 
+//      primarily for game engine tools
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -61,28 +62,31 @@ private:
 
 public:
     // Method: Update
-    //      Updates the menu.
-    void Update(Proteus::Core::f32 dt) override;
+    //      Updates the menu. Not used
+    void Update(Proteus::Core::f32 dt) override {}
 
     // Method: Draw
     //      Draws the menu. Default version is not used
-    void Draw() override;
+    void Draw() override {}
 
     // Method: DrawMenu
     //      Draws the menu.
-    void DrawMenu(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 width);
+    //
+    // Returns:
+    //      True if a menu item is chosen, false otherwise
+    bool DrawMenu(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 width);
 
     // Method: OnPressed
     //      Input handler.
-    void OnPressed(const prTouchEvent &e) override;
+    void OnPressed(const prTouchEvent &e) override {}
 
     // Method: OnMove
     //      Input handler.
-    void OnMove(const prTouchEvent &e) override;
+    void OnMove(const prTouchEvent &e) override {}
 
     // Method: OnReleased
     //      Input handler.
-    void OnReleased(const prTouchEvent &e) override;
+    void OnReleased(const prTouchEvent &e) override {}
 
     // Method: AddMenuItem
     //      Adds a menu item to the menu
@@ -91,7 +95,9 @@ public:
     //      The menu items ID needs to be unique
     bool AddMenuItem(prMenuItem *pMenuItem);
 
-    //prMenuItem *FindMenuItem(Proteus::Core::u32 id);
+    // Method: FindMenuItem
+    //      Finds a menu item in the menu if it exists
+    prMenuItem *FindMenuItem(Proteus::Core::u32 id);
 
     // Method: SetText
     //      Sets the menus text. E.g. like 'File'
@@ -127,7 +133,7 @@ public:
 
 private:
     // Sets the text max width and height
-    void AdjustSize(const Proteus::Math::prVector2 &size);
+    void AdjustSize(const Proteus::Math::prVector2 &size, prMenuItem *pMenuItem);
 
     // Tests if a touch is *over* a menu strip item
     bool InMenuItemRect(Proteus::Core::s32 x, Proteus::Core::s32 y, Proteus::Core::s32 width, Proteus::Core::s32 height, Proteus::Core::s32 xpos, Proteus::Core::s32 ypos);

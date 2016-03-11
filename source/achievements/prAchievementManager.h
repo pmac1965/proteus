@@ -367,7 +367,7 @@ private:
     const char *GetIdentifierByIndex(Proteus::Core::u32 index);
 
     // Gets the identifer for the achievement.
-    const char *prAchievementManager::GetIdentifier(const char *name);
+    const char *GetIdentifier(const char *name);
 
 private:
     // Stops passing by value and assignment.
