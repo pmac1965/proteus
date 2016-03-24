@@ -32,6 +32,7 @@
 class prBitmapFont;
 class prMouse;
 class prMessageManager;
+class prSprite;
 
 
 // Namespaces
@@ -62,11 +63,16 @@ private:
 
 public:
     // Method: Update
-    //      Updates the menu. Not used
+    //      Updates the menu. Default version is not used as only
+    //      open and active menus are drawn.
+    //
+    //      Updated via the menu strip when required
+    //
     void Update(Proteus::Core::f32 dt) override {}
 
     // Method: Draw
-    //      Draws the menu. Default version is not used
+    //      Draws the menu. Default version is not used as only
+    //      open and active menus are drawn
     void Draw() override {}
 
     // Method: DrawMenu
@@ -144,6 +150,7 @@ private:
     prBitmapFont                               *mpGrayTextBMF;
     prMouse                                    *mpMouse;
     prMessageManager                           *mpMessageManager;
+    prSprite                                   *mpIconSubMenu;
     prString                                    mText;
     Proteus::Math::prVector2                    mSize;
     Proteus::Core::s32                          mMaxWidth;

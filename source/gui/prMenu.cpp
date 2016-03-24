@@ -60,6 +60,7 @@ prMenu::prMenu(const char *name, prSpriteManager *pSpriteManager) : prWidget(WT_
     mMaxWidth         = 0;
     mMaxHeight        = 0;
     mOpened           = PRFALSE;
+    mpIconSubMenu     = nullptr;
     mpGrayTextBMF     = nullptr;
     mpMessageManager  = nullptr;
     
