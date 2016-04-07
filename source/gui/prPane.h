@@ -95,6 +95,8 @@ public:
     //      <prTouchEvent>
     void OnReleased(const prTouchEvent &e);
 
+    void SetSizeAndPos(Proteus::Core::s32 x, Proteus::Core::s32 y, Proteus::Core::s32 width, Proteus::Core::s32 height) { mXpos = x; mYpos = y; mWidth = width; mHeight = height; }
+
 private:
     Proteus::Core::s32  mXpos;
     Proteus::Core::s32  mYpos;

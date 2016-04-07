@@ -24,7 +24,7 @@
 #define AUDIO_ANDROID   3
 #define AUDIO_MAC       4
 #define AUDIO_LINUX     5
-#define AUDIO_WINPHONE  6
+//#define AUDIO_WINPHONE  6
 
 
 // Determine platform. First check for PC
@@ -105,7 +105,7 @@
 #endif
 
 #ifndef HIDE_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.
-#define HIDE_MESSAGES
+//#define HIDE_MESSAGES
 #endif
 
 #ifndef PROTEUS_ALLOW_CONSOLE                           // Allows the debug console to be optionally removed. (PC only)
@@ -113,15 +113,15 @@
 #endif
 
 #ifndef PROTEUS_ALLOW_WINDOW_MINIMIZE                   // Allows the game window to have a minimize button
-#define PROTEUS_ALLOW_WINDOW_MINIMIZE
+//#define PROTEUS_ALLOW_WINDOW_MINIMIZE
 #endif
 
 #ifndef PROTEUS_ALLOW_WINDOW_MAXIMIZE                   // Allows the game window to have a maximize button
-#define PROTEUS_ALLOW_WINDOW_MAXIMIZE
+//#define PROTEUS_ALLOW_WINDOW_MAXIMIZE
 #endif
 
 #ifndef PROTEUS_ALLOW_RESIZEABLE_WINDOW                 // Allows the game window to be resizeable.
-#define PROTEUS_ALLOW_RESIZEABLE_WINDOW
+//#define PROTEUS_ALLOW_RESIZEABLE_WINDOW
 #endif
 
 #ifndef PROTEUS_ALLOW_AT                                // Allows the AT define to exist

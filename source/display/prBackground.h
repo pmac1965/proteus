@@ -28,6 +28,7 @@
 
 
 #include "../core/prTypes.h"
+#include "../core/prGameObject.h"
 #include "../core/prString.h"
 #include "../math/prVector2.h"
 #include "prColour.h"
@@ -46,7 +47,7 @@ class prBackgroundLayer;
 
 // Class: prBackground
 //      A class designed to handle single and multiplayered backgrounds.
-class prBackground
+class prBackground : public prGameObject
 {
 public:
     // Enum: prBackgroundType
@@ -82,7 +83,7 @@ public:
 
     // Method: Draw
     //      Draws the background.
-    void Draw();
+    void Draw() override;
 
     // Method: SetColour
     //      Sets the tint colour.
@@ -106,15 +107,15 @@ public:
 
     // Method: SetVisible
     //      Sets the visibility.
-    void SetVisible(Proteus::Core::PRBOOL state) { mVisible = state; }
+    //void SetVisible(Proteus::Core::PRBOOL state) { mVisible = state; }
 
     // Method: GetVisible
     //      Gets the visibility.
-    Proteus::Core::PRBOOL GetVisible() const { return mVisible; }
+    //Proteus::Core::PRBOOL GetVisible() const { return mVisible; }
 
     // Method: GetName
     //      Gets the backgrounds name.
-    const char *GetName() const { return m_name.Text(); }
+    //const char *GetName() const { return m_name.Text(); }
 
 
 #if defined(PROTEUS_TOOL)
@@ -226,7 +227,7 @@ private:
 private:
     prTexture              *m_texture;
     prString                m_filenameTexture;
-    prString                m_name;
+    //prString                m_name;
     Proteus::Core::s32      m_width;
     Proteus::Core::s32      m_height;
     Proteus::Core::s32      m_type;
@@ -241,7 +242,7 @@ private:
     Proteus::Core::f32      m_scrnHeight;
     Proteus::Core::f32      m_v0;
     Proteus::Core::f32      m_u1;
-    Proteus::Core::PRBOOL   mVisible;
+    //Proteus::Core::PRBOOL   mVisible;
     
     // Tiled map layers
     prBackgroundLayer *mLayers[BACKGROUND_MAX_LAYERS];

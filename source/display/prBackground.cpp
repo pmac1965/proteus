@@ -96,7 +96,7 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
     m_scrnHeight            = 0.0f;
     m_v0                    = 0.0f;
     m_u1                    = 0.0f;
-    mVisible                = PRTRUE;
+    //mVisible                = PRTRUE;
 
     for (s32 i=0; i<BACKGROUND_MAX_LAYERS;i++)
     {
@@ -196,57 +196,60 @@ prBackground::~prBackground()
 void prBackground::Draw()
 {
     // Visible?
-    if (mVisible == PRFALSE) {
-        return;
-    }
-
-    #if !defined(PROTEUS_TOOL)
-    PRASSERT(m_texture);
-    #endif
-
-    // Draws a single image
-    if (m_type == IMAGE)
+    if (IsVisible())
     {
-        if (m_texture)
+        //if (mVisible == PRFALSE) {
+        //    return;
+        //}
+
+        #if !defined(PROTEUS_TOOL)
+        PRASSERT(m_texture);
+        #endif
+
+        // Draws a single image
+        if (m_type == IMAGE)
         {
-            f32 width  = (f32)(m_scrnWidth  / 2);
-            f32 height = (f32)(m_scrnHeight / 2);
-
-            glPushMatrix();
-            ERR_CHECK();
-
-            // Translate to center
-            glTranslatef(width, height, 0);
-            ERR_CHECK();
-
-            // Move to offset
-            glTranslatef(pos.x, pos.y, 0);
-            ERR_CHECK();
-
-            // Set scale
-            glScalef(m_scrnWidth, m_scrnHeight, 0);
-            ERR_CHECK();
-
-            if (m_texture->Bind())
+            if (m_texture)
             {
-                prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
-                if (pRenderer)
+                f32 width  = (f32)(m_scrnWidth  / 2);
+                f32 height = (f32)(m_scrnHeight / 2);
+
+                glPushMatrix();
+                ERR_CHECK();
+
+                // Translate to center
+                glTranslatef(width, height, 0);
+                ERR_CHECK();
+
+                // Move to offset
+                glTranslatef(pos.x, pos.y, 0);
+                ERR_CHECK();
+
+                // Set scale
+                glScalef(m_scrnWidth, m_scrnHeight, 0);
+                ERR_CHECK();
+
+                if (m_texture->Bind())
                 {
-                    pRenderer->DrawQuad(0.0f, m_v0, m_u1, 1.0f, m_colour);
+                    prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
+                    if (pRenderer)
+                    {
+                        pRenderer->DrawQuad(0.0f, m_v0, m_u1, 1.0f, m_colour);
+                    }
                 }
-            }
 
-            glPopMatrix();
-            ERR_CHECK();
+                glPopMatrix();
+                ERR_CHECK();
+            }
         }
-    }
-    else
-    {
-        for (s32 i=0; i<BACKGROUND_MAX_LAYERS; i++)
+        else
         {
-            if (mLayers[i])
+            for (s32 i=0; i<BACKGROUND_MAX_LAYERS; i++)
             {
-                mLayers[i]->Draw();
+                if (mLayers[i])
+                {
+                    mLayers[i]->Draw();
+                }
             }
         }
     }
@@ -544,12 +547,12 @@ void prBackground::ParseAttribs_Background(TiXmlElement* pElement)
         if (prStringCompare(pElement->Attribute("type"), "image") == 0)
         {
             m_type = IMAGE;
-            m_name.Set(pElement->Attribute("name"));
+            //m_name.Set(pElement->Attribute("name"));
         }
         else if (prStringCompare(pElement->Attribute("type"), "tile") == 0)
         {
             m_type = TILEMAP;
-            m_name.Set(pElement->Attribute("name"));
+            //m_name.Set(pElement->Attribute("name"));
         }
         else
         {

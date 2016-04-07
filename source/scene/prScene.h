@@ -1,4 +1,5 @@
 // File: prScene.h
+//      A simple scene graph
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -23,7 +24,9 @@
 
 
 // Forward declarations
-class prSceneNode;
+class prGameObject;
+class TiXmlNode;
+class TiXmlElement;
 
 
 // Class: prScene
@@ -39,17 +42,47 @@ public:
     //      Dtor
     ~prScene();
 
-    // Method: Add
+    // Method: Load
+    //      Loads the scene file specified by the filename
     //
-    void Add(prSceneNode *psn);
+    // Parameters:
+    //      pFilename - A scene file
+    void Load(const char *pFilename);
+
+    // Method: Unload
+    //     Unloads the current scene and frees all the objects
+    void Unload();
+
+    // Method: Add
+    //      Adds an object to the scene
+    //
+    // Parameters:
+    //      pObject - A game object
+    void Add(prGameObject *pObject);
 
     // Method: Remove
+    //      Removes an object from the scene
     //
-    void Remove(prSceneNode *psn);
+    // Parameters:
+    //      pObject - A game object
+    void Remove(prGameObject *pObject);
 
-    //
-    void Update(Proteus::Core::f32 dt);
+    // Method: Update
+    //      Updates the scene
+    void Update();
 
-    //
-    //void Render();
+    // Method: Draw
+    //      Draws the scene
+    void Draw();
+
+private:
+    // Method: ParseFile
+    //      Parses the xml file.
+    void ParseFile(TiXmlNode* pParent);
+    
+    // Method: ParseAttribs_File
+    //      Attribute parser used to get information about the file.
+    void ParseAttribs_File(TiXmlElement* pElement);
+
+private:
 };

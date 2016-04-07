@@ -45,8 +45,8 @@ class prMenuItem;
 
 
 // Class: prMenu
-//      Standard GUI menu
-//
+//      The standard GUI menu designed to simulate the OS menus. Intended 
+//      primarily for game engine tools
 class prMenu : public prWidget
 {
 private:
@@ -146,7 +146,7 @@ private:
 
 
 private:
-    std::map<Proteus::Core::u32, prMenuItem *>  mItems;         // Menu items
+    std::map<Proteus::Core::u32, prMenuItem *>  mItems;                 // Menu items
     prBitmapFont                               *mpGrayTextBMF;
     prMouse                                    *mpMouse;
     prMessageManager                           *mpMessageManager;

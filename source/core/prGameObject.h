@@ -36,10 +36,10 @@ public:
     {}
 
     //
-    void Update() {}
+    virtual void Update() {}
 
     //
-    void Draw() {}
+    virtual void Draw() {}
 
     //
     inline Proteus::Core::PRBOOL IsActive() const { return mActive; }
@@ -67,10 +67,10 @@ public:
     void DestroyComponent() {}
 
     // serialize out
-    void Save();
+    virtual void Save() {}
 
     // serialize in
-    void Load();
+    virtual void Load() {}
 
     
 private:

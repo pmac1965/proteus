@@ -24,6 +24,10 @@
 #include "../core/prString.h"
 
 
+// Forward declarations
+class prGameObject;
+
+
 #if !defined(PROTEUS_EDITOR)
     // Optional inclusion on game objects
     #define PROT_EDITOR_INCL : prEditorObject

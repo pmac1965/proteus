@@ -117,9 +117,9 @@ prWidget *prGui::Create(prWidgetType type, const char *name)
 
     case WT_Pane:
         widget = new prPane(name, &m_spriteManager);
-        //widget->SetLayer(m_layer);
-        //widget->SetBMPFont(m_pBmpfont);
-        //widget->SetTTFFont(m_pTtfFont);
+        widget->SetLayer(m_layer);
+        widget->SetBMPFont(m_pBmpfont);
+        widget->SetTTFFont(m_pTtfFont);
         break;
 
     default:
