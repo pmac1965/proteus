@@ -1,0 +1,2348 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="source\file">
+      <UniqueIdentifier>{8f989ed1-03a8-41c3-874d-78fef5446e77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\core">
+      <UniqueIdentifier>{f323c337-437d-4151-ac70-07ea21d652c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\Box2D">
+      <UniqueIdentifier>{0bc6ca0a-97e3-4569-a691-ba2a047132b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\math">
+      <UniqueIdentifier>{8d1abc22-b942-4171-82a4-29b04307da71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\input">
+      <UniqueIdentifier>{1a713017-681d-464d-9074-713a48087517}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\display">
+      <UniqueIdentifier>{1c58730c-6387-4ce5-9d20-2bec559ae549}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\debug">
+      <UniqueIdentifier>{aaee9bad-3caa-48a6-9091-1147865169f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\tinyxml">
+      <UniqueIdentifier>{20605ac1-7c89-4cd8-b1c6-0b73604840fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\tool">
+      <UniqueIdentifier>{a90ca439-94e3-4583-b2ea-acb9f53d38fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\zlib">
+      <UniqueIdentifier>{f040a9ce-e17d-4381-9ae8-e045e99fc945}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\lua">
+      <UniqueIdentifier>{5be25a0e-8e72-49e3-9ac9-1913b7aea129}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\Box2D\Collision">
+      <UniqueIdentifier>{127d68b9-0393-497d-b5e7-5aa62e3de9f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\Box2D\Common">
+      <UniqueIdentifier>{c656936a-f6c8-4e10-9941-e3f488a82145}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\Box2D\Dynamics">
+      <UniqueIdentifier>{94317340-cadc-4746-afff-224505275e07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\Box2D\Rope">
+      <UniqueIdentifier>{9be77959-bd8a-46c5-96f0-afd191b0e074}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\Box2D\Collision\Shapes">
+      <UniqueIdentifier>{a91c4a71-68ed-445a-ae72-21dad79822b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\Box2D\Dynamics\Contacts">
+      <UniqueIdentifier>{357f936b-061a-4299-889e-0acd8a0a7be0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\Box2D\Dynamics\Joints">
+      <UniqueIdentifier>{aa76b91e-fe88-404e-87bf-8533c18e36c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="build">
+      <UniqueIdentifier>{fb27de59-c1b3-4ada-993d-c5572f77326b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\memory">
+      <UniqueIdentifier>{95eddf29-ff16-4510-848c-ccc98082f6d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\audio">
+      <UniqueIdentifier>{d9668d0b-43f1-4ffb-b28e-2cfa08e97de7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\libzip">
+      <UniqueIdentifier>{8d5be3a4-144a-4fd2-be47-e9817428cc14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\audio\external">
+      <UniqueIdentifier>{dc74d05f-cd2f-426b-9c6c-209b766c56c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\actor">
+      <UniqueIdentifier>{6ed431ad-b474-4a33-b314-9510f2a6cc37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\gui">
+      <UniqueIdentifier>{e5bae933-f809-44c0-a3af-30760de72689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\linux">
+      <UniqueIdentifier>{c2d18f63-cd01-4159-b09f-f2a4e3c1fc23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\locale">
+      <UniqueIdentifier>{696cd9cf-f33f-4b43-9013-07da028bc284}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\utf8proc">
+      <UniqueIdentifier>{7a7d4b0c-a7e0-4a2f-b550-1e238aa4fec3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\collision">
+      <UniqueIdentifier>{42e79610-8bfb-4823-b3a9-64dfad6fa847}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\thread">
+      <UniqueIdentifier>{2f694752-47c2-4822-826e-a1f3a695ec06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\ios">
+      <UniqueIdentifier>{6f541990-c7e0-4cac-96bd-88b470392d3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\android">
+      <UniqueIdentifier>{5da43927-b823-4def-8e63-f91cd8f4dca6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\particle">
+      <UniqueIdentifier>{d55993ae-3a6c-4ffa-ab74-c523c8e977f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\persistance">
+      <UniqueIdentifier>{6ac80738-968f-41c4-ae52-2f415849288d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\analytics">
+      <UniqueIdentifier>{63366f41-17d6-4b6f-8555-62fb540d2f7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\adverts">
+      <UniqueIdentifier>{5f5d328c-b694-4993-b9bf-db2868f96695}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\util">
+      <UniqueIdentifier>{2c50d1ab-ebfc-43a0-8b6a-c9ace89bd279}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\inAppPurchase">
+      <UniqueIdentifier>{6114747a-7556-4997-a061-ed295c98afe1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\notifications">
+      <UniqueIdentifier>{e621d6ab-4064-4f38-9378-473ad0c3493f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\achievements">
+      <UniqueIdentifier>{eb00e262-65a8-4ce3-8247-0e2510bb8597}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\online">
+      <UniqueIdentifier>{286ed960-5a03-408f-acc4-075aa2fa1eb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\android\AL">
+      <UniqueIdentifier>{f398635d-3bd7-475b-9c88-85228578489f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\multiplayer">
+      <UniqueIdentifier>{83bfa0fc-8e99-4900-8bae-1be0e3b825f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\script">
+      <UniqueIdentifier>{edd5923d-66e1-4da1-8e1f-b0865853f19b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\mesh">
+      <UniqueIdentifier>{ba20b465-fc1c-4da0-8574-42bfc947ab95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\social">
+      <UniqueIdentifier>{08229d26-c4d0-4dd6-8e3b-065a4b8b3cee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\social\facebook">
+      <UniqueIdentifier>{4e7b45b9-d6c8-4687-a7ac-7ab109b68fb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\social\twitter">
+      <UniqueIdentifier>{017fd5c9-38d3-47d4-a721-1cc92b9657e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\font">
+      <UniqueIdentifier>{4f79302a-75ac-48d1-b98e-d059d9774f7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\system">
+      <UniqueIdentifier>{e80cc32b-5809-4ef7-b980-e0f87677fa1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\network">
+      <UniqueIdentifier>{c1bdbefa-867b-42cc-ad6c-dd79165dfab1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\freeImage">
+      <UniqueIdentifier>{b24db495-bf15-4fb0-bde6-b7abcf798b51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\social\steam">
+      <UniqueIdentifier>{a3b2e735-028a-4765-9c9e-a35024cc082b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\steam">
+      <UniqueIdentifier>{7ead5293-39f1-4fb6-a23f-827f1c1037c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\scene">
+      <UniqueIdentifier>{4960f6e5-58e9-4ac2-aeb8-df13ff90760c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\proteus">
+      <UniqueIdentifier>{2d1d26a6-47de-4645-acdb-9e71d58dc6af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\social\google">
+      <UniqueIdentifier>{899ec93d-8933-4ae6-a7d9-39f50159a11d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\editor">
+      <UniqueIdentifier>{ffe9c829-d875-401a-b5de-f288ee51c161}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\..\source\proteus.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\Shapes\b2ChainShape.h">
+      <Filter>source\Box2D\Collision\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\Shapes\b2CircleShape.h">
+      <Filter>source\Box2D\Collision\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\Shapes\b2EdgeShape.h">
+      <Filter>source\Box2D\Collision\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\Shapes\b2PolygonShape.h">
+      <Filter>source\Box2D\Collision\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\Shapes\b2Shape.h">
+      <Filter>source\Box2D\Collision\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\b2BroadPhase.h">
+      <Filter>source\Box2D\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\b2Collision.h">
+      <Filter>source\Box2D\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\b2Distance.h">
+      <Filter>source\Box2D\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\b2DynamicTree.h">
+      <Filter>source\Box2D\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Collision\b2TimeOfImpact.h">
+      <Filter>source\Box2D\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Common\b2BlockAllocator.h">
+      <Filter>source\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Common\b2Draw.h">
+      <Filter>source\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Common\b2GrowableStack.h">
+      <Filter>source\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Common\b2Math.h">
+      <Filter>source\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Common\b2Settings.h">
+      <Filter>source\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Common\b2StackAllocator.h">
+      <Filter>source\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Common\b2Timer.h">
+      <Filter>source\Box2D\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2ChainAndCircleContact.h">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2ChainAndPolygonContact.h">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2CircleContact.h">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2Contact.h">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2ContactSolver.h">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2EdgeAndCircleContact.h">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2EdgeAndPolygonContact.h">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.h">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2PolygonContact.h">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2DistanceJoint.h">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2FrictionJoint.h">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2GearJoint.h">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2Joint.h">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2MotorJoint.h">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2MouseJoint.h">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2PrismaticJoint.h">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2PulleyJoint.h">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2RevoluteJoint.h">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2RopeJoint.h">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2WeldJoint.h">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2WheelJoint.h">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\b2Body.h">
+      <Filter>source\Box2D\Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\b2ContactManager.h">
+      <Filter>source\Box2D\Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\b2Fixture.h">
+      <Filter>source\Box2D\Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\b2Island.h">
+      <Filter>source\Box2D\Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\b2TimeStep.h">
+      <Filter>source\Box2D\Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\b2World.h">
+      <Filter>source\Box2D\Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\b2WorldCallbacks.h">
+      <Filter>source\Box2D\Dynamics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Rope\b2Rope.h">
+      <Filter>source\Box2D\Rope</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\Box2D\Box2D.h">
+      <Filter>source\Box2D</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\zlib\crc32.h">
+      <Filter>source\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\zlib\deflate.h">
+      <Filter>source\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\zlib\inffast.h">
+      <Filter>source\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\zlib\inffixed.h">
+      <Filter>source\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\zlib\inflate.h">
+      <Filter>source\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\zlib\inftrees.h">
+      <Filter>source\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\zlib\trees.h">
+      <Filter>source\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\zlib\zconf.h">
+      <Filter>source\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\zlib\zlib.h">
+      <Filter>source\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\zlib\zutil.h">
+      <Filter>source\zlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\tinyxml\tinystr.h">
+      <Filter>source\tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\tinyxml\tinyxml.h">
+      <Filter>source\tinyxml</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lapi.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lauxlib.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lcode.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lctype.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\ldebug.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\ldo.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lfunc.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lgc.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\llex.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\llimits.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lmem.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lobject.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lopcodes.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lparser.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lstate.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lstring.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\ltable.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\ltm.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lua.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lua.hpp">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\luaconf.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lualib.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lundump.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lvm.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lzio.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prApplication.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prApplication_PC.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prCore.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prCoreSystem.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prDefines.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prMacros.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prMessage.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prMessageManager.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prRegistry.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prResource.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prResourceManager.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prString.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prStringShared.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prStringUtil.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prTypes.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prVersion.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prVertex.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prWaypoint.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prWindow.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prWindow_PC.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prWindowProcedure.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\debug\prAssert.h">
+      <Filter>source\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\debug\prConsoleWindow.h">
+      <Filter>source\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\debug\prDebug.h">
+      <Filter>source\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\debug\prTrace.h">
+      <Filter>source\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prBackground.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prBackgroundManager.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prColour.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prFixedWidthFont.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prGLFont.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prOglUtils.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prPvr.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prRenderer.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prRenderer_GL11.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prRenderer_GL20.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prSprite.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prSpriteAnimation.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prSpriteAnimationSequence.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prSpriteManager.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prTexture.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\file\prFile.h">
+      <Filter>source\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\file\prFileManager.h">
+      <Filter>source\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\file\prFileShared.h">
+      <Filter>source\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\input\prMouse.h">
+      <Filter>source\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\math\prMathsUtil.h">
+      <Filter>source\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\math\prPoint.h">
+      <Filter>source\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\math\prRect.h">
+      <Filter>source\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\math\prRectF.h">
+      <Filter>source\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\math\prVector2.h">
+      <Filter>source\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\math\prVector3.h">
+      <Filter>source\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\tool\AntTweakBar.h">
+      <Filter>source\tool</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\prConfig.h">
+      <Filter>source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prArgs.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\debug\prOnScreenLogger.h">
+      <Filter>source\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\debug\prDebugFont.h">
+      <Filter>source\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prSplash.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prApplication_Android.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prApplication_Linux.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prApplication_IOS.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prWindow_Android.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prWindow_Linux.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\memory\prMemory.h">
+      <Filter>source\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prATB.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\libzip\config.h">
+      <Filter>source\libzip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\libzip\zip.h">
+      <Filter>source\libzip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\libzip\zipint.h">
+      <Filter>source\libzip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\audio\prOpenALDeviceList.h">
+      <Filter>source\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\audio\prOpenALErrors.h">
+      <Filter>source\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\audio\prSoundManager.h">
+      <Filter>source\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\audio\external\codec.h">
+      <Filter>source\audio\external</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\audio\external\ogg.h">
+      <Filter>source\audio\external</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\audio\external\os_types.h">
+      <Filter>source\audio\external</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\audio\external\vorbisenc.h">
+      <Filter>source\audio\external</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\audio\external\vorbisfile.h">
+      <Filter>source\audio\external</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\audio\prWaves.h">
+      <Filter>source\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\audio\prSoundManagerShared.h">
+      <Filter>source\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\audio\prSoundManager_PC.h">
+      <Filter>source\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prFadeManager.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\input\prTouch.h">
+      <Filter>source\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\input\prTouchListener.h">
+      <Filter>source\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\debug\prFps.h">
+      <Filter>source\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\debug\prFps_PC.h">
+      <Filter>source\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\actor\prActor.h">
+      <Filter>source\actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\actor\prActorManager.h">
+      <Filter>source\actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\gui\prButton.h">
+      <Filter>source\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\gui\prButtonListener.h">
+      <Filter>source\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\gui\prGui.h">
+      <Filter>source\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\gui\prWidget.h">
+      <Filter>source\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prCamera.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prLookAt.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\linux\prLinux.h">
+      <Filter>source\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prBitArray.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prSingleton.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\locale\prLanguage.h">
+      <Filter>source\locale</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\locale\prLocales.h">
+      <Filter>source\locale</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prList.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prContainers.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\utf8proc\utf8proc.h">
+      <Filter>source\utf8proc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\utf8proc\utf8proc_data.h">
+      <Filter>source\utf8proc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prBitmapFont.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prCameraManager.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\collision\prLine.h">
+      <Filter>source\collision</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\thread\prMutex.h">
+      <Filter>source\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\thread\prThread.h">
+      <Filter>source\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\memory\prMemoryPool.h">
+      <Filter>source\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\particle\prEmitter.h">
+      <Filter>source\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\particle\prParticle.h">
+      <Filter>source\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\particle\prParticleManager.h">
+      <Filter>source\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\memory\prSpritePointerPool.h">
+      <Filter>source\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prWindow_Ios.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prPerspective.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\ios\prIos.h">
+      <Filter>source\ios</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\audio\prSoundManager_Ios.h">
+      <Filter>source\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\ios\prIosAudio.h">
+      <Filter>source\ios</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\persistence\prSave.h">
+      <Filter>source\persistance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\persistence\prSaveBase.h">
+      <Filter>source\persistance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\persistence\prSave_pc.h">
+      <Filter>source\persistance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\persistence\prEncryption.h">
+      <Filter>source\persistance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\file\prFileSystem.h">
+      <Filter>source\file</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\persistence\prSave_android.h">
+      <Filter>source\persistance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\persistence\prSave_ios.h">
+      <Filter>source\persistance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\adverts\prAdvertProvider.h">
+      <Filter>source\adverts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\adverts\prAdvertProvider_AdMob.h">
+      <Filter>source\adverts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\adverts\prAdvertProvider_iAds.h">
+      <Filter>source\adverts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\adverts\prAdverts.h">
+      <Filter>source\adverts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\analytics\prAnalytics.h">
+      <Filter>source\analytics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\analytics\prAnalyticsBase.h">
+      <Filter>source\analytics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\analytics\prAnalyticsFlurry.h">
+      <Filter>source\analytics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prInAppPurchase.h">
+      <Filter>source\inAppPurchase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore.h">
+      <Filter>source\inAppPurchase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_android.h">
+      <Filter>source\inAppPurchase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_pc.h">
+      <Filter>source\inAppPurchase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prTransactionResult.h">
+      <Filter>source\inAppPurchase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\math\prRandom.h">
+      <Filter>source\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_ios.h">
+      <Filter>source\inAppPurchase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\achievements\prAchievement_android.h">
+      <Filter>source\achievements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\achievements\prAchievement_base.h">
+      <Filter>source\achievements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\achievements\prAchievement_ios.h">
+      <Filter>source\achievements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\achievements\prAchievement_pc.h">
+      <Filter>source\achievements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\achievements\prAchievementManager.h">
+      <Filter>source\achievements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\achievements\prLeaderboards.h">
+      <Filter>source\achievements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\online\prWeb.h">
+      <Filter>source\online</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\audio\prSoundManager_Android.h">
+      <Filter>source\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_linux.h">
+      <Filter>source\inAppPurchase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\persistence\prSave_linux.h">
+      <Filter>source\persistance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\achievements\prAchievement_linux.h">
+      <Filter>source\achievements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\linux\prLinuxInput.h">
+      <Filter>source\linux</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\android\prJNIInterface.h">
+      <Filter>source\android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\android\prJNIAudio.h">
+      <Filter>source\android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\achievements\prAchievement_mac.h">
+      <Filter>source\achievements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\persistence\prSave_mac.h">
+      <Filter>source\persistance</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore_mac.h">
+      <Filter>source\inAppPurchase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\android\AL\al.h">
+      <Filter>source\android\AL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\android\AL\alc.h">
+      <Filter>source\android\AL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\android\AL\alext.h">
+      <Filter>source\android\AL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\android\AL\efx.h">
+      <Filter>source\android\AL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\android\AL\efx-creative.h">
+      <Filter>source\android\AL</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\input\prAccelerometer.h">
+      <Filter>source\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\multiplayer\prMultiplayer.h">
+      <Filter>source\multiplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\multiplayer\prMultiplayerManager.h">
+      <Filter>source\multiplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\multiplayer\prMultiplayerProvider.h">
+      <Filter>source\multiplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\multiplayer\prGameSession.h">
+      <Filter>source\multiplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\multiplayer\prGameSessionAndroid_BT.h">
+      <Filter>source\multiplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\multiplayer\prGameSessionProvider.h">
+      <Filter>source\multiplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\android\prJNINetwork.h">
+      <Filter>source\android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\debug\prFps_Android.h">
+      <Filter>source\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\gui\prDialog.h">
+      <Filter>source\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\gui\prDialogListener.h">
+      <Filter>source\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\debug\prFps_ios.h">
+      <Filter>source\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\ios\prBluetooth.h">
+      <Filter>source\ios</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\ios\prGameCenter.h">
+      <Filter>source\ios</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\multiplayer\prGameSessionIos_BT.h">
+      <Filter>source\multiplayer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\script\prLua.h">
+      <Filter>source\script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\script\prLuaDebug.h">
+      <Filter>source\script</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\mesh\prMesh.h">
+      <Filter>source\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\mesh\prNormals_MD2.h">
+      <Filter>source\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\mesh\prMD2.h">
+      <Filter>source\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\mesh\prMesh_MD2.h">
+      <Filter>source\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\mesh\prMesh_OBJ.h">
+      <Filter>source\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\mesh\prAnimation.h">
+      <Filter>source\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\mesh\prAnimation_MD2.h">
+      <Filter>source\mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\debug\prProfileEntry.h">
+      <Filter>source\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\debug\prProfileManager.h">
+      <Filter>source\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prTrueTypeFont.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\font\prFontManager.h">
+      <Filter>source\font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\system\prSystem.h">
+      <Filter>source\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\social\facebook\prFacebook.h">
+      <Filter>source\social\facebook</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\social\facebook\prFacebook_Android.h">
+      <Filter>source\social\facebook</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\social\facebook\prFacebook_ios.h">
+      <Filter>source\social\facebook</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\social\twitter\prTwitter.h">
+      <Filter>source\social\twitter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\social\twitter\prTwitter_Android.h">
+      <Filter>source\social\twitter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\social\twitter\prTwitter_ios.h">
+      <Filter>source\social\twitter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\ios\prIosFacebook.h">
+      <Filter>source\ios</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\ios\prIosTwitter.h">
+      <Filter>source\ios</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\ios\prIosSystem.h">
+      <Filter>source\ios</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\android\prJNIFacebook.h">
+      <Filter>source\android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\android\prJNITwitter.h">
+      <Filter>source\android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\math\MersenneTwister.h">
+      <Filter>source\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\android\prJNISleep.h">
+      <Filter>source\android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prGameTime.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\network\prNetwork.h">
+      <Filter>source\network</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\android\prJNIInAppPurchase.h">
+      <Filter>source\android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\input\prOnScreenKeyboard.h">
+      <Filter>source\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\analytics\Flurry.h">
+      <Filter>source\analytics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\ios\prIosFlurry.h">
+      <Filter>source\ios</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\android\prJNIAnalytics.h">
+      <Filter>source\android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\math\prSinCos.h">
+      <Filter>source\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prSpriteCallbacks.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\freeImage\FreeImage.h">
+      <Filter>source\freeImage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\font\prFontGlyph.h">
+      <Filter>source\font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\util\prUtility_PC.h">
+      <Filter>source\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\input\prKeyboard.h">
+      <Filter>source\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\input\prKeyboard_PC.h">
+      <Filter>source\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\input\prKeys.h">
+      <Filter>source\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\steam\prSteamManager.h">
+      <Filter>source\steam</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\steam\prSteamLobby.h">
+      <Filter>source\steam</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\steam\prSteamAchievements.h">
+      <Filter>source\steam</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\debug\prAlert.h">
+      <Filter>source\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prGifDecoder.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\font\prTagParser.h">
+      <Filter>source\font</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\adverts\prAdvertProvider_Flurry.h">
+      <Filter>source\adverts</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\android\prJNIAdverts.h">
+      <Filter>source\android</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prShader.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\math\prMatrix4.h">
+      <Filter>source\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\math\prPlane.h">
+      <Filter>source\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\scene\prScene.h">
+      <Filter>source\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\scene\prSceneNode.h">
+      <Filter>source\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\scene\prSceneObject.h">
+      <Filter>source\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\input\prJoystick.h">
+      <Filter>source\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\memory\prLinkedHeap.h">
+      <Filter>source\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\memory\prStackHeap.h">
+      <Filter>source\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\memory\prAllocator.h">
+      <Filter>source\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\math\prQuaternion.h">
+      <Filter>source\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\math\prFixedPoint.h">
+      <Filter>source\math</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\particle\prParticleShared.h">
+      <Filter>source\particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\scene\prCube.h">
+      <Filter>source\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prOglConfig.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\gui\prMenu.h">
+      <Filter>source\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\gui\prMenuStrip.h">
+      <Filter>source\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\debug\prException.h">
+      <Filter>source\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\display\prBackgroundLayer.h">
+      <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\audio\prSoundManager_Linux.h">
+      <Filter>source\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\debug\prFps_Linux.h">
+      <Filter>source\debug</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\actor\prActorStateMachine.h">
+      <Filter>source\actor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\input\prKeyboard_Linux.h">
+      <Filter>source\input</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\social\twitter\prTwitterBase.h">
+      <Filter>source\social\twitter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\social\facebook\prFaceBookBase.h">
+      <Filter>source\social\facebook</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prSettings.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\achievements\prLeaderboardManager.h">
+      <Filter>source\achievements</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\util\prDictionarySearch.h">
+      <Filter>source\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\social\google\prGooglePlay.h">
+      <Filter>source\social\google</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prTransform.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\editor\prEditor.h">
+      <Filter>source\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prGameObject.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\gui\prCheckbox.h">
+      <Filter>source\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\gui\prPane.h">
+      <Filter>source\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\gui\prSlider.h">
+      <Filter>source\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prRectTransform.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\editor\prEditorObject.h">
+      <Filter>source\editor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\gui\prMenuItem.h">
+      <Filter>source\gui</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\Shapes\b2ChainShape.cpp">
+      <Filter>source\Box2D\Collision\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\Shapes\b2CircleShape.cpp">
+      <Filter>source\Box2D\Collision\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\Shapes\b2EdgeShape.cpp">
+      <Filter>source\Box2D\Collision\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\Shapes\b2PolygonShape.cpp">
+      <Filter>source\Box2D\Collision\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2BroadPhase.cpp">
+      <Filter>source\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2CollideCircle.cpp">
+      <Filter>source\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2CollideEdge.cpp">
+      <Filter>source\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2CollidePolygon.cpp">
+      <Filter>source\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2Collision.cpp">
+      <Filter>source\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2Distance.cpp">
+      <Filter>source\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2DynamicTree.cpp">
+      <Filter>source\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Collision\b2TimeOfImpact.cpp">
+      <Filter>source\Box2D\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Common\b2BlockAllocator.cpp">
+      <Filter>source\Box2D\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Common\b2Draw.cpp">
+      <Filter>source\Box2D\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Common\b2Math.cpp">
+      <Filter>source\Box2D\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Common\b2Settings.cpp">
+      <Filter>source\Box2D\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Common\b2StackAllocator.cpp">
+      <Filter>source\Box2D\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Common\b2Timer.cpp">
+      <Filter>source\Box2D\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2ChainAndCircleContact.cpp">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2ChainAndPolygonContact.cpp">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2CircleContact.cpp">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2Contact.cpp">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2ContactSolver.cpp">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2EdgeAndCircleContact.cpp">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2EdgeAndPolygonContact.cpp">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2PolygonAndCircleContact.cpp">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Contacts\b2PolygonContact.cpp">
+      <Filter>source\Box2D\Dynamics\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2DistanceJoint.cpp">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2FrictionJoint.cpp">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2GearJoint.cpp">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2Joint.cpp">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2MotorJoint.cpp">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2MouseJoint.cpp">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2PrismaticJoint.cpp">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2PulleyJoint.cpp">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2RevoluteJoint.cpp">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2RopeJoint.cpp">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2WeldJoint.cpp">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2WheelJoint.cpp">
+      <Filter>source\Box2D\Dynamics\Joints</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\b2Body.cpp">
+      <Filter>source\Box2D\Dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\b2ContactManager.cpp">
+      <Filter>source\Box2D\Dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\b2Fixture.cpp">
+      <Filter>source\Box2D\Dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\b2Island.cpp">
+      <Filter>source\Box2D\Dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\b2World.cpp">
+      <Filter>source\Box2D\Dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Dynamics\b2WorldCallbacks.cpp">
+      <Filter>source\Box2D\Dynamics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\Box2D\Rope\b2Rope.cpp">
+      <Filter>source\Box2D\Rope</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\zlib\adler32.c">
+      <Filter>source\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\zlib\compress.c">
+      <Filter>source\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\zlib\crc32.c">
+      <Filter>source\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\zlib\deflate.c">
+      <Filter>source\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\zlib\infback.c">
+      <Filter>source\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\zlib\inffast.c">
+      <Filter>source\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\zlib\inflate.c">
+      <Filter>source\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\zlib\inftrees.c">
+      <Filter>source\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\zlib\trees.c">
+      <Filter>source\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\zlib\uncompr.c">
+      <Filter>source\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\zlib\zutil.c">
+      <Filter>source\zlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\tinyxml\tinystr.cpp">
+      <Filter>source\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\tinyxml\tinyxml.cpp">
+      <Filter>source\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\tinyxml\tinyxmlerror.cpp">
+      <Filter>source\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\tinyxml\tinyxmlparser.cpp">
+      <Filter>source\tinyxml</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lapi.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lauxlib.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lbaselib.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lbitlib.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lcode.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lcorolib.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lctype.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\ldblib.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\ldebug.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\ldo.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\ldump.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lfunc.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lgc.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\linit.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\liolib.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\llex.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lmathlib.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lmem.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\loadlib.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lobject.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lopcodes.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\loslib.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lparser.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lstate.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lstring.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lstrlib.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\ltable.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\ltablib.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\ltm.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lundump.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lvm.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lzio.c">
+      <Filter>source\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prApplication.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prApplication_PC.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prCore.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prCoreSystem.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prMessageManager.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prRegistry.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prResource.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prResourceManager.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prString.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prStringUtil.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prVersion.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prWindow.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prWindow_PC.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prWindowProcedure.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prAssert.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prConsoleWindow.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prDebug.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prTrace.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prBackground.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prBackgroundManager.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prColour.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prFixedWidthFont.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prGLFont.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prOglUtils.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prRenderer_GL11.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prRenderer_GL20.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prSprite.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prSpriteAnimation.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prSpriteAnimationSequence.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prSpriteManager.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prTexture.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\file\prFile.cpp">
+      <Filter>source\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\file\prFileManager.cpp">
+      <Filter>source\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\file\prFileShared.cpp">
+      <Filter>source\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\input\prMouse.cpp">
+      <Filter>source\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\math\prMathsUtil.cpp">
+      <Filter>source\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\math\prRect.cpp">
+      <Filter>source\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\math\prRectF.cpp">
+      <Filter>source\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\math\prVector2.cpp">
+      <Filter>source\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\math\prVector3.cpp">
+      <Filter>source\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prArgs.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prOnScreenLogger.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prApplication_Android.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prApplication_Linux.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prApplication_IOS.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prWindow_Android.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prWindow_Linux.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prRenderer.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\memory\prMemory.cpp">
+      <Filter>source\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prATB.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\mkstemp.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_add.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_add_dir.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_close.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_delete.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_dirent.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_entry_free.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_entry_new.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_err_str.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_error.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_error_clear.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_error_get.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_error_get_sys_type.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_error_strerror.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_error_to_str.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_fclose.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_file_error_clear.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_file_error_get.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_file_get_offset.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_file_strerror.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_filerange_crc.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_fopen.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_fopen_index.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_fread.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_free.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_get_archive_comment.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_get_archive_flag.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_get_file_comment.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_get_name.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_get_num_files.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_memdup.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_name_locate.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_new.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_open.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_rename.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_replace.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_set_archive_comment.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_set_archive_flag.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_set_file_comment.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_set_name.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_source_buffer.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_source_file.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_source_filep.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_source_free.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_source_function.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_source_zip.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_stat.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_stat_index.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_stat_init.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_strerror.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_unchange.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_unchange_all.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_unchange_archive.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\libzip\zip_unchange_data.c">
+      <Filter>source\libzip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\audio\prOpenALDeviceList.cpp">
+      <Filter>source\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\audio\prOpenALErrors.cpp">
+      <Filter>source\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\audio\prSoundManager.cpp">
+      <Filter>source\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\audio\prWaves.cpp">
+      <Filter>source\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\audio\prSoundManager_PC.cpp">
+      <Filter>source\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\audio\prSoundManagerShared.cpp">
+      <Filter>source\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prFadeManager.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\input\prTouch.cpp">
+      <Filter>source\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prFps.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prFps_PC.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\actor\prActor.cpp">
+      <Filter>source\actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\actor\prActorManager.cpp">
+      <Filter>source\actor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prAssert_Android.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\gui\prButton.cpp">
+      <Filter>source\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\gui\prGui.cpp">
+      <Filter>source\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\gui\prWidget.cpp">
+      <Filter>source\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prCamera.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prLookAt.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\linux\prLinux.c">
+      <Filter>source\linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prAssert_Linux.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prBitArray.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\locale\prLanguage.cpp">
+      <Filter>source\locale</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\locale\prLocales.cpp">
+      <Filter>source\locale</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\utf8proc\utf8proc.cpp">
+      <Filter>source\utf8proc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prBitmapFont.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prCameraManager.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\collision\prLine.cpp">
+      <Filter>source\collision</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\thread\prMutex.cpp">
+      <Filter>source\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\thread\prThread.cpp">
+      <Filter>source\thread</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\particle\prEmitter.cpp">
+      <Filter>source\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\particle\prParticle.cpp">
+      <Filter>source\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\particle\prParticleManager.cpp">
+      <Filter>source\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\memory\prSpritePointerPool.cpp">
+      <Filter>source\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prWindow_Ios.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prPerspective.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prAssert_Ios.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\audio\prSoundManager_Ios.cpp">
+      <Filter>source\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\persistence\prSave.cpp">
+      <Filter>source\persistance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\persistence\prSaveBase.cpp">
+      <Filter>source\persistance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\persistence\prSave_pc.cpp">
+      <Filter>source\persistance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\persistence\prEncryption.cpp">
+      <Filter>source\persistance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\file\prFileSystem.cpp">
+      <Filter>source\file</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\persistence\prSave_android.cpp">
+      <Filter>source\persistance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\persistence\prSave_ios.cpp">
+      <Filter>source\persistance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\adverts\prAdvertProvider.cpp">
+      <Filter>source\adverts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\adverts\prAdvertProvider_AdMob.cpp">
+      <Filter>source\adverts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\adverts\prAdvertProvider_iAds.cpp">
+      <Filter>source\adverts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\adverts\prAdverts.cpp">
+      <Filter>source\adverts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\analytics\prAnalytics.cpp">
+      <Filter>source\analytics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\analytics\prAnalyticsBase.cpp">
+      <Filter>source\analytics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\analytics\prAnalyticsFlurry.cpp">
+      <Filter>source\analytics</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\inAppPurchase\prInAppPurchase.cpp">
+      <Filter>source\inAppPurchase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore.cpp">
+      <Filter>source\inAppPurchase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_android.cpp">
+      <Filter>source\inAppPurchase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_pc.cpp">
+      <Filter>source\inAppPurchase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\math\prRandom.cpp">
+      <Filter>source\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_ios.cpp">
+      <Filter>source\inAppPurchase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\achievements\prAchievement_android.cpp">
+      <Filter>source\achievements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\achievements\prAchievement_ios.cpp">
+      <Filter>source\achievements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\achievements\prAchievement_pc.cpp">
+      <Filter>source\achievements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\achievements\prAchievementManager.cpp">
+      <Filter>source\achievements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\achievements\prLeaderboards.cpp">
+      <Filter>source\achievements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\online\prWeb_android.cpp">
+      <Filter>source\online</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\online\prWeb_pc.cpp">
+      <Filter>source\online</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\online\prWeb_ios.cpp">
+      <Filter>source\online</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\audio\prSoundManager_Android.cpp">
+      <Filter>source\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_linux.cpp">
+      <Filter>source\inAppPurchase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\persistence\prSave_linux.cpp">
+      <Filter>source\persistance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\achievements\prAchievement_linux.cpp">
+      <Filter>source\achievements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\linux\prLinuxInput.cpp">
+      <Filter>source\linux</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\android\prJNIInterface.cpp">
+      <Filter>source\android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\android\prJNIAudio.cpp">
+      <Filter>source\android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\achievements\prAchievement_mac.cpp">
+      <Filter>source\achievements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\persistence\prSave_mac.cpp">
+      <Filter>source\persistance</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore_mac.cpp">
+      <Filter>source\inAppPurchase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\input\prAccelerometer.cpp">
+      <Filter>source\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\multiplayer\prMultiplayer.cpp">
+      <Filter>source\multiplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\multiplayer\prMultiplayerManager.cpp">
+      <Filter>source\multiplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\multiplayer\prMultiplayerProvider.cpp">
+      <Filter>source\multiplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\multiplayer\prGameSession.cpp">
+      <Filter>source\multiplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\multiplayer\prGameSessionAndroid_BT.cpp">
+      <Filter>source\multiplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\multiplayer\prGameSessionProvider.cpp">
+      <Filter>source\multiplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\android\prJNINetwork.cpp">
+      <Filter>source\android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prFps_Android.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\gui\prDialog.cpp">
+      <Filter>source\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prFps_ios.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\multiplayer\prGameSessionIos_BT.cpp">
+      <Filter>source\multiplayer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\script\prLua.cpp">
+      <Filter>source\script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\script\prLuaDebug.cpp">
+      <Filter>source\script</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\mesh\prMesh.cpp">
+      <Filter>source\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\mesh\prNormals_MD2.cpp">
+      <Filter>source\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\mesh\prMesh_MD2.cpp">
+      <Filter>source\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\mesh\prMesh_OBJ.cpp">
+      <Filter>source\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\mesh\prAnimation.cpp">
+      <Filter>source\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\mesh\prAnimation_MD2.cpp">
+      <Filter>source\mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prProfileEntry.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prProfileManager.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prTrueTypeFont.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\font\prFontManager.cpp">
+      <Filter>source\font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\system\prSystem.cpp">
+      <Filter>source\system</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\social\facebook\prFacebook.cpp">
+      <Filter>source\social\facebook</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\social\facebook\prFacebook_Android.cpp">
+      <Filter>source\social\facebook</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\social\facebook\prFacebook_ios.cpp">
+      <Filter>source\social\facebook</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\social\twitter\prTwitter.cpp">
+      <Filter>source\social\twitter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\social\twitter\prTwitter_Android.cpp">
+      <Filter>source\social\twitter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\social\twitter\prTwitter_ios.cpp">
+      <Filter>source\social\twitter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\android\prJNIFacebook.cpp">
+      <Filter>source\android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\android\prJNITwitter.cpp">
+      <Filter>source\android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\android\prJNISleep.cpp">
+      <Filter>source\android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prGameTime.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\network\prNetwork.cpp">
+      <Filter>source\network</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\android\prJNIInAppPurchase.cpp">
+      <Filter>source\android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\input\prOnScreenKeyboard.cpp">
+      <Filter>source\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\android\prJNIAnalytics.cpp">
+      <Filter>source\android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\math\prSinCos.cpp">
+      <Filter>source\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\font\prFontGlyph.cpp">
+      <Filter>source\font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\util\prUtility_PC.cpp">
+      <Filter>source\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\input\prKeyboard.cpp">
+      <Filter>source\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\input\prKeyboard_PC.cpp">
+      <Filter>source\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\steam\prSteamManager.cpp">
+      <Filter>source\steam</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\steam\prSteamLobby.cpp">
+      <Filter>source\steam</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\steam\prSteamAchievements.cpp">
+      <Filter>source\steam</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prAlert.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prGifDecoder.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\font\prTagParser.cpp">
+      <Filter>source\font</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\adverts\prAdvertProvider_Flurry.cpp">
+      <Filter>source\adverts</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\android\prJNIAdverts.cpp">
+      <Filter>source\android</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prSplash.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prShader.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\math\prMatrix4.cpp">
+      <Filter>source\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\math\prPlane.cpp">
+      <Filter>source\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\scene\prScene.cpp">
+      <Filter>source\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\scene\prSceneNode.cpp">
+      <Filter>source\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\scene\prSceneObject.cpp">
+      <Filter>source\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\input\prJoystick.cpp">
+      <Filter>source\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\memory\prLinkedHeap.cpp">
+      <Filter>source\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\memory\prStackHeap.cpp">
+      <Filter>source\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\math\prQuaternion.cpp">
+      <Filter>source\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\particle\prParticleShared.cpp">
+      <Filter>source\particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\scene\prCube.cpp">
+      <Filter>source\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\gui\prMenu.cpp">
+      <Filter>source\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\gui\prMenuStrip.cpp">
+      <Filter>source\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prException.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\display\prBackgroundLayer.cpp">
+      <Filter>source\display</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\audio\prSoundManager_Linux.cpp">
+      <Filter>source\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\debug\prFps_Linux.cpp">
+      <Filter>source\debug</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\input\prKeyboard_Linux.cpp">
+      <Filter>source\input</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prSettings.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\achievements\prLeaderboardManager.cpp">
+      <Filter>source\achievements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\util\prDictionarySearch.cpp">
+      <Filter>source\util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\social\google\prGooglePlay.cpp">
+      <Filter>source\social\google</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\achievements\prAchievement_base.cpp">
+      <Filter>source\achievements</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\editor\prEditor.cpp">
+      <Filter>source\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\gui\prCheckbox.cpp">
+      <Filter>source\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\gui\prPane.cpp">
+      <Filter>source\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\gui\prSlider.cpp">
+      <Filter>source\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\editor\prEditorObject.cpp">
+      <Filter>source\editor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\gui\prMenuItem.cpp">
+      <Filter>source\gui</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\..\..\source\read.me">
+      <Filter>source</Filter>
+    </None>
+    <None Include="..\..\..\..\source\math\prVector2.inl">
+      <Filter>source\math</Filter>
+    </None>
+    <None Include="..\..\..\..\source\math\prVector3.inl">
+      <Filter>source\math</Filter>
+    </None>
+    <None Include="..\..\..\..\source\license.txt">
+      <Filter>source</Filter>
+    </None>
+    <None Include="post-build.bat">
+      <Filter>build</Filter>
+    </None>
+    <None Include="..\..\..\..\source\core\prList.inl">
+      <Filter>source\core</Filter>
+    </None>
+    <None Include="..\..\..\..\source\ios\prIos.mm">
+      <Filter>source\ios</Filter>
+    </None>
+    <None Include="..\..\..\..\source\ios\prIosAudio.mm">
+      <Filter>source\ios</Filter>
+    </None>
+    <None Include="..\..\..\..\source\ios\prGameCenter.mm">
+      <Filter>source\ios</Filter>
+    </None>
+    <None Include="..\..\..\..\source\includes.bat">
+      <Filter>build</Filter>
+    </None>
+    <None Include="..\..\..\..\source\ios\prIosFacebook.mm">
+      <Filter>source\ios</Filter>
+    </None>
+    <None Include="..\..\..\..\source\ios\prIosTwitter.mm">
+      <Filter>source\ios</Filter>
+    </None>
+    <None Include="..\..\..\..\source\ios\prIosSystem.mm">
+      <Filter>source\ios</Filter>
+    </None>
+    <None Include="..\..\..\..\source\ios\prIosFlurry.mm">
+      <Filter>source\ios</Filter>
+    </None>
+    <None Include="..\..\..\..\source\changes.txt">
+      <Filter>source</Filter>
+    </None>
+    <None Include="..\..\..\..\source\math\prMatrix4.inl">
+      <Filter>source\math</Filter>
+    </None>
+    <None Include="..\..\..\..\source\Android.mk">
+      <Filter>build</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -24,7 +24,6 @@
 #define AUDIO_ANDROID   3
 #define AUDIO_MAC       4
 #define AUDIO_LINUX     5
-//#define AUDIO_WINPHONE  6
 
 
 // Determine platform. First check for PC
@@ -66,7 +65,7 @@
         #define AUDIO_TYPE  AUDIO_LINUX
 
     // Android
-    #elif (ANDROID)//defined(linux) && defined(__ANDROID__))
+    #elif (ANDROID)
         #define PLATFORM_ANDROID
         #define AUDIO_TYPE  AUDIO_ANDROID
     #endif
