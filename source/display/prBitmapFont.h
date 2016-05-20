@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRBITMAPFONT_H
-#define __PRBITMAPFONT_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -120,6 +119,3 @@ private:
 	BitmapFontImplementation	*pImpl;
 	BitmapFontImplementation	&imp;
 };
-
-
-#endif//__PRBITMAPFONT_H
