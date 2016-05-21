@@ -1,6 +1,7 @@
 // File: prPane.h
 //      A GUI pane acts like a dockable container, and can contain
-//      multiple GUI components
+//      multiple GUI components. Created for the game editor and 
+//		not suitable for normal game use
 /**
  * Copyright 2016 Paul Michael McNab
  * 
@@ -23,7 +24,12 @@
 
 #include "prWidget.h"
 #include "../core/prTypes.h"
+#include "../core/prString.h"
 #include "../display/prColour.h"
+
+
+// Forward declarations
+class prSprite;
 
 
 // Namespaces
@@ -33,13 +39,13 @@ namespace Gui {
 
 // Class: prPane
 //      A GUI pane acts like a dockable container, and can contain
-//      multiple GUI components
+//      multiple GUI components. Created for the game editor and 
+//		not suitable for normal game use
 class prPane : public prWidget
 {
 private:
     // Friends
     friend class prGui;
-    //friend class prDialog;
 
     // Method: prPane
     //      Ctor
@@ -95,13 +101,33 @@ public:
     //      <prTouchEvent>
     void OnReleased(const prTouchEvent &e);
 
+    // Method: SetSizeAndPos
+    //      Sets the panes size and position relative to screen 0, 0
+    //
+    // Parameters:
+    //      x		- X position
+    //      y		- Y position
+    //      width	- Pane width
+    //      height	- Pane height
     void SetSizeAndPos(Proteus::Core::s32 x, Proteus::Core::s32 y, Proteus::Core::s32 width, Proteus::Core::s32 height) { mXpos = x; mYpos = y; mWidth = width; mHeight = height; }
 
+    // Method: SetTitleText
+    //      Sets the panes title text
+    //
+    // Parameters:
+    //      text - The panes name (Optional)
+	void SetTitleText(const char *text) { if (text && *text) { mName.Set(text); } }
+
+	void SetIcons(prSprite *pIcon, prSprite *pOptionsIcon) { mpPaneIcon = pIcon; mpOptionsIcon = pOptionsIcon; }
+
 private:
-    Proteus::Core::s32  mXpos;
-    Proteus::Core::s32  mYpos;
-    Proteus::Core::s32  mWidth;
-    Proteus::Core::s32  mHeight;
+	prString				mName;
+    Proteus::Core::s32		mXpos;
+    Proteus::Core::s32		mYpos;
+    Proteus::Core::s32		mWidth;
+    Proteus::Core::s32		mHeight;
+	prSprite			   *mpPaneIcon;
+	prSprite			   *mpOptionsIcon;
 };
 
 
