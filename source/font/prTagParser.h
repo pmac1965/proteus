@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRTAGPARSER_H
-#define __PRTAGPARSER_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -56,6 +55,3 @@ void prTagDoAction();
 // Method: prTagGetTagLength
 //      Returns the length of the last tag found
 Proteus::Core::s32 prTagGetTagLength();
-
-
-#endif//__PRTAGPARSER_H

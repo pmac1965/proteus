@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRFONTMANAGER_H
-#define __PRFONTMANAGER_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -38,6 +37,3 @@ public:
     //      Dtor
     ~prFontManager();
 };
-
-
-#endif//__PRFONTMANAGER_H
