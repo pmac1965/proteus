@@ -65,7 +65,8 @@ class prGameObject;
 class prEditorObject
 {
 public:
-    prEditorObject(prGameObject &gameObject) : mGameObject(gameObject)
+    explicit prEditorObject(prGameObject &gameObject) : mGameObject(gameObject)
+													  , mName("")
     {}
 
     //
