@@ -86,6 +86,13 @@ public:
     ~prFont()
     {}
 
+    // Method: Load
+    //      Loads the font data.
+    //
+    // Parameters:
+    //      filename - The font file to load
+    virtual void Load(const char *filename) = 0;
+
     // Method: GetFontType
     //      Gets a fonts type
     //

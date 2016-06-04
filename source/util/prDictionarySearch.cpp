@@ -60,8 +60,8 @@ prDictionarySearch::prDictionarySearch(int minLength, int maxLength, prDictionar
     m_minLength  = minLength;
     m_maxLength  = maxLength;
     m_callback   = pcb;
-    m_file       = NULL;
-    m_fileBuffer = NULL;
+    m_file       = nullptr;
+    m_fileBuffer = nullptr;
     m_exp0       = false;
     m_exp1       = false;
     m_exp2       = false;
@@ -162,7 +162,6 @@ void prDictionarySearch::Update()
 /// ---------------------------------------------------------------------------
 void prDictionarySearch::Clear()
 {
-    //m_callback  = NULL;
     m_searching = false;
     m_mode      = WSM_NONE;
     m_wordSize  = 0;
@@ -245,16 +244,16 @@ void prDictionarySearch::UpdateLoad()
 {
     m_file->Read(m_fileBuffer, m_fileSize);
     m_file->Close();
+
     PRSAFE_DELETE(m_file);
 
-    m_mode = WSM_SEARCH_FILE;
-
+    m_mode    = WSM_SEARCH_FILE;
     m_entries = m_fileSize / (m_wordSize + 1);  // + 1 for null
 }
 
 
 /// ---------------------------------------------------------------------------
-/// Updates the loading of the dictionary file.
+/// Does a binary search of the loaded data
 /// ---------------------------------------------------------------------------
 void prDictionarySearch::SearchFile()
 {

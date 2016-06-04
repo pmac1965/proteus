@@ -88,7 +88,7 @@
 #endif
 
 #ifndef ALLOW_FREETYPE                                  // For builds that need freetype
-#define ALLOW_FREETYPE
+//#define ALLOW_FREETYPE
 #endif
 
 #ifndef REMOVE_EXCEPTIONS                               // Allows try/catch code to be removed.
@@ -96,11 +96,11 @@
 #endif
 
 #ifndef ALLOW_STEAM                                     // Allows the steam code
-#define ALLOW_STEAM
+//#define ALLOW_STEAM
 #endif
 
 #ifndef ALLOW_GLEW                                      // Allows glew to be used
-#define ALLOW_GLEW
+//#define ALLOW_GLEW
 #endif
 
 #ifndef HIDE_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.

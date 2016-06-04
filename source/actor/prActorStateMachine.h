@@ -1,4 +1,9 @@
 // File: prActorStateMachine.h
+//      An actor mix in class.
+//
+// Notes:
+//      Actors can add this class to get state
+//      machine functionality
 /**
  *  Copyright 2014 Paul Michael McNab
  *

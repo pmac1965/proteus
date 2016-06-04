@@ -20,12 +20,16 @@
 #include "../prConfig.h"
 
 
-#define TEMP_DEFINE	1
+//#define TEMP_DEFINE	1
 
 
 #if defined(PLATFORM_PC)
   #include <Windows.h>
+
+  #if ALLOW_GLEW
   #include <glew.h>
+  #endif
+
   #include <gl/gl.h>
   #include <gl/glu.h>
 

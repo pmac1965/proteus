@@ -1,8 +1,15 @@
 // File: prDictionarySearch.h
+//      Class used to search a text dictionary file installed on local storage.
 //
 // Notes:
-//      Provides a way to quickly search a language dictionary using the engine
-//      dictionary splitter tool. Dictionary must be alphabetically sorted
+//      The dictionary must be split use the engine dictionary splitter tool.
+//
+// Notes:
+//      The dictionary must be alphabetically sorted
+//
+// Notes:
+//      The update method of this class must be called at least once per frame,
+//      else the search won't happen and you will never receive any callbacks.
 /**
  * prDictionarySearch.cpp
  *
@@ -35,7 +42,7 @@
 //    SEARCH_RESULT_FOUND       - The word was found.
 //    SEARCH_RESULT_NOT_FOUND   - The word was not found.
 //
-typedef enum //prDictionarySearchResult
+typedef enum
 {
     SEARCH_RESULT_ERROR,
     SEARCH_RESULT_FOUND,
@@ -48,7 +55,7 @@ typedef enum //prDictionarySearchResult
 //      A mix-in class to receive notifications about settings
 //
 // Notes:
-//      This class is optional
+//      This class is *NOT* optional
 class prDictionaryCallbacks
 {
 public:
@@ -93,7 +100,7 @@ public:
     //      word        - The to search for.
     //
     // Notes:
-    //      Do not start a search while one is in progress, as the secondary search @n
+    //      Do not start a search while one is in progress, as the secondary search
     //      will be ignored.
     void Start(const char *word);
 

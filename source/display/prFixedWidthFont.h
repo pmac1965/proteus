@@ -1,4 +1,6 @@
 // File: prFixedWidthFont.h
+//      Fixed width font class. This font is a lot
+//      faster than the standard bitmap font.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -16,8 +18,7 @@
  */
 
 
-#ifndef __PRFIXEDWIDTHFONT_H
-#define __PRFIXEDWIDTHFONT_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -150,6 +151,3 @@ private:
     Proteus::Core::f32  m_scale;
     Proteus::Core::u32  m_alignment;
 };
-
-
-#endif//__PRFIXEDWIDTHFONT_H
