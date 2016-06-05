@@ -181,7 +181,7 @@ PRBOOL prApplication_PC::DisplayCreate(u32 width, u32 height, const char *pWindo
     // Check window name is not null
     if (pWindowName == NULL)
     {
-        MessageBoxW(HWND_DESKTOP, L"The window name cannot NULL.", L"Error", MB_ICONERROR | MB_OK);
+        MessageBoxW(HWND_DESKTOP, L"The window name cannot be NULL.", L"Error", MB_ICONERROR | MB_OK);
         return result;
     }
 
@@ -269,7 +269,7 @@ PRBOOL prApplication_PC::DisplayCreateTool(u32 width, u32 height, u32 menuID, u3
     // Check window name is not null
     if (pWindowName == NULL)
     {
-        MessageBoxW(HWND_DESKTOP, L"The window name cannot NULL.", L"Error", MB_ICONERROR | MB_OK);
+        MessageBoxW(HWND_DESKTOP, L"The window name cannot be NULL.", L"Error", MB_ICONERROR | MB_OK);
         return result;
     }
 

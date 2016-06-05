@@ -83,7 +83,7 @@ namespace
 /// ---------------------------------------------------------------------------
 /// Processes command line args
 /// ---------------------------------------------------------------------------
-void prArgsParseCommandLine(LPTSTR lpCmdLine)
+bool prArgsParseCommandLine(LPTSTR lpCmdLine)
 {
     // Init control data
     paramIndex  = 0;
@@ -201,14 +201,23 @@ void prArgsParseCommandLine(LPTSTR lpCmdLine)
             LocalFree(pArgv);
         }
     }
+    else
+    {
+        //MessageBoxW(HWND_DESKTOP, L"No arguments.", L"Error", MB_ICONERROR | MB_OK);
+        return true;
+    }
+
 
     // Reset handler
-    pUnknownParamCB = NULL;
+    pUnknownParamCB = nullptr;
 
     // Init control data
-    pArgv       = NULL;
+    pArgv       = nullptr;
     paramIndex  = -1;
     paramTotal  = -1;
+
+    // Returns the parse failed state
+    return parseFailed;
 }
 
 
@@ -218,8 +227,11 @@ void prArgsParseCommandLine(LPTSTR lpCmdLine)
 /// ---------------------------------------------------------------------------
 /// Processes command line args
 /// ---------------------------------------------------------------------------
-void prArgsParseCommandLine(int argc, const char *args[])
+bool prArgsParseCommandLine(int argc, const char *args[])
 {
+    if (argc == 1)
+        return true;
+
     // Init control data
     paramIndex  = 0;
     paramTotal  = 0;
@@ -228,6 +240,9 @@ void prArgsParseCommandLine(int argc, const char *args[])
     #if defined(PLATFORM_LINUX)
     prLinuxStoreArgs(argc, args);
     #endif
+
+    // Returns the parse failed state
+    return parseFailed;
 }
 
 

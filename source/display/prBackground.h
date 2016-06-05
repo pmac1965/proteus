@@ -163,7 +163,7 @@ public:
     //
     // Returns:
     //      false if save fails for any reason, else true
-    bool Save();
+    bool Save() override;
 
     // Method: SetBackgroundType
     //      Sets the background type. *Only available on tool builds*
@@ -227,7 +227,6 @@ private:
 private:
     prTexture              *m_texture;
     prString                m_filenameTexture;
-    //prString                m_name;
     Proteus::Core::s32      m_width;
     Proteus::Core::s32      m_height;
     Proteus::Core::s32      m_type;
@@ -248,6 +247,7 @@ private:
     prBackgroundLayer *mLayers[BACKGROUND_MAX_LAYERS];
 
     #if defined(PROTEUS_TOOL)
-    prString        m_filenameBackground;
+    prString                m_name;
+    prString				m_filenameBackground;
     #endif
 };

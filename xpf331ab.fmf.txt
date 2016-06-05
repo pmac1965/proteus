@@ -1,0 +1,37 @@
+﻿Merge branch 'master' of https://github.com/pmac1965/proteus
+
+# Conflicts:
+#	builds/vs2010/proteus/proteus/vernum.txt
+#	source/prVerNum.h
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 2 and 7 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	modified:   builds/vs2010/proteus/proteus/vernum.txt
+#	modified:   source/core/prApplication_PC.cpp
+#	modified:   source/core/prArgs.cpp
+#	modified:   source/core/prArgs.h
+#	modified:   source/core/prGameObject.h
+#	modified:   source/display/prBackground.h
+#	modified:   source/editor/prEditorObject.h
+#	modified:   source/font/prFontGlyph.h
+#	modified:   source/font/prFontManager.h
+#	modified:   source/font/prTagParser.h
+#	modified:   source/gui/prPane.cpp
+#	modified:   source/gui/prPane.h
+#	modified:   source/prConfig.h
+#
+

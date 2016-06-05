@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRFONTGLYPH_H
-#define __PRFONTGLYPH_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -62,6 +61,3 @@ private:
     Proteus::Core::u32          mTextureID;             // The texture ID
     Proteus::Core::QuadData     quadData[6];            // Data to draw a simple quad
 };
-
-
-#endif//__PRFONTGLYPH_H

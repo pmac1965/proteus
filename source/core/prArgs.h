@@ -1,4 +1,10 @@
 // File: prArgs.h
+//      Contains some functions for cross platform processing of command line arguments.
+//
+//      This includes the engine specific switches, player switches and user switches.
+//
+//      Also contains a few macros for setting up a cross platform main.
+//
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -56,7 +62,15 @@ typedef bool (*UnknownParamCB)(const char* arg, Proteus::Core::s32 index);
     //
     // Parameters:
     //      lpCmdLine - The args
-    void prArgsParseCommandLine(LPTSTR lpCmdLine);
+    //
+    // Return:
+    //      Returns true if there are no arguments to process, else
+    //      the function returns the parsing result which will 
+    //      be true on failure, false otherwise
+    //
+    // See Also:
+    //      <prArgsParseFailed>
+    bool prArgsParseCommandLine(LPTSTR lpCmdLine);
 
 #else
     // Function: prArgsParseCommandLine
@@ -64,12 +78,20 @@ typedef bool (*UnknownParamCB)(const char* arg, Proteus::Core::s32 index);
     //
     // Notes:
     //      The unknown parameter handler is cleared after this function
-    //      is called.
+    //      is called. *This version serves Linux, Mac*
     //
     // Parameters:
     //      argc - The number of args
     //      args - The arguments array
-    void prArgsParseCommandLine(int argc, const char *args[]);
+    //
+    // Return:
+    //      Returns true if there are no arguments to process, else
+    //      the function returns the parsing result which will 
+    //      be true on failure, false otherwise
+    //
+    // See Also:
+    //      <prArgsParseFailed>
+    bool prArgsParseCommandLine(int argc, const char *args[]);
 
 #endif
 
@@ -82,7 +104,7 @@ typedef bool (*UnknownParamCB)(const char* arg, Proteus::Core::s32 index);
 //      bufferSize - The buffers size
 //
 // Notes:
-//      Arguments are not persistant between one call and
+//      Arguments are not persistent between one call and
 //      the next. Returned data should be used immediately
 void prArgsPopNextArg(char *buffer, Proteus::Core::s32 bufferSize);
 
@@ -132,7 +154,7 @@ Proteus::Core::s32 prArgsGetRemainingArgCount();
 //
 // Notes:
 //      Requires that the unknown parameter callback is setup and
-//      used correctly. *An example can be seen in the sammple code*
+//      used correctly. *An example can be seen in the sample code*
 //
 // Returns:
 //      true if parsing failed

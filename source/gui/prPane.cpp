@@ -19,8 +19,11 @@
 
 #include "prPane.h"
 #include "../core/prCore.h"
-//#include "../core/prRegistry.h"
+#include "../debug/prTrace.h"
 #include "../display/prRenderer.h"
+#include "../display/prBitmapFont.h"
+#include "../display/prTrueTypeFont.h"
+#include "../display/prSprite.h"
 
 
 //namespace Proteus::Core;
@@ -35,13 +38,19 @@ namespace Gui {
     /// Ctor
     /// ---------------------------------------------------------------------------
     prPane::prPane(const char *name, prSpriteManager *pSpriteManager) : prWidget    (WT_Pane, name, pSpriteManager)
-                                                                      //, m_textColour(prColour::White)
+																	  , mName		("Unnamed")
     {
-    }
+		mXpos			= 32;			// Default settings which should be overriden 
+		mYpos			= 32;
+		mWidth			= 256;
+		mHeight			= 256;
+		mpPaneIcon		= nullptr;
+		mpOptionsIcon	= nullptr;
+	}
 
 
     /// ---------------------------------------------------------------------------
-    ///
+    /// Update the pane
     /// ---------------------------------------------------------------------------
     void prPane::Update(f32 dt)
     {
@@ -56,77 +65,42 @@ namespace Gui {
         prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
         if (pRenderer)
         {
-            // Draw strip
+            // Draw pane
             pRenderer->TexturesEnabled(false);
             pRenderer->SetColour(prColour::LiteGray);
-            pRenderer->DrawFilledRect(mXpos, mYpos, mXpos + mWidth, mYpos + mHeight);
+            pRenderer->DrawFilledRect((f32)mXpos, (f32)mYpos, (f32)(mXpos + mWidth), (f32)(mYpos + mHeight));
+            pRenderer->SetColour(prColour(.85f, .85f, .85f));
+            pRenderer->DrawFilledRect((f32)mXpos, (f32)mYpos, (f32)(mXpos + mWidth), (f32)(mYpos + 18));
             pRenderer->TexturesEnabled(true);
 
-            // Draw text
-            /*f32 xpos = mStartX;
-            f32 ypos = mStartY;
+			// Draw pane icon if we have one
+			s32 xpos = mXpos + 2;				// + 2 == edge gap
+			s32 ypos = mYpos + 2;				// + 2 == edge gap
 
-            auto it  = mMenus.begin();
-            auto end = mMenus.end();
-            for (s32 i=0; it != end; ++it, ++i)
-            {
-                if (m_pBmpfont)
-                {
-                    char name[256];
-                    sprintf(name, "%s", (*it)->GetText());
+			if (mpPaneIcon)
+			{
+				mpPaneIcon->pos.x = (f32)xpos;
+				mpPaneIcon->pos.y = (f32)ypos;
+				mpPaneIcon->Draw();
+				xpos += mpPaneIcon->GetFrameWidth();
+			}
 
-                    const prVector2 &size = (*it)->GetTextSize();
+            // Draw pane title text
+			if (m_pBmpfont)
+			{
+				pRenderer->SetColour(prColour::Black);
+				m_pBmpfont->Draw((f32)xpos, (f32)mYpos, mName.Text());
+			}
 
-                    // Is the menu open? If so draw the menu items
-                    if ((*it)->IsOpened())
-                    {
-                        pRenderer->TexturesEnabled(false);
-
-                        pRenderer->SetColour(prColour::LiteGray + prColour(.1f, .1f, .1f, 0.f));//prColour::Yellow);
-                        pRenderer->DrawFilledRect(xpos - MS_XPIXEL_BUFFER_HALF, ypos, xpos + MS_XPIXEL_BUFFER_HALF + size.x, ypos + size.y);
-                    
-                        pRenderer->SetColour(prColour::Black);
-                        pRenderer->DrawRect(xpos - MS_XPIXEL_BUFFER_HALF, ypos, xpos + MS_XPIXEL_BUFFER_HALF + size.x, ypos + size.y);
-                    
-                        //pRenderer->SetColour(prColour::LiteGray);
-                        pRenderer->TexturesEnabled(true);
-
-                        if ((*it)->DrawMenu(xpos - MS_XPIXEL_BUFFER_HALF, ypos + size.y, MS_XPIXEL_BUFFER_HALF + size.x + MS_XPIXEL_BUFFER_HALF))
-                        {
-                            SetAllMenusClosed();
-                        }
-                    }
-                    // On desktop we highlight the mouse cursor
-                    #if defined(PLATFORM_PC) || defined(PLATFORM_LINUX)
-                    else if (InMenuRect((s32)(xpos - MS_XPIXEL_BUFFER_HALF), (s32)ypos, (s32)(size.x + MS_XPIXEL_BUFFER - 1.0f), (s32)size.y, mpMouse->x, mpMouse->y))
-                    {
-                        pRenderer->TexturesEnabled(false);
-
-    //                    pRenderer->SetColour(prColour::Cyan);
-                        pRenderer->SetColour(prColour::LiteGray + prColour(.1f, .1f, .1f, 0.f));//prColour::Yellow);
-                        pRenderer->DrawFilledRect(xpos - MS_XPIXEL_BUFFER_HALF, ypos, xpos + MS_XPIXEL_BUFFER_HALF + size.x, ypos + size.y);
-                    
-                        pRenderer->SetColour(prColour::Black);
-                        pRenderer->DrawRect(xpos - MS_XPIXEL_BUFFER_HALF, ypos, xpos + MS_XPIXEL_BUFFER_HALF + size.x, ypos + size.y);
-                        pRenderer->DrawPoint(xpos - MS_XPIXEL_BUFFER_HALF - 1, ypos + size.y + 1); /* TEMP */
-                    
-            //            //pRenderer->SetColour(prColour::LiteGray);
-            //            pRenderer->TexturesEnabled(true);
-            //        }
-            //        #endif
-
-            //        pRenderer->SetColour(prColour::White);
-            //        m_pBmpfont->Draw(xpos, ypos, name);
-
-            //        xpos += (size.x + MS_XPIXEL_BUFFER);
-            //    }
-            //    else if (m_pTtfFont)
-            //    {
-            //    }
-            //}//*/
+			// Draw default pane icons
+			if (mpOptionsIcon)
+			{
+				mpOptionsIcon->pos.x = (f32)((mXpos + mWidth) - mpOptionsIcon->GetFrameWidth());
+				mpOptionsIcon->pos.y = (f32)ypos;
+				mpOptionsIcon->Draw();
+			}
         }
-
-    }////
+    }
 
 
     /// ---------------------------------------------------------------------------

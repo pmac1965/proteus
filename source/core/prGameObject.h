@@ -67,10 +67,10 @@ public:
     void DestroyComponent() {}
 
     // serialize out
-    virtual void Save() {}
+    virtual bool Save() { return false; }
 
     // serialize in
-    virtual void Load() {}
+    virtual bool Load() { return false; }
 
     
 private:
