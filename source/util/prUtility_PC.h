@@ -5,7 +5,7 @@
 //      These functions exist for use by the *proteus engine tools*
 //
 // Notes:
-//      Available for game use if required
+//      Available for PC game use if required
 /**
  *  Copyright 2014 Paul Michael McNab
  *

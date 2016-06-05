@@ -44,10 +44,13 @@ enum
 };
 
 
+using namespace Proteus::Core;
+
+
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
-prDictionarySearch::prDictionarySearch(int minLength, int maxLength, prDictionaryCallbacks *pcb)
+prDictionarySearch::prDictionarySearch(s32 minLength, s32 maxLength, prDictionaryCallbacks *pcb)
 {
     PRASSERT(minLength >= WORD_MIN_SIZE);
     PRASSERT(maxLength >= WORD_MIN_SIZE);
@@ -60,11 +63,8 @@ prDictionarySearch::prDictionarySearch(int minLength, int maxLength, prDictionar
     m_minLength  = minLength;
     m_maxLength  = maxLength;
     m_callback   = pcb;
-    m_file       = NULL;
-    m_fileBuffer = NULL;
-    m_exp0       = false;
-    m_exp1       = false;
-    m_exp2       = false;
+    m_file       = nullptr;
+    m_fileBuffer = nullptr;
     m_entries    = 0;
 
     memset(m_word, 0, sizeof(m_word));
@@ -90,7 +90,7 @@ void prDictionarySearch::Start(const char *word)
     // Are we searching already?
     if (m_searching)
     {
-        prTrace(LogError, "prDictionarySearch::Start - Attempted to start a search while a searh is running.\n");
+        Report(SEARCH_RESULT_PENDING, "prDictionarySearch - Current a search is still running.");
         return;
     }
 
@@ -101,8 +101,7 @@ void prDictionarySearch::Start(const char *word)
         m_wordSize = prStringLength(word);
         if (m_wordSize < m_minLength || m_wordSize > m_maxLength)
         {
-            prTrace(LogError, "prDictionarySearch::Start - Word size is invalid.\n");
-            Report(SEARCH_RESULT_ERROR);
+            Report(SEARCH_RESULT_ERROR, "prDictionarySearch - Word size is invalid.");
             return;
         }
 
@@ -110,20 +109,18 @@ void prDictionarySearch::Start(const char *word)
         char c = *word;
         if (!PRBETWEEN(c, 'a', 'z'))
         {
-            prTrace(LogError, "prDictionarySearch::Start - Initial character is invalid.\n");
-            Report(SEARCH_RESULT_ERROR);
+            Report(SEARCH_RESULT_ERROR, "prDictionarySearch - Initial character is invalid.");
             return;
         }
 
         // Start search
         m_mode      = WSM_START_LOAD;
-        m_searching = true;
+        m_searching = PRTRUE;
         prStringCopySafe(m_word, word, sizeof(m_word));
     }
     else
     {
-        prTrace(LogError, "prDictionarySearch::Start - Word pointer was either null or empty.\n");
-        Report(SEARCH_RESULT_ERROR);
+        Report(SEARCH_RESULT_ERROR, "prDictionarySearch - Word pointer was either null or empty.");
     }
 }
 
@@ -162,8 +159,7 @@ void prDictionarySearch::Update()
 /// ---------------------------------------------------------------------------
 void prDictionarySearch::Clear()
 {
-    //m_callback  = NULL;
-    m_searching = false;
+    m_searching = PRFALSE;
     m_mode      = WSM_NONE;
     m_wordSize  = 0;
     m_fileSize  = 0;
@@ -175,11 +171,16 @@ void prDictionarySearch::Clear()
 /// ---------------------------------------------------------------------------
 /// Report to the user.
 /// ---------------------------------------------------------------------------
-void prDictionarySearch::Report(prDictionarySearchResult result)
+void prDictionarySearch::Report(prDictionarySearchResult result, const char *message)
 {
     if (m_callback)
     {
         m_callback->prDictionaryCallback(result);
+    }
+
+    if (message && *message)
+    {
+        prTrace(LogError, "%s\n", message);
     }
 
     Clear();
@@ -211,10 +212,9 @@ void prDictionarySearch::StartLoad()
 
             if (m_fileSize == 0)
             {
-                prTrace(LogError, "prDictionarySearch::StartLoad - File size is zero.\n");
                 m_file->Close();
                 PRSAFE_DELETE(m_file);
-                Report(SEARCH_RESULT_ERROR);
+                Report(SEARCH_RESULT_ERROR, "prDictionarySearch - File size is zero.");
             }
             else
             {
@@ -224,16 +224,14 @@ void prDictionarySearch::StartLoad()
         }
         else
         {
-            prTrace(LogError, "prDictionarySearch::StartLoad - Failed to open dictionary file.\n");
             PRSAFE_DELETE(m_file);
-            Report(SEARCH_RESULT_ERROR);
+            Report(SEARCH_RESULT_ERROR, "prDictionarySearch - Failed to open dictionary file.");
         }
     }
     else
     {
-        prTrace(LogError, "DictionarySearch::StartLoad - File does not exist or failed to create file.\n");
         PRSAFE_DELETE(m_file);
-        Report(SEARCH_RESULT_ERROR);
+        Report(SEARCH_RESULT_ERROR, "DictionarySearch - File does not exist or failed to create file.");
     }
 }
 
@@ -247,14 +245,13 @@ void prDictionarySearch::UpdateLoad()
     m_file->Close();
     PRSAFE_DELETE(m_file);
 
-    m_mode = WSM_SEARCH_FILE;
-
+    m_mode    = WSM_SEARCH_FILE;
     m_entries = m_fileSize / (m_wordSize + 1);  // + 1 for null
 }
 
 
 /// ---------------------------------------------------------------------------
-/// Updates the loading of the dictionary file.
+/// Does a binary search of the loaded file
 /// ---------------------------------------------------------------------------
 void prDictionarySearch::SearchFile()
 {
@@ -283,11 +280,9 @@ void prDictionarySearch::SearchFile()
         else
         {
             Report(SEARCH_RESULT_FOUND);
-            //prTrace(LogDebug, "Found %s\n", m_word);
             return;
         }
     }
 
-    prTrace(LogInformation, "Didn't find %s\n", m_word);
-    Report(SEARCH_RESULT_NOT_FOUND);
+    Report(SEARCH_RESULT_NOT_FOUND, "Word not found");
 }

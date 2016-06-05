@@ -1,4 +1,5 @@
 // File: prWeb.h
+//      Provides simple web functionality
 /**
  *  Copyright 2014 Paul Michael McNab
  *
@@ -16,8 +17,7 @@
  */
 
 
-#ifndef __PRWEB_H
-#define __PRWEB_H
+#pragma once
 
 
 // Class: prWeb
@@ -40,6 +40,3 @@ public:
     //      address - The web pages address
     void OpenURL(const char *address);
 };
-
-
-#endif//__PRWEB_H

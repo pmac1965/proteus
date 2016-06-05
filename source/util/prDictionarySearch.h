@@ -1,8 +1,16 @@
-// File: prDictionarySearch.h
+// File: prDictionarySearch.h   
+//      Class to search dictionary files
 //
 // Notes:
-//      Provides a way to quickly search a language dictionary using the engine
-//      dictionary splitter tool. Dictionary must be alphabetically sorted
+//      The dictionary must be split using the engine dictionary splitter tool,
+//      which creates the required .dic files.
+//
+// Notes:
+//      The supplied dictionary must be alphabetically sorted
+//
+// Notes:
+//      The update method of this class must be called at least once per frame,
+//      else the search won't happen and you will never receive any callbacks.
 /**
  * prDictionarySearch.cpp
  *
@@ -34,21 +42,23 @@
 //    SEARCH_RESULT_ERROR       - A search has not been started, or search failed.
 //    SEARCH_RESULT_FOUND       - The word was found.
 //    SEARCH_RESULT_NOT_FOUND   - The word was not found.
+//    SEARCH_RESULT_PENDING     - Search still running
 //
-typedef enum //prDictionarySearchResult
+typedef enum
 {
     SEARCH_RESULT_ERROR,
     SEARCH_RESULT_FOUND,
-    SEARCH_RESULT_NOT_FOUND
+    SEARCH_RESULT_NOT_FOUND,
+    SEARCH_RESULT_PENDING
 
 } prDictionarySearchResult;
 
 
 // Class: prDictionaryCallbacks
-//      A mix-in class to receive notifications about settings
+//      A mix-in class to receive search notifications
 //
 // Notes:
-//      This class is optional
+//      This class is *NOT* optional
 class prDictionaryCallbacks
 {
 public:
@@ -80,7 +90,7 @@ public:
     //      minLength   - The minimum length of words which can be searched for.
     //      maxLength   - The maximum length of words which can be searched for.
     //      pcb         - A callback class. *Must not be NULL.*
-    prDictionarySearch(int minLength, int maxLength, prDictionaryCallbacks *pcb);
+    prDictionarySearch(Proteus::Core::s32 minLength, Proteus::Core::s32 maxLength, prDictionaryCallbacks *pcb);
 
     // Method: ~prDictionarySearch
     //      Destructor
@@ -106,7 +116,7 @@ public:
 
     // Method: IsSearching
     //      Determines if a search is running.
-    bool IsSearching() const { return m_searching; }
+    Proteus::Core::PRBOOL IsSearching() const { return m_searching; }
 
 
 private:
@@ -119,16 +129,13 @@ private:
     Proteus::Core::s32      m_entries;
     prFile                 *m_file;
     char                   *m_fileBuffer;
-    bool                    m_searching;
-    bool                    m_exp2;
-    bool                    m_exp1;
-    bool                    m_exp0;
+    Proteus::Core::PRBOOL   m_searching;
     char                    m_word[DICT_WORD_BUFFER_SIZE];
 
 
 private:
     void Clear();
-    void Report(prDictionarySearchResult result);
+    void Report(prDictionarySearchResult result, const char *message = nullptr);
     void StartLoad();
     void UpdateLoad();
     void SearchFile();
