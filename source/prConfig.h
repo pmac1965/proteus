@@ -111,16 +111,34 @@
 #define PROTEUS_ALLOW_CONSOLE
 #endif
 
-#ifndef PROTEUS_ALLOW_WINDOW_MINIMIZE                   // Allows the game window to have a minimize button
-//#define PROTEUS_ALLOW_WINDOW_MINIMIZE
-#endif
+// Tools will alway have min/max and be resizeble
+#if defined(PROTEUS_TOOL)
+    #ifndef PROTEUS_ALLOW_WINDOW_MINIMIZE               // Allows the tool window to have a minimize button
+    #define PROTEUS_ALLOW_WINDOW_MINIMIZE
+    #endif
 
-#ifndef PROTEUS_ALLOW_WINDOW_MAXIMIZE                   // Allows the game window to have a maximize button
-//#define PROTEUS_ALLOW_WINDOW_MAXIMIZE
-#endif
+    #ifndef PROTEUS_ALLOW_WINDOW_MAXIMIZE               // Allows the tool window to have a maximize button
+    #define PROTEUS_ALLOW_WINDOW_MAXIMIZE
+    #endif
 
-#ifndef PROTEUS_ALLOW_RESIZEABLE_WINDOW                 // Allows the game window to be resizeable.
-//#define PROTEUS_ALLOW_RESIZEABLE_WINDOW
+    #ifndef PROTEUS_ALLOW_RESIZEABLE_WINDOW             // Allows the tool window to be resizeable.
+    #define PROTEUS_ALLOW_RESIZEABLE_WINDOW
+    #endif
+
+// Games generally won't
+#else
+    #ifndef PROTEUS_ALLOW_WINDOW_MINIMIZE               // Allows the game window to have a minimize button (Optionally)
+    //#define PROTEUS_ALLOW_WINDOW_MINIMIZE
+    #endif
+
+    #ifndef PROTEUS_ALLOW_WINDOW_MAXIMIZE               // Allows the game window to have a maximize button (Optionally)
+    //#define PROTEUS_ALLOW_WINDOW_MAXIMIZE
+    #endif
+
+    #ifndef PROTEUS_ALLOW_RESIZEABLE_WINDOW             // Allows the game window to be resizeable. (Optionally)
+    //#define PROTEUS_ALLOW_RESIZEABLE_WINDOW
+    #endif
+
 #endif
 
 #ifndef PROTEUS_ALLOW_AT                                // Allows the AT define to exist
