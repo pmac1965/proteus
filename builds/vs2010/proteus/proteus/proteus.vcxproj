@@ -637,6 +637,7 @@
     <ClInclude Include="..\..\..\..\source\file\prFileManager.h" />
     <ClInclude Include="..\..\..\..\source\file\prFileShared.h" />
     <ClInclude Include="..\..\..\..\source\file\prFileSystem.h" />
+    <ClInclude Include="..\..\..\..\source\font\prFontBase.h" />
     <ClInclude Include="..\..\..\..\source\font\prFontGlyph.h" />
     <ClInclude Include="..\..\..\..\source\font\prFontManager.h" />
     <ClInclude Include="..\..\..\..\source\font\prTagParser.h" />
