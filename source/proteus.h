@@ -126,6 +126,7 @@
 #include "display/prSpriteManager.h"
 #include "display/prTexture.h"
 #include "display/prTrueTypeFont.h"
+#include "editor/prEditor.h"
 #include "file/prFile.h"
 #include "file/prFileManager.h"
 #include "file/prFileShared.h"
