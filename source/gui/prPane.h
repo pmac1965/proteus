@@ -111,6 +111,16 @@ public:
     //      height	- Pane height
     void SetSizeAndPos(Proteus::Core::s32 x, Proteus::Core::s32 y, Proteus::Core::s32 width, Proteus::Core::s32 height) { mXpos = x; mYpos = y; mWidth = width; mHeight = height; }
 
+    // Method: GetSizeAndPos
+    //      Gets the panes size and position relative to screen 0, 0
+    //
+    // Parameters:
+    //      x		- Reference to receive X position
+    //      y		- Reference to receive Y position
+    //      width	- Reference to receive Pane width
+    //      height	- Reference to receive Pane height
+    void GetSizeAndPos(Proteus::Core::s32 &x, Proteus::Core::s32 &y, Proteus::Core::s32 &width, Proteus::Core::s32 &height) { x = mXpos; y = mYpos; width = mWidth; height = mHeight; }
+
     // Method: SetTitleText
     //      Sets the panes title text
     //
@@ -118,6 +128,8 @@ public:
     //      text - The panes name (Optional)
 	void SetTitleText(const char *text) { if (text && *text) { mName.Set(text); } }
 
+    // Method: SetIcons
+    //      Sets the panes icons
 	void SetIcons(prSprite *pIcon, prSprite *pOptionsIcon) { mpPaneIcon = pIcon; mpOptionsIcon = pOptionsIcon; }
 
 private:

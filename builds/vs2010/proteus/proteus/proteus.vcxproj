@@ -61,7 +61,7 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -73,7 +73,7 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug64|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -85,7 +85,7 @@
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tool debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -98,14 +98,14 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release64|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -126,7 +126,7 @@
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Tool release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
@@ -653,6 +653,8 @@
     <ClInclude Include="..\..\..\..\source\gui\prMenuStrip.h" />
     <ClInclude Include="..\..\..\..\source\gui\prPane.h" />
     <ClInclude Include="..\..\..\..\source\gui\prSlider.h" />
+    <ClInclude Include="..\..\..\..\source\gui\prText.h" />
+    <ClInclude Include="..\..\..\..\source\gui\prTextBox.h" />
     <ClInclude Include="..\..\..\..\source\gui\prWidget.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prInAppPurchase.h" />
     <ClInclude Include="..\..\..\..\source\inAppPurchase\prStore.h" />
@@ -1016,6 +1018,8 @@
     <ClCompile Include="..\..\..\..\source\gui\prMenuStrip.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prPane.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prSlider.cpp" />
+    <ClCompile Include="..\..\..\..\source\gui\prText.cpp" />
+    <ClCompile Include="..\..\..\..\source\gui\prTextBox.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prWidget.cpp" />
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prInAppPurchase.cpp" />
     <ClCompile Include="..\..\..\..\source\inAppPurchase\prStore.cpp" />
