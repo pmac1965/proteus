@@ -22,11 +22,50 @@
 
 
 #include "../prConfig.h"
+#include "../core/prTypes.h"
 
 
-#if defined(PLATFORM_PC) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC)
+// Forward declarations
+namespace Proteus { namespace Gui {
+    class prGui;
+}}
 
-#else
-    // Not supported on mobile
+class prBitmapFont;
+class prMessageManager;
 
-#endif
+
+// Function: EditorCreateGameMenus
+//      Creates the default in game menus for the game player
+//
+// Parameters:
+//      pTheGui         - A pointer to a message manager, so the game player knows whats been clicked
+//      pMessageManager - A pointer to a GUI created by the game player
+//      pBitmapFntDark  - A pointer to the dark font
+//      pBitmapFntGrey  - A pointer to the grey font
+void EditorCreateGameMenus(Proteus::Gui::prGui *pTheGui, prMessageManager *pMessageManager, prBitmapFont *pBitmapFntDark, prBitmapFont *pBitmapFntGrey);
+
+
+enum
+{
+    // File menu
+    EDITOR_FILE_EXIT        = 20000,
+
+    // Tool menu
+    EDITOR_FPS_ON,
+    EDITOR_FPS_OFF,
+    EDITOR_FPS_RESET,
+    EDITOR_FPS_POSITION,
+    EDITOR_COLLISION_DRAW,
+
+    // Profile menu
+    EDITOR_PROFILE_ON,
+    EDITOR_PROFILE_OFF,
+
+    // Step menu
+    EDITOR_STEP_PAUSE,
+    EDITOR_STEP_PLAY,
+    EDITOR_STEP_STEP,
+
+    // Help menu
+    EDITOR_HELP_SHOW,
+};

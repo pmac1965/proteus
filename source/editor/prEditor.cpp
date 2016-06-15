@@ -18,6 +18,7 @@
 
 
 #include "../prConfig.h"
+#include "prEditor.h"
 
 
 #if defined(PLATFORM_PC) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC)
@@ -26,8 +27,14 @@
 #include "../core/prMacros.h"
 #include "../gui/prGui.h"
 #include "../gui/prMenuStrip.h"
+#include "../gui/prMenuItem.h"
+#include "../gui/prMenu.h"
+#include "../display/prBitmapFont.h"
+#include "../font/prFontBase.h"
+#include "../input/prKeys.h"
 
 
+using namespace Proteus::Core;
 using namespace Proteus::Gui;
 
 
@@ -41,131 +48,112 @@ namespace
 /// ---------------------------------------------------------------------------
 /// Creates the editors menus
 /// ---------------------------------------------------------------------------
-void EditorCreateGameMenus()
+void EditorCreateGameMenus(prGui *pTheGui, prMessageManager *pMessageManager, prBitmapFont *pBitmapFntDark, prBitmapFont *pBitmapFntGrey)
 {
-    if (pGui != nullptr)
-        return;
+    PRASSERT(pTheGui);
+    PRASSERT(pMessageManager);
+    PRASSERT(pBitmapFntDark);
+    PRASSERT(pBitmapFntGrey);
 
     // Create the GUI
-    pGui = new prGui();
-    PRASSERT(pGui);
-    
-    //mApp.mpGui->SetBMPFont(mApp.mpTextFontDark);
+    pGui = pTheGui;    
+    pGui->SetBMPFont(pBitmapFntDark);
 
     pMenuStrip = static_cast<prMenuStrip *>(pGui->Create(WT_MenuStrip, "GameMenuStrip"));
     if (pMenuStrip)
     {
-        /*
         // Create the file menu
         {
-            prMenu *pFileMenu = static_cast<prMenu *>(mApp.mpGui->Create(WT_Menu, "FileMenu"));
+            prMenu *pFileMenu = static_cast<prMenu *>(pGui->Create(WT_Menu, "EditorFileMenu"));
             pFileMenu->SetText("File");
+            pFileMenu->SetGrayFontAsBitmapFont(pBitmapFntGrey);
+            pFileMenu->SetMessageManager(pMessageManager);
 
-            // Create the menu items
-            prMenuItem *pNew    = new prMenuItem("New",     MENU_ITEM_FILE_NEW);
-            prMenuItem *pOpen   = new prMenuItem("Open",    MENU_ITEM_FILE_OPEN);
-            //prMenuItem *_pSep_  = new prMenuItem("-",       MENU_ITEM_SEPARATOR);
-            prMenuItem *pSave   = new prMenuItem("Save",    MENU_ITEM_FILE_SAVE);
-            prMenuItem *pSaveAs = new prMenuItem("Save As", MENU_ITEM_FILE_SAVEAS);
-            prMenuItem *pExit   = new prMenuItem("Exit",    MENU_ITEM_FILE_OPEN);
-
-            // Add the menu items
-            pFileMenu->AddMenuItem(pNew);
-            pFileMenu->AddMenuItem(pOpen);
-            //pFileMenu->AddMenuItem(_pSep_);
-            pFileMenu->AddMenuItem(pSave);
-            pFileMenu->AddMenuItem(pSaveAs);
-            //pFileMenu->AddMenuItem(_pSep_);
+			// Exit
+            prMenuItem *pExit = new prMenuItem("Exit", EDITOR_FILE_EXIT);
             pFileMenu->AddMenuItem(pExit);
 
             // Add menu
             pMenuStrip->AddMenu(pFileMenu);
         }
 
-        // Create the edit menu
+        // Create the tool menu
         {
-            prMenu *pEditMenu = static_cast<prMenu *>(mApp.mpGui->Create(WT_Menu, "EditMenu"));
-            pEditMenu->SetText("Edit");
+            prMenu *pToolMenu = static_cast<prMenu *>(pGui->Create(WT_Menu, "EditorToolMenu"));
+            pToolMenu->SetText("Tool");
+            pToolMenu->SetGrayFontAsBitmapFont(pBitmapFntGrey);
+            pToolMenu->SetMessageManager(pMessageManager);
 
             // Create the menu items
-            prMenuItem *pPrefs = new prMenuItem("Prefs",  MENU_ITEM_EDIT_PREFS);
+            prMenuItem *pFpsOn    = new prMenuItem("FPS On",  EDITOR_FPS_ON);
+            pFpsOn->SetCommandKeys(prMenuItemControlKey::Control, PRKEY_F);
+
+            prMenuItem *pFpsOff   = new prMenuItem("FPS Off",  EDITOR_FPS_OFF);
+            prMenuItem *pFpsReset = new prMenuItem("FPS Reset",  EDITOR_FPS_RESET);
+            prMenuItem *pFpsPos   = new prMenuItem("FPS Position",  EDITOR_FPS_POSITION);
 
             // Add the menu items
-            pEditMenu->AddMenuItem(pPrefs);
+            pToolMenu->AddMenuItem(pFpsOn);
+            pToolMenu->AddMenuItem(pFpsOff);
+            pToolMenu->AddMenuItem(pFpsReset);
+            pToolMenu->AddMenuItem(pFpsPos);
 
             // Add menu
-            pMenuStrip->AddMenu(pEditMenu);
+            pMenuStrip->AddMenu(pToolMenu);
         }
 
-        // Create the view menu
+        // Create the profile menu
         {
-            prMenu *pViewMenu = static_cast<prMenu *>(mApp.mpGui->Create(WT_Menu, "ViewMenu"));
-            pViewMenu->SetText("View");
+            prMenu *pProfileMenu = static_cast<prMenu *>(pGui->Create(WT_Menu, "EditorProfileMenu"));
+            pProfileMenu->SetText("Profile");
+            pProfileMenu->SetGrayFontAsBitmapFont(pBitmapFntGrey);
+            pProfileMenu->SetMessageManager(pMessageManager);
 
-            pMenuStrip->AddMenu(pViewMenu);
+            // Create the menu items
+            prMenuItem *pFpsOn    = new prMenuItem("Profile On",  EDITOR_PROFILE_ON);
+            prMenuItem *pFpsOff   = new prMenuItem("Profile Off",  EDITOR_PROFILE_OFF);
+
+            // Add the menu items
+            pProfileMenu->AddMenuItem(pFpsOn);
+            pProfileMenu->AddMenuItem(pFpsOff);
+
+            pMenuStrip->AddMenu(pProfileMenu);
+        }
+
+        // Create the step menu
+        {
+            prMenu *pStepMenu = static_cast<prMenu *>(pGui->Create(WT_Menu, "EditorStepMenu"));
+            pStepMenu->SetText("Step");
+            pStepMenu->SetGrayFontAsBitmapFont(pBitmapFntGrey);
+            pStepMenu->SetMessageManager(pMessageManager);
+
+            // Create the menu items
+            prMenuItem *pStep      = new prMenuItem("Step",  EDITOR_STEP_STEP);
+            prMenuItem *pStepPause = new prMenuItem("Pause",  EDITOR_STEP_PAUSE);
+
+            // Add the menu items
+            pStepMenu->AddMenuItem(pStep);
+            pStepMenu->AddMenuItem(pStepPause);
+
+            pMenuStrip->AddMenu(pStepMenu);
         }
 
         // Create the help menu
         {
-            prMenu *pHelpMenu = static_cast<prMenu *>(mApp.mpGui->Create(WT_Menu, "HelpMenu"));
+            prMenu *pHelpMenu = static_cast<prMenu *>(pGui->Create(WT_Menu, "EditorHelpMenu"));
             pHelpMenu->SetText("Help");
+            pHelpMenu->SetGrayFontAsBitmapFont(pBitmapFntGrey);
+            pHelpMenu->SetMessageManager(pMessageManager);
 
             // Create the menu items
-            prMenuItem *pManual = new prMenuItem("Manual",  MENU_ITEM_HELP_MANUAL);
-            prMenuItem *pHelp   = new prMenuItem("About",  MENU_ITEM_HELP_ABOUT);
+            prMenuItem *pHelp   = new prMenuItem("Show",  EDITOR_HELP_SHOW);
 
             // Add the menu items
-            pHelpMenu->AddMenuItem(pManual);
             pHelpMenu->AddMenuItem(pHelp);
 
             pMenuStrip->AddMenu(pHelpMenu);
-        }//*/
+        }
     }
 }
 
-
-/// ---------------------------------------------------------------------------
-/// Destroys the editors menus
-/// ---------------------------------------------------------------------------
-void EditorDestroyGameMenus()
-{
-    PRSAFE_DELETE(pGui);
-}
-
-
 #endif
-
-
-//#if defined(PLATFORM_PC)
-//
-//#define WIN32_LEAN_AND_MEAN
-//#include <windows.h>
-//
-//void CreateBasicMenu(HWND hWnd)
-//{
-////    HMENU hMenu = CreateMenu();
-////    HMENU hSubMenu = CreatePopupMenu();
-////
-////    AppendMenu(hSubMenu, MF_STRING, ID_EXIT_GAME, L"&Quit");
-////    AppendMenu(hSubMenu, MF_STRING, ID_SAVE_GAME, L"&Save Game");
-//////    AppendMenu(hSubMenu, MF_STRING, ID_QUIT_ITEM, L"&Quit");
-////    AppendMenu(hMenu, MF_STRING | MF_POPUP, (UINT)hSubMenu, L"&File");
-////
-////    //hSubMenu = CreatePopupMenu();
-////    //AppendMenu(hSubMenu, MF_STRING, ID_SHOW_ALL_ITEM, L"Show &All Data");
-////    //AppendMenu(hSubMenu, MF_STRING, ID_SELECT_REPORT_ITEM, L"S&eelect report");
-////    //AppendMenu(hMenu, MF_STRING | MF_POPUP, (UINT)hSubMenu, L"&Reports");
-////
-////    SetMenu(hWnd, hMenu);
-//}
-//#else
-//
-//#endif
-//
-//
-///// ---------------------------------------------------------------------------
-///// Creates the editors menus
-///// ---------------------------------------------------------------------------
-//void EditorCreateMenus()
-//{
-//}
