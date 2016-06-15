@@ -34,6 +34,9 @@
 using namespace Proteus::Core;
 
 
+//#define SHOW_ARGS
+
+
 #if defined(PLATFORM_LINUX)
 #include "../linux/prLinux.h"
 #endif
@@ -93,6 +96,13 @@ bool prArgsParseCommandLine(LPTSTR lpCmdLine)
 
     if (lpCmdLine && *lpCmdLine)
     {
+        // Show args
+#ifdef SHOW_ARGS
+        char buffer[1024];
+        size_t cnt = wcstombs(buffer, lpCmdLine, sizeof(buffer));
+        MessageBoxA(HWND_DESKTOP, buffer, "Args", MB_ICONINFORMATION | MB_OK);
+#endif
+
         pArgv = CommandLineToArgvW(lpCmdLine, &paramTotal);
 
         prRegistry *reg  = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
