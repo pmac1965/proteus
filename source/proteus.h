@@ -15,8 +15,7 @@
  */
 
 
-#ifndef __PROTEUS_H
-#define __PROTEUS_H
+#pragma once
 
 
 // The config file
@@ -292,6 +291,3 @@
     #endif
 
 #endif//PLATFORM_PC
-
-
-#endif//__PROTEUS_H
