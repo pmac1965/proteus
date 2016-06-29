@@ -34,7 +34,7 @@ using namespace Proteus::Core;
 /// ---------------------------------------------------------------------------
 prString::prString()
 {
-    Set(NULL);
+    Set(nullptr);
 }
 
 
@@ -72,10 +72,10 @@ void prString::Clear()
 void prString::Set(const char *text)
 {
     // NULL?
-    if (text == NULL)
+    if (text == nullptr)
     {
-        m_hash = 0xFFFFFFFF;
-        m_text = NULL;
+        m_hash = 0x00000000;
+        m_text = nullptr;
         Clear();
         return;
     }
@@ -83,7 +83,7 @@ void prString::Set(const char *text)
     // Empty?
     if (*text == (char)NULL)
     {
-        m_hash = 0xFFFFFFFF;
+        m_hash = 0x00000000;
         m_text = m_buffer;
         Clear();
         return;
@@ -92,7 +92,7 @@ void prString::Set(const char *text)
     // Copy the string.
     m_length = prStringCopySafe(m_buffer, text, sizeof(m_buffer));
     m_text   = m_buffer;
-    m_hash   = 0xFFFFFFFF;
+    m_hash   = prStringHash(text);
 }
 
 
@@ -117,10 +117,12 @@ void prString::Append(const char *text)
             m_buffer[m_length++] = *text++;
         }
 
+        // Terminate string
         m_buffer[m_length] = '\0';
-    }
 
-    TODO("Add hash generation")
+        // Generate new hash
+        m_hash = prStringHash(m_buffer);
+    }
 }
 
 
@@ -155,6 +157,9 @@ void prString::TrimBack()
     {
         m_buffer[--m_length] = '\0';
     }
+
+    // Generate new hash
+    m_hash = prStringHash(m_buffer);
 }
 
 
@@ -202,6 +207,9 @@ void prString::Replace(char findChar, char replaceChar)
 
             string++;
         }
+
+        // Generate new hash
+        m_hash = prStringHash(m_buffer);
     }
 }
 
@@ -218,6 +226,9 @@ void prString::ToUpper()
         m_buffer[index] = (char)toupper(m_buffer[index]);
         index++;
     }
+
+    // Generate new hash
+    m_hash = prStringHash(m_buffer);
 }
 
 
@@ -233,6 +244,9 @@ void prString::ToLower()
         m_buffer[index] = (char)tolower(m_buffer[index]);
         index++;
     }
+
+    // Generate new hash
+    m_hash = prStringHash(m_buffer);
 }
 
 
@@ -265,6 +279,15 @@ void prString::Sprintf(const char *fmt, ...)
     {
         Clear();
     }
+}
+
+
+/// ---------------------------------------------------------------------------
+///  Generates the hash for this string
+/// ---------------------------------------------------------------------------
+void prString::Rescan() 
+{ 
+    m_hash = prStringHash(m_buffer);
 }
 
 

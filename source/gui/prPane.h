@@ -30,11 +30,18 @@
 
 // Forward declarations
 class prSprite;
+class prRenderer;
 
 
 // Namespaces
 namespace Proteus {
 namespace Gui {
+
+
+// Predraw type
+typedef bool (*PanePredraw)(prRenderer *pRenderer, Proteus::Core::s32 x, Proteus::Core::s32 y, Proteus::Core::s32 width, Proteus::Core::s32 height);
+typedef void (*PaneInit)(void *);
+typedef void (*PaneUpdate)();
 
 
 // Class: prPane
@@ -132,6 +139,16 @@ public:
     //      Sets the panes icons
 	void SetIcons(prSprite *pIcon, prSprite *pOptionsIcon) { mpPaneIcon = pIcon; mpOptionsIcon = pOptionsIcon; }
 
+    // Method: SetCallbacks
+    //      Sets the callback functions
+    //
+    // Parameters:
+    //      ptrInit   - Pointer to an initialisation function (Optional)
+    //      ptrUpdate - Pointer to a update function (Optional)
+    //      ptrRedraw - Pointer to a redraw function (Optional)
+    //      initData  - Pointer to initialisation data (Optional)
+    void SetCallbacks(PaneInit ptrInit, PaneUpdate ptrUpdate, PanePredraw ptrRedraw, void *initData = nullptr) { mpPaneInit = ptrInit; mpPaneUpdate = ptrUpdate; mpPanePredraw = ptrRedraw; mpInitData = initData; }
+
 private:
 	prString				mName;
     Proteus::Core::s32		mXpos;
@@ -140,6 +157,10 @@ private:
     Proteus::Core::s32		mHeight;
 	prSprite			   *mpPaneIcon;
 	prSprite			   *mpOptionsIcon;
+    PaneInit                mpPaneInit;
+    PaneUpdate              mpPaneUpdate;
+    PanePredraw             mpPanePredraw;
+    void                   *mpInitData;
 };
 
 

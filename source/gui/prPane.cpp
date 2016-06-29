@@ -19,6 +19,7 @@
 
 #include "prPane.h"
 #include "../core/prCore.h"
+#include "../core/prMacros.h"
 #include "../core/prRegistry.h"
 #include "../debug/prTrace.h"
 #include "../display/prRenderer.h"
@@ -51,6 +52,10 @@ namespace Gui {
 		mHeight			= 256;
 		mpPaneIcon		= nullptr;
 		mpOptionsIcon	= nullptr;
+        mpPaneInit      = nullptr;
+        mpPaneUpdate    = nullptr;
+        mpPanePredraw   = nullptr;
+        mpInitData      = nullptr;
 	}
 
 
@@ -59,6 +64,20 @@ namespace Gui {
     /// ---------------------------------------------------------------------------
     void prPane::Update(f32 dt)
     {
+        PRUNUSED(dt);
+
+        // Initialise?
+        if (mpPaneInit)
+        {
+            mpPaneInit(mpInitData);
+            mpPaneInit = nullptr;
+            mpInitData = nullptr;
+        }
+
+        if (mpPaneUpdate)
+        {
+            mpPaneUpdate();
+        }
     }
 
 
@@ -80,10 +99,24 @@ namespace Gui {
             glEnable(GL_SCISSOR_TEST);
 #endif
 
+            // Predraw backdrop to pane?
+            bool predrawn = false;
+            if (mpPanePredraw)
+            {
+                predrawn = mpPanePredraw(pRenderer, mXpos, mYpos, mWidth, mHeight);
+            }
+
+
             // Draw pane
             pRenderer->TexturesEnabled(false);
-            pRenderer->SetColour(prColour::LiteGray);
-            pRenderer->DrawFilledRect((f32)mXpos, (f32)mYpos, (f32)(mXpos + mWidth), (f32)(mYpos + mHeight));
+
+            // Draw default pane backdrop
+            if (!predrawn)
+            {
+                pRenderer->SetColour(prColour::LiteGray);
+                pRenderer->DrawFilledRect((f32)mXpos, (f32)mYpos, (f32)(mXpos + mWidth), (f32)(mYpos + mHeight));
+            }
+
             pRenderer->SetColour(prColour(.85f, .85f, .85f));
             pRenderer->DrawFilledRect((f32)mXpos, (f32)mYpos, (f32)(mXpos + mWidth), (f32)(mYpos + 18));
             pRenderer->TexturesEnabled(true);
@@ -126,21 +159,27 @@ namespace Gui {
     /// A touch event handler
     /// ---------------------------------------------------------------------------
     void prPane::OnPressed(const prTouchEvent &e)
-    {}
+    {
+        PRUNUSED(e);
+    }
 
 
     /// ---------------------------------------------------------------------------
     /// A touch event handler
     /// ---------------------------------------------------------------------------
     void prPane::OnMove(const prTouchEvent &e)
-    {}
+    {
+        PRUNUSED(e);
+    }
 
 
     /// ---------------------------------------------------------------------------
     /// A touch event handler
     /// ---------------------------------------------------------------------------
     void prPane::OnReleased(const prTouchEvent &e)
-    {}
+    {
+        PRUNUSED(e);
+    }
 
 
 }} // Namespaces

@@ -175,39 +175,39 @@ prApplication_PC::~prApplication_PC()
 /// ---------------------------------------------------------------------------
 PRBOOL prApplication_PC::DisplayCreate(u32 width, u32 height, const char *pWindowName, bool fullscreen)
 {
-    PRBOOL result = PRFALSE;
+    PRBOOL aresult = PRFALSE;
 
 
     // Check window name is not null
     if (pWindowName == NULL)
     {
         MessageBoxW(HWND_DESKTOP, L"The window name cannot be NULL.", L"Error", MB_ICONERROR | MB_OK);
-        return result;
+        return aresult;
     }
 
     // Check window name is not empty
     if (pWindowName && strlen(pWindowName) == 0)
     {
         MessageBoxW(HWND_DESKTOP, L"The window name is empty.", L"Error", MB_ICONERROR | MB_OK);
-        return result;
+        return aresult;
     }
 
     // Check platform
     if (!CheckPlatform())
     {
-        return result;
+        return aresult;
     }
 
     // Running, then switch to running app.
     if (RunningAlready(pWindowName))
     {
-        return result;
+        return aresult;
     }
 
     // Don't allow remote sessions.
     if (IsRemoteSession())
     {
-        return result;
+        return aresult;
     }
 
 
@@ -222,7 +222,7 @@ PRBOOL prApplication_PC::DisplayCreate(u32 width, u32 height, const char *pWindo
     if (success)
     {
         m_running = PRTRUE;
-        result    = PRTRUE;
+        aresult   = PRTRUE;
 
         // Set window.
         prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
@@ -254,7 +254,7 @@ PRBOOL prApplication_PC::DisplayCreate(u32 width, u32 height, const char *pWindo
     }
 
 
-    return result;
+    return aresult;
 }
 
 

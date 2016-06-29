@@ -68,7 +68,7 @@ public:
     //
     //      Updated via the menu strip when required
     //
-    void Update(Proteus::Core::f32 dt) override {}
+    void Update(Proteus::Core::f32 /*dt*/) override {}
 
     // Method: Draw
     //      Draws the menu. Default version is not used as only
@@ -84,15 +84,15 @@ public:
 
     // Method: OnPressed
     //      Input handler.
-    void OnPressed(const prTouchEvent &e) override {}
+    void OnPressed(const prTouchEvent &/*e*/) override {}
 
     // Method: OnMove
     //      Input handler.
-    void OnMove(const prTouchEvent &e) override {}
+    void OnMove(const prTouchEvent &/*e*/) override {}
 
     // Method: OnReleased
     //      Input handler.
-    void OnReleased(const prTouchEvent &e) override {}
+    void OnReleased(const prTouchEvent &/*e*/) override {}
 
     // Method: AddMenuItem
     //      Adds a menu item to the menu

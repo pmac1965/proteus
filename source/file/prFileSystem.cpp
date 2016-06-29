@@ -340,10 +340,10 @@ bool prFileLoad(const char *filename, u32 filesize, void *buffer, u32 bufferSize
             // Errors?
             if (ferror(fp))
             {
-                char buffer[BUFFER_SIZE];
-                strcpy(buffer, strerror(errno));
+                char errBuffer[BUFFER_SIZE];
+                strcpy(errBuffer, strerror(errno));
                 clearerr(fp);
-                PRWARN(buffer);
+                PRWARN(errBuffer);
                 result = false;
             }
 

@@ -1,4 +1,10 @@
 // File: prRect.h
+//      Represents a simple rectangle.
+//
+// Notes:
+//      Will have pre-defined types of
+//          - prRect<s32>
+//          - prRect<f32>
 /**
  *  Copyright 2014 Paul Michael McNab
  *
@@ -30,6 +36,7 @@ namespace Math {
 
 // class: prRect
 //      Represents a simple rectangle.
+//template <typename T>
 class prRect
 {
 public:        

@@ -297,11 +297,11 @@ void prLanguage::ParseAttribs_Entry(TiXmlElement* pElement)
                 {
                     if (locales[i].hash == hash)
                     {
-                        s32 locale = locales[i].locale;
+                        s32 alocale = locales[i].locale;
 
-                        entry->text[locale] = new char [strlen(text) + 1];
+                        entry->text[alocale] = new char [strlen(text) + 1];
 
-                        prStringCopy((char *)text, entry->text[locale]);
+                        prStringCopy((char *)text, entry->text[alocale]);
                         //prTrace(LogError, "> %s - %s - %i\n", entry->text[locale], text, strlen(text) + 1);
                         break;
                     }

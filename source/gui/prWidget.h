@@ -36,8 +36,10 @@
 // - WT_MenuStrip
 // - WT_Menu
 // - WT_Pane
+// - WT_Text
 // - WT_TextBox
 // - WT_CheckBox
+// - WT_Slider
 //
 typedef enum
 {
@@ -46,7 +48,10 @@ typedef enum
     WT_MenuStrip,
     WT_Menu,
     WT_Pane,
-    WT_CheckBox
+    WT_Text,
+    WT_TextBox,
+    WT_CheckBox,
+    WT_Slider
 
 } prWidgetType;
 
@@ -66,7 +71,11 @@ class prTrueTypeFont;
 //
 // See Also:
 //      <prSpriteManager>
+//
+// See Also:
 //      <prBitmapFont>
+//
+// See Also:
 //      <prTrueTypeFont>
 class prWidget
 {
@@ -82,6 +91,8 @@ public:
     //
     // See Also:
     //      <prWidgetType>
+    //
+    // See Also:
     //      <prSpriteManager>
     prWidget(prWidgetType type, const char *name, prSpriteManager *pSpriteManager);
 
@@ -228,6 +239,11 @@ public:
     // See Also:
     //      <prTouchEvent>
     virtual void OnReleased(const prTouchEvent &e) = 0;
+
+    // Method: AddComponent
+    //
+    void AddComponent(prWidget *pWidget);
+
 
 private:
     prWidgetType        m_type;

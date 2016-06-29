@@ -74,21 +74,21 @@ public:
     //
     // Notes:
     //      *Do not call*
-    void OnPressed(const prTouchEvent &e) override {}
+    void OnPressed(const prTouchEvent &/*e*/) override {}
 
     // Method: OnMove
     //      Input handler.
     //
     // Notes:
     //      *Do not call*
-    void OnMove(const prTouchEvent &e) override {}
+    void OnMove(const prTouchEvent &/*e*/) override {}
 
     // Method: OnReleased
     //      Input handler.
     //
     // Notes:
     //      *Do not call*
-    void OnReleased(const prTouchEvent &e) override {}
+    void OnReleased(const prTouchEvent &/*e*/) override {}
 
     // Method: AddMenu
     //      Adds a menu to the menu strip

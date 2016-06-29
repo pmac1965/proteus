@@ -1,4 +1,10 @@
 // File: prString.h
+//      Fixed size string class. This class is designed not to
+//      allocate memory during usage. Use where you know string size
+//      will be limited to 256 bytes or less.
+//
+// Notes:
+//      Also designed to faster to use than std::string
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -30,7 +36,7 @@
 // Class: prString
 //      Fixed size string class. This class is designed not to
 //      allocate memory during usage. Use where you know string size
-//      will be limited.
+//      will be limited to 256 bytes or less.
 class prString
 {
 public:
@@ -39,7 +45,7 @@ public:
     prString();
 
     // Method: prString
-    //      Construtor
+    //      Constructor
     //
     // Parameters:
     //      text - The string to set
@@ -141,6 +147,14 @@ public:
     //      ... - Optional parameters
     void Sprintf(const char *fmt, ...);
 
+    // Method: Rescan
+    //      Generates the hash for this string
+    //
+    // Notes:
+    //      Designed to be used with array access which can
+    //      change a string without regenerating the hash
+    void Rescan();
+
     // Method: Length
     //      Gets the length of the string
     Proteus::Core::s32 Length() const { return m_length; }
@@ -149,13 +163,9 @@ public:
     //      Gets the strings text
     const char *Text() const { return m_text; }
 
-    //bool Contains(const char *text);
-    //bool Contains(const prString &str);
-    //bool IsEmpty();
-    //void Remove(char c);?
-    // Tests the strings, sets length, use if [] sets null
-    //void Rescan();
-
+    // Method: Hash
+    //      Gets this strings hash
+    Proteus::Core::u32 Hash() const { return m_hash; }
 
     // -- Operators --
 

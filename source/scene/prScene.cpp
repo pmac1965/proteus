@@ -19,6 +19,7 @@
 
 #include "prScene.h"
 #include "../core/prStringUtil.h"
+#include "../core/prMacros.h"
 #include "../tinyxml/tinyxml.h"
 
 
@@ -80,6 +81,7 @@ void prScene::Unload()
 /// ---------------------------------------------------------------------------
 void prScene::Add(prGameObject *pObject)
 {
+    PRUNUSED(pObject);
 }
 
 
@@ -88,6 +90,7 @@ void prScene::Add(prGameObject *pObject)
 /// ---------------------------------------------------------------------------
 void prScene::Remove(prGameObject *pObject)
 {
+    PRUNUSED(pObject);
 }
 
 

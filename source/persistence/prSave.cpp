@@ -298,7 +298,7 @@ void prSave::StartLoad(void **ppData, s32 *pSize, prIoResultCallback *cb, const 
 /// ---------------------------------------------------------------------------
 /// Report result to user
 /// ---------------------------------------------------------------------------
-void prSave::Report(int result)
+void prSave::Report(int aResult)
 {
     PRASSERT(pImpl);
 
@@ -307,11 +307,11 @@ void prSave::Report(int result)
     {
         if (PRBETWEEN(imp.mode, SAVE_MODE_BEGIN_SAVE, SAVE_MODE_CLOSE_SAVE))
         {
-            imp.callback->SaveResult(result);
+            imp.callback->SaveResult(aResult);
         }
         else
         {
-            imp.callback->LoadResult(result);
+            imp.callback->LoadResult(aResult);
         }
     }
 

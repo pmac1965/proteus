@@ -648,6 +648,8 @@
     <ClInclude Include="..\..\..\..\source\gui\prDialog.h" />
     <ClInclude Include="..\..\..\..\source\gui\prDialogListener.h" />
     <ClInclude Include="..\..\..\..\source\gui\prGui.h" />
+    <ClInclude Include="..\..\..\..\source\gui\prLayer.h" />
+    <ClInclude Include="..\..\..\..\source\gui\prLayerManager.h" />
     <ClInclude Include="..\..\..\..\source\gui\prMenu.h" />
     <ClInclude Include="..\..\..\..\source\gui\prMenuItem.h" />
     <ClInclude Include="..\..\..\..\source\gui\prMenuStrip.h" />
@@ -1013,6 +1015,8 @@
     <ClCompile Include="..\..\..\..\source\gui\prCheckbox.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prDialog.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prGui.cpp" />
+    <ClCompile Include="..\..\..\..\source\gui\prLayer.cpp" />
+    <ClCompile Include="..\..\..\..\source\gui\prLayerManager.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prMenu.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prMenuItem.cpp" />
     <ClCompile Include="..\..\..\..\source\gui\prMenuStrip.cpp" />

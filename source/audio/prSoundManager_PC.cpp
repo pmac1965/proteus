@@ -218,20 +218,20 @@ bool prSoundManager_PC::Initialise()
                             result = true;
 
                             // Generate the playback sources
-                            for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
+                            for (int j=0; j<AUDIO_MAX_ACTIVE; j++)
                             {
                                 // Generate a source to playback a buffer
-                                alGenSources(1, &soundEffects[i].uiSource);
+                                alGenSources(1, &soundEffects[j].uiSource);
                                 if (AL_ErrorCheck() != AL_NO_ERROR)
                                 {
-                                    prTrace(LogError, "Failed to allocate source %i\n", i);
-                                    soundEffects[i].state    = SFX_STATE_UNAVAILABLE;
-                                    soundEffects[i].uiSource = 0xFFFFFFFF;
+                                    prTrace(LogError, "Failed to allocate source %i\n", j);
+                                    soundEffects[j].state    = SFX_STATE_UNAVAILABLE;
+                                    soundEffects[j].uiSource = 0xFFFFFFFF;
                                     result = false;
                                 }
                                 else
                                 {
-                                    soundEffects[i].state = SFX_STATE_FREE;
+                                    soundEffects[j].state = SFX_STATE_FREE;
                                 }
                             }
                         }
@@ -1015,7 +1015,7 @@ bool prSoundManager_PC::SFXIsPlaying(int id) const
 /// ---------------------------------------------------------------------------
 bool prSoundManager_PC::SFXIsPlaying(const char *name) const
 {
-    bool result = false;
+    bool aresult = false;
 
 #ifdef SOUND_ALLOW
 
@@ -1031,7 +1031,7 @@ bool prSoundManager_PC::SFXIsPlaying(const char *name) const
             {
                 if (soundEffects[i].state == SFX_STATE_PLAYING)
                 {
-                    result = true;
+                    aresult = true;
                     break;
                 }
             }
@@ -1044,7 +1044,7 @@ bool prSoundManager_PC::SFXIsPlaying(const char *name) const
 
 #endif
 
-    return result;
+    return aresult;
 }
 
 
@@ -1312,7 +1312,7 @@ void prSoundManager_PC::DisplayUsage() const
 /// ---------------------------------------------------------------------------
 bool prSoundManager_PC::SongUpdate()
 {
-    bool active = true;
+    bool isActive = true;
 
 #ifdef SOUND_ALLOW
 
@@ -1329,7 +1329,7 @@ bool prSoundManager_PC::SongUpdate()
             alSourceUnqueueBuffers(songSource, 1, &buffer);
             AL_ERROR_CHECK()
 
-            active = SongStream(buffer);
+            isActive = SongStream(buffer);
 
             alSourceQueueBuffers(songSource, 1, &buffer);
             AL_ERROR_CHECK()
@@ -1338,7 +1338,7 @@ bool prSoundManager_PC::SongUpdate()
 
 #endif
 
-    return active;
+    return isActive;
 }
 
 

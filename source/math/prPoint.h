@@ -1,4 +1,12 @@
 // File: prPoint.h
+//      Templated classes which represents a simple 2D and 3D points in space
+//
+// Notes:
+//      Contains the pre-defined types
+//          - prPoint3
+//          - prPoint3F
+//          - prPoint2
+//          - prPoint2F
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -19,12 +27,7 @@
 #pragma once
 
 
-#include "../core/prTypes.h"
-
-
-// Namespaces
-namespace Proteus {
-namespace Math {
+//#include "../core/prTypes.h"
 
 
 // Class: TPoint3
@@ -81,6 +84,11 @@ public:
     // Members are public for faster access.
     T x, y;
 };
+
+
+// Namespaces
+namespace Proteus {
+namespace Math {
 
 
 // Typedef: prPoint3

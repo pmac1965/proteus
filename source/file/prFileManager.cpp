@@ -137,8 +137,8 @@ prFileManager::prFileManager(const char *saveFolder) : prCoreSystem(PRSYSTEM_FIL
         {
             // Remove the executables name
             GetModuleFileNameA(NULL, dataPath, FILE_MAX_FILENAME_SIZE);
-            int index = prStringFindLastIndex(dataPath, '\\');
-            dataPath[index] = 0;
+            int tindex = prStringFindLastIndex(dataPath, '\\');
+            dataPath[tindex] = 0;
         }
 
     // Android
@@ -643,16 +643,16 @@ void prFileManager::DisplayFiles(bool accessed)
         {
             prTrace(LogError, "Archive %i\n", i);
 
-            u32 count = entryCount[i];
-            if (count)
+            u32 acount = entryCount[i];
+            if (acount)
             {
                 prArcEntry *entry = pEntries[i];
 
-                for (u32 j=0; j<count; j++)
+                for (u32 j=0; j<acount; j++)
                 {
                     if (static_cast<u8>(accessed) == entry->accessed)
                     {
-                        prTrace(LogError, "File %i of %i : '%s' - %s\n", j, count, entry->filename, PRBOOL_TO_STRING(entry->accessed));
+                        prTrace(LogError, "File %i of %i : '%s' - %s\n", j, acount, entry->filename, PRBOOL_TO_STRING(entry->accessed));
                     }
 
                     entry++;

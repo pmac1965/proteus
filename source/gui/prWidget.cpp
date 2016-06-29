@@ -59,3 +59,13 @@ prWidget::prWidget(prWidgetType type, const char *name, prSpriteManager *pSprite
     m_pBmpfont  = nullptr;
     m_pTtfFont  = nullptr;
 }
+
+
+/// ---------------------------------------------------------------------------
+/// 
+/// ---------------------------------------------------------------------------
+void prWidget::AddComponent(prWidget *pWidget)
+{
+    PRUNUSED(pWidget);
+}
+

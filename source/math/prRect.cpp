@@ -18,6 +18,7 @@
 
 
 #include "../prConfig.h"
+#include "../debug/prDebug.h"
 #include "prRect.h"
 #include "prMathsUtil.h"
 #include "prPoint.h"
@@ -35,13 +36,15 @@ namespace Math {
 /// Constructor.
 /// ---------------------------------------------------------------------------
 prRect::prRect()
-: m_top    (0)
-, m_left   (0)
-, m_bottom (0)
-, m_right  (0) 
-, m_width  (0) 
-, m_height (0) 
+    : m_top    (0)
+    , m_left   (0)
+    , m_bottom (0)
+    , m_right  (0) 
+    , m_width  (0) 
+    , m_height (0) 
 {
+    TODO("Turn this into a template type");
+    TODO("Remove prRectF");
 }
 
 
@@ -49,10 +52,10 @@ prRect::prRect()
 /// Constructor.
 /// ---------------------------------------------------------------------------
 prRect::prRect(s32 top, s32 left, s32 bottom, s32 right)
-: m_top    (top)
-, m_left   (left)
-, m_bottom (bottom)
-, m_right  (right)
+    : m_top    (top)
+    , m_left   (left)
+    , m_bottom (bottom)
+    , m_right  (right)
 {
     VerifyCoords();
 }   

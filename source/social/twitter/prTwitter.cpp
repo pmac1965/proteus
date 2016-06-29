@@ -50,6 +50,7 @@ prTwitter::prTwitter(prTwitterCallbacks *pcb)
     mpTwitter = new prTwitter_Ios(pcb);
 
 #else
+    PRUNUSED(pcb);
     mpTwitter = nullptr;
 
 #endif

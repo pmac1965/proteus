@@ -172,7 +172,7 @@ prGifDecoder::~prGifDecoder()
 /// ---------------------------------------------------------------------------
 bool prGifDecoder::DecodeFrame(u32 frame)
 {
-    bool result = false;
+    bool aresult = false;
 
     if (mpImage && mFileSize > 0)
     {
@@ -276,7 +276,7 @@ bool prGifDecoder::DecodeFrame(u32 frame)
             }
 
             FreeImage_UnlockPage(mMultiBmp, dib, FALSE);
-            result = true;
+            aresult = true;
 
             // Merge?
             if (!copyBase)
@@ -342,7 +342,7 @@ bool prGifDecoder::DecodeFrame(u32 frame)
         }
     }
 
-    return result;
+    return aresult;
 }
 
 

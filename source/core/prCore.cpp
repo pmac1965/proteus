@@ -191,11 +191,11 @@ void prCoreInit(const char *saveDataPath)
 /// ---------------------------------------------------------------------------
 PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version)
 {
-    PRBOOL result = PRFALSE;
+    PRBOOL aresult = PRFALSE;
 
     if (init == PRTRUE)
     {
-        result = PRTRUE;
+        aresult = PRTRUE;
 
 
         // Platform specific initialisation
@@ -334,7 +334,7 @@ PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version)
     }
 
 
-    return result;
+    return aresult;
 }
 
 

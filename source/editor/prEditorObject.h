@@ -70,7 +70,7 @@ public:
     {}
 
     //
-    void SetGameObjectName(prString aname) {}
+    void SetGameObjectName(prString /*aname*/) {}
 
     //
     prString &GetGameObjectName() { return mName; }// aname) {}
@@ -80,5 +80,5 @@ private:
     prGameObject    &mGameObject;
     prString        mName;
 
-    GAME_OBJ_VAR(int, name)
+    //GAME_OBJ_VAR(int, name)
 };

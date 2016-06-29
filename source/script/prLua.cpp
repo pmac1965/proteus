@@ -20,6 +20,7 @@
 #include "prLua.h"
 #include "prLuaDebug.h"
 #include "../debug/prTrace.h"
+#include "../core/prMacros.h"
 #include "../lua/lua.hpp"
 #include "../thread/prThread.h"
 
@@ -137,6 +138,7 @@ void prLua::Run(const char *filename)
 /// ---------------------------------------------------------------------------
 void prLua::RunThreaded(const char *filename)
 {
+    PRUNUSED(filename);
 }
 
 

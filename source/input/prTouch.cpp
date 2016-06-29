@@ -340,20 +340,21 @@ typedef struct TouchImplementation
     // ------------------------------------------------------------------------
     // Test for down already.
     // ------------------------------------------------------------------------
-    bool IsDownAlready(u32 id)
+    bool IsDownAlready(u32 theId)
     {
-        bool down = false;
+        bool isDown = false;
+
         // Look for an active touch
         for (int i = 0; i < MAX_TOUCHPOINTS; i++)
         {
-            if (id == touchData[i].id)
+            if (theId == touchData[i].id)
             {
-                down = true;
+                isDown = true;
                 break;
             }
         }
 
-        return down;
+        return isDown;
     }
 
     // ------------------------------------------------------------------------

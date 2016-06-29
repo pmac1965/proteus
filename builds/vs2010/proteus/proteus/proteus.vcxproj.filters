@@ -1233,6 +1233,12 @@
     <ClInclude Include="..\..\..\..\source\gui\prTextBox.h">
       <Filter>source\gui</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\source\gui\prLayer.h">
+      <Filter>source\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\gui\prLayerManager.h">
+      <Filter>source\gui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\source\Box2D\Collision\Shapes\b2ChainShape.cpp">
@@ -2304,6 +2310,12 @@
       <Filter>source\gui</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\source\gui\prTextBox.cpp">
+      <Filter>source\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\gui\prLayer.cpp">
+      <Filter>source\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\gui\prLayerManager.cpp">
       <Filter>source\gui</Filter>
     </ClCompile>
   </ItemGroup>

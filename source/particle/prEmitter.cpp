@@ -34,6 +34,8 @@ prEmitter::prEmitter(s32 id, const prEmitterDefinition &ed) : mID(id)
 {
     prTrace(LogError, "prEmitter::prEmitter - %i\n", mID);
 
+    PRUNUSED(ed);
+
     pEffects = NULL;
     mAlive   = true;
 

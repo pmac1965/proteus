@@ -29,6 +29,8 @@ using namespace Proteus::Core;
 /// ---------------------------------------------------------------------------
 void prAchievementBase::Update(f32 dt)
 {
+    PRUNUSED(dt);
+
     if (mPrevStatus != mCurrStatus)
     {
         mPrevStatus = mCurrStatus;

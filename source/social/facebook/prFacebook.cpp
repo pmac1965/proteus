@@ -51,11 +51,10 @@ prFacebook::prFacebook(prFacebookCallbacks *pcb)
     mpFacebook = new prFacebook_Android(pcb);
 
 #elif defined(PLATFORM_IOS)
-//#if 0
     mpFacebook = nullptr;//new prFacebook_Ios(pcb);
-//#endif
     
 #else
+    PRUNUSED(pcb);
     mpFacebook = nullptr;
 
 #endif
@@ -140,6 +139,8 @@ bool prFacebook::Initialise()
 /// ----------------------------------------------------------------------------
 void prFacebook::SetDetails(const char *name, u64 fbid)
 {
+    PRUNUSED(name);
+    PRUNUSED(fbid);
     //mPlayerFBID = fbid;
     //mIsLoggedIn = true;         // Set logged in - only when logged in to facebook
     //                            //                 can we set the details    

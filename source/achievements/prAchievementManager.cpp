@@ -532,7 +532,7 @@ void prAchievementManager::Load(const char *filename)
     {
         // Set number of achievements.
         mAchievementsCount = size / sizeof(prAchievementStatus);
-        PRASSERT(mAchievementsCount == mAchievementsList.size());
+        PRASSERT(mAchievementsCount == (s32)mAchievementsList.size());
 #if defined(ACHIEVEMENT_DEBUG)
         prTrace(LogError, "Loaded %i achievements\n", mAchievementsCount);
 #endif
@@ -775,6 +775,9 @@ void prAchievementManager::SetNotificationBar(const char *filename, Notification
 /// ---------------------------------------------------------------------------
 void prAchievementManager::SetNotificationBarFont(prBitmapFont *font, float width, float scale)
 {
+    PRUNUSED(font);
+    PRUNUSED(width);
+    PRUNUSED(scale);
     //PRASSERT(pImpl);
     //PRASSERT(font);
     //PRUNUSED(width);
