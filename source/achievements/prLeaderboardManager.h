@@ -28,11 +28,16 @@
 #include "../prConfig.h"
 #include "../core/prTypes.h"
 #include "../core/prCoreSystem.h"
+#include <string>
+#include <map>
 
 
 // Namespaces
 namespace Proteus {
 namespace Achievements {
+
+
+class prLeaderboard;
 
 
 // Class: prLeaderboard
@@ -47,6 +52,15 @@ public:
     // Method: ~prLeaderboardManager
     //      Dtor
     ~prLeaderboardManager();
+
+    bool AddLeaderboard(const char *name) {}
+
+    // Method: GetLeaderboard
+    //      Gets the name leaderboard if it exists
+    //
+    // Parameters:
+    //      name  - The name of the leaderboard
+    prLeaderboard* GetLeaderboard(const char *name) { return nullptr; }
 
     //// Method: Submit
     ////      Submit a value to a leaderboard.
@@ -65,6 +79,10 @@ public:
     //// Method: Available
     ////      Determines if the leaderboard interface is available for the current platform
     //bool Available() const;
+
+
+private:
+    std::map<std::string, prLeaderboard*>   mLeaderboards;
 };
 
 

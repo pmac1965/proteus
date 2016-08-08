@@ -1,4 +1,5 @@
 // File: prBackgroundLayer.h
+//      Represents a single background layer
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -54,6 +55,7 @@ public:
     // Method: Draw
     //      Draws this layer
     void Draw();
+
 
 #if defined(PROTEUS_TOOL)
     // Method: GetLayerWidth

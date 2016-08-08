@@ -82,7 +82,7 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
     #endif
 
     // Init data
-    m_texture               = NULL;
+    m_texture               = nullptr;
     m_width                 = -1;
     m_height                = -1;
     m_type                  = prBackground::UNKNOWN;
@@ -100,7 +100,7 @@ prBackground::prBackground(const char *filename) : m_colour(prColour::White)
 
     for (s32 i=0; i<BACKGROUND_MAX_LAYERS;i++)
     {
-        mLayers[i] = NULL;
+        mLayers[i] = nullptr;
     }
 
     // Parse the document
@@ -179,7 +179,7 @@ prBackground::~prBackground()
     if (pRM && m_texture)
     {
         pRM->Unload(m_texture);
-        m_texture = NULL;
+        m_texture = nullptr;
     }
 
     // Release the layers
@@ -270,7 +270,7 @@ void prBackground::SetColour(prColour c)
 /// ---------------------------------------------------------------------------
 prBackgroundLayer* prBackground::GetLayer(s32 index)
 {
-    prBackgroundLayer* pLayer = NULL;
+    prBackgroundLayer* pLayer = nullptr;
 
     if (PRBETWEEN(index, 0, BACKGROUND_MAX_LAYERS - 1))
     {
@@ -318,7 +318,7 @@ void prBackground::SetTexture(prTexture* pTex)
 bool prBackground::Save()
 {
     bool        result  = false;
-    const char *type    = NULL;
+    const char *type    = nullptr;
     const char *name    = "?";
 
 
@@ -454,11 +454,11 @@ bool prBackground::Save()
 /// ---------------------------------------------------------------------------
 prBackgroundLayer *prBackground::AddNewLayer(s32 width, s32 height, s32 tileWidth, s32 tileHeight, prTexture *pTexture)
 {
-    prBackgroundLayer *pLayer = NULL;
+    prBackgroundLayer *pLayer = nullptr;
 
     for (s32 i=0; i<BACKGROUND_MAX_LAYERS;i++)
     {
-        if (mLayers[i] == NULL)
+        if (mLayers[i] == nullptr)
         {
             pLayer     = new prBackgroundLayer(width, height, tileWidth, tileHeight, pTexture);
             mLayers[i] = pLayer;

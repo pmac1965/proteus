@@ -52,6 +52,7 @@ LOCAL_C_INCLUDES := D:/engine/freetype2/include
 LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	achievements/prAchievement_base.cpp	\
 	achievements/prAchievement_android.cpp	\
+	achievements/prLeaderboardManager.cpp	\
 	achievements/prLeaderboards.cpp	\
 	actor/prActor.cpp	\
 	actor/prActorManager.cpp	\
@@ -126,7 +127,6 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	core/prApplication.cpp	\
 	core/prApplication_Android.cpp	\
 	core/prArgs.cpp	\
-	core/prATB.cpp	\
 	core/prBitArray.cpp	\
 	core/prCore.cpp	\
 	core/prCoreSystem.cpp	\

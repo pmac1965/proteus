@@ -24,6 +24,7 @@
 #include "../editor/prEditorObject.h"
 //#include "../math/prVector3.h"
 
+
 //
 //
 class prGameObject PROT_EDITOR_INCL

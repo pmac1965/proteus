@@ -103,8 +103,8 @@
 #define ALLOW_GLEW
 #endif
 
-#ifndef HIDE_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.
-#define HIDE_MESSAGES
+#ifndef HIDE_MESSAGES                                   // Allows the TODO messages to be hidden by the systems compilers.
+//#define HIDE_MESSAGES
 #endif
 
 #ifndef PROTEUS_ALLOW_CONSOLE                           // Allows the debug console to be optionally removed. (PC only)

@@ -21,12 +21,12 @@
 
 // Constructor
 template<typename T>
-prList<T>::prList()
+prList<T>::prList() : method(LIST_METHOD_NONE)
 {
     count  = 0;        
     head   = 0;
     tail   = 0;
-    method = LIST_METHOD_NONE;
+    //method = LIST_METHOD_NONE; // CPPCheck change
 }
 
 

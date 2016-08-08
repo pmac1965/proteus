@@ -116,6 +116,7 @@ prBackgroundLayer::~prBackgroundLayer()
 void prBackgroundLayer::Draw()
 {
     // TODO: Add screen offset for positioning
+    TODO("Add screen offset for positioning");
 
     if (mpTexture)
     {

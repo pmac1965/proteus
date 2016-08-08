@@ -2,7 +2,7 @@
 //      prBackground is designed to handle single and multi-layered backgrounds
 //
 //
-//      *IMAGE* type backgrounds single layered. Intended for simple 2D screens, like logo/title screens, etc
+//      *IMAGE* type backgrounds are single layered. Intended for simple 2D screens, like logo/title screens, etc
 //
 //
 //      *TILED* type backgrounds can be multi or single layered.
@@ -96,7 +96,7 @@ public:
     //      Gets a layer of a tiled background
     //
     // Parameters:
-    //      c - The tint colour
+    //      index - The index of the required layer
     //
     // See also:
     //      <prBackgroundLayer>
