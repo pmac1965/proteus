@@ -146,6 +146,14 @@ public:
     //      Tells the GUI manager to destroy this widget
     void SetDestroy() { m_destroy = true; }
 
+    // Method: GetHasFocus
+    //      Does this widget have keyboard focus?
+    bool GetHasFocus() const { return m_hasFocus; }
+
+    // Method: SetHasFocus
+    //      Set if this widget has keyboard focus
+    void SetHasFocus(bool result) { m_hasFocus = result; }
+
     // Method: SetColour
     //      Sets the widget colour.
     //
@@ -231,7 +239,7 @@ protected:
     bool                m_animated;
     bool                m_active;
     bool                m_destroy;
-    bool                m_exp0;
+    bool                m_hasFocus;                 // For components which accept input
     bool                m_exp1;
     bool                m_exp2;
     prSpriteManager    *m_pSpriteManager;

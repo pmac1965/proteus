@@ -19,12 +19,17 @@
 
 #include "prPane.h"
 #include "../core/prCore.h"
+#include "../core/prRegistry.h"
 #include "../debug/prTrace.h"
 #include "../display/prRenderer.h"
 #include "../display/prBitmapFont.h"
 #include "../display/prTrueTypeFont.h"
 #include "../display/prSprite.h"
 
+
+#if defined(PLATFORM_PC)
+  #include "../core/prWindow_PC.h"
+#endif
 
 //namespace Proteus::Core;
 using namespace Proteus::Core;
@@ -65,6 +70,16 @@ namespace Gui {
         prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
         if (pRenderer)
         {
+            // Get the screens details
+            prRegistry *pReg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
+            PRASSERT(pReg);
+            s32 scrnHeight = atoi(pReg->GetValue("ScreenHeight"));
+
+#if defined(PLATFORM_PC)
+            glScissor(mXpos, scrnHeight - (mYpos + mHeight), mWidth, mHeight);
+            glEnable(GL_SCISSOR_TEST);
+#endif
+
             // Draw pane
             pRenderer->TexturesEnabled(false);
             pRenderer->SetColour(prColour::LiteGray);
@@ -99,6 +114,10 @@ namespace Gui {
 				mpOptionsIcon->pos.y = (f32)ypos;
 				mpOptionsIcon->Draw();
 			}
+
+#if defined(PLATFORM_PC)
+            glDisable(GL_SCISSOR_TEST);
+#endif
         }
     }
 
