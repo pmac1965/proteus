@@ -74,7 +74,7 @@ void prLinuxUpdateMouse(int x, int y, unsigned int flags, int pressed)
 /// ---------------------------------------------------------------------------
 void prLinuxUpdateKeyboard(unsigned int keycode, int pressed)
 {
-	prKeyboard *pKeyboard  = (prKeyboard *)prCoreGetComponent(PRSYSTEM_KEYBOARD);
+	prKeyboard *pKeyboard  = static_cast<prKeyboard *>(prCoreGetComponent(PRSYSTEM_KEYBOARD));
 	if (pKeyboard)
 	{
 		if (pressed)

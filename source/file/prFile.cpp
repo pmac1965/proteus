@@ -64,11 +64,11 @@ enum prFileMode
 typedef struct FileImplementation
 {
     // Ctor
-    FileImplementation()
+    FileImplementation() : filemode(FileMode_None)
     {
         filedata    = NULL;
         pFile       = NULL;
-        filemode    = FileMode_None;
+        //filemode    = FileMode_None;
         filesize    = 0xFFFFFFFF;
         filePointer = 0;
         opened      = false;

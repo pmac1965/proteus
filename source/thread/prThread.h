@@ -68,7 +68,7 @@ typedef PRTHREAD_RETVAL (PRTHREAD_CALLCONV *prThreadFunc)(void *);
 class prThread
 {
 public:
-    prThread(prThreadFunc pThreadFunction, void *pThreadData, bool suspended);
+    explicit prThread(prThreadFunc pThreadFunction, void *pThreadData, bool suspended);
     ~prThread();
 
 	void Resume();

@@ -36,7 +36,7 @@ public:
     //
     // Parameters:
     //      error - A descriptive error message
-    explicit prException(std::string error);
+    explicit prException(std::string &error);
 
     // Method: prException
     //      Constructor.
@@ -46,7 +46,7 @@ public:
     //      func  - The function that the exception occurred in
     //      file  - The file that the exception occurred in
     //      line  - The line number that the exception occurred in
-    prException(std::string error, std::string func, std::string file, int line);
+    prException(std::string &error, std::string &func, std::string &file, int line);
 
     // Method: ~prException
     //      Destructor.

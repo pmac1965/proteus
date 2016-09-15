@@ -78,7 +78,7 @@ public:
     //
     // See Also:
     //      <prFontType>
-    prFont(prFontType fontType) : mFontType(fontType)
+    explicit prFont(prFontType fontType) : mFontType(fontType)
     {}
 
     // Method: ~prFont

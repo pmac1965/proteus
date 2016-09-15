@@ -37,10 +37,10 @@ prException::prException() : m_line     (-1)
 /// ---------------------------------------------------------------------------
 /// Constructor
 /// ---------------------------------------------------------------------------
-prException::prException(string error) : m_line     (-1)
-                                       , m_error    (error)
-                                       , m_filename ("Unknown file name")
-                                       , m_function ("Unknown function")
+prException::prException(string &error) : m_line     (-1)
+                                        , m_error    (error)
+                                        , m_filename ("Unknown file name")
+                                        , m_function ("Unknown function")
 {
 }
 
@@ -48,9 +48,9 @@ prException::prException(string error) : m_line     (-1)
 /// ---------------------------------------------------------------------------
 /// Constructor
 /// ---------------------------------------------------------------------------
-prException::prException(string error, string func, string file, int line) : m_line     (line)
-                                                                           , m_error    (error)
-                                                                           , m_filename (file)
-                                                                           , m_function (func)
+prException::prException(string &error, string &func, string &file, int line) : m_line     (line)
+                                                                              , m_error    (error)
+                                                                              , m_filename (file)
+                                                                              , m_function (func)
 {
 }

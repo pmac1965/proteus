@@ -38,12 +38,12 @@ using namespace Proteus::Core;
 /// ---------------------------------------------------------------------------
 /// Constructor
 /// ---------------------------------------------------------------------------
-prGifDecoder::prGifDecoder(const char *filename)
+prGifDecoder::prGifDecoder(const char *filename) : mFif(FIF_UNKNOWN)
 {
     PRASSERT(filename && *filename);
 
     // Init
-    mFif            = FIF_UNKNOWN;
+    //mFif            = FIF_UNKNOWN;
     mDib            = NULL;
     mMultiBmp       = NULL;
     mpImage         = NULL;

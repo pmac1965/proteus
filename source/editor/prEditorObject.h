@@ -70,7 +70,7 @@ public:
     {}
 
     //
-    void SetGameObjectName(prString aname) {}
+    void SetGameObjectName(prString &aname) {}
 
     //
     prString &GetGameObjectName() { return mName; }// aname) {}

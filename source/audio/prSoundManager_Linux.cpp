@@ -533,6 +533,7 @@ void prSoundManager_Linux::SongSetVolume(f32 volume)
                     float vol = PRCLAMP(volume, AUDIO_MUS_MIN_VOLUME, AUDIO_MUS_MAX_VOLUME);
                     vol *= masterMusVolume;
                     TODO("Add set volume")
+					PRUSED(vol);
                     //prJNI_SongSetVolume(vol);
                 }
                 else

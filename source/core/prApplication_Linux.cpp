@@ -69,7 +69,7 @@ namespace Core {
 prApplication_Linux::prApplication_Linux() : prApplication()
 {
     // Write startup info.
-    prRegistry *reg = (prRegistry *)prCoreGetComponent(PRSYSTEM_REGISTRY);
+    prRegistry *reg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
     if (reg)
     {
         prTrace(LogVerbose, "-------------------------------------------------------------------------------\n");

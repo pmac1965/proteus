@@ -104,9 +104,11 @@ prSoundManager_PC::prSoundManager_PC()
     songBuffers[1]      = 0xFFFFFFFF;
     pOggFile            = nullptr;
 
-
+#if 0
     memset(&oggStream, 0, sizeof(oggStream));
-
+#else
+	ZeroMemory(&oggStream, sizeof(oggStream));
+#endif
 
     // Try and load Vorbis DLLs. vorbisfile.dll will load ogg.dll and vorbis.dll
     dll = LoadLibrary(TEXT("vorbisfile.dll"));
