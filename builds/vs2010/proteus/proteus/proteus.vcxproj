@@ -565,6 +565,8 @@
     <ClInclude Include="..\..\..\..\source\core\prDefines.h" />
     <ClInclude Include="..\..\..\..\source\core\prGameObject.h" />
     <ClInclude Include="..\..\..\..\source\core\prGameTime.h" />
+    <ClInclude Include="..\..\..\..\source\core\prLayer.h" />
+    <ClInclude Include="..\..\..\..\source\core\prLayerManager.h" />
     <ClInclude Include="..\..\..\..\source\core\prList.h" />
     <ClInclude Include="..\..\..\..\source\core\prMacros.h" />
     <ClInclude Include="..\..\..\..\source\core\prMessage.h" />
@@ -945,6 +947,8 @@
     <ClCompile Include="..\..\..\..\source\core\prCore.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prCoreSystem.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prGameTime.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prLayer.cpp" />
+    <ClCompile Include="..\..\..\..\source\core\prLayerManager.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prMessageManager.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prRegistry.cpp" />
     <ClCompile Include="..\..\..\..\source\core\prResource.cpp" />

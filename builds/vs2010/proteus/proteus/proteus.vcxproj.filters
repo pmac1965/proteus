@@ -1236,6 +1236,12 @@
     <ClInclude Include="..\..\..\..\source\actor\prActorComponent.h">
       <Filter>source\actor</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prLayer.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\core\prLayerManager.h">
+      <Filter>source\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\source\Box2D\Collision\Shapes\b2ChainShape.cpp">
@@ -2308,6 +2314,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\source\gui\prTextBox.cpp">
       <Filter>source\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prLayer.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prLayerManager.cpp">
+      <Filter>source\core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
