@@ -187,6 +187,9 @@
     <Filter Include="source\editor">
       <UniqueIdentifier>{ffe9c829-d875-401a-b5de-f288ee51c161}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\components">
+      <UniqueIdentifier>{78765343-b453-4bea-a258-e64cb4331498}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\source\proteus.h">
@@ -1241,6 +1244,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\source\core\prLayerManager.h">
       <Filter>source\core</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\components\prComponentAudio.h">
+      <Filter>source\components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

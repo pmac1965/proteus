@@ -37,22 +37,44 @@ s32 prActor::m_baseid = 0;
 /// ---------------------------------------------------------------------------
 /// Ctor.
 /// ---------------------------------------------------------------------------
-prActor::prActor(s32 type) : m_type(type)
+prActor::prActor(s32 type) : prGameObject()
+                           , m_type     (type)
+                           , m_layer    ("Default", 0)
+                           , m_colPos   (prVector2::Zero)
 {
-    m_visible   = true;
-    m_active    = true;
     m_destroy   = false;
     m_onScreen  = true;
-    m_priority  = 0;
-    m_state     = 0;
-    m_id        = m_baseid++;
+    m_id        = m_baseid++;           // Give each actor a unique ID
     user0       = 0;
     user1       = 0;
     user2       = 0;
     user3       = 0;
-    m_layer     = ActorLayerBack;
-    m_colPos    = prVector2::MinusOne;
+//    m_colPos    = prVector2::Zero;
 }
+
+
+/// ---------------------------------------------------------------------------
+/// Dtor
+/// ---------------------------------------------------------------------------
+prActor::~prActor()
+{
+////    for(auto it = mComponents)
+//    for (auto it = mComponents.begin(); it != mComponents.end(); ++it)
+//    {
+//    }
+}
+
+
+///// ---------------------------------------------------------------------------
+///// 
+///// ---------------------------------------------------------------------------
+//void prActor::AddComponent(prActorComponent *pComponent)
+//{
+//    if (pComponent)
+//    {
+//        mComponents.push_back(pComponent);
+//    }
+//}
 
 
 }}// Namespaces

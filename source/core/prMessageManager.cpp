@@ -44,11 +44,12 @@ void prMessageManager::Register(prMessageHandler *handler)
     PRASSERT(handler);
 
     // Check for duplicate entry.
-    std::list<prMessageHandler *>::iterator itr = m_handlers.begin();
-    std::list<prMessageHandler *>::iterator end = m_handlers.end();
-    for (; itr != end; ++itr)
+    //std::list<prMessageHandler *>::iterator itr = m_handlers.begin();
+    //std::list<prMessageHandler *>::iterator end = m_handlers.end();
+    //for (; itr != end; ++itr)
+    for (auto it = m_handlers.begin(); it != m_handlers.end(); ++it)
     {
-        if ((*itr) == handler)
+        if ((*it) == handler)
         {
             return;
         }
@@ -73,12 +74,12 @@ void prMessageManager::Unregister(prMessageHandler *handler)
 /// ---------------------------------------------------------------------------
 void prMessageManager::Send(prGameMessage &msg)
 {
-    std::list<prMessageHandler *>::iterator itr = m_handlers.begin();
-    std::list<prMessageHandler *>::iterator end = m_handlers.end();
-
-    for (; itr != end; ++itr)
+    //std::list<prMessageHandler *>::iterator itr = m_handlers.begin();
+    //std::list<prMessageHandler *>::iterator end = m_handlers.end();
+    //for (; itr != end; ++itr)
+    for (auto it = m_handlers.begin(); it != m_handlers.end(); ++it)
     {
-        if ((*itr)->Receive(msg))
+        if ((*it)->Receive(msg))
         {
             break;
         }

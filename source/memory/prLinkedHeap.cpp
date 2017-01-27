@@ -529,7 +529,7 @@ void prLinkedHeap::BoundsCheck() const
     if (m_bounds_check)
     {
         // Get first node.
-        LinkNode* node = (LinkNode*)m_head;
+        LinkNode* node = static_cast<LinkNode*>(m_head);
 
         while(node)
         {
@@ -617,7 +617,7 @@ bool prLinkedHeap::IsValidPointer(void* p)
 
 
         // Is address the same as a node header?
-        LinkNode* node = (LinkNode*)m_head;
+        LinkNode* node = static_cast<LinkNode*>(m_head);
 
         while(node)
         {
@@ -668,13 +668,13 @@ void prLinkedHeap::FreeListAdd(void* p)
 {
     if (0 == m_free)
     {
-        m_free       = (prFreeNode*)p;
-        m_last       = (prFreeNode*)p;
+        m_free       = static_cast<prFreeNode*>(p);
+        m_last       = static_cast<prFreeNode*>(p);
         m_free->next = 0;
     }
     else
     {
-        m_last       = (prFreeNode*)p;
+        m_last       = static_cast<prFreeNode*>(p);
         m_last->next = 0;
     }
 }
@@ -756,7 +756,7 @@ LinkNode* prLinkedHeap::FreeListSearch(u32 required_size, void*& p)
 void prLinkedHeap::FreeListRemove(void* p)
 {
     prFreeNode* curr = m_free;
-    prFreeNode* prev = NULL;
+    prFreeNode* prev = nullptr;
 
     do
     {
@@ -899,7 +899,8 @@ void* prLinkedHeap::AllocateMemory(u32 size, const char* func, u32 status)
 
 
                 // Fill in the nodes details
-                LinkNode& node = *(LinkNode*)(u64)m_start;
+                LinkNode& node = *reinterpret_cast<LinkNode*>(static_cast<u64>(m_start));
+                //LinkNode& node = *static_cast<LinkNode*>(m_start);
 
                 node.prev   = m_tail;
                 node.next   = 0;
@@ -949,7 +950,8 @@ void* prLinkedHeap::AllocateMemory(u32 size, const char* func, u32 status)
 
 
             // Fill in the nodes details
-            LinkNode& node = *(LinkNode*)(u64)m_start;
+            LinkNode& node = *reinterpret_cast<LinkNode*>(static_cast<u64>(m_start));
+//            LinkNode& node = *(LinkNode*)(u64)m_start;
 
             node.prev   = 0;
             node.next   = 0;

@@ -22,8 +22,12 @@
 #include "../core/prTypes.h"
 #include "../core/prMacros.h"
 #include "../core/prString.h"
+#include "../core/prGameObject.h"
+#include "../core/prLayer.h"
+#include "../core/prTransform.h"
 #include "../math/prVector2.h"
 #include "../math/prPoint.h"
+#include <list>
 
 
 // Namespaces
@@ -31,40 +35,8 @@ namespace Proteus {
 namespace Actor {
 
 
-// Enum: prActorLayer
-//      Actor layering
-//
-// Notes:
-//      Actors are sorted by layer, then priority.
-//
-// ActorLayerBack       - Default at the back
-// ActorLayerMiddle0    - Middle layer
-// ActorLayerMiddle1    - Middle layer
-// ActorLayerMiddle2    - Middle layer
-// ActorLayerMiddle3    - Middle layer
-// ActorLayerMiddle4    - Middle layer
-// ActorLayerMiddle5    - Middle layer
-// ActorLayerMiddle6    - Middle layer
-// ActorLayerMiddle7    - Middle layer
-// ActorLayerMiddle8    - Middle layer
-// ActorLayerMiddle9    - Middle layer
-// ActorLayerFront      - Highest layer priority
-typedef enum prActorLayer
-{
-    ActorLayerBack,
-    ActorLayerMiddle0,    
-    ActorLayerMiddle1,
-    ActorLayerMiddle2,
-    ActorLayerMiddle3,
-    ActorLayerMiddle4,
-    ActorLayerMiddle5,
-    ActorLayerMiddle6,
-    ActorLayerMiddle7,
-    ActorLayerMiddle8,
-    ActorLayerMiddle9,
-    ActorLayerFront
-
-} prActorLayer;
+// Forward declarations
+class prActorComponent;
 
 
 // Class: prActor
@@ -77,11 +49,11 @@ typedef enum prActorLayer
 //
 // Notes:
 //      Actors default to active, visible, on screen and on
-//      the ActorLayerBack layer
+//      the default layer
 //
 // See also:
 //      <prActorStateMachine>
-class prActor
+class prActor : public Proteus::Core::prGameObject
 {
 public:
     // Friends
@@ -100,19 +72,7 @@ public:
 
     // Method: ~prActor
     //      Dtor
-    virtual ~prActor() {}
-
-
-    // Method: Update
-    //      Update an actor
-    //
-    // Parameters:
-    //      dt - Delta time
-    virtual void Update(Proteus::Core::f32 dt) = 0;
-
-    // Method: Draw
-    //      Draw an actor
-    virtual void Draw() {}
+    virtual ~prActor();
 
     // Method: Init
     //      Optional actor construction
@@ -139,14 +99,6 @@ public:
     //      Returns user specified type.
     Proteus::Core::s32 GetType() const { return m_type; }
 
-    // Method: SetVisible
-    //      Sets visible.
-    void SetVisible(bool state) { m_visible = state; }
-
-    // Method: SetActive
-    //      Sets active.
-    void SetActive(bool state) { m_active = state; }
-
     // Method: Destroy
     //      Destroy this actor?
     void SetDestroy() { m_destroy = true; }
@@ -162,25 +114,9 @@ public:
     //      Is destroyed?
     bool IsDestroyed() const { return m_destroy; }
 
-    // Method: IsVisible
-    //      Is visible?
-    bool IsVisible() const { return m_visible; }
-
-    // Method: IsActive
-    //      Is active?
-    bool IsActive() const { return m_active; }
-
     // Method: GetID
     //      Unique ID.
     Proteus::Core::s32 GetID() const { return m_id; }
-
-    // Method: SetPriority
-    //      Actor priority.
-    void SetPriority(Proteus::Core::s32 priority) { m_priority = priority; }
-
-    // Method: GetPriority
-    //      Get actor priority.
-    Proteus::Core::s32 GetPriority() const { return m_priority; }
 
     // Method: OnCollisionEnter2D
     //      Indicates a collision has started
@@ -248,55 +184,44 @@ public:
     //      User defined height
     virtual Proteus::Core::u32 GetActorHeight() const { return 0; }
 
-    // Method: GetState
-    //      Entity state.
-    //
-    // Notes:
-    //      Included for older state machine games
-    //
-    // Notes:
-    //      *This call is deprecated*
-    Proteus::Core::s32 GetState() const { return m_state; }
+    //void AddComponent(prActorComponent *pComponent);// {}
+    //void RemoveComponent(prActorComponent *pComponent) {}
 
-    // Method: SetState
-    //      Entity state.
-    //
-    // Notes:
-    //      Included for older state machine games
-    //
-    // Notes:
-    //      *This call is deprecated*
-    void SetState(Proteus::Core::s32 state) { m_state = state; }
+    //template<typename T>
+    //T* FindComponentByType()
+    //{
+    //    return nullptr;
+    //}
 
 
 public:
-    Proteus::Math::prVector2    pos;    
-    Proteus::Core::s32          user0;          // User data for you to do as you please
-    Proteus::Core::s32          user1;          // User data for you to do as you please
-    Proteus::Core::s32          user2;          // User data for you to do as you please
-    Proteus::Core::s32          user3;          // User data for you to do as you please
-    Proteus::Core::u32          collision0;     // For passing additional collision info, such as ground type
-    Proteus::Core::u32          collision1;     // For passing additional collision info
-    Proteus::Core::u32          collision2;     // For passing additional collision info
-    Proteus::Core::u32          collision3;     // For passing additional collision info
+    Proteus::Core::prTransform      transform;
 
+    //Proteus::Math::prVector2        pos;    
+    Proteus::Core::s32              user0;          // User data for you to do as you please
+    Proteus::Core::s32              user1;          // User data for you to do as you please
+    Proteus::Core::s32              user2;          // User data for you to do as you please
+    Proteus::Core::s32              user3;          // User data for you to do as you please
+    Proteus::Core::u32              collision0;     // For passing additional collision info, such as ground type
+    Proteus::Core::u32              collision1;     // For passing additional collision info
+    Proteus::Core::u32              collision2;     // For passing additional collision info
+    Proteus::Core::u32              collision3;     // For passing additional collision info
 
 protected:
-    prString                    m_name;
-    Proteus::Core::s32          m_type;
-    Proteus::Core::s32          m_priority;
-    Proteus::Core::s32          m_id;
-    Proteus::Core::s32          m_state;
-    Proteus::Math::prVector2    m_colPos;    
-    bool                        m_visible;
-    bool                        m_active;
-    bool                        m_destroy;
-    bool                        m_onScreen;
-    prActorLayer                m_layer;
+    prString                        m_name;
+    Proteus::Core::prLayer          m_layer;
+    Proteus::Core::s32              m_type;
+    Proteus::Core::s32              m_id;
+    Proteus::Math::prVector2        m_colPos;    
+    bool                            m_destroy;
+    bool                            m_onScreen;
 
+    // Add colour
+
+    //std::list<prActorComponent*>    mComponents;
 
 private:
-    static Proteus::Core::s32   m_baseid;
+    static Proteus::Core::s32       m_baseid;
 };
 
 

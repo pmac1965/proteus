@@ -130,6 +130,9 @@ LOCAL_SRC_FILES :=		achievements/prAchievementManager.cpp	\
 	core/prBitArray.cpp	\
 	core/prCore.cpp	\
 	core/prCoreSystem.cpp	\
+	core/prGameTime.cpp	\
+	core/prLayer.cpp	\
+	core/prLayerManager.cpp	\
 	core/prMessageManager.cpp	\
 	core/prRegistry.cpp	\
 	core/prResource.cpp	\

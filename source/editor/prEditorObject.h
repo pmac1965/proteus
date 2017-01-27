@@ -25,7 +25,10 @@
 
 
 // Forward declarations
-class prGameObject;
+namespace Proteus {
+namespace Core {
+    class prGameObject;
+}}
 
 
 #if !defined(PROTEUS_EDITOR)
@@ -39,7 +42,7 @@ class prGameObject;
                              , mVisible   (PRTRUE)
 
     //
-    #define GAME_OBJ_VAR(type, name) type name;
+    //#define GAME_OBJ_VAR(vtype, vname) vtype vname;
 
     //
     #define PROT_EDITOR_FUNC(retval, funcname ) \
@@ -65,8 +68,8 @@ class prGameObject;
 class prEditorObject
 {
 public:
-    explicit prEditorObject(prGameObject &gameObject) : mGameObject(gameObject)
-													  , mName("")
+    explicit prEditorObject(Proteus::Core::prGameObject &gameObject) : mGameObject(gameObject)
+                                                                     , mName("")
     {}
 
     //
@@ -77,8 +80,8 @@ public:
 
 
 private:
-    prGameObject    &mGameObject;
+    Proteus::Core::prGameObject    &mGameObject;
     prString        mName;
 
-    GAME_OBJ_VAR(int, name)
+    //GAME_OBJ_VAR(int, name)
 };

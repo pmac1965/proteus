@@ -105,6 +105,7 @@ enum prSystems
     PRSYSTEM_ACCELEROMETER,    
     PRSYSTEM_FONTMANAGER,    
     PRSYSTEM_LEADERBOARDS,
+    PRSYSTEM_LAYERMANAGER,
     PRSYSTEM_MAX,                   // -- KEEP THIS LAST --      
 };
 

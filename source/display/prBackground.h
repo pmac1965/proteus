@@ -47,7 +47,7 @@ class prBackgroundLayer;
 
 // Class: prBackground
 //      A class designed to handle single and multiplayered backgrounds.
-class prBackground : public prGameObject
+class prBackground : public Proteus::Core::prGameObject
 {
 public:
     // Enum: prBackgroundType

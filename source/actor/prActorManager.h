@@ -1,6 +1,6 @@
 // File: prActorManager.h
 /**
- *  Copyright 2014 Paul Michael McNab
+ *  Copyright 2016 Paul Michael McNab
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -19,17 +19,8 @@
 #pragma once
 
 
-//#define NEW_ACTORMANAGER // Single lists proved to be faster when profiled
-
-
 #include "../core/prTypes.h"
-
-
-#ifdef NEW_ACTORMANAGER
-  #include "../core/prList.h"
-#else
-  #include <list>
-#endif
+#include <list>
 
 
 // Namespaces
@@ -99,9 +90,9 @@ public:
     //      list order
     void Draw();
 
-    // Method: SetPriority
-    //      Set the draw order priority.
-    void SetPriority(prActor *actor, Proteus::Core::s32 priority);
+    //// Method: SetPriority
+    ////      Set the draw order priority.
+    //void SetPriority(prActor *actor, Proteus::Core::s32 priority);
 
     // Method: Count
     //      Gets the number of actors
@@ -115,7 +106,7 @@ public:
     Proteus::Core::u32 HowMany(Proteus::Core::s32 type);
 
     // Method: FindByIndex
-    //      Finds an actor of a specific type an index.
+    //      Finds an actor of a specific type at index.
     //
     // Parameters:
     //      type  - A user defined type
@@ -133,18 +124,9 @@ private:
 
 
 private:
-#ifdef NEW_ACTORMANAGER
-    // Data
-    prList<prActor *>     **mActors;
-    prFactoryCallback       mCallback;
-    Proteus::Core::s32      mActorTypes;
-
-#else
     // Data
     std::list<prActor *>    actors;
     prFactoryCallback       callback;
-
-#endif
 };
 
 

@@ -551,6 +551,7 @@
     <ClInclude Include="..\..\..\..\source\Box2D\Dynamics\Joints\b2WheelJoint.h" />
     <ClInclude Include="..\..\..\..\source\Box2D\Rope\b2Rope.h" />
     <ClInclude Include="..\..\..\..\source\collision\prLine.h" />
+    <ClInclude Include="..\..\..\..\source\components\prComponentAudio.h" />
     <ClInclude Include="..\..\..\..\source\core\prApplication.h" />
     <ClInclude Include="..\..\..\..\source\core\prApplication_Android.h" />
     <ClInclude Include="..\..\..\..\source\core\prApplication_IOS.h" />

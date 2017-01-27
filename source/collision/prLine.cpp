@@ -1,4 +1,3 @@
-// File: prLine.cpp
 /**
  * Copyright 2014 Paul Michael McNab
  * 

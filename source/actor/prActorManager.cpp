@@ -1,7 +1,7 @@
 /**
  * prActorManager.cpp
  *
- *  Copyright 2014 Paul Michael McNab
+ *  Copyright 2016 Paul Michael McNab
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -38,14 +38,8 @@ namespace Actor {
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
-prActorManager::prActorManager()
-#ifdef NEW_ACTORMANAGER
-                                 : mCallback    (nullptr)
-                                 , mActors      (nullptr)
-                                 , mActorTypes  (0)
-#else
-                                 : callback (nullptr)
-#endif
+prActorManager::prActorManager() 
+    : callback (nullptr)
 {
     TODO("Modify to add create/release for actor pools - via handler class")
 }
@@ -57,19 +51,6 @@ prActorManager::prActorManager()
 prActorManager::~prActorManager()
 {
     ReleaseAll();
-
-#ifdef NEW_ACTORMANAGER
-
-    for (s32 i=0; i<mActorTypes; i++)
-    {
-        prList<prActor *> *pActors = mActors[i];
-        PRASSERT(pActors);
-        PRSAFE_DELETE(pActors);
-    }
-
-    PRSAFE_DELETE_ARRAY(mActors);
-
-#endif
 }
 
 
@@ -80,23 +61,7 @@ void prActorManager::Registerfactory(prFactoryCallback cb, s32 actorTypes)
 {
     PRASSERT(cb);
     PRASSERT(actorTypes > 0);
-
-#ifdef NEW_ACTORMANAGER
-    // Create an array of actor lists. One for each type
-    mActors = new prList<prActor *> *[actorTypes];
-
-    for (s32 i=0; i<actorTypes; i++)
-    {
-        mActors[i] = new prList<prActor *>();
-    }
-
-    mCallback   = cb;
-    mActorTypes = actorTypes;
-
-#else
     callback = cb;
-
-#endif
 }
 
 
@@ -105,24 +70,6 @@ void prActorManager::Registerfactory(prFactoryCallback cb, s32 actorTypes)
 /// ---------------------------------------------------------------------------
 prActor *prActorManager::Create(s32 type)
 {
-#ifdef NEW_ACTORMANAGER
-    PRASSERT(mCallback);
-    PRASSERT(mActorTypes > 0);
-    PRASSERT(type >= 0 && type < mActorTypes);
-
-    prList<prActor *> *pActors = mActors[type];
-    PRASSERT(pActors);
-
-    // Create the actor
-    prActor *actor = mCallback(type);
-    if (actor)
-    {
-        pActors->AddTail(actor);
-    }    
-
-    return actor;
-
-#else
     prActor *actor = nullptr;
 
     if (callback)
@@ -135,8 +82,6 @@ prActor *prActorManager::Create(s32 type)
     }
 
     return actor;
-
-#endif
 }
 
 
@@ -145,30 +90,6 @@ prActor *prActorManager::Create(s32 type)
 /// ---------------------------------------------------------------------------
 void prActorManager::Release(prActor *actor)
 {
-#ifdef NEW_ACTORMANAGER
-    PRASSERT(mActors);
-
-    if (actor)
-    {
-        actor->m_type;
-
-        prList<prActor *> *pActors = mActors[actor->m_type];
-        PRASSERT(pActors);
-
-        auto it = pActors->Begin();    
-        while(it.Okay())
-        {
-            if ((*it) == actor)
-            {
-                pActors->Remove(actor);
-                PRSAFE_DELETE(actor);
-                return;
-            }
-            ++it;
-        }
-    }
-
-#else
     if (actor)
     {
         for (auto it = actors.begin(); it != actors.end(); ++it)
@@ -181,8 +102,6 @@ void prActorManager::Release(prActor *actor)
             }
         }
     }
-
-#endif
 }
 
 
@@ -191,31 +110,12 @@ void prActorManager::Release(prActor *actor)
 /// ---------------------------------------------------------------------------
 void prActorManager::ReleaseAll()
 {
-#ifdef NEW_ACTORMANAGER
-    for (s32 i=0; i<mActorTypes; i++)
-    {
-        prList<prActor *> *pActors = mActors[i];
-        PRASSERT(pActors);
-
-        auto it = pActors->Begin();
-        while(it.Okay())
-        {
-            PRSAFE_DELETE(*it);
-            ++it;
-        }
-
-        pActors->Clear();
-    }
-
-#else
     for (auto it = actors.begin(); it != actors.end(); ++it)
     {
         PRSAFE_DELETE(*it);
     }
 
     actors.clear();
-
-#endif
 }
 
 
@@ -224,56 +124,15 @@ void prActorManager::ReleaseAll()
 /// ---------------------------------------------------------------------------
 void prActorManager::Update(f32 time)
 {
-#ifdef NEW_ACTORMANAGER
-    for (s32 i=0; i<mActorTypes; i++)
-    {
-        prList<prActor *> *pActors = mActors[i];
-        PRASSERT(pActors);
-
-        if (pActors->Size() > 0)
-        {
-            prActor *pDes = nullptr;
-
-            auto it = pActors->Begin();
-            while(it.Okay())
-            {
-                prActor *actor = *it;
-                PRASSERT(actor);
-                {
-                    // Active?
-                    if (actor->m_active)
-                    {
-                        actor->Update(time);
-
-                        // Destroy?
-                        if (actor->m_destroy)
-                        {
-                            it = pActors->Remove(actor);
-                            PRSAFE_DELETE(actor);
-                            continue;
-                        }
-                        else
-                        {
-                            // No, actor is still active
-                            actor->UpdateOnScreen();
-                        }
-                    }
-                }
-                ++it;
-            }
-        }
-    }
-
-#else
     for (auto it = actors.begin(); it != actors.end(); ++it)
     {
         prActor *actor = *it;
         PRASSERT(actor);
         {
             // Active?
-            if (actor->m_active)
+            if (actor->IsActive())
             {
-                actor->Update(time);
+                actor->Update();//time);
 
                 // Destroy?
                 if (actor->m_destroy)
@@ -289,7 +148,6 @@ void prActorManager::Update(f32 time)
             }
         }
     }
-#endif
 }
 
 
@@ -298,93 +156,68 @@ void prActorManager::Update(f32 time)
 /// ---------------------------------------------------------------------------
 void prActorManager::Draw()
 {
-#ifdef NEW_ACTORMANAGER
-    for (s32 i=0; i<mActorTypes; i++)
-    {
-        prList<prActor *> *pActors = mActors[i];
-        PRASSERT(pActors);
-
-        auto it = pActors->Begin();
-        while(it.Okay())
-        {
-            prActor *actor = *it;
-            PRASSERT(actor);
-            if (actor->m_visible && actor->IsOnscreen())
-            {
-                (*it)->Draw();
-            }            
-
-            ++it;
-        }
-    }
-#else
     for (auto it = actors.begin(); it != actors.end(); ++it)
     {
         prActor *actor = *it;
         PRASSERT(actor);
         {
-            if (actor->m_visible && actor->IsOnscreen())
+            if (actor->IsVisible() && actor->IsOnscreen())
             {
                 (*it)->Draw();
             }
         }
     }
-#endif
 }
 
 
-/// ---------------------------------------------------------------------------
-/// Set the draw order priority.
-/// ---------------------------------------------------------------------------
-void prActorManager::SetPriority(prActor *actor, s32 priority)
-{
-#ifdef NEW_ACTORMANAGER
-
-#else
-    PRASSERT(actor);
-
-    if (actor)
-    {
-        bool found = false;
-
-        std::list<prActor *>::iterator it  = actors.begin();
-        std::list<prActor *>::iterator end = actors.end();
-        for (; it != end; ++it)
-        {
-            if ((*it) == actor)
-            {
-                actors.remove(actor);
-                found = true;
-                break;
-            }
-        }
-
-        if (found)
-        {
-            it  = actors.begin();
-            end = actors.end();
-
-            actor->m_priority = priority;
-            
-            for (; it != end; ++it)
-            {
-                if (priority < (*it)->m_priority)
-                {
-                    actors.insert(it, actor);
-                    return;
-                }
-            }
-
-            // Add last
-            actors.push_back(actor);
-        }
-        else
-        {
-            PRWARN("prActorManager::SetPriority - Actor not found");
-        }
-    }
-#endif
-}
+///// ---------------------------------------------------------------------------
+///// Set the draw order priority.
+///// ---------------------------------------------------------------------------
+//void prActorManager::SetPriority(prActor *actor, s32 priority)
+//{
+//    PRASSERT(actor);
+//
+//    if (actor)
+//    {
+//        bool found = false;
+//
+//        std::list<prActor *>::iterator it  = actors.begin();
+//        std::list<prActor *>::iterator end = actors.end();
+//        for (; it != end; ++it)
+//        {
+//            if ((*it) == actor)
+//            {
+//                actors.remove(actor);
+//                found = true;
+//                break;
+//            }
+//        }
+//
+//        if (found)
+//        {
+//            it  = actors.begin();
+//            end = actors.end();
+//
+// /*           actor->m_priority = priority;
+//            
+//            for (; it != end; ++it)
+//            {
+//                if (priority < (*it)->m_priority)
+//                {
+//                    actors.insert(it, actor);
+//                    return;
+//                }
+//            }//*/
+//
+//            // Add last
+//            actors.push_back(actor);
+//        }
+//        else
+//        {
+//            PRWARN("prActorManager::SetPriority - Actor not found");
+//        }
+//    }
+//}
 
 
 /// ---------------------------------------------------------------------------
@@ -392,13 +225,7 @@ void prActorManager::SetPriority(prActor *actor, s32 priority)
 /// ---------------------------------------------------------------------------
 int prActorManager::Count() const
 {
-#ifdef NEW_ACTORMANAGER
-    return 0;
-
-#else
     return (int)actors.size();
-
-#endif
 }
 
 
@@ -410,12 +237,6 @@ u32 prActorManager::HowMany(s32 type)
 {
     u32 count = 0;
 
-#ifdef NEW_ACTORMANAGER
-
-    prList<prActor *> *pActors = mActors[type];
-    return (u32)pActors->Size();
-
-#else
     for (auto it = actors.begin(); it != actors.end(); ++it)
     {
         if (type == (*it)->m_type)
@@ -424,40 +245,17 @@ u32 prActorManager::HowMany(s32 type)
         }
     }
 
-#endif
-
     return count;
 }
 
 
 /// ---------------------------------------------------------------------------
-/// Finds an actor of a specific type an index.
+/// Finds an actor of a specific type at index.
 /// ---------------------------------------------------------------------------
 prActor *prActorManager::FindByIndex(s32 type, u32 index)
 {
-    prActor *actor = NULL;
+    prActor *actor = nullptr;
  
-#ifdef NEW_ACTORMANAGER
-    PRASSERT(mActorTypes > 0);
-    PRASSERT(type >= 0 && type < mActorTypes);
-
-    u32 count = 0;
-    prList<prActor *> *pActors = mActors[type];
-
-    auto it = pActors->Begin();
-    while(it.Okay())
-    {
-        if (count == index)
-        {
-            actor = (*it);
-            break;
-        }
-
-        ++count;
-        ++it;
-    }
-
-#else
     u32 count = 0;
 
     for (auto it = actors.begin(); it != actors.end(); ++it)
@@ -473,8 +271,6 @@ prActor *prActorManager::FindByIndex(s32 type, u32 index)
             count++;
         }
     }
-
-#endif
 
     return actor;
 }

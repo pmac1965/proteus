@@ -26,7 +26,7 @@
 struct GameTimeImplementation;
 
 
-// Class: prGameTimer
+// Class: prGameTime
 //      Cross platform game timing.
 class prGameTime
 {

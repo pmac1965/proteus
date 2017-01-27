@@ -22,37 +22,95 @@
 #include "prTypes.h"
 #include "prString.h"
 #include "../editor/prEditorObject.h"
-//#include "../math/prVector3.h"
+#include <list>
 
-//
-//
+
+// Namespaces
+namespace Proteus {
+namespace Actor {
+    class prActorComponent;
+}}
+
+
+// Namespaces
+namespace Proteus {
+namespace Core {
+
+
+// Class: prGameObject
+//      Base class for all objects in a scene
 class prGameObject PROT_EDITOR_INCL
 {
 public:
+    // Method: prGameObject
+    //      Ctor
     prGameObject() PROT_EDITOR_CTOR
     {}
 
+    // Method: ~prGameObject
+    //      Dtor
     virtual ~prGameObject() 
     {}
 
+    // Method: Update
+    //      Overrideable update class
     //
+    // Notes:
+    //      This method is optional
     virtual void Update() {}
 
+    // Method: Draw
+    //      Overrideable draw class
     //
+    // Notes:
+    //      This method is optional
     virtual void Draw() {}
 
+    // Method: IsActive
+    //      Determines if this game object is active
     //
+    // Notes:
+    //      Active game objects are updated if enabled
     inline Proteus::Core::PRBOOL IsActive() const { return mActive; }
+
+    // Method: IsEnabled
+    //      Determines if this game object is enabled
+    //
+    // Notes:
+    //      Enabled game objects are updated if active, and drawn
+    //      if visible
     inline Proteus::Core::PRBOOL IsEnabled() const { return mEnabled; }
+
+    // Method: IsVisible
+    //      Determines if this game object is visible
+    //
+    // Notes:
+    //      Visible game objects are drawn
     inline Proteus::Core::PRBOOL IsVisible() const { return mVisible; }
 
+    // Method: SetActive
+    //      Sets a game objects active state
     //
+    // Parameters:
+    //      active - The new state
     inline void SetActive(Proteus::Core::PRBOOL active) { mActive = active; }
+
+    // Method: SetEnabled
+    //      Sets a game objects enabled state
+    //
+    // Parameters:
+    //      active - The new state
     inline void SetEnabled(Proteus::Core::PRBOOL active) { mEnabled = active; }
+
+    // Method: SetVisible
+    //      Sets a game objects visible state
+    //
+    // Parameters:
+    //      active - The new state
     inline void SetVisible(Proteus::Core::PRBOOL active) { mVisible = active; }
 
     //
-    void AddComponent() {}
+    void AddComponent(Proteus::Actor::prActorComponent *pComponent) {}
 
     //
     void FindComponentByName() {}
@@ -79,4 +137,9 @@ private:
     Proteus::Core::PRBOOL   mActive;
     Proteus::Core::PRBOOL   mEnabled;
     Proteus::Core::PRBOOL   mVisible;
+
+    std::list<Proteus::Actor::prActorComponent*>    mComponents;
 };
+
+
+}}// Namespaces
