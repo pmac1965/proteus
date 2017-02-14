@@ -47,7 +47,7 @@ prLanguage::prLanguage()
     language            = prGetPlatformsLanguage();
     count               = 0;
     correctFileType     = PRFALSE;
-    pStringTableEntries = NULL;
+    pStringTableEntries = nullptr;
 }
 
 

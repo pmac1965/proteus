@@ -71,7 +71,8 @@ using namespace Proteus::Core;
 /// ---------------------------------------------------------------------------
 /// Constructs the background.
 /// ---------------------------------------------------------------------------
-prBackground::prBackground(const char *filename) : m_colour(prColour::White)
+prBackground::prBackground(const char *filename) : prGameObject()
+                                                 , m_colour(prColour::White)
                                                  #if defined(PROTEUS_TOOL)
                                                  , m_filenameBackground(filename)
                                                  #endif

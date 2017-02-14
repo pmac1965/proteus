@@ -26,8 +26,7 @@
  */
 
 
-#ifndef __PRLOCALES_H
-#define __PRLOCALES_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -54,11 +53,26 @@ namespace Proteus
 
 // Function: prGetPlatformsLanguage
 //      Get the platforms default language.
+//
+// Returns:
+//      Proteus::Locale::EN_US - United States
+//      Proteus::Locale::EN_GB - United Kingdom
+//      Proteus::Locale::FR_FR - France
+//      Proteus::Locale::IT_IT - Italy
+//      Proteus::Locale::DE_DE - German
+//      Proteus::Locale::ES_ES - Spain
+//      Proteus::Locale::ZH_CN - China
 Proteus::Core::s32 prGetPlatformsLanguage();
 
 // Function: prGetPlatformsLanguageString
 //      Get the platforms default language as a string.
+//
+// Returns:
+//       - "EN_US"
+//       - "EN_GB"
+//       - "FR_FR"
+//       - "IT_IT"
+//       - "DE_DE"
+//       - "ES_ES"
+//       - "ZH_CN"
 const char *prGetPlatformsLanguageString();
-
-
-#endif//__PRLOCALES_H

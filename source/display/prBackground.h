@@ -105,24 +105,8 @@ public:
     //      Either a layer or NULL
     prBackgroundLayer* GetLayer(Proteus::Core::s32 index);
 
-    // Method: SetVisible
-    //      Sets the visibility.
-    //void SetVisible(Proteus::Core::PRBOOL state) { mVisible = state; }
-
-    // Method: GetVisible
-    //      Gets the visibility.
-    //Proteus::Core::PRBOOL GetVisible() const { return mVisible; }
-
-    // Method: GetName
-    //      Gets the backgrounds name.
-    //const char *GetName() const { return m_name.Text(); }
-
 
 #if defined(PROTEUS_TOOL)
-    // Method: SetName
-    //      Sets the backgrounds name. *Only available on tool builds*
-    void SetName(const char *name) { m_name.Set(name); }
-
     // Method: GetTextureFilename
     //      Gets the textures filename. *Only available on tool builds*
     const char *GetTextureFilename() const { return m_filenameTexture.Text(); }

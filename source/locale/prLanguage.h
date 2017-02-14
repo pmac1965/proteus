@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRLANGUAGE_H
-#define __PRLANGUAGE_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -39,7 +38,7 @@ public:
     {
         for (int i=0; i<Proteus::Locale::MAX; i++)
         {
-            text[i] = NULL;
+            text[i] = nullptr;
         }
 
         hash = 0;
@@ -135,6 +134,3 @@ private:
     prList<prStringTableEntry*>   entries;                  // Used to sort entries for binary search
     prStringTableEntry          **pStringTableEntries;      // The sorted entries.
 };
-
-
-#endif//__PRLANGUAGE_H

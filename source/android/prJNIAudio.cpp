@@ -46,7 +46,7 @@ namespace
         PRASSERT(pName);
         PRASSERT(pClassName && *pClassName);
 
-        strcpy(pName, "com/redcliffeinteractive/engine/audio/");
+        strcpy(pName, "engine/proteus/audio/");
         strcat(pName, pClassName);
 
         return pName;

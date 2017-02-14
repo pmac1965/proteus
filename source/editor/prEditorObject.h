@@ -41,13 +41,6 @@ namespace Core {
                              , mEnabled   (PRTRUE)      \
                              , mVisible   (PRTRUE)
 
-    //
-    //#define GAME_OBJ_VAR(vtype, vname) vtype vname;
-
-    //
-    #define PROT_EDITOR_FUNC(retval, funcname ) \
-        retval funcname();
-
 #else
     // Optional inclusion on game objects
     #define PROT_EDITOR_INCL
@@ -57,14 +50,12 @@ namespace Core {
                              , mEnabled   (PRTRUE)      \
                              , mVisible   (PRTRUE)
 
-    //#define PROT_EDITOR_FUNC() 
-
 #endif
 
 
 // Class: prEditorObject
-//      This class needs only to exist for editor builds. It allows functions for editing of
-//      object names, ID's and the setting of other values
+//      This class needs only to exist for editor builds. It has functions for the editing of the game
+//      object names, its ID and the setting of other values
 class prEditorObject
 {
 public:
@@ -72,16 +63,19 @@ public:
                                                                      , mName("")
     {}
 
-    //
+    // Method: SetGameObjectName
+    //      Sets the name of the parent game object
     void SetGameObjectName(prString &aname) {}
 
+    // Method: GetGameObjectName
+    //      Gets the name of the parent game object
     //
-    prString &GetGameObjectName() { return mName; }// aname) {}
+    // Returns:
+    //      A reference to the name
+    prString &GetGameObjectName() { return mName; }
 
 
 private:
     Proteus::Core::prGameObject    &mGameObject;
-    prString        mName;
-
-    //GAME_OBJ_VAR(int, name)
+    prString                        mName;
 };

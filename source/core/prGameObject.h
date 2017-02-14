@@ -113,16 +113,19 @@ public:
     void AddComponent(Proteus::Actor::prActorComponent *pComponent) {}
 
     //
-    void FindComponentByName() {}
+    void RemoveComponent(Proteus::Actor::prActorComponent *pComponent) {}
+
+    //
+    void FindComponentByName(const char *name) {}
 
     //
     void FindComponentByType() {}
 
     //
-    void FindComponentByTag() {}
+    void FindComponentByTag(const char *tag) {}
 
     //
-    void DestroyComponent() {}
+    void DestroyAllComponent() {}
 
     // serialize out
     virtual bool Save() { return false; }
