@@ -211,3 +211,26 @@ void prScreenToWorld(Proteus::Core::s32 sx, Proteus::Core::s32 sy, Proteus::Core
 // Notes:
 //      x should be a float/double
 #define IS_ZERO(x)      ((x) > -Proteus::Math::Epsilon && (x) < Proteus::Math::Epsilon)
+
+
+// Build control
+#if ((defined(_DEBUG) || defined(DEBUG)) && defined(PLATFORM_PC))
+#define DEBUG_ENABLE_FLOATING_POINT_EXCEPTIONS
+#endif
+
+
+// Floating point exceptions?
+#if defined(DEBUG_ENABLE_FLOATING_POINT_EXCEPTIONS)
+  #include <float.h>
+
+  void EnableFPExceptions()
+  {
+      int i = _controlfp(0, 0);
+      i &= ~(EM_ZERODIVIDE | EM_OVERFLOW | EM_INVALID);
+      _controlfp(i, MCW_EM);
+  }
+
+#else
+  #define EnableFPExceptions() 
+
+#endif
