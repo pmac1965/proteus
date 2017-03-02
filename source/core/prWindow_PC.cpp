@@ -197,13 +197,13 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
     }
     else
     {
-        prTrace(LogError, "GLEW: Initialised\n");
-        prTrace(LogError, "GLEW: Version: %s\n", glewGetString(GLEW_VERSION));
+        prTrace(LogDebug, "GLEW: Initialised\n");
+        prTrace(LogDebug, "GLEW: Version: %s\n", glewGetString(GLEW_VERSION));
 
 
         if (wglewIsSupported("WGL_EXT_swap_control"))
         {
-            prTrace(LogError, "GLEW: 'Got WGL_EXT_swap_control'\n");
+            prTrace(LogDebug, "GLEW: 'Got WGL_EXT_swap_control'\n");
             wglSwapIntervalEXT(1);
         }
         else
