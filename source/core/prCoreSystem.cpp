@@ -21,7 +21,7 @@
 #include "../debug/prTrace.h"
 
 
-#define CORE_SHOW_INIT
+//#define CORE_SHOW_INIT
 #define CORE_SHOW_SIZE  24
 
 

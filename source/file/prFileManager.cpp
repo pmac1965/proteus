@@ -36,11 +36,8 @@
 // Debug assist
 #if defined(_DEBUG) || defined(DEBUG)
 //#define FILEMANAGER_DEBUG
-#endif
-
-
-// Misc debug defines
 //#define FILEMANAGER_SHOW_DATA_PATH
+#endif
 
 
 // Platform specific includes.
@@ -53,7 +50,6 @@
 
 #elif defined(PLATFORM_MAC)
   #include <stdlib.h>
-  //#include "../ios/prIos.h"
 
 #elif defined(PLATFORM_LINUX)
   #include <stdlib.h>
@@ -64,7 +60,7 @@
   #include <libzip\zip.h>
   #include <libzip\zipint.h>
 
-  #define ANDROID_APK_DEBUG
+  //#define ANDROID_APK_DEBUG
   //#define ANDROID_APK_DEBUG_SHOW_CONTENTS
 
   namespace
@@ -72,7 +68,7 @@
     char APKPath [FILE_MAX_FILENAME_SIZE] = { '\0' };
     char CardPath[FILE_MAX_FILENAME_SIZE] = { '\0' };
     char SavePath[FILE_MAX_FILENAME_SIZE] = { '\0' };
-    zip *APKArchive = NULL;
+    zip *APKArchive = nullptr;
   }
 
 #else
@@ -89,7 +85,7 @@ using namespace Proteus::Core;
 /// ---------------------------------------------------------------------------
 prFileManager::prFileManager(const char *saveFolder) : prCoreSystem(PRSYSTEM_FILEMANAGER, "prFileManager")
 {
-    PRASSERT(saveFolder && *saveFolder);
+    PRASSERT(saveFolder && *saveFolder, "Save location missing");
 
     // Init data
     count    = 0;
@@ -103,8 +99,8 @@ prFileManager::prFileManager(const char *saveFolder) : prCoreSystem(PRSYSTEM_FIL
 
     for (int i=0; i<FILE_ARCHIVES_MAX; i++)
     {
-        pArchiveFile[i] = NULL;
-        pEntries[i]     = NULL;
+        pArchiveFile[i] = nullptr;
+        pEntries[i]     = nullptr;
         entryCount[i]   = 0;
     }
 
@@ -136,7 +132,7 @@ prFileManager::prFileManager(const char *saveFolder) : prCoreSystem(PRSYSTEM_FIL
         else
         {
             // Remove the executables name
-            GetModuleFileNameA(NULL, dataPath, FILE_MAX_FILENAME_SIZE);
+            GetModuleFileNameA(nullptr, dataPath, FILE_MAX_FILENAME_SIZE);
             int index = prStringFindLastIndex(dataPath, '\\');
             dataPath[index] = 0;
         }
@@ -176,7 +172,7 @@ prFileManager::~prFileManager()
     for (int i=0; i<FILE_ARCHIVES_MAX; i++)
     {
         // Close and delete file
-        if (pArchiveFile[i] != NULL)
+        if (pArchiveFile[i] != nullptr)
         {
             pArchiveFile[i]->Close();
             PRSAFE_DELETE(pArchiveFile[i]);
@@ -252,7 +248,7 @@ void prFileManager::RegisterArchive(const char *filename)
                             int  idx = 0;
                             for (int i=0; i<FILE_ARCHIVES_MAX; i++)
                             {
-                                if (pEntries[i] == NULL && pArchiveFile[i] == NULL)
+                                if (pEntries[i] == nullptr && pArchiveFile[i] == nullptr)
                                 {
                                     idx   = i;
                                     found = true;
@@ -336,10 +332,10 @@ void prFileManager::RegisterArchive(const char *filename)
 
 #else
 
-    if (APKArchive == NULL)
+    if (APKArchive == nullptr)
     {
-        APKArchive = zip_open(APKPath, 0, NULL);
-        if (APKArchive == NULL)
+        APKArchive = zip_open(APKPath, 0, nullptr);
+        if (APKArchive == nullptr)
         {
             PRPANIC("Error loading APK");
         }
@@ -356,7 +352,7 @@ void prFileManager::RegisterArchive(const char *filename)
             for (int i=0; i<numFiles; i++)
             {
                 const char *name = zip_get_name(APKArchive, i, 0);
-                if (name == NULL)
+                if (name == nullptr)
                 {
                     PRPANIC("Error reading zip file name at index %i : %s", i, zip_strerror(APKArchive));
                 }

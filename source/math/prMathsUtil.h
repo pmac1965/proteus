@@ -223,12 +223,7 @@ void prScreenToWorld(Proteus::Core::s32 sx, Proteus::Core::s32 sy, Proteus::Core
 #if defined(DEBUG_ENABLE_FLOATING_POINT_EXCEPTIONS)
   #include <float.h>
 
-  void EnableFPExceptions()
-  {
-      int i = _controlfp(0, 0);
-      i &= ~(EM_ZERODIVIDE | EM_OVERFLOW | EM_INVALID);
-      _controlfp(i, MCW_EM);
-  }
+  void EnableFPExceptions();
 
 #else
   #define EnableFPExceptions() 

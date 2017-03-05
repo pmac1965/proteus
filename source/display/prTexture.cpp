@@ -101,7 +101,7 @@ enum
 
 
 // Debug defines
-#define SHOW_TEXTURE_TYPES
+//#define SHOW_TEXTURE_TYPES
 
 
 using namespace Proteus::Core;

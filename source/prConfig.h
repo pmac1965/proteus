@@ -111,7 +111,7 @@
 #define PROTEUS_ALLOW_CONSOLE
 #endif
 
-// Tools will alway have min/max and be resizeble
+// Tools will always have min/max buttons and be resizeble
 #if defined(PROTEUS_TOOL)
     #ifndef PROTEUS_ALLOW_WINDOW_MINIMIZE               // Allows the tool window to have a minimize button
     #define PROTEUS_ALLOW_WINDOW_MINIMIZE

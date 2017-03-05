@@ -142,3 +142,16 @@ void prScreenToWorld(s32 sx, s32 sy, f64 &ox, f64 &oy, f64 &oz)
 
 
 }}// Namespaces
+
+
+// Floating point exceptions?
+#if defined(DEBUG_ENABLE_FLOATING_POINT_EXCEPTIONS)
+
+  void EnableFPExceptions()
+  {
+      int i = _controlfp(0, 0);
+      i &= ~(EM_ZERODIVIDE | EM_OVERFLOW | EM_INVALID);
+      _controlfp(i, MCW_EM);
+  }
+
+#endif
