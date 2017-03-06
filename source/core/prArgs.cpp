@@ -46,14 +46,14 @@ namespace
 {
     // Internal data
 #if defined(PLATFORM_PC)
-    LPWSTR         *pArgv           = NULL;
+    LPWSTR         *pArgv           = nullptr;
 
 #else
-    char          **pArgv           = NULL;
+    char          **pArgv           = nullptr;
 
 #endif
 
-    UnknownParamCB  pUnknownParamCB = NULL;
+    UnknownParamCB  pUnknownParamCB = nullptr;
     s32             paramIndex      = -1;
     s32             paramTotal      = -1;
     bool            parseFailed     = false;

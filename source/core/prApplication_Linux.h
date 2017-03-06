@@ -1,4 +1,5 @@
 // File: prApplication_Linux.h
+//      The interface class for all linux application classes.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -51,7 +52,7 @@ public:
 
     // Method: ~prApplication_Linux
     //      Dtor    
-    virtual ~prApplication_Linux();
+    virtual ~prApplication_Linux() {}
 
     // Method: DisplayCreate
     //      Creates the application display.

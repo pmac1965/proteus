@@ -69,8 +69,7 @@ bool prATBIsInit()
 /// ---------------------------------------------------------------------------
 bool prATBUpdate(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    if (antTweakBarInit &&
-        antTweakBarShow)
+    if (antTweakBarInit && antTweakBarShow)
     {
         if (TwEventWin(hwnd, msg, wParam, lParam))
         {
@@ -87,8 +86,7 @@ bool prATBUpdate(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 /// ---------------------------------------------------------------------------
 void prATBDraw()
 {
-    if (antTweakBarInit &&
-        antTweakBarShow)
+    if (antTweakBarInit && antTweakBarShow)
     {
         TwDraw();
     }

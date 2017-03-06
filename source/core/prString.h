@@ -35,18 +35,18 @@ class prString
 {
 public:
     // Method: prString
-    //      Default construtor
+    //      Default constructor
     prString();
 
     // Method: prString
-    //      Construtor
+    //      Constructor
     //
     // Parameters:
     //      text - The string to set
     explicit prString(const char *text);
 
     // Method: prString
-    //      Copy construtor
+    //      Copy constructor
     //
     // Parameters:
     //      str - String to copy

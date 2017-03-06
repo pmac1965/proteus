@@ -1,4 +1,5 @@
 // File: prApplication_Ios.h
+//      The interface class for all iOS applications.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -47,7 +48,7 @@ public:
 
     // Method: ~prApplication_Ios
     //      Dtor    
-    virtual ~prApplication_Ios();
+    virtual ~prApplication_Ios() {}
 
     // Method: DisplayCreate
     //      Creates the application display.

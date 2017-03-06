@@ -195,9 +195,7 @@ public:
 
 
 public:
-    Proteus::Core::prTransform      transform;
-
-    //Proteus::Math::prVector2        pos;    
+    Proteus::Core::prTransform      transform;      // Transform data
     Proteus::Core::s32              user0;          // User data for you to do as you please
     Proteus::Core::s32              user1;          // User data for you to do as you please
     Proteus::Core::s32              user2;          // User data for you to do as you please
@@ -215,6 +213,8 @@ protected:
     Proteus::Math::prVector2        m_colPos;    
     bool                            m_destroy;
     bool                            m_onScreen;
+    bool                            m_exp0;
+    bool                            m_exp1;
 
     // Add colour
 

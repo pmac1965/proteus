@@ -1,4 +1,5 @@
 // File: prGameObject.h
+//      All entities in a scene are deriveable from a game object
 /**
  * Copyright 2016 Paul Michael McNab
  * 
@@ -25,7 +26,7 @@
 #include <list>
 
 
-// Namespaces
+// Forward declarations
 namespace Proteus {
 namespace Actor {
     class prActorComponent;

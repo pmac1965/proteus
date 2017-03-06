@@ -2327,6 +2327,9 @@
     <ClCompile Include="..\..\..\..\source\core\prLayerManager.cpp">
       <Filter>source\core</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\source\core\prGameObject.cpp">
+      <Filter>source\core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\source\read.me">

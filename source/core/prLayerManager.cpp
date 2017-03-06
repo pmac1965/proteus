@@ -43,7 +43,7 @@ prLayerManager::prLayerManager() : prCoreSystem(PRSYSTEM_LAYERMANAGER, "prLayerM
     mpLayers[3] = new prLayer("Foreground",   3);
 
     // Create the used layers
-    for (int i=4; i<32;i++)
+    for (int i=4; i<32; i++)
     {
         mpLayers[i] = new prLayer("Unused", i);
     }
@@ -63,6 +63,20 @@ prLayerManager::~prLayerManager()
 
     // Delete holder array
     PRSAFE_DELETE_ARRAY(mpLayers);
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Gets a rendering layer by index.
+/// ---------------------------------------------------------------------------
+prLayer *prLayerManager::GetLayerByIndex(s32 index)
+{
+    if (PRBETWEEN(index, 0 , (LAYER_MAX_LAYERS - 1)))
+    {
+        return mpLayers[index];
+    }
+
+    return nullptr;
 }
 
 

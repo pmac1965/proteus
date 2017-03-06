@@ -326,7 +326,7 @@ bool prBackground::Save()
     // We need a file name to save
     if (m_filenameBackground.Length() == 0)
     {
-        throw prException("The backgrounds texture filename is null or empty");
+        throw prException(std::string("The backgrounds texture filename is null or empty"));
     }
 
 
@@ -338,7 +338,7 @@ bool prBackground::Save()
         // We need a texture file name to save an image type background
         if (m_filenameTexture.Length() == 0)
         {
-            throw prException("The backgrounds texture filename is null or empty");
+            throw prException(std::string("The backgrounds texture filename is null or empty"));
         }
     }
     else if (m_type == TILEMAP)
@@ -347,7 +347,7 @@ bool prBackground::Save()
     }
     else
     {
-        throw prException("Unknown background type");
+        throw prException(std::string("Unknown background type"));
     }
 
 
@@ -558,7 +558,7 @@ void prBackground::ParseAttribs_Background(TiXmlElement* pElement)
         else
         {
             #if defined(PROTEUS_TOOL)
-                throw prException("Unknown background type");
+                throw prException(std::string("Unknown background type"));
             #else
                 PRPANIC("Unknown background type");
             #endif
@@ -588,12 +588,12 @@ void prBackground::ParseAttribs_Background(TiXmlElement* pElement)
                     {
                         if (prStringCompareNoCase(&filename[index], ".pvr") == 0)
                         {
-                            throw prException("You cannot use this background file, as it contains a .pvr file as the texture");
+                            throw prException(std::string("You cannot use this background file, as it contains a .pvr file as the texture"));
                         }
                     }
                     else
                     {
-                        throw prException("Invalid background file");
+                        throw prException(std::string("Invalid background file"));
                     }
 
                 #else
@@ -639,7 +639,7 @@ void prBackground::ParseAttribs_Background(TiXmlElement* pElement)
             else
             {
                 #if defined(PROTEUS_TOOL)
-                    throw prException("The background file has no texture.");
+                    throw prException(std::string("The background file has no texture."));
                 #else
                     PRPANIC("The background file has no texture.");
                 #endif

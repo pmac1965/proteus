@@ -1,4 +1,5 @@
 // File: prApplication.h
+//      The base interface class for all the application classes.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -53,7 +54,7 @@ public:
 
     // Method: ~prApplication
     //      Dtor    
-    virtual ~prApplication();
+    virtual ~prApplication() {}
 
     // Method: DisplayCreate
     //      Creates the application display.

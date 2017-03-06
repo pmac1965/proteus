@@ -26,8 +26,8 @@ namespace Core {
 
 
 prLayer::prLayer(const char *layerName, s32 index)
-    : mName     (layerName)
-    , mIndex    (index)
+    : mLayerName     (layerName)
+    , mLayerIndex    (index)
 {
 }
 

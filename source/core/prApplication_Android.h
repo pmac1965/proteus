@@ -1,4 +1,5 @@
 // File: prApplication_Android.h
+//      The interface class for all Android applications.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -52,7 +53,7 @@ public:
 
     // Method: ~prApplication_Android
     //      Dtor    
-    virtual ~prApplication_Android();
+    virtual ~prApplication_Android() {}
 
     // Method: DisplayCreate
     //      Creates the application display.

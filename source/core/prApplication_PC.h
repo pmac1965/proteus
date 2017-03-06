@@ -1,4 +1,5 @@
 // File: prApplication_PC.h
+//      The interface class for all PC applications.
 /**
  * Copyright 2014 Paul Michael McNab
  * 

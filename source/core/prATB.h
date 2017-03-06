@@ -97,7 +97,7 @@
 
 #else
     // These external calls are macros for easy removal
-    // All other callls should trigger a compiler error
+    // All other calls should trigger a compiler error
     #define prATBIsInit()       false
     #define prATBGetShow()      false
     #define prATBSetShow(state)

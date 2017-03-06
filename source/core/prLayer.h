@@ -1,4 +1,5 @@
 // File: prLayer.h
+//      A class used to sort game objects.
 /**
  *  Copyright 2016 Paul Michael McNab
  *
@@ -28,11 +29,11 @@ namespace Core {
 
 
 // Class: prLayer
-//      A class used to sort game objects like actors
+//      A class used to sort game objects.
 //
 // Notes:
-//      Layers are sorted by index with 0 having the highest priority.
-//      Layer priority decreases the higher the index
+//      Layers are sorted by index with 0 having the lowest priority.
+//      Layer priority increases the higher the index
 class prLayer
 {
 public:
@@ -44,21 +45,25 @@ public:
     //      cb         - Objects index in that layer
     prLayer(const char *layerName, s32 index);
 
-    // Method: Registerfactory
-    //      Registers a function which creates the games actors.
-    s32 GetIndex(){ return mIndex;}
+    // Method: GetLayerIndex
+    //      Gets this layers index.
+    s32 GetLayerIndex() const { return mLayerIndex; }
 
-    // Method: GetName
+    // Method: GetLayerName
     //      Gets this layers name
-    const char *GetName() { return mName.Text(); }
+    const char *GetLayerName() const { return mLayerName.Text(); }
 
-    // Method: SetName
-    //      Sets this layers name
-    void SetName(const char *name) { mName.Set(name); }
+    // Method: ChangeLayerName
+    //      Change this layers name
+    void ChangeLayerName(const char *name) { mLayerName.Set(name); }
+
+    // Method: ChangeIndex
+    //      Change this layers index
+    void ChangeIndex(s32 index) { mLayerIndex = index; }
 
 private:
-    prString    mName;
-    s32         mIndex;
+    prString    mLayerName;
+    s32         mLayerIndex;
 };
 
 

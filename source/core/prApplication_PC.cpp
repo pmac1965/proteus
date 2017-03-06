@@ -77,7 +77,7 @@ prApplication_PC::prApplication_PC() : prApplication()
         prDebugRegisterConsoleWindow(m_pCW);
 
     #else
-        m_pCW = NULL;
+        m_pCW = nullptr;
 
         if (reg)
         {
@@ -94,7 +94,7 @@ prApplication_PC::prApplication_PC() : prApplication()
     pGameTime  = new prGameTime();
 
     // Init data
-    m_hAccel   = NULL;
+    m_hAccel   = nullptr;
 
     // Remove old log file
     prTraceLogClear();
@@ -179,7 +179,7 @@ PRBOOL prApplication_PC::DisplayCreate(u32 width, u32 height, const char *pWindo
 
 
     // Check window name is not null
-    if (pWindowName == NULL)
+    if (pWindowName == nullptr)
     {
         MessageBoxW(HWND_DESKTOP, L"The window name cannot be NULL.", L"Error", MB_ICONERROR | MB_OK);
         return result;
@@ -267,9 +267,9 @@ PRBOOL prApplication_PC::DisplayCreateTool(u32 width, u32 height, u32 menuID, u3
 
 
     // Check window name is not null
-    if (pWindowName == NULL)
+    if (pWindowName == nullptr)
     {
-        MessageBoxW(HWND_DESKTOP, L"The window name cannot be NULL.", L"Error", MB_ICONERROR | MB_OK);
+        MessageBoxW(HWND_DESKTOP, L"The window name cannot be s.", L"Error", MB_ICONERROR | MB_OK);
         return result;
     }
 
@@ -335,8 +335,8 @@ PRBOOL prApplication_PC::DisplayCreateTool(u32 width, u32 height, u32 menuID, u3
         // Load accelarator?
         if (accelID > 0)
         {
-            m_hAccel = LoadAccelerators(GetModuleHandle(NULL), MAKEINTRESOURCE(accelID));
-            if (m_hAccel == NULL)
+            m_hAccel = LoadAccelerators(GetModuleHandle(nullptr), MAKEINTRESOURCE(accelID));
+            if (m_hAccel == nullptr)
             {
                 prTrace(LogError, "Failed to load accelerator\n");
             }
@@ -364,9 +364,9 @@ PRBOOL prApplication_PC::Run()
     while(m_running)
     {
         // Game loop.
-        if (PeekMessage(&msg, NULL, 0, 0, PM_NOREMOVE))
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_NOREMOVE))
         {
-            GetMessage(&msg, NULL, 0, 0);
+            GetMessage(&msg, nullptr, 0, 0);
             
             // Quit?
             if (msg.message == WM_QUIT)
@@ -462,7 +462,7 @@ PRBOOL prApplication_PC::Run()
 
 
     // Clear app pointer.
-    prSetApplicationForWindowProcedure(NULL);
+    prSetApplicationForWindowProcedure(nullptr);
     prCoreDestroy();
 
 
