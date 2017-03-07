@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRPVR_H
-#define __PRPVR_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -42,6 +41,3 @@ typedef struct prPVRTextureHeader
     Proteus::Core::u32     dwNumSurfs;             // Number of slices for volume textures or skyboxes
 
 } prPVRTextureHeader;
-
-
-#endif//__PRPVR_H

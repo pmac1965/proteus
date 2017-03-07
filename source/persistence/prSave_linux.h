@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSAVELINUX_H
-#define __PRSAVELINUX_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -85,6 +84,3 @@ private:
 
 
 #endif
-
-
-#endif//__PRSAVELINUX_H

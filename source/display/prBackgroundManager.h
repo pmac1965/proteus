@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRBACKGROUNDMANAGER_H
-#define __PRBACKGROUNDMANAGER_H
+#pragma once
 
 
 #include "../core/prCoreSystem.h"
@@ -73,18 +72,11 @@ public:
     //      Shows all the assets being used by the background manager.
     void DisplayUsage();
 
-
 private:
-
     // Stops passing by value and assignment.
     prBackgroundManager(const prBackgroundManager&);
     const prBackgroundManager& operator = (const prBackgroundManager&);
 
-
 private:
-
     prBackground   *backgrounds[MAX_BACKGROUNDS];
 };
-
-
-#endif//__PRBACKGROUNDMANAGER_H

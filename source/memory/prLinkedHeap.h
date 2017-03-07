@@ -28,8 +28,7 @@
  */
 
 
-#ifndef __PRLINKEDHEAP_H
-#define __PRLINKEDHEAP_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -272,6 +271,3 @@ protected:
     Proteus::Core::u32  m_bounds_check; // Bounds check?
     bool                m_user_addr;    // User supplied the heap start address and heap size.
 };
-
-
-#endif//__PRLINKEDHEAP_H

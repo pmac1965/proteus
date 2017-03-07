@@ -51,8 +51,7 @@
  */
 
 
-#ifndef _PRLOOKAT_H
-#define _PRLOOKAT_H
+#pragma once
 
 
 // Function: prLookAt
@@ -60,6 +59,3 @@
 void prLookAt(double eyex,    double eyey,    double eyez,
               double centerx, double centery, double centerz,
               double upx,     double upy,     double upz);
-
-
-#endif//_PRLOOKAT_H

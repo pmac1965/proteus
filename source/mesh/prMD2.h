@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRMD2_H
-#define __PRMD2_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -156,6 +155,3 @@ typedef struct
 #define MD2_MAGIC               PRMAKE4('2', 'P', 'D', 'I')
 #define MD2_VERSION             8
 #define MD2_MAX_FRAMES          199
-
-
-#endif//__PRMD2_H

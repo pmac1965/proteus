@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRCAMERA_H
-#define __PRCAMERA_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -125,6 +124,3 @@ private:
     Proteus::Core::s32      m_id;
     prString                m_name;
 };
-
-
-#endif// __PRCAMERA_H

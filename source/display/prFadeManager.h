@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRFADEMANAGER_H
-#define __PRFADEMANAGER_H
+#pragma once
 
 
 #include "../core/prCoreSystem.h"
@@ -140,6 +139,3 @@ private:
     Proteus::Core::f32  step;
     bool                fading;
 };
-
-
-#endif//__PRFADEMANAGER_H

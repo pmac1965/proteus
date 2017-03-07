@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRONSCREENLOGGER_H
-#define __PRONSCREENLOGGER_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -114,6 +113,3 @@ private:
     bool                m_exp2;
     std::list<char *>   m_messages;
 };
-
-
-#endif//__PRONSCREENLOGGER_H

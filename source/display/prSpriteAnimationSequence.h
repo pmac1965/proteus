@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSPRITEANIMATIONSEQUENCE_H
-#define __PRSPRITEANIMATIONSEQUENCE_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -143,6 +142,3 @@ private:
     prSpriteAnimationSequence(const prSpriteAnimationSequence&);
     const prSpriteAnimationSequence& operator = (const prSpriteAnimationSequence&);
 };
-
-
-#endif//__PRSPRITEANIMATIONSEQUENCE_H

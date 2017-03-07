@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRGAMESESSIONPROVIDER_H
-#define __PRGAMESESSIONPROVIDER_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -59,6 +58,3 @@ public:
 protected:
     Proteus::Core::s32     mType;
 };
-
-
-#endif//__PRGAMESESSIONPROVIDER_H

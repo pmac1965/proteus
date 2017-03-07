@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRMESHMD2_H
-#define __PRMESHMD2_H
+#pragma once
 
 
 #include "prMesh.h"
@@ -83,6 +82,3 @@ private:
     float           m_scale;
     int             m_frame;
 };
-
-
-#endif//__PRMESHMD2_H

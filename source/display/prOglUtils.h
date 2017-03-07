@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PROGLUTILS_H
-#define __PROGLUTILS_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -62,6 +61,3 @@ void prOpenGLErrorCheck(const char *file, const char *func, int line);
 #else
     #define ERR_CHECK()
 #endif
-
-
-#endif//__PROGLUTILS_H

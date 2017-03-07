@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSAVEMAC_H
-#define __PRSAVEMAC_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -85,6 +84,3 @@ private:
 
 
 #endif
-
-
-#endif//__PRSAVEMAC_H

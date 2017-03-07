@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRANIMATION_H
-#define __PRANIMATION_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -73,6 +72,3 @@ protected:
 
     Proteus::Core::s32  mCurrAnimation;
 };
-
-
-#endif//__PRANIMATION_H

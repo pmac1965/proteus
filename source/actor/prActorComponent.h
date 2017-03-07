@@ -1,4 +1,5 @@
 // File: prActorComponent.h
+//      The base interface class for actor components.
 /**
  *  Copyright 2016 Paul Michael McNab
  *
@@ -19,6 +20,14 @@
 #pragma once
 
 
+typedef struct ActorComponentData
+{
+    Proteus::Core::s32      mType;
+    void                   *pData;
+
+} ActorComponentData;
+
+
 // Namespaces
 namespace Proteus {
 namespace Actor {
@@ -29,6 +38,9 @@ class prActorComponent
 public:
     prActorComponent(){}
     virtual ~prActorComponent(){}
+
+    void Initialize(ActorComponentData *pComponentData)
+    {}
 };
 
 

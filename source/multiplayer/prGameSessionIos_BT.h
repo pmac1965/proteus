@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRGAMESESSIONIOS_BT_H
-#define __PRGAMESESSIONIOS_BT_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -49,6 +48,3 @@ public:
     //      Disconnects a game session
     void Disconnect();
 };
-
-
-#endif//__PRGAMESESSIONIOS_BT_H

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRANIMATION_MD2_H
-#define __PRANIMATION_MD2_H
+#pragma once
 
 
 #include "prAnimation.h"
@@ -71,6 +70,3 @@ private:
     Proteus::Core::s32      mCurFrame;
     float                   mStep;
 };
-
-
-#endif//__PRANIMATION_MD2_H

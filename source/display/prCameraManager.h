@@ -16,8 +16,7 @@
  */
   
  
-#ifndef __PRCAMERAMANAGER_H
-#define __PRCAMERAMANAGER_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -99,7 +98,3 @@ private:
     prList<prCamera*> m_cameras;    
     prCamera*         m_activeCamera;
 };
-
-
-
-#endif//__PRCAMERAMANAGER3D_H

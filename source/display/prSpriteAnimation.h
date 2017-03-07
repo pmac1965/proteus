@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSPRITEANIMATION_H
-#define __PRSPRITEANIMATION_H
+#pragma once
 
 
 #include <list>
@@ -145,6 +144,3 @@ private:
     prSpriteAnimation(const prSpriteAnimation&);
     const prSpriteAnimation& operator = (const prSpriteAnimation&);
 };
-
-
-#endif//__PRSPRITEANIMATION_H

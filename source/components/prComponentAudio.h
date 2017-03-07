@@ -21,19 +21,38 @@
 
 
 #include "../actor/prActorComponent.h"
+#include "../math/prVector3.h"
 
 
 // Class: prComponentAudio
 //      Actor audio component
+//
+// Notes:
+//      Used to attach audio data to a game actor object
 class prComponentAudio : public Proteus::Actor::prActorComponent
 {
 public:
-    prComponentAudio(){}
-    ~prComponentAudio(){}
+    //prComponentAudio(){}
+    //~prComponentAudio(){}
 
+    // Method: Play
+    //      Plays the audio source
+    //
+    // Parameters:
+    //      type - A user defined actor identifier
     void Play() {}
 
-    void PlayAtPosition() {}
+    // Method: PlayAtPosition
+    //      Plays the audio source with positional data included
+    //
+    // Parameters:
+    //      position - World position of the audio
+    void PlayAtPosition(Proteus::Math::prVector3 position) {}
 
-    void Assign() {}
+    //
+    //
+//    void Assign() {}
+
+private:
+    Proteus::Core::u8* pAudioData;
 };

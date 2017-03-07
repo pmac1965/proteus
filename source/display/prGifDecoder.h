@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRGIFDECODER_H
-#define __PRGIFDECODER_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -139,6 +138,3 @@ private:
     Proteus::Core::u32  imageHeight;
     Proteus::Core::u8  *pRawImage;
 };
-
-
-#endif//__PRGIFDECODER_H

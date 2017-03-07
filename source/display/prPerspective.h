@@ -45,13 +45,9 @@
  */
 
 
-#ifndef __PRPERSPECTIVE_H
-#define __PRPERSPECTIVE_H
+#pragma once
 
 
 // Function: prPerspective
 //      The Perspective utility method. Missing from OpenGLES 1.0
 void prPerspective(double fovy, double aspect, double zNear, double zFar);
-
-
-#endif//__PRPERSPECTIVE_H

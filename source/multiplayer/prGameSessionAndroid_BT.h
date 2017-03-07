@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRGAMESESSIONANDROID_BT_H
-#define __PRGAMESESSIONANDROID_BT_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -49,6 +48,3 @@ public:
     //      Disconnects a game session
     void Disconnect();
 };
-
-
-#endif//__PRGAMESESSIONANDROID_BT_H

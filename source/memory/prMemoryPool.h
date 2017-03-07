@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRMEMORYPOOL_H
-#define __PRMEMORYPOOL_H
+#pragma once
 
 
 #include "../debug/prAssert.h"
@@ -175,6 +174,3 @@ protected:
     Proteus::Core::s32  m_index;    // Index of the last usable object. (Range 1 to size)
     Proteus::Core::s32  m_size;     // The size of the memory pool
 };
-
-
-#endif//__PRMEMORYPOOL_H

@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRMESH_OBJ_H
-#define __PRMESH_OBJ_H
+#pragma once
 
 
 #include "prMesh.h"
@@ -75,6 +74,3 @@ private:
     prVertex3D             *pVerts;
     Proteus::Core::s32      count;
 };
-
-
-#endif//__PRMESH_OBJ_H

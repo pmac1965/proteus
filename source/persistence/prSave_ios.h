@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSAVE_IOS_H
-#define __PRSAVE_IOS_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -85,6 +84,3 @@ private:
 
 
 #endif
-
-
-#endif//__PRSAVE_IOS_H

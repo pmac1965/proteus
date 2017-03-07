@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRRENDERER_GL20_H
-#define __PRRENDERER_GL20_H
+#pragma once
 
 
 #include "prRenderer.h"
@@ -240,6 +239,3 @@ private:
     RendererImplementation *pImpl;
     RendererImplementation &imp;
 };
-
-
-#endif//__PRRENDERER_GL20_H

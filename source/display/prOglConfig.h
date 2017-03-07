@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PROGLCONFIG_H
-#define __PROGLCONFIG_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -33,6 +32,3 @@
 #if (defined(PLATFORM_ANDROID) ||defined(PLATFORM_ANDROID))
 #define PROGL_GLES              // Is ios or android? If so, then GLES
 #endif
-
-
-#endif//__PROGLCONFIG_H

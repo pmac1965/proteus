@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRMESH_H
-#define __PRMESH_H
+#pragma once
 
 
 // Forward declarations
@@ -65,6 +64,3 @@ protected:
     bool        mLoaded;
     bool        mWireframe;
 };
-
-
-#endif//__PRMESH_H

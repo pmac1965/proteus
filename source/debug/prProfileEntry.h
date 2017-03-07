@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRPROFILEENTRY_H
-#define __PRPROFILEENTRY_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -84,6 +83,3 @@ public:
 
 #endif
 };
-
-
-#endif//_PROFILE_H

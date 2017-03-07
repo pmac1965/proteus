@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRFIXEDWIDTHFONT_H
-#define __PRFIXEDWIDTHFONT_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -150,6 +149,3 @@ private:
     Proteus::Core::f32  m_scale;
     Proteus::Core::u32  m_alignment;
 };
-
-
-#endif//__PRFIXEDWIDTHFONT_H

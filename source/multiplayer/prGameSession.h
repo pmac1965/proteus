@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRGAMESESSION_H
-#define __PRGAMESESSION_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -150,6 +149,3 @@ private:
     Proteus::Core::PRBOOL   mIsAvailable;           // Is the technology available? For example does a device have bluetooth
     Proteus::Core::PRBOOL   mIsEnabled;             // Is the technology turned on?
 };
-
-
-#endif//__PRGAMESESSION_H

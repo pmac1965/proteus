@@ -16,14 +16,10 @@
  */
 
 
-#ifndef __PRNORMALS_MD2_H
-#define __PRNORMALS_MD2_H
+#pragma once
 
 
 #include "prMD2.h"
 
 
 extern const prMD2Vec3 md2Normals[];
-
-
-#endif//__PRNORMALS_MD2_H

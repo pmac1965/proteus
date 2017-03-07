@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRMOUSE_H
-#define __PRMOUSE_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -275,6 +274,3 @@ private:
 
 
 #endif//PLATFORM_PC || PLATFORM_LINUX
-
-
-#endif//__PRMOUSE_H

@@ -110,11 +110,19 @@ public:
     //      active - The new state
     inline void SetVisible(Proteus::Core::PRBOOL active) { mVisible = active; }
 
+    // Method: AddComponent
+    //      Adds a component to the game object
     //
-    void AddComponent(Proteus::Actor::prActorComponent *pComponent) {}
+    // Parameters:
+    //      pComponent - The component to add
+    void AddComponent(Proteus::Actor::prActorComponent *pComponent);
 
+    // Method: RemoveComponent
+    //      Removes a component from the game object
     //
-    void RemoveComponent(Proteus::Actor::prActorComponent *pComponent) {}
+    // Parameters:
+    //      pComponent - The component to remove
+    void RemoveComponent(Proteus::Actor::prActorComponent *pComponent);
 
     //
     void FindComponentByName(const char *name) {}

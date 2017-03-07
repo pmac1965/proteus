@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRMEMORY_H
-#define __PRMEMORY_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -96,7 +95,3 @@ void prMemoryFill16(void *addr, Proteus::Core::u32 size, Proteus::Core::u16 data
 //      size - The size of the pointed to address in bytes
 //      data - The data to fill with
 void prMemoryFill32(void *addr, Proteus::Core::u32 size, Proteus::Core::u32 data);
-
-
-#endif//__PRMEMORY_H
-

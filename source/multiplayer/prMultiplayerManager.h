@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRMULTIPLAYERMANAGER_H
-#define __PRMULTIPLAYERMANAGER_H
+#pragma once
 
 
 // Class: prMultiplayerManager
@@ -33,6 +32,3 @@ public:
     //      Dtor
     ~prMultiplayerManager();
 };
-
-
-#endif//__PRMULTIPLAYERMANAGER_H

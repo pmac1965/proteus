@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSPRITEPOINTERPOOL_H
-#define __PRSPRITEPOINTERPOOL_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -151,6 +150,3 @@ private:
     Proteus::Core::u32       arrayHashes[POOL_MAX_TYPES];                   // Hashes for each pool type.
     Proteus::Core::s32       count;                                         // Total sprites in pool.
 };
-
-
-#endif//__PRSPRITEPOINTERPOOL_H

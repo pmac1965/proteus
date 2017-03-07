@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRSHADER_H
-#define __PRSHADER_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -51,6 +50,3 @@ private:
     // Shows the program info log
     void ProgramInfoLog(Proteus::Core::u32 shader);
 };
-
-
-#endif//__PRSHADER_H

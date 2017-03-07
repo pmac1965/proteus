@@ -24,8 +24,7 @@
  */
 
 
-#ifndef __PRSTACKHEAP_H
-#define __PRSTACKHEAP_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -152,6 +151,3 @@ protected:
     Proteus::Core::u32   m_bounds_check;         // Bounds check?
     const char          *m_name;                 // A name used to uniquely identify the heap during debugging.
 };
-
-
-#endif//__PRSTACKHEAP_H

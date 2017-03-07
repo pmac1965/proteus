@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRGLFONT_H
-#define __PRGLFONT_H
+#pragma once
 
 
 #include "../prConfig.h"
@@ -91,6 +90,3 @@ private:
 
 
 #endif//PLATFORM_PC
-
-
-#endif//__PRGLFONT_H

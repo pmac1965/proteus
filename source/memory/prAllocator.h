@@ -16,8 +16,7 @@
  */
 
 
-#ifndef __PRALLOCATOR_H
-#define __PRALLOCATOR_H
+#pragma once
 
 
 #include "../core/prTypes.h"
@@ -36,6 +35,3 @@ public:
     //      Releases memory to an prAllocator.
     virtual void Release(void *p) = 0;
 };
-
-
-#endif//__PRALLOCATOR_H
