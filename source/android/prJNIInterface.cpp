@@ -41,7 +41,7 @@
 // Local data.
 namespace
 {
-    JavaVM *gJavaVM = NULL;
+    JavaVM *gJavaVM = nullptr;
     char    gPackageName  [ANDROID_NAME_SIZE] = { '\0' };
     char    gActivityName [ANDROID_NAME_SIZE] = { '\0' };
     char    gProviderName [ANDROID_NAME_SIZE] = { '\0' };
@@ -72,7 +72,7 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
 /// ---------------------------------------------------------------------------
 JNIEXPORT void JNI_OnUnload(JavaVM *vm, void *reserved)
 {
-    gJavaVM = NULL;
+    gJavaVM = nullptr;
 }
 
 
@@ -147,7 +147,7 @@ bool prJNI_GetEnv(JNIEnv **env, bool &isAttached)
         // Failed to get JNI environment. Assuming native thread.
         __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to get JNI environment. Assuming native thread.");
 
-        status = gJavaVM->AttachCurrentThread(env, NULL);
+        status = gJavaVM->AttachCurrentThread(env, nullptr);
         if (status < 0) 
         {
             __android_log_print(ANDROID_LOG_ERROR, "Proteus", "Failed to attach current thread");
@@ -226,7 +226,7 @@ int JNI_SFXLoad(const char *filename)
     if (gJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!JNI_GetEnv(&env, isAttached))
@@ -284,7 +284,7 @@ int JNI_SFXPlay(int sid, float volume)
     if (gJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!JNI_GetEnv(&env, isAttached))
@@ -330,7 +330,7 @@ void JNI_SFXInit()
     if (gJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!JNI_GetEnv(&env, isAttached))
@@ -374,7 +374,7 @@ void JNI_SFXStop(int sid)
     if (gJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!JNI_GetEnv(&env, isAttached))
@@ -427,7 +427,7 @@ void JNI_OpenURL(const char *url)
     if (gJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!JNI_GetEnv(&env, isAttached))
@@ -474,7 +474,7 @@ bool JNI_ShowAchievements()
     if (gJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!JNI_GetEnv(&env, isAttached))
@@ -522,7 +522,7 @@ bool JNI_ShowLeaderboards()
     if (gJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!JNI_GetEnv(&env, isAttached))
@@ -568,7 +568,7 @@ void JNI_ShowDashboard()
     if (gJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!JNI_GetEnv(&env, isAttached))
@@ -614,7 +614,7 @@ bool JNI_ShowPurchaseDialog()
     if (gJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!JNI_GetEnv(&env, isAttached))
@@ -660,7 +660,7 @@ void JNI_SubmitLeaderboardScore(const char *name, int score)
     if (gJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!JNI_GetEnv(&env, isAttached))
@@ -705,7 +705,7 @@ void JNI_AwardAchievement(const char *name)
     if (gJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!JNI_GetEnv(&env, isAttached))
@@ -758,7 +758,7 @@ void JNI_AdvertShow()
     if (gJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!JNI_GetEnv(&env, isAttached))
@@ -802,7 +802,7 @@ void JNI_AdvertHide()
     if (gJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!JNI_GetEnv(&env, isAttached))
@@ -846,7 +846,7 @@ void JNI_SubmitFlurry(const char *str)
     if (gJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!JNI_GetEnv(&env, isAttached))
@@ -890,7 +890,7 @@ void JNI_SubmitFlurry(const char *str1, const char *str2)
     if (gJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!JNI_GetEnv(&env, isAttached))

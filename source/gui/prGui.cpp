@@ -52,8 +52,8 @@ prGui::prGui()
     m_visible   = PRTRUE;
     m_layer     = 0;
     m_baseLayer = m_layer;
-    m_pBmpfont  = NULL;
-    m_pTtfFont  = NULL;
+    m_pBmpfont  = nullptr;
+    m_pTtfFont  = nullptr;
 
     prTouch *pTouch = static_cast<prTouch *>(prCoreGetComponent(PRSYSTEM_TOUCH));
     if (pTouch)
@@ -83,7 +83,7 @@ prGui::~prGui()
 /// ---------------------------------------------------------------------------
 prWidget *prGui::Create(prWidgetType type, const char *name)
 {
-    prWidget *widget = NULL;
+    prWidget *widget = nullptr;
 
     switch(type)
     {
@@ -237,7 +237,7 @@ prWidget *prGui::Find(const char *name)
         }
     }
 
-    return NULL;
+    return nullptr;
 }
 
 

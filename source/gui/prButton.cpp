@@ -214,7 +214,7 @@ void prButton::SetSprite(prSprite *pSprite)
     }
     else
     {
-        m_sprite = NULL;
+        m_sprite = nullptr;
         m_width  = 0;
         m_height = 0;
     }

@@ -47,8 +47,8 @@ namespace
 /// ----------------------------------------------------------------------------
 prOnScreenLogger::prOnScreenLogger() : prCoreSystem(PRSYSTEM_ONSCREENLOGGER, "prOnScreenLogger")
 {
-    m_pTexture          = NULL;
-    m_pFixedWidthFont   = NULL;
+    m_pTexture          = nullptr;
+    m_pFixedWidthFont   = nullptr;
     m_enabled           = true;
     m_exp0              = false;
     m_exp1              = false;
@@ -75,7 +75,7 @@ prOnScreenLogger::~prOnScreenLogger()
             if (pRM && m_pTexture)
             {
                 pRM->Unload(m_pTexture);
-                m_pTexture = NULL;
+                m_pTexture = nullptr;
             }
         }
     }
@@ -135,7 +135,7 @@ void prOnScreenLogger::Draw(u32 xpos, u32 ypos, prFixedWidthFont::prFixedWidthAl
     if (!m_enabled)
         return;
 
-    if (m_pFixedWidthFont == NULL)
+    if (m_pFixedWidthFont == nullptr)
     {
         // Create a texture
         prResourceManager *pRM = static_cast<prResourceManager *>(prCoreGetComponent(PRSYSTEM_RESOURCEMANAGER));

@@ -90,7 +90,7 @@ void prJNI_ShowTweet(const char *initialText)
     if (pJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!prJNI_GetEnv(&env, isAttached))

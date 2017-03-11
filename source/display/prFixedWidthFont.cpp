@@ -157,7 +157,7 @@ prFixedWidthFont::~prFixedWidthFont()
         {
             pRM->Unload(m_pTexture);
         }
-        m_pTexture = NULL;
+        m_pTexture = nullptr;
     }
 }
 

@@ -40,8 +40,8 @@ using namespace Proteus::Core;
 /// Standard GUI dialog
 /// ---------------------------------------------------------------------------
 prDialog::prDialog(const char *name, prSpriteManager *pSpriteManager) : prWidget(WT_Dialog, name, pSpriteManager)
-                                                                      , m_spriteBackdrop      (NULL)
-                                                                      , m_pDialogListener     (NULL)
+                                                                      , m_spriteBackdrop      (nullptr)
+                                                                      , m_pDialogListener     (nullptr)
                                                                       , m_buttonCount         (0)
                                                                       , m_titleScale          (1.0f)
                                                                       , m_textScale           (1.0f)
@@ -65,7 +65,7 @@ prDialog::~prDialog()
     if (m_spriteBackdrop)
     {
         m_pSpriteManager->Release(m_spriteBackdrop);
-        m_spriteBackdrop = NULL;
+        m_spriteBackdrop = nullptr;
     }
 }
 
@@ -336,7 +336,7 @@ prButton *prDialog::AddButton(const char *pFile, const char *pName, const char *
     PRASSERT(pName && *pName);
     PRASSERT(pText && *pText);
 
-    prButton *pButton = NULL;
+    prButton *pButton = nullptr;
 
     if (m_buttonCount < DIALOG_MAX_BUTTONS)
     {

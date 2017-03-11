@@ -66,8 +66,8 @@ typedef struct FileImplementation
     // Ctor
     FileImplementation() : filemode(FileMode_None)
     {
-        filedata    = NULL;
-        pFile       = NULL;
+        filedata    = nullptr;
+        pFile       = nullptr;
         //filemode    = FileMode_None;
         filesize    = 0xFFFFFFFF;
         filePointer = 0;
@@ -81,7 +81,7 @@ typedef struct FileImplementation
         memset(filenameOrig, 0, sizeof(filenameOrig));
 
         #if defined(PLATFORM_ANDROID)
-        pZipFile    = NULL;
+        pZipFile    = nullptr;
         bytesRead   = 0;
         #endif
     }
@@ -255,7 +255,7 @@ bool prFile::Exists()
                 {
                     result = true;
                     zip_fclose(imp.pZipFile);
-                    imp.pZipFile = NULL;
+                    imp.pZipFile = nullptr;
                 }
                 else
                 {
@@ -276,7 +276,7 @@ bool prFile::Exists()
                 // Errors?
                 result = !imp.WasThereAFileError();
                 fclose(imp.pFile);
-                imp.pFile = NULL;
+                imp.pFile = nullptr;
             }
             else
             {
@@ -363,7 +363,7 @@ bool prFile::Open()
 
     // Open the file?
     imp.pFile = fopen(imp.filenameDisk, "rb");
-    if (imp.pFile == NULL)
+    if (imp.pFile == nullptr)
     {
         // Show error
         imp.WasThereAFileError();
@@ -371,7 +371,7 @@ bool prFile::Open()
         prTrace(LogError, "STD: Trying to open file: %s\n", imp.filenameOrig);
 
         imp.pFile = fopen(imp.filenameOrig, "rb");
-        if (imp.pFile == NULL)
+        if (imp.pFile == nullptr)
         {
             // Show error
             prTrace(LogError, "STD: Failed to open file: %s\n", imp.filenameOrig);
@@ -392,7 +392,7 @@ bool prFile::Open()
         // Show error
         imp.WasThereAFileError();
         fclose(imp.pFile);
-        imp.pFile = NULL;
+        imp.pFile = nullptr;
         return false;
     }
 
@@ -425,7 +425,7 @@ void prFile::Close()
     if (imp.pZipFile)
     {
         zip_fclose(imp.pZipFile);
-        imp.pZipFile  = NULL;
+        imp.pZipFile  = nullptr;
         imp.bytesRead = 0;
     }
 
@@ -434,7 +434,7 @@ void prFile::Close()
     if (imp.pFile)
     {
         fclose(imp.pFile);
-        imp.pFile = NULL;
+        imp.pFile = nullptr;
     }
 
 #endif
@@ -450,10 +450,10 @@ void prFile::Close()
 u32 prFile::Read(void *pDataBuffer, u32 size)
 {
     // Sanity checks
-    PRASSERT(pImpl        != NULL);
+    PRASSERT(pImpl        != nullptr);
     PRASSERT(imp.opened   == true);
     PRASSERT(imp.filemode == FileMode_Normal);
-    PRASSERT(pDataBuffer  != NULL);
+    PRASSERT(pDataBuffer  != nullptr);
     PRASSERT(size > 0);
 
     
@@ -475,14 +475,14 @@ u32 prFile::Read(void *pDataBuffer, u32 size)
     {
 #if defined(PLATFORM_ANDROID)
         // Read from disk.
-        PRASSERT(imp.pZipFile != NULL);
+        PRASSERT(imp.pZipFile != nullptr);
         bytes = zip_fread(imp.pZipFile, pDataBuffer, size);
         imp.bytesRead += bytes;
         //__android_log_print(ANDROID_LOG_ERROR, "Proteus", "Loaded: %s", imp.filenameArch);
 
 #else
         // Read from disk.
-        PRASSERT(imp.pFile != NULL);
+        PRASSERT(imp.pFile != nullptr);
 
         bytes = fread(pDataBuffer, 1, size, imp.pFile);
 
@@ -584,7 +584,7 @@ void prFile::Internal_Seek(s32 offset, s32 origin)
     PRASSERT(PRBETWEEN(origin, PRFILE_SEEK_SET, PRFILE_SEEK_END));
 
 #if defined(PLATFORM_ANDROID)
-    PRASSERT(imp.pZipFile != NULL);
+    PRASSERT(imp.pZipFile != nullptr);
 
     // Read to simulate seek
     if (origin == PRFILE_SEEK_CUR)
@@ -601,7 +601,7 @@ void prFile::Internal_Seek(s32 offset, s32 origin)
         {
             // Close the old file.
             zip_fclose(imp.pZipFile);
-            imp.pZipFile  = NULL;
+            imp.pZipFile  = nullptr;
             imp.bytesRead = 0;
 
             prFileManager *pFileManager = static_cast<prFileManager*>(prCoreGetComponent(PRSYSTEM_FILEMANAGER));
@@ -658,7 +658,7 @@ s32 prFile::Internal_Tell() const
 /*bool prFile::Internal_FileDataLoaded()
 {
     PRASSERT(pImpl);
-    return (imp.filedata != NULL);
+    return (imp.filedata != nullptr);
 }
 
 

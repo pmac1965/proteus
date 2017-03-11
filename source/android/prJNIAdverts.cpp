@@ -86,7 +86,7 @@ void prJNI_FlurryShowAdvert()
     if (pJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!prJNI_GetEnv(&env, isAttached))
@@ -131,7 +131,7 @@ void prJNI_FlurryHideAdvert()
     if (pJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!prJNI_GetEnv(&env, isAttached))
@@ -176,7 +176,7 @@ void prJNI_FlurryLoadAdvert()
     if (pJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!prJNI_GetEnv(&env, isAttached))

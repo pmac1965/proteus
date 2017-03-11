@@ -167,7 +167,7 @@ void prRenderer_GL11::Init()
         PRASSERT(m_pWatermark);
 
     #else
-        m_pWatermark = NULL;
+        m_pWatermark = nullptr;
 
     #endif
 

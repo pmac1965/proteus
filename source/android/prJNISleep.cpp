@@ -72,7 +72,7 @@ void prJNI_SleepSetState(bool state)
     if (pJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!prJNI_GetEnv(&env, isAttached))

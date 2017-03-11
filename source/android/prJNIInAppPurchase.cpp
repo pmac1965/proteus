@@ -88,7 +88,7 @@ void prJNI_BeginPurchase(const char *item)
         if (pJavaVM)
         {
             bool    isAttached  = false;
-            JNIEnv *env         = NULL;
+            JNIEnv *env         = nullptr;
 
             // Get environment.
             if (!prJNI_GetEnv(&env, isAttached))

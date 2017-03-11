@@ -86,7 +86,7 @@ void prJNI_Submit(const char *message)
     if (pJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!prJNI_GetEnv(&env, isAttached))

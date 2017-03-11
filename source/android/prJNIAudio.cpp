@@ -90,7 +90,7 @@ void prJNI_SongPlay(const char *filename)
     if (pJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!prJNI_GetEnv(&env, isAttached))
@@ -136,7 +136,7 @@ void prJNI_SongStop()
     if (pJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!prJNI_GetEnv(&env, isAttached))
@@ -181,7 +181,7 @@ void prJNI_SongSetVolume(float volume)
     if (pJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!prJNI_GetEnv(&env, isAttached))
@@ -226,7 +226,7 @@ void prJNI_SongPause()
     if (pJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!prJNI_GetEnv(&env, isAttached))
@@ -271,7 +271,7 @@ void prJNI_SongResume()
     if (pJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!prJNI_GetEnv(&env, isAttached))

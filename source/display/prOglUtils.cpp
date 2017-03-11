@@ -207,7 +207,7 @@ void prOpenGLErrorCheck(const char *file, const char *func, int line)
     GLenum error = glGetError();
     if (error != GL_NO_ERROR)
     {
-        const char *err = NULL;
+        const char *err = nullptr;
 
         switch(error)
         {

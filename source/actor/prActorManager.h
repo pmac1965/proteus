@@ -64,7 +64,7 @@ public:
     //      type - A user defined type
     //
     // Returns:
-    //      An actor pointer or NULL
+    //      An actor pointer or nullptr
     prActor *Create(Proteus::Core::s32 type);
 
     // Method: Release

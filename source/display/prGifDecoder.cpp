@@ -44,18 +44,18 @@ prGifDecoder::prGifDecoder(const char *filename) : mFif(FIF_UNKNOWN)
 
     // Init
     //mFif            = FIF_UNKNOWN;
-    mDib            = NULL;
-    mMultiBmp       = NULL;
-    mpImage         = NULL;
-    mpImageCopy     = NULL;
-    mpSprite        = NULL;
-    mpTetxure       = NULL;
+    mDib            = nullptr;
+    mMultiBmp       = nullptr;
+    mpImage         = nullptr;
+    mpImageCopy     = nullptr;
+    mpSprite        = nullptr;
+    mpTetxure       = nullptr;
     mFileSize       = 0;
     mFrameCount     = 0;
     mFrameWidth     = 0;
     mFrameHeight    = 0;
     mFrameCurrent   = GIFDECODER_NOFRAME;
-    pRawImage       = NULL;
+    pRawImage       = nullptr;
     pitch           = 0;
     imageBPP        = 0;
     imageWidth      = 0;
@@ -158,7 +158,7 @@ prGifDecoder::~prGifDecoder()
     if (mMultiBmp)
     {
         FreeImage_CloseMultiBitmap(mMultiBmp, 0);
-        mMultiBmp = NULL;
+        mMultiBmp = nullptr;
     }
 
     PRSAFE_DELETE(mpImage);
@@ -191,7 +191,7 @@ bool prGifDecoder::DecodeFrame(u32 frame)
 
             // Create the copy image for merging frames
             bool copyBase = false;
-            if (mpImageCopy == NULL)
+            if (mpImageCopy == nullptr)
             {
                 mpImageCopy = new u8[mTextureSize];
                 //memset(mpImageCopy, 0, mTextureSize);
@@ -316,7 +316,7 @@ bool prGifDecoder::DecodeFrame(u32 frame)
             if (mpTetxure)
             {
                 pRM->Unload(mpTetxure);
-                mpTetxure = NULL;
+                mpTetxure = nullptr;
             }
 
             mpTetxure = pRM->LoadFromRaw<prTexture>("Texture", mpImageCopy, mTextureSize, mTextureWidth, mTextureHeight);
@@ -330,7 +330,7 @@ bool prGifDecoder::DecodeFrame(u32 frame)
                 {
                     // Delete old sprite
                     pSM->ToolRelease(mpSprite);
-                    mpSprite = NULL;
+                    mpSprite = nullptr;
                 }
 
                 // Set working
@@ -353,7 +353,7 @@ bool prGifDecoder::DecodeFrame(u32 frame)
 void prGifDecoder::PartDecode1(u32 frame)
 {
     PRASSERT(mpImageCopy);
-    PRASSERT(pRawImage == NULL);
+    PRASSERT(pRawImage == nullptr);
 
     if (mpImage && mFileSize > 0)
     {
@@ -505,7 +505,7 @@ void prGifDecoder::PartDecode3()
     if (mpTetxure)
     {
         pRM->Unload(mpTetxure);
-        mpTetxure = NULL;
+        mpTetxure = nullptr;
     }
 
     mpTetxure = pRM->LoadFromRaw<prTexture>("Texture", mpImageCopy, mTextureSize, mTextureWidth, mTextureHeight);
@@ -519,7 +519,7 @@ void prGifDecoder::PartDecode3()
         {
             // Delete old sprite
             pSM->ToolRelease(mpSprite);
-            mpSprite = NULL;
+            mpSprite = nullptr;
         }
 
         // Set working

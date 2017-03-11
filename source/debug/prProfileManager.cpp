@@ -149,7 +149,7 @@ s32 prProfileManager::Create(const char *name)
         {
             for (u32 i=0; i<PROFILE_MAX_ENTRIES; i++)
             {
-                if (m_entries[i] == NULL)
+                if (m_entries[i] == nullptr)
                 {
                     m_entries[i] = entry;
                     return (s32)i;

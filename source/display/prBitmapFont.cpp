@@ -130,9 +130,9 @@ typedef struct BitmapFontImplementation
         scaleW       = 0;
         scaleH       = 0;
         kernings     = 0;
-        pCharInfo    = NULL;
-        pPageInfo    = NULL;
-        pKerningData = NULL;
+        pCharInfo    = nullptr;
+        pPageInfo    = nullptr;
+        pKerningData = nullptr;
         rotation     = 0.0f;
     }
 

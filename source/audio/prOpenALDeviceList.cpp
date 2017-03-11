@@ -49,7 +49,7 @@ prOpenALDeviceList::prOpenALDeviceList()
         s32   index          = 0;
 
 
-        // Go through device list (each device terminated with a single NULL, list terminated with double NULL)
+        // Go through device list (each device terminated with a single nullptr, list terminated with double nullptr)
         while (*pDeviceList != NULL) 
         {
             // Default device?

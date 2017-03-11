@@ -90,7 +90,7 @@ void prJNI_FacebookOpenSession()
     if (pJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!prJNI_GetEnv(&env, isAttached))
@@ -135,7 +135,7 @@ void prJNI_FacebookLogin()
     if (pJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!prJNI_GetEnv(&env, isAttached))
@@ -180,7 +180,7 @@ void prJNI_FacebookBrag()
     if (pJavaVM)
     {
         bool    isAttached  = false;
-        JNIEnv *env         = NULL;
+        JNIEnv *env         = nullptr;
 
         // Get environment.
         if (!prJNI_GetEnv(&env, isAttached))
@@ -225,7 +225,7 @@ void prJNI_FacebookLogout()
     if (pJavaVM)
     {
         bool    isAttached = false;
-        JNIEnv *env = NULL;
+        JNIEnv *env = nullptr;
 
         // Get environment.
         if (!prJNI_GetEnv(&env, isAttached))

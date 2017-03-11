@@ -127,12 +127,12 @@ void prActorManager::Update(f32 time)
     for (auto it = actors.begin(); it != actors.end(); ++it)
     {
         prActor *actor = *it;
-        PRASSERT(actor);
+        if (actor)
         {
             // Active?
             if (actor->IsActive())
             {
-                actor->Update();//time);
+                actor->Update();
 
                 // Destroy?
                 if (actor->m_destroy)
