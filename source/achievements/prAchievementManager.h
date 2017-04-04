@@ -1,4 +1,5 @@
 // File: prAchievementManager.h
+// About:
 //      Cross platform achievement manager with support for non-networked
 //      management of achievements.
 /**
