@@ -49,7 +49,6 @@ prActor::prActor(s32 type) : prGameObject()
     user1       = 0;
     user2       = 0;
     user3       = 0;
-//    m_colPos    = prVector2::Zero;
 }
 
 

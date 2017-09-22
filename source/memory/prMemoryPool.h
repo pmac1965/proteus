@@ -134,7 +134,6 @@ public:
 
 
 private:
-
     // Creates the pool.
     void Create(Proteus::Core::s32 size)
     {
@@ -167,7 +166,6 @@ private:
 
 
 protected:
-
     const char         *m_name;     // A name used to uniquely identify a pool during debugging.
     T*                  m_pool;     // The actual memory pool.
     T**                 m_objects;  // Pointers to the objects in the memory pool.
