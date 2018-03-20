@@ -57,23 +57,7 @@ prActor::prActor(s32 type) : prGameObject()
 /// ---------------------------------------------------------------------------
 prActor::~prActor()
 {
-////    for(auto it = mComponents)
-//    for (auto it = mComponents.begin(); it != mComponents.end(); ++it)
-//    {
-//    }
 }
-
-
-///// ---------------------------------------------------------------------------
-///// 
-///// ---------------------------------------------------------------------------
-//void prActor::AddComponent(prActorComponent *pComponent)
-//{
-//    if (pComponent)
-//    {
-//        mComponents.push_back(pComponent);
-//    }
-//}
 
 
 }}// Namespaces

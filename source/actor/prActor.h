@@ -184,16 +184,6 @@ public:
     //      User defined height
     virtual Proteus::Core::u32 GetActorHeight() const { return 0; }
 
-    //void AddComponent(prActorComponent *pComponent);// {}
-    //void RemoveComponent(prActorComponent *pComponent) {}
-
-    //template<typename T>
-    //T* FindComponentByType()
-    //{
-    //    return nullptr;
-    //}
-
-
 public:
     Proteus::Core::prTransform      transform;      // Transform data
     Proteus::Core::s32              user0;          // User data for you to do as you please
@@ -217,8 +207,6 @@ protected:
     bool                            m_exp1;
 
     // Add colour
-
-    //std::list<prActorComponent*>    mComponents;
 
 private:
     static Proteus::Core::s32       m_baseid;
