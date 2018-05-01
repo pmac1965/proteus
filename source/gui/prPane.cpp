@@ -51,6 +51,10 @@ namespace Gui {
 		mHeight			= 256;
 		mpPaneIcon		= nullptr;
 		mpOptionsIcon	= nullptr;
+        mcbInitialise   = nullptr;
+        mcbUpdate       = nullptr;
+        mcbPredraw      = nullptr;
+        mInitPane       = false;
 	}
 
 
@@ -59,6 +63,16 @@ namespace Gui {
     /// ---------------------------------------------------------------------------
     void prPane::Update(f32 dt)
     {
+        if (!mInitPane && mcbInitialise)
+        {
+            mInitPane = true;
+            mcbInitialise(nullptr);
+        }
+
+        if (mcbUpdate)
+        {
+            mcbUpdate();
+        }
     }
 
 

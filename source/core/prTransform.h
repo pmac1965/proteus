@@ -23,8 +23,11 @@
 #include "../math/prVector3.h"
 
 
+using namespace Proteus::Math;
+
+
 // Namespaces
-namespace Proteus {
+namespace Proteus { // convert to struct
 namespace Core {
 
 
@@ -37,9 +40,35 @@ namespace Core {
 class prTransform
 {
 public:
-    Proteus::Math::prVector3    position;
-    Proteus::Math::prVector3    rotation;
-    Proteus::Math::prVector3    scale;
+    /*Proteus::Math::*/prVector3    position;
+    /*Proteus::Math::*/prVector3    rotation;
+    /*Proteus::Math::*/prVector3    scale;
+
+
+    void Reset()
+    {
+        position = prVector3::Zero;
+        rotation = prVector3::Zero;
+        scale    = prVector3::One;
+    }
+
+
+    void ResetPosition()
+    {
+        position = prVector3::Zero;
+    }
+
+
+    void ResetRotation()
+    {
+        rotation = prVector3::Zero;
+    }
+
+
+    void ResetScale()
+    {
+        scale = prVector3::One;
+    }
 };
 
 

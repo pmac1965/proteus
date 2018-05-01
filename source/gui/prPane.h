@@ -30,6 +30,13 @@
 
 // Forward declarations
 class prSprite;
+class prRenderer;
+
+
+// Callbacks
+typedef void (*prPaneInitCallback)(void *);
+typedef void (*prPaneUpdateCallback)();
+typedef bool (*prPanePredrawCallback)(prRenderer *pRenderer, Proteus::Core::s32 x, Proteus::Core::s32 y, Proteus::Core::s32 width, Proteus::Core::s32 height);
 
 
 // Namespaces
@@ -132,6 +139,14 @@ public:
     //      Sets the panes icons
 	void SetIcons(prSprite *pIcon, prSprite *pOptionsIcon) { mpPaneIcon = pIcon; mpOptionsIcon = pOptionsIcon; }
 
+    void SetCallbacks(prPaneInitCallback cbi, prPaneUpdateCallback cbu, prPanePredrawCallback cbp)
+    {
+        mcbInitialise   = cbi;
+        mcbUpdate       = cbu;
+        mcbPredraw      = cbp;
+    }
+
+
 private:
 	prString				mName;
     Proteus::Core::s32		mXpos;
@@ -140,6 +155,12 @@ private:
     Proteus::Core::s32		mHeight;
 	prSprite			   *mpPaneIcon;
 	prSprite			   *mpOptionsIcon;
+
+    prPaneInitCallback      mcbInitialise;
+    prPaneUpdateCallback    mcbUpdate;
+    prPanePredrawCallback   mcbPredraw;
+
+    bool                    mInitPane;
 };
 
 
