@@ -38,6 +38,10 @@
 #include <map>
 
 
+namespace Proteus {
+namespace Core {
+
+
 // Class: prSettingsCallbacks
 //      A mix-in class to receive notifications about settings
 //
@@ -83,7 +87,7 @@ public:
     
     // Method: ~prSettings
     //      Dtor
-    ~prSettings();
+    ~prSettings() {}
 
     // Method: Add
     //      Adds a default setting and its value
@@ -154,3 +158,6 @@ private:
     prSettingsCallbacks                *mprSettingsCallbacks;
     bool                                mCorrectFileType;
 };
+
+
+}}// Namespaces

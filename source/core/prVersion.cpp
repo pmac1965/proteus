@@ -18,39 +18,44 @@
 
 
 #include "../prConfig.h"
-
-
 #include <stdio.h>
 #include "prVersion.h"
+#include "../debug/prDebug.h"
 
 
-namespace
-{
-    int versionMajor    = 2;
+namespace Proteus {
+namespace Core {
+
+    int versionMajor    = 3;
     int versionMinor    = 0;
     int versionRevision = 0;
-}
 
 
-/// ---------------------------------------------------------------------------
-/// Acquire engine version number.
-/// ---------------------------------------------------------------------------
-void prGetVersion(int &major, int &minor, int &revision)
-{
-    major    = versionMajor;
-    minor    = versionMinor;
-    revision = versionRevision;
-}
+    /// ---------------------------------------------------------------------------
+    /// Acquire engine version number.
+    /// ---------------------------------------------------------------------------
+    void prGetVersion(int &major, int &minor, int &revision)
+    {
+        major    = versionMajor;
+        minor    = versionMinor;
+        revision = versionRevision;
+    }
 
 
-/// ---------------------------------------------------------------------------
-/// Acquire engine version number as a string.
-/// ---------------------------------------------------------------------------
-const char *prGetVersionAsString()
-{
-    static char buffer[256];
+    /// ---------------------------------------------------------------------------
+    /// Acquire engine version number as a string.
+    /// ---------------------------------------------------------------------------
+    const char *prGetVersionAsString()
+    {
+        static char buffer[64];
 
-    sprintf(buffer, "%i.%i.%i", versionMajor, versionMinor, versionRevision);
+#if defined(PLATFORM_PC)
+        sprintf_s(buffer, sizeof(buffer), "%i.%i.%i", versionMajor, versionMinor, versionRevision);
+#else
+        sprintf(buffer, "%i.%i.%i", versionMajor, versionMinor, versionRevision);
+#endif
 
-    return buffer;
-}
+        return buffer;
+    }
+
+}}

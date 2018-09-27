@@ -19,18 +19,23 @@
 #pragma once
 
 
-// Function: prGetVersion
-//      Acquire engine version number.
-//
-// Parameters:
-//      major    - Variable to receive version number
-//      minor    - Variable to receive version number
-//      revision - Variable to receive version number
-void prGetVersion(int &major, int &minor, int &revision);
+namespace Proteus {
+namespace Core {
 
-// Function: prGetVersionAsString
-//      Acquire engine version number as a string.
-//
-// Returns:
-//      A string in the format of "major.minor.revision"
-const char *prGetVersionAsString();
+    // Function: prGetVersion
+    //      Acquire engine version number.
+    //
+    // Parameters:
+    //      major    - Variable to receive version number
+    //      minor    - Variable to receive version number
+    //      revision - Variable to receive version number
+    void prGetVersion(int &major, int &minor, int &revision);
+
+    // Function: prGetVersionAsString
+    //      Acquire engine version number as a string.
+    //
+    // Returns:
+    //      A string in the format of "major.minor.revision"
+    const char *prGetVersionAsString();
+
+}}

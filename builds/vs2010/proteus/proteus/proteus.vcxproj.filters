@@ -190,6 +190,9 @@
     <Filter Include="source\components">
       <UniqueIdentifier>{78765343-b453-4bea-a258-e64cb4331498}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\vr">
+      <UniqueIdentifier>{22f256ae-0692-4fe5-98bb-971855dea7bc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\source\proteus.h">
