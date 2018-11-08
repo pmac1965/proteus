@@ -227,13 +227,13 @@ bool prSoundManager_PC::Initialise()
                                 if (AL_ErrorCheck() != AL_NO_ERROR)
                                 {
                                     prTrace(LogError, "Failed to allocate source %i\n", i);
-                                    soundEffects[i].state    = SFX_STATE_UNAVAILABLE;
+                                    soundEffects[i].state    = prSoundEffectEntryState::SFX_STATE_UNAVAILABLE;
                                     soundEffects[i].uiSource = 0xFFFFFFFF;
                                     result = false;
                                 }
                                 else
                                 {
-                                    soundEffects[i].state = SFX_STATE_FREE;
+                                    soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_FREE;
                                 }
                             }
                         }
@@ -350,7 +350,7 @@ void prSoundManager_PC::Update(f32 dt)
         // Free any stopped effects
         for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
         {
-            if (soundEffects[i].state == SFX_STATE_PLAYING)
+            if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PLAYING)
             {
                 active++;
 
@@ -361,7 +361,7 @@ void prSoundManager_PC::Update(f32 dt)
                 // Set free?
                 if (state != AL_PLAYING && state != AL_PAUSED)
                 {
-                    soundEffects[i].state = SFX_STATE_FREE;
+                    soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_FREE;
                     active--;
                 }
             }
@@ -545,7 +545,7 @@ void prSoundManager_PC::SongPlayByName(const char *filename)
     songBuffers[0] = 0xFFFFFFFF;
     songBuffers[1] = 0xFFFFFFFF;
     songPlaying    = false;
-    songState      = SONG_STATE_FREE;
+    songState      = prSongState::SONG_STATE_FREE;
     songIndex      = -1;
     songFade       = 0.0f;
     songTime       = 0.0f;
@@ -624,7 +624,7 @@ void prSoundManager_PC::SongPlayByName(const char *filename)
 
         songPlaying = true;
         songIndex   = index;
-        songState   = SONG_STATE_PLAYING;
+        songState   = prSongState::SONG_STATE_PLAYING;
 
 
         if (!SongStream((unsigned int)songBuffers[0]))
@@ -696,7 +696,7 @@ void prSoundManager_PC::SongStop(float time)
         songBuffers[0] = 0;
         songBuffers[1] = 0;
         songPlaying    = false;
-        songState      = SONG_STATE_FREE;
+        songState      = prSongState::SONG_STATE_FREE;
         songIndex      = -1;
         songFade       = 0.0f;
         songTime       = 0.0f;
@@ -721,18 +721,18 @@ void prSoundManager_PC::SongPause(bool pause)
             {
                 if (pause)
                 {
-                    if (songState == SONG_STATE_PLAYING)
+                    if (songState == prSongState::SONG_STATE_PLAYING)
                     {
-                        songState = SONG_STATE_PAUSED;
+                        songState = prSongState::SONG_STATE_PAUSED;
                         alSourcePause(songSource);
                         AL_ERROR_CHECK()
                     }
                 }
                 else
                 {
-                    if (songState == SONG_STATE_PAUSED)
+                    if (songState == prSongState::SONG_STATE_PAUSED)
                     {
-                        songState = SONG_STATE_PLAYING;
+                        songState = prSongState::SONG_STATE_PLAYING;
                         alSourcePlay(songSource);
                         AL_ERROR_CHECK()
                     }
@@ -764,7 +764,7 @@ bool prSoundManager_PC::SongGetPaused() const
         {
             if (songPlaying)
             {
-                if (songState == SONG_STATE_PAUSED)
+                if (songState == prSongState::SONG_STATE_PAUSED)
                 {
                     result = true;
                 }
@@ -791,7 +791,7 @@ void prSoundManager_PC::SongSetVolume(f32 volume)
         {
             if (songPlaying)
             {
-                if (songState == SONG_STATE_PLAYING)
+                if (songState == prSongState::SONG_STATE_PLAYING)
                 {
                     // Set volume
                     float vol = PRCLAMP(volume, AUDIO_MUS_MIN_VOLUME, AUDIO_MUS_MAX_VOLUME);
@@ -834,7 +834,7 @@ s32 prSoundManager_PC::SFXPlay(s32 index, f32 volume, bool loop)
 
             for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
             {
-                if (soundEffects[i].state == SFX_STATE_FREE)
+                if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_FREE)
                 {
                     prLoadedWave *entry = &pLoadedWaves[index];
 
@@ -858,7 +858,7 @@ s32 prSoundManager_PC::SFXPlay(s32 index, f32 volume, bool loop)
 
 
                     // Set states
-                    soundEffects[i].state = SFX_STATE_PLAYING;
+                    soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_PLAYING;
                     soundEffects[i].hash  = entry->hash;
                     soundEffects[i].id    = effectId++;
 
@@ -895,9 +895,9 @@ void prSoundManager_PC::SFXStop(s32 id)
         {
             if (soundEffects[i].id == (u32)id)
             {
-                if (soundEffects[i].state == SFX_STATE_PLAYING)
+                if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PLAYING)
                 {
-                    soundEffects[i].state = SFX_STATE_FREE;
+                    soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_FREE;
                     soundEffects[i].id    = 0;
                     alSourceStop(soundEffects[i].uiSource);
                     AL_ERROR_CHECK()
@@ -930,9 +930,9 @@ void prSoundManager_PC::SFXStop(const char *name)
         {
             if (soundEffects[i].hash == hash)
             {
-                if (soundEffects[i].state == SFX_STATE_PLAYING)
+                if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PLAYING)
                 {
-                    soundEffects[i].state = SFX_STATE_FREE;
+                    soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_FREE;
                     soundEffects[i].id    = 0;
                     alSourceStop(soundEffects[i].uiSource);
                     AL_ERROR_CHECK()
@@ -961,10 +961,10 @@ void prSoundManager_PC::SFXStopAll()
     {
         for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
         {
-            if (soundEffects[i].state == SFX_STATE_PLAYING ||
-                soundEffects[i].state == SFX_STATE_PAUSED)
+            if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PLAYING ||
+                soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PAUSED)
             {
-                soundEffects[i].state = SFX_STATE_FREE;
+                soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_FREE;
                 soundEffects[i].id    = 0;
                 alSourceStop(soundEffects[i].uiSource);
                 AL_ERROR_CHECK()
@@ -993,7 +993,7 @@ bool prSoundManager_PC::SFXIsPlaying(int id) const
         {
             if (soundEffects[i].id == (u32)id)
             {
-                if (soundEffects[i].state == SFX_STATE_PLAYING)
+                if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PLAYING)
                 {
                     result = true;
                     break;
@@ -1031,7 +1031,7 @@ bool prSoundManager_PC::SFXIsPlaying(const char *name) const
         {
             if (soundEffects[i].hash == hash)
             {
-                if (soundEffects[i].state == SFX_STATE_PLAYING)
+                if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PLAYING)
                 {
                     result = true;
                     break;
@@ -1065,18 +1065,18 @@ void prSoundManager_PC::SFXPause(int id, bool state)
             {
                 if (state)
                 {
-                    if (soundEffects[i].state == SFX_STATE_PLAYING)
+                    if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PLAYING)
                     {
-                        soundEffects[i].state = SFX_STATE_PAUSED;
+                        soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_PAUSED;
                         alSourcePause(soundEffects[i].uiSource);
                         AL_ERROR_CHECK()
                     }
                 }
                 else
                 {
-                    if (soundEffects[i].state == SFX_STATE_PAUSED)
+                    if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PAUSED)
                     {
-                        soundEffects[i].state = SFX_STATE_PLAYING;
+                        soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_PLAYING;
                         alSourcePlay(soundEffects[i].uiSource);
                         AL_ERROR_CHECK()
                     }
@@ -1115,18 +1115,18 @@ void prSoundManager_PC::SFXPause(const char *name, bool state)
             {
                 if (state)
                 {
-                    if (soundEffects[i].state == SFX_STATE_PLAYING)
+                    if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PLAYING)
                     {
-                        soundEffects[i].state = SFX_STATE_PAUSED;
+                        soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_PAUSED;
                         alSourcePause(soundEffects[i].uiSource);
                         AL_ERROR_CHECK()
                     }
                 }
                 else
                 {
-                    if (soundEffects[i].state == SFX_STATE_PAUSED)
+                    if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PAUSED)
                     {
-                        soundEffects[i].state = SFX_STATE_PLAYING;
+                        soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_PLAYING;
                         alSourcePlay(soundEffects[i].uiSource);
                         AL_ERROR_CHECK()
                     }
@@ -1163,9 +1163,9 @@ void prSoundManager_PC::SFXPauseAll(bool state)
             {
                 for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
                 {
-                    if (soundEffects[i].state == SFX_STATE_PLAYING)
+                    if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PLAYING)
                     {
-                        soundEffects[i].state = SFX_STATE_PAUSED;
+                        soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_PAUSED;
                         alSourcePause(soundEffects[i].uiSource);
                         AL_ERROR_CHECK()
                     }
@@ -1175,9 +1175,9 @@ void prSoundManager_PC::SFXPauseAll(bool state)
             {
                 for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
                 {
-                    if (soundEffects[i].state == SFX_STATE_PAUSED)
+                    if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PAUSED)
                     {
-                        soundEffects[i].state = SFX_STATE_PLAYING;
+                        soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_PLAYING;
                         alSourcePlay(soundEffects[i].uiSource);
                         AL_ERROR_CHECK()
                     }
@@ -1240,7 +1240,7 @@ void prSoundManager_PC::SFXSetVolume(int id, f32 volume)
         {
             if (soundEffects[i].id == (u32)id)
             {
-                if (soundEffects[i].state == SFX_STATE_PLAYING)
+                if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PLAYING)
                 {
                     // Set volume
                     float vol = PRCLAMP(volume, AUDIO_SFX_MIN_VOLUME, AUDIO_SFX_MAX_VOLUME);

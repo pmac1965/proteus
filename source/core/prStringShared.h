@@ -27,6 +27,7 @@
 //      CMP_LESSTHAN    - Less than
 //      CMP_EQUALTO     - Equal to
 //      CMP_GREATERTHAN - Greater than
+//enum class prStringResult : Proteus::Core::s32
 enum prStringResult
 {
     CMP_ERROR       = -2,

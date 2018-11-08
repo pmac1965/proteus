@@ -29,7 +29,11 @@ using namespace Proteus::Core;
 /// ---------------------------------------------------------------------------
 prFps::prFps() : prCoreSystem(PRSYSTEM_FPS, "prFps")
 {
-    Reset();
+//    Reset();
+    frames        = 0;
+    frameRate     = 0;
+    frameRateMin  = 1000000;
+    frameRateMax  = -1000000;
 }
 
 

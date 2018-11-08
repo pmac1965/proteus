@@ -119,11 +119,15 @@ typedef struct prFileChunk
 typedef struct prSaveHeader
 {
     prSaveHeader()
+        : magic1    (0) // Keep cppcheck happy
+        , magic2    (0)
+        , size      (0)
+        , checksum  (0)
     {
-        magic1   = 0; 
-        magic2   = 0; 
-        size     = 0;   
-        checksum = 0;
+        //magic1   = 0; 
+        //magic2   = 0; 
+        //size     = 0;   
+        //checksum = 0;
     }
 
     Proteus::Core::u32     magic1;         ///< File identifer.

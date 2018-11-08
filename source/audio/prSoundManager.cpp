@@ -39,7 +39,7 @@ prSoundManager::prSoundManager() : prCoreSystem(PRSYSTEM_AUDIO, "prSoundManager"
     masterSfxVolumeBackup   = 0.0f;
     songVolume              = AUDIO_MUS_INITIAL_VOL;
     songIndex               = -1;
-    songState               = SONG_STATE_FREE;
+    songState               = prSongState::SONG_STATE_FREE;
     songFade                = 0.0f;
     songTime                = 0.0f;
     songPlaying             = false;
@@ -56,7 +56,7 @@ prSoundManager::prSoundManager() : prCoreSystem(PRSYSTEM_AUDIO, "prSoundManager"
     // Set default states
     for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
     {
-        soundEffects[i].state    = SFX_STATE_UNAVAILABLE;
+        soundEffects[i].state    = prSoundEffectEntryState::SFX_STATE_UNAVAILABLE;
         soundEffects[i].uiSource = 0xFFFFFFFF;
     }
 }

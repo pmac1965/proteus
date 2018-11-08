@@ -292,7 +292,8 @@ protected:
 
     Proteus::Core::f32  songVolume;
     Proteus::Core::s32  songIndex;
-    Proteus::Core::s32  songState;
+    
+    /*Proteus::Core::s32*/prSongState  songState;
     Proteus::Core::f32  songFade;
     Proteus::Core::f32  songTime;
 

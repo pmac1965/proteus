@@ -153,11 +153,11 @@ inline int prNextPowerOf2(int a)
 
 // Function: prIsPowerOf2
 //      This function tests if a number is power of 2
-inline bool prIsPowerOf2(Proteus::Core::s32 size)
+inline bool prIsPowerOf2(Proteus::Core::u32 size)
 {
     bool result = false;
     
-    for (Proteus::Core::s32 i = 1; i < 32; i++)
+    for (Proteus::Core::u32 i = 1; i < 32; i++)
     {
         if (size == (1 << i))
         {

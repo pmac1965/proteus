@@ -40,7 +40,7 @@
 //  - SFX_STATE_PLAYING
 //  - SFX_STATE_PAUSED
 //  - SFX_STATE_UNAVAILABLE
-enum prSoundEffectEntryState
+enum class prSoundEffectEntryState : Proteus::Core::u32
 {
     SFX_STATE_FREE,
     SFX_STATE_PLAYING,
@@ -55,11 +55,11 @@ enum prSoundEffectEntryState
 //  - SONG_STATE_FREE
 //  - SONG_STATE_PLAYING
 //  - SONG_STATE_PAUSED
-enum prSongState
+enum class prSongState : Proteus::Core::u32
 {
     SONG_STATE_FREE,
     SONG_STATE_PLAYING,
-    SONG_STATE_PAUSED,
+    SONG_STATE_PAUSED
 };
 
 
@@ -105,9 +105,9 @@ public:
 //  u32 - id;
 typedef struct prSoundEffectEntry
 {
-    Proteus::Core::u32 uiSource;
-    Proteus::Core::u32 state;
-    Proteus::Core::u32 hash;
-    Proteus::Core::u32 id;
+    Proteus::Core::u32      uiSource;
+    prSoundEffectEntryState state;
+    Proteus::Core::u32      hash;
+    Proteus::Core::u32      id;
 
 } prSoundEffectEntry;
