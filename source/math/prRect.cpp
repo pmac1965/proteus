@@ -35,12 +35,12 @@ namespace Math {
 /// Constructor.
 /// ---------------------------------------------------------------------------
 prRect::prRect()
-: m_top    (0)
-, m_left   (0)
-, m_bottom (0)
-, m_right  (0) 
-, m_width  (0) 
-, m_height (0) 
+    : m_top    (0)
+    , m_left   (0)
+    , m_bottom (0)
+    , m_right  (0) 
+    , m_width  (0) 
+    , m_height (0) 
 {
 }
 
@@ -49,10 +49,10 @@ prRect::prRect()
 /// Constructor.
 /// ---------------------------------------------------------------------------
 prRect::prRect(s32 top, s32 left, s32 bottom, s32 right)
-: m_top    (top)
-, m_left   (left)
-, m_bottom (bottom)
-, m_right  (right)
+    : m_top    (top)
+    , m_left   (left)
+    , m_bottom (bottom)
+    , m_right  (right)
 {
     VerifyCoords();
 }   
@@ -62,10 +62,10 @@ prRect::prRect(s32 top, s32 left, s32 bottom, s32 right)
 /// Constructor.
 /// ---------------------------------------------------------------------------
 prRect::prRect(f32 top, f32 left, f32 bottom, f32 right)
-: m_top    ((s32)top)
-, m_left   ((s32)left)
-, m_bottom ((s32)bottom)
-, m_right  ((s32)right)
+    : m_top    ((s32)top)
+    , m_left   ((s32)left)
+    , m_bottom ((s32)bottom)
+    , m_right  ((s32)right)
 {
     VerifyCoords();
 }   
@@ -75,10 +75,10 @@ prRect::prRect(f32 top, f32 left, f32 bottom, f32 right)
 /// Constructor.
 /// ---------------------------------------------------------------------------
 prRect::prRect(const prPoint3& topLeft, const prPoint3& bottomRight)
-: m_top    (topLeft.y)
-, m_left   (topLeft.x)
-, m_bottom (bottomRight.y)
-, m_right  (bottomRight.x)
+    : m_top    (topLeft.y)
+    , m_left   (topLeft.x)
+    , m_bottom (bottomRight.y)
+    , m_right  (bottomRight.x)
 {
     VerifyCoords();
 }

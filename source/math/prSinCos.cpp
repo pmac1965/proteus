@@ -98,12 +98,9 @@ Proteus::Core::f32 prCos(Proteus::Core::u32 angle)
     if (angle >= PRARRAY_SIZE(cosTable))
     {
         angle %= PRARRAY_SIZE(cosTable);
-        return cosTable[angle];
     }
-    else
-    {
-        return cosTable[angle];
-    }
+
+    return cosTable[angle];
 }
 
 
@@ -115,12 +112,9 @@ Proteus::Core::f32 prSin(Proteus::Core::u32 angle)
     if (angle >= PRARRAY_SIZE(sinTable))
     {
         angle %= PRARRAY_SIZE(sinTable);
-        return sinTable[angle];
     }
-    else
-    {
-        return sinTable[angle];
-    }
+
+    return sinTable[angle];
 }
 
 

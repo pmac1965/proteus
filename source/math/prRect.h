@@ -20,6 +20,7 @@
 
 
 #include "../core/prTypes.h"
+#include "../debug/prDebug.h"
 #include "prPoint.h"
 
 
@@ -65,10 +66,12 @@ public:
     //      bottomRight - Rectangle coordinate 
     prRect(const prPoint3& topLeft, const prPoint3& bottomRight);
 
-    // Method: ~prRect
-    //      Destructor
-    ~prRect()
-    {}
+    //// Method: ~prRect
+    ////      Destructor
+    //~prRect()
+    //{
+    //    TODO("Unnecessary remove");
+    //}
                     
     // Method: PointInside
     //       Determines if the passed coordinates are within the rectangle.
