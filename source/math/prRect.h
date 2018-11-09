@@ -65,13 +65,6 @@ public:
     //      topLeft     - Rectangle coordinate 
     //      bottomRight - Rectangle coordinate 
     prRect(const prPoint3& topLeft, const prPoint3& bottomRight);
-
-    //// Method: ~prRect
-    ////      Destructor
-    //~prRect()
-    //{
-    //    TODO("Unnecessary remove");
-    //}
                     
     // Method: PointInside
     //       Determines if the passed coordinates are within the rectangle.
