@@ -32,8 +32,8 @@ namespace Math {
 class prQuaternion
 {
 public:
-    prQuaternion() : x(0.0f), y(0.0f), z(0.0f), w(0.0f)
-    {}
+    prQuaternion();// : x(0.0f), y(0.0f), z(0.0f), w(0.0f)
+    //{}
 
     prQuaternion(Proteus::Core::f32 _x, Proteus::Core::f32 _y, Proteus::Core::f32 _z, Proteus::Core::f32 _w) : x(_x), y(_y), z(_x), w(_w)
     {}
@@ -111,7 +111,7 @@ inline prQuaternion& prQuaternion::operator*=(Proteus::Core::f32 s)
 
 
 
-inline prQuaternion& prQuaternion::Set(Proteus::Core::f32 _x, Proteus::Core::f32 _y, Proteus::Core::f32 _z)
+/*inline prQuaternion& prQuaternion::Set(Proteus::Core::f32 _x, Proteus::Core::f32 _y, Proteus::Core::f32 _z)
 {
 	Proteus::Core::f64 angle;
 
@@ -138,10 +138,10 @@ inline prQuaternion& prQuaternion::Set(Proteus::Core::f32 _x, Proteus::Core::f32
 	w = (Proteus::Core::f32)(cr * cpcy + sr * spsy);
 
 	return Normalise();
-}
+}//*/
 
 
-inline prQuaternion& prQuaternion::Normalise()
+/*inline prQuaternion& prQuaternion::Normalise()
 {
 	const Proteus::Core::f32 n = x*x + y*y + z*z + w*w;
 
@@ -151,7 +151,7 @@ inline prQuaternion& prQuaternion::Normalise()
 	//n = 1.0f / sqrtf(n);
 	return (*this *= 1.0f / sqrtf(n));
     //return *this;
-}
+}//*/
 
 
 }}// Namespaces

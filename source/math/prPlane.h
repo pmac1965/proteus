@@ -31,7 +31,11 @@ class prPlane
 {
 public:
     prPlane();
-    ~prPlane();
+
+
+    //{
+    //}
+    //~prPlane();
 
 
 private:

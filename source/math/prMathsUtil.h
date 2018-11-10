@@ -159,7 +159,7 @@ inline bool prIsPowerOf2(Proteus::Core::u32 size)
     
     for (Proteus::Core::u32 i = 1; i < 32; i++)
     {
-        if (size == (1 << i))
+        if (size == static_cast<Proteus::Core::u32>(1 << i))
         {
             result = true;
             break;

@@ -60,6 +60,15 @@ using namespace Proteus::Core;
 /// ---------------------------------------------------------------------------
 prProfileManager::prProfileManager()
 {
+    // Just in case its not set below 
+    m_frequency = 0.0f;
+
+    // Sets all entries to null
+    for (u32 i=0; i<PROFILE_MAX_ENTRIES; i++)
+    {
+        m_entries[i] = nullptr;
+    }
+
 #if defined(PLATFORM_PC)
 
     // Calculate frequency here, so we only do it once
