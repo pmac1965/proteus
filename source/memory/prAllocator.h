@@ -1,4 +1,11 @@
 // File: prAllocator.h
+//      Describes the memory allocator types.
+//
+//      - Linked heap (similar to standard memory allocation, but quite fast)
+//      - Stacked heap (Fast, single use allocation only, delete heap == all allocations gone)
+//
+// Notes:
+//      Updated 12, Nov, 2018 to add namespaces
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -22,6 +29,10 @@
 #include "../core/prTypes.h"
 
 
+PRNAMESPACE_BEG(Proteus)
+PRNAMESPACE_BEG(Memory)
+
+
 // Class: prAllocator
 //      Interface for all prAllocators.
 class prAllocator
@@ -35,3 +46,7 @@ public:
     //      Releases memory to an prAllocator.
     virtual void Release(void *p) = 0;
 };
+
+
+PRNAMESPACE_END
+PRNAMESPACE_END // Namespaces

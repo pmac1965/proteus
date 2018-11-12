@@ -72,7 +72,7 @@ typedef struct AllocInfo
 
 // Class: prLinkedHeap
 //      Represents a memory heap manager that uses linked nodes.
-class prLinkedHeap : public prAllocator
+class prLinkedHeap : public Proteus::Memory::prAllocator
 {
 public:
     // Method: prLinkedHeap

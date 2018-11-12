@@ -1,4 +1,5 @@
 // File: prMemoryPool.h
+//      Simple memory pool (Pool of objects)
 /**
  * Copyright 2014 Paul Michael McNab
  * 

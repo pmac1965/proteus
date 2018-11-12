@@ -46,7 +46,7 @@ typedef struct StackNode
 
 // Class: prStackHeap
 //      Represents a stack based memory heap manager.
-class prStackHeap : public prAllocator
+class prStackHeap : public Proteus::Memory::prAllocator
 {
 public:
     // Method: prStackHeap
