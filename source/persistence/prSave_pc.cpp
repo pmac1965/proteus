@@ -41,10 +41,11 @@ using namespace Proteus::Core;
 // Implementation data.
 typedef struct SavePCImplementation
 {
-    SavePCImplementation()
+    SavePCImplementation() : pFile      (nullptr)
+                           , filesize   (0)
     {
-        pFile    = NULL;
-        filesize = 0;
+        //pFile    = NULL;
+        //filesize = 0;
     }
 
     FILE   *pFile;

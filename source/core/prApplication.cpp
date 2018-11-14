@@ -30,10 +30,9 @@ namespace Core {
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
-prApplication::prApplication()
+prApplication::prApplication() : m_running(PRFALSE)
+                               , m_pWindow(nullptr)
 {
-    m_pWindow = nullptr;
-    m_running = PRFALSE;
 }
 
 

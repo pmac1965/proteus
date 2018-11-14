@@ -1,4 +1,11 @@
 // File: prMemory.h
+//      Some of this code is pre-GBA, written before DMA (Direct Memory Acess)
+//      
+// Notes:
+//      Really shouldn't keep is around... but I do
+//
+// Notes:
+//      Not really intended to be used.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -52,6 +59,10 @@ typedef struct prFreeNode
 #endif
 
 
+PRNAMESPACE_BEG(Proteus)
+PRNAMESPACE_BEG(Memory)
+
+
 // Function: prMemoryCopy
 //      Performs memory copying.
 //
@@ -95,3 +106,7 @@ void prMemoryFill16(void *addr, Proteus::Core::u32 size, Proteus::Core::u16 data
 //      size - The size of the pointed to address in bytes
 //      data - The data to fill with
 void prMemoryFill32(void *addr, Proteus::Core::u32 size, Proteus::Core::u32 data);
+
+
+PRNAMESPACE_END
+PRNAMESPACE_END

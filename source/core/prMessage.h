@@ -29,13 +29,12 @@ typedef struct prGameMessage
 public:
     // Method: prGameMessage
     //      Default constructor
-    prGameMessage()
+    prGameMessage() : type        (0)
+                    , user0       (0)
+                    , user1       (0)
+                    , user2       (0)
+                    , user3       (0)
     {
-        type        = 0;
-        user0       = 0;
-        user1       = 0;
-        user2       = 0;
-        user3       = 0;
     }
 
     // Method: prGameMessage
@@ -48,12 +47,12 @@ public:
     //      d2    - Optional data component.
     //      d3    - Optional data component.
     prGameMessage(Proteus::Core::u32 atype, Proteus::Core::u32 d0 = 0, Proteus::Core::u32 d1 = 0, Proteus::Core::u32 d2 = 0, Proteus::Core::u32 d3 = 0)
+        : type        (atype)
+        , user0       (d0)
+        , user1       (d1)
+        , user2       (d2)
+        , user3       (d3)
     {
-        type        = atype;
-        user0       = d0;
-        user1       = d1;
-        user2       = d2;
-        user3       = d3;
     }
 
     Proteus::Core::u32 type;               // The message type

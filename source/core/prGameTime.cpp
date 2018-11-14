@@ -32,19 +32,19 @@
 using namespace Proteus::Core;
 
 
-#define MILLISECONDS    1000.0f
+//#define MILLISECONDS    1000.0f
+const float MILLISECONDS    = 1000.0f;
 
 
 // Implementation data.
 typedef struct GameTimeImplementation
 {
-    GameTimeImplementation()
+    // Ctor
+    GameTimeImplementation() : timePrev    (0LL)
+                             , frequency   (0.0f)
+                             , runTime     (0.0f)
+                             , elapsedTime (0.0f)
     {
-        frequency   = 0.0f;
-        runTime     = 0.0f;
-        elapsedTime = 0.0f;
-        timePrev    = 0LL;
-
         LARGE_INTEGER countsPerSecond;
 
         if (QueryPerformanceFrequency(&countsPerSecond))
