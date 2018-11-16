@@ -102,7 +102,7 @@ bool prRegistry::AddKey(string key, string value)
 /// ---------------------------------------------------------------------------
 /// Sets the value of a key in the registry.
 /// ---------------------------------------------------------------------------
-bool prRegistry::SetValue(string key, string value)
+bool prRegistry::SetValue(string key, const string &value)
 {
     bool result = false;
 

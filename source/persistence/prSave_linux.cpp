@@ -47,10 +47,11 @@ using namespace Proteus::Core;
 /// ---------------------------------------------------------------------------
 typedef struct SaveLinuxImplementation
 {
-    SaveLinuxImplementation()
+    SaveLinuxImplementation() : pFile      (nullptr)
+                              , filesize   (0)
     {
-        pFile    = NULL;
-        filesize = 0;
+        //pFile    = NULL;
+        //filesize = 0;
     }
 
     FILE   *pFile;

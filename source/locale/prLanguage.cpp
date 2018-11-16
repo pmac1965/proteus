@@ -42,12 +42,15 @@ typedef struct LocaleInfo
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
-prLanguage::prLanguage()
+prLanguage::prLanguage() : language             (prGetPlatformsLanguage())
+                         , count                (0)
+                         , correctFileType      (PRFALSE)
+                         , pStringTableEntries  (nullptr)
 {
-    language            = prGetPlatformsLanguage();
-    count               = 0;
-    correctFileType     = PRFALSE;
-    pStringTableEntries = nullptr;
+//    language            = prGetPlatformsLanguage();
+//    count               = 0;
+//    correctFileType     = PRFALSE;
+//    pStringTableEntries = nullptr;
 }
 
 

@@ -70,15 +70,12 @@ u32 prCamera::baseID = 1;
 /// http://nehe.gamedev.net/article/using_gluunproject/16013/
 /// http://www.gamedev.net/topic/583628-solved-gluproject/page__p__583628__hl__screen+to+world__fromsearch__1#entry583628
 /// ---------------------------------------------------------------------------
-prCamera::prCamera() 
-
-: m_eye     (Proteus::Math::prVector3::Zero)
-, m_up      (Proteus::Math::prVector3(0, 1, 0))
-, m_at      (Proteus::Math::prVector3::Zero)
-
+prCamera::prCamera() : m_eye     (Proteus::Math::prVector3::Zero)
+                     , m_up      (Proteus::Math::prVector3(0, 1, 0))
+                     , m_at      (Proteus::Math::prVector3::Zero)
+                     , m_active  (PRFALSE)
+                     , m_hash    (0)
 {
-    m_active = PRFALSE;
-    m_hash   = 0;
     m_id     = baseID++;
 }
 
@@ -87,14 +84,12 @@ prCamera::prCamera()
 /// Constructor
 /// ---------------------------------------------------------------------------
 prCamera::prCamera(const Proteus::Math::prVector3 &eye, const Proteus::Math::prVector3 &up, const Proteus::Math::prVector3 &at) 
-
-: m_eye     (eye)
-, m_up      (up)
-, m_at      (at)
-
+    : m_eye     (eye)
+    , m_up      (up)
+    , m_at      (at)
+    , m_active  (PRFALSE)
+    , m_hash    (0)
 {
-    m_active = PRFALSE;
-    m_hash   = 0;
     m_id     = baseID++;
 }
 

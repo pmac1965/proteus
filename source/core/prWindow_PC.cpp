@@ -86,9 +86,10 @@ static const TCHAR *g_ClassName = TEXT("Proteus Class");
 /// Ctor
 /// ---------------------------------------------------------------------------
 prWindow_PC::prWindow_PC() : prWindow()
+                           , m_glrc  (NULL)
 {
     m_hwnd        = NULL;
-    m_glrc        = NULL;
+   // m_glrc        = NULL; // Only this line triggered cppcheck?
     m_hdc         = NULL;
     m_title       = NULL;
 }

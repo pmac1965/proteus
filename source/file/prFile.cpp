@@ -64,13 +64,15 @@ enum prFileMode
 typedef struct FileImplementation
 {
     // Ctor
-    FileImplementation() : filemode(FileMode_None)
+    FileImplementation() : filemode     (FileMode_None)
+                         , filesize     (0xFFFFFFFF)
+                         , filePointer  (0)
     {
         filedata    = nullptr;
         pFile       = nullptr;
-        //filemode    = FileMode_None;
-        filesize    = 0xFFFFFFFF;
-        filePointer = 0;
+        //filemode    = FileMode_None; //cppcheck only triggred these 3?
+//        filesize    = 0xFFFFFFFF;
+  //      filePointer = 0;
         opened      = false;
         loaded      = false;
         locked      = false;

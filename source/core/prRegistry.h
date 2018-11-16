@@ -73,11 +73,11 @@ public:
     //      value - The keys value
     //
     // Notes:
-    //      All entries are stored as string
+    //      All entries are stored as stringn
     //
     // Returns:
     //      true if value set, false otherwise
-    bool SetValue(std::string key, std::string value);
+    bool SetValue(std::string key, const std::string &value);
     
     // Method: SetValue
     //      Sets the value of a key in the registry.

@@ -42,10 +42,11 @@ using namespace Proteus::Core;
 /// ---------------------------------------------------------------------------
 typedef struct SaveIosImplementation
 {
-    SaveIosImplementation()
+    SaveIosImplementation() : pFile     (nullptr)
+                            , filesize  (0)
     {
-        pFile    = NULL;
-        filesize = 0;
+        //pFile    = NULL;
+        //filesize = 0;
     }
 
     FILE   *pFile;

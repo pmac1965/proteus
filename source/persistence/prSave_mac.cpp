@@ -41,10 +41,11 @@
 /// ---------------------------------------------------------------------------
 typedef struct SaveMacImplementation
 {
-    SaveMacImplementation()
+    SaveMacImplementation() : pFile      (nullptr)
+                            , filesize   (0)
     {
-        pFile    = NULL;
-        filesize = 0;
+        //pFile    = NULL;
+        //filesize = 0;
     }
 
     FILE   *pFile;
