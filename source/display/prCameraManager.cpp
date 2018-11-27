@@ -208,8 +208,8 @@ void prCameraManager::DisplayUsage()
 {
 #if defined(_DEBUG) || defined(DEBUG)
 
-    prTrace(LogError, "\n");
-    prTrace(LogError, "Camera manager: =========================================================================\n");
+    prTrace(prLogLevel::LogError, "\n");
+    prTrace(prLogLevel::LogError, "Camera manager: =========================================================================\n");
 
     prList<prCamera*>::prIterator it = m_cameras.Begin();    
     while(it.Okay())
@@ -218,7 +218,7 @@ void prCameraManager::DisplayUsage()
         
         prTrace
         (
-            LogError,
+            prLogLevel::LogError,
             "Camera ID %*i, Active: %s, Hash 0x%08x, Name: %s\n", 
             4, cam->GetID(), 
             cam->GetActive() ? "true " : "false",
@@ -229,8 +229,8 @@ void prCameraManager::DisplayUsage()
         ++it;
     }
     
-    prTrace(LogError, "Cameras: %i\n", m_cameras.Size());
-    prTrace(LogError, "=========================================================================================\n");
+    prTrace(prLogLevel::LogError, "Cameras: %i\n", m_cameras.Size());
+    prTrace(prLogLevel::LogError, "=========================================================================================\n");
 
 #endif
 }

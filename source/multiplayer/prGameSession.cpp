@@ -109,36 +109,36 @@ void prGameSession::ReceiveMessage(s32 msg)
     {
     case GSS_CONNECT_BEGIN:
         if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus((u32)GSS_CONNECT_BEGIN); }
-        prTrace(LogError, "GSS_CONNECT_BEGIN\n");
+        prTrace(prLogLevel::LogError, "GSS_CONNECT_BEGIN\n");
         break;
 
     case GSS_CONNECT_FAILED:
         if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus((u32)GSS_CONNECT_FAILED); }
-        prTrace(LogError, "GSS_CONNECT_FAILED\n");
+        prTrace(prLogLevel::LogError, "GSS_CONNECT_FAILED\n");
         break;
 
     case GSS_CONNECT_OK:
         if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus((u32)GSS_CONNECT_OK); }
-        prTrace(LogError, "GSS_CONNECT_OK\n");
+        prTrace(prLogLevel::LogError, "GSS_CONNECT_OK\n");
         break;
 
     case GSS_TURNED_ON:
         if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus((u32)GSS_TURNED_ON); }
-        prTrace(LogError, "GSS_TURNED_ON\n");
+        prTrace(prLogLevel::LogError, "GSS_TURNED_ON\n");
         break;
 
     case GSS_DISCOVERY:
         if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus((u32)GSS_DISCOVERY); }
-        prTrace(LogError, "GSS_DISCOVERY\n");
+        prTrace(prLogLevel::LogError, "GSS_DISCOVERY\n");
         break;
 
     case GSS_PEER_ID:
         if (mpGameSessionReceiver) { mpGameSessionReceiver->GameSessionStatus((u32)GSS_PEER_ID); }
-        prTrace(LogError, "GSS_PEER_ID\n");
+        prTrace(prLogLevel::LogError, "GSS_PEER_ID\n");
         break;
 
     default:
-        prTrace(LogError, "game session: unknown message: 0x%08x\n", msg);
+        prTrace(prLogLevel::LogError, "game session: unknown message: 0x%08x\n", msg);
         break;
     }
 }

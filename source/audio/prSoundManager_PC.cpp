@@ -128,7 +128,7 @@ prSoundManager_PC::prSoundManager_PC()
     }
     else
     {
-        prTrace(LogError, "Failed to load OggVorbis dll's\n");
+        prTrace(prLogLevel::LogError, "Failed to load OggVorbis dll's\n");
     }
 
 #endif
@@ -184,7 +184,7 @@ bool prSoundManager_PC::Initialise()
     // Already initialised?
     if (initialised)
     {
-        prTrace(LogError, "The sound system is already initialised.\n");
+        prTrace(prLogLevel::LogError, "The sound system is already initialised.\n");
         return true;
     }
 
@@ -200,7 +200,7 @@ bool prSoundManager_PC::Initialise()
             for (int i=0; i<count; i++)
             {
                 #if defined(SOUND_DEBUG)
-                prTrace(LogError, "Trying device: %s\n", pDeviceList->GetDeviceName(i));
+                prTrace(prLogLevel::LogError, "Trying device: %s\n", pDeviceList->GetDeviceName(i));
                 #endif
 
                 // Open default OpenAL device
@@ -226,7 +226,7 @@ bool prSoundManager_PC::Initialise()
                                 alGenSources(1, &soundEffects[i].uiSource);
                                 if (AL_ErrorCheck() != AL_NO_ERROR)
                                 {
-                                    prTrace(LogError, "Failed to allocate source %i\n", i);
+                                    prTrace(prLogLevel::LogError, "Failed to allocate source %i\n", i);
                                     soundEffects[i].state    = prSoundEffectEntryState::SFX_STATE_UNAVAILABLE;
                                     soundEffects[i].uiSource = 0xFFFFFFFF;
                                     result = false;
@@ -239,7 +239,7 @@ bool prSoundManager_PC::Initialise()
                         }
                         else
                         {
-                            prTrace(LogError, "Failed to make OpenAL context current\n");
+                            prTrace(prLogLevel::LogError, "Failed to make OpenAL context current\n");
                         }
                     }
 
@@ -247,7 +247,7 @@ bool prSoundManager_PC::Initialise()
                     if (!result)
                     {
                         #if defined(SOUND_DEBUG)
-                        prTrace(LogError, "Device failed: %s\n", pDeviceList->GetDeviceName(i));
+                        prTrace(prLogLevel::LogError, "Device failed: %s\n", pDeviceList->GetDeviceName(i));
                         #endif
 
                         if (context)
@@ -268,14 +268,14 @@ bool prSoundManager_PC::Initialise()
                     else
                     {
                         #if defined(SOUND_DEBUG)
-                        prTrace(LogError, "Device succeeded: %s\n", pDeviceList->GetDeviceName(i));
+                        prTrace(prLogLevel::LogError, "Device succeeded: %s\n", pDeviceList->GetDeviceName(i));
                         #endif
                         break;
                     }
                 }
                 else
                 {
-                    prTrace(LogError, "Failed to open audio device: %s\n", pDeviceList->GetDeviceName(i));
+                    prTrace(prLogLevel::LogError, "Failed to open audio device: %s\n", pDeviceList->GetDeviceName(i));
                 }
             }
         }
@@ -309,7 +309,7 @@ void prSoundManager_PC::Release()
         // Release the current context.
         if (!alcMakeContextCurrent(nullptr))
         {
-            prTrace(LogError, "OpenAL shutdown error\n");
+            prTrace(prLogLevel::LogError, "OpenAL shutdown error\n");
         }
         ALC_ErrorCheck(pDevice);
 
@@ -322,13 +322,13 @@ void prSoundManager_PC::Release()
         {
             if (alcGetError(pDevice) != ALC_NO_ERROR)
             {
-                prTrace(LogError, "OpenAL shutdown error\n");
+                prTrace(prLogLevel::LogError, "OpenAL shutdown error\n");
             }
 
             // Destroy device
             if (!alcCloseDevice(pDevice))
             {
-                prTrace(LogError, "OpenAL shutdown error\n");
+                prTrace(prLogLevel::LogError, "OpenAL shutdown error\n");
             }
         }
     }
@@ -422,7 +422,7 @@ void prSoundManager_PC::LoadSFX(const prSFXInfo *sfx, s32 count)
     // Called twice?
     if (pLoadedWaves)
     {
-        prTrace(LogError, "Attempted to load sfx twice\n");
+        prTrace(prLogLevel::LogError, "Attempted to load sfx twice\n");
         return;
     }
     
@@ -466,21 +466,21 @@ void prSoundManager_PC::LoadSFX(const prSFXInfo *sfx, s32 count)
                 }
                 else
                 {
-                    prTrace(LogError, "Sound effect: %s\n", sfx[i].filename);
-                    prTrace(LogError, "Failed to create effect\n");
+                    prTrace(prLogLevel::LogError, "Sound effect: %s\n", sfx[i].filename);
+                    prTrace(prLogLevel::LogError, "Failed to create effect\n");
 
                     #if defined(SOUND_SHOW_FAILS) && (defined(_DEBUG) || defined(DEBUG))
-                    prTrace(LogError, "GetWaveSize           == %i\n", waves.GetWaveSize(id, (u32*)&iDataSize)                 == WR_OK);
-                    prTrace(LogError, "GetWaveData           == %i\n", waves.GetWaveData(id, (void**)&pData)                   == WR_OK);
-                    prTrace(LogError, "GetWaveFrequency      == %i\n", waves.GetWaveFrequency(id, (u32*)&iFrequency)           == WR_OK);
-                    prTrace(LogError, "GetWaveALBufferFormat == %i\n", waves.GetWaveALBufferFormat(id, (u32*)&eBufferFormat)   == WR_OK);
+                    prTrace(prLogLevel::LogError, "GetWaveSize           == %i\n", waves.GetWaveSize(id, (u32*)&iDataSize)                 == WR_OK);
+                    prTrace(prLogLevel::LogError, "GetWaveData           == %i\n", waves.GetWaveData(id, (void**)&pData)                   == WR_OK);
+                    prTrace(prLogLevel::LogError, "GetWaveFrequency      == %i\n", waves.GetWaveFrequency(id, (u32*)&iFrequency)           == WR_OK);
+                    prTrace(prLogLevel::LogError, "GetWaveALBufferFormat == %i\n", waves.GetWaveALBufferFormat(id, (u32*)&eBufferFormat)   == WR_OK);
                     #endif
                 }
             }
             else
             {
-                prTrace(LogError, "Failed to load %s\n", sfx[i].filename);
-                prTrace(LogError, "If the file is not missing, then check .wav format. Should be PCM\n");
+                prTrace(prLogLevel::LogError, "Failed to load %s\n", sfx[i].filename);
+                prTrace(prLogLevel::LogError, "If the file is not missing, then check .wav format. Should be PCM\n");
             }
         }
     }
@@ -508,7 +508,7 @@ void prSoundManager_PC::SongPlayByName(const char *filename)
     pOggFile = fopen(filename, "rb");
     if (pOggFile == nullptr)
     {
-        prTrace(LogError, "Couldn't open .ogg file: %s\n", filename);
+        prTrace(prLogLevel::LogError, "Couldn't open .ogg file: %s\n", filename);
         return;
     }
 
@@ -526,7 +526,7 @@ void prSoundManager_PC::SongPlayByName(const char *filename)
 
     if (index == -1)
     {
-        prTrace(LogError, "Failed to find registered music track %s\n", filename);
+        prTrace(prLogLevel::LogError, "Failed to find registered music track %s\n", filename);
         return;
     }
 
@@ -584,7 +584,7 @@ void prSoundManager_PC::SongPlayByName(const char *filename)
                 // Close OggVorbis stream
                 PRASSERT(ov_clear);
                 ov_clear(&oggStream);
-                prTrace(LogError, "Unknown channel count from .ogg file: %s\n", filename);
+                prTrace(prLogLevel::LogError, "Unknown channel count from .ogg file: %s\n", filename);
                 return;
             }
         }
@@ -593,7 +593,7 @@ void prSoundManager_PC::SongPlayByName(const char *filename)
             // Close OggVorbis stream
             PRASSERT(ov_clear);
             ov_clear(&oggStream);
-            prTrace(LogError, "Failed to get info from .ogg file: %s\n", filename);
+            prTrace(prLogLevel::LogError, "Failed to get info from .ogg file: %s\n", filename);
             return;
         }
 
@@ -629,12 +629,12 @@ void prSoundManager_PC::SongPlayByName(const char *filename)
 
         if (!SongStream((unsigned int)songBuffers[0]))
         {
-            prTrace(LogError, "stream failed 1\n");
+            prTrace(prLogLevel::LogError, "stream failed 1\n");
         }
 
         if (!SongStream((unsigned int)songBuffers[1]))
         {
-            prTrace(LogError, "stream failed 2\n");
+            prTrace(prLogLevel::LogError, "stream failed 2\n");
         }
     
         alSourceQueueBuffers(songSource, 2, songBuffers);
@@ -648,7 +648,7 @@ void prSoundManager_PC::SongPlayByName(const char *filename)
     }
     else
     {
-        prTrace(LogError, "Failed to open .ogg file: %s\n", filename);
+        prTrace(prLogLevel::LogError, "Failed to open .ogg file: %s\n", filename);
     }
 
 #else
@@ -802,7 +802,7 @@ void prSoundManager_PC::SongSetVolume(f32 volume)
                 }
                 else
                 {
-                    prTrace(LogError, "Tried to set the volume of a paused song.\n");
+                    prTrace(prLogLevel::LogError, "Tried to set the volume of a paused song.\n");
                 }
             }
         }
@@ -1367,7 +1367,7 @@ bool prSoundManager_PC::SongStream(unsigned int buffer)
         {
             if (result < 0)
             {
-                prTrace(LogError, "Stream error\n");
+                prTrace(prLogLevel::LogError, "Stream error\n");
             }
             else
             {

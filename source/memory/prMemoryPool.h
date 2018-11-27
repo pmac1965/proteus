@@ -64,7 +64,7 @@ public:
             return m_objects[--m_index];
         }
 
-        prTrace(LogError, "Failed to pop object from pool\n");
+        prTrace(prLogLevel::LogError, "Failed to pop object from pool\n");
         return 0;
     }
     

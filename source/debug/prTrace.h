@@ -32,7 +32,7 @@
 //  - LogInformation  - Logs messages of information level or above
 //  - LogWarning      - Logs messages of warning level or above
 //  - LogError        - Logs messages of error level or above
-typedef enum prLogLevel
+typedef enum class prLogLevel : int
 {
     LogVerbose,
     LogDebug,
@@ -109,25 +109,25 @@ int prTraceIsEnabled();
 // Macro versions
 #if (defined(_DEBUG) || defined(DEBUG))
     #if defined(PLATFORM_PC)
-        #define PRLOGV(msg, ...)        prTrace(LogVerbose,     msg, __VA_ARGS__)
-        #define PRLOGD(msg, ...)        prTrace(LogDebug,       msg, __VA_ARGS__)
-        #define PRLOGI(msg, ...)        prTrace(LogInformation, msg, __VA_ARGS__)
-        #define PRLOGW(msg, ...)        prTrace(LogWarning,     msg, __VA_ARGS__)
-        #define PRLOGE(msg, ...)        prTrace(LogError,       msg, __VA_ARGS__)
+        #define PRLOGV(msg, ...)        prTrace(prLogLevel::LogVerbose,     msg, __VA_ARGS__)
+        #define PRLOGD(msg, ...)        prTrace(prLogLevel::LogDebug,       msg, __VA_ARGS__)
+        #define PRLOGI(msg, ...)        prTrace(prLogLevel::LogInformation, msg, __VA_ARGS__)
+        #define PRLOGW(msg, ...)        prTrace(prLogLevel::LogWarning,     msg, __VA_ARGS__)
+        #define PRLOGE(msg, ...)        prTrace(prLogLevel::LogError,       msg, __VA_ARGS__)
 
     #elif defined(PLATFORM_ANDROID)
-        #define PRLOGV(msg, args...)    prTrace(LogVerbose,     msg, ## args)
-        #define PRLOGD(msg, args...)    prTrace(LogDebug,       msg, ## args)
-        #define PRLOGI(msg, args...)    prTrace(LogInformation, msg, ## args)
-        #define PRLOGW(msg, args...)    prTrace(LogWarning,     msg, ## args)
-        #define PRLOGE(msg, args...)    prTrace(LogError,       msg, ## args)
+        #define PRLOGV(msg, args...)    prTrace(prLogLevel::LogVerbose,     msg, ## args)
+        #define PRLOGD(msg, args...)    prTrace(prLogLevel::LogDebug,       msg, ## args)
+        #define PRLOGI(msg, args...)    prTrace(prLogLevel::LogInformation, msg, ## args)
+        #define PRLOGW(msg, args...)    prTrace(prLogLevel::LogWarning,     msg, ## args)
+        #define PRLOGE(msg, args...)    prTrace(prLogLevel::LogError,       msg, ## args)
 
     #elif defined(PLATFORM_IOS)
-        #define PRLOGV(msg, args...)    prTrace(LogVerbose,     msg, ## args)
-        #define PRLOGD(msg, args...)    prTrace(LogDebug,       msg, ## args)
-        #define PRLOGI(msg, args...)    prTrace(LogInformation, msg, ## args)
-        #define PRLOGW(msg, args...)    prTrace(LogWarning,     msg, ## args)
-        #define PRLOGE(msg, args...)    prTrace(LogError,       msg, ## args)
+        #define PRLOGV(msg, args...)    prTrace(prLogLevel::LogVerbose,     msg, ## args)
+        #define PRLOGD(msg, args...)    prTrace(prLogLevel::LogDebug,       msg, ## args)
+        #define PRLOGI(msg, args...)    prTrace(prLogLevel::LogInformation, msg, ## args)
+        #define PRLOGW(msg, args...)    prTrace(prLogLevel::LogWarning,     msg, ## args)
+        #define PRLOGE(msg, args...)    prTrace(prLogLevel::LogError,       msg, ## args)
       
     #endif
 

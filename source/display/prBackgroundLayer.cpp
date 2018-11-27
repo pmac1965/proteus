@@ -94,8 +94,8 @@ prBackgroundLayer::prBackgroundLayer(s32 width, s32 height, s32 tileWidth, s32 t
     mTilesAcross        = pTexture->GetWidth()  / tileWidth;
     mTilesDown          = pTexture->GetHeight()  / tileWidth;
 
-    prTrace(LogError, "prBackgroundLayer: Map:(%i, %i), Tile:(%i, %i), Tile count:(%i, %i)\n", width, height, tileWidth, tileHeight, mTilesAcross, mTilesDown);
-    prTrace(LogError, "Map size         : %i\n", sizeof(s32) * (width * height));
+    prTrace(prLogLevel::LogError, "prBackgroundLayer: Map:(%i, %i), Tile:(%i, %i), Tile count:(%i, %i)\n", width, height, tileWidth, tileHeight, mTilesAcross, mTilesDown);
+    prTrace(prLogLevel::LogError, "Map size         : %i\n", sizeof(s32) * (width * height));
 
     memset(mMapData, -1, sizeof(s32) * (width * height));
 }

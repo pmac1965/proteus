@@ -339,13 +339,13 @@ void prInAppPurchase::SetTestMode(u32 testEvent)
         imp.testEvent = IAPTEST_NONE;
         imp.testTimer = 0.0f;
         imp.testStep  = 0;
-        prTrace(LogError, "Invalid test mode\n");
+        prTrace(prLogLevel::LogError, "Invalid test mode\n");
         break;
     }
 
 #else
     PRUNUSED(testEvent);
-    prTrace(LogError, "IAP test code is not enabled in engine\n");
+    prTrace(prLogLevel::LogError, "IAP test code is not enabled in engine\n");
 
 #endif
 }
@@ -373,7 +373,7 @@ void prInAppPurchase::EventNotify(s32 type, const char *id)
             break;
 
         default:
-            prTrace(LogError, "invalid transaction result\n");
+            prTrace(prLogLevel::LogError, "invalid transaction result\n");
             break;
         }
     }

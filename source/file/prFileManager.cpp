@@ -317,7 +317,7 @@ void prFileManager::RegisterArchive(const char *filename)
         }
         else
         {
-            prTrace(LogError, "Failed to locate: %s\n", filenameArc);
+            prTrace(prLogLevel::LogError, "Failed to locate: %s\n", filenameArc);
         }
 
         PRSAFE_DELETE(fileArc);
@@ -499,7 +499,7 @@ bool prFileManager::Exists(const char *filename, u32 &size)
     bool result = Exists(hash, size);
     if (!result)
     {
-        prTrace(LogError, "Failed to find file in archive: %s\n", filename);
+        prTrace(prLogLevel::LogError, "Failed to find file in archive: %s\n", filename);
     }
 
 #else
@@ -637,7 +637,7 @@ void prFileManager::DisplayFiles(bool accessed)
     {
         if (pArchiveFile[i] && pEntries[i])
         {
-            prTrace(LogError, "Archive %i\n", i);
+            prTrace(prLogLevel::LogError, "Archive %i\n", i);
 
             u32 count = entryCount[i];
             if (count)
@@ -648,7 +648,7 @@ void prFileManager::DisplayFiles(bool accessed)
                 {
                     if (static_cast<u8>(accessed) == entry->accessed)
                     {
-                        prTrace(LogError, "File %i of %i : '%s' - %s\n", j, count, entry->filename, PRBOOL_TO_STRING(entry->accessed));
+                        prTrace(prLogLevel::LogError, "File %i of %i : '%s' - %s\n", j, count, entry->filename, PRBOOL_TO_STRING(entry->accessed));
                     }
 
                     entry++;

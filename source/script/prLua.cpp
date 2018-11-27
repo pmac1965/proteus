@@ -55,13 +55,13 @@ int my_function(lua_State *L)
 {
   int argc = lua_gettop(L);
 
-  prTrace(LogError, "Arg count %i\n", argc);
+  prTrace(prLogLevel::LogError, "Arg count %i\n", argc);
 
   //std::cerr << "-- my_function() called with " << argc
     //<< " arguments:" << std::endl;
 
   for ( int n=1; n<=argc; ++n ) {
-      prTrace(LogError, "%s\n", lua_tostring(L, n));
+      prTrace(prLogLevel::LogError, "%s\n", lua_tostring(L, n));
 
 //    std::cerr << "-- argument " << n << ": "
   //    << lua_tostring(L, n) << std::endl;
@@ -149,7 +149,7 @@ void prLua::CheckForErrors(lua_State *lua, int status)
 
     if (status != 0)
     {        
-        prTrace(LogError, "%s\n", lua_tostring(lua, -1));
+        prTrace(prLogLevel::LogError, "%s\n", lua_tostring(lua, -1));
 
         // Remove error message
         lua_pop(lua, 1); 

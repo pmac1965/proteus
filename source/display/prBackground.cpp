@@ -675,7 +675,7 @@ void prBackground::ParseAttribs_Layer(TiXmlElement* pElement)
         const char *mapHeight  = pElement->Attribute("mapHeight");
         const char *tex        = pElement->Attribute("tex");
 
-        prTrace(LogError, "ATTRIBS TILED: %s, %s, %s, %s, %s\n", tileWidth, tileHeight, mapWidth, mapHeight, tex);
+        prTrace(prLogLevel::LogError, "ATTRIBS TILED: %s, %s, %s, %s, %s\n", tileWidth, tileHeight, mapWidth, mapHeight, tex);
 
         // Add a new map layer
 /*        for (s32 i=0; i<BACKGROUND_MAX_LAYERS;i++)
@@ -701,7 +701,7 @@ void prBackground::ParseAttribs_Layer(TiXmlElement* pElement)
         s32           i      = 0;       
         for (; pElem; pElem = pElem->NextSiblingElement())
         {
-            prTrace(LogError, "Row %03i: > '%s'\n", i, pElem->GetText());
+            prTrace(prLogLevel::LogError, "Row %03i: > '%s'\n", i, pElem->GetText());
             i++;
         }
     }

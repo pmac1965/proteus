@@ -180,7 +180,7 @@ void prDictionarySearch::Report(prDictionarySearchResult result, const char *mes
 
     if (message && *message)
     {
-        prTrace(LogError, "%s\n", message);
+        prTrace(prLogLevel::LogError, "%s\n", message);
     }
 
     Clear();

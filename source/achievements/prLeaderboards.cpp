@@ -111,7 +111,7 @@ void prLeaderboard::Submit(const char *name, u64 value)
 
         #endif
 
-            prTrace(LogError, "Submit to leaderboard '%s' - %llu\n", name, value);        
+            prTrace(prLogLevel::LogError, "Submit to leaderboard '%s' - %llu\n", name, value);        
         }
     }
 }

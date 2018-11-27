@@ -139,7 +139,7 @@ namespace
     /// -----------------------------------------------------------------------
     void CoreShowSystemExists(s32 id)
     {
-        prTrace(LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
+        prTrace(prLogLevel::LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
     }
 }
 
@@ -476,11 +476,11 @@ void prCoreCreateOptional(s32 *optionalSystems, u32 count)
             default:
                 if (id < 0 || id >= PRSYSTEM_MAX)
                 {
-                    prTrace(LogError, "Invalid core system ID: %i\n", id);
+                    prTrace(prLogLevel::LogError, "Invalid core system ID: %i\n", id);
                 }
                 else
                 {
-                    prTrace(LogError, "Yet to implement %i - %s\n", id, CoreGetSystemName(id));
+                    prTrace(prLogLevel::LogError, "Yet to implement %i - %s\n", id, CoreGetSystemName(id));
                 }
                 break;
             }
@@ -531,7 +531,7 @@ PRBOOL prCoreComponentExist(s32 systemID)
         }
         else
         {
-            prTrace(LogError, "prCoreOptionalExist: Invalid system ID\n");
+            prTrace(prLogLevel::LogError, "prCoreOptionalExist: Invalid system ID\n");
         }
     }
 
@@ -553,7 +553,7 @@ prCoreSystem *prCoreGetComponent(u32 systemID)
         }
         else
         {
-            prTrace(LogError, "prCoreGetComponent: Invalid system ID\n");
+            prTrace(prLogLevel::LogError, "prCoreGetComponent: Invalid system ID\n");
         }
     }
 

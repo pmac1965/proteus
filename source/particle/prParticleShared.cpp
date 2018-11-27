@@ -28,5 +28,5 @@
 prEmitterDefinition::prEmitterDefinition(const char *name) : mHash  (prStringHash(name))
                                                            , mName  (name)
 {
-    prTrace(LogError, "New 'prEmitterDefinition' %s - %08x\n", mName.c_str(), mHash);
+    prTrace(prLogLevel::LogError, "New 'prEmitterDefinition' %s - %08x\n", mName.c_str(), mHash);
 }

@@ -54,11 +54,11 @@ void prAlertShowError(const char *title, const char *message, prWindow *pWindow)
 
 #if defined(PLATFORM_PC)
 
-    prTrace(LogError, "=======================================================\n");
-    prTrace(LogError, "ALERT\n");
-    prTrace(LogError, prStringSnprintf(buffer, sizeof(buffer), "Title  : %s\n", title));
-    prTrace(LogError, prStringSnprintf(buffer, sizeof(buffer), "Message: %s\n", message));
-    prTrace(LogError, "=======================================================\n");
+    prTrace(prLogLevel::LogError, "=======================================================\n");
+    prTrace(prLogLevel::LogError, "ALERT\n");
+    prTrace(prLogLevel::LogError, prStringSnprintf(buffer, sizeof(buffer), "Title  : %s\n", title));
+    prTrace(prLogLevel::LogError, prStringSnprintf(buffer, sizeof(buffer), "Message: %s\n", message));
+    prTrace(prLogLevel::LogError, "=======================================================\n");
 
     // Get windows handle
     HWND hwnd = (pWindow == 0) ? HWND_DESKTOP : static_cast<prWindow_PC*>(pWindow)->GetWindowHandle();
@@ -90,11 +90,11 @@ void prAlertShowInformation(const char *title, const char *message, prWindow *pW
 
 #if defined(PLATFORM_PC)
 
-    prTrace(LogError, "=======================================================\n");
-    prTrace(LogError, "ALERT\n");
-    prTrace(LogError, prStringSnprintf(buffer, sizeof(buffer), "Title  : %s\n", title));
-    prTrace(LogError, prStringSnprintf(buffer, sizeof(buffer), "Message: %s\n", message));
-    prTrace(LogError, "=======================================================\n");
+    prTrace(prLogLevel::LogError, "=======================================================\n");
+    prTrace(prLogLevel::LogError, "ALERT\n");
+    prTrace(prLogLevel::LogError, prStringSnprintf(buffer, sizeof(buffer), "Title  : %s\n", title));
+    prTrace(prLogLevel::LogError, prStringSnprintf(buffer, sizeof(buffer), "Message: %s\n", message));
+    prTrace(prLogLevel::LogError, "=======================================================\n");
 
     // Get windows handle
     HWND hwnd = (pWindow == 0) ? HWND_DESKTOP : static_cast<prWindow_PC*>(pWindow)->GetWindowHandle();
@@ -126,11 +126,11 @@ void prAlertShowWarning(const char *title, const char *message, prWindow *pWindo
 
 #if defined(PLATFORM_PC)
 
-    prTrace(LogError, "=======================================================\n");
-    prTrace(LogError, "ALERT\n");
-    prTrace(LogError, prStringSnprintf(buffer, sizeof(buffer), "Title  : %s\n", title));
-    prTrace(LogError, prStringSnprintf(buffer, sizeof(buffer), "Message: %s\n", message));
-    prTrace(LogError, "=======================================================\n");
+    prTrace(prLogLevel::LogError, "=======================================================\n");
+    prTrace(prLogLevel::LogError, "ALERT\n");
+    prTrace(prLogLevel::LogError, prStringSnprintf(buffer, sizeof(buffer), "Title  : %s\n", title));
+    prTrace(prLogLevel::LogError, prStringSnprintf(buffer, sizeof(buffer), "Message: %s\n", message));
+    prTrace(prLogLevel::LogError, "=======================================================\n");
 
     // Get windows handle
     HWND hwnd = (pWindow == 0) ? HWND_DESKTOP : static_cast<prWindow_PC*>(pWindow)->GetWindowHandle();

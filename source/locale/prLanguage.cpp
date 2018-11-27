@@ -100,7 +100,7 @@ void prLanguage::Load(const char *filename)
         bool loaded = doc->LoadFile();      
         if (loaded)
         {
-            prTrace(LogError, "Loaded language file: %s\n", filename);
+            prTrace(prLogLevel::LogError, "Loaded language file: %s\n", filename);
             ParseFile(doc);
         }
         else
@@ -195,7 +195,7 @@ const char *prLanguage::GetString(const char *name) const
         }
     }
 
-    prTrace(LogError, "Failed to find string: %s\n", name);
+    prTrace(prLogLevel::LogError, "Failed to find string: %s\n", name);
     return name;
 }
 
@@ -243,7 +243,7 @@ void prLanguage::ParseAttribs_File(TiXmlElement* pElement)
     if (pElement)
     {
         PRASSERT(pElement->Attribute("version"));
-        prTrace(LogError, "Language: File version: %s\n", pElement->Attribute("version"));
+        prTrace(prLogLevel::LogError, "Language: File version: %s\n", pElement->Attribute("version"));
     }
 
     // Indicate correct file type.
@@ -324,8 +324,8 @@ void prLanguage::ParseAttribs_Entry(TiXmlElement* pElement)
                 // Is a duplicate?
                 if (entry->hash == (*it)->hash)
                 {
-                    prTrace(LogError, "Language: Duplicate text entry: %s\n", id);
-                    prTrace(LogError, "Language: First text entries == %s, %s\n", entry->text[0], (*it)->text[0]);
+                    prTrace(prLogLevel::LogError, "Language: Duplicate text entry: %s\n", id);
+                    prTrace(prLogLevel::LogError, "Language: First text entries == %s, %s\n", entry->text[0], (*it)->text[0]);
                     PRSAFE_DELETE(entry);
                     return;
                 }

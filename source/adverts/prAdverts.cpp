@@ -157,7 +157,7 @@ void prAdverts::LoadAd()
     if (IsAdvertLoaded()  == false &&
         IsAdvertLoading() == false)
     {
-        prTrace(LogError, "Start loading advert\n");
+        prTrace(prLogLevel::LogError, "Start loading advert\n");
         if (imp.pProvider)
         {
             imp.pProvider->Load();

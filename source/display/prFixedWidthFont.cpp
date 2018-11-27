@@ -306,7 +306,7 @@ void prFixedWidthFont::SetAlignment(u32 alignment)
         break;
 
     default:
-        prTrace(LogError, "prFixedWidthFont error: Invalid alignment\n");
+        prTrace(prLogLevel::LogError, "prFixedWidthFont error: Invalid alignment\n");
         break;
     }
 }

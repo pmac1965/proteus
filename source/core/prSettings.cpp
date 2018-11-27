@@ -68,7 +68,7 @@ void prSettings::Add(const char *key, const char *value)
 
     if (Exists(key))
     {
-        prTrace(LogError, "Can't add value %s twice\n", key);
+        prTrace(prLogLevel::LogError, "Can't add value %s twice\n", key);
     }
     else
     {
@@ -131,7 +131,7 @@ void prSettings::Save()
 
     // Now save
     doc.SaveFile(filename);
-    prTrace(LogError, "SETTINGS file %s\n", filename);
+    prTrace(prLogLevel::LogError, "SETTINGS file %s\n", filename);
 
 #endif
 }
@@ -162,7 +162,7 @@ bool prSettings::Load()
         }
         else
         {
-            prTrace(LogError, "Failed to Load %s\n", filename);
+            prTrace(prLogLevel::LogError, "Failed to Load %s\n", filename);
         }
 
         delete doc;
@@ -241,7 +241,7 @@ void prSettings::GenerateFileName(char *pBuffer)
     {
         if (SHGetFolderPathA(HWND_DESKTOP, CSIDL_LOCAL_APPDATA, NULL, SHGFP_TYPE_CURRENT, pBuffer) != S_OK)
         {
-            prTrace(LogError, "Failed to acquire save/load path.\n");
+            prTrace(prLogLevel::LogError, "Failed to acquire save/load path.\n");
             *pBuffer = 0;
         }
         else
@@ -266,7 +266,7 @@ void prSettings::GenerateFolderName(char *pBuffer)
     {
         if (SHGetFolderPathA(HWND_DESKTOP, CSIDL_LOCAL_APPDATA, NULL, SHGFP_TYPE_CURRENT, pBuffer) != S_OK)
         {
-            prTrace(LogError, "Failed to acquire save/load path.\n");
+            prTrace(prLogLevel::LogError, "Failed to acquire save/load path.\n");
             *pBuffer = 0;
         }
         else
@@ -363,16 +363,16 @@ bool prSettings::Exists(std::string key)
 /// ---------------------------------------------------------------------------
 void prSettings::Display()
 {
-    prTrace(LogDebug, "----------------------------------------------------------------\n");
-    prTrace(LogDebug, "Settings:\n", values.size());
-    prTrace(LogDebug, "----------------------------------------------------------------\n");
+    prTrace(prLogLevel::LogDebug, "----------------------------------------------------------------\n");
+    prTrace(prLogLevel::LogDebug, "Settings:\n", values.size());
+    prTrace(prLogLevel::LogDebug, "----------------------------------------------------------------\n");
 
     for (auto it = values.begin(); it != values.end(); ++it)
     {
-        prTrace(LogDebug, "%s, %s\n", (*it).first.c_str(),  (*it).second.c_str());
+        prTrace(prLogLevel::LogDebug, "%s, %s\n", (*it).first.c_str(),  (*it).second.c_str());
     }
 
-    prTrace(LogDebug, "----------------------------------------------------------------\n");
+    prTrace(prLogLevel::LogDebug, "----------------------------------------------------------------\n");
 }
 
 

@@ -53,8 +53,8 @@ extern "C" void PC_API SteamAPIDebugTextHook(int nSeverity, const char *pchDebug
 {
     PRASSERT(pchDebugText && *pchDebugText);
 
-    prTrace(LogError, "STEAM API DEBUG:\n");
-    prTrace(LogError, pchDebugText);
+    prTrace(prLogLevel::LogError, "STEAM API DEBUG:\n");
+    prTrace(prLogLevel::LogError, pchDebugText);
 
 	if (nSeverity >= 1)
 	{
@@ -195,7 +195,7 @@ bool prSteamManager::Initialise(u32 id, u32 notificationPosition)
 	    // will return false.
 	    if ( !SteamUser()->BLoggedOn() )
 	    {
-		    prTrace(LogError, "Steam user must be logged in to play this game (SteamUser()->BLoggedOn() returned false).\n");
+		    prTrace(prLogLevel::LogError, "Steam user must be logged in to play this game (SteamUser()->BLoggedOn() returned false).\n");
 		    prAlertShowError("Error", "The steam user must be logged in to play this game.");
             return result;
 	    }

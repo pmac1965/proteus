@@ -100,7 +100,7 @@ void prParticleManager::Clear()
         {
             PRSAFE_DELETE((*it).second);
         }
-        prTrace(LogError, "Clean emitters\n");
+        prTrace(prLogLevel::LogError, "Clean emitters\n");
     }
 
     // Clean the definitions
@@ -111,7 +111,7 @@ void prParticleManager::Clear()
         {
             PRSAFE_DELETE((*it).second);
         }
-        prTrace(LogError, "Clean definitions\n");
+        prTrace(prLogLevel::LogError, "Clean definitions\n");
     }
 
     // And clear
@@ -164,7 +164,7 @@ s32 prParticleManager::Fire(const char *name, const Proteus::Math::prVector3 &po
             const prEmitterDefinition *ed = (*it).second;
             if (hash == ed->GetHash())
             {
-                prTrace(LogError, "Found definition\n");
+                prTrace(prLogLevel::LogError, "Found definition\n");
                 
                 // Ensure emitter is always positive
                 sEmitterID++;
@@ -249,7 +249,7 @@ void prParticleManager::ParseParticleFile(TiXmlNode* pParent)
             // So lets validate it
             if (mCorrectFileType == false)
             {
-                prTrace(LogError, "Incorrect file type. Not particle file\n");
+                prTrace(prLogLevel::LogError, "Incorrect file type. Not particle file\n");
                 return;
             }
         }

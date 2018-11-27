@@ -63,7 +63,7 @@ namespace
         {
             if (SHGetFolderPathA(HWND_DESKTOP, CSIDL_LOCAL_APPDATA, NULL, SHGFP_TYPE_CURRENT, pBuffer) != S_OK)
             {
-                prTrace(LogError, "Failed to acquire save/load path.\n");
+                prTrace(prLogLevel::LogError, "Failed to acquire save/load path.\n");
                 *pBuffer = 0;
             }
         }
@@ -145,7 +145,7 @@ bool prSavePC::SaveBegin()
         imp.pFile = fopen(filename, "wb");
         if (imp.pFile == NULL)
         {
-            prTrace(LogError, "SaveBegin: Failed to create file: %s\n", filename);
+            prTrace(prLogLevel::LogError, "SaveBegin: Failed to create file: %s\n", filename);
             SetError(-1);
             return result;
         }
@@ -180,7 +180,7 @@ bool prSavePC::SaveUpdate()
         size_t bytes = fwrite(&header, 1, sizeof(prSaveHeader), imp.pFile);
         if (bytes != sizeof(prSaveHeader))
         {
-            prTrace(LogError, "A:SaveUpdate - Bytes written did not match save size\n");
+            prTrace(prLogLevel::LogError, "A:SaveUpdate - Bytes written did not match save size\n");
         }
 
         // Write data.
@@ -188,14 +188,14 @@ bool prSavePC::SaveUpdate()
         bytes = fwrite(m_saveSata, 1, m_saveSize, imp.pFile);
         if (bytes != (size_t)m_saveSize)
         {
-            prTrace(LogError, "B:SaveUpdate - Bytes written did not match save size\n");
+            prTrace(prLogLevel::LogError, "B:SaveUpdate - Bytes written did not match save size\n");
         }
 
 
         // Errors?
         if (ferror(imp.pFile))
         {
-            prTrace(LogError, "SaveUpdate - %s\n", strerror(errno));
+            prTrace(prLogLevel::LogError, "SaveUpdate - %s\n", strerror(errno));
             clearerr(imp.pFile);
             SetError(-1);
             fclose(imp.pFile);
@@ -261,7 +261,7 @@ bool prSavePC::LoadBegin()
             imp.pFile = fopen(filename, "rb");
             if (imp.pFile == NULL)
             {
-                prTrace(LogError, "LoadBegin: Failed to open file: %s\n", filename);
+                prTrace(prLogLevel::LogError, "LoadBegin: Failed to open file: %s\n", filename);
                 SetError(-1);
                 return result;
             }
@@ -277,14 +277,14 @@ bool prSavePC::LoadBegin()
                 // Check size
                 if (imp.filesize == 0)
                 {
-                    prTrace(LogError, "File is empty. Load cancelled: %s\n", filename);
+                    prTrace(prLogLevel::LogError, "File is empty. Load cancelled: %s\n", filename);
                     SetError(-1);
                     return result;
                 }
 
                 if ((u32)imp.filesize < sizeof(prSaveHeader))
                 {
-                    prTrace(LogError, "File is too small. Load cancelled: %s\n", filename);
+                    prTrace(prLogLevel::LogError, "File is too small. Load cancelled: %s\n", filename);
                     SetError(-1);
                     return result;
                 }
@@ -298,7 +298,7 @@ bool prSavePC::LoadBegin()
         }
         else
         {
-            prTrace(LogError, "File doesn't exist. Load cancelled: %s\n", filename);
+            prTrace(prLogLevel::LogError, "File doesn't exist. Load cancelled: %s\n", filename);
             SetError(-1);
         }
     }
@@ -334,7 +334,7 @@ bool prSavePC::LoadUpdate()
             {
                 if (ferror(imp.pFile))
                 {
-                    prTrace(LogError, "LoadUpdate: fread error: %s\n", strerror(errno));
+                    prTrace(prLogLevel::LogError, "LoadUpdate: fread error: %s\n", strerror(errno));
                     clearerr(imp.pFile);
                 }
 
@@ -352,7 +352,7 @@ bool prSavePC::LoadUpdate()
             {
                 if (ferror(imp.pFile))
                 {
-                    prTrace(LogError, "LoadUpdate: fread error: %s\n", strerror(errno));
+                    prTrace(prLogLevel::LogError, "LoadUpdate: fread error: %s\n", strerror(errno));
                     clearerr(imp.pFile);
                 }
 
@@ -376,7 +376,7 @@ bool prSavePC::LoadUpdate()
                 }
                 else
                 {
-                    prTrace(LogError, "Invalid save header\n");
+                    prTrace(prLogLevel::LogError, "Invalid save header\n");
                     SetError(-1);
                     return result;
                 }
@@ -397,7 +397,7 @@ bool prSavePC::LoadUpdate()
         }
         else
         {
-            prTrace(LogError, "Unable to allocate buffer to load save file.\n");
+            prTrace(prLogLevel::LogError, "Unable to allocate buffer to load save file.\n");
         }
     }
 

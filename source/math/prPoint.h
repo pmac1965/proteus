@@ -27,12 +27,17 @@ namespace Proteus {
 namespace Math {
 
 
+const Proteus::Core::s32 POINT_TOSTRING_BUFFERSIZE = 128;
+
+
 // Class: TPoint3
 //      template for a simple 3D point.
 template<typename T>
 struct TPoint3
 {
-public:
+    static const TPoint3 Zero;        // All components set to zero
+    static const TPoint3 One;         // All components set to one
+
     // Method: TPoint3
     //      Constructor.
     TPoint3() : x(0), y(0), z(0)
@@ -48,9 +53,34 @@ public:
     TPoint3(const TPoint3& p) : x(p.x), y(p.y), z(p.z)
     {}
 
+    // Operator ==
+    inline bool operator == (const TPoint3& other) const
+    {
+        return ((x == other.x) &&
+                (y == other.y) &&
+                (z == other.z));
+    }
 
-public:
-    // Members are public for faster access.
+    // Operator !=
+    inline bool operator != (const TPoint3& other) const
+    {
+        return !(*this == other);
+    }
+
+
+    // Method: ToString
+    //      Debug helper function.
+    const char *ToString() const
+    {
+        static char buffer[POINT_TOSTRING_BUFFERSIZE] = { 0 };
+
+        sprintf(buffer, "%f, %f, %f", x, y, z);
+
+        return buffer;
+    }
+
+
+    // Members are public by default.
     T x, y, z;
 };
 
@@ -60,7 +90,9 @@ public:
 template<typename T>
 struct TPoint2
 {
-public:
+    static const TPoint2 Zero;        // All components set to zero
+    static const TPoint2 One;         // All components set to one
+
     // Method: TPoint2
     //      Constructor.
     TPoint2() : x(0), y(0)
@@ -76,9 +108,31 @@ public:
     TPoint2(const TPoint2& p) : x(p.x), y(p.y)
     {}
 
+    // Operator ==
+    inline bool operator == (const TPoint2& other) const
+    {
+        return ((x == other.x) &&
+                (y == other.y));
+    }
 
-public:
-    // Members are public for faster access.
+    // Operator !=
+    inline bool operator != (const TPoint2& other) const
+    {
+        return !(*this == other);
+    }
+
+    // Method: ToString
+    //      Debug helper function.
+    const char *ToString() const
+    {
+        static char buffer[POINT_TOSTRING_BUFFERSIZE] = { 0 };
+
+        sprintf(buffer, "%f, %f", x, y);
+
+        return buffer;
+    }
+
+    // Members are public by default.
     T x, y;
 };
 
@@ -101,3 +155,7 @@ typedef TPoint2<Proteus::Core::f32>     prPoint2F;
 
 
 }}// Namespaces
+
+
+// Add inline file
+#include "prPoint.inl" // Unused at present, but don't remove as yet

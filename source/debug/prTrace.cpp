@@ -50,20 +50,20 @@
 namespace
 {
 #if (defined(_DEBUG) || defined(DEBUG))
-    int         enabled         = TRUE;             // Is logging enabled?
-    int         duplicates      = TRUE;             // Remove duplicate error messages?
-    prLogLevel  logLevel        = LogVerbose;       // Default log level
+    int         enabled         = TRUE;                     // Is logging enabled?
+    int         duplicates      = TRUE;                     // Remove duplicate error messages?
+    prLogLevel  logLevel        = prLogLevel::LogVerbose;   // Default log level
 
 #else
-    int         enabled         = FALSE;            // Is logging enabled?
-    int         duplicates      = TRUE;             // Remove duplicate error messages?
-    prLogLevel  logLevel        = LogError;         // Default log level
+    int         enabled         = FALSE;                    // Is logging enabled?
+    int         duplicates      = TRUE;                     // Remove duplicate error messages?
+    prLogLevel  logLevel        = prLogLevel::LogError;     // Default log level
 
 #endif
 
-    int  outputted    = 0;                          // Specifies the number of unique messages output
-    int  outputLength = 0;                          // Length of the previously output message
-    char output[MSG_BUFFER_SIZE] = { '\0' };        // Buffer to store the previously output message
+    int  outputted    = 0;                                  // Specifies the number of unique messages output
+    int  outputLength = 0;                                  // Length of the previously output message
+    char output[MSG_BUFFER_SIZE] = { '\0' };                // Buffer to store the previously output message
 }
 
 
@@ -225,7 +225,7 @@ void prTraceLogClear()
 /// ---------------------------------------------------------------------------
 void prTraceSetLogLevel(prLogLevel level)
 {
-    if (PRBETWEEN(level, LogVerbose, LogError))
+    if (PRBETWEEN(level, prLogLevel::LogVerbose, prLogLevel::LogError))
     {
         logLevel = level;
 
@@ -245,23 +245,23 @@ const char *prTraceGetLogLevel()
 
     switch(logLevel)
     {
-    case LogVerbose:
+    case prLogLevel::LogVerbose:
         pLevel = "Verbose";
         break;
 
-    case LogDebug:
+    case prLogLevel::LogDebug:
         pLevel = "Debug";
         break;
 
-    case LogWarning:
+    case prLogLevel::LogWarning:
         pLevel = "Warning";
         break;
 
-    case LogInformation:
+    case prLogLevel::LogInformation:
         pLevel = "Information";
         break;
 
-    case LogError:
+    case prLogLevel::LogError:
         pLevel = "Error";
         break;
 

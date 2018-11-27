@@ -263,7 +263,7 @@ bool prMenu::AddMenuItem(prMenuItem *pMenuItem)
         }
         else
         {
-            prTrace(LogError, "Failed to add menu item. Is the menu item ID unique?\n - [%s]\n", pMenuItem->GetText());
+            prTrace(prLogLevel::LogError, "Failed to add menu item. Is the menu item ID unique?\n - [%s]\n", pMenuItem->GetText());
         }
     }
 

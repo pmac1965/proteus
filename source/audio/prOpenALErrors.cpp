@@ -146,13 +146,13 @@ int ALC_ErrorCheck(void *device)
         {
             if (ALC_ErrText(error))
             {
-                prTrace(LogError, ALC_ErrText(error));
+                prTrace(prLogLevel::LogError, ALC_ErrText(error));
             }
         }
     }
     else
     {
-        prTrace(LogError, "No OpenAL device exists.\n");
+        prTrace(prLogLevel::LogError, "No OpenAL device exists.\n");
     }
 
     return error;
@@ -178,7 +178,7 @@ int AL_ErrorCheck()
     {
         if (AL_ErrText(error))
         {
-            prTrace(LogError, AL_ErrText(error));
+            prTrace(prLogLevel::LogError, AL_ErrText(error));
         }
     }
 

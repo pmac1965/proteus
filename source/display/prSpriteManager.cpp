@@ -105,8 +105,10 @@ void prSpriteManager::Update(f32 dt)
 {
     if (!m_activeSprites.empty())
     {
-        std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
-        std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+        //std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
+        //std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+        auto it  = m_activeSprites.begin();
+        auto end = m_activeSprites.end();
 
         for (; it != end; ++it)
         {
@@ -123,8 +125,10 @@ void prSpriteManager::Draw()
 {
     if (!m_activeSprites.empty())
     {
-        std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
-        std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+        //std::list<prActiveSprite>::iterator it  = m_activeSprites.begin(); /*Update*/
+        //std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+        auto it  = m_activeSprites.begin();
+        auto end = m_activeSprites.end();
 
         for (; it != end; ++it)
         {
@@ -247,8 +251,10 @@ void prSpriteManager::Release(prSprite *sprite)
     {
         if (!m_activeSprites.empty())
         {
-            std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
-            std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+            //std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
+            //std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+            auto it  = m_activeSprites.begin();
+            auto end = m_activeSprites.end();
 
             for (; it != end; ++it)
             {
@@ -279,8 +285,10 @@ void prSpriteManager::ReleaseAll()
 {
     if (!m_activeSprites.empty())
     {
-        std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
-        std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+        //std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
+        //std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+        auto it  = m_activeSprites.begin();
+        auto end = m_activeSprites.end();
 
         for (; it != end; ++it)
         {
@@ -308,17 +316,19 @@ void prSpriteManager::DisplayUsage()
 
     if (!m_activeSprites.empty())
     {
-        prTrace(LogError, "Sprites\n");
+        prTrace(prLogLevel::LogError, "Sprites\n");
 
-        std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
-        std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+        //std::list<prActiveSprite>::iterator it  = m_activeSprites.begin();
+        //std::list<prActiveSprite>::iterator end = m_activeSprites.end();
+        auto it  = m_activeSprites.begin();
+        auto end = m_activeSprites.end();
         s32 index = 0;
         for (; it != end; ++index, ++it)
         {
-            prTrace(LogError, "Sprite %03i: Name: %s, TexID: %ul\n", index, (*it).sprite->Name(), (*it).texture->GetTexID());
+            prTrace(prLogLevel::LogError, "Sprite %03i: Name: %s, TexID: %ul\n", index, (*it).sprite->Name(), (*it).texture->GetTexID());
         }
 
-        prTrace(LogError, "Total sprites: %i\n", m_activeSprites.size());
+        prTrace(prLogLevel::LogError, "Total sprites: %i\n", m_activeSprites.size());
     }
 
 #endif

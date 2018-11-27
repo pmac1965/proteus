@@ -1838,6 +1838,7 @@
     <ClCompile Include="..\..\..\..\source\math\prMathsUtil.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prMatrix4.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prPlane.cpp" />
+    <ClCompile Include="..\..\..\..\source\math\prPoint.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prQuaternion.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prRandom.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prRect.cpp" />
@@ -1937,6 +1938,7 @@
     <None Include="..\..\..\..\source\ios\prIosTwitter.mm" />
     <None Include="..\..\..\..\source\license.txt" />
     <None Include="..\..\..\..\source\math\prMatrix4.inl" />
+    <None Include="..\..\..\..\source\math\prPoint.inl" />
     <None Include="..\..\..\..\source\math\prVector2.inl" />
     <None Include="..\..\..\..\source\math\prVector3.inl" />
     <None Include="..\..\..\..\source\read.me" />

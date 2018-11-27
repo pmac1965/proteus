@@ -207,13 +207,13 @@ void prRegistry::ShowKeyValuePairs()
 {
     if (!values.empty())
     {
-        prTrace(LogInformation, "System keys:-------------------------------------------------------------------\n");
+        prTrace(prLogLevel::LogInformation, "System keys:-------------------------------------------------------------------\n");
 
         for (auto it = values.begin(); it != values.end(); ++it)        
         {
-            prTrace(LogInformation, "Key: %*s, Value: %s\n", 20, ((*it).first).c_str(), ((*it).second).c_str());
+            prTrace(prLogLevel::LogInformation, "Key: %*s, Value: %s\n", 20, ((*it).first).c_str(), ((*it).second).c_str());
         }
 
-        prTrace(LogInformation, "-------------------------------------------------------------------------------\n");
+        prTrace(prLogLevel::LogInformation, "-------------------------------------------------------------------------------\n");
     }
 }

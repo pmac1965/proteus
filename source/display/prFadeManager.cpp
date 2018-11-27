@@ -189,13 +189,13 @@ void prFadeManager::Start(prFade fade, f32 runtime)
         }
         else
         {
-            prTrace(LogError, "Invalid fade state\n");
+            prTrace(prLogLevel::LogError, "Invalid fade state\n");
             Reset();
         }
     }
     else
     {
-        prTrace(LogError, "Attempted to start a fade operation while another fade was in progress!\n");
+        prTrace(prLogLevel::LogError, "Attempted to start a fade operation while another fade was in progress!\n");
     }
 }
 

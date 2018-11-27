@@ -291,7 +291,7 @@ prWaveResult prWaves::ParseFile(const char *filename, prWaveFileInfo* pWaveInfo)
                         }
                         else
                         {
-                            prTrace(LogError, "Unsupported wave format\n");
+                            prTrace(prLogLevel::LogError, "Unsupported wave format\n");
                         }
                     }
                     else
@@ -325,7 +325,7 @@ prWaveResult prWaves::ParseFile(const char *filename, prWaveFileInfo* pWaveInfo)
             }
             else
             {
-                prTrace(LogError, "Invalid audio file\n");
+                prTrace(prLogLevel::LogError, "Invalid audio file\n");
                 return WR_BADWAVEFILE;
             }
         }

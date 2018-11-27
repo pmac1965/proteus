@@ -211,7 +211,7 @@ typedef struct BitmapFontImplementation
                 }
                 else
                 {
-                    prTrace(LogError, "Unsupported element: %s\n", pParent->Value());
+                    prTrace(prLogLevel::LogError, "Unsupported element: %s\n", pParent->Value());
                 }
             }
             break;
@@ -399,7 +399,7 @@ typedef struct BitmapFontImplementation
                 characters = atoi(count);
                 if (characters == 0)
                 {
-                    prTrace(LogError, "Font character count is invalid\n");
+                    prTrace(prLogLevel::LogError, "Font character count is invalid\n");
                     return;
                 }
 
@@ -477,7 +477,7 @@ typedef struct BitmapFontImplementation
                 kernings = atoi(count);
                 if (kernings == 0)
                 {
-                    prTrace(LogError, "Font kernings count is zero\n");
+                    prTrace(prLogLevel::LogError, "Font kernings count is zero\n");
                 }
 
                 // Extract kerning data
@@ -646,7 +646,7 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
         switch(alignment)
         {
         default:
-            prTrace(LogError, "Unsupported alignment\n");
+            prTrace(prLogLevel::LogError, "Unsupported alignment\n");
             break;
 
         case ALIGN_LEFT:
@@ -710,7 +710,7 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
                 switch(alignment)
                 {
                 default:
-                    prTrace(LogError, "Unsupported alignment\n");
+                    prTrace(prLogLevel::LogError, "Unsupported alignment\n");
                     break;
 
                 case ALIGN_LEFT:
@@ -822,7 +822,7 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
                 }
                 else
                 {
-                    prTrace(LogError, "Unsupported character: %i, %c\n", character, character);
+                    prTrace(prLogLevel::LogError, "Unsupported character: %i, %c\n", character, character);
                 }
             }
         }
@@ -921,7 +921,7 @@ Proteus::Math::prVector2 prBitmapFont::MeasureString(const char *string, float s
                 }
                 else
                 {
-                    prTrace(LogError, "Unsupported character: %i, %c\n", character, character);
+                    prTrace(prLogLevel::LogError, "Unsupported character: %i, %c\n", character, character);
                 }
             }
         }
@@ -1013,7 +1013,7 @@ Proteus::Math::prVector2 prBitmapFont::MeasureStringUntilTerm(const char *string
                 }
                 else
                 {
-                    prTrace(LogError, "Unsupported character: %i, %c\n", character, character);
+                    prTrace(prLogLevel::LogError, "Unsupported character: %i, %c\n", character, character);
                 }
             }
         }

@@ -74,7 +74,7 @@ namespace
         }
         else
         {
-            prTrace(LogError, "Unknown command line parameter was null or empty\n");
+            prTrace(prLogLevel::LogError, "Unknown command line parameter was null or empty\n");
         }
 
         return parseFailed;

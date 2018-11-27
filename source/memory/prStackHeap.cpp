@@ -173,7 +173,7 @@ void prStackHeap::DisplayUsage(bool full) const
     
     s32 blocks_used = 0;
 
-    prTrace(LogError, "\nStack heap: =============================================================================\n");
+    prTrace(prLogLevel::LogError, "\nStack heap: =============================================================================\n");
 
     if (full)
     {
@@ -181,11 +181,11 @@ void prStackHeap::DisplayUsage(bool full) const
 
         while((u32)(u64)node < m_start)
         {
-            if (0 == blocks_used) { prTrace(LogError, "\n"); }
+            if (0 == blocks_used) { prTrace(prLogLevel::LogError, "\n"); }
 
             prTrace
             (
-                LogError,
+                prLogLevel::LogError,
                 "Start: %#16x, Block size: %*i, Data size: %*i, Func: %s\n",   
                 (((u8*)node) + sizeof(StackNode) + (m_bounds_check>>1)),
                 SPACE_COUNT, node->size,
@@ -199,15 +199,15 @@ void prStackHeap::DisplayUsage(bool full) const
         }
     }
 
-    prTrace(LogError, "\n");
-    prTrace(LogError, "Heap name    : %s\n", (m_name && *m_name) ? m_name : "unnamed");
-    prTrace(LogError, "Marks placed : %i\n", m_index);
-    prTrace(LogError, "Blocks used  : %i\n", blocks_used);
-    prTrace(LogError, "Bounds check : %s\n", m_bounds_check ? "true" : "false"); 
-    prTrace(LogError, "Heap size    : %i K and %i bytes.\n", m_heap_size/1024, m_heap_size%1024);
-    prTrace(LogError, "Used memory  : %i K and %i bytes.\n", (m_heap_size - MemoryFree())/1024, (m_heap_size - MemoryFree())%1024);    
-    prTrace(LogError, "Free memory  : %i K and %i bytes.\n", MemoryFree()/1024, MemoryFree()%1024);
-    prTrace(LogError, "=========================================================================================\n");
+    prTrace(prLogLevel::LogError, "\n");
+    prTrace(prLogLevel::LogError, "Heap name    : %s\n", (m_name && *m_name) ? m_name : "unnamed");
+    prTrace(prLogLevel::LogError, "Marks placed : %i\n", m_index);
+    prTrace(prLogLevel::LogError, "Blocks used  : %i\n", blocks_used);
+    prTrace(prLogLevel::LogError, "Bounds check : %s\n", m_bounds_check ? "true" : "false"); 
+    prTrace(prLogLevel::LogError, "Heap size    : %i K and %i bytes.\n", m_heap_size/1024, m_heap_size%1024);
+    prTrace(prLogLevel::LogError, "Used memory  : %i K and %i bytes.\n", (m_heap_size - MemoryFree())/1024, (m_heap_size - MemoryFree())%1024);    
+    prTrace(prLogLevel::LogError, "Free memory  : %i K and %i bytes.\n", MemoryFree()/1024, MemoryFree()%1024);
+    prTrace(prLogLevel::LogError, "=========================================================================================\n");
 
 #else
 

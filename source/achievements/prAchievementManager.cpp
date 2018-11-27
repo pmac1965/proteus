@@ -352,7 +352,7 @@ void prAchievementManager::Update(f32 dt)
                         mpNotificationIcon = mpSpriteManager->Create((*itr).image.c_str());
                         if (mpNotificationIcon == nullptr)
                         {
-                            prTrace(LogError, "Failed to find achievement icon\n");
+                            prTrace(prLogLevel::LogError, "Failed to find achievement icon\n");
                             mDisplayMode = MODE_PRE;
                         }
                         else
@@ -434,7 +434,7 @@ void prAchievementManager::Award(const char *key, s32 awardValue)
 
         if (!found)
         {
-            prTrace(LogError, "prAchievementManager::Award - Failed to find achievement: %s\n", key);
+            prTrace(prLogLevel::LogError, "prAchievementManager::Award - Failed to find achievement: %s\n", key);
         }
     }
 }
@@ -520,12 +520,12 @@ void prAchievementManager::Load(const char *filename)
 
             if (!mIoSuccess)
             {
-                prTrace(LogError, "Failed to save initial achievements status file.\n");
+                prTrace(prLogLevel::LogError, "Failed to save initial achievements status file.\n");
             }
         }
         else
         {
-            prTrace(LogError, "Achievements list is empty\n");
+            prTrace(prLogLevel::LogError, "Achievements list is empty\n");
         }
     }
     else
@@ -544,7 +544,7 @@ void prAchievementManager::Load(const char *filename)
     {
         for (s32 i=0; i<mAchievementsCount; i++)
         {
-            prTrace(LogError, "Name: %*s, Hash %08x, State: %s, Count %i\n", 24, GetNameByIndex(i), mpAchievements[i].hash, GetAchievementState(mpAchievements[i].state), mpAchievements[i].count);
+            prTrace(prLogLevel::LogError, "Name: %*s, Hash %08x, State: %s, Count %i\n", 24, GetNameByIndex(i), mpAchievements[i].hash, GetAchievementState(mpAchievements[i].state), mpAchievements[i].count);
         }
     }
 #endif
@@ -578,7 +578,7 @@ void prAchievementManager::Save()
         
         if (!mIoSuccess)
         {
-            prTrace(LogError, "Failed to save achievements status file.\n");
+            prTrace(prLogLevel::LogError, "Failed to save achievements status file.\n");
         }
     }
 }
@@ -646,7 +646,7 @@ const char *prAchievementManager::GetDescriptionText(const char *name, Descripti
         }
     }
 
-    prTrace(LogError, "prAchievementManager::GetDescriptionText - Failed to find achievement: %s\n", name);
+    prTrace(prLogLevel::LogError, "prAchievementManager::GetDescriptionText - Failed to find achievement: %s\n", name);
     return nullptr;
 }
 
@@ -677,7 +677,7 @@ const char *prAchievementManager::GetDescriptionTextByIndex(u32 index, Descripti
         }
     }
 
-    prTrace(LogError, "prAchievementManager::GetDescriptionTextByIndex - Failed to find achievement: %i\n", index);
+    prTrace(prLogLevel::LogError, "prAchievementManager::GetDescriptionTextByIndex - Failed to find achievement: %i\n", index);
     return nullptr;
 }
 
@@ -936,7 +936,7 @@ const char *prAchievementManager::GetIdentifierByIndex(u32 index)
         idx++;
     }
 
-    prTrace(LogError, "prAchievementManager::GetIdentifierByIndex - Failed to find identifier\n");
+    prTrace(prLogLevel::LogError, "prAchievementManager::GetIdentifierByIndex - Failed to find identifier\n");
     return nullptr;
 }
 
@@ -963,6 +963,6 @@ const char *prAchievementManager::GetIdentifier(const char *name)
         }
     }
 
-    prTrace(LogError, "prAchievementManager::GetIdentifier - Failed to find identifier: %s\n", name);
+    prTrace(prLogLevel::LogError, "prAchievementManager::GetIdentifier - Failed to find identifier: %s\n", name);
     return nullptr;
 }

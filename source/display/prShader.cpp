@@ -106,7 +106,7 @@ bool prShader::LoadFromMemory(const char *vertexSrc, const char *fragmentSrc)
 
     if (vertexShader == 0 || fragmentShader == 0)
     {
-        prTrace(LogError, "Failed to create shaders\n");
+        prTrace(prLogLevel::LogError, "Failed to create shaders\n");
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
         return false;
@@ -128,7 +128,7 @@ bool prShader::LoadFromMemory(const char *vertexSrc, const char *fragmentSrc)
     glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &val);
     if (val == GL_FALSE) 
     {
-        prTrace(LogError, "Error found in vertex shader\n");        
+        prTrace(prLogLevel::LogError, "Error found in vertex shader\n");        
         ShaderInfoLog(vertexShader);
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
@@ -138,7 +138,7 @@ bool prShader::LoadFromMemory(const char *vertexSrc, const char *fragmentSrc)
     glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &val);
     if (val == GL_FALSE) 
     {
-        prTrace(LogError, "Error found in fragment shader\n");        
+        prTrace(prLogLevel::LogError, "Error found in fragment shader\n");        
         ShaderInfoLog(fragmentShader);
         glDeleteShader(vertexShader);
         glDeleteShader(fragmentShader);
@@ -209,7 +209,7 @@ void prShader::ShaderInfoLog(u32 shader)
         glGetShaderInfoLog(shader, logLength, &written, log);
         ERR_CHECK();
         
-        prTrace(LogError, "%s\n", log);
+        prTrace(prLogLevel::LogError, "%s\n", log);
         free(log);
     }
 
@@ -237,7 +237,7 @@ void prShader::ProgramInfoLog(u32 shader)
         glGetProgramInfoLog(shader, logLength, &written, log);
         ERR_CHECK();
         
-        prTrace(LogError, "%s\n", log);
+        prTrace(prLogLevel::LogError, "%s\n", log);
         free(log);
     }
 #endif

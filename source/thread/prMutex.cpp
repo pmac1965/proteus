@@ -122,7 +122,7 @@ bool prMutex::TryLock()
     }
     else
     {
-        prTrace(LogError, "Failed to locked mutex\n");
+        prTrace(prLogLevel::LogError, "Failed to locked mutex\n");
     }
 
 #elif (defined(PLATFORM_IOS) || defined(PLATFORM_LINUX) || defined(PLATFORM_MAC))  

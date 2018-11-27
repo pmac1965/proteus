@@ -68,7 +68,7 @@ void prAchievementBase::Update(f32 dt)
             break;
 
         default:
-            prTrace(LogError, "Unknown achievement status message: %08x\n", mCurrStatus);
+            prTrace(prLogLevel::LogError, "Unknown achievement status message: %08x\n", mCurrStatus);
             break;
         }
     }

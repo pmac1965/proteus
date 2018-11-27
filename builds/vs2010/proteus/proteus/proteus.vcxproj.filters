@@ -2333,6 +2333,9 @@
     <ClCompile Include="..\..\..\..\source\core\prGameObject.cpp">
       <Filter>source\core</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\source\math\prPoint.cpp">
+      <Filter>source\math</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\source\read.me">
@@ -2385,6 +2388,9 @@
     </None>
     <None Include="..\..\..\..\source\Android.mk">
       <Filter>build</Filter>
+    </None>
+    <None Include="..\..\..\..\source\math\prPoint.inl">
+      <Filter>source\math</Filter>
     </None>
   </ItemGroup>
 </Project>

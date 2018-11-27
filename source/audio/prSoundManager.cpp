@@ -143,7 +143,7 @@ s32 prSoundManager::SFXPlay(const char *name, f32 volume, bool loop)
 
     if (handle == -1)
     {
-        prTrace(LogWarning, "Failed to play effect '%s'\n", name);
+        prTrace(prLogLevel::LogWarning, "Failed to play effect '%s'\n", name);
     }
 
 #else

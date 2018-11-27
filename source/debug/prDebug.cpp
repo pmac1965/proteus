@@ -90,10 +90,10 @@ void prDebugShowLastError(const char *msg)
             NULL
         );
 
-        prTrace(LogError, "============================================================\n");
-        prTrace(LogError, "Message   : %s\n", (msg && *msg) ? msg : "None");
-        prTrace(LogError, "Last error: %ls\n", lpMsgBuf);
-        prTrace(LogError, "============================================================\n");
+        prTrace(prLogLevel::LogError, "============================================================\n");
+        prTrace(prLogLevel::LogError, "Message   : %s\n", (msg && *msg) ? msg : "None");
+        prTrace(prLogLevel::LogError, "Last error: %ls\n", lpMsgBuf);
+        prTrace(prLogLevel::LogError, "============================================================\n");
 
         if (lpMsgBuf)
         {
@@ -136,27 +136,27 @@ void prOutputString(prLogLevel level, const char *text)
         
         switch(level)
         {
-        case LogVerbose:
+        case prLogLevel::LogVerbose:
             if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightCyan, prConsoleWindow::ConsoleColourBlack); }
             fprintf(stderr, "%s", text);
             break;
 
-        case LogDebug:
+        case prLogLevel::LogDebug:
             if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightWhite, prConsoleWindow::ConsoleColourBlack); }
             fprintf(stderr, "%s", text);
             break;
 
-        case LogInformation:
+        case prLogLevel::LogInformation:
             if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightGreen, prConsoleWindow::ConsoleColourBlack); }
             fprintf(stderr, "%s", text);
             break;
 
-        case LogWarning:
+        case prLogLevel::LogWarning:
             if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightYellow, prConsoleWindow::ConsoleColourBlack); }
             fprintf(stderr, "%s", text);
             break;
 
-        case LogError:
+        case prLogLevel::LogError:
             if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightRed, prConsoleWindow::ConsoleColourBlack); }
             fprintf(stderr, "%s", text);
             break;

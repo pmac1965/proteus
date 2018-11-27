@@ -126,7 +126,7 @@ void prResourceManager::DisplayUsage()
 {
 #if defined(_DEBUG) || defined(DEBUG)
 
-    prTrace(LogError, "\nResource Manager: ==============================================================\n");
+    prTrace(prLogLevel::LogError, "\nResource Manager: ==============================================================\n");
 
     u64 size = 0;
 
@@ -145,7 +145,7 @@ void prResourceManager::DisplayUsage()
 
                 prTrace
                 (
-                    LogError,
+                    prLogLevel::LogError,
                     "Table: %03i, Hash: %08x, Refs %03i, Locked %s, Size: %*i, File: %s\n",
                     i,                                                  // Hash table index
                     resource.Hash(),                                    // Hash key
@@ -160,10 +160,10 @@ void prResourceManager::DisplayUsage()
         }
     }
 
-    prTrace(LogError, "------------------\n");
-    prTrace(LogError, "Number of entries: %i, Total size: %.02fKB or %.02fMB\n", Count(), ((float)size)/1024, ((float)size)/1024/1024);
-    prTrace(LogError, "Note: The total size is approximate\n");
-    prTrace(LogError, "================================================================================\n");
+    prTrace(prLogLevel::LogError, "------------------\n");
+    prTrace(prLogLevel::LogError, "Number of entries: %i, Total size: %.02fKB or %.02fMB\n", Count(), ((float)size)/1024, ((float)size)/1024/1024);
+    prTrace(prLogLevel::LogError, "Note: The total size is approximate\n");
+    prTrace(prLogLevel::LogError, "================================================================================\n");
 
 #endif
 }

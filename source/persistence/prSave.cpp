@@ -236,7 +236,7 @@ void prSave::StartSave(void *pData, s32 size, prIoResultCallback *cb, const char
     // Working?
     if (imp.mode != SAVE_MODE_NONE)
     {
-        prTrace(LogError, "Error: The save system is currently saving. Cannot restart.\n");
+        prTrace(prLogLevel::LogError, "Error: The save system is currently saving. Cannot restart.\n");
         return;
     }
 
@@ -245,7 +245,7 @@ void prSave::StartSave(void *pData, s32 size, prIoResultCallback *cb, const char
     imp.pSaveData = malloc(size);
     if (imp.pSaveData == nullptr)
     {
-        prTrace(LogError, "Error: Unable to allocate enough memory for the save data.\n");
+        prTrace(prLogLevel::LogError, "Error: Unable to allocate enough memory for the save data.\n");
         return;
     }
     else
@@ -279,7 +279,7 @@ void prSave::StartLoad(void **ppData, s32 *pSize, prIoResultCallback *cb, const 
     // Working?
     if (imp.mode != SAVE_MODE_NONE)
     {
-        prTrace(LogError, "Error: The current save system operation has not completed.\n");
+        prTrace(prLogLevel::LogError, "Error: The current save system operation has not completed.\n");
         return;
     }
 

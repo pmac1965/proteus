@@ -138,14 +138,14 @@ typedef struct TrueTypeFontImplementation
         u32 glyphIndex = FT_Get_Char_Index(face, charcode);
         if (glyphIndex == 0)
         {
-            prTrace(LogError, "Didn't find character %i - %c\n", charcode, charcode);
+            prTrace(prLogLevel::LogError, "Didn't find character %i - %c\n", charcode, charcode);
             return;
         }
 
 	    // Load the glyph for our character
 	    if (FT_Load_Glyph(face, glyphIndex, FT_LOAD_DEFAULT))
         {
-		    prTrace(LogError, "FT_Load_Glyph failed for character %i, Glyph index %i\n", charcode, glyphIndex);
+		    prTrace(prLogLevel::LogError, "FT_Load_Glyph failed for character %i, Glyph index %i\n", charcode, glyphIndex);
             return;
         }
 
@@ -153,7 +153,7 @@ typedef struct TrueTypeFontImplementation
         FT_Glyph glyph;
         if (FT_Get_Glyph(face->glyph, &glyph))
         {
-		    prTrace(LogError, "FT_Get_Glyph failed\n");
+		    prTrace(prLogLevel::LogError, "FT_Get_Glyph failed\n");
             return;
         }
 
@@ -187,7 +187,7 @@ typedef struct TrueTypeFontImplementation
         glGenTextures(1, &texID);
         if (glGetError() != GL_NO_ERROR)
         {
-            prTrace(LogError, "Failed to generate texture for TTF font\n");
+            prTrace(prLogLevel::LogError, "Failed to generate texture for TTF font\n");
             prOpenGLErrorCheck(__FILE__, __FUNCTION__, __LINE__);
             PRSAFE_DELETE_ARRAY(texData);
             FT_Done_Glyph(glyph);
@@ -268,13 +268,13 @@ typedef struct TrueTypeFontImplementation
     {
         if (glyphCount == 0)
         {
-            prTrace(LogError, "Glyph count cannot be zero\n");
+            prTrace(prLogLevel::LogError, "Glyph count cannot be zero\n");
             return;
         }
 
         if (mpGlyphs != NULL)
         {
-            prTrace(LogError, "Glyph array already created\n");
+            prTrace(prLogLevel::LogError, "Glyph array already created\n");
             return;
         }
 
@@ -350,7 +350,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
     FT_Library library;    
     if (FT_Init_FreeType(&library))
     {
-        prTrace(LogError, "FT_Init_FreeType failed\n");
+        prTrace(prLogLevel::LogError, "FT_Init_FreeType failed\n");
         return;
     }
 
@@ -364,7 +364,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
         u32 size = pFile->Size();
         if (size == 0)
         {
-            prTrace(LogError, "prTrueTypeFont::Load failed. File was zero length\n");
+            prTrace(prLogLevel::LogError, "prTrueTypeFont::Load failed. File was zero length\n");
             return;
         }
 
@@ -389,7 +389,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height)
                                0,
                                &face))
         {
-            prTrace(LogError, "FT_New_Face failed. There is probably a problem with your font file\n");
+            prTrace(prLogLevel::LogError, "FT_New_Face failed. There is probably a problem with your font file\n");
             PRSAFE_DELETE_ARRAY(buffer);
             return;
         }
@@ -440,7 +440,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height, const char *characte
     FT_Library library;    
     if (FT_Init_FreeType(&library))
     {
-        prTrace(LogError, "FT_Init_FreeType failed\n");
+        prTrace(prLogLevel::LogError, "FT_Init_FreeType failed\n");
         return;
     }
 
@@ -454,7 +454,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height, const char *characte
         u32 size = pFile->Size();
         if (size == 0)
         {
-            prTrace(LogError, "prTrueTypeFont::Load failed. File was zero length\n");
+            prTrace(prLogLevel::LogError, "prTrueTypeFont::Load failed. File was zero length\n");
             return;
         }
 
@@ -474,7 +474,7 @@ void prTrueTypeFont::Load(const char *filename, s32 height, const char *characte
                                0,
                                &face))
         {
-            prTrace(LogError, "FT_New_Face failed. There is probably a problem with your font file\n");
+            prTrace(prLogLevel::LogError, "FT_New_Face failed. There is probably a problem with your font file\n");
             PRSAFE_DELETE_ARRAY(buffer);
             return;
         }
@@ -549,7 +549,7 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
         switch(alignment)
         {
         default:
-            prTrace(LogError, "Unsupported alignment\n");
+            prTrace(prLogLevel::LogError, "Unsupported alignment\n");
             break;
 
         case ALIGN_LEFT:

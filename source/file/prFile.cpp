@@ -282,7 +282,7 @@ bool prFile::Exists()
             }
             else
             {
-                prTrace(LogError, "File does not exist %s\n", imp.filenameDisk);
+                prTrace(prLogLevel::LogError, "File does not exist %s\n", imp.filenameDisk);
             }
 #endif
         }
@@ -369,14 +369,14 @@ bool prFile::Open()
     {
         // Show error
         imp.WasThereAFileError();
-        prTrace(LogError, "STD: Failed to open file: %s\n", imp.filenameDisk);
-        prTrace(LogError, "STD: Trying to open file: %s\n", imp.filenameOrig);
+        prTrace(prLogLevel::LogError, "STD: Failed to open file: %s\n", imp.filenameDisk);
+        prTrace(prLogLevel::LogError, "STD: Trying to open file: %s\n", imp.filenameOrig);
 
         imp.pFile = fopen(imp.filenameOrig, "rb");
         if (imp.pFile == nullptr)
         {
             // Show error
-            prTrace(LogError, "STD: Failed to open file: %s\n", imp.filenameOrig);
+            prTrace(prLogLevel::LogError, "STD: Failed to open file: %s\n", imp.filenameOrig);
             imp.WasThereAFileError();
             return false;
         }
@@ -418,7 +418,7 @@ void prFile::Close()
     // Check mode.
     if (imp.filemode == FileMode_Simple)
     {
-        prTrace(LogError, "You cannot call close on files created by the Load() method\n");
+        prTrace(prLogLevel::LogError, "You cannot call close on files created by the Load() method\n");
         return;
     }
 

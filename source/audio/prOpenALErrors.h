@@ -29,22 +29,22 @@
     int AL_ErrorCheck();
 
     #if defined(_DEBUG) || defined(DEBUG)
-        #define AL_ERROR_CHECK()                                                                \
-        {                                                                                       \
-            int error = AL_ErrorCheck();                                                        \
-            if (error != 0)                                                                     \
-            {                                                                                   \
-                prTrace(LogError, "OpenAL error in '%s' at line %i\n", __FUNCTION__, __LINE__); \
-            }                                                                                   \
+        #define AL_ERROR_CHECK()                                                                            \
+        {                                                                                                   \
+            int error = AL_ErrorCheck();                                                                    \
+            if (error != 0)                                                                                 \
+            {                                                                                               \
+                prTrace(prLogLevel::LogError, "OpenAL error in '%s' at line %i\n", __FUNCTION__, __LINE__); \
+            }                                                                                               \
         }
 
-        #define ALC_ERROR_CHECK(device)                                                         \
-        {                                                                                       \
-            int error = ALC_ErrorCheck(device);                                                 \
-            if (error != 0)                                                                     \
-            {                                                                                   \
-                prTrace(LogError, "OpenAL error in '%s' at line %i\n", __FUNCTION__, __LINE__); \
-            }                                                                                   \
+        #define ALC_ERROR_CHECK(device)                                                                     \
+        {                                                                                                   \
+            int error = ALC_ErrorCheck(device);                                                             \
+            if (error != 0)                                                                                 \
+            {                                                                                               \
+                prTrace(prLogLevel::LogError, "OpenAL error in '%s' at line %i\n", __FUNCTION__, __LINE__); \
+            }                                                                                               \
         }
 
     #else

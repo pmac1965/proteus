@@ -174,7 +174,7 @@ void prConsoleWindow::SetConsoleColours(prConsoleColour foreground, prConsoleCol
     }
     else
     {
-        prTrace(LogError, "Failed to set console colours. Invalid screen buffer\n");
+        prTrace(prLogLevel::LogError, "Failed to set console colours. Invalid screen buffer\n");
     }
 }
 
