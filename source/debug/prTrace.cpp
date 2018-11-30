@@ -188,9 +188,13 @@ void prTrace(prLogLevel level, const char *fmt, ...)
 /// ---------------------------------------------------------------------------
 /// Allows tracing to be enabled/disabled.
 /// ---------------------------------------------------------------------------
-void prTraceEnable(int state)
+int prTraceEnable(int state)
 {
+    int oldState = enabled;
+    
     enabled = state;
+
+    return oldState;
 }
 
 

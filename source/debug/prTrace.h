@@ -64,7 +64,10 @@ void prTrace(prLogLevel level, const char* fmt, ...);
 //
 // Parameters:
 //      state - true or false.
-void prTraceEnable(int state);
+//
+// Returns:
+//      Returns the previous state.
+int prTraceEnable(int state);
 
 // Function: prTraceRemoveDuplicates 
 //      Enables or disables duplicate string output. This prevents logging from spamming the debug output window.

@@ -13,6 +13,8 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
+ *
+ *  Modified 2018 to add missing operator=
  */
 
 
@@ -165,6 +167,18 @@ public:
 
     // Operator !=
     bool operator != (const prVector3& other) const { return !Equals(other); }
+
+    // Copy Assignment
+    prVector3& operator=(const prVector3& v)
+    {
+        if (this == &v) { return (*this); }
+        
+        x = v.x;
+        y = v.y;
+        z = v.z;
+
+        return *this;
+    }
 
 
 public:
