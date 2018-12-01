@@ -1251,6 +1251,9 @@
     <ClInclude Include="..\..\..\..\source\components\prComponentAudio.h">
       <Filter>source\components</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\source\lua\lprefix.h">
+      <Filter>source\lua</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\source\Box2D\Collision\Shapes\b2ChainShape.cpp">
@@ -2335,6 +2338,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\source\math\prPoint.cpp">
       <Filter>source\math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\lua\lutf8lib.c">
+      <Filter>source\lua</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

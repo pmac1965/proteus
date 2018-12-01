@@ -42,6 +42,7 @@
 #include "../audio/prSoundManager.h"
 #include "../input/prTouch.h"
 #include "../prVerNum.h"
+#include "../lua/lua.h"
 #include <versionhelpers.h>
 
 
@@ -106,7 +107,7 @@ prApplication_PC::prApplication_PC() : prApplication()
         prTrace(prLogLevel::LogInformation, "Engine version : %s\n", prGetVersionAsString());
         prTrace(prLogLevel::LogVerbose, "-------------------------------------------------------------------------------\n");
         prTrace(prLogLevel::LogVerbose, "Components:\n");
-        prTrace(prLogLevel::LogVerbose, "Lua              : 5.2.3 - Copyright (C) 1994-2013 Lua.org, PUC-Rio.\n");
+        prTrace(prLogLevel::LogVerbose, "Lua              : %s.\n", LUA_COPYRIGHT);
         prTrace(prLogLevel::LogVerbose, "Box2D            : 2.3.0 - Copyright (C) 2006-2013 Erin Catto\n");
         prTrace(prLogLevel::LogVerbose, "TinyXML          : 2.6.2 - Copyright (C) 2000-2006 Lee Thomason.\n");
         prTrace(prLogLevel::LogVerbose, "Zlib             : 1.2.8 - Copyright (C) 1995-2013 Jean-loup Gailly and\n");

@@ -746,6 +746,7 @@
     <ClInclude Include="..\..\..\..\source\lua\lobject.h" />
     <ClInclude Include="..\..\..\..\source\lua\lopcodes.h" />
     <ClInclude Include="..\..\..\..\source\lua\lparser.h" />
+    <ClInclude Include="..\..\..\..\source\lua\lprefix.h" />
     <ClInclude Include="..\..\..\..\source\lua\lstate.h" />
     <ClInclude Include="..\..\..\..\source\lua\lstring.h" />
     <ClInclude Include="..\..\..\..\source\lua\ltable.h" />
@@ -1833,6 +1834,7 @@
     <ClCompile Include="..\..\..\..\source\lua\ltablib.c" />
     <ClCompile Include="..\..\..\..\source\lua\ltm.c" />
     <ClCompile Include="..\..\..\..\source\lua\lundump.c" />
+    <ClCompile Include="..\..\..\..\source\lua\lutf8lib.c" />
     <ClCompile Include="..\..\..\..\source\lua\lvm.c" />
     <ClCompile Include="..\..\..\..\source\lua\lzio.c" />
     <ClCompile Include="..\..\..\..\source\math\prMathsUtil.cpp" />
