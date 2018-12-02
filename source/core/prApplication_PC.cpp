@@ -43,6 +43,7 @@
 #include "../input/prTouch.h"
 #include "../prVerNum.h"
 #include "../lua/lua.h"
+#include "../Box2D/Common/b2Settings.h"
 #include <versionhelpers.h>
 
 
@@ -108,7 +109,7 @@ prApplication_PC::prApplication_PC() : prApplication()
         prTrace(prLogLevel::LogVerbose, "-------------------------------------------------------------------------------\n");
         prTrace(prLogLevel::LogVerbose, "Components:\n");
         prTrace(prLogLevel::LogVerbose, "Lua              : %s.\n", LUA_COPYRIGHT);
-        prTrace(prLogLevel::LogVerbose, "Box2D            : 2.3.0 - Copyright (C) 2006-2013 Erin Catto\n");
+        prTrace(prLogLevel::LogVerbose, "Box2D            : %i.%i.%i - Copyright (C) 2006-2009 Erin Catto\n", b2_version.major, b2_version.minor, b2_version.revision);
         prTrace(prLogLevel::LogVerbose, "TinyXML          : 2.6.2 - Copyright (C) 2000-2006 Lee Thomason.\n");
         prTrace(prLogLevel::LogVerbose, "Zlib             : 1.2.8 - Copyright (C) 1995-2013 Jean-loup Gailly and\n");
         prTrace(prLogLevel::LogVerbose, "                           Mark Adler.\n");

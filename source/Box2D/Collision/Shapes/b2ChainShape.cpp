@@ -16,27 +16,32 @@
 * 3. This notice may not be removed or altered from any source distribution.
 */
 
-#include <Box2D/Collision/Shapes/b2ChainShape.h>
-#include <Box2D/Collision/Shapes/b2EdgeShape.h>
+#include "Box2D/Collision/Shapes/b2ChainShape.h"
+#include "Box2D/Collision/Shapes/b2EdgeShape.h"
 #include <new>
-
-#if defined(ANDROID)            // PMAC - Android uses a different include for memcpy, etc
-  #include <cstring>
-#else
-  #include <memory.h>
-#endif
+#include <string.h>
 
 b2ChainShape::~b2ChainShape()
 {
+	Clear();
+}
+
+void b2ChainShape::Clear()
+{
 	b2Free(m_vertices);
-	m_vertices = NULL;
+	m_vertices = nullptr;
 	m_count = 0;
 }
 
 void b2ChainShape::CreateLoop(const b2Vec2* vertices, int32 count)
 {
-	b2Assert(m_vertices == NULL && m_count == 0);
+	b2Assert(m_vertices == nullptr && m_count == 0);
 	b2Assert(count >= 3);
+	if (count < 3)
+	{
+		return;
+	}
+
 	for (int32 i = 1; i < count; ++i)
 	{
 		b2Vec2 v1 = vertices[i-1];
@@ -57,19 +62,18 @@ void b2ChainShape::CreateLoop(const b2Vec2* vertices, int32 count)
 
 void b2ChainShape::CreateChain(const b2Vec2* vertices, int32 count)
 {
-	b2Assert(m_vertices == NULL && m_count == 0);
+	b2Assert(m_vertices == nullptr && m_count == 0);
 	b2Assert(count >= 2);
 	for (int32 i = 1; i < count; ++i)
 	{
-		b2Vec2 v1 = vertices[i-1];
-		b2Vec2 v2 = vertices[i];
 		// If the code crashes here, it means your vertices are too close together.
-		b2Assert(b2DistanceSquared(v1, v2) > b2_linearSlop * b2_linearSlop);
+		b2Assert(b2DistanceSquared(vertices[i-1], vertices[i]) > b2_linearSlop * b2_linearSlop);
 	}
 
 	m_count = count;
 	m_vertices = (b2Vec2*)b2Alloc(count * sizeof(b2Vec2));
 	memcpy(m_vertices, vertices, m_count * sizeof(b2Vec2));
+
 	m_hasPrevVertex = false;
 	m_hasNextVertex = false;
 

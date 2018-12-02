@@ -16,13 +16,7 @@
 * 3. This notice may not be removed or altered from any source distribution.
 */
 
-#include <Box2D/Collision/b2BroadPhase.h>
-
-#if defined(ANDROID)            // PMAC - Android uses a different include for memcpy, etc
-  #include <cstring>
-#else
-  #include <memory.h>
-#endif
+#include "Box2D/Collision/b2BroadPhase.h"
 
 b2BroadPhase::b2BroadPhase()
 {

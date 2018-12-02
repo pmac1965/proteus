@@ -16,15 +16,9 @@
 * 3. This notice may not be removed or altered from any source distribution.
 */
 
-#include <Box2D/Common/b2BlockAllocator.h>
+#include "Box2D/Common/b2BlockAllocator.h"
 #include <limits.h>
-
-#if defined(ANDROID)            // PMAC - Android uses a different include for memcpy, etc
-  #include <cstring>
-#else
-  #include <memory.h>
-#endif
-
+#include <string.h>
 #include <stddef.h>
 
 int32 b2BlockAllocator::s_blockSizes[b2_blockSizes] = 
@@ -103,7 +97,7 @@ b2BlockAllocator::~b2BlockAllocator()
 void* b2BlockAllocator::Allocate(int32 size)
 {
 	if (size == 0)
-		return NULL;
+		return nullptr;
 
 	b2Assert(0 < size);
 
@@ -128,21 +122,17 @@ void* b2BlockAllocator::Allocate(int32 size)
 			b2Chunk* oldChunks = m_chunks;
 			m_chunkSpace += b2_chunkArrayIncrement;
 			m_chunks = (b2Chunk*)b2Alloc(m_chunkSpace * sizeof(b2Chunk));
-
 			memcpy(m_chunks, oldChunks, m_chunkCount * sizeof(b2Chunk));
 			memset(m_chunks + m_chunkCount, 0, b2_chunkArrayIncrement * sizeof(b2Chunk));
-
-            b2Free(oldChunks);
+			b2Free(oldChunks);
 		}
 
 		b2Chunk* chunk = m_chunks + m_chunkCount;
 		chunk->blocks = (b2Block*)b2Alloc(b2_chunkSize);
-
 #if defined(_DEBUG)
 		memset(chunk->blocks, 0xcd, b2_chunkSize);
 #endif
-
-        int32 blockSize = s_blockSizes[index];
+		int32 blockSize = s_blockSizes[index];
 		chunk->blockSize = blockSize;
 		int32 blockCount = b2_chunkSize / blockSize;
 		b2Assert(blockCount * blockSize <= b2_chunkSize);
@@ -153,7 +143,7 @@ void* b2BlockAllocator::Allocate(int32 size)
 			block->next = next;
 		}
 		b2Block* last = (b2Block*)((int8*)chunk->blocks + blockSize * (blockCount - 1));
-		last->next = NULL;
+		last->next = nullptr;
 
 		m_freeLists[index] = chunk->blocks->next;
 		++m_chunkCount;
@@ -203,7 +193,7 @@ void b2BlockAllocator::Free(void* p, int32 size)
 
 	b2Assert(found);
 
-    memset(p, 0xfd, blockSize);
+	memset(p, 0xfd, blockSize);
 #endif
 
 	b2Block* block = (b2Block*)p;
@@ -219,7 +209,7 @@ void b2BlockAllocator::Clear()
 	}
 
 	m_chunkCount = 0;
-
 	memset(m_chunks, 0, m_chunkSpace * sizeof(b2Chunk));
+
 	memset(m_freeLists, 0, sizeof(m_freeLists));
 }
