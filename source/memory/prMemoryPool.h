@@ -83,7 +83,7 @@ public:
         }   
         else
         {
-            prTrace(LogError, "Failed to push object onto pool\n");
+            prTrace(prLogLevel::LogError, "Failed to push object onto pool\n");
         }
     }
 
@@ -120,15 +120,15 @@ public:
     {
         #if defined(_DEBUG) || defined(DEBUG)
     
-        prTrace(LogError, "\n");
-        prTrace(LogError, "---------------------------------------------------------------\n");
-        prTrace(LogError, "Memory pool: (%s)\n", (m_name && *m_name) ? m_name : "unnamed");
-        prTrace(LogError, "---------------------------------------------------------------\n");
-        prTrace(LogError, "Size in objects: %i\n", GetSize());
-        prTrace(LogError, "Size in bytes  : %i\n", GetSize() * sizeof(T));
-        prTrace(LogError, "Free objects   : %i\n", GetFree());
-        prTrace(LogError, "Used objects   : %i\n", GetUsed());
-        prTrace(LogError, "---------------------------------------------------------------\n");
+        prTrace(prLogLevel::LogError, "\n");
+        prTrace(prLogLevel::LogError, "---------------------------------------------------------------\n");
+        prTrace(prLogLevel::LogError, "Memory pool: (%s)\n", (m_name && *m_name) ? m_name : "unnamed");
+        prTrace(prLogLevel::LogError, "---------------------------------------------------------------\n");
+        prTrace(prLogLevel::LogError, "Size in objects: %i\n", GetSize());
+        prTrace(prLogLevel::LogError, "Size in bytes  : %i\n", GetSize() * sizeof(T));
+        prTrace(prLogLevel::LogError, "Free objects   : %i\n", GetFree());
+        prTrace(prLogLevel::LogError, "Used objects   : %i\n", GetUsed());
+        prTrace(prLogLevel::LogError, "---------------------------------------------------------------\n");
         
         #endif
     }
