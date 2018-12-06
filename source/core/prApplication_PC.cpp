@@ -271,7 +271,7 @@ PRBOOL prApplication_PC::DisplayCreateTool(u32 width, u32 height, u32 menuID, u3
     // Check window name is not null
     if (pWindowName == nullptr)
     {
-        MessageBoxW(HWND_DESKTOP, L"The window name cannot be s.", L"Error", MB_ICONERROR | MB_OK);
+        MessageBoxW(HWND_DESKTOP, L"The window name cannot be null.", L"Error", MB_ICONERROR | MB_OK);
         return result;
     }
 
@@ -352,7 +352,6 @@ PRBOOL prApplication_PC::DisplayCreateTool(u32 width, u32 height, u32 menuID, u3
 
 
     return result;
-
 }
 
 
@@ -512,7 +511,7 @@ BOOL prApplication_PC::CheckPlatform()
     // Lets get the OS we're running on. Vista is used as a base version
     if (!IsWindowsVistaOrGreater())
     {
-        prTrace(prLogLevel::LogError, "Failed to acquire windows version\n");
+        PRLOGE("Failed to acquire windows version\n");
         prDebugShowLastError();
     }
     else
@@ -570,14 +569,13 @@ BOOL prApplication_PC::CheckPlatform()
             isOSInvalid = false;
         }
 
-        /*if (IsWindows10OrGreater())
+        if (IsWindows10OrGreater())
         {
             verMajor    = 10;
             verMinor    = 0;
             isOSInvalid = false;
-        }//*/
+        }
     }
-
 
     // Couldn't get info about windows?
     if (initFailed)
@@ -586,7 +584,6 @@ BOOL prApplication_PC::CheckPlatform()
         return FALSE;
     }
 
-
     // Wrong version of windows?
     if (isOSInvalid)
     {
@@ -594,10 +591,8 @@ BOOL prApplication_PC::CheckPlatform()
         return FALSE;
     }
 
-
     // Write startup info.
-    prTrace(prLogLevel::LogInformation, "Windows version %i.%i\n", verMajor, verMinor);
-
+    PRLOGI("Windows version %i.%i\n", verMajor, verMinor);
 
     return TRUE;
 }
