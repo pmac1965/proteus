@@ -1,5 +1,5 @@
 /**
- * prRenderer_GL20.cpp
+ * prShader.cpp
  *
  *  Copyright 2014 Paul Michael McNab
  *
@@ -17,6 +17,8 @@
  */
 
 
+#if 1
+
 #include "../prConfig.h"
 
 
@@ -25,7 +27,10 @@
 
 #if defined(PLATFORM_PC)
   #include <Windows.h>
+#if defined(ALLOW_GLEW)
   #include <glew.h>
+  #include <wglew.h>
+#endif
   #include <gl/gl.h>
   #include <gl/glu.h>
 
@@ -242,3 +247,6 @@ void prShader::ProgramInfoLog(u32 shader)
     }
 #endif
 }
+
+
+#endif

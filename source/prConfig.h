@@ -96,11 +96,12 @@
 #endif
 
 #ifndef ALLOW_STEAM                                     // Allows the steam code
-#define ALLOW_STEAM
+//#define ALLOW_STEAM
 #endif
 
 #ifndef ALLOW_GLEW                                      // Allows glew to be used
 #define ALLOW_GLEW
+//#define STATIC_GLEW										// for glew static library
 #endif
 
 #ifndef HIDE_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.

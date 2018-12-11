@@ -246,9 +246,9 @@
     // Freetype
     #if defined(ALLOW_FREETYPE)
         #if (defined(_DEBUG) || defined(DEBUG))
-            #pragma comment(lib, "freetype253_D.lib")
+            #pragma comment(lib, "freetyped.lib")
         #else
-            #pragma comment(lib, "freetype253.lib")
+            #pragma comment(lib, "freetype.lib")
         #endif
     #endif
 
@@ -284,8 +284,9 @@
 
     // GLEW
     #if defined(ALLOW_GLEW)
-        #if (defined(_DEBUG) || defined(DEBUG))
-            #pragma comment(lib, "glew32d.lib")
+		// The GLEW library has changed,  library/dll combo or static library now.
+		#if defined(STATIC_GLEW)
+			#pragma comment(lib, "glew32s.lib")
         #else
             #pragma comment(lib, "glew32.lib")
         #endif
