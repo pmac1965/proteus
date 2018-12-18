@@ -119,7 +119,7 @@
 #include "display/prPvr.h"
 #include "display/prRenderer.h"
 #include "display/prRenderer_GL11.h"
-#include "display/prRenderer_GL20.h"
+//#include "display/prRenderer_GL4.h"
 #include "display/prSprite.h"
 #include "display/prSpriteAnimation.h"
 #include "display/prSpriteAnimationSequence.h"

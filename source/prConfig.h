@@ -177,7 +177,7 @@
 
 // OpenGL debug settings
 //#define OPENGL_SHOW_EXTENSIONS
-//#define OPENGL_CHECK_CALLS
+#define OPENGL_CHECK_CALLS
 
 
 // Optimizations

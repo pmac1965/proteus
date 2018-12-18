@@ -1,7 +1,7 @@
 /**
- * prRenderer_GL20.cpp
+ * prRenderer_GL4.cpp
  *
- *  Copyright 2014 Paul Michael McNab
+ *  Copyright 2019 Paul Michael McNab
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
  */
 
 
-//#include <glew.h>
+#include <glew.h>
 #include "../prConfig.h"
 
 
@@ -51,7 +51,7 @@
 
 
 #include <math.h>
-#include "prRenderer_GL20.h"
+#include "prRenderer_GL4.h"
 #include "prColour.h"
 #include "../debug/prTrace.h"
 #include "../debug/prAssert.h"
@@ -67,6 +67,8 @@
 //#include "../core/prResourceManager.h"
 #include "../display/prOglUtils.h"
 //#include "../display/prTexture.h"
+#include "prShadersEmbedded.h"
+#include "../core/prATB.h"
 
 
 // Splash image
@@ -79,18 +81,15 @@ using namespace Proteus::Math;
 using namespace Proteus::Core;
 
 
-//// Use ant tweak bar.
-//#if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)
-//#include "../core/prATB.h"
-//#endif
+//static
+float points[] = {
+   0.0f,  0.5f,  0.0f,
+   0.5f, -0.5f,  0.0f,
+  -0.5f, -0.5f,  0.0f
+};
 
-
-//// ----------------------------------------------------------------------------
-//// Constants for circle drawing.
-//// ----------------------------------------------------------------------------
-//static const float SEGMENTS  = 32.0f;
-//static const int   VERTICES  = 32;                                              // This must be the same as SEGMENTS
-//static const float INCREMENT = 2.0f * Proteus::Math::Pi / SEGMENTS;
+//static 
+GLuint vao = 0;
 
 
 /// ---------------------------------------------------------------------------
@@ -103,98 +102,33 @@ public:
 
     RendererImplementation()
     {
-#if defined(PLATFORM_ANDROID)
-        mDisplay = EGL_NO_DISPLAY;
-        mContext = EGL_NO_CONTEXT;
-        mSurface = EGL_NO_SURFACE;
-#endif
     }
 
     ~RendererImplementation()
     {
-#if defined(PLATFORM_ANDROID)
-        mDisplay = EGL_NO_DISPLAY;
-        mContext = EGL_NO_CONTEXT;
-        mSurface = EGL_NO_SURFACE;
-#endif
     }
 
     void Initialise()
     {
-#if defined(PLATFORM_PC)
+		// Show extensions.
+		#if defined(OPENGL_SHOW_EXTENSIONS)
+		prOpenGLShowExtensions();
+		#endif
 
-#elif defined(PLATFORM_ANDROID)
+		glEnable(GL_DEPTH_TEST);                            // Enables depth testing
+		ERR_CHECK();
+		glDepthFunc(GL_LESS);// GL_LEQUAL);                             // The type of depth test to do
+		ERR_CHECK();
 
-		const EGLint attribs[] =
-		{
-				EGL_RENDERABLE_TYPE, EGL_OPENGL_ES2_BIT,
-				EGL_SURFACE_TYPE, EGL_WINDOW_BIT,
-				EGL_BLUE_SIZE, 8,
-				EGL_GREEN_SIZE, 8,
-				EGL_RED_SIZE, 8,
-				EGL_NONE
-		};
+		prOpenGLInit();
 
-		EGLint      format;
-		EGLint      numConfigs;
-		EGLConfig   config;
-        EGLint      majorVersion;
-        EGLint      minorVersion;
-
-        // Get a display
-		mDisplay = eglGetDisplay(EGL_DEFAULT_DISPLAY);
-        if (mDisplay ==  EGL_NO_DISPLAY)
-        {
-            prTrace(LogError, "EGL: No display\n");
-            return;
-        }
-
-        // Initialise
-		eglInitialize(mDisplay, &majorVersion, &minorVersion);
-        prTrace(LogError, "EGL VER %i, %i\n", majorVersion, minorVersion);
-
-
-		/* Here, the application chooses the configuration it desires. In this
-		 * sample, we have a very simplified selection process, where we pick
-		 * the first EGLConfig that matches our criteria */
-		eglChooseConfig(mDisplay, attribs, &config, 1, &numConfigs);
-
-		/* EGL_NATIVE_VISUAL_ID is an attribute of the EGLConfig that is
-		 * guaranteed to be accepted by ANativeWindow_setBuffersGeometry().
-		 * As soon as we picked a EGLConfig, we can safely reconfigure the
-		 * ANativeWindow buffers to match, using EGL_NATIVE_VISUAL_ID. */
-//		eglGetConfigAttrib(mDisplay, config, EGL_NATIVE_VISUAL_ID, &format);
-
-//		ANativeWindow_setBuffersGeometry(m_pState->window, 0, 0, format);
-
-		//mSurface = eglCreateWindowSurface(mDisplay, config, window, NULL);
-
-	/*	EGLint contextAttribs[] =
-		{
-				EGL_CONTEXT_CLIENT_VERSION, 2,
-				EGL_NONE
-		};
-
-		mContext = eglCreateContext(mDisplay, config, NULL, contextAttribs);//*/
-
-		//eglMakeCurrent(mDisplay, mSurface, m_surface, m_context);
-
-		//eglQuerySurface(mDisplay, mSurface, EGL_WIDTH, &m_width);
-		//eglQuerySurface(mDisplay, mSurface, EGL_HEIGHT, &m_height);//*/
-#endif
+		EmbeddedShadersInit();
     }
 
     // Show the display
     void Swap()
     {
     }
-
-#if defined(PLATFORM_ANDROID)
-	EGLDisplay		mDisplay;
-	EGLContext		mContext;
-	EGLSurface		mSurface;
-    //ANativeWindow   mWindow;
-#endif
 };
 
 
@@ -202,9 +136,9 @@ public:
 /// ---------------------------------------------------------------------------
 /// Constructor.
 /// ---------------------------------------------------------------------------
-prRenderer_GL20::prRenderer_GL20() : prRenderer ()
-                                   , pImpl      (new RendererImplementation())
-                                   , imp        (*pImpl)
+prRenderer_GL4::prRenderer_GL4() : prRenderer ()
+                                 , pImpl      (new RendererImplementation())
+                                 , imp        (*pImpl)
 {
     PRASSERT(pImpl);
 }
@@ -213,7 +147,7 @@ prRenderer_GL20::prRenderer_GL20() : prRenderer ()
 /// ---------------------------------------------------------------------------
 /// Destructor.
 /// ---------------------------------------------------------------------------
-prRenderer_GL20::~prRenderer_GL20()
+prRenderer_GL4::~prRenderer_GL4()
 {
     PRSAFE_DELETE(pImpl);
 }
@@ -222,33 +156,70 @@ prRenderer_GL20::~prRenderer_GL20()
 /// ---------------------------------------------------------------------------
 /// Inits the renderer with basic settings.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::Init()
+void prRenderer_GL4::Init()
 {
     imp.Initialise();
+	PRLOGD("prRenderer_GL4::Init(MAX)\n");
+
+	/*float points[] = {
+	   0.0f,  0.5f,  0.0f,
+	   0.5f, -0.5f,  0.0f,
+	  -0.5f, -0.5f,  0.0f
+	};*/
+
+	GLuint vbo = 0;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), points, GL_STATIC_DRAW);
+
+//	GLuint vao = 0;
+	glGenVertexArrays(1, &vao);
+	glBindVertexArray(vao);
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, vbo);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+
+	glBindVertexArray(vao);
+	PRLOGD("VAO: %i\n", vao);
 }
 
 
 /// ---------------------------------------------------------------------------
 /// Destroys the renderer.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::Destroy()
+void prRenderer_GL4::Destroy()
 {
-    // For OpenGL we do nothing.
+    // ?
 }
 
 
 /// ---------------------------------------------------------------------------
 /// Begins the image rendering cycle.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::Begin()
+void prRenderer_GL4::Begin()
 {
+	glClearColor(0.2f, 0.2f, 0.5f, 0.0f);
+	ERR_CHECK();
+
+	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
+	ERR_CHECK();
+
+	EmbeddedShadersUsePrg();
+	ERR_CHECK();
+
+	//PRLOGD("prRenderer_GL4::Begin()");
+	glBindVertexArray(vao);
+	ERR_CHECK();
+
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+	ERR_CHECK();
 }
 
 
 /// ---------------------------------------------------------------------------
 /// Ends the image rendering cycle.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::End()
+void prRenderer_GL4::End()
 {
     // For OpenGL we do nothing.
 }
@@ -257,17 +228,36 @@ void prRenderer_GL20::End()
 /// ---------------------------------------------------------------------------
 /// Shows the previously rendered image.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::Present()
+void prRenderer_GL4::Present()
 {
-#if defined(PLATFORM_ANDROID)
+	PRASSERT(m_pWindow);
+	//if (m_pWindow)
+	{
+		// Draw watermark
+//#if defined(PLATFORM_PC) && defined(PROTEUS_ALLOW_WATERMARK) && !defined(PROTEUS_TOOL)
+//		prDrawWaterMark(m_pWatermark);
+//#endif
+
+		// Draw tweak bars
+#if defined(PROTEUS_USE_ANT_TWEAK_BAR) && defined(PLATFORM_PC)
+		//prATBDraw();
 #endif
+
+#if defined(PLATFORM_PC)
+		SwapBuffers(static_cast<prWindow_PC*>(m_pWindow)->GetDeviceContext());
+#endif
+
+#if defined(PLATFORM_LINUX)
+		prLinuxSwapBuffers();
+#endif
+	}
 }
 
 
 /// ---------------------------------------------------------------------------
 /// Set orthographic view in preparation for 2D rendering.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::SetOrthographicView()
+void prRenderer_GL4::SetOrthographicView()
 {
 }
 
@@ -275,7 +265,7 @@ void prRenderer_GL20::SetOrthographicView()
 /// ---------------------------------------------------------------------------
 /// Restore perspective projection.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::RestorePerspectiveView()
+void prRenderer_GL4::RestorePerspectiveView()
 {
 }
 
@@ -283,30 +273,17 @@ void prRenderer_GL20::RestorePerspectiveView()
 /// ---------------------------------------------------------------------------
 /// Draws a single point.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::DrawPoint(f32 x, f32 y)
+void prRenderer_GL4::DrawPoint(f32 x, f32 y)
 {
 	PRUNUSED(x);
 	PRUNUSED(y);
-//    prVertex2D vertices[] =
-//    {
-//        {x, y},
-//    };
-
-//    glVertexPointer(2, GL_FLOAT, 0, vertices);
-//    ERR_CHECK();
-    
-    //glEnableClientState(GL_VERTEX_ARRAY);
-    //ERR_CHECK();
-
-    glDrawArrays(GL_POINTS, 0, 1);
-    ERR_CHECK();
 }
 
 
 /// ---------------------------------------------------------------------------
 /// Draws a line
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::DrawLine(f32 x1, f32 y1, f32 x2, f32 y2)
+void prRenderer_GL4::DrawLine(f32 x1, f32 y1, f32 x2, f32 y2)
 {
     PRUNUSED(x1);
     PRUNUSED(y1);
@@ -318,7 +295,7 @@ void prRenderer_GL20::DrawLine(f32 x1, f32 y1, f32 x2, f32 y2)
 /// ---------------------------------------------------------------------------
 /// Draws a line 3D.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::DrawLine(Proteus::Math::prVector3 &from, Proteus::Math::prVector3 &to)
+void prRenderer_GL4::DrawLine(Proteus::Math::prVector3 &from, Proteus::Math::prVector3 &to)
 {
     PRUNUSED(from);
     PRUNUSED(to);
@@ -328,7 +305,7 @@ void prRenderer_GL20::DrawLine(Proteus::Math::prVector3 &from, Proteus::Math::pr
 /// ---------------------------------------------------------------------------
 /// Draws a line 3D.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::DrawLine(const Proteus::Math::prVector3 &from, const Proteus::Math::prVector3 &to)
+void prRenderer_GL4::DrawLine(const Proteus::Math::prVector3 &from, const Proteus::Math::prVector3 &to)
 {
     PRUNUSED(from);
     PRUNUSED(to);
@@ -338,7 +315,7 @@ void prRenderer_GL20::DrawLine(const Proteus::Math::prVector3 &from, const Prote
 /// ---------------------------------------------------------------------------
 /// Draws a hollow rectangle.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::DrawRect(f32 x1, f32 y1, f32 x2, f32 y2)
+void prRenderer_GL4::DrawRect(f32 x1, f32 y1, f32 x2, f32 y2)
 {
     PRUNUSED(x1);
     PRUNUSED(y1);
@@ -350,7 +327,7 @@ void prRenderer_GL20::DrawRect(f32 x1, f32 y1, f32 x2, f32 y2)
 /// ---------------------------------------------------------------------------
 /// Draws a filled rectangle.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::DrawFilledRect(f32 x1, f32 y1, f32 x2, f32 y2)
+void prRenderer_GL4::DrawFilledRect(f32 x1, f32 y1, f32 x2, f32 y2)
 {
     PRUNUSED(x1);
     PRUNUSED(y1);
@@ -362,7 +339,7 @@ void prRenderer_GL20::DrawFilledRect(f32 x1, f32 y1, f32 x2, f32 y2)
 /// ---------------------------------------------------------------------------
 /// Draws a hollow circle.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::DrawCircle(f32 x, f32 y, f32 radius)
+void prRenderer_GL4::DrawCircle(f32 x, f32 y, f32 radius)
 {
     PRUNUSED(x);
     PRUNUSED(y);
@@ -373,7 +350,7 @@ void prRenderer_GL20::DrawCircle(f32 x, f32 y, f32 radius)
 /// ---------------------------------------------------------------------------
 /// Draws a filled circle.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::DrawFilledCircle(f32 x, f32 y, f32 radius)
+void prRenderer_GL4::DrawFilledCircle(f32 x, f32 y, f32 radius)
 {
     PRUNUSED(x);
     PRUNUSED(y);
@@ -384,7 +361,7 @@ void prRenderer_GL20::DrawFilledCircle(f32 x, f32 y, f32 radius)
 /// ---------------------------------------------------------------------------
 /// Draws a hollow polygon.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::DrawPolygon(prVertex2D *vertices, s32 count)
+void prRenderer_GL4::DrawPolygon(prVertex2D *vertices, s32 count)
 {
     PRUNUSED(vertices);
     PRUNUSED(count);
@@ -394,7 +371,7 @@ void prRenderer_GL20::DrawPolygon(prVertex2D *vertices, s32 count)
 /// ---------------------------------------------------------------------------
 /// Draws a filled polygon.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::DrawFilledPolygon(prVertex2D *vertices, s32 count)
+void prRenderer_GL4::DrawFilledPolygon(prVertex2D *vertices, s32 count)
 {
     PRUNUSED(vertices);
     PRUNUSED(count);
@@ -404,7 +381,7 @@ void prRenderer_GL20::DrawFilledPolygon(prVertex2D *vertices, s32 count)
 /// ---------------------------------------------------------------------------
 /// Sets the draw colour.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::SetColour(const prColour &colour)
+void prRenderer_GL4::SetColour(const prColour &colour)
 {
     PRUNUSED(colour);
 }
@@ -413,7 +390,7 @@ void prRenderer_GL20::SetColour(const prColour &colour)
 /// ---------------------------------------------------------------------------
 /// Sets the clear colour.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::SetClearColour(const prColour &colour)
+void prRenderer_GL4::SetClearColour(const prColour &colour)
 {
     PRUNUSED(colour);
 }
@@ -422,7 +399,7 @@ void prRenderer_GL20::SetClearColour(const prColour &colour)
 /// ---------------------------------------------------------------------------
 /// Draws a textured quad.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::DrawQuad()
+void prRenderer_GL4::DrawQuad()
 {
 }
 
@@ -430,7 +407,7 @@ void prRenderer_GL20::DrawQuad()
 /// ---------------------------------------------------------------------------
 /// Draws a textured quad.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::DrawQuad(float u0, float v0, float u1, float v1)
+void prRenderer_GL4::DrawQuad(float u0, float v0, float u1, float v1)
 {
     PRUNUSED(u0);
     PRUNUSED(v0);
@@ -442,7 +419,7 @@ void prRenderer_GL20::DrawQuad(float u0, float v0, float u1, float v1)
 /// ---------------------------------------------------------------------------
 /// Draws a textured quad.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::DrawQuad(float u0, float v0, float u1, float v1, prColour c)
+void prRenderer_GL4::DrawQuad(float u0, float v0, float u1, float v1, prColour c)
 {
     PRUNUSED(u0);
     PRUNUSED(v0);
@@ -455,7 +432,7 @@ void prRenderer_GL20::DrawQuad(float u0, float v0, float u1, float v1, prColour 
 /// ---------------------------------------------------------------------------
 /// Draws a textured quad.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::BatchDrawQuad(float u0, float v0, float u1, float v1, prColour c)
+void prRenderer_GL4::BatchDrawQuad(float u0, float v0, float u1, float v1, prColour c)
 {
     PRUNUSED(u0);
     PRUNUSED(v0);
@@ -468,7 +445,7 @@ void prRenderer_GL20::BatchDrawQuad(float u0, float v0, float u1, float v1, prCo
 /// ---------------------------------------------------------------------------
 /// Enables/disables textures.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::TexturesEnabled(bool state)
+void prRenderer_GL4::TexturesEnabled(bool state)
 {
     PRUNUSED(state);
 }
@@ -477,7 +454,7 @@ void prRenderer_GL20::TexturesEnabled(bool state)
 /// ---------------------------------------------------------------------------
 /// Enables/disables blending.
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::BlendEnabled(bool state)
+void prRenderer_GL4::BlendEnabled(bool state)
 {
     PRUNUSED(state);
 }
@@ -486,31 +463,6 @@ void prRenderer_GL20::BlendEnabled(bool state)
 /// ---------------------------------------------------------------------------
 /// Draws a positioning grid
 /// ---------------------------------------------------------------------------
-void prRenderer_GL20::DrawGrid(s32 size)
+void prRenderer_GL4::DrawGrid(s32 size)
 {
-    TexturesEnabled(false);
-
-    for (s32 x = -size; x< size; x++)
-    {
-        (x == 0) ? SetColour(prColour::Blue) : SetColour(prColour::White);
-
-        DrawLine(prVector3((f32)x, 0, (f32)-size),
-                 prVector3((f32)x, 0, (f32) size));
-    }
-        
-    DrawLine(prVector3((f32)size, 0, (f32)-size),
-             prVector3((f32)size, 0, (f32) size) );
-
-    for (s32 z = -size; z< size; z++)
-    {
-        (z == 0) ? SetColour(prColour::Red) : SetColour(prColour::White);
-
-        DrawLine(prVector3((f32)-size, 0, (f32)z),
-                 prVector3((f32) size, 0, (f32)z));
-    }
-
-    DrawLine(prVector3((f32)-size, 0, (f32)size),
-             prVector3((f32) size, 0, (f32)size));
-
-    TexturesEnabled(true);
 }

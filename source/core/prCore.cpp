@@ -31,7 +31,7 @@
 #include "../achievements/prLeaderboards.h"
 #include "../file/prFileManager.h"
 #include "../display/prRenderer_GL11.h"
-#include "../display/prRenderer_GL20.h"
+#include "../display/prRenderer_GL4.h"
 #include "../display/prBackgroundManager.h"
 #include "../display/prSpriteManager.h"
 #include "../display/prFadeManager.h"
@@ -205,19 +205,19 @@ PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version)
             if (rendererType == PRRENDERER_OPENGL)
             {
                 // Check version numbers
-                PRASSERT(version == PRGLVER_11 || version == PRGLVER_20 || version == PRGLVER_30);
+                PRASSERT(version == PRGLVER_11 || version == PRGLVER_45)// || version == PRGLVER_30);
                 switch (version)
                 {
                 case PRGLVER_11:
                     pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
                     break;
 
-                case PRGLVER_20:
-                    pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
+                case PRGLVER_45:
+                    pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL4();
                     break;
 
-                case PRGLVER_30:
-                    PRPANIC("Under construction");
+                default:
+                    PRPANIC("No valid renderer");
                     break;
                 }
             }
@@ -237,13 +237,13 @@ PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version)
                         pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
                         break;
                     
-                    case PRGLVER_20:
+                    /*case PRGLVER_20:
                         pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                         break;
                     
                     case PRGLVER_30:
                         PRPANIC("Under construction");
-                        break;
+                        break;//*/
                 }
             }
         
@@ -262,13 +262,13 @@ PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version)
                         pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
                         break;
                     
-                    case PRGLVER_20:
+                    /*case PRGLVER_20:
                         pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                         break;
                     
                     case PRGLVER_30:
                         PRPANIC("Under construction");
-                        break;
+                        break;//*/
                 }
             }
 
@@ -287,13 +287,13 @@ PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version)
                     pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
                     break;
 
-                case PRGLVER_20:
+                /*case PRGLVER_20:
                     pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                     break;
 
                 case PRGLVER_30:
                     PRPANIC("Under construction");
-                    break;
+                    break;//*/
                 }
             }
 
@@ -313,13 +313,13 @@ PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version)
                     pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
                     break;
                     
-                case PRGLVER_20:
+                /*case PRGLVER_20:
                     pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL20();
                     break;
                     
                 case PRGLVER_30:
                     PRPANIC("Under construction");
-                    break;
+                    break;//*/
                 }
             }
         

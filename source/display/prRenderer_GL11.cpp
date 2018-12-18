@@ -331,16 +331,26 @@ void prRenderer_GL11::RestorePerspectiveView()
 /// ---------------------------------------------------------------------------
 void prRenderer_GL11::DrawPoint(f32 x, f32 y)
 {
-    prVertex2D vertices[] = 
-    {
-        {x, y},
-    };
+//    prVertex2D vertices[] = 
+//    {
+  //      {x, y},
+    //};
 
-    glVertexPointer(2, GL_FLOAT, 0, vertices);
+	//glEnableClientState(GL_VERTEX_ARRAY);
+	//ERR_CHECK();
+
+ /*   glVertexPointer(2, GL_FLOAT, 0, vertices);
     ERR_CHECK();
 
     glDrawArrays(GL_POINTS, 0, 1);
     ERR_CHECK();
+
+	//glDisableClientState(GL_VERTEX_ARRAY);
+	//ERR_CHECK();
+	//*/
+	glBegin(GL_POINTS);
+		glVertex2f(x, y);
+	glEnd();
 }
 
 

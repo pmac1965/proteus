@@ -1,6 +1,6 @@
-// File: prRenderer_GL20.h
+// File: prRenderer_GL4.h
 /**
- * Copyright 2014 Paul Michael McNab
+ * Copyright 2019 Paul Michael McNab
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,18 +26,18 @@
 class RendererImplementation;
 
 
-// Class: prRenderer_GL20
-//      Renderer for OpenGLES 2.0
-class prRenderer_GL20 : public prRenderer
+// Class: prRenderer_GL4
+//      Renderer for OpenGL 4
+class prRenderer_GL4 : public prRenderer
 {
 public:
-    // Method: prRenderer_GL20
+    // Method: prRenderer_GL4
     //      Ctor
-    prRenderer_GL20();
+	prRenderer_GL4();
 
-    // Method: ~prRenderer_GL20
+    // Method: ~prRenderer_GL4
     //      Dtor
-    ~prRenderer_GL20();
+    ~prRenderer_GL4();
 
     // Method: Init
     //      Inits the renderer with basic settings.
@@ -230,8 +230,8 @@ public:
 
 private:
     // Stops passing by value and assignment.
-    prRenderer_GL20(const prRenderer_GL20&);
-    const prRenderer_GL20& operator = (const prRenderer_GL20&);
+    prRenderer_GL4(const prRenderer_GL4&);
+    const prRenderer_GL4& operator = (const prRenderer_GL4&);
 
 
 private:

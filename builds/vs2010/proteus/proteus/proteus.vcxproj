@@ -625,8 +625,9 @@
     <ClInclude Include="..\..\..\..\source\display\prPvr.h" />
     <ClInclude Include="..\..\..\..\source\display\prRenderer.h" />
     <ClInclude Include="..\..\..\..\source\display\prRenderer_GL11.h" />
-    <ClInclude Include="..\..\..\..\source\display\prRenderer_GL20.h" />
+    <ClInclude Include="..\..\..\..\source\display\prRenderer_GL4.h" />
     <ClInclude Include="..\..\..\..\source\display\prShader.h" />
+    <ClInclude Include="..\..\..\..\source\display\prShadersEmbedded.h" />
     <ClInclude Include="..\..\..\..\source\display\prSplash.h" />
     <ClInclude Include="..\..\..\..\source\display\prSprite.h" />
     <ClInclude Include="..\..\..\..\source\display\prSpriteAnimation.h" />
@@ -999,8 +1000,9 @@
     <ClCompile Include="..\..\..\..\source\display\prPerspective.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prRenderer_GL11.cpp" />
-    <ClCompile Include="..\..\..\..\source\display\prRenderer_GL20.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prRenderer_GL4.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prShader.cpp" />
+    <ClCompile Include="..\..\..\..\source\display\prShadersEmbedded.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prSplash.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prSprite.cpp" />
     <ClCompile Include="..\..\..\..\source\display\prSpriteAnimation.cpp" />
