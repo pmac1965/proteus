@@ -92,7 +92,7 @@ namespace
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
-prCube::prCube() : prSceneObject("Cube")
+prCube::prCube() //: prSceneObject("Cube")
 {
 }
 
@@ -108,29 +108,29 @@ void prCube::Draw()
     ERR_CHECK();
 
     // Translate
-    glTranslatef(position.x, position.y, position.z);
+//    glTranslatef(position.x, position.y, position.z);
     ERR_CHECK();
 
     // Roate
-    glRotatef(rotation.x, 1, 0, 0);
-    glRotatef(rotation.y, 0, 1, 0);
-    glRotatef(rotation.z, 0, 0, 1);
+//    glRotatef(rotation.x, 1, 0, 0);
+//    glRotatef(rotation.y, 0, 1, 0);
+//    glRotatef(rotation.z, 0, 0, 1);
 
     // Scale
-    glScalef(scale.x, scale.y, scale.z);
+//    glScalef(scale.x, scale.y, scale.z);
     ERR_CHECK();
 #endif
 
         // Base class draw
-        prSceneObject::Draw();
+//        prSceneObject::Draw();
 
         // We're using colour for the cube as its the most used primitive
 //        glEnableClientState(GL_COLOR_ARRAY);
 //        ERR_CHECK();
 
         // Set the colour
-        glColor4f(colour.red, colour.green, colour.blue, colour.alpha);
-        ERR_CHECK();
+//        glColor4f(colour.red, colour.green, colour.blue, colour.alpha);
+//        ERR_CHECK();
 
         glVertexPointer(3, GL_FLOAT, 0, vertices);
         ERR_CHECK();

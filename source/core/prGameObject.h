@@ -1,5 +1,5 @@
 // File: prGameObject.h
-//      All entities in a scene are deriveable from a game object
+//      All entities in a scene are derived from a game object
 /**
  * Copyright 2016 Paul Michael McNab
  * 
@@ -23,6 +23,7 @@
 #include "prTypes.h"
 #include "prString.h"
 #include "../editor/prEditorObject.h"
+#include "../core/prTransform.h"
 #include <list>
 
 
@@ -149,6 +150,8 @@ private:
     Proteus::Core::PRBOOL   mActive;
     Proteus::Core::PRBOOL   mEnabled;
     Proteus::Core::PRBOOL   mVisible;
+
+    prTransform             mTransform;
 
     std::list<Proteus::Actor::prActorComponent*>    mComponents;
 };

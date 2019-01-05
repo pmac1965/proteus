@@ -1,5 +1,5 @@
 // File: prTransform.h
-//      The transform class for actor components.
+//      The transform struct for game components.
 /**
  *  Copyright 2018 Paul Michael McNab
  *
@@ -23,26 +23,25 @@
 #include "../math/prVector3.h"
 
 
-//using namespace Proteus::Math; (Dang don't know what I was thinking!)
-
-
 // Namespaces
-namespace Proteus { // convert to struct
+namespace Proteus {
 namespace Core {
 
 
-// Class: prTransform
-//      Initial transform class
+// Struct: prTransform
+//      Initial transform structure
 //
 // Notes:
 //      Will be modified to add quaternions.
 //
-class prTransform
+struct /*class*/ prTransform
 {
-public:
-    Proteus::Math::prVector3    position;
-    Proteus::Math::prVector3    rotation;
-    Proteus::Math::prVector3    scale;
+//public:
+    prTransform() : position(Proteus::Math::prVector3::Zero)
+                  , rotation(Proteus::Math::prVector3::Zero)
+                  , scale   (Proteus::Math::prVector3::One)
+    {
+    }
 
 
     void Reset()
@@ -53,22 +52,13 @@ public:
     }
 
 
-    void ResetPosition()
-    {
-        position = Proteus::Math::prVector3::Zero;
-    }
+    //inline void ResetPosition() { position = Proteus::Math::prVector3::Zero; }
+    //inline void ResetRotation() { rotation = Proteus::Math::prVector3::Zero; }
+    //inline void ResetScale() { scale = Proteus::Math::prVector3::One; }
 
-
-    void ResetRotation()
-    {
-        rotation = Proteus::Math::prVector3::Zero;
-    }
-
-
-    void ResetScale()
-    {
-        scale = Proteus::Math::prVector3::One;
-    }
+    Proteus::Math::prVector3    position;
+    Proteus::Math::prVector3    rotation;
+    Proteus::Math::prVector3    scale;
 };
 
 

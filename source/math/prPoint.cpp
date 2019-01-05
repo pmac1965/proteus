@@ -38,17 +38,4 @@ const TPoint2<Proteus::Core::f32> prPoint2F :: Zero  (0.0f, 0.0f);
 const TPoint2<Proteus::Core::f32> prPoint2F :: One   (0.0f, 0.0f);
 
 
-/// ---------------------------------------------------------------------------
-/// Returns the points data as a string.
-/// ---------------------------------------------------------------------------
-//const char *prPoint3::ToString() const
-//{
-//    static char buffer[256];
-//
-//    //sprintf(buffer, "%f, %f, %f", x, y, z);
-//
-//    return buffer;
-//}
-
-
 }} // Namespaces

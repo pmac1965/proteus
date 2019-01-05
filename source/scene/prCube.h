@@ -19,19 +19,20 @@
 #pragma once
 
 
-#include "prSceneObject.h"
+//#include "prSceneObject.h"
+#include "../core/prGameObject.h"
 
 
 // Class: prCube
 //      A simple geometric primitive for use by the *game editor*
 //
 // Notes:
-//      This class is a scene object, and therefore inherits a great deal
-//      of functionality from the scene object
+//      This class is a game object, and therefore inherits a great deal
+//      of functionality from the game object
 //
 // See Also
-//      <prSceneObject>
-class prCube : public prSceneObject
+//      <prGameObject>
+class prCube : public Proteus::Core::prGameObject //: public prSceneObject
 {
 public:
     // Method: prCube

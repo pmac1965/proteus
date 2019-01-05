@@ -29,60 +29,64 @@ class TiXmlNode;
 class TiXmlElement;
 
 
-// Class: prScene
-//      A simple scene graph
-class prScene
-{
-public:
-    // Method: prScene
-    //      Ctor
-    prScene();
+namespace Scene {
 
-    // Method: ~prScene
-    //      Dtor
-    ~prScene();
+    // Class: prScene
+    //      A simple scene graph
+    class prScene
+    {
+    public:
+        // Method: prScene
+        //      Ctor
+        prScene();
 
-    // Method: Load
-    //      Loads the scene file specified by the filename
-    //
-    // Parameters:
-    //      pFilename - A scene file
-    void Load(const char *pFilename);
+        // Method: ~prScene
+        //      Dtor
+        ~prScene();
 
-    // Method: Unload
-    //     Unloads the current scene and frees all the objects
-    void Unload();
+        // Method: Load
+        //      Loads the scene file specified by the filename
+        //
+        // Parameters:
+        //      pFilename - A scene file
+        void Load(const char *pFilename);
 
-    // Method: Add
-    //      Adds an object to the scene
-    //
-    // Parameters:
-    //      pObject - A game object
-    void Add(prGameObject *pObject);
+        // Method: Unload
+        //     Unloads the current scene and frees all the objects
+        void Unload();
 
-    // Method: Remove
-    //      Removes an object from the scene
-    //
-    // Parameters:
-    //      pObject - A game object
-    void Remove(prGameObject *pObject);
+        // Method: Add
+        //      Adds an object to the scene
+        //
+        // Parameters:
+        //      pObject - A game object
+        void Add(prGameObject *pObject);
 
-    // Method: Update
-    //      Updates the scene
-    void Update();
+        // Method: Remove
+        //      Removes an object from the scene
+        //
+        // Parameters:
+        //      pObject - A game object
+        void Remove(prGameObject *pObject);
 
-    // Method: Draw
-    //      Draws the scene
-    void Draw();
+        // Method: Update
+        //      Updates the scene
+        void Update();
 
-private:
-    // Method: ParseFile
-    //      Parses the xml file.
-    void ParseFile(TiXmlNode* pParent);
+        // Method: Draw
+        //      Draws the scene
+        void Draw();
+
+    private:
+        // Method: ParseFile
+        //      Parses the xml file.
+        void ParseFile(TiXmlNode* pParent);
     
-    // Method: ParseAttribs_File
-    //      Attribute parser used to get information about the file.
-    void ParseAttribs_File(TiXmlElement* pElement);
+        // Method: ParseAttribs_File
+        //      Attribute parser used to get information about the file.
+        void ParseAttribs_File(TiXmlElement* pElement);
 
-private:
-};
+    //private:
+    };
+
+}

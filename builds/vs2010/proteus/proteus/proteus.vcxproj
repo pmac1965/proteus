@@ -808,10 +808,12 @@
     <ClInclude Include="..\..\..\..\source\persistence\prSave_pc.h" />
     <ClInclude Include="..\..\..\..\source\prConfig.h" />
     <ClInclude Include="..\..\..\..\source\proteus.h" />
+    <ClInclude Include="..\..\..\..\source\scene\prCapsule.h" />
     <ClInclude Include="..\..\..\..\source\scene\prCube.h" />
+    <ClInclude Include="..\..\..\..\source\scene\prCylinder.h" />
     <ClInclude Include="..\..\..\..\source\scene\prScene.h" />
     <ClInclude Include="..\..\..\..\source\scene\prSceneNode.h" />
-    <ClInclude Include="..\..\..\..\source\scene\prSceneObject.h" />
+    <ClInclude Include="..\..\..\..\source\scene\prSphere.h" />
     <ClInclude Include="..\..\..\..\source\script\prLua.h" />
     <ClInclude Include="..\..\..\..\source\script\prLuaDebug.h" />
     <ClInclude Include="..\..\..\..\source\social\facebook\prFacebook.h" />
@@ -1883,10 +1885,12 @@
     <ClCompile Include="..\..\..\..\source\persistence\prSave_linux.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave_mac.cpp" />
     <ClCompile Include="..\..\..\..\source\persistence\prSave_pc.cpp" />
+    <ClCompile Include="..\..\..\..\source\scene\prCapsule.cpp" />
     <ClCompile Include="..\..\..\..\source\scene\prCube.cpp" />
+    <ClCompile Include="..\..\..\..\source\scene\prCylinder.cpp" />
     <ClCompile Include="..\..\..\..\source\scene\prScene.cpp" />
     <ClCompile Include="..\..\..\..\source\scene\prSceneNode.cpp" />
-    <ClCompile Include="..\..\..\..\source\scene\prSceneObject.cpp" />
+    <ClCompile Include="..\..\..\..\source\scene\prSphere.cpp" />
     <ClCompile Include="..\..\..\..\source\script\prLua.cpp" />
     <ClCompile Include="..\..\..\..\source\script\prLuaDebug.cpp" />
     <ClCompile Include="..\..\..\..\source\social\facebook\prFacebook.cpp" />
@@ -1932,6 +1936,8 @@
     <None Include="..\..\..\..\source\Android.mk" />
     <None Include="..\..\..\..\source\changes.txt" />
     <None Include="..\..\..\..\source\core\prList.inl" />
+    <None Include="..\..\..\..\source\display\shaders\fragment_shader.glsl" />
+    <None Include="..\..\..\..\source\display\shaders\vertex_shader.glsl" />
     <None Include="..\..\..\..\source\includes.bat" />
     <None Include="..\..\..\..\source\ios\prGameCenter.mm" />
     <None Include="..\..\..\..\source\ios\prIos.mm" />

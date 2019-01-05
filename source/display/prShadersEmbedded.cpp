@@ -62,3 +62,4 @@ void EmbeddedShadersUsePrg()
 	glUseProgram(shader_prg);
 	ERR_CHECK();
 }
+

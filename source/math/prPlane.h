@@ -19,7 +19,8 @@
 #pragma once
 
 
-#include "prVector3.h"
+//#include "prVector3.h"
+#include "../core/prGameObject.h"
 
 
 // Namespaces
@@ -27,23 +28,19 @@ namespace Proteus {
 namespace Math {
 
 
-class prPlane
+class prPlane : public Proteus::Core::prGameObject// Should be moved, as will be rendered too
 {
 public:
     prPlane();
 
-
-    //{
-    //}
-    //~prPlane();
-
+    // Should inherit a prGameObject
 
 private:
     // Normal vector of the plane.
-    prVector3   normal;
+//    prVector3   normal;
 
     // Distance from origin.
-    Proteus::Core::f32  distance;
+//    Proteus::Core::f32  distance;
 };
 
 

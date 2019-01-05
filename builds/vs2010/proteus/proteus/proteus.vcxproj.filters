@@ -193,6 +193,9 @@
     <Filter Include="source\vr">
       <UniqueIdentifier>{22f256ae-0692-4fe5-98bb-971855dea7bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\display\shaders">
+      <UniqueIdentifier>{28b4eb88-b443-4fe7-b940-5da9524a9d10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\source\proteus.h">
@@ -1128,9 +1131,6 @@
     <ClInclude Include="..\..\..\..\source\scene\prSceneNode.h">
       <Filter>source\scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\source\scene\prSceneObject.h">
-      <Filter>source\scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\source\input\prJoystick.h">
       <Filter>source\input</Filter>
     </ClInclude>
@@ -1256,6 +1256,15 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\source\display\prShadersEmbedded.h">
       <Filter>source\display</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\scene\prCapsule.h">
+      <Filter>source\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\scene\prCylinder.h">
+      <Filter>source\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\scene\prSphere.h">
+      <Filter>source\scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2246,9 +2255,6 @@
     <ClCompile Include="..\..\..\..\source\scene\prSceneNode.cpp">
       <Filter>source\scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\source\scene\prSceneObject.cpp">
-      <Filter>source\scene</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\source\input\prJoystick.cpp">
       <Filter>source\input</Filter>
     </ClCompile>
@@ -2348,6 +2354,15 @@
     <ClCompile Include="..\..\..\..\source\display\prShadersEmbedded.cpp">
       <Filter>source\display</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\source\scene\prCapsule.cpp">
+      <Filter>source\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\scene\prCylinder.cpp">
+      <Filter>source\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\scene\prSphere.cpp">
+      <Filter>source\scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\source\read.me">
@@ -2403,6 +2418,12 @@
     </None>
     <None Include="..\..\..\..\source\math\prPoint.inl">
       <Filter>source\math</Filter>
+    </None>
+    <None Include="..\..\..\..\source\display\shaders\fragment_shader.glsl">
+      <Filter>source\display\shaders</Filter>
+    </None>
+    <None Include="..\..\..\..\source\display\shaders\vertex_shader.glsl">
+      <Filter>source\display\shaders</Filter>
     </None>
   </ItemGroup>
 </Project>

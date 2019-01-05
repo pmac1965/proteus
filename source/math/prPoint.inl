@@ -17,51 +17,30 @@
 //  limitations under the License.
 //
 // ------------------------------------------------------------------------------------------------
+/*
+
+#include <iostream>
 
 
 // Namespaces
 namespace Proteus {
 namespace Math {
+#if (defined(DEBUG) || defined(_DEBUG)) // Move to start of file?
 
-    // To be completed (AND TESTED)
-/*    const char *TPoint3<Proteus::Core::s32>::ToString() const
+    const char *prPoint2::ToString() const
     {
-        static char buffer[256] = { 0 };
-
-        //sprintf(buffer, "%f, %f, %f", x, y, z);
-
+        static char buffer[POINT_TOSTRING_BUFFERSIZE] = { 0 };
+        sprintf(buffer, "%i, %i", x, y);
         return buffer;
     }
 
-    // To be completed (AND TESTED)
-    const char *TPoint3<Proteus::Core::f32>::ToString() const
+    const char *prPoint2F::ToString() const
     {
-        static char buffer[256] = { 0 };
-
-        //sprintf(buffer, "%f, %f, %f", x, y, z);
-
+        static char buffer[POINT_TOSTRING_BUFFERSIZE] = { 0 };
+        sprintf(buffer, "%f, %f", x, y);
         return buffer;
     }
 
-
-/*    // To be completed (AND TESTED)
-    const char *TPoint2<Proteus::Core::s32>::ToString() const
-    {
-        static char buffer[256] = { 0 };
-
-        //sprintf(buffer, "%f, %f, %f", x, y, z);
-
-        return buffer;
-    }
-
-    // To be completed (AND TESTED)
-    const char *TPoint2<Proteus::Core::s32>::ToString() const
-    {
-        static char buffer[256] = { 0 };
-
-        //sprintf(buffer, "%f, %f, %f", x, y, z);
-
-        return buffer;
-    }//*/
-
+#endif
 }} // Namespaces
+//*/

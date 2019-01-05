@@ -101,15 +101,23 @@ prLua::~prLua()
 /// ---------------------------------------------------------------------------
 /// Runs a script
 /// ---------------------------------------------------------------------------
-void prLua::Run(const char *filename)
+void prLua::Run(const char *script)
 {
-    PRASSERT(filename && *filename);
+    PRASSERT(script && *script);
 
-    lua_State *lua = luaL_newstate();
-    if (lua)
+    lua_State *L = luaL_newstate(); // lua_newstate() allows passing in of allocator
+    if (L)
     {
+        luaL_dostring(L, script);
+
+        lua_getglobal(L, "x");
+
+        lua_Number x = lua_tonumber(L, 1);
+
+        prTrace(prLogLevel::LogDebug, "x == %i\n", (int)x);
+
         // Setup global error functions
-        prLuaDebugRegisterDebugFunctions(lua);
+        /*prLuaDebugRegisterDebugFunctions(lua);
 
         luaL_openlibs(lua);
 
@@ -125,9 +133,9 @@ void prLua::Run(const char *filename)
             s = lua_pcall(lua, 0, LUA_MULTRET, 0);
         }
 
-        CheckForErrors(lua, s);
+        CheckForErrors(lua, s);//*/
 
-        lua_close(lua);        
+        lua_close(L);        
     }
 }
 
