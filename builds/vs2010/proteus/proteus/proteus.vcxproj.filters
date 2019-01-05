@@ -2407,17 +2407,11 @@
     <None Include="..\..\..\..\source\ios\prIosFlurry.mm">
       <Filter>source\ios</Filter>
     </None>
-    <None Include="..\..\..\..\source\changes.txt">
-      <Filter>source</Filter>
-    </None>
     <None Include="..\..\..\..\source\math\prMatrix4.inl">
       <Filter>source\math</Filter>
     </None>
     <None Include="..\..\..\..\source\Android.mk">
       <Filter>build</Filter>
-    </None>
-    <None Include="..\..\..\..\source\math\prPoint.inl">
-      <Filter>source\math</Filter>
     </None>
     <None Include="..\..\..\..\source\display\shaders\fragment_shader.glsl">
       <Filter>source\display\shaders</Filter>

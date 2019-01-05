@@ -15,8 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *
- *  Updated Nov 2018 to allow removal of debug code.
- *  Updated Jan 2019 to add operators (+, -, +=, -=)
+ *  PMAC - Updated Nov 2018 to allow removal of debug code.
+ *  PMAC - Updated Jan 2019 to add operators (+, -, +=, -=)
+ *  PMAC - Updated Jan 2019 to remove .inl file
  */
 
 
@@ -229,7 +230,3 @@ typedef TPoint2<Proteus::Core::f32>     prPoint2F;
 
 
 }}// Namespaces
-
-
-// Add inline file
-//#include "prPoint.inl"

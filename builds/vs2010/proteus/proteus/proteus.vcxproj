@@ -1934,7 +1934,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\..\..\source\Android.mk" />
-    <None Include="..\..\..\..\source\changes.txt" />
     <None Include="..\..\..\..\source\core\prList.inl" />
     <None Include="..\..\..\..\source\display\shaders\fragment_shader.glsl" />
     <None Include="..\..\..\..\source\display\shaders\vertex_shader.glsl" />
@@ -1948,7 +1947,6 @@
     <None Include="..\..\..\..\source\ios\prIosTwitter.mm" />
     <None Include="..\..\..\..\source\license.txt" />
     <None Include="..\..\..\..\source\math\prMatrix4.inl" />
-    <None Include="..\..\..\..\source\math\prPoint.inl" />
     <None Include="..\..\..\..\source\math\prVector2.inl" />
     <None Include="..\..\..\..\source\math\prVector3.inl" />
     <None Include="..\..\..\..\source\read.me" />
