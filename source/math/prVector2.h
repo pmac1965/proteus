@@ -1,4 +1,5 @@
 // File: prVector2.h
+//  A simple 2D vector class.
 /**
  *  Copyright 2014 Paul Michael McNab
  *
@@ -13,6 +14,8 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
+ *
+ *  Modified 2018 to add missing operator=
  */
 
 
@@ -44,6 +47,7 @@ public:
 public:
 #if defined(PROTEUS_OPTIMISE_NO_VECTOR2_INIT)
     // This optimized version does not initialise its members
+    // *NOT* recommended, as this may unintended side effects.
     prVector2()
     {}
 #else
@@ -136,6 +140,17 @@ public:
 
     // Operator !=
     bool operator != (const prVector2& other) const { return !Equals(other); }
+
+    // Copy Assignment
+    prVector2& operator=(const prVector2& v)
+    {
+        if (this == &v) { return (*this); }
+        
+        x = v.x;
+        y = v.y;
+
+        return *this;
+    }
 
 
 public:

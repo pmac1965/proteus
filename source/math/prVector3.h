@@ -1,4 +1,5 @@
 // File: prVector3.h
+//  A simple 3D vector class.
 /**
  *  Copyright 2014 Paul Michael McNab
  *
@@ -46,6 +47,7 @@ public:
 public:
 #if defined(PROTEUS_OPTIMISE_NO_VECTOR3_INIT)
     // This optimized version does not initialise its members
+    // *NOT* recommended, as this may unintended side effects.
     prVector3()
     {}
 #else

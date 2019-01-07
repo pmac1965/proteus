@@ -1,4 +1,8 @@
 // File: prSinCos.h
+//  This is a pre-generated table, that can be altered on a
+//  per game basis to save on sin/cos calculations.
+//
+//  This is just a starting point.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -13,6 +17,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
+ *  PMAC - Updated Jan 2019 to improve comments.
  */
 
 

@@ -1,4 +1,8 @@
 // File: prRect.h
+//  Represents a simple rectangle.
+//
+// This class will be templated - the float version will be removed
+//
 /**
  *  Copyright 2014 Paul Michael McNab
  *

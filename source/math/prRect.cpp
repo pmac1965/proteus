@@ -42,6 +42,7 @@ prRect::prRect()
     , m_width  (0) 
     , m_height (0) 
 {
+    TODO("Template this class")
 }
 
 
