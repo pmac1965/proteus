@@ -1,8 +1,10 @@
 // File: prRect.h
-//  Represents a simple rectangle.
+//      Represents a simple rectangle.
 //
-// This class will be templated - the float version will be removed
-//
+// Notes:
+//      Another coder attempted to improve this code by adding a floating point
+//      point version of the integer code. That code was removed and the
+//      original code has been templated.
 /**
  *  Copyright 2014 Paul Michael McNab
  *
@@ -17,14 +19,14 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
+ *
+ *  PMAC - Converted to template class
  */
 
 
 #pragma once
 
 
-#include "../core/prTypes.h"
-#include "../debug/prDebug.h"
 #include "prPoint.h"
 
 
@@ -35,32 +37,26 @@ namespace Math {
 
 // class: prRect
 //      Represents a simple rectangle.
+template<typename T>
 class prRect
 {
 public:        
     // Method: prRect
     //      Constructor
-    prRect();
-
-    // Method: prRect
-    //      Constructor
     //
     // Parameters:
-    //      top    - Rectangle coordinate 
-    //      left   - Rectangle coordinate 
-    //      bottom - Rectangle coordinate
-    //      right  - Rectangle coordinate
-    prRect(Proteus::Core::s32 top, Proteus::Core::s32 left, Proteus::Core::s32 bottom, Proteus::Core::s32 right);
-
-    // Method: prRect
-    //      Constructor
-    //
-    // Parameters:
-    //      top    - Rectangle coordinate 
-    //      left   - Rectangle coordinate 
-    //      bottom - Rectangle coordinate
-    //      right  - Rectangle coordinate
-    prRect(Proteus::Core::f32 top, Proteus::Core::f32 left, Proteus::Core::f32 bottom, Proteus::Core::f32 right);
+    //      top    - Rectangle corner coordinate 
+    //      left   - Rectangle corner coordinate 
+    //      bottom - Rectangle corner coordinate
+    //      right  - Rectangle corner coordinate
+    prRect(T top, T left, T bottom, T right)
+        : m_top    (top)
+        , m_left   (left)
+        , m_bottom (bottom)
+        , m_right  (right)
+    {
+        VerifyCoords();
+    }   
 
     // Method: prRect
     //      Constructor
@@ -68,7 +64,13 @@ public:
     // Parameters:
     //      topLeft     - Rectangle coordinate 
     //      bottomRight - Rectangle coordinate 
-    prRect(const prPoint3& topLeft, const prPoint3& bottomRight);
+    prRect(const prPoint3& topLeft, const prPoint3& bottomRight)
+        : m_top    (topLeft.y)
+        , m_left   (topLeft.x)
+        , m_bottom (bottomRight.y)
+        , m_right  (bottomRight.x)
+    {
+    }
                     
     // Method: PointInside
     //       Determines if the passed coordinates are within the rectangle.
@@ -79,7 +81,21 @@ public:
     //
     // Returns:
     //      true or false
-    bool PointInside(Proteus::Core::s32 x, Proteus::Core::s32 y) const;
+    bool PointInside(T x, T y) const
+    {
+        if (IsEmpty() == false)
+        {
+            return 
+            ( 
+                x >= m_left    &&
+                x <= m_right   &&
+                y <= m_bottom  &&
+                y >= m_top
+            );
+        }
+    
+        return false;           
+    }
     
     // Method: PointInside
     //      Determines if the passed coordinates are within the rectangle.
@@ -89,7 +105,21 @@ public:
     //
     // Returns:
     //      true or false
-    bool PointInside(const prPoint3& point) const;
+    bool PointInside(const prPoint3& point) const
+    {
+        if (IsEmpty() == false)
+        {
+            return 
+            ( 
+                point.x >= m_left    &&
+                point.x <= m_right   &&
+                point.y <= m_bottom  &&
+                point.y >= m_top
+            );
+        }
+    
+        return false;           
+    }
 
     // Method: Resize
     //      Resizes the rectangle.
@@ -99,7 +129,15 @@ public:
     //      left   - Adjustment value
     //      bottom - Adjustment value
     //      right  - Adjustment value
-    void Resize(Proteus::Core::s32 top, Proteus::Core::s32 left, Proteus::Core::s32 bottom, Proteus::Core::s32 right);                    
+    void Resize(T top, T left, T bottom, T right)
+    {
+        m_top    += top;
+        m_left   += left;
+        m_bottom += bottom;
+        m_right  += right;
+
+        VerifyCoords();
+    }
 
     // Method: Set
     //      Sets the size of the rectangle.
@@ -109,56 +147,65 @@ public:
     //      left   - Rectangle coordinate 
     //      bottom - Rectangle coordinate
     //      right  - Rectangle coordinate
-    void Set(Proteus::Core::s32 top, Proteus::Core::s32 left, Proteus::Core::s32 bottom, Proteus::Core::s32 right);
+    void Set(T top, T left, T bottom, T right)
+    {
+        m_top    = top;
+        m_left   = left;
+        m_bottom = bottom;
+        m_right  = right;
+                
+        VerifyCoords();
+    }
                    
     // Method: IsEmpty
     //      Determines if the rectangle has zero width and height.
     //
     // Returns:
     //      true or false
-    bool IsEmpty() const { return ((m_left - m_right) == 0  &&  (m_top - m_bottom) == 0); }
+    // TODO("Add template specialization");
+    bool IsEmpty() const { return (IS_ZERO(m_left - m_right) && IS_ZERO(m_top - m_bottom)); }
                     
     // Method: GetTop
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle coordinate
-    Proteus::Core::s32 GetTop() const { return m_top; }            
+    T GetTop() const { return m_top; }            
     
     // Method: GetBottom
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle coordinate
-    Proteus::Core::s32 GetBottom() const { return m_bottom; }
+    T GetBottom() const { return m_bottom; }
     
     // Method: GetLeft
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle coordinate
-    Proteus::Core::s32 GetLeft() const { return m_left; }
+    T GetLeft() const { return m_left; }
         
     // Method: GetRight
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle coordinate
-    Proteus::Core::s32 GetRight() const { return m_right; }
+    T GetRight() const { return m_right; }
         
     // Method: GetWidth
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle width
-    Proteus::Core::s32 GetWidth() const { return m_width; }
+    T GetWidth() const { return m_width; }
         
     // Method: GetHeight
     //      Gets rectangle coordinate.
     //
     // Returns:
     //      Rectangle height
-    Proteus::Core::s32 GetHeight() const { return m_height; }
+    T GetHeight() const { return m_height; }
                 
     // Method: Intersect
     //      Determine whether the passed rectangle intersects this rectangle.
@@ -168,7 +215,13 @@ public:
     //
     // Returns:
     //      true or false
-    bool Intersect(const prRect& rect) const;            
+    bool Intersect(const prRect& rect) const
+    {
+        return (m_right   >= rect.GetLeft()   &&
+                m_left    <= rect.GetRight()  &&
+                m_bottom  >= rect.GetTop()    &&
+                m_top     <= rect.GetBottom());
+    }
     
     // Method: Move
     //      Changes the position of the rectangle.
@@ -176,21 +229,41 @@ public:
     // Parameters:
     //      x    - Adjustment value
     //      y    - Adjustment value
-    void Move(Proteus::Core::s32 x, Proteus::Core::s32 y);
+    void Move(T x, T y)
+    {
+        m_right  += x;
+        m_left   += x;
+        m_bottom += y;
+        m_top    += y;
+    }
     
 
 private:
-    Proteus::Core::s32     m_top;
-    Proteus::Core::s32     m_left;
-    Proteus::Core::s32     m_bottom;
-    Proteus::Core::s32     m_right;            
-    Proteus::Core::s32     m_width;
-    Proteus::Core::s32     m_height;
+    T     m_top;
+    T     m_left;
+    T     m_bottom;
+    T     m_right;            
+    T     m_width;
+    T     m_height;
 
 
 private:
-    // This method ensures that left is less than right and top greater than botton.
-    void VerifyCoords();    
+    // This method ensures that left is less than right and top higher than botton.
+    void VerifyCoords()
+    {
+        if (m_right < m_left)
+        {
+            prSwap(m_left, m_right);
+        }
+    
+        if (m_top > m_bottom)
+        {
+            prSwap(m_top, m_bottom);
+        }
+    
+        m_width  = m_right  - m_left;
+        m_height = m_bottom - m_top;
+    }
 };
 
 

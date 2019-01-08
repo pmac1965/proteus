@@ -768,7 +768,6 @@
     <ClInclude Include="..\..\..\..\source\math\prQuaternion.h" />
     <ClInclude Include="..\..\..\..\source\math\prRandom.h" />
     <ClInclude Include="..\..\..\..\source\math\prRect.h" />
-    <ClInclude Include="..\..\..\..\source\math\prRectF.h" />
     <ClInclude Include="..\..\..\..\source\math\prSinCos.h" />
     <ClInclude Include="..\..\..\..\source\math\prVector2.h" />
     <ClInclude Include="..\..\..\..\source\math\prVector3.h" />
@@ -1847,8 +1846,6 @@
     <ClCompile Include="..\..\..\..\source\math\prPoint.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prQuaternion.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prRandom.cpp" />
-    <ClCompile Include="..\..\..\..\source\math\prRect.cpp" />
-    <ClCompile Include="..\..\..\..\source\math\prRectF.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prSinCos.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prVector2.cpp" />
     <ClCompile Include="..\..\..\..\source\math\prVector3.cpp" />

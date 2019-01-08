@@ -591,9 +591,6 @@
     <ClInclude Include="..\..\..\..\source\math\prRect.h">
       <Filter>source\math</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\source\math\prRectF.h">
-      <Filter>source\math</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\source\math\prVector2.h">
       <Filter>source\math</Filter>
     </ClInclude>
@@ -1650,12 +1647,6 @@
       <Filter>source\input</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\source\math\prMathsUtil.cpp">
-      <Filter>source\math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\source\math\prRect.cpp">
-      <Filter>source\math</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\source\math\prRectF.cpp">
       <Filter>source\math</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\source\math\prVector2.cpp">

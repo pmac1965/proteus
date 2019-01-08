@@ -173,7 +173,7 @@
 #include "math/prQuaternion.h"
 #include "math/prRandom.h"
 #include "math/prRect.h"
-#include "math/prRectF.h"
+//#include "math/prRectF.h"
 #include "math/prSinCos.h"
 #include "math/prVector2.h"
 #include "math/prVector3.h"

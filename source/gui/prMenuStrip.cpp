@@ -275,7 +275,7 @@ void prMenuStrip::SetAllMenusClosed()
 /// ---------------------------------------------------------------------------
 bool prMenuStrip::InMenuRect(s32 x, s32 y, s32 width, s32 height, s32 xpos, s32 ypos)
 {
-    prRect rect = prRect(y, x, y + height, x + width);
+    prRect<s32> rect = prRect<s32>(y, x, y + height, x + width);
     return rect.PointInside(xpos, ypos);
 }
 

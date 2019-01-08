@@ -254,7 +254,7 @@ void prButton::SetSelected()
 /// ---------------------------------------------------------------------------
 bool prButton::InButtonsRect(s32 x, s32 y)
 {
-    Proteus::Math::prRect rect = Proteus::Math::prRect((s32)pos.y, (s32)pos.x, (s32)(pos.y + m_height), (s32)(pos.x + m_width));
+    Proteus::Math::prRect<s32> rect = Proteus::Math::prRect<s32>((s32)pos.y, (s32)pos.x, (s32)(pos.y + m_height), (s32)(pos.x + m_width));
     return rect.PointInside(x, y);
 }
 
