@@ -90,7 +90,7 @@ public:
     //      minLength   - The minimum length of words which can be searched for.
     //      maxLength   - The maximum length of words which can be searched for.
     //      pcb         - A callback class. *Must not be NULL.*
-    prDictionarySearch(Proteus::Core::s32 minLength, Proteus::Core::s32 maxLength, prDictionaryCallbacks *pcb);
+    prDictionarySearch(s32 minLength, s32 maxLength, prDictionaryCallbacks *pcb);
 
     // Method: ~prDictionarySearch
     //      Destructor
@@ -116,20 +116,20 @@ public:
 
     // Method: IsSearching
     //      Determines if a search is running.
-    Proteus::Core::PRBOOL IsSearching() const { return m_searching; }
+    PRBOOL IsSearching() const { return m_searching; }
 
 
 private:
     prDictionaryCallbacks  *m_callback;
-    Proteus::Core::s32      m_minLength;
-    Proteus::Core::s32      m_maxLength;
-    Proteus::Core::s32      m_mode;
-    Proteus::Core::s32      m_wordSize;
-    Proteus::Core::s32      m_fileSize;
-    Proteus::Core::s32      m_entries;
+    s32                     m_minLength;
+    s32                     m_maxLength;
+    s32                     m_mode;
+    s32                     m_wordSize;
+    s32                     m_fileSize;
+    s32                     m_entries;
     prFile                 *m_file;
     char                   *m_fileBuffer;
-    Proteus::Core::PRBOOL   m_searching;
+    PRBOOL                  m_searching;
     char                    m_word[DICT_WORD_BUFFER_SIZE];
 
 

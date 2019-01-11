@@ -86,7 +86,7 @@ public:
 
     // Method: Count
     //      Gets the number of contained cameras.
-    Proteus::Core::s32 Count() const { return m_cameras.Size(); }
+    s32 Count() const { return m_cameras.Size(); }
         
     // Method: DisplayUsage
     //      Displays all the cameras.

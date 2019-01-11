@@ -62,7 +62,7 @@ namespace Proteus
 //      Proteus::Locale::DE_DE - German
 //      Proteus::Locale::ES_ES - Spain
 //      Proteus::Locale::ZH_CN - China
-Proteus::Core::s32 prGetPlatformsLanguage();
+s32 prGetPlatformsLanguage();
 
 // Function: prGetPlatformsLanguageString
 //      Get the platforms default language as a string.

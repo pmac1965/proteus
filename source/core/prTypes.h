@@ -35,9 +35,9 @@
 #endif
 
 
-// Namespaces
-PRNAMESPACE_BEG(Proteus)
-PRNAMESPACE_BEG(Core)
+//// Namespaces
+//PRNAMESPACE_BEG(Proteus)
+//PRNAMESPACE_BEG(Core)
 
 
 // Basic types - PC
@@ -138,5 +138,5 @@ PRCOMPILER_ASSERT(sizeof(f32) == 4);
 PRCOMPILER_ASSERT(sizeof(f64) == 8);
 
 
-PRNAMESPACE_END
-PRNAMESPACE_END // Namespaces
+//PRNAMESPACE_END
+//PRNAMESPACE_END // Namespaces

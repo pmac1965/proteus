@@ -66,7 +66,7 @@ public:
     //
     // Parameters:
     //      dt - Delta time
-    void Update(Proteus::Core::f32 dt);
+    void Update(f32 dt);
 
     // Method: Draw
     //      Draws all the visible sprites.
@@ -100,7 +100,7 @@ public:
     // 
     // Notes:
     //      This call only exists in the tool build
-    prSprite *ToolCreate(prTexture *pTex, Proteus::Core::s32 width, Proteus::Core::s32 height);
+    prSprite *ToolCreate(prTexture *pTex, s32 width, s32 height);
 
     // Method: ToolRelease
     //      Releases a sprite and any asssociated assets.
@@ -134,7 +134,7 @@ public:
     // Parameters:
     //      pSprite   - The sprite to start batching with
     //      batchSize - The number of supported draw calls (32 equals 32 sprites, 0 equals don't use)
-    void BatchBegin(prSprite *pSprite, Proteus::Core::s32 batchSize = 0);
+    void BatchBegin(prSprite *pSprite, s32 batchSize = 0);
     
     // Method: BatchEnd
     //      Ends batch sprite rendering
@@ -144,7 +144,7 @@ public:
     //      Is batching available?
     bool BatchAvailable() const { return m_numQuads > 0; }
 
-    void BatchAdd(Proteus::Core::f32 *pColours, Proteus::Core::QuadData* pQuadData);
+    void BatchAdd(f32 *pColours, QuadData* pQuadData);
 
 
 private:
@@ -188,8 +188,8 @@ private:
     prSprite                   *m_sprite;
     prTexture                  *m_texture;
     std::list<prActiveSprite>   m_activeSprites;
-    Proteus::Core::QuadData    *m_pBatchQuads;
-    Proteus::Core::f32         *m_pBatchColours;
-    Proteus::Core::s32          m_numQuads;
-    Proteus::Core::s32          m_numQuadsAdded;
+    QuadData                   *m_pBatchQuads;
+    f32                        *m_pBatchColours;
+    s32                         m_numQuads;
+    s32                         m_numQuadsAdded;
 };

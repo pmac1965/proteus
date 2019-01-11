@@ -37,7 +37,7 @@
 #endif
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 using namespace Proteus::Math;
 
 
@@ -274,7 +274,7 @@ bool prMenu::AddMenuItem(prMenuItem *pMenuItem)
 /// ---------------------------------------------------------------------------
 /// Finds a menu item in the menu if it exists
 /// ---------------------------------------------------------------------------
-prMenuItem *prMenu::FindMenuItem(Proteus::Core::u32 id)
+prMenuItem *prMenu::FindMenuItem(u32 id)
 {
     prMenuItem *pMenuItem = nullptr;
 

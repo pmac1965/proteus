@@ -111,21 +111,21 @@ public:
     //
     // See Also:
     //      <prWaveResult>
-    prWaveResult GetWaveSize(prWaveID id, Proteus::Core::u32 *size) const;
+    prWaveResult GetWaveSize(prWaveID id, u32 *size) const;
 
     // Method: GetWaveFrequency
     //      Gets the frequency
     //
     // See Also:
     //      <prWaveResult>
-    prWaveResult GetWaveFrequency(prWaveID id, Proteus::Core::u32 *pulFrequency) const;
+    prWaveResult GetWaveFrequency(prWaveID id, u32 *pulFrequency) const;
 
     // Method: GetWaveALBufferFormat
     //      Returns the buffer format
     //
     // See Also:
     //      <prWaveResult>
-    prWaveResult GetWaveALBufferFormat(prWaveID id, Proteus::Core::u32 *pulFormat) const;
+    prWaveResult GetWaveALBufferFormat(prWaveID id, u32 *pulFormat) const;
 
     // Method: DeleteWaveFile
     //      Deletes a loaded wave file

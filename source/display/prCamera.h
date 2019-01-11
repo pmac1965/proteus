@@ -61,7 +61,7 @@ public:
     //      x - Amount to rotate the camera in the X direction
     //      y - Amount to rotate the camera in the Y direction
     //      z - Amount to rotate the camera in the Z direction
-    void Rotate(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 z);
+    void Rotate(f32 x, f32 y, f32 z);
     
     // Method: SetTarget
     //      Sets the camera look at target position
@@ -89,15 +89,15 @@ public:
 
     // Method: GetID
     //      Gets the cameras unique ID.
-    Proteus::Core::s32 GetID() const { return m_id; }
+    s32 GetID() const { return m_id; }
 
     // Method: GetHash
     //      Gets the cameras hash.
-    Proteus::Core::u32 GetHash() const { return m_hash; }
+    u32 GetHash() const { return m_hash; }
 
     // Method: GetActive
     //      Gets the cameras active status
-    Proteus::Core::PRBOOL GetActive() const { return m_active; }
+    PRBOOL GetActive() const { return m_active; }
 
     // Method: GetName
     //      Gets the cameras name.
@@ -105,7 +105,7 @@ public:
 
     // Method: SetActive
     //      Sets the cameras active status.
-    void SetActive(Proteus::Core::PRBOOL state) { m_active = state; }
+    void SetActive(PRBOOL state) { m_active = state; }
 
 
 protected:
@@ -115,12 +115,12 @@ protected:
 
 
 private:
-    static Proteus::Core::u32  baseID;
+    static u32  baseID;
 
 
 private:
-    Proteus::Core::PRBOOL   m_active;
-    Proteus::Core::u32      m_hash;
-    Proteus::Core::s32      m_id;
-    prString                m_name;
+    PRBOOL      m_active;
+    u32         m_hash;
+    s32         m_id;
+    prString    m_name;
 };

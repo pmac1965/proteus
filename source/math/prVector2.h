@@ -63,7 +63,7 @@ public:
     // Parameters:
     //      nx - X coordinate
     //      ny - Y coordinate
-    prVector2(Proteus::Core::f32 nx, Proteus::Core::f32 ny) : x(nx), y(ny)
+    prVector2(f32 nx, f32 ny) : x(nx), y(ny)
     {}
 
     // Method: prVector2
@@ -76,11 +76,11 @@ public:
 
     // Method: Length
     //      Calculates the magnitude of the vector.
-    Proteus::Core::f32 Length() const;
+    f32 Length() const;
 
     // Method: LengthSquared
     //      Calculates the magnitude of the vector squared.
-    Proteus::Core::f32 LengthSquared() const;
+    f32 LengthSquared() const;
     
     // Method: Normalize
     //      Normalise this vector.
@@ -106,19 +106,19 @@ public:
 
     // Operator +
     inline prVector2 operator + (const prVector2& rhs) const;
-    inline prVector2 operator + (const Proteus::Core::f32& rhs) const;
+    inline prVector2 operator + (const f32& rhs) const;
 
     // Operator -
     inline prVector2 operator - (const prVector2& rhs) const;
-    inline prVector2 operator - (const Proteus::Core::f32& rhs) const;
+    inline prVector2 operator - (const f32& rhs) const;
 
     // Operator *
     inline prVector2 operator * (const prVector2& rhs) const;
-    inline prVector2 operator * (const Proteus::Core::f32& rhs) const;
+    inline prVector2 operator * (const f32& rhs) const;
 
     // Operator /
     inline prVector2 operator / (const prVector2& rhs) const;
-    inline prVector2 operator / (const Proteus::Core::f32& rhs) const;
+    inline prVector2 operator / (const f32& rhs) const;
 
     // Operator +=
     inline prVector2& operator += (const prVector2& rhs);
@@ -127,7 +127,7 @@ public:
     inline prVector2& operator -= (const prVector2& rhs);
 
     // Operator *=
-    inline prVector2& operator *= (const Proteus::Core::f32 val);
+    inline prVector2& operator *= (const f32 val);
 
     // Unary + operator.
     inline prVector2 operator + () const { return *this; }
@@ -163,12 +163,12 @@ public:
 
     union
     {
-        Proteus::Core::f32 element[2];
+        f32 element[2];
         
         struct
         {                   
-            Proteus::Core::f32 x;
-            Proteus::Core::f32 y;
+            f32 x;
+            f32 y;
         };
     };    
 

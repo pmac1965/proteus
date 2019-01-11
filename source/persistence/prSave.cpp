@@ -55,7 +55,7 @@
 #endif
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 // prSave modes

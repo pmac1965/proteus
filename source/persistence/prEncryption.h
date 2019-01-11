@@ -36,7 +36,7 @@
 // Parameters:
 //      pData   - Address of the data block to encrypt
 //      length  - Length of the data block to encrypt
-void prEncrypt(Proteus::Core::u8 *pData, Proteus::Core::u32 length);
+void prEncrypt(u8 *pData, u32 length);
 
 // Function: prDecrypt
 //      Decrypts a block of data.
@@ -44,4 +44,4 @@ void prEncrypt(Proteus::Core::u8 *pData, Proteus::Core::u32 length);
 // Parameters:
 //      pData   - Address of the data block to decrypt
 //      length  - Length of the data block to decrypt
-void prDecrypt(Proteus::Core::u8 *pData, Proteus::Core::u32 length);
+void prDecrypt(u8 *pData, u32 length);

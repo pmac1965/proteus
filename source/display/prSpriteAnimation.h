@@ -120,7 +120,7 @@ public:
     //
     // Returns:
     //      The user data for a specific frame
-    Proteus::Core::s32 GetUserDataForCurrentFrame(Proteus::Core::s32 index) const;
+    s32 GetUserDataForCurrentFrame(s32 index) const;
 
     // Method: HasAnimationStopped
     //      Has the current animation stopped.

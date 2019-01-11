@@ -39,7 +39,7 @@ private:
 
     // Method: prEmitter 
     //      Ctor
-    prEmitter(Proteus::Core::s32 id, const prEmitterDefinition &ed);
+    prEmitter(s32 id, const prEmitterDefinition &ed);
 
     // Method: prEmitter 
     //      Dtor
@@ -49,11 +49,11 @@ private:
 
     // Method: GetID
     //      Get the emitters unique ID.
-    Proteus::Core::s32 GetID() const { return mID; }
+    s32 GetID() const { return mID; }
 
 
 public:
-    bool Update(Proteus::Core::f32 dt);
+    bool Update(f32 dt);
     //void Draw();
 
 
@@ -69,8 +69,8 @@ private:
 
     prEffectType   *pEffects;
 
-    Proteus::Core::s32  mID;                // Unique ID
-    Proteus::Core::f32  mLifetime;          // Lifetime of this emitter as a whole
+    s32             mID;                // Unique ID
+    f32             mLifetime;          // Lifetime of this emitter as a whole
 
-    bool                mAlive;             //
+    bool            mAlive;             //
 };

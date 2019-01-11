@@ -68,7 +68,7 @@
 #include "../tinyxml/tinyxml.h"
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

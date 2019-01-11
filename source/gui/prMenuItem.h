@@ -63,11 +63,11 @@ class prMenuItem
 public:
     // Method: prMenuItem
     //      Ctor
-    explicit prMenuItem(prString text, Proteus::Core::u32 id);
+    explicit prMenuItem(prString text, u32 id);
     
     // Method: prMenuItem
     //      Ctor
-    explicit prMenuItem(const char *text, Proteus::Core::u32 id);
+    explicit prMenuItem(const char *text, u32 id);
     
     // Method: prMenuItem
     //      Ctor
@@ -83,11 +83,11 @@ public:
     //
     // See Also:
     //      <prMenuItemControlKey>
-    void SetCommandKeys(prMenuItemControlKey controlKeys = prMenuItemControlKey::None, Proteus::Core::u32 character = 0);
+    void SetCommandKeys(prMenuItemControlKey controlKeys = prMenuItemControlKey::None, u32 character = 0);
 
     // Method: GotCommandKeys
     //      Do we have a command key sequence?
-    Proteus::Core::PRBOOL GotCommandKeys() const { return mControlKey; }
+    PRBOOL GotCommandKeys() const { return mControlKey; }
 
     // Method: SetIcon
     //      Sets the icon for the menu item
@@ -99,15 +99,15 @@ public:
 
     // Method: SetEnabled
     //      Sets the enabled status
-    void SetEnabled(Proteus::Core::PRBOOL state) { mEnabled = state; }
+    void SetEnabled(PRBOOL state) { mEnabled = state; }
 
     // Method: GetEnabled
     //      Gets the enabled status
-    Proteus::Core::PRBOOL GetEnabled() const { return mEnabled; }
+    PRBOOL GetEnabled() const { return mEnabled; }
 
     // Method: GetID
     //      Gets the menu items ID
-    Proteus::Core::u32 GetID() const { return mId; }
+    u32 GetID() const { return mId; }
 
     // Method: GetText
     //      Gets the menu items text
@@ -119,12 +119,12 @@ public:
 
 
 private:
-    Proteus::Core::u32      mId;
-    prString                mText;
-    prString                mCommandKeyText;
-    prSprite               *mIcon;
-    Proteus::Core::PRBOOL   mControlKey;
-    Proteus::Core::PRBOOL   mEnabled;
+    u32         mId;
+    prString    mText;
+    prString    mCommandKeyText;
+    prSprite   *mIcon;
+    PRBOOL      mControlKey;
+    PRBOOL      mEnabled;
 };
 
 

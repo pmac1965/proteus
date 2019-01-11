@@ -55,8 +55,8 @@ public:
     }
 
 
-    Proteus::Core::u32   hash;
-    char                *text[Proteus::Locale::MAX];
+    u32   hash;
+    char *text[Proteus::Locale::MAX];
 };
 
 
@@ -99,11 +99,11 @@ public:
     //  - Proteus::Locale::DE_DE    German  = German
     //  - Proteus::Locale::ES_ES    Spanish = Spain
     //  - Proteus::Locale::ZH_CN    Chinese = China
-    void Set(Proteus::Core::s32 lang);
+    void Set(s32 lang);
 
     // Method: Load
     //      Gets the language used.
-    Proteus::Core::s32 Get() const;
+    s32 Get() const;
 
     // Method: GetString
     //      Gets a localised string.
@@ -128,9 +128,9 @@ private:
 
 
 private:
-    Proteus::Core::s32            language;                 // The language id.
-    Proteus::Core::s32            count;                    // Number of entries.
-    Proteus::Core::PRBOOL         correctFileType;          // Internal safety check
-    prList<prStringTableEntry*>   entries;                  // Used to sort entries for binary search
-    prStringTableEntry          **pStringTableEntries;      // The sorted entries.
+    s32                             language;                 // The language id.
+    s32                             count;                    // Number of entries.
+    PRBOOL                          correctFileType;          // Internal safety check
+    prList<prStringTableEntry*>     entries;                  // Used to sort entries for binary search
+    prStringTableEntry            **pStringTableEntries;      // The sorted entries.
 };

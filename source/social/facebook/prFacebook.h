@@ -101,7 +101,7 @@ public:
     
     // Method: GetPlayerID
     //      Returns the players facebook ID
-    Proteus::Core::u64 GetPlayerID() const;
+    u64 GetPlayerID() const;
     
     // Method: GetPlayerName
     //      Returns the facebook players name
@@ -148,13 +148,13 @@ private:
     //void SetLoggedIn(bool state) { mIsLoggedIn = state; }
 
     // Allows facebook to set the user details
-    void SetDetails(const char *name, Proteus::Core::u64 fbid);
+    void SetDetails(const char *name, u64 fbid);
 
 
 private:
     prFacebookBase         *mpFacebook;
     //prString                mPlayerName;
-    //Proteus::Core::u64      mPlayerFBID;
+    //u64      mPlayerFBID;
     //bool                    mIsLoggedIn;
     
     

@@ -76,7 +76,7 @@ public:
     //
     // Parameters:
     //      dt - Delta time
-    void Update(Proteus::Core::f32 dt);
+    void Update(f32 dt);
 
     // Method: Draw
     //      Draw the dialog.
@@ -141,11 +141,11 @@ public:
 
     // Method: SetTitle
     //      Sets the dialogs title text
-    void SetTitle(const char *text, Proteus::Core::f32 scale = 1.0f);
+    void SetTitle(const char *text, f32 scale = 1.0f);
 
     // Method: SetText
     //      Sets the dialogs body text.
-    void SetText(const char *text, Proteus::Core::f32 scale = 1.0f);
+    void SetText(const char *text, f32 scale = 1.0f);
     
     // Method: RegisterListener
     //      Set callback listener.
@@ -153,11 +153,11 @@ public:
 
     // Method: GetWidth
     //      Returns the width of the dialogs backdrop
-    Proteus::Core::s32 GetWidth() const;
+    s32 GetWidth() const;
     
     // Method: GetHeight
     //      Returns the height of the dialogs backdrop
-    Proteus::Core::s32 GetHeight() const;
+    s32 GetHeight() const;
 
     // Method: SetButtonOffset
     //      Sets an offset which is applied to the *buttons* position
@@ -170,8 +170,7 @@ public:
     //      Please ae aware that the buttons will move in different directions
     //      in the X direction, as this is method is intended to bring the buttons
     //      away from the edge
-    void SetButtonOffset(Proteus::Core::f32 x, Proteus::Core::f32 y) { m_offsetButtons.x = x;
-                                                                       m_offsetButtons.y = y; }
+    void SetButtonOffset(f32 x, f32 y) { m_offsetButtons.x = x; m_offsetButtons.y = y; }
 
     // Method: SetTitleOffset
     //      Sets an offset which is applied to the *title* text position
@@ -179,8 +178,7 @@ public:
     // Parameters:
     //      x - pixels from side
     //      y - pixels from top.
-    void SetTitleOffset(Proteus::Core::f32 x, Proteus::Core::f32 y) { m_offsetTitle.x = x;
-                                                                      m_offsetTitle.y = y; }
+    void SetTitleOffset(f32 x, f32 y) { m_offsetTitle.x = x; m_offsetTitle.y = y; }
 
     // Method: SetTextOffset
     //      Sets an offset which is applied to the *body* text position
@@ -188,12 +186,11 @@ public:
     // Parameters:
     //      x - pixels from side
     //      y - pixels from top.
-    void SetTextOffset(Proteus::Core::f32 x, Proteus::Core::f32 y) { m_offsetText.x = x;
-                                                                     m_offsetText.y = y; }
+    void SetTextOffset(f32 x, f32 y) { m_offsetText.x = x; m_offsetText.y = y; }
 
     // Method: ButtonCount
     //      Gets the button count.
-    Proteus::Core::s32 ButtonCount() const { return m_buttonCount; }
+    s32 ButtonCount() const { return m_buttonCount; }
 
     // Method: SetTextScale
     //      Sets the dialogs text colour
@@ -201,7 +198,7 @@ public:
 
     // Method: SetTextScale
     //      Sets the dialogs text scale
-    void SetTextScale(Proteus::Core::f32 scale) { m_textScale = scale; }
+    void SetTextScale(f32 scale) { m_textScale = scale; }
     
     // Method: SetTextAlignment
     //      Sets the dialogs text alignments
@@ -221,8 +218,7 @@ public:
     //
     // See Also:
     //      <prTrueTypeFont::prTrueTypeFontAlign>
-    void SetTextAlignment(Proteus::Core::s32 title, Proteus::Core::s32 body) { mFontAlignmentTitle = title;
-                                                                               mFontAlignmentBody  = body; }
+    void SetTextAlignment(s32 title, s32 body) { mFontAlignmentTitle = title; mFontAlignmentBody  = body; }
     
 
 private:
@@ -233,14 +229,14 @@ private:
     Proteus::Math::prVector2 m_offsetButtons;
     Proteus::Math::prVector2 m_offsetTitle;
     Proteus::Math::prVector2 m_offsetText;
-    Proteus::Core::s32       m_buttonCount;
+    s32                      m_buttonCount;
     prString                 m_title;
     prString                 m_text;
-    Proteus::Core::f32       m_titleScale;
-    Proteus::Core::f32       m_textScale;
+    f32                      m_titleScale;
+    f32                      m_textScale;
     prColour                 m_textColour;
-    Proteus::Core::s32       mFontAlignmentTitle;
-    Proteus::Core::s32       mFontAlignmentBody;
+    s32                      mFontAlignmentTitle;
+    s32                      mFontAlignmentBody;
 };
 
 

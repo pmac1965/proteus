@@ -46,7 +46,7 @@
 
 
 // Unknown parameter callback
-typedef bool (*UnknownParamCB)(const char* arg, Proteus::Core::s32 index);
+typedef bool (*UnknownParamCB)(const char* arg, s32 index);
 
 
 #if defined(PLATFORM_PC)
@@ -106,7 +106,7 @@ typedef bool (*UnknownParamCB)(const char* arg, Proteus::Core::s32 index);
 // Notes:
 //      Arguments are not persistent between one call and
 //      the next. Returned data should be used immediately
-void prArgsPopNextArg(char *buffer, Proteus::Core::s32 bufferSize);
+void prArgsPopNextArg(char *buffer, s32 bufferSize);
 
 
 // Function: prArgsRegisterUnknownParamHandler
@@ -130,7 +130,7 @@ void prArgsRegisterUnknownParamHandler(UnknownParamCB cb);
 // Returns:
 //      Returns -1 when not processing args, else
 //      will return a number greater or equal to zero
-Proteus::Core::s32 prArgsGetTotalArgCount();
+s32 prArgsGetTotalArgCount();
 
 
 // Function: prArgsGetRemainingArgCount
@@ -146,7 +146,7 @@ Proteus::Core::s32 prArgsGetTotalArgCount();
 // Returns:
 //      Returns -1 when not processing args, else
 //      will return a number greater or equal to zero
-Proteus::Core::s32 prArgsGetRemainingArgCount();
+s32 prArgsGetRemainingArgCount();
 
 
 // Function: prArgsParseFailed

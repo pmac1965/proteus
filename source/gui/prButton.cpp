@@ -36,7 +36,7 @@ namespace Proteus {
 namespace Gui {
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

@@ -57,9 +57,9 @@ enum
 // Ad provider details
 typedef struct prAdvertProviderDetails
 {
-    Proteus::Core::u32  type;               // Provider type. For example; AD_PROVIDER_ADMOB
-    Proteus::Core::u32  caps;               // Provider capabilities.
-    const char         *name;               // Provider name
+    u32             type;               // Provider type. For example; AD_PROVIDER_ADMOB
+    u32             caps;               // Provider capabilities.
+    const char     *name;               // Provider name
 
 } prAdvertProviderDetails;
 
@@ -85,7 +85,7 @@ public:
     //      eventType   - The event type
     //      data1       - Event data (Optional)
     //      data2       - Event data (Optional)
-    virtual void EventNotify(Proteus::Core::u32 eventType, Proteus::Core::u32 data1 = 0, Proteus::Core::u32 data2 = 0) { PRUNUSED(eventType); PRUNUSED(data1); PRUNUSED(data2); }
+    virtual void EventNotify(u32 eventType, u32 data1 = 0, u32 data2 = 0) { PRUNUSED(eventType); PRUNUSED(data1); PRUNUSED(data2); }
 
     // Method: Init
     //      So you can determine when the provider is initialised,
@@ -99,7 +99,7 @@ public:
 
     // Method: Show
     //      Show advert
-    virtual void Show(Proteus::Core::s32 type) = 0;
+    virtual void Show(s32 type) = 0;
 
     // Method: Hide
     //      Hide advert.
@@ -115,7 +115,7 @@ public:
 
     // Method: ProviderType
     //      Returns the provider type.
-    Proteus::Core::s32 ProviderType() const;
+    s32 ProviderType() const;
     
     // Method: ProviderName
     //      Returns the provider name.
@@ -123,7 +123,7 @@ public:
 
     // Method: ProviderHasCapability
     //      Checks the provider for the specified ability
-    bool ProviderHasCapability(Proteus::Core::u32 ability) const;
+    bool ProviderHasCapability(u32 ability) const;
 
     // Method: IsAdvertLoaded
     //      Checks if the provider has loaded

@@ -34,7 +34,7 @@
 #include "../input/prKeys.h"
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 using namespace Proteus::Gui;
 
 

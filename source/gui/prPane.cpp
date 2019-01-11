@@ -31,9 +31,6 @@
   #include "../core/prWindow_PC.h"
 #endif
 
-//namespace Proteus::Core;
-using namespace Proteus::Core;
-
 
 // Namespaces
 namespace Proteus {

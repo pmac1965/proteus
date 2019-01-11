@@ -44,7 +44,7 @@ public:
 
     // Method: Size
     //      Gets the size of the file.
-    Proteus::Core::u32 Size() const;
+    u32 Size() const;
 
     // Method: Exists
     //      Determines if the file exists
@@ -60,15 +60,15 @@ public:
     
     // Method: Read
     //      Reads data from an open file
-    Proteus::Core::u32 Read(void *pDataBuffer, Proteus::Core::u32 size);
+    u32 Read(void *pDataBuffer, u32 size);
 
     // Method: Seek
     //      Seek within an open file.
-    void Seek(Proteus::Core::s32 offset, Proteus::Core::s32 origin);
+    void Seek(s32 offset, s32 origin);
 
     // Method: Tell
     //      Returns the file pointers position.
-    Proteus::Core::s32 Tell() const;
+    s32 Tell() const;
 
     // Method: Rewind
     //      Sets the file pointer back to the start of the file.
@@ -78,8 +78,8 @@ public:
 private:
     // For engine use.
     void Internal_Rewind();
-    void Internal_Seek(Proteus::Core::s32 offset, Proteus::Core::s32 origin);
-    Proteus::Core::s32  Internal_Tell() const;
+    void Internal_Seek(s32 offset, s32 origin);
+    s32  Internal_Tell() const;
 
 
 private:

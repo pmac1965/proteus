@@ -41,7 +41,7 @@ public:
 
     // Method: Update
     //      Updates a particle
-    bool Update(Proteus::Core::f32 dt);
+    bool Update(f32 dt);
 
     // Method: Draw
     //      Draws a particle
@@ -58,7 +58,7 @@ public:
 
 private:
 
-    Proteus::Core::f32         mLifeTime;                  // Particles lifetime
+    f32                        mLifeTime;                  // Particles lifetime
     Proteus::Math::prVector3   mPos;                       // Particles position
     Proteus::Math::prVector3   mGravity;                   // Particles gravity
     Proteus::Math::prVector3   mDirection;                 // Particles direction

@@ -29,7 +29,7 @@
 #include "../debug/prTrace.h"
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

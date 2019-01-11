@@ -68,7 +68,7 @@ public:
     //
     //      Updated via the menu strip when required
     //
-    void Update(Proteus::Core::f32 dt) override {}
+    void Update(f32 dt) override {}
 
     // Method: Draw
     //      Draws the menu. Default version is not used as only
@@ -80,7 +80,7 @@ public:
     //
     // Returns:
     //      True if a menu item is chosen, false otherwise
-    bool DrawMenu(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 width);
+    bool DrawMenu(f32 x, f32 y, f32 width);
 
     // Method: OnPressed
     //      Input handler.
@@ -103,7 +103,7 @@ public:
 
     // Method: FindMenuItem
     //      Finds a menu item in the menu if it exists
-    prMenuItem *FindMenuItem(Proteus::Core::u32 id);
+    prMenuItem *FindMenuItem(u32 id);
 
     // Method: SetText
     //      Sets the menus text. E.g. like 'File'
@@ -122,11 +122,11 @@ public:
 
     // Method: IsOpened
     //      Is the menu opened and items selectable?
-    Proteus::Core::PRBOOL IsOpened() const { return mOpened; }
+    PRBOOL IsOpened() const { return mOpened; }
 
     // Method: SetOpened
     //      Opens a menu so items are selectable
-    void SetOpened(Proteus::Core::PRBOOL state) { mOpened = state; }
+    void SetOpened(PRBOOL state) { mOpened = state; }
 
     // Method: SetGrayFontAsBitmapFont
     //      Sets the font to be used for inactive menu items text
@@ -142,20 +142,20 @@ private:
     void AdjustSize(const Proteus::Math::prVector2 &size, prMenuItem *pMenuItem);
 
     // Tests if a touch is *over* a menu strip item
-    bool InMenuItemRect(Proteus::Core::s32 x, Proteus::Core::s32 y, Proteus::Core::s32 width, Proteus::Core::s32 height, Proteus::Core::s32 xpos, Proteus::Core::s32 ypos);
+    bool InMenuItemRect(s32 x, s32 y, s32 width, s32 height, s32 xpos, s32 ypos);
 
 
 private:
-    std::map<Proteus::Core::u32, prMenuItem *>  mItems;                 // Menu items
-    prBitmapFont                               *mpGrayTextBMF;
-    prMouse                                    *mpMouse;
-    prMessageManager                           *mpMessageManager;
-    prSprite                                   *mpIconSubMenu;
-    prString                                    mText;
-    Proteus::Math::prVector2                    mSize;
-    Proteus::Core::s32                          mMaxWidth;
-    Proteus::Core::s32                          mMaxHeight;
-    Proteus::Core::PRBOOL                       mOpened;
+    std::map<u32, prMenuItem *> mItems;                 // Menu items
+    prBitmapFont               *mpGrayTextBMF;
+    prMouse                    *mpMouse;
+    prMessageManager           *mpMessageManager;
+    prSprite                   *mpIconSubMenu;
+    prString                    mText;
+    Proteus::Math::prVector2    mSize;
+    s32                         mMaxWidth;
+    s32                         mMaxHeight;
+    PRBOOL                      mOpened;
 };
 
 

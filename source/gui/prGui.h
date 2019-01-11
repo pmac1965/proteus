@@ -67,7 +67,7 @@ public:
 
     // Method: Update
     //      Update the GUI
-    void Update(Proteus::Core::f32 dt);
+    void Update(f32 dt);
 
     // Method: Draw
     //      Draw the GUI widgets
@@ -82,22 +82,22 @@ public:
     //
     // Notes:
     //      This enables/disables all widgets
-    void SetEnable(Proteus::Core::PRBOOL state) { m_enabled = state; }
+    void SetEnable(PRBOOL state) { m_enabled = state; }
 
     // Method: SetVisible
     //      Set the GUI's visible state
     //
     // Notes:
     //      This shows/hides all widgets
-    void SetVisible(Proteus::Core::PRBOOL state) { m_visible = state; }
+    void SetVisible(PRBOOL state) { m_visible = state; }
 
     // Method: IsEnabled
     //      Is the GUI enabled?
-    Proteus::Core::PRBOOL IsEnabled() const { return m_enabled; }
+    PRBOOL IsEnabled() const { return m_enabled; }
 
     // Method: IsVisible
     //      Is the GUI visible?
-    Proteus::Core::PRBOOL IsVisible() const { return m_enabled; }
+    PRBOOL IsVisible() const { return m_enabled; }
 
     // Method: Find
     //      Finds a GUI item
@@ -108,7 +108,7 @@ public:
 
     // Method: GetWidgetCount
     //      Returns the number of widgets
-    Proteus::Core::s32 GetWidgetCount() const { return (Proteus::Core::s32)m_widgets.size(); }
+    s32 GetWidgetCount() const { return (s32)m_widgets.size(); }
 
     // Method: SetBaseLayer
     //      Sets the base layer for GUI dialogs
@@ -116,8 +116,7 @@ public:
     // Notes:
     //      This is useful for when your using multiple GUI's as it stops
     //      them mixing messages
-    void SetBaseLayer(Proteus::Core::u32 layer) { m_layer     = layer;
-                                                  m_baseLayer = layer; }
+    void SetBaseLayer(u32 layer) { m_layer = layer; m_baseLayer = layer; }
 
     // Method: SetBMPFont
     //      Sets the default bitmap font.
@@ -167,10 +166,10 @@ public:
 private:
     std::list<prWidget *>   m_widgets;
     prSpriteManager         m_spriteManager;
-    Proteus::Core::PRBOOL   m_enabled;
-    Proteus::Core::PRBOOL   m_visible;
-    Proteus::Core::s32      m_layer;
-    Proteus::Core::s32      m_baseLayer;
+    PRBOOL                  m_enabled;
+    PRBOOL                  m_visible;
+    s32                     m_layer;
+    s32                     m_baseLayer;
     prBitmapFont           *m_pBmpfont;
     prTrueTypeFont         *m_pTtfFont;
 };

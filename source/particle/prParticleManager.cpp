@@ -27,7 +27,7 @@
 #include "../core/prString.h"
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 // Types

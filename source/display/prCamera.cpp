@@ -57,7 +57,7 @@
 
 
 using namespace Proteus::Math;
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 // Statics

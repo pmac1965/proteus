@@ -41,7 +41,7 @@ public:
     //      tileWidth   - The width of the tile
     //      tileHeight  - The height of the tile
     //      pTexture    - The texture for the layer
-    prBackgroundLayer(Proteus::Core::s32 width, Proteus::Core::s32 height, Proteus::Core::s32 tileWidth, Proteus::Core::s32 tileHeight, prTexture *pTexture);
+    prBackgroundLayer(s32 width, s32 height, s32 tileWidth, s32 tileHeight, prTexture *pTexture);
 
 
 #if defined(PROTEUS_TOOL)
@@ -58,19 +58,19 @@ public:
 #if defined(PROTEUS_TOOL)
     // Method: GetLayerWidth
     //      Gets the layers width. *Only available on tool builds*
-    Proteus::Core::s32 GetLayerWidth() const { return mLayerWidth; }
+    s32 GetLayerWidth() const { return mLayerWidth; }
 
     // Method: GetLayerHeight
     //      Gets the layers height. *Only available on tool builds*
-    Proteus::Core::s32 GetLayerHeight() const { return mLayerHeight; }
+    s32 GetLayerHeight() const { return mLayerHeight; }
 
     // Method: GetTileWidth
     //      Gets the width of the tiles used. *Only available on tool builds*
-    Proteus::Core::s32 GetTileWidth() const { return mTileWidth; }
+    s32 GetTileWidth() const { return mTileWidth; }
 
     // Method: GetTileHeight
     //      Gets the height of the tiles used. *Only available on tool builds*
-    Proteus::Core::s32 GetTileHeight() const { return mTileHeight; }
+    s32 GetTileHeight() const { return mTileHeight; }
 
     // Method: SetTextureFilename
     //      Sets the textures filename. *Only available on tool builds*
@@ -82,7 +82,7 @@ public:
 
     // Method: GetMapData
     //      Gets the map data. *Only available on tool builds*
-    Proteus::Core::s32 *GetMapData() { return mMapData; }
+    s32 *GetMapData() { return mMapData; }
 #endif
 
 
@@ -95,18 +95,18 @@ private:
     prString    mTextureFilename;
     #endif
 
-    Proteus::Core::s32         mLayerWidth;
-    Proteus::Core::s32         mLayerHeight;
-    Proteus::Core::s32         mTileWidth;
-    Proteus::Core::s32         mTileHeight;
-    Proteus::Core::s32         mTilesAcross;
-    Proteus::Core::s32         mTilesDown;
-    Proteus::Core::f32         mPixelWidth;
-    Proteus::Core::f32         mPixelHeight;
-    Proteus::Core::f32         mTileWidthInPixels;
-    Proteus::Core::f32         mTileHeightInPixels;
+    s32         mLayerWidth;
+    s32         mLayerHeight;
+    s32         mTileWidth;
+    s32         mTileHeight;
+    s32         mTilesAcross;
+    s32         mTilesDown;
+    f32         mPixelWidth;
+    f32         mPixelHeight;
+    f32         mTileWidthInPixels;
+    f32         mTileHeightInPixels;
 
-    Proteus::Core::s32        *mMapData;
-    prTexture                 *mpTexture;
-    Proteus::Core::PRBOOL      mWrap;
+    s32        *mMapData;
+    prTexture  *mpTexture;
+    PRBOOL      mWrap;
 };

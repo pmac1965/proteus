@@ -25,7 +25,7 @@
 #define CORE_SHOW_SIZE  24
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

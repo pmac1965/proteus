@@ -73,7 +73,7 @@ public:
     //
     // Notes:
     //      Active game objects are updated if enabled
-    inline Proteus::Core::PRBOOL IsActive() const { return mActive; }
+    inline PRBOOL IsActive() const { return mActive; }
 
     // Method: IsEnabled
     //      Determines if this game object is enabled
@@ -81,35 +81,35 @@ public:
     // Notes:
     //      Enabled game objects are updated if active, and drawn
     //      if visible
-    inline Proteus::Core::PRBOOL IsEnabled() const { return mEnabled; }
+    inline PRBOOL IsEnabled() const { return mEnabled; }
 
     // Method: IsVisible
     //      Determines if this game object is visible
     //
     // Notes:
     //      Visible game objects are drawn
-    inline Proteus::Core::PRBOOL IsVisible() const { return mVisible; }
+    inline PRBOOL IsVisible() const { return mVisible; }
 
     // Method: SetActive
     //      Sets a game objects active state
     //
     // Parameters:
     //      active - The new state
-    inline void SetActive(Proteus::Core::PRBOOL active) { mActive = active; }
+    inline void SetActive(PRBOOL active) { mActive = active; }
 
     // Method: SetEnabled
     //      Sets a game objects enabled state
     //
     // Parameters:
     //      active - The new state
-    inline void SetEnabled(Proteus::Core::PRBOOL active) { mEnabled = active; }
+    inline void SetEnabled(PRBOOL active) { mEnabled = active; }
 
     // Method: SetVisible
     //      Sets a game objects visible state
     //
     // Parameters:
     //      active - The new state
-    inline void SetVisible(Proteus::Core::PRBOOL active) { mVisible = active; }
+    inline void SetVisible(PRBOOL active) { mVisible = active; }
 
     // Method: AddComponent
     //      Adds a component to the game object
@@ -145,13 +145,13 @@ public:
 
     
 private:
-    prString                mName;
-    prString                mTag;
-    Proteus::Core::PRBOOL   mActive;
-    Proteus::Core::PRBOOL   mEnabled;
-    Proteus::Core::PRBOOL   mVisible;
+    prString    mName;
+    prString    mTag;
+    PRBOOL      mActive;
+    PRBOOL      mEnabled;
+    PRBOOL      mVisible;
 
-    prTransform             mTransform;
+    prTransform mTransform;
 
     std::list<Proteus::Actor::prActorComponent*>    mComponents;
 };

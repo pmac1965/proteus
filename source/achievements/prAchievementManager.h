@@ -113,9 +113,9 @@ namespace Proteus
 // The achievement status.
 typedef struct prAchievementStatus
 {
-    Proteus::Core::s32  state;                  // State
-    Proteus::Core::u32  hash;                   // Hash
-    Proteus::Core::u32  count;                  // Count
+    s32  state;                  // State
+    u32  hash;                   // Hash
+    u32  count;                  // Count
 
 } prAchievementStatus;
 
@@ -169,7 +169,7 @@ public:
     //
     // See Also:
     //      <AchievementStep>
-    virtual void AwardDisplayNotification(AchievementStep step, prSprite *pPanel, Proteus::Core::f32 time) = 0;
+    virtual void AwardDisplayNotification(AchievementStep step, prSprite *pPanel, f32 time) = 0;
 };
 
 
@@ -200,7 +200,7 @@ public:
 
     // Method: Update
     //      Updates the achievement manager
-    void Update(Proteus::Core::f32 dt);
+    void Update(f32 dt);
 
     // Method: Render
     //      Renders the achievement dropdowns if required.
@@ -221,7 +221,7 @@ public:
     //         Award("EnemiesKilled", 500);
     //
     //      Would award the achievement once the method has been called 500 times
-    void Award(const char *key, Proteus::Core::s32 awardValue);
+    void Award(const char *key, s32 awardValue);
 
     // Method: IsAwarded
     //      Tests if an achievement has been awarded
@@ -243,14 +243,14 @@ public:
     //
     // Parameters:
     //      save - The save result
-    void SaveResult(Proteus::Core::s32 result) override;
+    void SaveResult(s32 result) override;
 
     // Method: LoadResult
     //      This method receives state messages.
     //
     // Parameters:
     //      save - The save result
-    void LoadResult(Proteus::Core::s32 result) override;
+    void LoadResult(s32 result) override;
 
     // Method: SetRender
     //      Sets whether the engine or the provider renders the achievement popup.
@@ -283,15 +283,15 @@ public:
     //
     // See Also:
     //      <DescriptionType>
-    const char *GetDescriptionTextByIndex(Proteus::Core::u32 index, Proteus::Achievement::DescriptionType type);
+    const char *GetDescriptionTextByIndex(u32 index, Proteus::Achievement::DescriptionType type);
 
     // Method: GetCount
     //      Gets number of achievements
-    Proteus::Core::u32 GetCount() const { return mAchievementsCount; }
+    u32 GetCount() const { return mAchievementsCount; }
 
     // Method: GetNameByIndex
     //      Get the name of the achievement by index.
-    const char *GetNameByIndex(Proteus::Core::u32 index);
+    const char *GetNameByIndex(u32 index);
 
     // Method: SetNotificationBar
     //      Set the image to use as the bar
@@ -353,7 +353,7 @@ public:
 
 private:
     // Test to see if an achievement has been achieved.
-    bool Achieved(Proteus::Core::s32 value, Proteus::Core::s32 testValue, Proteus::Core::s32 type);
+    bool Achieved(s32 value, s32 testValue, s32 type);
 
     // Load the XML descriptions of the achievements.
     void LoadAchievementDescriptions(const char *filename);
@@ -365,7 +365,7 @@ private:
     void ParseAttribs_Achievement(TiXmlElement* pElement);
 
     // Gets the identifer for the achievement.
-    const char *GetIdentifierByIndex(Proteus::Core::u32 index);
+    const char *GetIdentifierByIndex(u32 index);
 
     // Gets the identifer for the achievement.
     const char *GetIdentifier(const char *name);
@@ -386,14 +386,14 @@ private:
     prAchievementDisplayCallback        *mprAchievementDisplayCallback;         // Callback notifier (Optional)
     prColour                            mTextColour;                            // The text colour
     std::list<prAchievementDefinition>  mAchievementsList;                      // The achievement definitions
-    std::list<Proteus::Core::s32>       mRenderList;                            // Any achievements to be rendered.
-    Proteus::Core::s32                  mAchievementsCount;                     // The number of achievements
-    Proteus::Core::s32                  mCheckIndex;                            // The index of an achievement to check
-    Proteus::Core::s32                  mDisplayMode;                           // The current display mode (Bring on, Show, remove, etc)
-    Proteus::Core::f32                  mTestTimer;                             // Test for awards given?
-    Proteus::Core::f32                  mDefaultPanelXPos;                      // Default panel position
-    Proteus::Core::f32                  mDefaultPanelYPos;                      // Default panel position
-    Proteus::Core::f32                  mRunTime;                               // The run time for each display mode
+    std::list<s32>                      mRenderList;                            // Any achievements to be rendered.
+    s32                                 mAchievementsCount;                     // The number of achievements
+    s32                                 mCheckIndex;                            // The index of an achievement to check
+    s32                                 mDisplayMode;                           // The current display mode (Bring on, Show, remove, etc)
+    f32                                 mTestTimer;                             // Test for awards given?
+    f32                                 mDefaultPanelXPos;                      // Default panel position
+    f32                                 mDefaultPanelYPos;                      // Default panel position
+    f32                                 mRunTime;                               // The run time for each display mode
     bool                                mIoSuccess;                             // Allows tracking of io sucess/failure
     bool                                mCorrectFile;                           // Ensures we loaded a achievements file
     bool                                mRender;                                // Does the engine render?

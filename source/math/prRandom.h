@@ -49,14 +49,14 @@ namespace Math {
 //
 // Parameters:
 //      newSeed = The random number generators seed.
-void prRandomSetSeed(Proteus::Core::u32 newSeed);
+void prRandomSetSeed(u32 newSeed);
 
 // Function: prRandomNumber
 //      Returns a random number between 0 and max minus 1.
 //
 // Parameters:
 //      max = The highest value required.
-Proteus::Core::u32 prRandomNumber(Proteus::Core::u32 max);
+u32 prRandomNumber(u32 max);
 
 // Function: prRandomNumber
 //      Returns a random number between min and max.
@@ -64,11 +64,11 @@ Proteus::Core::u32 prRandomNumber(Proteus::Core::u32 max);
 // Parameters:
 //      min = The lowest value required.
 //      max = The highest value required.
-Proteus::Core::s32 prRandomNumber(Proteus::Core::s32 min, Proteus::Core::s32 max);
+s32 prRandomNumber(s32 min, s32 max);
 
 // Function: prRand
 //      Returns a random number similar to the C standard lib rand() function.
-Proteus::Core::s32 prRand();
+s32 prRand();
 
 
 }}// Namespaces

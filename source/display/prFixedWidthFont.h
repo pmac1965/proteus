@@ -61,7 +61,7 @@ public:
     //      width    - Width of a character cell
     //      height   - Height of a character  cell
     //      offset   - Optional offset to bring cells closer.
-    explicit prFixedWidthFont(const char *filename, Proteus::Core::u32 width, Proteus::Core::u32 height, Proteus::Core::u32 offset);
+    explicit prFixedWidthFont(const char *filename, u32 width, u32 height, u32 offset);
 
     // Method: prFixedWidthFont
     //      Ctor
@@ -71,7 +71,7 @@ public:
     //      width    - Width of a character cell
     //      height   - Height of a character  cell
     //      offset   - Optional offset to bring cells closer.
-    explicit prFixedWidthFont(prTexture *pTexture, Proteus::Core::u32 width, Proteus::Core::u32 height, Proteus::Core::u32 offset);
+    explicit prFixedWidthFont(prTexture *pTexture, u32 width, u32 height, u32 offset);
 
     // Method: ~prFixedWidthFont
     //      Dtor
@@ -85,14 +85,14 @@ public:
     //      y      - Y coordinate
     //      fmt    - Format string
     //      ...    - Optional parameters
-    void Draw(Proteus::Core::f32 x, Proteus::Core::f32 y, const char *fmt, ...);
+    void Draw(f32 x, f32 y, const char *fmt, ...);
 
     // Method: SetScale
     //      Sets the font scale
     //
     // Parameters:
     //      scale    - A scale value
-    void SetScale(Proteus::Core::f32 scale) { m_scale = scale; }
+    void SetScale(f32 scale) { m_scale = scale; }
 
     // Method: PixelWidth
     //      Get the width of the passed string.
@@ -102,7 +102,7 @@ public:
     //
     // Returns:
     //      String width in pixels
-    Proteus::Core::f32 PixelWidth(const char *pText) const;
+    f32 PixelWidth(const char *pText) const;
 
     // Method: SetAlignment
     //      Set the text alignment.
@@ -112,40 +112,40 @@ public:
     //
     // See Also:
     //      <prFixedWidthAlignment>
-    void SetAlignment(Proteus::Core::u32 alignment);
+    void SetAlignment(u32 alignment);
 
     // Method: GetAlignment
     //      Gets the text alignment.
-    Proteus::Core::u32 GetAlignment() const { return m_alignment; }
+    u32 GetAlignment() const { return m_alignment; }
 
     // Method: GetFrameWidth
     //      Get the frame width
-    Proteus::Core::u32 GetFrameWidth() const { return m_frameWidth; }
+    u32 GetFrameWidth() const { return m_frameWidth; }
 
     // Method: GetFrameHeight
     //      Get the frame height
-    Proteus::Core::u32 GetFrameHeight() const { return m_frameHeight; }
+    u32 GetFrameHeight() const { return m_frameHeight; }
 
     // Method: GetFrameCount
     //      Get the frame count
-    Proteus::Core::u32 GetFrameCount() const { return m_framesTotal; }
+    u32 GetFrameCount() const { return m_framesTotal; }
 
 
 private:
 
-    prTexture          *m_pTexture;
-    Proteus::Core::u32  m_offset;
-    Proteus::Core::s32  m_frameWidth;
-    Proteus::Core::s32  m_frameHeight;
-    Proteus::Core::s32  m_framesAcross;
-    Proteus::Core::s32  m_framesDown;
-    Proteus::Core::s32  m_framesTotal;
-    Proteus::Core::f32  m_fw;
-    Proteus::Core::f32  m_fh;
-    Proteus::Core::f32  m_u0;
-    Proteus::Core::f32  m_u1;
-    Proteus::Core::f32  m_v0;
-    Proteus::Core::f32  m_v1;
-    Proteus::Core::f32  m_scale;
-    Proteus::Core::u32  m_alignment;
+    prTexture  *m_pTexture;
+    u32         m_offset;
+    s32         m_frameWidth;
+    s32         m_frameHeight;
+    s32         m_framesAcross;
+    s32         m_framesDown;
+    s32         m_framesTotal;
+    f32         m_fw;
+    f32         m_fh;
+    f32         m_u0;
+    f32         m_u1;
+    f32         m_v0;
+    f32         m_v1;
+    f32         m_scale;
+    u32         m_alignment;
 };

@@ -141,7 +141,7 @@ public:
     //
     // See Also:
     //      <prMouseButton>
-    bool ButtonPressed(prMouseButton buttons) const { return ((m_buttonsPressed & buttons) == (Proteus::Core::u32)buttons); }
+    bool ButtonPressed(prMouseButton buttons) const { return ((m_buttonsPressed & buttons) == (u32)buttons); }
 
     // Method: ButtonReleased
     //      Determines if one or more mouse buttons have been released.
@@ -154,7 +154,7 @@ public:
     //
     // See Also:
     //      <prMouseButton>
-    bool ButtonReleased(prMouseButton buttons) const { return ((m_buttonsReleased & buttons) == (Proteus::Core::u32)buttons); }
+    bool ButtonReleased(prMouseButton buttons) const { return ((m_buttonsReleased & buttons) == (u32)buttons); }
 
     // Method: ButtonDown
     //      Determines if one or more mouse buttons are down.
@@ -167,7 +167,7 @@ public:
     //
     // See Also:
     //      <prMouseButton>
-    bool ButtonDown(prMouseButton buttons) const { return ((m_buttonsDown & buttons) == (Proteus::Core::u32)buttons); }
+    bool ButtonDown(prMouseButton buttons) const { return ((m_buttonsDown & buttons) == (u32)buttons); }
 
     // Method: GetPosition
     //      Returns the mouse position.
@@ -178,7 +178,7 @@ public:
     //
     // Notes:
     //      This method is called by the engine. *You should not call it*
-    void SetMouseData(Proteus::Core::s32 x, Proteus::Core::s32 y, Proteus::Core::u32 flags, bool state);
+    void SetMouseData(s32 x, s32 y, u32 flags, bool state);
 
     // Method: SetInRect
     //      Sets whether the mouse cursor is in the client rect.
@@ -196,7 +196,7 @@ public:
     //
     // Notes:
     //      This method is called by the engine. *You should not call it*
-    void MouseWheelUpdate(Proteus::Core::s32 dir, Proteus::Core::s32 clicks);
+    void MouseWheelUpdate(s32 dir, s32 clicks);
 
     // Method: IsVisible
     //      Determines if the system cursor is hidden.
@@ -226,36 +226,36 @@ public:
 
     // Method: GetMouseWheelDir
     //      Gets the direction the wheel mouse moved in.
-    Proteus::Core::s32 GetMouseWheelDir() const { return m_wheelDir; }
+    s32 GetMouseWheelDir() const { return m_wheelDir; }
 
     // Method: GetMouseWheelClicks
     //      Gets the number of clicks moved in the specified direction.
-    Proteus::Core::s32 GetMouseWheelClicks() const { return m_wheelClicks; }
+    s32 GetMouseWheelClicks() const { return m_wheelClicks; }
 
 
 public:
 
     // Variable: x
     //      Public mouse X position.
-    Proteus::Core::s32     x;
+    s32     x;
                                     
     // Variable: y
     //      Public mouse Y position.
-    Proteus::Core::s32     y;
+    s32     y;
 
 private:
 
-    Proteus::Core::s32     m_xPos;              // Receiver data.
-    Proteus::Core::s32     m_yPos;              // Receiver data.
-    Proteus::Core::u32     m_flags;             // Receiver data.
+    s32     m_xPos;              // Receiver data.
+    s32     m_yPos;              // Receiver data.
+    u32     m_flags;             // Receiver data.
 
-    Proteus::Core::s32     m_wheelDir;          // Wheel motion directions.
-    Proteus::Core::s32     m_wheelClicks;       // Wheel motion clicks in the specified direction.
+    s32     m_wheelDir;          // Wheel motion directions.
+    s32     m_wheelClicks;       // Wheel motion clicks in the specified direction.
 
-    Proteus::Core::u32     m_buttonsPressed;    // Buttons pressed.
-    Proteus::Core::u32     m_buttonsReleased;   // Buttons released.
-    Proteus::Core::u32     m_buttonsPrev;       // Previous button flags
-    Proteus::Core::u32     m_buttonsDown;       // Current button flags
+    u32     m_buttonsPressed;    // Buttons pressed.
+    u32     m_buttonsReleased;   // Buttons released.
+    u32     m_buttonsPrev;       // Previous button flags
+    u32     m_buttonsDown;       // Current button flags
 
     bool    m_shift;                            // Is the shift key being pressed? 
                                                 // NOTE; Will only be set if the shift key is being held before a mouse key is pressed.

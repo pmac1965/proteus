@@ -22,7 +22,7 @@
 #include "../debug/prTrace.h"
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 // Namespaces
@@ -89,7 +89,7 @@ prMenuItem::prMenuItem(prString text, u32 id) : mText(text), mId(id)
 /// ---------------------------------------------------------------------------
 /// Ctor
 /// ---------------------------------------------------------------------------
-prMenuItem::prMenuItem(const char *text, Proteus::Core::u32 id) : mText(text), mId(id)
+prMenuItem::prMenuItem(const char *text, u32 id) : mText(text), mId(id)
 {
     mIcon       = nullptr;
     mEnabled    = PRTRUE;
@@ -100,7 +100,7 @@ prMenuItem::prMenuItem(const char *text, Proteus::Core::u32 id) : mText(text), m
 /// ---------------------------------------------------------------------------
 /// Sets the keyboard command keys for the menu item
 /// ---------------------------------------------------------------------------
-void prMenuItem::SetCommandKeys(prMenuItemControlKey controlKeys, Proteus::Core::u32 character) 
+void prMenuItem::SetCommandKeys(prMenuItemControlKey controlKeys, u32 character) 
 {
     // Reset
     mCommandKeyText.Set("");

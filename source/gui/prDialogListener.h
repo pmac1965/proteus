@@ -34,14 +34,14 @@ public:
     //
     // Parameters:
     //      name - The name of the button pressed
-    virtual bool OnDlgButtonPressed(const char *name, Proteus::Core::s32 index) = 0;
+    virtual bool OnDlgButtonPressed(const char *name, s32 index) = 0;
 
     // Method: OnDlgButtonReleased
     //      A method which the handling class needs to implement
     //
     // Parameters:
     //      name - The name of the button released
-    virtual bool OnDlgButtonReleased(const char *name, Proteus::Core::s32 index) = 0;
+    virtual bool OnDlgButtonReleased(const char *name, s32 index) = 0;
 };
 
 

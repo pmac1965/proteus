@@ -49,10 +49,10 @@ enum
 class prGameSessionPacket
 {
 public:
-    Proteus::Core::u32 size;
-    Proteus::Core::u32 hash;
-    Proteus::Core::u32 type;
-    Proteus::Core::u32 index;
+    u32 size;
+    u32 hash;
+    u32 type;
+    u32 index;
 };
 
 
@@ -64,7 +64,7 @@ class prGameSessionReceiver
 public:
     // Method: GameSessionStatus
     //      Receives the current status of a game session
-    virtual void GameSessionStatus(Proteus::Core::u32 status) = 0;
+    virtual void GameSessionStatus(u32 status) = 0;
 
     // Method: PacketReceiver
     //      Receive a data packet from the other device
@@ -106,11 +106,11 @@ public:
 
     // Method: IsAvailable
     //      Is the technology available? For example does a device have bluetooth
-    Proteus::Core::PRBOOL IsAvailable() const { return mIsAvailable; }
+    PRBOOL IsAvailable() const { return mIsAvailable; }
 
     // Method: IsEnabled
     //      Is the technology turned on?
-    Proteus::Core::PRBOOL IsEnabled() const { return mIsEnabled; }
+    PRBOOL IsEnabled() const { return mIsEnabled; }
 
     // Method: ReceiveMessage
     //      Used by the OS to pass messages back to the game
@@ -119,7 +119,7 @@ public:
     //      The messages are of type. Game Session Status
     //
     //      Some of which are platform specific 
-    void ReceiveMessage(Proteus::Core::s32 msg);
+    void ReceiveMessage(s32 msg);
 
     // Method: SendPacket
     //      Send a data packet to the other device
@@ -131,7 +131,7 @@ public:
 
     // Method: IsServer
     //      Determine if we are the client or the server
-    Proteus::Core::PRBOOL IsServer();
+    PRBOOL IsServer();
     
     // Method: GetProvider
     //      Gets the current provider
@@ -145,7 +145,7 @@ public:
 private:
     prGameSessionProvider  *mpProvider;             // The provider
     prGameSessionReceiver  *mpGameSessionReceiver;  // Notification class.
-    Proteus::Core::PRBOOL   mInitialised;           // Has game session been initialised.
-    Proteus::Core::PRBOOL   mIsAvailable;           // Is the technology available? For example does a device have bluetooth
-    Proteus::Core::PRBOOL   mIsEnabled;             // Is the technology turned on?
+    PRBOOL                  mInitialised;           // Has game session been initialised.
+    PRBOOL                  mIsAvailable;           // Is the technology available? For example does a device have bluetooth
+    PRBOOL                  mIsEnabled;             // Is the technology turned on?
 };

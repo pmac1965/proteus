@@ -54,7 +54,7 @@ public:
     //
     // Returns:
     //      The layer or nullptr if index is incorrect.
-    prLayer *GetLayerByIndex(Proteus::Core::s32 index);
+    prLayer *GetLayerByIndex(s32 index);
 
 private:
     prLayer  **mpLayers;

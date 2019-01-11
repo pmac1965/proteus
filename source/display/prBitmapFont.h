@@ -73,7 +73,7 @@ public:
     //      y   - Y position to draw at
     //      fmt - A format string
     //      ... - Optional parameters
-    void Draw(Proteus::Core::f32 x, Proteus::Core::f32 y, const char *fmt, ...);
+    void Draw(f32 x, f32 y, const char *fmt, ...);
 
     // Method: Draw
     //      Draws a string
@@ -89,7 +89,7 @@ public:
     //
     // See Also:
     //      <prBitmapFontAlign>
-    void Draw(Proteus::Core::f32 x, Proteus::Core::f32 y, float scale, prColour colour, Proteus::Core::s32 alignment, const char *fmt, ...);
+    void Draw(f32 x, f32 y, float scale, prColour colour, s32 alignment, const char *fmt, ...);
 
     // Method: MeasureString
     //      Returns the pixel size of the string.
@@ -100,7 +100,7 @@ public:
 
     // Method: SetRotation
     //      Allows the text to be rotated, for sideways text, etc.
-    void SetRotation(Proteus::Core::f32 rotation);
+    void SetRotation(f32 rotation);
 
 
 private:

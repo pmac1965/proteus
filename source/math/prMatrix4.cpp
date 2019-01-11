@@ -27,7 +27,7 @@ namespace Proteus {
 namespace Math {
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 const f32 DEG2RAD = 3.141593f / 180;

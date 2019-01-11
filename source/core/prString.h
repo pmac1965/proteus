@@ -143,7 +143,7 @@ public:
 
     // Method: Length
     //      Gets the length of the string
-    Proteus::Core::s32 Length() const { return m_length; }
+    s32 Length() const { return m_length; }
 
     // Method: Text
     //      Gets the strings text
@@ -162,12 +162,12 @@ public:
     // Operator +
     prString operator + (const prString& rhs) const;
     prString operator + (const char rhs) const;
-    prString operator + (const Proteus::Core::s8 rhs) const;
-    prString operator + (const Proteus::Core::s16 rhs) const;
-    prString operator + (const Proteus::Core::s32 rhs) const;
-    prString operator + (const Proteus::Core::f32 rhs) const;
-    prString operator + (const Proteus::Core::s64 rhs) const;
-    prString operator + (const Proteus::Core::f64 rhs) const;
+    prString operator + (const s8 rhs) const;
+    prString operator + (const s16 rhs) const;
+    prString operator + (const s32 rhs) const;
+    prString operator + (const f32 rhs) const;
+    prString operator + (const s64 rhs) const;
+    prString operator + (const f64 rhs) const;
 
     // Operator ==, !=
     inline bool operator == (const prString &a) { return Compare(a) == 0; }
@@ -177,8 +177,8 @@ public:
     char& operator [] (unsigned int index);
 
 private:
-    char               *m_text;
-    char                m_buffer[STRING_BUFFER_SIZE];
-    Proteus::Core::s32  m_length;
-    Proteus::Core::u32  m_hash;
+    char   *m_text;
+    char    m_buffer[STRING_BUFFER_SIZE];
+    s32     m_length;
+    u32     m_hash;
 };

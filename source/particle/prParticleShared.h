@@ -28,10 +28,10 @@
 //      This struct is used to hold an effect type for a defined emitter
 struct prEffectType
 {
-    Proteus::Core::u32  mHash;              // The identifying hash key
-    Proteus::Core::s32  mCount;             // The number of effects
-    Proteus::Core::f32  mWaitTime;
-    Proteus::Core::f32  mRunTime;
+    u32  mHash;              // The identifying hash key
+    s32  mCount;             // The number of effects
+    f32  mWaitTime;
+    f32  mRunTime;
 };
 
 
@@ -59,7 +59,7 @@ struct prEmitterDefinition
 
     // Method: GetHash
     //      Gets the hash for this emitter definition
-    Proteus::Core::u32  GetHash() const { return mHash; }
+    u32  GetHash() const { return mHash; }
 
     // Method: GetName
     //      Gets the name for this emitter definition
@@ -67,13 +67,13 @@ struct prEmitterDefinition
 
     // Method: GetNumEffects
     //      Gets the number of effects for this emitter
-    Proteus::Core::u32 GetNumEffects() const { return (Proteus::Core::u32)mEffects.size(); }
+    u32 GetNumEffects() const { return (u32)mEffects.size(); }
 
     prEffectTypeList &GetEffectsList() { return mEffects; }
 
 
 private:
-    Proteus::Core::u32  mHash;
+    u32                 mHash;
     std::string         mName;
     prEffectTypeList    mEffects;
 };

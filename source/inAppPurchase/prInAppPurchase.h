@@ -99,7 +99,7 @@ public:
     //
     // Parameters:
     //      dt - Delta time
-    void Update(Proteus::Core::f32 dt);
+    void Update(f32 dt);
 
     // Method: BeginPurchase
     //      Begins a purchase
@@ -110,7 +110,7 @@ public:
     //
     // See Also:
     //      <IapConfig>
-    bool BeginPurchase(const char *name, Proteus::Core::u32 type);
+    bool BeginPurchase(const char *name, u32 type);
 
     // Method: GetTestMode
     //      Is class in test mode
@@ -128,7 +128,7 @@ public:
     //
     // See also:
     //      <IapTestEvent>
-    void SetTestMode(Proteus::Core::u32 testEvent);
+    void SetTestMode(u32 testEvent);
 
     // Method: EventNotify
     //      Callback from the game. This is then passed on to the appropriate handler
@@ -142,7 +142,7 @@ public:
     //
     // See also:
     //      <prTransactionResult>
-    void EventNotify(Proteus::Core::s32 type, const char *id);
+    void EventNotify(s32 type, const char *id);
 
     // Method: FindProductPrice
     //      Find a products price.

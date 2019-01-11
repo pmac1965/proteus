@@ -21,9 +21,9 @@
 #include "../core/prTypes.h"
 
 
-extern Proteus::Core::u8 proteusImg[];
+extern u8 proteusImg[];
 
 
 // Func: prSplashSize
 //      Returns the binary size of the splash image
-Proteus::Core::u32 prSplashSize();
+u32 prSplashSize();

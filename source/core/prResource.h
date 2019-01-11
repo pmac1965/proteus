@@ -56,18 +56,18 @@ public:
     
     // Method: Hash
     //      Gets the resouces hash value
-    const Proteus::Core::u32 Hash() const { return m_hash; }
+    const u32 Hash() const { return m_hash; }
 
     // Method: Size
     //      Gets the resouces file size
-    const Proteus::Core::u32 Size() const { return m_size; }
+    const u32 Size() const { return m_size; }
 
 
 private:
 
     // Method: Load
     //      Load resource
-    virtual void Load(Proteus::Core::s32 extra) = 0;
+    virtual void Load(s32 extra) = 0;
 
     // Method: Unload
     //      Unload resource
@@ -75,7 +75,7 @@ private:
 
     // Method: References
     //      Gets the number of references to this resource
-    const Proteus::Core::u32 References() const { return m_references; }
+    const u32 References() const { return m_references; }
 
     // Method: IncrementReferenceCount
     //      Sets reference count up
@@ -103,16 +103,16 @@ protected:
     //
     // Parameters:
     //      size - The size in bytes
-    void SetSize(Proteus::Core::u32 size) { m_size = size; }
+    void SetSize(u32 size) { m_size = size; }
 
 
 private:
-    char                m_filename[FILE_MAX_FILENAME_SIZE];
-    Proteus::Core::u32  m_hash;
-    Proteus::Core::u32  m_references;
-    Proteus::Core::u32  m_size;
-    bool                m_locked;
-    bool                m_exp0;
-    bool                m_exp1;
-    bool                m_exp2;
+    char    m_filename[FILE_MAX_FILENAME_SIZE];
+    u32     m_hash;
+    u32     m_references;
+    u32     m_size;
+    bool    m_locked;
+    bool    m_exp0;
+    bool    m_exp1;
+    bool    m_exp2;
 };

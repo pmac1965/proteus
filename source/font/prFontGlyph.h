@@ -30,9 +30,9 @@ class prFontGlyph
 public:
     // Method: Ctor
     //      Constructor
-    prFontGlyph(Proteus::Core::f32 advanceX, Proteus::Core::f32 advanceY,
-                Proteus::Core::f32 offsetX,  Proteus::Core::f32 offsetY,
-                Proteus::Core::u32 aChar,    Proteus::Core::u32 texID);
+    prFontGlyph(f32 advanceX, f32 advanceY,
+                f32 offsetX,  f32 offsetY,
+                u32 aChar,    u32 texID);
 
     // Method: Dtor
     //      Destructor
@@ -40,11 +40,11 @@ public:
 
     // Method: SetTextureCoords
     //      Sets the texture coords for the character
-    void SetTextureCoords(Proteus::Core::u32 index, Proteus::Core::f32 u, Proteus::Core::f32 v);
+    void SetTextureCoords(u32 index, f32 u, f32 v);
 
     // Method: SetVertexCoords
     //      Sets the vertex coords for the character
-    void SetVertexCoords(Proteus::Core::u32 index, Proteus::Core::f32 x, Proteus::Core::f32 y);
+    void SetVertexCoords(u32 index, f32 x, f32 y);
 
     // Method: Draw
     //      Draws the character. This is called by prTrueTypeFont
@@ -57,7 +57,7 @@ public:
 
 private:
     Proteus::Math::prVector2    mOffset;                // X, Y positioning offset
-    Proteus::Core::u32          mCharacter;             // This character
-    Proteus::Core::u32          mTextureID;             // The texture ID
-    Proteus::Core::QuadData     quadData[6];            // Data to draw a simple quad
+    u32                         mCharacter;             // This character
+    u32                         mTextureID;             // The texture ID
+    QuadData                    quadData[6];            // Data to draw a simple quad
 };

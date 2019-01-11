@@ -63,7 +63,7 @@ private:
 public:
     // Method: Update
     //      Updates the menu strip.
-    void Update(Proteus::Core::f32 dt) override;
+    void Update(f32 dt) override;
 
     // Method: Draw
     //      Draw the menu strip.
@@ -100,19 +100,19 @@ public:
 
 private:
     // Tests if a touch is *over* a menu strip item
-    bool InMenuRect(Proteus::Core::s32 x, Proteus::Core::s32 y, Proteus::Core::s32 width, Proteus::Core::s32 height, Proteus::Core::s32 xpos, Proteus::Core::s32 ypos);
+    bool InMenuRect(s32 x, s32 y, s32 width, s32 height, s32 xpos, s32 ypos);
 
 
 private:
     std::list<prMenu*>      mMenus;
     prRegistry             *mpRegistry;
     prMouse                *mpMouse;
-    Proteus::Core::PRBOOL   mInit;
-    Proteus::Core::f32      mStripHeight;
-    Proteus::Core::f32      mScreenWidth;
-    Proteus::Core::f32      mStartX;
-    Proteus::Core::f32      mStartY;
-    Proteus::Core::f32      mOpen;
+    PRBOOL                  mInit;
+    f32                     mStripHeight;
+    f32                     mScreenWidth;
+    f32                     mStartX;
+    f32                     mStartY;
+    f32                     mOpen;
 };
 
 

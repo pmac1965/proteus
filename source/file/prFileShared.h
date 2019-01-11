@@ -78,14 +78,14 @@
 //      The standard file header for all binary files made by the proteus engine tools.
 typedef struct prFileHeader
 {
-    Proteus::Core::u32     magic1;         ///< File identifer.
-    Proteus::Core::u32     magic2;         ///< File identifer.
-    Proteus::Core::u32     size;           ///< File size.
-    Proteus::Core::u32     type;           ///< File type.
-    Proteus::Core::u32     checksum;       ///< The checksum.
-    Proteus::Core::u32     version;        ///< Version.
-    Proteus::Core::u32     exp1;           ///< Expansion
-    Proteus::Core::u32     exp2;           ///< Expansion
+    u32     magic1;         ///< File identifer.
+    u32     magic2;         ///< File identifer.
+    u32     size;           ///< File size.
+    u32     type;           ///< File type.
+    u32     checksum;       ///< The checksum.
+    u32     version;        ///< Version.
+    u32     exp1;           ///< Expansion
+    u32     exp2;           ///< Expansion
 
 } prFileHeader;
 
@@ -94,10 +94,10 @@ typedef struct prFileHeader
 //      Main header for chunked files
 typedef struct prChunkHeader
 {
-    Proteus::Core::u32     magic1;         ///< File identifer.
-    Proteus::Core::u32     magic2;         ///< File identifer.
-    Proteus::Core::u32     count;          ///< Number of chunks.
-    Proteus::Core::u32     type;           ///< File type.
+    u32     magic1;         ///< File identifer.
+    u32     magic2;         ///< File identifer.
+    u32     count;          ///< Number of chunks.
+    u32     type;           ///< File type.
 
 } prChunkHeader;
 
@@ -106,10 +106,10 @@ typedef struct prChunkHeader
 //      A chunk header for chunked files.
 typedef struct prFileChunk
 {
-    Proteus::Core::u32     type;           ///< Chunk type.
-    Proteus::Core::u32     size;           ///< Size of the data. Note this does not include the size of the chunk header.
-    Proteus::Core::u32     entries;        ///< Number of data entries.
-    Proteus::Core::u32     offset;         ///< Offset to the next chunk. Offset is zero for the last chunk.
+    u32     type;           ///< Chunk type.
+    u32     size;           ///< Size of the data. Note this does not include the size of the chunk header.
+    u32     entries;        ///< Number of data entries.
+    u32     offset;         ///< Offset to the next chunk. Offset is zero for the last chunk.
 
 } prFileChunk;
 
@@ -130,10 +130,10 @@ typedef struct prSaveHeader
         //checksum = 0;
     }
 
-    Proteus::Core::u32     magic1;         ///< File identifer.
-    Proteus::Core::u32     magic2;         ///< File identifer.
-    Proteus::Core::u32     size;           ///< File size.
-    Proteus::Core::u32     checksum;       ///< The checksum
+    u32     magic1;         ///< File identifer.
+    u32     magic2;         ///< File identifer.
+    u32     size;           ///< File size.
+    u32     checksum;       ///< The checksum
 
 } prSaveHeader;
 
@@ -150,10 +150,10 @@ typedef struct prSaveHeader
 // ----------------------------------------------------------------------------
 typedef struct prFatHeader
 {
-    Proteus::Core::u32 entries;
-    Proteus::Core::u32 size;
-    Proteus::Core::u32 magic1;
-    Proteus::Core::u32 magic2;
+    u32 entries;
+    u32 size;
+    u32 magic1;
+    u32 magic2;
 
 } prFatHeader;
 
@@ -163,14 +163,14 @@ typedef struct prFatHeader
 // ----------------------------------------------------------------------------
 typedef struct prArcEntry
 {
-    Proteus::Core::u32     hash;
-    Proteus::Core::u32     offset;
-    Proteus::Core::u32     filesize;
-    Proteus::Core::u32     compressedSize;
-    Proteus::Core::u8      compressed;
-    Proteus::Core::u8      compressionType;
-    Proteus::Core::u8      accessed;
-    Proteus::Core::u8      exp1;
+    u32     hash;
+    u32     offset;
+    u32     filesize;
+    u32     compressedSize;
+    u8      compressed;
+    u8      compressionType;
+    u8      accessed;
+    u8      exp1;
     char    filename[FILE_MAX_FILENAME_SIZE];
 
 } prArcEntry;
@@ -185,4 +185,4 @@ typedef struct prArcEntry
 //
 // Returns:
 //      The checksum value
-Proteus::Core::u32 prCalculateChecksum(Proteus::Core::u8 *data, Proteus::Core::u32 datasize);
+u32 prCalculateChecksum(u8 *data, u32 datasize);

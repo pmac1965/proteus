@@ -21,7 +21,7 @@
 #include "../core/prCore.h"
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

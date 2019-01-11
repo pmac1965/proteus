@@ -36,7 +36,7 @@ class prRenderer;
 // Callbacks
 typedef void (*prPaneInitCallback)(void *);
 typedef void (*prPaneUpdateCallback)();
-typedef bool (*prPanePredrawCallback)(prRenderer *pRenderer, Proteus::Core::s32 x, Proteus::Core::s32 y, Proteus::Core::s32 width, Proteus::Core::s32 height);
+typedef bool (*prPanePredrawCallback)(prRenderer *pRenderer, s32 x, s32 y, s32 width, s32 height);
 
 
 // Namespaces
@@ -72,7 +72,7 @@ public:
     //
     // Parameters:
     //      dt - Delta time
-    void Update(Proteus::Core::f32 dt) override;
+    void Update(f32 dt) override;
 
     // Method: Draw
     //      Draws the pane
@@ -116,7 +116,7 @@ public:
     //      y		- Y position
     //      width	- Pane width
     //      height	- Pane height
-    void SetSizeAndPos(Proteus::Core::s32 x, Proteus::Core::s32 y, Proteus::Core::s32 width, Proteus::Core::s32 height) { mXpos = x; mYpos = y; mWidth = width; mHeight = height; }
+    void SetSizeAndPos(s32 x, s32 y, s32 width, s32 height) { mXpos = x; mYpos = y; mWidth = width; mHeight = height; }
 
     // Method: GetSizeAndPos
     //      Gets the panes size and position relative to screen 0, 0
@@ -126,7 +126,7 @@ public:
     //      y		- Reference to receive Y position
     //      width	- Reference to receive Pane width
     //      height	- Reference to receive Pane height
-    void GetSizeAndPos(Proteus::Core::s32 &x, Proteus::Core::s32 &y, Proteus::Core::s32 &width, Proteus::Core::s32 &height) { x = mXpos; y = mYpos; width = mWidth; height = mHeight; }
+    void GetSizeAndPos(s32 &x, s32 &y, s32 &width, s32 &height) { x = mXpos; y = mYpos; width = mWidth; height = mHeight; }
 
     // Method: SetTitleText
     //      Sets the panes title text
@@ -149,10 +149,10 @@ public:
 
 private:
 	prString				mName;
-    Proteus::Core::s32		mXpos;
-    Proteus::Core::s32		mYpos;
-    Proteus::Core::s32		mWidth;
-    Proteus::Core::s32		mHeight;
+    s32		                mXpos;
+    s32		                mYpos;
+    s32		                mWidth;
+    s32		                mHeight;
 	prSprite			   *mpPaneIcon;
 	prSprite			   *mpOptionsIcon;
 

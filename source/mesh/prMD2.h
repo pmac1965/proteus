@@ -29,26 +29,26 @@
  */
 typedef struct
 {
-    Proteus::Core::s32     ident;              // Magic number. must be equal to "IDP2"
-    Proteus::Core::s32     version;            // Md2 version. must be equal to 8
+    s32     ident;              // Magic number. must be equal to "IDP2"
+    s32     version;            // Md2 version. must be equal to 8
 
-    Proteus::Core::s32     skinWidth;          // Width of the texture
-    Proteus::Core::s32     skinHeight;         // Height of the texture
-    Proteus::Core::s32     frameSize;          // Size of one frame in bytes
+    s32     skinWidth;          // Width of the texture
+    s32     skinHeight;         // Height of the texture
+    s32     frameSize;          // Size of one frame in bytes
 
-    Proteus::Core::s32     num_skins;          // Number of textures
-    Proteus::Core::s32     num_vertices;       // Number of vertices
-    Proteus::Core::s32     num_st;             // Number of texture coordinates
-    Proteus::Core::s32     num_tris;           // Number of triangles
-    Proteus::Core::s32     num_glcmds;         // Number of opengl commands
-    Proteus::Core::s32     num_frames;         // Total number of frames
+    s32     num_skins;          // Number of textures
+    s32     num_vertices;       // Number of vertices
+    s32     num_st;             // Number of texture coordinates
+    s32     num_tris;           // Number of triangles
+    s32     num_glcmds;         // Number of opengl commands
+    s32     num_frames;         // Total number of frames
 
-    Proteus::Core::s32     offset_skins;       // Offset to skin names (64 bytes each)
-    Proteus::Core::s32     offset_st;          // Offset to s-t texture coordinates
-    Proteus::Core::s32     offset_tris;        // Offset to triangles
-    Proteus::Core::s32     offset_frames;      // Offset to frame data
-    Proteus::Core::s32     offset_glcmds;      // Offset to opengl commands
-    Proteus::Core::s32     offset_end;         // Offset to end of file
+    s32     offset_skins;       // Offset to skin names (64 bytes each)
+    s32     offset_st;          // Offset to s-t texture coordinates
+    s32     offset_tris;        // Offset to triangles
+    s32     offset_frames;      // Offset to frame data
+    s32     offset_glcmds;      // Offset to opengl commands
+    s32     offset_end;         // Offset to end of file
 
 } prMD2Header;
 
@@ -66,8 +66,8 @@ typedef struct
  */
 typedef struct
 {
-  Proteus::Core::s16 s;                        // Coord
-  Proteus::Core::s16 t;                        // Coord
+  s16 s;                        // Coord
+  s16 t;                        // Coord
 
 } prMD2TexCoord;
 
@@ -76,8 +76,8 @@ typedef struct
  */
 typedef struct
 {
-  Proteus::Core::u16 vertex[3];                // Triangle's vertex indices
-  Proteus::Core::u16 st[3];                    // Texture coord indices
+  u16 vertex[3];                // Triangle's vertex indices
+  u16 st[3];                    // Texture coord indices
 
 } prMD2Triangle;
 
@@ -86,15 +86,15 @@ typedef struct
  */
 typedef struct
 {
-  Proteus::Core::u8 v[3];                      // Compressed vertex position
-  Proteus::Core::u8 normalIndex;               // Normal vector index
+  u8 v[3];                      // Compressed vertex position
+  u8 normalIndex;               // Normal vector index
 
 } prMD2Vertex;
 
 
 // OpenGL vector types.
-typedef Proteus::Core::f32 prMD2Vec2[2];
-typedef Proteus::Core::f32 prMD2Vec3[3];
+typedef f32 prMD2Vec2[2];
+typedef f32 prMD2Vec3[3];
 
 
 /** MD2 Frame data.
@@ -132,9 +132,9 @@ typedef struct prMD2Frame
  */
 typedef struct
 {
-    Proteus::Core::f32 s;                      // S texture coord.
-    Proteus::Core::f32 t;                      // T texture coord.
-    Proteus::Core::s32 index;                  // Vertex index
+    f32 s;                      // S texture coord.
+    f32 t;                      // T texture coord.
+    s32 index;                  // Vertex index
 
 } prMD2GLCMD;
 
@@ -143,10 +143,10 @@ typedef struct
  */
 typedef struct
 {
-    char                   name[16];           // Frame name
-    Proteus::Core::u32     hash;               // Frame hash
-    Proteus::Core::s32     start;              // First frame index
-    Proteus::Core::s32     end;                // Last frame index
+    char    name[16];           // Frame name
+    u32     hash;               // Frame hash
+    s32     start;              // First frame index
+    s32     end;                // Last frame index
 
 } prMD2Anim;
 

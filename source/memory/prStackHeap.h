@@ -38,8 +38,8 @@
 //  Used to store information on a stack based memory block
 typedef struct StackNode
 {
-    Proteus::Core::u32  size;
-    char*               func;
+    u32     size;
+    char*   func;
 
 } StackNode;
 
@@ -55,7 +55,7 @@ public:
     // Parameters:
     //      size    - The size of heap required
     //      name    - Optional name of the heap
-    prStackHeap(Proteus::Core::u32 size, const char *name = 0);
+    prStackHeap(u32 size, const char *name = 0);
 
     // Method: ~prStackHeap
     //      Destructor.
@@ -67,7 +67,7 @@ public:
     // Parameters:
     //      size - Bytes required
     //      name - Optional name for the allocation (Use in memory tracking)
-    void* Allocate(Proteus::Core::u32 size, const char* func = 0);
+    void* Allocate(u32 size, const char* func = 0);
 
     // Method: Release
     //      Restores the last memory mark placed, releasing all memory allocated after the mark was placed.
@@ -93,7 +93,7 @@ public:
 
     // Method: MemoryFree
     //      Returns the amount of memory free in the heap.
-    Proteus::Core::u32 MemoryFree() const;
+    u32 MemoryFree() const;
 
     // Method: Mark
     //      Marks the current end of the heap, allowing it to be restored later.
@@ -101,11 +101,11 @@ public:
 
     // Method: GetMarkCount
     //      Returns the number of marks placed.
-    Proteus::Core::u32 GetMarkCount() const;
+    u32 GetMarkCount() const;
 
     // Method: Size
     //      Returns the heap size.
-    Proteus::Core::u32 Size() const;
+    u32 Size() const;
 
     // Method: IsValidPointer
     //      Allows you to test if a pointer is valid for a specific heap.
@@ -142,12 +142,12 @@ private:
 
 
 protected:
-    Proteus::Core::u8   *m_heap;                 // The heap.
-    Proteus::Core::u32   m_heap_size;            // The size of the heap.
-    Proteus::Core::u32   m_start;                // Start of the unused part of the heap. (Below contains blocks, Above contains no blocks)
-    Proteus::Core::u32   m_end;                  // The end of the heap.
-    Proteus::Core::s32   m_index;                // The stack index
-    Proteus::Core::u32   m_stack[SH_STACK_SIZE]; // The stack.
-    Proteus::Core::u32   m_bounds_check;         // Bounds check?
-    const char          *m_name;                 // A name used to uniquely identify the heap during debugging.
+    u8         *m_heap;                 // The heap.
+    u32         m_heap_size;            // The size of the heap.
+    u32         m_start;                // Start of the unused part of the heap. (Below contains blocks, Above contains no blocks)
+    u32         m_end;                  // The end of the heap.
+    s32         m_index;                // The stack index
+    u32         m_stack[SH_STACK_SIZE]; // The stack.
+    u32         m_bounds_check;         // Bounds check?
+    const char *m_name;                 // A name used to uniquely identify the heap during debugging.
 };

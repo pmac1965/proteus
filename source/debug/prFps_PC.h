@@ -50,8 +50,8 @@ public:
     void End() override;
 
 private:
-    Proteus::Core::u64     timeStart;
-    Proteus::Core::u64     timeEnd;
-    Proteus::Core::u64     timeTotal;
-    Proteus::Core::u64     ticksPerSecond;
+    u64     timeStart;
+    u64     timeEnd;
+    u64     timeTotal;
+    u64     ticksPerSecond;
 };

@@ -40,7 +40,7 @@
 #include <gl/glu.h>
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 // Debug

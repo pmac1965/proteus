@@ -63,7 +63,7 @@ public:
     //
     // See also:
     //      <prTransactionResultType>
-    virtual void TransactionResult(Proteus::Core::s32 result, const char *id) = 0;
+    virtual void TransactionResult(s32 result, const char *id) = 0;
 
     // Method: ConnectionStateChanged
     //      Lets you know when the connection state has changed.

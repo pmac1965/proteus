@@ -52,7 +52,7 @@ namespace Proteus {
 namespace Math {
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

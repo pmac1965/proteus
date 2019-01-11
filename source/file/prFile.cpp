@@ -44,7 +44,7 @@
 //#define FILE_LOG_CREATE
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

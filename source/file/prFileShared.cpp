@@ -20,7 +20,7 @@
 #include "prFileShared.h"
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

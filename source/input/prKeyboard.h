@@ -60,30 +60,30 @@ public:
 
     // Method: IsKeyDown
     //      Tests if the key passed is currently being held down.
-    bool IsKeyDown(Proteus::Core::u32 charcode, Proteus::Core::u32 ctrlKeys = PRCTRL_KEY_NONE) const;
+    bool IsKeyDown(u32 charcode, u32 ctrlKeys = PRCTRL_KEY_NONE) const;
 
     // Method: IsKeyPressed
     //      Tests if the key passed has been pressed
-    bool IsKeyPressed(Proteus::Core::u32 charcode, Proteus::Core::u32 ctrlKeys = PRCTRL_KEY_NONE) const;
+    bool IsKeyPressed(u32 charcode, u32 ctrlKeys = PRCTRL_KEY_NONE) const;
 
     // Method: LastKeyPressed
     //      Returns the last key pressed
-    Proteus::Core::u32 LastKeyPressed() const { return mLastKey; }
+    u32 LastKeyPressed() const { return mLastKey; }
 
     // Method: KeyboardInjectDown
     //      Engine call. Called by the specific platform implementation.
     //      Injects the held down keys
-    virtual void KeyboardInjectDown(Proteus::Core::u32 charcode) = 0;
+    virtual void KeyboardInjectDown(u32 charcode) = 0;
 
     // Method: KeyboardInjectPressed
     //      Engine call. Called by the specific platform implementation.
     //      Injects the pressed keys
-    virtual void KeyboardInjectPressed(Proteus::Core::u32 charcode) = 0;
+    virtual void KeyboardInjectPressed(u32 charcode) = 0;
 
     // Method: KeyboardInjectControl
     //      Engine call. Called by the specific platform implementation.
     //      Injects the controls keys
-    virtual void KeyboardInjectControl(Proteus::Core::u32 charcode) = 0;
+    virtual void KeyboardInjectControl(u32 charcode) = 0;
 
 
 private:
@@ -93,11 +93,11 @@ private:
 
 
 protected:
-    Proteus::Core::u32 mLastKey;                               // Last key pressed
-    Proteus::Core::u32 mControlKeys;                           // Control keys pressed
-    Proteus::Core::u32 mPrevControlKeys;                       // Control keys pressed
-    Proteus::Core::u32 mPrevKeyBuffer[PRKEY_BUFFER_SIZE];      // Keycodes for pressed buttons
-    Proteus::Core::u32 mKeyBuffer    [PRKEY_BUFFER_SIZE];      // Keycodes for pressed buttons
+    u32 mLastKey;                               // Last key pressed
+    u32 mControlKeys;                           // Control keys pressed
+    u32 mPrevControlKeys;                       // Control keys pressed
+    u32 mPrevKeyBuffer[PRKEY_BUFFER_SIZE];      // Keycodes for pressed buttons
+    u32 mKeyBuffer    [PRKEY_BUFFER_SIZE];      // Keycodes for pressed buttons
 };
 
 

@@ -57,7 +57,7 @@ public:
     
     // Method: GetPlayerID
     //      Returns the players facebook ID
-    Proteus::Core::u64 GetPlayerID() const { return mPlayerFBID; }
+    u64 GetPlayerID() const { return mPlayerFBID; }
     
     // Method: GetPlayerName
     //      Returns the facebook players name
@@ -95,7 +95,7 @@ public:
 protected:
     prString                mPlayerName;
     prFacebookCallbacks    *mpCallbacks;
-    Proteus::Core::u64      mPlayerFBID;
+    u64                     mPlayerFBID;
     bool                    mIsLoggedIn;
 };
 

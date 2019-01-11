@@ -39,5 +39,5 @@
 //
 // Returns:
 //      true if intersects, false otherwise
-bool prLineIntersect(Proteus::Core::s32 x1, Proteus::Core::s32 y1, Proteus::Core::s32 x2, Proteus::Core::s32 y2, 
-                     Proteus::Core::s32 x3, Proteus::Core::s32 y3, Proteus::Core::s32 x4, Proteus::Core::s32 y4, Proteus::Math::prPoint2F &p);
+bool prLineIntersect(s32 x1, s32 y1, s32 x2, s32 y2, 
+                     s32 x3, s32 y3, s32 x4, s32 y4, Proteus::Math::prPoint2F &p);

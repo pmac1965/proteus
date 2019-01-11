@@ -43,13 +43,13 @@ public:
 
     // Method: Update
     //      Ctor
-    void Update(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 z);
+    void Update(f32 x, f32 y, f32 z);
     
     // Get accelerometer values.
-    void GetActual(Proteus::Core::f32 &x, Proteus::Core::f32 &y, Proteus::Core::f32 &z) const;
+    void GetActual(f32 &x, f32 &y, f32 &z) const;
 
     // Get accelerometer values.
-    void GetDifference(Proteus::Core::f32 &x, Proteus::Core::f32 &y, Proteus::Core::f32 &z) const;
+    void GetDifference(f32 &x, f32 &y, f32 &z) const;
    
 
 private:    

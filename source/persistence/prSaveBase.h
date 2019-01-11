@@ -37,11 +37,11 @@ public:
 
     // Method: Init
     //      Save initialisation.
-    void Init(char *folder, char *filename, void  *saveData, Proteus::Core::s32  saveSize);
+    void Init(char *folder, char *filename, void  *saveData, s32  saveSize);
 
     // Method: Init
     //      Load initialisation.
-    void Init(char *folder, char *filename, void **loadData, Proteus::Core::s32 *loadSize);
+    void Init(char *folder, char *filename, void **loadData, s32 *loadSize);
 
     // Method: ErrorOccurred
     //      Checks for errors.
@@ -49,7 +49,7 @@ public:
 
     // Method: SetError
     //      Sets an error.
-    void SetError(Proteus::Core::s32 error) { m_error = error; }
+    void SetError(s32 error) { m_error = error; }
 
     // Method: SaveBegin
     //      Required save state
@@ -80,11 +80,11 @@ public:
     virtual void Draw() {}
 
 protected:
-    Proteus::Core::s32     m_error;
-    char                  *m_folder;
-    char                  *m_filename;
-    Proteus::Core::u8     *m_saveSata;
-    Proteus::Core::s32     m_saveSize;
-    Proteus::Core::s32    *m_loadSize;
-    Proteus::Core::u8    **m_loadData;
+    s32     m_error;
+    char   *m_folder;
+    char   *m_filename;
+    u8     *m_saveSata;
+    s32     m_saveSize;
+    s32    *m_loadSize;
+    u8    **m_loadData;
 };

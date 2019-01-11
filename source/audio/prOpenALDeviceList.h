@@ -27,10 +27,10 @@
 // Structs
 typedef struct prAudioDeviceInfo
 {
-    std::string         deviceName;
-    Proteus::Core::s32  versionMajor;
-    Proteus::Core::s32  versionMinor;
-    Proteus::Core::u32  maxSources;
+    std::string deviceName;
+    s32         versionMajor;
+    s32         versionMinor;
+    u32         maxSources;
 
 } prAudioDeviceInfo;
 
@@ -50,23 +50,23 @@ public:
 
     // Method: GetNumDevices
     //      Returns the number of devices in the audio device list.
-    Proteus::Core::s32 GetNumDevices() const;
+    s32 GetNumDevices() const;
 
     // Method: GetDeviceName
     //      Returns the device name at a specified index in the audio device list.
-    char *GetDeviceName(Proteus::Core::s32 index);
+    char *GetDeviceName(s32 index);
 
     // Method: GetMaxSources
     //      Returns the maximum number of sources that can be generated on the given device.
-    Proteus::Core::u32 GetMaxSources(int index) const;
+    u32 GetMaxSources(int index) const;
 
 
 private:
     // Internal function to detemine max number of Sources that can be generated
-    Proteus::Core::u32 GetNumSources() const;
+    u32 GetNumSources() const;
 
 
 private:
-  std::vector<prAudioDeviceInfo> m_deviceList;
-  Proteus::Core::s32             m_defaultDeviceIndex;
+  std::vector<prAudioDeviceInfo>    m_deviceList;
+  s32                               m_defaultDeviceIndex;
 };

@@ -69,7 +69,7 @@
 #include "../display/prOglUtils.h"
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 // Defines

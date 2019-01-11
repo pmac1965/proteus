@@ -69,7 +69,7 @@ public:
     // Parameters:
     //      x - The x coordinate
     //      y - The y coordinate
-    void DrawPoint(Proteus::Core::f32 x, Proteus::Core::f32 y) override;
+    void DrawPoint(f32 x, f32 y) override;
     
     // Method: DrawLine
     //      Draws a line.
@@ -79,7 +79,7 @@ public:
     //      y1 - The start y coordinate
     //      x2 - The end x coordinate
     //      y2 - The end y coordinate
-    void DrawLine(Proteus::Core::f32 x1, Proteus::Core::f32 y1, Proteus::Core::f32 x2, Proteus::Core::f32 y2) override;
+    void DrawLine(f32 x1, f32 y1, f32 x2, f32 y2) override;
 
     // Method: DrawLine
     //      Draws a line 3D.
@@ -105,7 +105,7 @@ public:
     //      y1 - The start y coordinate (Top left corner)
     //      x2 - The end x coordinate (Bottom right corner)
     //      y2 - The end y coordinate (Bottom right corner)
-    void DrawRect(Proteus::Core::f32 x1, Proteus::Core::f32 y1, Proteus::Core::f32 x2, Proteus::Core::f32 y2) override;
+    void DrawRect(f32 x1, f32 y1, f32 x2, f32 y2) override;
     
     // Method: DrawFilledRect
     //      Draws a filled rectangle.
@@ -115,7 +115,7 @@ public:
     //      y1 - The start y coordinate (Top left corner)
     //      x2 - The end x coordinate (Bottom right corner)
     //      y2 - The end y coordinate (Bottom right corner)
-    void DrawFilledRect(Proteus::Core::f32 x1, Proteus::Core::f32 y1, Proteus::Core::f32 x2, Proteus::Core::f32 y2) override;
+    void DrawFilledRect(f32 x1, f32 y1, f32 x2, f32 y2) override;
     
     // Method: DrawCircle
     //      Draws a hollow circle.
@@ -124,7 +124,7 @@ public:
     //      x      - The start x coordinate (center)
     //      y      - The start y coordinate (center)
     //      radius - The radius
-    void DrawCircle(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 radius) override;
+    void DrawCircle(f32 x, f32 y, f32 radius) override;
 
     // Method: DrawFilledCircle
     //      Draws a filled circle.
@@ -133,7 +133,7 @@ public:
     //      x      - The start x coordinate (center)
     //      y      - The start y coordinate (center)
     //      radius - The radius
-    void DrawFilledCircle(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 radius) override;
+    void DrawFilledCircle(f32 x, f32 y, f32 radius) override;
 
     // Method: DrawPolygon
     //      Draws a hollow polygon.
@@ -141,7 +141,7 @@ public:
     // Parameters:
     //      vertices - A pointer to the vertex data
     //      count    - Number of vertices
-    void DrawPolygon(prVertex2D *vertices, Proteus::Core::s32 count) override;
+    void DrawPolygon(prVertex2D *vertices, s32 count) override;
 
     // Method: DrawFilledPolygon
     //      Draws a filled polygon.
@@ -149,7 +149,7 @@ public:
     // Parameters:
     //      vertices - A pointer to the vertex data
     //      count    - Number of vertices
-    void DrawFilledPolygon(prVertex2D *vertices, Proteus::Core::s32 count) override;
+    void DrawFilledPolygon(prVertex2D *vertices, s32 count) override;
     
     // Method: DrawQuad
     //      Draws a textured quad
@@ -221,5 +221,5 @@ public:
     // Parameters:
     //      size - The number of squares in either direction.
     //      E.g 2 will give a 4x4 grid
-    void DrawGrid(Proteus::Core::s32 size) override;
+    void DrawGrid(s32 size) override;
 };

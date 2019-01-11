@@ -68,7 +68,7 @@ public:
     //
     // Notes:
     //      type should be unique
-    explicit prActor(Proteus::Core::s32 type);
+    explicit prActor(s32 type);
 
     // Method: ~prActor
     //      Dtor
@@ -97,7 +97,7 @@ public:
 
     // Method: GetType
     //      Returns user specified type.
-    Proteus::Core::s32 GetType() const { return m_type; }
+    s32 GetType() const { return m_type; }
 
     // Method: Destroy
     //      Destroy this actor?
@@ -116,7 +116,7 @@ public:
 
     // Method: GetID
     //      Unique ID.
-    Proteus::Core::s32 GetID() const { return m_id; }
+    s32 GetID() const { return m_id; }
 
     // Method: OnCollisionEnter2D
     //      Indicates a collision has started
@@ -126,7 +126,7 @@ public:
     //
     // Return:
     //  A response type. The default value of -1 equals do nothing
-    virtual Proteus::Core::s32 OnCollisionEnter2D(prActor *pActor) { PRUNUSED(pActor); return -1; }
+    virtual s32 OnCollisionEnter2D(prActor *pActor) { PRUNUSED(pActor); return -1; }
 
     // Method: OnCollisionExit2D
     //      Indicates a collision has ended
@@ -136,7 +136,7 @@ public:
     //
     // Return:
     //  A response type. The default value of -1 equals do nothing
-    virtual Proteus::Core::s32 OnCollisionExit2D(prActor *pActor) { PRUNUSED(pActor); return -1; }
+    virtual s32 OnCollisionExit2D(prActor *pActor) { PRUNUSED(pActor); return -1; }
 
     // Method: OnCollisionLinger2D
     //      Indicates a collision is occurring
@@ -146,7 +146,7 @@ public:
     //
     // Return:
     //      A response type. The default value of -1 equals do nothing
-    virtual Proteus::Core::s32 OnCollisionLinger2D(prActor *pActor) { PRUNUSED(pActor); return -1; }
+    virtual s32 OnCollisionLinger2D(prActor *pActor) { PRUNUSED(pActor); return -1; }
 
     // Method: SetCollisionPosition2D
     //      An overrideable function which allows the collision rectangle start x, y to be
@@ -172,7 +172,7 @@ public:
     //
     // Return:
     //      User defined width
-    virtual Proteus::Core::u32 GetActorWidth() const { return 0; }
+    virtual u32 GetActorWidth() const { return 0; }
 
     // Method: GetActorHeight
     //      Optional call to get the actor height
@@ -182,34 +182,34 @@ public:
     //
     // Return:
     //      User defined height
-    virtual Proteus::Core::u32 GetActorHeight() const { return 0; }
+    virtual u32 GetActorHeight() const { return 0; }
 
 public:
-    Proteus::Core::prTransform      transform;      // Transform data
-    Proteus::Core::s32              user0;          // User data for you to do as you please
-    Proteus::Core::s32              user1;          // User data for you to do as you please
-    Proteus::Core::s32              user2;          // User data for you to do as you please
-    Proteus::Core::s32              user3;          // User data for you to do as you please
-    Proteus::Core::u32              collision0;     // For passing additional collision info, such as ground type
-    Proteus::Core::u32              collision1;     // For passing additional collision info
-    Proteus::Core::u32              collision2;     // For passing additional collision info
-    Proteus::Core::u32              collision3;     // For passing additional collision info
+    Proteus::Core::prTransform  transform;      // Transform data
+    s32                         user0;          // User data for you to do as you please
+    s32                         user1;          // User data for you to do as you please
+    s32                         user2;          // User data for you to do as you please
+    s32                         user3;          // User data for you to do as you please
+    u32                         collision0;     // For passing additional collision info, such as ground type
+    u32                         collision1;     // For passing additional collision info
+    u32                         collision2;     // For passing additional collision info
+    u32                         collision3;     // For passing additional collision info
 
 protected:
-    prString                        m_name;
-    Proteus::Core::prLayer          m_layer;
-    Proteus::Core::s32              m_type;
-    Proteus::Core::s32              m_id;
-    Proteus::Math::prVector2        m_colPos;    
-    bool                            m_destroy;
-    bool                            m_onScreen;
-    bool                            m_exp0;
-    bool                            m_exp1;
+    prString                    m_name;
+    Proteus::Core::prLayer      m_layer;
+    s32                         m_type;
+    s32                         m_id;
+    Proteus::Math::prVector2    m_colPos;    
+    bool                        m_destroy;
+    bool                        m_onScreen;
+    bool                        m_exp0;
+    bool                        m_exp1;
 
     // Add colour
 
 private:
-    static Proteus::Core::s32       m_baseid;
+    static s32                  m_baseid;
 };
 
 

@@ -42,7 +42,7 @@ class prProfileEntry;
     #define ProfileCount()                          prProfileManager::GetInstance().Count()
 
     // Use these to declare data for the profiler
-    #define PROF_VAR_DEC(var)                       Proteus::Core::s32 var = -1;
+    #define PROF_VAR_DEC(var)                       s32 var = -1;
     #define PROF_VAR_SET(var)                       if (var == -1) { var = ProfileCreate(#var); }
 
 #else
@@ -97,7 +97,7 @@ public:
 
     // Method: Create
     //      Creates a new profiling entry.
-    Proteus::Core::s32 Create(const char *name);
+    s32 Create(const char *name);
 
     // Method: Destroy
     //      Destroys all profiling entries.
@@ -112,7 +112,7 @@ public:
     //      font    - The font to draw with
     //      spacing - The spacing between the lines of text, so it can be tightly displayed
     //      first   - The first timing t0 display (Allows scrolling of the text)
-    void Display(Proteus::Core::s32 x, Proteus::Core::s32 y, prFixedWidthFont* font, Proteus::Core::s32 spacing, Proteus::Core::u32 first);
+    void Display(s32 x, s32 y, prFixedWidthFont* font, s32 spacing, u32 first);
 
     // Method: Enable
     //      Enables/disables profiling.
@@ -124,15 +124,15 @@ public:
 
     // Method: Start
     //      Start profiling
-    void Start(Proteus::Core::u32 index);
+    void Start(u32 index);
 
     // Method: Stop
     //      Stop profiling
-    void Stop(Proteus::Core::u32 index);
+    void Stop(u32 index);
 
     // Method: Count
     //      Returns the number of visible entries.
-    Proteus::Core::s32 Count() const;
+    s32 Count() const;
 
 
 private:
@@ -148,7 +148,7 @@ private:
 private:
     static prProfileManager m_instance;
     prProfileEntry         *m_entries[PROFILE_MAX_ENTRIES];
-    Proteus::Core::f32      m_frequency;
+    f32                     m_frequency;
     bool                    m_update;
     bool                    m_enabled;
     bool                    m_exp0;

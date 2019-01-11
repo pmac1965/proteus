@@ -24,7 +24,7 @@
 #include "../core/prMacros.h"
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

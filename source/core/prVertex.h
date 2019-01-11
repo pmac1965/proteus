@@ -26,8 +26,8 @@
 //      2 dimensional vertex type
 typedef struct prVertex2D
 {
-    Proteus::Core::f32 x;
-    Proteus::Core::f32 y;
+    f32 x;
+    f32 y;
 
 } prVertex2D;
 
@@ -36,8 +36,8 @@ typedef struct prVertex2D
 //      3 dimensional vertex type
 typedef struct prVertex3D
 {
-    Proteus::Core::f32 x;
-    Proteus::Core::f32 y;
-    Proteus::Core::f32 z;
+    f32 x;
+    f32 y;
+    f32 z;
 
 } prVertex3D;

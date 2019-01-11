@@ -45,9 +45,9 @@ public:
 
     // Method: Update
     //      Update the connection status, etc.
-    void Update(Proteus::Core::f32 dt);
+    void Update(f32 dt);
 
     // Method: IsConnected
     //      Do we have a connection to the internet?
-    Proteus::Core::PRBOOL IsConnected();
+    PRBOOL IsConnected();
 };

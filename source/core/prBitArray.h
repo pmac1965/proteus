@@ -29,7 +29,7 @@ class prBitArray
 public:
     // Method: prBitArray
     //      Constructor.
-    explicit prBitArray(Proteus::Core::s32 bitCount);
+    explicit prBitArray(s32 bitCount);
 
     // Method: ~prBitArray
     //      Destructor.
@@ -44,21 +44,21 @@ public:
     //
     // Parameters:
     //      index - A value between 0 to max bits - 1
-    void Set(Proteus::Core::s32 index);
+    void Set(s32 index);
 
     // Method: Clear
     //      Sets the bit at 'index' to 0.
     //
     // Parameters:
     //      index - A value between 0 to max bits - 1
-    void Clear(Proteus::Core::s32 index);
+    void Clear(s32 index);
 
     // Method: Flip
     //      Flips the bit at 'index'.
     //
     // Parameters:
     //      index - A value between 0 to max bits - 1
-    void Flip(Proteus::Core::s32 index);
+    void Flip(s32 index);
 
     // Method: ClearAll
     //      Sets all the bits to 0.
@@ -73,15 +73,15 @@ public:
     //
     // Parameters:
     //      index - A value between 0 to max bits - 1
-    bool Test(Proteus::Core::s32 index) const;
+    bool Test(s32 index) const;
 
     // Method: Count
     //      Returns the number of bits in the array
-    Proteus::Core::u32 Count() const { return m_count; }
+    u32 Count() const { return m_count; }
 
 
 protected:
-    Proteus::Core::s32  m_boxes;
-    Proteus::Core::s32  m_count;
-    Proteus::Core::u32 *m_array;
+    s32  m_boxes;
+    s32  m_count;
+    u32 *m_array;
 };

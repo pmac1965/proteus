@@ -28,7 +28,7 @@
 #define SPACE_COUNT         6           // Used to format display usage.
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

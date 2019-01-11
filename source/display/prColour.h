@@ -28,10 +28,10 @@
 //      A struct to represent RGBA colour
 typedef struct prRGBA
 {
-    Proteus::Core::u8  r;
-    Proteus::Core::u8  g;
-    Proteus::Core::u8  b;
-    Proteus::Core::u8  a;
+    u8  r;
+    u8  g;
+    u8  b;
+    u8  a;
 
 } prRGBA;
 
@@ -62,7 +62,7 @@ public:
     //      g - The green component
     //      b - The blue component
     //      a - The alpha component
-    prColour(Proteus::Core::f32 r, Proteus::Core::f32 g, Proteus::Core::f32 b, Proteus::Core::f32 a = 1.0f)
+    prColour(f32 r, f32 g, f32 b, f32 a = 1.0f)
     {
         red   = PRCLAMP(r, 0.0f, 1.0f);
         green = PRCLAMP(g, 0.0f, 1.0f);
@@ -81,7 +81,7 @@ public:
     //      g - The green component
     //      b - The blue component
     //      a - The alpha component
-    prColour(Proteus::Core::u8 r, Proteus::Core::u8 g, Proteus::Core::u8 b, Proteus::Core::u8 a = 255)
+    prColour(u8 r, u8 g, u8 b, u8 a = 255)
     {
         red   = RGB_ELE * r;
         green = RGB_ELE * g;
@@ -101,7 +101,7 @@ public:
     //      g - The green component
     //      b - The blue component
     //      a - The alpha component
-    prColour(Proteus::Core::s32 r, Proteus::Core::s32 g, Proteus::Core::s32 b, Proteus::Core::s32 a = 255)
+    prColour(s32 r, s32 g, s32 b, s32 a = 255)
     {
         red   = RGB_ELE * (r & 255);
         green = RGB_ELE * (g & 255);
@@ -116,11 +116,11 @@ public:
 
     // Method: RGBA
     //      Converts to the RGBA colour format
-    Proteus::Core::u32 RGBA() const;
+    u32 RGBA() const;
     
     // Method: BGRA
     //      Converts to the BGRA colour format
-    Proteus::Core::u32 BGRA() const;
+    u32 BGRA() const;
 
 
     // ------------------------------------------------------------------------
@@ -180,4 +180,4 @@ inline prColour prColour::operator - (const prColour& rhs) const
 // Parameters:
 //      pData - A pointer to the colour data
 //      size  - Size of the colour data
-void prSwitchRGBAToBGRA(Proteus::Core::u8 *pData, Proteus::Core::u32 size);
+void prSwitchRGBAToBGRA(u8 *pData, u32 size);

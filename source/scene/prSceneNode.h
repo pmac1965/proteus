@@ -40,7 +40,7 @@ public:
     //      Dtor
     virtual ~prSceneNode();
 
-    void Update(Proteus::Core::f32 dt);
+    void Update(f32 dt);
 
     //void Render();
 

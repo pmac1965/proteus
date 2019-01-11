@@ -67,7 +67,7 @@ public:
     //
     // Notes:
     //      Some providers may require updating. Most don't
-    void Update(Proteus::Core::f32 dt);
+    void Update(f32 dt);
 
     // Method: Draw
     //      Draws the provider
@@ -78,7 +78,7 @@ public:
 
     // Method: ShowAd
     //      Shows ad
-    void ShowAd(Proteus::Core::s32 type);
+    void ShowAd(s32 type);
 
     // Method: HideAd
     //      hides ads

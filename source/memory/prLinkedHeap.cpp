@@ -26,7 +26,7 @@
 #include "../core/prList.h"
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 #define KILOBYTE            1024        // 1K.

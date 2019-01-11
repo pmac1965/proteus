@@ -28,16 +28,16 @@ namespace Math {
 
 
 // Integer versions
-const TPoint3<Proteus::Core::s32> prPoint3 :: Zero   (0, 0, 0);
-const TPoint3<Proteus::Core::s32> prPoint3 :: One    (0, 0, 0);
-const TPoint2<Proteus::Core::s32> prPoint2 :: Zero   (0, 0);
-const TPoint2<Proteus::Core::s32> prPoint2 :: One    (0, 0);
+const TPoint3<s32> prPoint3 :: Zero   (0, 0, 0);
+const TPoint3<s32> prPoint3 :: One    (0, 0, 0);
+const TPoint2<s32> prPoint2 :: Zero   (0, 0);
+const TPoint2<s32> prPoint2 :: One    (0, 0);
 
 // Float versions
-const TPoint3<Proteus::Core::f32> prPoint3F :: Zero  (0.0f, 0.0f, 0.0f);
-const TPoint3<Proteus::Core::f32> prPoint3F :: One   (0.0f, 0.0f, 0.0f);
-const TPoint2<Proteus::Core::f32> prPoint2F :: Zero  (0.0f, 0.0f);
-const TPoint2<Proteus::Core::f32> prPoint2F :: One   (0.0f, 0.0f);
+const TPoint3<f32> prPoint3F :: Zero  (0.0f, 0.0f, 0.0f);
+const TPoint3<f32> prPoint3F :: One   (0.0f, 0.0f, 0.0f);
+const TPoint2<f32> prPoint2F :: Zero  (0.0f, 0.0f);
+const TPoint2<f32> prPoint2F :: One   (0.0f, 0.0f);
 
 
 }} // Namespaces

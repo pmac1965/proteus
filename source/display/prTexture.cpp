@@ -104,7 +104,7 @@ enum
 //#define SHOW_TEXTURE_TYPES
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 // Local data

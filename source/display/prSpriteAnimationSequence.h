@@ -44,9 +44,9 @@ typedef struct prAnimSequenceData
     }
 
         
-    Proteus::Core::s32 index;                      // Frame index.
-    Proteus::Core::f32 delay;                      // delay before showing next frame. (In milliseconds)
-    Proteus::Core::s32 userData[MAX_USER_DATA];    // User data for a frame.
+    s32 index;                      // Frame index.
+    f32 delay;                      // delay before showing next frame. (In milliseconds)
+    s32 userData[MAX_USER_DATA];    // User data for a frame.
 
 } prAnimSequenceData;
 
@@ -71,7 +71,7 @@ public:
     //
     // See Also:
     //      <prAnimType>
-    prSpriteAnimationSequence(const char *name, Proteus::Core::s32 frames, Proteus::Core::s32 type);
+    prSpriteAnimationSequence(const char *name, s32 frames, s32 type);
 
     // Method: ~prSpriteAnimationSequence
     //      Dtor
@@ -90,11 +90,11 @@ public:
 
     // Method: GetHash
     //      Returns the animations sequences hashed name.
-    Proteus::Core::u32 GetHash() const;
+    u32 GetHash() const;
 
     // Method: GetFrame
     //      Returns the current frame.
-    Proteus::Core::s32 GetFrame() const;
+    s32 GetFrame() const;
 
     // Method: ParseFrameData
     //      Parses the animation data from an xml file.
@@ -111,14 +111,14 @@ public:
     //
     // Returns:
     //      The value or -1 if value doesn't exist
-    Proteus::Core::s32 GetUserDataForCurrentFrame(Proteus::Core::s32 index) const;
+    s32 GetUserDataForCurrentFrame(s32 index) const;
 
     // Method: GetAnimState
     //      Returns the animations state.
     //
     // See Also:
     //      <prAnimState>
-    Proteus::Core::s32 GetAnimState() const;
+    s32 GetAnimState() const;
 
 
 private:
@@ -126,14 +126,14 @@ private:
     // Data
     char               *m_pName;                            // Name of this sequence.
     prAnimSequenceData *m_pData;                            // The sequence data.
-    Proteus::Core::s32  m_count;                            // The number of frames in the sequence.
-    Proteus::Core::u32  m_hash;                             // The hashed name of this anim sequence.
-    Proteus::Core::s32  m_animationType;                    // The animation type. Defaults to none.
+    s32                 m_count;                            // The number of frames in the sequence.
+    u32                 m_hash;                             // The hashed name of this anim sequence.
+    s32                 m_animationType;                    // The animation type. Defaults to none.
     float               m_frameDelay;                       // Delay between frames.
-    Proteus::Core::s32  m_frameIndex;                       // The current frame index.
-    Proteus::Core::s32  m_currentFrame;                     // The current frame/delay.
-    Proteus::Core::s32  m_state;                            // The state of the animation playback. 
-    Proteus::Core::s32  m_dir;                              // The animation direction.
+    s32                 m_frameIndex;                       // The current frame index.
+    s32                 m_currentFrame;                     // The current frame/delay.
+    s32                 m_state;                            // The state of the animation playback. 
+    s32                 m_dir;                              // The animation direction.
 
 
 private:

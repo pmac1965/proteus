@@ -49,11 +49,11 @@ public:
 
     // Method: GetWidth
     //      Gets the textures width.
-    Proteus::Core::s32 GetWidth() const { return m_width; }
+    s32 GetWidth() const { return m_width; }
 
     // Method: GetHeight
     //      Gets the textures height.
-    Proteus::Core::s32 GetHeight() const { return m_height; }
+    s32 GetHeight() const { return m_height; }
 
     // Method: GetHasAlpha
     //      Gets the textures alpha state.
@@ -61,7 +61,7 @@ public:
 
     // Method: GetTexID
     //      Gets the textures ID.
-    Proteus::Core::u32 GetTexID() const { return m_texID; }
+    u32 GetTexID() const { return m_texID; }
 
 
 private:
@@ -75,24 +75,24 @@ private:
     ~prTexture();
 
     // Load texture.
-    void Load(Proteus::Core::s32 extra);
+    void Load(s32 extra);
 
     // Unload texture.
     void Unload();
 
     // Allows embedded data to be used.
-    void LoadFromMemory(void *pData, Proteus::Core::u32 size);
+    void LoadFromMemory(void *pData, u32 size);
 
     // Allows raw data to be used
-    void LoadFromRaw(void *pData, Proteus::Core::u32 size, Proteus::Core::u32 width, Proteus::Core::u32 height);
+    void LoadFromRaw(void *pData, u32 size, u32 width, u32 height);
 
     // Checks for power of two compliance.
     //
     //      size - A texture width/height
-    bool ValidateSize(Proteus::Core::s32 size);
+    bool ValidateSize(s32 size);
 
     // Acquires the texture format
-    bool GetTextureFormat(Proteus::Core::u32 texFormat, int &internalFormat, int &format, int &type, bool &compressed);
+    bool GetTextureFormat(u32 texFormat, int &internalFormat, int &format, int &type, bool &compressed);
 
     // Validates the header
     bool ValidateHeader(prPVRTextureHeader *header);
@@ -111,13 +111,13 @@ private:
 
 
 private:
-    Proteus::Core::s32  m_width;
-    Proteus::Core::s32  m_height;
-    Proteus::Core::u32  m_texID;
-    bool                m_alpha;
-    bool                m_exp0;
-    bool                m_exp1;
-    bool                m_exp2;
+    s32     m_width;
+    s32     m_height;
+    u32     m_texID;
+    bool    m_alpha;
+    bool    m_exp0;
+    bool    m_exp1;
+    bool    m_exp2;
 };
 
 

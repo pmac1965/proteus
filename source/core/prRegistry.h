@@ -91,7 +91,7 @@ public:
     //
     // Returns:
     //      true if value set, false otherwise
-    bool SetValue(std::string key, Proteus::Core::s32 value);
+    bool SetValue(std::string key, s32 value);
     
     // Method: SetValue
     //      Sets the value of a key in the registry.
@@ -105,7 +105,7 @@ public:
     //
     // Returns:
     //      true if value set, false otherwise
-    bool SetValue(std::string key, Proteus::Core::u32 value);
+    bool SetValue(std::string key, u32 value);
     
     // Method: SetValue
     //      Sets the value of a key in the registry.
@@ -119,7 +119,7 @@ public:
     //
     // Returns:
     //      true if value set, false otherwise
-    bool SetValue(std::string key, Proteus::Core::f32 value);
+    bool SetValue(std::string key, f32 value);
     
     // Method: GetValue
     //      Gets the value of a key in the registry.

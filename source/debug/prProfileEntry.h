@@ -42,7 +42,7 @@ class prProfileEntry
 public:
     // Method: prProfileEntry
     //      Ctor
-    prProfileEntry(const char *name, Proteus::Core::f32 frequency);
+    prProfileEntry(const char *name, f32 frequency);
 
     // Method: ~prProfileEntry
     //      Dtor
@@ -58,23 +58,23 @@ public:
 
     // Method: Update
     //      Updates a profiling entry.
-    void Update(Proteus::Core::u64 period);
+    void Update(u64 period);
 
     // Method: Reset
     //      Resets the profiling stats data.
     void Reset();
 
-    prString            m_name;
-    Proteus::Core::u32  m_hash;
-    Proteus::Core::u32  m_hits;
-    Proteus::Core::u32  m_hitsPerFrame;
-    Proteus::Core::u32  m_maxHits;
-    Proteus::Core::f32  m_fastest;
-    Proteus::Core::f32  m_slowest;
-    Proteus::Core::f32  m_average;
-    Proteus::Core::f32  m_total;
-    Proteus::Core::f32  m_frequency;
-    Proteus::Core::u64  m_timeStart;
+    prString    m_name;
+    u32         m_hash;
+    u32         m_hits;
+    u32         m_hitsPerFrame;
+    u32         m_maxHits;
+    f32         m_fastest;
+    f32         m_slowest;
+    f32         m_average;
+    f32         m_total;
+    f32         m_frequency;
+    u64         m_timeStart;
 
 #if defined(PLATFORM_ANDROID)
     

@@ -52,7 +52,7 @@
 prProfileManager prProfileManager::m_instance;
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

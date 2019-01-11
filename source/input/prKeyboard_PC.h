@@ -40,15 +40,15 @@ public:
 
     // Method: KeyboardInjectDown
     //      Engine call. Injects the held down keys
-    void KeyboardInjectDown(Proteus::Core::u32 charcode) override;
+    void KeyboardInjectDown(u32 charcode) override;
 
     // Method: KeyboardInjectPressed
     //      Engine call. Injects the pressed keys
-    void KeyboardInjectPressed(Proteus::Core::u32 charcode) override;
+    void KeyboardInjectPressed(u32 charcode) override;
 
     // Method: KeyboardInjectControl
     //      Engine call. Injects the controls keys
-    void KeyboardInjectControl(Proteus::Core::u32 charcode) override;
+    void KeyboardInjectControl(u32 charcode) override;
 };
 
 

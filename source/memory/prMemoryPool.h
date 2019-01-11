@@ -39,7 +39,7 @@ public:
     // Parameters:
     //      size    - The size of the pool in objects
     //      name    - An optional name for debug purposes
-    prMemoryPool(Proteus::Core::s32 size, const char* name = 0) : m_name(name)
+    prMemoryPool(s32 size, const char* name = 0) : m_name(name)
     {
         PRASSERT(size > 0);
         Create(size);
@@ -94,7 +94,7 @@ public:
     //      All previously acquired pointers should be considered invalid
     void Reset()
     {
-        for (Proteus::Core::s32 i=0; i<m_size; ++i)
+        for (s32 i=0; i<m_size; ++i)
         {
             m_objects[i] = &m_pool[i];
         }
@@ -104,15 +104,15 @@ public:
 
     // Method: GetSize
     //      Returns the size of the pool in objects, *not* bytes.
-    Proteus::Core::s32 GetSize() const { return m_size;}
+    s32 GetSize() const { return m_size;}
     
     // Method: GetFree
     //      Returns the number of free objects in the pool.
-    Proteus::Core::s32 GetFree() const { return m_index;}
+    s32 GetFree() const { return m_index;}
 
     // Method: GetUsed
     //      Returns the number of used objects in the pool.
-    Proteus::Core::s32 GetUsed() const { return m_size - m_index;}
+    s32 GetUsed() const { return m_size - m_index;}
 
     // Method: DisplayUsage
     //      Displays memory pool status information.
@@ -136,7 +136,7 @@ public:
 
 private:
     // Creates the pool.
-    void Create(Proteus::Core::s32 size)
+    void Create(s32 size)
     {
         // Create object pool.
         m_pool = new T [size];
@@ -147,7 +147,7 @@ private:
         PRASSERT(m_objects);
 
         // Fill in the pointer list.
-        for (Proteus::Core::s32 i=0; i<size; ++i)
+        for (s32 i=0; i<size; ++i)
         {
             m_objects[i] = &m_pool[i];
         }
@@ -170,6 +170,6 @@ protected:
     const char         *m_name;     // A name used to uniquely identify a pool during debugging.
     T*                  m_pool;     // The actual memory pool.
     T**                 m_objects;  // Pointers to the objects in the memory pool.
-    Proteus::Core::s32  m_index;    // Index of the last usable object. (Range 1 to size)
-    Proteus::Core::s32  m_size;     // The size of the memory pool
+    s32                 m_index;    // Index of the last usable object. (Range 1 to size)
+    s32                 m_size;     // The size of the memory pool
 };

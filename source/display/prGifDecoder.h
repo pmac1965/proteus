@@ -55,14 +55,14 @@ public:
     //
     // Parameters:
     //      frame - The frame to decode
-    bool DecodeFrame(Proteus::Core::u32 frame);
+    bool DecodeFrame(u32 frame);
 
     // Method: PartDecode1
     //      Slower platforms can decode and animate the gif over several frames
     //
     // Notes:
     //      This function acquires the next frame from the gif
-    void PartDecode1(Proteus::Core::u32 frame);
+    void PartDecode1(u32 frame);
 
     // Method: PartDecode2
     //      Slower platforms can decode and animate the gif over several frames
@@ -92,19 +92,19 @@ public:
     //
     // See Also:
     //      <DecodeFrame>
-    void Draw(Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 scale);
+    void Draw(f32 x, f32 y, f32 scale);
 
     // Method: GetFrameCount
     //      Returns the number of frames in the animation
-    Proteus::Core::u32 GetFrameCount() const { return mFrameCount; }
+    u32 GetFrameCount() const { return mFrameCount; }
 
     // Method: GetFrameWidth
     //      Returns the animations frame width
-    Proteus::Core::u32 GetFrameWidth() const { return mFrameWidth; }
+    u32 GetFrameWidth() const { return mFrameWidth; }
 
     // Method: GetFrameHeight
     //      Returns the animations frame height
-    Proteus::Core::u32 GetFrameHeight() const { return mFrameHeight; }
+    u32 GetFrameHeight() const { return mFrameHeight; }
 
 
 private:
@@ -117,24 +117,21 @@ private:
     FREE_IMAGE_FORMAT   mFif;
     FIBITMAP           *mDib;
     FIMULTIBITMAP      *mMultiBmp;
-    Proteus::Core::u8  *mpImage;
-    Proteus::Core::u8  *mpImageCopy;
+    u8                 *mpImage;
+    u8                 *mpImageCopy;
     prSprite           *mpSprite;
     prTexture          *mpTetxure;
-    Proteus::Core::u32  mFileSize;
-
-    Proteus::Core::u32  mFrameCount;
-    Proteus::Core::u32  mFrameWidth;
-    Proteus::Core::u32  mFrameHeight;
-    Proteus::Core::u32  mFrameCurrent;
-
-    Proteus::Core::u32  mTextureWidth;
-    Proteus::Core::u32  mTextureHeight;
-    Proteus::Core::u32  mTextureSize;
-
-    Proteus::Core::u32  pitch;
-    Proteus::Core::u32  imageBPP;
-    Proteus::Core::u32  imageWidth;
-    Proteus::Core::u32  imageHeight;
-    Proteus::Core::u8  *pRawImage;
+    u32                 mFileSize;
+    u32                 mFrameCount;
+    u32                 mFrameWidth;
+    u32                 mFrameHeight;
+    u32                 mFrameCurrent;
+    u32                 mTextureWidth;
+    u32                 mTextureHeight;
+    u32                 mTextureSize;
+    u32                 pitch;
+    u32                 imageBPP;
+    u32                 imageWidth;
+    u32                 imageHeight;
+    u8                 *pRawImage;
 };

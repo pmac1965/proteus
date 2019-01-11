@@ -166,7 +166,7 @@ void prCoreInit(const char *saveDataPath);
 // Returns:
 //      PRTRUE if the core was constructed
 //      PRFALSE if the core already exists 
-Proteus::Core::PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version);
+PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version);
 
 
 // Function: prCoreCreateOptional
@@ -181,7 +181,7 @@ Proteus::Core::PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType v
 //
 // See Also:
 //      <prCoreInit>
-void prCoreCreateOptional(Proteus::Core::s32 *optionalSystems, Proteus::Core::u32 count);
+void prCoreCreateOptional(s32 *optionalSystems, u32 count);
 
 
 // Function: prCoreDestroy
@@ -197,7 +197,7 @@ void prCoreDestroy();
 //
 // Returns:
 //      PRTRUE or PRFALSE
-Proteus::Core::PRBOOL prCoreExist();
+PRBOOL prCoreExist();
 
 
 // Function: prCoreComponentExist
@@ -211,7 +211,7 @@ Proteus::Core::PRBOOL prCoreExist();
 //
 // Returns:
 //      PRTRUE or PRFALSE
-Proteus::Core::PRBOOL prCoreComponentExist(Proteus::Core::s32 systemID);
+PRBOOL prCoreComponentExist(s32 systemID);
 
 
 // Function: prCoreGetComponent
@@ -226,4 +226,4 @@ Proteus::Core::PRBOOL prCoreComponentExist(Proteus::Core::s32 systemID);
 // Returns:
 //      A prCoreSystem pointer.
 //      May return nullptr
-prCoreSystem *prCoreGetComponent(Proteus::Core::u32 systemID);
+prCoreSystem *prCoreGetComponent(u32 systemID);

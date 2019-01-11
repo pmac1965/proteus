@@ -56,7 +56,7 @@ public:
     //
     // Parameters:
     //      dt - Delta time
-    virtual bool Update(Proteus::Core::f32);
+    virtual bool Update(f32);
     
     // Method: EventNotify
     //      Callback from the game.
@@ -70,7 +70,7 @@ public:
     //
     // See also:
     //      <prTransactionResult>
-    virtual void EventNotify(Proteus::Core::s32 type, const char *id);
+    virtual void EventNotify(s32 type, const char *id);
 
     // Method: BeginPurchase
     //      Purchase an item.

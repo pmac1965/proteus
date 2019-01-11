@@ -36,7 +36,7 @@
 #define FONT_CHARACTER_COUNT    256
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

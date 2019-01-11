@@ -29,7 +29,7 @@
 #include "../debug/prDebug.h"
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 //#define MILLISECONDS    1000.0f

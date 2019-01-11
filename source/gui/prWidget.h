@@ -98,7 +98,7 @@ public:
     //
     // See Also:
     //      <prWidgetType>
-    Proteus::Core::s32 GetType() const { return m_type; }
+    s32 GetType() const { return m_type; }
 
     // Method: SetVisible
     //      Set the render visibility state.
@@ -166,11 +166,11 @@ public:
     //
     // Parameters:
     //      layer - The layer
-    void SetLayer(Proteus::Core::s32 layer) { m_layer = layer; }
+    void SetLayer(s32 layer) { m_layer = layer; }
 
     // Method: GetLayer
     //      Gets the widget layer.
-    Proteus::Core::s32 GetLayer() const { return m_layer; }
+    s32 GetLayer() const { return m_layer; }
 
     // Method: SetBMPFont
     //      Sets the default bitmap font.
@@ -193,7 +193,7 @@ public:
     //
     // Parameters:
     //      dt - Delta time
-    virtual void Update(Proteus::Core::f32 dt) = 0;
+    virtual void Update(f32 dt) = 0;
 
     // Method: Draw
     //      Draws the widget
@@ -246,7 +246,7 @@ protected:
     prBitmapFont       *m_pBmpfont;
     prTrueTypeFont     *m_pTtfFont;
     prColour            m_colour;
-    Proteus::Core::s32  m_layer;
+    s32                 m_layer;
 
 public:
     Proteus::Math::prVector2    pos;

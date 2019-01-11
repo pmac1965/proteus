@@ -66,14 +66,14 @@ public:
 
     // Method: Update
     //      Updates the particle manager
-    void Update(Proteus::Core::f32 dt);
+    void Update(f32 dt);
 
     // Method: Fire
     //      Fires off a particle effect
     //
     // Return:
     //      Returns an ID for the emitter, or -1 on failure
-    Proteus::Core::s32 Fire(const char *name, const Proteus::Math::prVector3 &pos);
+    s32 Fire(const char *name, const Proteus::Math::prVector3 &pos);
 
     // Method: GetEmitterDefinitionCount
     //      Returns the number of emitter definitions
@@ -83,15 +83,15 @@ public:
     //      the returned count would be two.
     //
     //      *PLEASE REMEMBER THIS IS THE COUNT OF EMITTER TYPES, NOT ACTIVE EMITTERS*
-    Proteus::Core::s32 GetEmitterDefinitionCount() const;
+    s32 GetEmitterDefinitionCount() const;
 
     //
     //
-    prEmitterDefinition *GetEmitterDefinitionByIndex(Proteus::Core::s32 index);
+    prEmitterDefinition *GetEmitterDefinitionByIndex(s32 index);
 
 
 private:
-    static Proteus::Core::s32 sEmitterID;                                              // Used to give emitters a unique ID
+    static s32 sEmitterID;                                              // Used to give emitters a unique ID
 
 
 private:
@@ -109,7 +109,7 @@ private:
 
 
 private:    
-    std::map<Proteus::Core::s32, prEmitter*>        mEmitters;          // The active emitters
+    std::map<s32, prEmitter*>                       mEmitters;          // The active emitters
     std::map<std::string, prEmitterDefinition*>     mDefinitions;       // The definitions of the emitters
     bool                                            mCorrectFileType;   // Used to ensure its the correct file type during loading.
 };
