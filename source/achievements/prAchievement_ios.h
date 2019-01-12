@@ -49,13 +49,13 @@ public:
     
     // Method: Update
     //      Updates the achievement system for a specific platform
-    virtual void Update(Proteus::Core::f32 dt) override;
+    virtual void Update(f32 dt) override;
     
     // Method: Award
     //      Award an achievement.
-    void Award(const char *name, Proteus::Core::s32 id) override;
+    void Award(const char *name, s32 id) override;
     
     // Method: IsAwarded
     //      Checks if an achievement has been awarded.
-    bool IsAwarded(const char *name, Proteus::Core::s32 id)  override;
+    bool IsAwarded(const char *name, s32 id)  override;
 };

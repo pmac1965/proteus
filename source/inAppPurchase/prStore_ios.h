@@ -53,7 +53,7 @@ public:
     
     // Method: Update
     //      Perform store specific updates.
-    bool Update(Proteus::Core::f32 dt) override;
+    bool Update(f32 dt) override;
 
     // Method: EventNotify
     //      Callback from the game.
@@ -64,7 +64,7 @@ public:
     //
     // See also:
     //      <prTransactionResultType>
-    void EventNotify(Proteus::Core::s32 type, const char *id) override;
+    void EventNotify(s32 type, const char *id) override;
 
     // Method: BeginPurchase
     //      Purchase an item.

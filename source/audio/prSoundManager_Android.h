@@ -54,11 +54,11 @@ public:
 
     // Method: Update
     //      Updates the sound system.
-    void Update(Proteus::Core::f32 dt);
+    void Update(f32 dt);
 
     // Method: LoadSFX
     //      Loads the sound effects into sound memory.
-    void LoadSFX(const prSFXInfo *sfx, Proteus::Core::s32 count);
+    void LoadSFX(const prSFXInfo *sfx, s32 count);
 
     // Method: SongPlayByName
     //      Starts playing a song.
@@ -66,7 +66,7 @@ public:
 
     // Method: SongStop
     //      Stops the current song.
-    void SongStop(Proteus::Core::f32 time = 0.0f);
+    void SongStop(f32 time = 0.0f);
 
     // Method: SongPause
     //      Pauses the active song.
@@ -78,15 +78,15 @@ public:
 
     // Method: SongSetVolume
     //      Sets the volume of the current song.
-    void SongSetVolume(Proteus::Core::f32 volume);
+    void SongSetVolume(f32 volume);
 
     // Method: SFXPlay
     //      Plays a sound effect.
-    Proteus::Core::s32 SFXPlay(Proteus::Core::s32 index, Proteus::Core::f32 volume = 1.0f, bool loop = false);
+    s32 SFXPlay(s32 index, f32 volume = 1.0f, bool loop = false);
 
     // Method: SFXStop
     //      Stops the specified effect.
-    void SFXStop(Proteus::Core::s32 id);
+    void SFXStop(s32 id);
 
     // Method: SFXStop
     //      Stops the specified effect.
@@ -98,7 +98,7 @@ public:
 
     // Method: SFXIsPlaying
     //      Determines if a particular sound effect is playing.
-    bool SFXIsPlaying(Proteus::Core::s32 index) const;
+    bool SFXIsPlaying(s32 index) const;
 
     // Method: SFXIsPlaying
     //      Determines if a particular sound effect is playing.
@@ -106,7 +106,7 @@ public:
 
     // Method: SFXPause
     //      Pauses a specific sound effect
-    void SFXPause(Proteus::Core::s32 index, bool state);
+    void SFXPause(s32 index, bool state);
 
     // Method: SFXPause
     //      Pauses a specific sound effect
@@ -122,22 +122,22 @@ public:
 
     // Method: SFXGetActive
     //      Returns the number of active sound effects
-    Proteus::Core::s32 SFXGetActive() const;
+    s32 SFXGetActive() const;
 
     // Method: SFXSetVolume
     //      Sets the volume of the specified effect.
-    void SFXSetVolume(Proteus::Core::s32 id, Proteus::Core::f32 volume);
+    void SFXSetVolume(s32 id, f32 volume);
 
     // Method: SFXSetPosition
     //      Sets the position of a sound effect.
-    void SFXSetPosition(const char *name, Proteus::Core::f32 x, Proteus::Core::f32 y, Proteus::Core::f32 z);
+    void SFXSetPosition(const char *name, f32 x, f32 y, f32 z);
 
 
 private:
     ALCdevice          *device;
     ALCcontext         *context;
     prWaves             waves;
-    Proteus::Core::u32  songCurr;
+    u32  songCurr;
 };
 
 

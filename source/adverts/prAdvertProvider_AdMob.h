@@ -41,7 +41,7 @@ public:
 
     // Method: Show
     //      Show advert
-    void Show(Proteus::Core::s32 type);
+    void Show(s32 type);
 
     // Method: Hide
     //      Hide advert.

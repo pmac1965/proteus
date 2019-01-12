@@ -68,7 +68,7 @@ public:
     //      pStates - The list of states
     //      state   - The default state
     //      count   - The number of states
-    void StateMachineInitialise(prFsmState *pStates, Proteus::Core::u32 state, Proteus::Core::u32 count)
+    void StateMachineInitialise(prFsmState *pStates, u32 state, u32 count)
     {
         PRASSERT(pStates);
         PRASSERT(count > 0);
@@ -106,7 +106,7 @@ public:
 
     // Method: StateMachineSetState
     //      Sets the next state
-    void StateMachineSetState(Proteus::Core::u32 state)
+    void StateMachineSetState(u32 state)
     {
         PRASSERT(mStateCurr < mStateCount);
         PRASSERT(mStateCount > 0);
@@ -133,11 +133,11 @@ public:
 
     // Method: GetState
     //      Gets the current state.
-    Proteus::Core::u32 GetState() const { return mStateCurr; }
+    u32 GetState() const { return mStateCurr; }
 
 
 protected:
-    prFsmState         *mpStates;
-    Proteus::Core::u32  mStateCurr;
-    Proteus::Core::u32  mStateCount;
+    prFsmState *mpStates;
+    u32			mStateCurr;
+    u32			mStateCount;
 };

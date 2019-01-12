@@ -54,5 +54,5 @@ public:
 //    void Assign() {}
 
 private:
-    Proteus::Core::u8* pAudioData;
+    u8* pAudioData;
 };

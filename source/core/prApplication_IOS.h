@@ -39,7 +39,7 @@
 // See Also:
 //      <DisplayCreate>
 //      <Run>
-class prApplication_Ios : public Proteus::Core::prApplication
+class prApplication_Ios : public prApplication
 {
 public:
     // Method: prApplication_Ios
@@ -65,7 +65,7 @@ public:
     // Returns:
     //      PRTRUE if the display was created successfully.
     //      PRFALSE if the display was NOT created successfully.
-    Proteus::Core::PRBOOL DisplayCreate(Proteus::Core::u32 width, Proteus::Core::u32 height, const char *pWindowName, bool fullscreen) override;
+    PRBOOL DisplayCreate(u32 width, u32 height, const char *pWindowName, bool fullscreen) override;
 
     // Method: Run
     //      Runs the game.
@@ -76,7 +76,7 @@ public:
     //
     // Returns:
     //      Will return PRFALSE when the game is complete.
-    Proteus::Core::PRBOOL Run() override;
+    PRBOOL Run() override;
 
 
 private:

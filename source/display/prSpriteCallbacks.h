@@ -32,5 +32,5 @@ public:
     //
     // Parameters:
     //      dt - Delta time
-    virtual void SpriteCurrentFrameIndex(const char *name, Proteus::Core::s32 index) = 0;
+    virtual void SpriteCurrentFrameIndex(const char *name, s32 index) = 0;
 };

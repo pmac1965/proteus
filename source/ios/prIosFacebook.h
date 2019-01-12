@@ -44,7 +44,7 @@ void prFB_FetchUserDetails(prFacebookCallbacks *pCallback, prFacebook_Ios *pFace
 
 // Function: prFB_Brag
 //      Brags to facebook
-void prFB_Brag(prFacebookCallbacks *pCallback, Proteus::Core::u64 fbid);
+void prFB_Brag(prFacebookCallbacks *pCallback, u64 fbid);
 
 
 #endif//PLATFORM_IOS

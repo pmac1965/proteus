@@ -56,7 +56,7 @@ public:
     //
     // See also:
     //      <prTransactionResultType>
-    void EventNotify(Proteus::Core::s32 type, const char *id) override;
+    void EventNotify(s32 type, const char *id) override;
 
     // Method: BeginPurchase
     //      Purchase an item.

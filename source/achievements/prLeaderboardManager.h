@@ -54,7 +54,7 @@ public:
     //// Parameters:
     ////      name  - The name of the leaderboard
     ////      value - The value to submit to the leaderboard
-    //void Submit(const char *name, Proteus::Core::u64 value);
+    //void Submit(const char *name, u64 value);
 
     //// Method: Enable
     ////      Allows submit to be disabled in case you need to remove it.

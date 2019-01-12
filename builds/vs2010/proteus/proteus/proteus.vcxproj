@@ -191,7 +191,7 @@
     <LibraryPath>D:\engine\external\steamworks_sdk_130\sdk\public\steam\lib\win32;D:\engine\libs\glew-2.1.0\lib\Release\Win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug64|x64'">
-    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.5.3\include;D:\engine\external\steamworks_sdk_130\sdk\public;$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include;D:\engine\glew-1.11.0\include\GL;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.9.1\include;D:\engine\external\steamworks_sdk_130\sdk\public;$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include;D:\engine\libs\glew-2.1.0\include\GL;$(IncludePath)</IncludePath>
     <TargetName>$(ProjectName)64_d</TargetName>
     <LibraryPath>D:\engine\external\steamworks_sdk_130\sdk\public\steam\lib\win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -221,7 +221,7 @@
     <LibraryPath>D:\engine\external\steamworks_sdk_130\sdk\public\steam\lib\win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release64|x64'">
-    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.5.3\include;D:\engine\external\steamworks_sdk_130\sdk\public;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include;D:\engine\glew-1.11.0\include\GL</IncludePath>
+    <IncludePath>$(SolutionDir)..\..\..\source;D:\engine\freetype-2.9.1\include;D:\engine\external\steamworks_sdk_130\sdk\public;$(IncludePath);$(MSBuildProgramFiles32)\OpenAL 1.1 SDK\include;D:\engine\libs\glew-2.1.0\include\GL</IncludePath>
     <TargetName>$(ProjectName)64_r</TargetName>
     <LibraryPath>D:\engine\external\steamworks_sdk_130\sdk\public\steam\lib\win32;$(LibraryPath)</LibraryPath>
   </PropertyGroup>

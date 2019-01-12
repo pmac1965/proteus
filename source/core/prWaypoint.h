@@ -40,7 +40,7 @@ public:
     //      _x     - X coordinate
     //      _y     - Y coordinate
     //      _index - Waypoints index
-    prWaypoint(Proteus::Core::s32 _x, Proteus::Core::s32 _y, Proteus::Core::s32 _index)  : x(_x), y(_y), index(_index)
+    prWaypoint(s32 _x, s32 _y, s32 _index)  : x(_x), y(_y), index(_index)
     {
     }
 
@@ -58,7 +58,7 @@ public:
 
 
 public:    
-    Proteus::Core::s32 x;              // public for fast access
-    Proteus::Core::s32 y;
-    Proteus::Core::s32 index;
+    s32 x;              // public for fast access
+    s32 y;
+    s32 index;
 };

@@ -71,7 +71,7 @@ public:
     //
     // See Also:
     //      <FlurryEvents>
-    void EventNotify(Proteus::Core::u32 eventType, Proteus::Core::u32 data1 = 0, Proteus::Core::u32 data2 = 0);
+    void EventNotify(u32 eventType, u32 data1 = 0, u32 data2 = 0);
 
     // Method: Init
     //      Initialise the advert provider.
@@ -83,7 +83,7 @@ public:
 
     // Method: Show
     //      Show an advert
-    void Show(Proteus::Core::s32 type);
+    void Show(s32 type);
 
     // Method: Hide
     //      Hide an advert.
