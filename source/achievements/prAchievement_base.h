@@ -143,11 +143,10 @@ public:
     //      Sets the status of the provider
     void SetStatus(prAchievementProviderStatus status) { mCurrStatus = status; }
 
-
 private:
     // Stops passing by value and assignment.
-    prAchievementBase(const prAchievementBase&);
-    const prAchievementBase& operator = (const prAchievementBase&);
+    prAchievementBase(const prAchievementBase&) = delete;
+    const prAchievementBase& operator = (const prAchievementBase&) = delete;
 
 private:
     const prAchievementProvider mAchievementProvider;           // The provider (Engine, Steam, etc)

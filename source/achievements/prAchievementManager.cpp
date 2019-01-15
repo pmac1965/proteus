@@ -112,7 +112,7 @@ const char *GetAchievementState(s32 state)
 // Achievement definition.
 typedef struct prAchievementDefinition
 {
-    u32				hash;
+    u32             hash;
     std::string     name;
     std::string     howTo;
     std::string     description;
@@ -910,7 +910,7 @@ void prAchievementManager::ParseAttribs_Achievement(TiXmlElement* pElement)
     d.howTo         = pElement->Attribute("desc_howto");
     d.achieved      = pElement->Attribute("desc_achieved");
     d.identifier    = identifier;
-    d.image			= pElement->Attribute("badge");
+    d.image         = pElement->Attribute("badge");
     d.hash          = prStringHash(pElement->Attribute("name"));
 
     mAchievementsList.push_back(d);

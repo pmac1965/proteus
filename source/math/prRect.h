@@ -42,6 +42,18 @@ class prRect
 {
 public:        
     // Method: prRect
+    //      Default Constructor
+    prRect()
+        : m_top     (0)
+        , m_left    (0)
+        , m_bottom  (0)
+        , m_right   (0)
+        , m_width   (0)
+        , m_height  (0)
+    {
+    }
+
+    // Method: prRect
     //      Constructor
     //
     // Parameters:
@@ -70,6 +82,7 @@ public:
         , m_bottom (bottomRight.y)
         , m_right  (bottomRight.x)
     {
+        VerifyCoords();
     }
                     
     // Method: PointInside
