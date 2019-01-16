@@ -1,5 +1,16 @@
+#include "../prConfig.h"
+
+
 #include <glew.h>
-#include <gl/GL.h>
+
+
+#if defined(PLATFORM_PC)
+  #include <gl/GL.h>
+#elif defined(PLATFORM_LINUX)
+  #include <Gl/gl.h>
+  #include <Gl/glu.h>
+#endif
+
 #include "prShadersEmbedded.h"
 #include "prOglUtils.h"
 

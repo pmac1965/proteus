@@ -27,7 +27,7 @@
 #include "prKeyboard_Linux.h"
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

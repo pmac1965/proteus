@@ -39,7 +39,7 @@
 #include "prEncryption.h"
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------

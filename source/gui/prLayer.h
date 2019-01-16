@@ -23,9 +23,8 @@ public:
 
 
 private:
-    prString            mName;
-    Proteus::Core::u32  mBitFlag;
-
+    prString    mName;
+    u32         mBitFlag;
 };
 
 

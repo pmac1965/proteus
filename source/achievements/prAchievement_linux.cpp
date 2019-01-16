@@ -26,7 +26,18 @@
 #include "prAchievement_linux.h"
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
+
+
+/// ---------------------------------------------------------------------------
+/// Initialises the achievement system for a specific platform
+/// ---------------------------------------------------------------------------
+void prAchievement_Linux::Initialise()
+{
+    // Start engine initialisation process, which essentially mimics a more complex process with
+    // network sign-in, to keep status messages similar.
+    //SetStatus(InitialisingStart);
+}
 
 
 /// ---------------------------------------------------------------------------

@@ -28,6 +28,22 @@
 class prAchievement_Linux : public prAchievementBase
 {
 public:
+    // Method: prAchievement_Linux
+    //      Ctor
+    //
+    // Parameters:
+    //      provider - The provider to use
+    //
+    // See Also:
+    //      <prAchievementProvider>
+    explicit prAchievement_Linux(prAchievementProvider provider) : prAchievementBase(provider)
+    {
+    }
+
+    // Method: Initialise
+    //      Initialises the achievement system for a specific platform
+    void Initialise() override;
+
     // Method: Award
     //      Award an achievement.
     void Award(const char *name, s32 id);

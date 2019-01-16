@@ -55,6 +55,11 @@
   #include <stdlib.h>
   #include <unistd.h>
 
+#ifndef MAX_PATH
+#define MAX_PATH 256
+#endif
+
+
 #elif defined(PLATFORM_ANDROID)
   #include <stdlib.h>
   #include <libzip\zip.h>

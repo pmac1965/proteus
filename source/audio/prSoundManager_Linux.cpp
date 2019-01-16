@@ -37,7 +37,7 @@
 #define SOUND_DEBUG
 
 
-using namespace Proteus::Core;
+//using namespace Proteus::Core;
 
 
 /// ---------------------------------------------------------------------------
@@ -73,7 +73,7 @@ bool prSoundManager_Linux::Initialise()
         // Init effects
         for (s32 i=0; i<AUDIO_MAX_ACTIVE; i++)
         {
-            soundEffects[i].state    = SFX_STATE_FREE;
+            soundEffects[i].state    = prSoundEffectEntryState::SFX_STATE_FREE;
             soundEffects[i].uiSource = 0xFFFFFFFF;
         }
 
@@ -92,7 +92,7 @@ bool prSoundManager_Linux::Initialise()
                 alcMakeContextCurrent(context);
                 if (ALC_ErrorCheck(device) != ALC_NO_ERROR)
                 {
-                    prTrace(LogError, "Failed to make OpenAL context current\n");
+                    prTrace(prLogLevel::LogError, "Failed to make OpenAL context current\n");
                 }
 
                 // Generate the playback sources
@@ -103,19 +103,19 @@ bool prSoundManager_Linux::Initialise()
 
                     if (AL_ErrorCheck() != AL_NO_ERROR)
                     {
-                        soundEffects[i].state    = SFX_STATE_UNAVAILABLE;
+                        soundEffects[i].state    = prSoundEffectEntryState::SFX_STATE_UNAVAILABLE;
                         soundEffects[i].uiSource = 0xFFFFFFFF;
-                        prTrace(LogError, "OpenAL failed to generate a source\n");
+                        prTrace(prLogLevel::LogError, "OpenAL failed to generate a source\n");
                     }
                     else
                     {
-                        soundEffects[i].state    = SFX_STATE_FREE;
+                        soundEffects[i].state    = prSoundEffectEntryState::SFX_STATE_FREE;
                     }
                 }
             }
             else
             {
-            	prTrace(LogError, "Failed to create OpenAL context\n");
+            	prTrace(prLogLevel::LogError, "Failed to create OpenAL context\n");
                 alcCloseDevice(device);
                 context = nullptr;
                 device  = nullptr;
@@ -123,14 +123,14 @@ bool prSoundManager_Linux::Initialise()
         }
         else
         {
-        	prTrace(LogError, "Failed to open default OpenAL device\n");
+        	prTrace(prLogLevel::LogError, "Failed to open default OpenAL device\n");
         }
 
         initialised = true;
     }
     else
     {
-        prTrace(LogError, "The sound system is already initialised\n");
+        prTrace(prLogLevel::LogError, "The sound system is already initialised\n");
     }
 
 
@@ -201,7 +201,7 @@ void prSoundManager_Linux::Update(f32 dt)
         // Free any stopped effects
         for (s32 i=0; i<AUDIO_MAX_ACTIVE; i++)
         {
-            if (soundEffects[i].state == SFX_STATE_PLAYING)
+            if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PLAYING)
             {
                 active++;
 
@@ -212,7 +212,7 @@ void prSoundManager_Linux::Update(f32 dt)
                 // Set free?
                 if (state != AL_PLAYING && state != AL_PAUSED)
                 {
-                    soundEffects[i].state = SFX_STATE_FREE;
+                    soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_FREE;
                     active--;
                 }
             }
@@ -396,7 +396,7 @@ void prSoundManager_Linux::SongPlayByName(const char *filename)
     // Set playing
     songPlaying = true;
     songIndex   = index;
-    songState   = SONG_STATE_PLAYING;
+    songState   = prSongState::SONG_STATE_PLAYING;
     songCurr    = hash;
     
     // Set volume.
@@ -500,7 +500,7 @@ bool prSoundManager_Linux::SongGetPaused() const
         {
             if (songPlaying)
             {
-                if (songState == SONG_STATE_PAUSED)
+                if (songState == prSongState::SONG_STATE_PAUSED)
                 {
                     result = true;
                 }
@@ -527,18 +527,18 @@ void prSoundManager_Linux::SongSetVolume(f32 volume)
         {
             if (songPlaying)
             {
-                if (songState == SONG_STATE_PLAYING)
+                if (songState == prSongState::SONG_STATE_PLAYING)
                 {
                     // Set volume
                     float vol = PRCLAMP(volume, AUDIO_MUS_MIN_VOLUME, AUDIO_MUS_MAX_VOLUME);
                     vol *= masterMusVolume;
                     TODO("Add set volume")
-					PRUSED(vol);
+					PRUNUSED(vol);
                     //prJNI_SongSetVolume(vol);
                 }
                 else
                 {
-                    prTrace(LogError, "Tried to set the volume of a paused song.\n");
+                    prTrace(prLogLevel::LogError, "Tried to set the volume of a paused song.\n");
                 }
             }
         }
@@ -570,7 +570,7 @@ s32 prSoundManager_Linux::SFXPlay(s32 index, f32 volume, bool loop)
 
             for (s32 i=0; i<AUDIO_MAX_ACTIVE; i++)
             {
-                if (soundEffects[i].state == SFX_STATE_FREE)
+                if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_FREE)
                 {
                     prLoadedWave *entry = &pLoadedWaves[index];
 
@@ -631,9 +631,9 @@ void prSoundManager_Linux::SFXStop(s32 index)
         {
             if (soundEffects[i].id == (u32)index)
             {
-                if (soundEffects[i].state == SFX_STATE_PLAYING)
+                if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PLAYING)
                 {
-                    soundEffects[i].state = SFX_STATE_FREE;
+                    soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_FREE;
                     soundEffects[i].id    = 0;
                     alSourceStop(soundEffects[i].uiSource);
                     AL_ERROR_CHECK()
@@ -667,9 +667,9 @@ void prSoundManager_Linux::SFXStop(const char *name)
         {
             if (soundEffects[i].hash == hash)
             {
-                if (soundEffects[i].state == SFX_STATE_PLAYING)
+                if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PLAYING)
                 {
-                    soundEffects[i].state = SFX_STATE_FREE;
+                    soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_FREE;
                     alSourceStop(soundEffects[i].uiSource);
                     AL_ERROR_CHECK()
                     break;
@@ -697,10 +697,10 @@ void prSoundManager_Linux::SFXStopAll()
     {
         for (int i=0; i<AUDIO_MAX_ACTIVE; i++)
         {
-            if (soundEffects[i].state == SFX_STATE_PLAYING ||
-                soundEffects[i].state == SFX_STATE_PAUSED)
+            if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PLAYING ||
+                soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PAUSED)
             {
-                soundEffects[i].state = SFX_STATE_FREE;
+                soundEffects[i].state = prSoundEffectEntryState::SFX_STATE_FREE;
                 alSourceStop(soundEffects[i].uiSource);
                 AL_ERROR_CHECK()
             }
@@ -726,7 +726,7 @@ bool prSoundManager_Linux::SFXIsPlaying(s32 index) const
     {
         for (s32 i=0; i<AUDIO_MAX_ACTIVE; i++)
         {
-            if (soundEffects[i].state == SFX_STATE_PLAYING)
+            if (soundEffects[i].state == prSoundEffectEntryState::SFX_STATE_PLAYING)
             {
                 if (soundEffects[i].id == (u32)index)
                 {

@@ -367,7 +367,7 @@ void prArgsShowHelp()
                                 "-prhelp         - Displays the help text\n"
                                 "-prnoarc        - Disables archives\n";
 
-    prTrace(LogError, "%s", pHelpMessage);
+    prTrace(prLogLelel::prLogError, "%s", pHelpMessage);
 
 #endif
 }
