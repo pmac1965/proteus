@@ -44,6 +44,15 @@
 //#define TRACE_TEST
 
 
+#if defined(DEBUG)
+#pragma message("Debug 1")
+#endif
+
+#if defined(_DEBUG)
+#pragma message("Debug 2")
+#endif
+
+
 /// ---------------------------------------------------------------------------
 /// Locals
 /// ---------------------------------------------------------------------------

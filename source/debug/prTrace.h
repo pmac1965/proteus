@@ -19,6 +19,9 @@
 #pragma once
 
 
+#include "../prConfig.h"
+
+
 #if defined(__cplusplus)
   extern "C" {
 #endif

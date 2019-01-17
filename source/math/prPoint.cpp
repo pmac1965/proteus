@@ -20,6 +20,7 @@
 
 
 #include "prPoint.h"
+#include "prTypes.h"
 
 
 // Namespaces
