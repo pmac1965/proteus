@@ -131,6 +131,13 @@ int prTraceIsEnabled();
         #define PRLOGI(msg, args...)    prTrace(prLogLevel::LogInformation, msg, ## args)
         #define PRLOGW(msg, args...)    prTrace(prLogLevel::LogWarning,     msg, ## args)
         #define PRLOGE(msg, args...)    prTrace(prLogLevel::LogError,       msg, ## args)
+
+    #elif defined(PLATFORM_LINUX)
+        #define PRLOGV(msg, args...)    prTrace(prLogLevel::LogVerbose,     msg, ## args)
+        #define PRLOGD(msg, args...)    prTrace(prLogLevel::LogDebug,       msg, ## args)
+        #define PRLOGI(msg, args...)    prTrace(prLogLevel::LogInformation, msg, ## args)
+        #define PRLOGW(msg, args...)    prTrace(prLogLevel::LogWarning,     msg, ## args)
+        #define PRLOGE(msg, args...)    prTrace(prLogLevel::LogError,       msg, ## args)
       
     #endif
 

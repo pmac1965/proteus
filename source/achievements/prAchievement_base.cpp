@@ -21,9 +21,6 @@
 #include "../debug/prTrace.h"
 
 
-//using namespace Proteus::Core;
-
-
 /// ---------------------------------------------------------------------------
 /// Updates the achievement system for a specific platform
 /// ---------------------------------------------------------------------------
@@ -68,7 +65,7 @@ void prAchievementBase::Update(f32 dt)
             break;
 
         default:
-            prTrace(prLogLevel::LogError, "Unknown achievement status message: %08x\n", mCurrStatus);
+            PRLOGE("Unknown achievement status message: %08x\n", mCurrStatus);
             break;
         }
     }

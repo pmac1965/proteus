@@ -21,9 +21,6 @@
 #include "../debug/prTrace.h"
 
 
-//using namespace Proteus::Core;
-
-
 /// ---------------------------------------------------------------------------
 /// Initialises the achievement system for a specific platform
 /// ---------------------------------------------------------------------------
