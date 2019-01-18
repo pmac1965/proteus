@@ -69,7 +69,7 @@ public:
         None,
         InitialisingStart,              // Achievements initialisation has started
         InitialisingSuccess,            // Achievements initialisation has succeeded
-        InitialisingFailed,             // Achievements initialisation has faileded
+        InitialisingFailed,             // Achievements initialisation has failed
         AwardingStart,                  // An award has started
         AwardingPending,                // An award is pending
         AwardingSuccess,                // An award has been given
@@ -128,16 +128,17 @@ public:
     //      Checks if the provider is ready to be used
     bool IsReady() const { return mReady; }
 
-    // Method: SetReady
-    //      Sets the ready state
-    void SetReady(bool state) { mReady = state; }
-
     // Method: GetProvider
     //      Gets the provider that is being used
     //
     // See Also:
     //      <prAchievementProvider>
     const prAchievementProvider GetProvider() const { return mAchievementProvider; }
+
+protected:
+    // Method: SetReady
+    //      Sets the ready state
+    void SetReady(bool state) { mReady = state; }
 
     // Method: SetStatus
     //      Sets the status of the provider

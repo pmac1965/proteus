@@ -44,6 +44,10 @@ public:
     //      Initialises the achievement system for a specific platform
     void Initialise() override;
 
+    // Method: StatusUpdate
+    //      Called when the status has changed.
+    void StatusUpdate(prAchievementProviderStatus status) override;
+
     // Method: Award
     //      Award an achievement.
     void Award(const char *name, s32 id);

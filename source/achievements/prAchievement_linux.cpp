@@ -26,9 +26,6 @@
 #include "prAchievement_linux.h"
 
 
-//using namespace Proteus::Core;
-
-
 /// ---------------------------------------------------------------------------
 /// Initialises the achievement system for a specific platform
 /// ---------------------------------------------------------------------------
@@ -36,7 +33,28 @@ void prAchievement_Linux::Initialise()
 {
     // Start engine initialisation process, which essentially mimics a more complex process with
     // network sign-in, to keep status messages similar.
-    //SetStatus(InitialisingStart);
+    SetStatus(InitialisingStart);
+}
+
+
+/// ---------------------------------------------------------------------------
+/// Called when the status has changed.
+/// ---------------------------------------------------------------------------
+void prAchievement_Linux::StatusUpdate(prAchievementProviderStatus status)
+{
+    switch(status)
+    {
+    // We've started, so set success
+    case InitialisingStart:
+        SetStatus(InitialisingSuccess);
+        break;
+
+    // Okay, succeeded
+    case InitialisingSuccess:
+        SetStatus(None);
+        SetReady(true);
+        break;
+    }
 }
 
 
