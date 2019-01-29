@@ -49,6 +49,12 @@ prActor::prActor(s32 type) : prGameObject()
     user1       = 0;
     user2       = 0;
     user3       = 0;
+    collision0  = 0;
+    collision1  = 0;
+    collision2  = 0;
+    collision3  = 0;
+    m_exp0      = false;
+    m_exp1      = false;
 }
 
 
