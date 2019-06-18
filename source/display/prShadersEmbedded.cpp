@@ -15,8 +15,8 @@
 #include "prOglUtils.h"
 
 
-#include "shaders/fragment_shader.glsl"
-#include "shaders/vertex_shader.glsl"
+//#include "shaders/fragment_shader.glsl"
+//#include "shaders/vertex_shader.glsl"
 
 
 const char* vertex_shader =

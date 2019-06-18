@@ -15,8 +15,7 @@
  */
 
 
-#ifndef __PROTEUS_H
-#define __PROTEUS_H
+#pragma once
 
 
 // The config file
@@ -156,10 +155,10 @@
 #include "input/prMouse.h"
 #include "input/prTouch.h"
 #include "input/prTouchListener.h"
-#include "ios/prBluetooth.h"
-#include "ios/prGameCenter.h"
-#include "ios/prIos.h"
-#include "ios/prIosAudio.h"
+//#include "ios/prBluetooth.h"
+//#include "ios/prGameCenter.h"
+//#include "ios/prIos.h"
+//#include "ios/prIosAudio.h"
 #include "linux/prLinux.h"
 #include "linux/prLinuxInput.h"
 #include "locale/prLanguage.h"
@@ -293,6 +292,3 @@
     #endif
 
 #endif//PLATFORM_PC
-
-
-#endif//__PROTEUS_H

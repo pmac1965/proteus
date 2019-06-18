@@ -1263,6 +1263,9 @@
     <ClInclude Include="..\..\..\..\source\scene\prSphere.h">
       <Filter>source\scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\source\mesh\prMaterial.h">
+      <Filter>source\mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\source\Box2D\Collision\Shapes\b2ChainShape.cpp">
