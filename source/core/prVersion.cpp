@@ -18,7 +18,7 @@
 
 
 #include "../prConfig.h"
-#include <stdio.h>
+#include <cstdio>
 #include "prVersion.h"
 #include "../debug/prDebug.h"
 
@@ -26,15 +26,15 @@
 namespace Proteus {
 namespace Core {
 
-    int versionMajor    = 3;
-    int versionMinor    = 0;
-    int versionRevision = 0;
+    s32 versionMajor    = 2020;     // Year
+    s32 versionMinor    = 1;        // Month
+    s32 versionRevision = 0;        // Version
 
 
-    /// ---------------------------------------------------------------------------
-    /// Acquire engine version number.
-    /// ---------------------------------------------------------------------------
-    void prGetVersion(int &major, int &minor, int &revision)
+    // ---------------------------------------------------------------------------
+    // Acquire engine version number.
+    // ---------------------------------------------------------------------------
+    void prGetVersion(s32 &major, s32 &minor, s32 &revision)
     {
         major    = versionMajor;
         minor    = versionMinor;
@@ -42,20 +42,22 @@ namespace Core {
     }
 
 
-    /// ---------------------------------------------------------------------------
-    /// Acquire engine version number as a string.
-    /// ---------------------------------------------------------------------------
-    const char *prGetVersionAsString()
+    // ---------------------------------------------------------------------------
+    // Acquire engine version number as a string.
+    // ---------------------------------------------------------------------------
+    void prGetVersionAsString(char *buffer, s32 bufferSize)
     {
-        static char buffer[64];
+        PRASSERT(buffer && *buffer, "Buffer cannot be null.");
+        PRASSERT(bufferSize > 15 && bufferSize < 256, "Invalid buffer size");
 
+        if (buffer && bufferSize > 15 && bufferSize < 256)
+        {
 #if defined(PLATFORM_PC)
-        sprintf_s(buffer, sizeof(buffer), "%i.%i.%i", versionMajor, versionMinor, versionRevision);
+            sprintf_s(buffer, bufferSize, "%i.%i.%i", versionMajor, versionMinor, versionRevision);
 #else
-        sprintf(buffer, "%i.%i.%i", versionMajor, versionMinor, versionRevision);
+            sprintf(buffer, "%i.%i.%i", versionMajor, versionMinor, versionRevision);
 #endif
-
-        return buffer;
+        }
     }
 
 }}

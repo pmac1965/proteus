@@ -1,4 +1,8 @@
 // File: prVersion.h
+//      Engine version number.
+//
+// Notes:
+//      July 2019 - Switched to year/month/revision model.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -19,6 +23,9 @@
 #pragma once
 
 
+#include "prTypes.h"
+
+
 namespace Proteus {
 namespace Core {
 
@@ -26,16 +33,17 @@ namespace Core {
     //      Acquire engine version number.
     //
     // Parameters:
-    //      major    - Variable to receive version number
-    //      minor    - Variable to receive version number
+    //      year     - Variable to receive version number
+    //      month    - Variable to receive version number
     //      revision - Variable to receive version number
-    void prGetVersion(int &major, int &minor, int &revision);
+    void prGetVersion(s32 &year, s32 &month, s32 &revision);
 
     // Function: prGetVersionAsString
     //      Acquire engine version number as a string.
     //
-    // Returns:
-    //      A string in the format of "major.minor.revision"
-    const char *prGetVersionAsString();
+    // Notes:
+    //      Buffer size should be between 16 and 255 bytes.
+    //      Buffer contains a string in the format of "year.month.revision"
+    void prGetVersionAsString(char* buffer, s32 bufferSize);
 
 }}
