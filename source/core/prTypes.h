@@ -1,3 +1,11 @@
+// File: prTypes.h
+//      Basic type definitions.
+//
+// Notes:
+//      Standard game related types as used by companies like Nintendo.
+//
+// Notes:
+//      July 2019 - Improved header info. Cleaned up the code.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -33,11 +41,6 @@
   #define PRNAMESPACE_END
 
 #endif
-
-
-//// Namespaces
-//PRNAMESPACE_BEG(Proteus)
-//PRNAMESPACE_BEG(Core)
 
 
 // Basic types - PC
@@ -136,7 +139,3 @@ PRCOMPILER_ASSERT(sizeof(s64) == 8);
 PRCOMPILER_ASSERT(sizeof(u64) == 8);
 PRCOMPILER_ASSERT(sizeof(f32) == 4);
 PRCOMPILER_ASSERT(sizeof(f64) == 8);
-
-
-//PRNAMESPACE_END
-//PRNAMESPACE_END // Namespaces
