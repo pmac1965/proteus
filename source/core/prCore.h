@@ -43,13 +43,13 @@ typedef enum
 //      The version of the renderer required
 //
 //  PRGLVER_11  - OpenGL Version 1.1
-//  PRGLVER_20  - OpenGL Version 2.0 (No longer supported)
-//  PRGLVER_30  - OpenGL Version 3.0 (No longer supported)
-//  PRGLVER_45  - OpenGL Version 4.5 (2014)
+//  PRGLVER_20  - OpenGL Version 2.0
+//  PRGLVER_30  - OpenGL Version 3.0 or above
 typedef enum
 {
     PRGLVER_11,
-	PRGLVER_45,
+    PRGLVER_20,
+    PRGLVER_30,
 
 } prVerType;
 

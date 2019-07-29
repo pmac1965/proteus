@@ -41,27 +41,19 @@ prActor::prActor(s32 type) : prGameObject()
                            , m_type     (type)
                            , m_layer    ("Default", 0)
                            , m_colPos   (prVector2::Zero)
-{
-    m_destroy   = false;
-    m_onScreen  = true;
-    m_id        = m_baseid++;           // Give each actor a unique ID
-    user0       = 0;
-    user1       = 0;
-    user2       = 0;
-    user3       = 0;
-    collision0  = 0;
-    collision1  = 0;
-    collision2  = 0;
-    collision3  = 0;
-    m_exp0      = false;
-    m_exp1      = false;
-}
-
-
-/// ---------------------------------------------------------------------------
-/// Dtor
-/// ---------------------------------------------------------------------------
-prActor::~prActor()
+                           , user0      (0)
+                           , user1      (0)
+                           , user2      (0)
+                           , user3      (0)
+                           , collision0 (0)
+                           , collision1 (0)
+                           , collision2 (0)
+                           , collision3 (0)
+                           , m_id       (m_baseid++)            // Give each actor a unique ID
+                           , m_destroy  (false)
+                           , m_onScreen (true)
+                           , m_exp0     (false)
+                           , m_exp1     (false)
 {
 }
 

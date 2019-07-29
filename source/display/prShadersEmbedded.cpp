@@ -20,18 +20,43 @@
 
 
 const char* vertex_shader =
-"# version 400\n"
+"#version 330 core\n"
+"layout(location = 0) in vec3 aPos;"
+"layout(location = 1) in vec3 aColor;"
+"layout(location = 2) in vec2 aTexCoord;"
+"out vec3 ourColor;"
+"out vec2 TexCoord;"
+"void main()"
+"{"
+" gl_Position = vec4(aPos, 1.0);"
+" ourColor = aColor;"
+" TexCoord = aTexCoord;"
+"}";
+
+
+/*"# version 400\n"
 "in vec3 vp;"
 "void main() {"
 " gl_Position = vec4(vp, 1.0);"
-"}";
+"}";//*/
 
 const char* fragment_shader = 
-"# version 400\n"
+"#version 330 core\n"
+"out vec4 FragColor;"
+"in vec3 ourColor;"
+"in vec2 TexCoord;"
+"uniform sampler2D ourTexture;"
+""
+"void main()"
+"{"
+"    FragColor = texture(ourTexture, TexCoord);"
+"}";
+
+/*"# version 400\n"
 "out vec4 frag_colour;"
 "void main() {"
 " frag_colour = vec4(0.5, 0.5, 0.5, 1.0);"
-"}";
+"}";//*/
 
 
 namespace

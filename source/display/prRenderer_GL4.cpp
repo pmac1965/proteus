@@ -81,15 +81,22 @@ using namespace Proteus::Math;
 //using namespace Proteus::Core;
 
 
-//static
-float points[] = {
-   0.0f,  0.5f,  0.0f,
-   0.5f, -0.5f,  0.0f,
-  -0.5f, -0.5f,  0.0f
-};
-
-//static 
-GLuint vao = 0;
+////static
+//float points2[] = { // temp - remove
+//   0.0f,  0.5f,  0.0f,
+//   0.5f, -0.5f,  0.0f,
+//  -0.5f, -0.5f,  0.0f
+//};
+//float vertices[] = {
+//    // positions          // colors           // texture coords
+//     0.5f,  0.5f, 0.0f,   1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // top right
+//     0.5f, -0.5f, 0.0f,   0.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
+//    -0.5f, -0.5f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f,   // bottom left
+//    -0.5f,  0.5f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f    // top left 
+//};
+//
+////static 
+//GLuint vao = 0;
 
 
 /// ---------------------------------------------------------------------------
@@ -122,7 +129,7 @@ public:
 
 		prOpenGLInit();
 
-		EmbeddedShadersInit();
+		//EmbeddedShadersInit();
     }
 
     // Show the display
@@ -159,7 +166,7 @@ prRenderer_GL4::~prRenderer_GL4()
 void prRenderer_GL4::Init()
 {
     imp.Initialise();
-	PRLOGD("prRenderer_GL4::Init(MAX)\n");
+	//PRLOGD("prRenderer_GL4::Init(MAX)\n");
 
 	/*float points[] = {
 	   0.0f,  0.5f,  0.0f,
@@ -167,10 +174,11 @@ void prRenderer_GL4::Init()
 	  -0.5f, -0.5f,  0.0f
 	};*/
 
-	GLuint vbo = 0;
+/*	GLuint vbo = 0;
 	glGenBuffers(1, &vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, 9 * sizeof(float), points, GL_STATIC_DRAW);
+	//(GL_ARRAY_BUFFER, 9 * sizeof(float), points2, GL_STATIC_DRAW);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 //	GLuint vao = 0;
 	glGenVertexArrays(1, &vao);
@@ -179,8 +187,8 @@ void prRenderer_GL4::Init()
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
-	glBindVertexArray(vao);
-	PRLOGD("VAO: %i\n", vao);
+	glBindVertexArray(vao);//*/
+	//PRLOGD("VAO: %i\n", vao);
 }
 
 
@@ -204,7 +212,7 @@ void prRenderer_GL4::Begin()
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 	ERR_CHECK();
 
-	EmbeddedShadersUsePrg();
+/*	EmbeddedShadersUsePrg();
 	ERR_CHECK();
 
 	//PRLOGD("prRenderer_GL4::Begin()");
@@ -212,7 +220,7 @@ void prRenderer_GL4::Begin()
 	ERR_CHECK();
 
 	glDrawArrays(GL_TRIANGLES, 0, 3);
-	ERR_CHECK();
+	ERR_CHECK();//*/
 }
 
 

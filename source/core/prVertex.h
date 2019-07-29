@@ -1,4 +1,5 @@
 // File: prVertex.h
+//      Basic vertex definitions.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -20,6 +21,10 @@
 
 
 #include "prTypes.h"
+#include "../debug/prDebug.h" // For TODO
+
+
+TODO("Move to math?? Its not math though!")
 
 
 // Typedef: prVertex2D
@@ -34,7 +39,7 @@ typedef struct prVertex2D
 
 // Typedef: prVertex3D
 //      3 dimensional vertex type
-typedef struct prVertex3D
+typedef struct prVertex3D // https://gist.github.com/rishav007/accaf10c7aa06135d34ddf3919ebdb3b
 {
     f32 x;
     f32 y;

@@ -31,6 +31,7 @@ REM ---------------------------------------------------------------------------
 
     echo Copying the source to include directory.
     xcopy .\..\..\..\..\source\*.h   %PROTEUS_ENGINE_DIR%\include\proteus /E /Q
+    xcopy .\..\..\..\..\source\*.hpp %PROTEUS_ENGINE_DIR%\include\proteus /E /Q
     xcopy .\..\..\..\..\source\*.inl %PROTEUS_ENGINE_DIR%\include\proteus /E /Q
     copy  .\..\..\..\..\source\includes.bat %PROTEUS_ENGINE_DIR%\include\proteus\includes.bat
 

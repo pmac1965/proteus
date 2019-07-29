@@ -1,4 +1,8 @@
 // File: prWaypoint.h
+//      A Basic waypoint
+//
+// Notes:
+//      July 2019 - Added prev/next step through components.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -22,43 +26,82 @@
 #include "prTypes.h"
 
 
-// Class: prWaypoint
-//      A basic way point
-class prWaypoint
-{
-public:
-    // Method: prWaypoint
-    //      Constructor.
-    prWaypoint() : x(0), y(0), index(0)
-    {
-    }
-    
-    // Method: prWaypoint
-    //      Constructor.
-    //
-    // Parameters:
-    //      _x     - X coordinate
-    //      _y     - Y coordinate
-    //      _index - Waypoints index
-    prWaypoint(s32 _x, s32 _y, s32 _index)  : x(_x), y(_y), index(_index)
-    {
-    }
+namespace Proteus {
+namespace Core {
 
-    // Method: prWaypoint
-    //      Copy constructor.
-    //
-    // Parameters:
-    //      a - Waypoint to copy
-    prWaypoint(const prWaypoint &a)
+    // Class: prWaypoint
+    //      A basic way point
+    class prWaypoint
     {
-        x     = a.x;
-        y     = a.y;
-        index = a.index;
-    }
+    public:
+        // Method: prWaypoint
+        //      Constructor.
+        prWaypoint() : x(0), y(0), z(0), index(0), m_Prev(nullptr), m_Next(nullptr)
+        {}
+
+        // Method: prWaypoint
+        //      Constructor.
+        //
+        // Parameters:
+        //      _x     - X coordinate
+        //      _y     - Y coordinate
+        //      _z     - Z coordinate
+        //      _index - Waypoints index
+        prWaypoint(s32 _x, s32 _y, s32 _z, s32 _index) : x(_x), y(_y), z(_z), index(_index), m_Prev(nullptr), m_Next(nullptr)
+        {}
+
+        // Method: prWaypoint
+        //      Copy constructor.
+        //
+        // Parameters:
+        //      a - Waypoint to copy
+        prWaypoint(const prWaypoint& a)
+        {
+            x       = a.x;
+            y       = a.y;
+            z       = a.z;
+            index   = a.index;
+            m_Prev  = a.m_Prev;
+            m_Next  = a.m_Next;
+        }
+
+        // Method: SetPrev
+        //      Sets the previous waypoint in the loop.
+        //
+        // Parameters:
+        //      pPrev - The waypoint.
+        inline void SetPrev(prWaypoint* pPrev) { PRASSERT(pPrev); m_Prev = pPrev; }
+
+        // Method: SetNext
+        //      Sets the next waypoint in the loop.
+        //
+        // Parameters:
+        //      pNext - The waypoint.
+        inline void SetNext(prWaypoint* pNext) { PRASSERT(pNext); m_Next = pNext; }
+
+        // Method: GetPrev
+        //      Gets the previous waypoint in the loop.
+        //
+        // Returns:
+        //      A waypoint pointer, or null.
+        prWaypoint* GetPrev() const { return m_Prev; }
+
+        // Method: GetNext
+        //      Gets the next waypoint in the loop.
+        //
+        // Returns:
+        //      A waypoint pointer, or null.
+        prWaypoint* GetNext() const { return m_Next; }
 
 
-public:    
-    s32 x;              // public for fast access
-    s32 y;
-    s32 index;
-};
+    private:
+        prWaypoint* m_Prev;
+        prWaypoint* m_Next;
+
+    public:
+        s32 x;                          // public for fast access
+        s32 y;
+        s32 z;
+        s32 index;
+    };
+}}

@@ -1,4 +1,10 @@
 // File: prString.h
+//      Fixed size string class. This class is designed not to
+//      allocate memory during usage. Use where you know string size
+//      will be limited.
+//
+// Changes:
+//      July 2019 - STRING_BUFFER_SIZE define to constant.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -23,14 +29,12 @@
 #include "prStringShared.h"
 
 
-// Defines
-#define STRING_BUFFER_SIZE  256
+// Constants
+const s32 STRING_BUFFER_SIZE = 256;
 
 
 // Class: prString
-//      Fixed size string class. This class is designed not to
-//      allocate memory during usage. Use where you know string size
-//      will be limited.
+//      Fixed size string class.
 class prString
 {
 public:

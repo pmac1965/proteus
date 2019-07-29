@@ -36,7 +36,7 @@ namespace Actor {
 
 
 // Forward declarations
-class prActorComponent;
+//class prActorComponent;
 
 
 // Class: prActor
@@ -72,7 +72,7 @@ public:
 
     // Method: ~prActor
     //      Dtor
-    virtual ~prActor();
+    virtual ~prActor() {}
 
     // Method: Init
     //      Optional actor construction
@@ -198,9 +198,9 @@ public:
 protected:
     prString                    m_name;
     Proteus::Core::prLayer      m_layer;
+    Proteus::Math::prVector2    m_colPos;
     s32                         m_type;
     s32                         m_id;
-    Proteus::Math::prVector2    m_colPos;    
     bool                        m_destroy;
     bool                        m_onScreen;
     bool                        m_exp0;

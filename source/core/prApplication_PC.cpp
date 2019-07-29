@@ -104,8 +104,11 @@ prApplication_PC::prApplication_PC() : prApplication()
     // Write startup info.
     if (reg)
     {
+        char buffer[32];
+        prGetVersionAsString(buffer, sizeof(buffer));
+
         prTrace(prLogLevel::LogInformation, "-------------------------------------------------------------------------------\n");
-        prTrace(prLogLevel::LogInformation, "Engine version : %s\n", prGetVersionAsString());
+        prTrace(prLogLevel::LogInformation, "Engine version : %s\n", buffer);
         prTrace(prLogLevel::LogVerbose, "-------------------------------------------------------------------------------\n");
         prTrace(prLogLevel::LogVerbose, "Components:\n");
         prTrace(prLogLevel::LogVerbose, "Lua              : %s.\n", LUA_COPYRIGHT);

@@ -31,7 +31,8 @@
 #include "../achievements/prLeaderboards.h"
 #include "../file/prFileManager.h"
 #include "../display/prRenderer_GL11.h"
-#include "../display/prRenderer_GL4.h"
+#include "../display/prRenderer_GL4.h" /*To be removed*/
+#include "../display/prRenderer_GL3.h"
 #include "../display/prBackgroundManager.h"
 #include "../display/prSpriteManager.h"
 #include "../display/prFadeManager.h"
@@ -139,6 +140,7 @@ namespace
     /// -----------------------------------------------------------------------
     void CoreShowSystemExists(s32 id)
     {
+        TODO("Add bounds check")
         prTrace(prLogLevel::LogError, "Engine system '%s' already exists\n", pSystems[id]->Name());
     }
 }
@@ -200,20 +202,28 @@ PRBOOL prCoreSetRenderer(prRendererType rendererType, prVerType version)
 
         // Platform specific initialisation
         #if defined(PLATFORM_PC)
-            // Check renderer type value.
-            PRASSERT(rendererType == PRRENDERER_OPENGL);
-            if (rendererType == PRRENDERER_OPENGL)
+        // Check renderer type value.
+        PRASSERT(rendererType == PRRENDERER_OPENGL);
+        if (rendererType == PRRENDERER_OPENGL)
             {
                 // Check version numbers
-                PRASSERT(version == PRGLVER_11 || version == PRGLVER_45)// || version == PRGLVER_30);
+                PRASSERT(version == PRGLVER_11 || version == PRGLVER_20 || version == PRGLVER_30);
                 switch (version)
                 {
+                // Old OpenGL
                 case PRGLVER_11:
                     pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL11();
                     break;
 
-                case PRGLVER_45:
-                    pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL4();
+                // OpenGL for mobiles
+                case PRGLVER_20:
+                    TODO("Added the opengl 2 renderer for phones");
+                    PRPANIC("Invalid renderer - incomplete");
+                    break;
+
+                // Base for PC/Mac/Linux
+                case PRGLVER_30:
+                    pSystems[PRSYSTEM_RENDERER] = new prRenderer_GL3();
                     break;
 
                 default:

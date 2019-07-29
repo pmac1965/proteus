@@ -31,7 +31,7 @@ namespace Core {
 }}
 
 
-#if !defined(PROTEUS_EDITOR)
+#if defined(PROTEUS_EDITOR)
     // Optional inclusion on game objects
     #define PROT_EDITOR_INCL : prEditorObject
 

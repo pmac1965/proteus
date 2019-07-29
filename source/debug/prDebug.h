@@ -1,4 +1,8 @@
 // File: prDebug.h
+//      Debug assistance functions.
+//
+// Changes:
+//      July 2019 - Fixed AT() error.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -109,7 +113,7 @@ void prOutputString(prLogLevel level, const char *text);
 
 // Used to log line numbers. Just a lazy shortcut... I know :-)
 #if (defined(DEBUG) || defined(_DEBUG)) && defined(PROTEUS_ALLOW_AT)
-    #define AT()    prTrace(LogError, "In func '%s' at line %i\n", __FUNCTION__, __LINE__)
+    #define AT()    prTrace(prLogLevel::LogError, "In func '%s' at line %i\n", __FUNCTION__, __LINE__)
 #else
     #define AT()
 #endif

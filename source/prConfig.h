@@ -143,7 +143,7 @@
 #endif
 
 #ifndef PROTEUS_ALLOW_AT                                // Allows the AT define to exist
-//#define PROTEUS_ALLOW_AT
+#define PROTEUS_ALLOW_AT
 #endif
 
 #ifndef PROTEUS_IAP_TEST                                // Allows the in app purchase test code
@@ -177,7 +177,7 @@
 
 // OpenGL debug settings
 //#define OPENGL_SHOW_EXTENSIONS
-//#define OPENGL_CHECK_CALLS
+#define OPENGL_CHECK_CALLS
 
 
 // Optimizations
