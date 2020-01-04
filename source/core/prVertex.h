@@ -21,10 +21,8 @@
 
 
 #include "prTypes.h"
-#include "../debug/prDebug.h" // For TODO
-
-
-TODO("Move to math?? Its not math though!")
+//#include "../debug/prDebug.h" // For TODO
+//TODO("Move to math?? Its not math though!")
 
 
 // Typedef: prVertex2D
@@ -46,3 +44,17 @@ typedef struct prVertex3D // https://gist.github.com/rishav007/accaf10c7aa06135d
     f32 z;
 
 } prVertex3D;
+
+
+struct RGBA // As part of date sent to graphics card
+{
+    f32 r;
+    f32 g;
+    f32 b;
+    f32 a;
+};
+
+//struct UV
+//{
+//
+//};
