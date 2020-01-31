@@ -575,7 +575,7 @@ void /*prRenderer_GL3::*/TestCode(const u8 *data)
 
 void /*prRenderer_GL3::*/DrawTestCode(prShader& ourShader)
 {
-    static float time = 0.0f;
+/*    static float time = 0.0f;
     
     time += 0.016f;
 
@@ -594,5 +594,5 @@ void /*prRenderer_GL3::*/DrawTestCode(prShader& ourShader)
     glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 
     glBindVertexArray(VAO);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);//*/
 }
