@@ -24,6 +24,7 @@
 #include "../core/prMacros.h"
 #include "../core/prMessageManager.h"
 #include "../debug/prTrace.h"
+#include "../debug/prAssert.h"
 #include "../display/prBitmapFont.h"
 #include "../display/prTrueTypeFont.h"
 #include "../display/prRenderer.h"

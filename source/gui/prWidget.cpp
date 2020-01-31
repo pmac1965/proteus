@@ -21,6 +21,7 @@
 #include "../core/prStringUtil.h"
 #include "../core/prMacros.h"
 #include "../debug/prDebug.h"
+#include "../debug/prAssert.h"
 
 
 //using namespace Proteus::Core;

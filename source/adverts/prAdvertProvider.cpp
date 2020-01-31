@@ -19,6 +19,7 @@
 
 #include "prAdvertProvider.h"
 #include "../debug/prDebug.h"
+#include "../debug/prAssert.h"
 
 
 //using namespace Proteus::Core;

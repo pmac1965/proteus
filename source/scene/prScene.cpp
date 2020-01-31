@@ -20,6 +20,7 @@
 #include "prScene.h"
 #include "../core/prStringUtil.h"
 #include "../tinyxml/tinyxml.h"
+#include "../debug/prAssert.h"
 
 
 namespace Scene

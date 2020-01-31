@@ -20,6 +20,7 @@
 #include "prLua.h"
 #include "prLuaDebug.h"
 #include "../debug/prTrace.h"
+#include "../debug/prAssert.h"
 #include "../lua/lua.hpp"
 #include "../thread/prThread.h"
 

@@ -21,6 +21,7 @@
 #include "prEmitter.h"
 #include "prParticleShared.h"
 #include "../debug/prTrace.h"
+#include "../debug/prAssert.h"
 #include "../core/prStringUtil.h"
 #include "../core/prMacros.h"
 #include "../tinyxml/tinyxml.h"

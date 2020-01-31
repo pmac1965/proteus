@@ -24,6 +24,7 @@
 #include "../core/prMacros.h"
 #include"../core/prString.h"
 #include "../debug/prTrace.h"
+#include "../debug/prAssert.h"
 #include "../math/prRandom.h"
 
 

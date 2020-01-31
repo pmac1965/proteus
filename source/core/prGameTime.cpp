@@ -27,6 +27,7 @@
 #include "prGameTime.h"
 #include "../debug/prTrace.h"
 #include "../debug/prDebug.h"
+#include "../debug/prAssert.h"
 
 
 //using namespace Proteus::Core;

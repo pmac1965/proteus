@@ -18,6 +18,7 @@
 
 #include "prMessageManager.h"
 #include "prCore.h"
+#include "../debug/prAssert.h"
 
 
 /// ---------------------------------------------------------------------------

@@ -21,6 +21,7 @@
 #include "../prConfig.h"
 #include "../debug/prAlert.h"
 #include "../debug/prTrace.h"
+#include "../debug/prAssert.h"
 
 
 //using namespace Proteus::Core;

@@ -27,6 +27,7 @@
 #include "prTouchListener.h"
 #include "../core/prMacros.h"
 #include "../core/prCore.h"
+#include "../debug/prAssert.h"
 #include "../debug/prTrace.h"
 #include "../debug/prDebug.h"
 

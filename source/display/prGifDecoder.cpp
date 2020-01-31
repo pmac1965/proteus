@@ -25,6 +25,7 @@
 #include "../core/prMacros.h"
 #include "../core/prResourceManager.h"
 #include "../debug/prTrace.h"
+#include "../debug/prAssert.h"
 #include "../display/prSprite.h"
 #include "../display/prTexture.h"
 #include "../display/prSpriteManager.h"

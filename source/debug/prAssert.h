@@ -210,10 +210,3 @@ enum
     #define PRWARN(...)    
 
 #endif//_DEBUG
-
-
-// Macro: PRCOMPILER_ASSERT
-//      Used to check values at compile time.
-#ifndef PRCOMPILER_ASSERT
-#define PRCOMPILER_ASSERT(check) typedef int COMPILER_ASSERT__[(check) ? 1 : -1]
-#endif

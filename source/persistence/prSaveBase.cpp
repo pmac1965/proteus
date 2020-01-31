@@ -19,6 +19,7 @@
 
 #include "prSaveBase.h"
 #include "../core/prDefines.h"
+#include "../debug/prAssert.h"
 
 
 //using namespace Proteus::Core;

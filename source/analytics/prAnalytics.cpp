@@ -20,6 +20,7 @@
 #include "prAnalytics.h"
 #include "prAnalyticsBase.h"
 #include "../core/prMacros.h"
+#include "../debug/prAssert.h"
 
 
 /// ---------------------------------------------------------------------------

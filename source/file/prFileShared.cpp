@@ -18,6 +18,7 @@
 
 
 #include "prFileShared.h"
+#include "../debug/prAssert.h"
 
 
 //using namespace Proteus::Core;

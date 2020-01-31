@@ -21,6 +21,7 @@
 #include "prStackHeap.h"
 #include "../core/prMacros.h"
 #include "../debug/prTrace.h"
+#include "../debug/prAssert.h"
 #include "prMemory.h"
 
 

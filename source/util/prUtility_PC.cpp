@@ -25,6 +25,7 @@
 
 #include "prUtility_PC.h"
 #include "../debug/prDebug.h"
+#include "../debug/prAssert.h"
 
 
 /// ---------------------------------------------------------------------------

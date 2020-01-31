@@ -21,6 +21,7 @@
 #include "prStringUtil.h"
 #include "../debug/prTrace.h"
 #include "../debug/prDebug.h"
+#include "../debug/prAssert.h"
 #include "../file/prFileSystem.h"
 
 

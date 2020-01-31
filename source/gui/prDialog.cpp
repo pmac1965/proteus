@@ -22,6 +22,7 @@
 #include "prDialogListener.h"
 #include "../debug/prDebug.h"
 #include "../debug/prTrace.h"
+#include "../debug/prAssert.h"
 #include "../display/prSprite.h"
 #include "../display/prBitmapFont.h"
 #include "../display/prTrueTypeFont.h"

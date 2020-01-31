@@ -29,6 +29,7 @@
 #include "prGLFont.h"
 #include "prOglUtils.h"
 #include "../debug/prDebug.h"
+#include "../debug/prAssert.h"
 #include "../core/prCore.h"
 #include "../core/prRegistry.h"
 

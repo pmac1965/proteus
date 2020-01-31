@@ -20,6 +20,7 @@
 #include "prRenderer.h"
 #include "../core/prCore.h"
 #include "../core/prDefines.h"
+#include "../debug/prAssert.h"
 
 
 /// ---------------------------------------------------------------------------

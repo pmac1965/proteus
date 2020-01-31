@@ -25,6 +25,7 @@
 #include "prMenu.h"
 #include "prPane.h"
 #include "../debug/prTrace.h"
+#include "../debug/prAssert.h"
 #include "../core/prStringUtil.h"
 #include "../core/prMacros.h"
 #include "../core/prCore.h"

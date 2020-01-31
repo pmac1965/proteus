@@ -18,6 +18,7 @@
 
 
 #include "prGameObject.h"
+#include "../debug/prAssert.h"
 
 
 using namespace Proteus::Actor;

@@ -28,6 +28,7 @@
 #include "prConsoleWindow.h"
 #include "prTrace.h"
 #include "prDebug.h"
+#include "../debug/prAssert.h"
 
 
 // ----------------------------------------------------------------------------

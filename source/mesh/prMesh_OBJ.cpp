@@ -27,6 +27,7 @@
 #include "prMesh_OBJ.h"
 #include "../file/prFile.h"
 #include "../debug/prTrace.h"
+#include "../debug/prAssert.h"
 #include "../core/prStringUtil.h"
 #include "../core/prMacros.h"
 #include <windows.h>

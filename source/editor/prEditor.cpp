@@ -32,6 +32,7 @@
 #include "../display/prBitmapFont.h"
 #include "../font/prFontBase.h"
 #include "../input/prKeys.h"
+#include "../debug/prAssert.h"
 
 
 //using namespace Proteus::Core;

@@ -21,6 +21,7 @@
 #include <cstdio>
 #include "prVersion.h"
 #include "../debug/prDebug.h"
+#include "../debug/prAssert.h"
 
 
 namespace Proteus {

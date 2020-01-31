@@ -20,6 +20,7 @@
 #include "prAnimation_MD2.h"
 #include "../core/prStringUtil.h"
 #include "../debug/prTrace.h"
+#include "../debug/prAssert.h"
 
 
 #if defined(_DEBUG) || defined(DEBUG)

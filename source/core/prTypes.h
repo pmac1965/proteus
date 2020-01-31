@@ -6,6 +6,7 @@
 //
 // Notes:
 //      July 2019 - Improved header info. Cleaned up the code.
+//      Jan  2020 - Moved compiler assert.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -27,7 +28,7 @@
 
 
 #include "../prConfig.h"
-#include "../debug/prAssert.h"
+//#include "../debug/prAssert.h"
 
 
 // Namespaces for C++ code
@@ -126,6 +127,13 @@ typedef struct QuadData
 	f32 u, v;
 
 }  QuadData;
+
+
+// Macro: PRCOMPILER_ASSERT
+//      Used to check values at compile time.
+#ifndef PRCOMPILER_ASSERT
+#define PRCOMPILER_ASSERT(check) typedef int COMPILER_ASSERT__[(check) ? 1 : -1]
+#endif
 
 
 // Sanity checks

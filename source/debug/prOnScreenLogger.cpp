@@ -27,6 +27,7 @@
 #include "../core/prStringUtil.h"
 #include "../display/prTexture.h"
 #include "../debug/prDebug.h"
+#include "../debug/prAssert.h"
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>

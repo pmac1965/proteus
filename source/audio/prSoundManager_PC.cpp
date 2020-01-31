@@ -21,6 +21,7 @@
 
 
 #include "../prConfig.h"
+#include "../debug/prAssert.h"
 
 
 #if defined(PLATFORM_PC)
