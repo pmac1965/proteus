@@ -12,6 +12,9 @@
  *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
+ *
+ * Notes:
+ *      Mar 2020 - Removed unused DirectX includes.
  */
 
 
@@ -236,13 +239,6 @@
     #pragma comment(lib, "opengl32.lib")
     #pragma comment(lib, "glu32.lib")
 
-    // DirectX
-    #if defined(ALLOW_DIRECTX)
-      #pragma comment(lib, "dxguid.lib")
-      #pragma comment(lib, "dinput8.lib")
-      #pragma comment(lib, "dxerr.lib")
-    #endif
-
     // Freetype
     #if defined(ALLOW_FREETYPE)
         #if (defined(_DEBUG) || defined(DEBUG))
@@ -284,9 +280,9 @@
 
     // GLEW
     #if defined(ALLOW_GLEW)
-		// The GLEW library has changed,  library/dll combo or static library now.
-		#if defined(STATIC_GLEW)
-			#pragma comment(lib, "glew32s.lib")
+        // The GLEW library has changed,  library/dll combo or static library now.
+        #if defined(STATIC_GLEW)
+            #pragma comment(lib, "glew32s.lib")
         #else
             #pragma comment(lib, "glew32.lib")
         #endif

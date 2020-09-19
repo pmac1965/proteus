@@ -505,13 +505,14 @@ const char *prApplication_PC::BuildIsDebug()
 /// ---------------------------------------------------------------------------
 BOOL prApplication_PC::CheckPlatform()
 {
-    bool isOSInvalid = true;            // Set both to fail
-    bool initFailed  = true;
-    s32  verMajor     = 0;              // Version major/minor. Won't match windows, but that's not important
-    s32  verMinor     = 0;              // as data usage is internal
+    bool isOSInvalid    = true;            // Set both to fail
+    bool initFailed     = true;
+    s32  verMajor       = 0;              // Version major/minor. Won't match windows, but that's not important
+    s32  verMinor       = 0;              // as data usage is internal
 
 
     // Lets get the OS we're running on. Vista is used as a base version
+    // https://docs.microsoft.com/en-us/windows/win32/sysinfo/targeting-your-application-at-windows-8-1
     if (!IsWindowsVistaOrGreater())
     {
         PRLOGE("Failed to acquire windows version\n");

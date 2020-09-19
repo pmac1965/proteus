@@ -28,7 +28,6 @@
 
 
 #include "../prConfig.h"
-//#include "../debug/prAssert.h"
 
 
 // Namespaces for C++ code

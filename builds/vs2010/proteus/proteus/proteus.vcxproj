@@ -958,7 +958,6 @@
     <ClInclude Include="..\..\..\..\source\scene\prCube.h" />
     <ClInclude Include="..\..\..\..\source\scene\prCylinder.h" />
     <ClInclude Include="..\..\..\..\source\scene\prScene.h" />
-    <ClInclude Include="..\..\..\..\source\scene\prSceneNode.h" />
     <ClInclude Include="..\..\..\..\source\scene\prSphere.h" />
     <ClInclude Include="..\..\..\..\source\script\prLua.h" />
     <ClInclude Include="..\..\..\..\source\script\prLuaDebug.h" />
@@ -2037,7 +2036,6 @@
     <ClCompile Include="..\..\..\..\source\scene\prCube.cpp" />
     <ClCompile Include="..\..\..\..\source\scene\prCylinder.cpp" />
     <ClCompile Include="..\..\..\..\source\scene\prScene.cpp" />
-    <ClCompile Include="..\..\..\..\source\scene\prSceneNode.cpp" />
     <ClCompile Include="..\..\..\..\source\scene\prSphere.cpp" />
     <ClCompile Include="..\..\..\..\source\script\prLua.cpp" />
     <ClCompile Include="..\..\..\..\source\script\prLuaDebug.cpp" />

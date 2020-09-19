@@ -46,7 +46,7 @@ typedef struct prVertex3D // https://gist.github.com/rishav007/accaf10c7aa06135d
 } prVertex3D;
 
 
-struct RGBA // As part of date sent to graphics card
+struct RGBA // As part of data sent to the graphics card
 {
     f32 r;
     f32 g;

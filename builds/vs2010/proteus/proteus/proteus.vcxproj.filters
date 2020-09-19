@@ -1140,9 +1140,6 @@
     <ClInclude Include="..\..\..\..\source\scene\prScene.h">
       <Filter>source\scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\source\scene\prSceneNode.h">
-      <Filter>source\scene</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\..\source\input\prJoystick.h">
       <Filter>source\input</Filter>
     </ClInclude>
@@ -2697,9 +2694,6 @@
       <Filter>source\math</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\source\scene\prScene.cpp">
-      <Filter>source\scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\source\scene\prSceneNode.cpp">
       <Filter>source\scene</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\source\input\prJoystick.cpp">

@@ -41,7 +41,7 @@ public:
 
     // Method: ~prWindow
     //      Dtor    
-    virtual ~prWindow();
+    virtual ~prWindow() {}
 
     // Method: Create
     //      Creates the application window.
