@@ -16,3 +16,4 @@
 *.cache
 *.db
 
+*.db-shm
