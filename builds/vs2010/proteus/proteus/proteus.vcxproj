@@ -1960,7 +1960,6 @@
     <ClCompile Include="..\..\..\..\source\lua\lapi.c" />
     <ClCompile Include="..\..\..\..\source\lua\lauxlib.c" />
     <ClCompile Include="..\..\..\..\source\lua\lbaselib.c" />
-    <ClCompile Include="..\..\..\..\source\lua\lbitlib.c" />
     <ClCompile Include="..\..\..\..\source\lua\lcode.c" />
     <ClCompile Include="..\..\..\..\source\lua\lcorolib.c" />
     <ClCompile Include="..\..\..\..\source\lua\lctype.c" />

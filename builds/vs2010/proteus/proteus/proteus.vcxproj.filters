@@ -1910,9 +1910,6 @@
     <ClCompile Include="..\..\..\..\source\lua\lbaselib.c">
       <Filter>source\lua</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\source\lua\lbitlib.c">
-      <Filter>source\lua</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\source\lua\lcode.c">
       <Filter>source\lua</Filter>
     </ClCompile>

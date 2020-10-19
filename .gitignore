@@ -17,3 +17,9 @@
 *.db
 
 *.db-shm
+*.recipe
+*.db-shm
+builds/vs2010/proteus/proteus/Tool debug/proteus.vcxproj.FileListAbsolute.txt
+builds/vs2010/proteus/proteus/Tool release/proteus.vcxproj.FileListAbsolute.txt
+builds/vs2010/proteus/proteus/x64/Tool debug/proteus.vcxproj.FileListAbsolute.txt
+builds/vs2010/proteus/proteus/x64/Tool release/proteus.vcxproj.FileListAbsolute.txt
