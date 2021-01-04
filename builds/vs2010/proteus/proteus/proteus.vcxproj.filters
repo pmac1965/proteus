@@ -211,6 +211,9 @@
     <Filter Include="source\glm\simd">
       <UniqueIdentifier>{7c273216-ad6c-4f0a-9da8-54070f96c019}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\imgui">
+      <UniqueIdentifier>{fb953c37-686c-4032-ad6c-a76090bc1c42}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\source\proteus.h">
@@ -1716,6 +1719,30 @@
     <ClInclude Include="..\..\..\..\source\glm\vector_relational.hpp">
       <Filter>source\glm</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\source\imgui\imconfig.h">
+      <Filter>source\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\imgui\imgui.h">
+      <Filter>source\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\imgui\imgui_internal.h">
+      <Filter>source\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\imgui\imstb_rectpack.h">
+      <Filter>source\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\imgui\imstb_textedit.h">
+      <Filter>source\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\imgui\imstb_truetype.h">
+      <Filter>source\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\imgui\imgui_impl_opengl3.h">
+      <Filter>source\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\source\imgui\imgui_impl_win32.h">
+      <Filter>source\imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\source\Box2D\Collision\Shapes\b2ChainShape.cpp">
@@ -2812,6 +2839,24 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\source\glm\detail\glm.cpp">
       <Filter>source\glm\detail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\imgui\imgui.cpp">
+      <Filter>source\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\imgui\imgui_demo.cpp">
+      <Filter>source\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\imgui\imgui_draw.cpp">
+      <Filter>source\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\imgui\imgui_widgets.cpp">
+      <Filter>source\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\imgui\imgui_impl_opengl3.cpp">
+      <Filter>source\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\source\imgui\imgui_impl_win32.cpp">
+      <Filter>source\imgui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

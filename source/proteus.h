@@ -15,6 +15,7 @@
  *
  * Notes:
  *      Mar 2020 - Removed unused DirectX includes.
+ *      Oct 2020 - Added imgui library. It will eventually be replacing current GUI code.
  */
 
 
@@ -30,6 +31,8 @@
 #include "tinyxml/tinyxml.h"
 #include "tool/AntTweakBar.h"
 #include "zlib/zlib.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_win32.h"
 
 
 // Engine includes

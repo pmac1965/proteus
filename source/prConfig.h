@@ -89,6 +89,7 @@
 //#define PROTEUS_IAP_TEST                                // Allows the in app purchase test code
 //#define ALLOW_STEAM                                     // Allows the steam code
 #define ALLOW_FREETYPE                                  // For builds that need freetype
+#define ALLOW_IMGUI                                     // For imgui UI
 #define REMOVE_EXCEPTIONS                               // Allows try/catch code to be removed.
 #define ALLOW_GLEW                                      // Allows glew to be used
 //#define STATIC_GLEW                                     // for glew static library

@@ -13,6 +13,8 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
+ *      Oct 2020 - Added imgui
  */
 
 
@@ -39,6 +41,12 @@
 #include <gl/glu.h>
 #include "prTypes.h"
 #include "prWindow.h"
+
+
+// Forward declarations
+#ifdef ALLOW_IMGUI
+    struct ImGuiContext;
+#endif
 
 
 // Class: prWindow_PC
@@ -120,7 +128,6 @@ public:
 
 
 private:
-
     void CenterWindow(HWND hwnd);
     bool ChangeToFullScreen();
     bool CreateOpenGLWindow(u32 menuID, u32 iconID);
@@ -129,11 +136,14 @@ private:
 
 
 private:
-
     HGLRC           m_glrc;         // Handle to the OpenGL rendering context.
     HWND            m_hwnd;         // Handle to the window.
     HDC             m_hdc;          // Handle to a device context.
     const TCHAR    *m_title;        // Text displayed in the title bar.
+
+#ifdef ALLOW_IMGUI
+    ImGuiContext*   m_guiContext;   //
+#endif
 };
 
 

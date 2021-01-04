@@ -40,6 +40,10 @@
 #include "../core/prStringUtil.h"
 #include "../util/prUtility_PC.h"
 
+#ifdef ALLOW_IMGUI
+#include "../imgui/imgui_impl_win32.h"
+#endif
+
 
 using namespace Proteus::Core;
 
@@ -92,6 +96,10 @@ prWindow_PC::prWindow_PC() : prWindow()
    // m_glrc        = NULL; // Only this line triggered cppcheck?
     m_hdc         = NULL;
     m_title       = NULL;
+
+#ifdef ALLOW_IMGUI
+    m_guiContext = nullptr;
+#endif
 }
 
 
@@ -224,9 +232,9 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
     #pragma message("x64 build")
 
     #if defined(SOUND_ALLOW)
-    #pragma message("Sound enabled")
+        #pragma message("Sound enabled")
     #else
-    #pragma message("Sound disabled")
+        #pragma message("Sound disabled")
     #endif
     #pragma message("======================================")
 
@@ -238,17 +246,21 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
     #pragma message("Win32 build")
 
     #if defined(SOUND_ALLOW)
-    #pragma message("Sound enabled")
+        #pragma message("Sound enabled")
     #else
-    #pragma message("Sound disabled")
+        #pragma message("Sound disabled")
     #endif
     #pragma message("======================================")
 
 #endif
 
-
     SetTitle(m_title);
 
+#ifdef ALLOW_IMGUI
+    m_guiContext = ImGui::CreateContext();
+    ImGui::SetCurrentContext(m_guiContext);
+    ImGui_ImplWin32_Init(m_hwnd);
+#endif
 
     return true;
 }
@@ -431,6 +443,10 @@ void prWindow_PC::Destroy()
     m_height     = 0;
     m_bits       = 0;
     m_title      = 0;
+
+#ifdef ALLOW_IMGUI
+    ImGui_ImplWin32_Shutdown();
+#endif
 }
 
 
