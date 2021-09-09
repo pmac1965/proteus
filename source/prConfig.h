@@ -92,7 +92,7 @@
 #define ALLOW_IMGUI                                     // For imgui UI
 #define REMOVE_EXCEPTIONS                               // Allows try/catch code to be removed.
 #define ALLOW_GLEW                                      // Allows glew to be used
-//#define STATIC_GLEW                                     // for glew static library
+#define STATIC_GLEW                                     // for glew static library
 #define PROTEUS_ALLOW_WATERMARK                         // Allow watermark?
 
 

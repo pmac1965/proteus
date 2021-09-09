@@ -283,12 +283,13 @@
 
     // GLEW
     #if defined(ALLOW_GLEW)
-        // The GLEW library has changed,  library/dll combo or static library now.
+        // The GLEW library is static library now.
         #if defined(STATIC_GLEW)
             #pragma comment(lib, "glew32s.lib")
+        // The GLEW library is library/dll combo
         #else
             #pragma comment(lib, "glew32.lib")
         #endif
     #endif
 
-#endif//PLATFORM_PC
+#endif //PLATFORM_PC
