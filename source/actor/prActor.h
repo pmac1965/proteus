@@ -35,10 +35,6 @@ namespace Proteus {
 namespace Actor {
 
 
-// Forward declarations
-//class prActorComponent;
-
-
 // Class: prActor
 //      Actor base class
 //

@@ -27,9 +27,9 @@
 namespace Proteus {
 namespace Core {
 
-    s32 versionMajor    = 2020;     // Year
+    s32 versionMajor    = 2022;     // Year
     s32 versionMinor    = 1;        // Month
-    s32 versionRevision = 0;        // Version
+    s32 versionRevision = 1;        // Version
 
 
     // ---------------------------------------------------------------------------
