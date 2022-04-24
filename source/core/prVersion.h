@@ -2,7 +2,8 @@
 //      Engine version number.
 //
 // Notes:
-//      July 2019 - Switched to year/month/revision model.
+//      Jul 2019 - Switched to year/month/revision model.
+//      Apr 2019 - Switched to year/month/dat model.
 /**
  * Copyright 2014 Paul Michael McNab
  * 
@@ -35,15 +36,15 @@ namespace Core {
     // Parameters:
     //      year     - Variable to receive version number
     //      month    - Variable to receive version number
-    //      revision - Variable to receive version number
-    void prGetVersion(s32 &year, s32 &month, s32 &revision);
+    //      day      - Variable to receive version number
+    void prGetVersion(s32 &year, s32 &month, s32 &day);
 
     // Function: prGetVersionAsString
     //      Acquire engine version number as a string.
     //
     // Notes:
     //      Buffer size should be between 16 and 255 bytes.
-    //      Buffer contains a string in the format of "year.month.revision"
+    //      Buffer contains a string in the format of "year.month.day"
     void prGetVersionAsString(char* buffer, s32 bufferSize);
 
 }}

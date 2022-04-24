@@ -27,25 +27,21 @@
 namespace Proteus {
 namespace Core {
 
-    s32 versionMajor    = 2022;     // Year
-    s32 versionMinor    = 1;        // Month
-    s32 versionRevision = 1;        // Version
+    const s32 VERSION_YEAR   = 2022;
+    const s32 VERSION_MONTH  = 4;
+    const s32 VERSION_DAY    = 24;
 
 
-    // ---------------------------------------------------------------------------
     // Acquire engine version number.
-    // ---------------------------------------------------------------------------
-    void prGetVersion(s32 &major, s32 &minor, s32 &revision)
+    void prGetVersion(s32 &year, s32 &month, s32 &day)
     {
-        major    = versionMajor;
-        minor    = versionMinor;
-        revision = versionRevision;
+        year    = VERSION_YEAR;
+        month   = VERSION_MONTH;
+        day     = VERSION_DAY;
     }
 
 
-    // ---------------------------------------------------------------------------
     // Acquire engine version number as a string.
-    // ---------------------------------------------------------------------------
     void prGetVersionAsString(char *buffer, s32 bufferSize)
     {
         PRASSERT(buffer && *buffer, "Buffer cannot be null.");
@@ -54,9 +50,9 @@ namespace Core {
         if (buffer && bufferSize > 15 && bufferSize < 256)
         {
 #if defined(PLATFORM_PC)
-            sprintf_s(buffer, bufferSize, "%i.%i.%i", versionMajor, versionMinor, versionRevision);
+            sprintf_s(buffer, bufferSize, "%i.%i.%i", VERSION_YEAR, VERSION_MONTH, VERSION_DAY);
 #else
-            sprintf(buffer, "%i.%i.%i", versionMajor, versionMinor, versionRevision);
+            sprintf(buffer, "%i.%i.%i", VERSION_YEAR, VERSION_MONTH, VERSION_DAY);
 #endif
         }
     }
