@@ -126,20 +126,18 @@ public:
     //      This is used during window resizing by the engine
     //
     // Notes:
-    //      Neither values should be zero
+    //      Both values must be greater than zero
     void SetMinSize(u32 width, u32 height) { PRASSERT(width > 0);
-                                                                           PRASSERT(height > 0);
-                                                                           m_minWidth  = width;
-                                                                           m_minHeight = height; }
+                                             PRASSERT(height > 0);
+                                             m_minWidth  = width;
+                                             m_minHeight = height; }
 
 protected:
-
     u32     m_width;        // Width of the window.
     u32     m_height;       // Height of the window.
     u32     m_bits;         // Bits per pixel.
     u32     m_minWidth;     // Minimum width for windowed OS's like linux, mac and windows
     u32     m_minHeight;    // Minimum height for windowed OS's like linux, mac and windows
-
     bool    m_fullScreen;   // Are we fullscreen or windowed?
     bool    m_active;       // Is the window active. This is set by the system.
     bool    m_exp0;         // Expansion.

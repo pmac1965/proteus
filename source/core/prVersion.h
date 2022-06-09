@@ -3,7 +3,7 @@
 //
 // Notes:
 //      Jul 2019 - Switched to year/month/revision model.
-//      Apr 2019 - Switched to year/month/dat model.
+//      Apr 2022 - Switched to year/month/day model.
 /**
  * Copyright 2014 Paul Michael McNab
  * 

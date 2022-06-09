@@ -153,9 +153,9 @@ bool prTexture::Bind()
     }
 
 #if defined(PROTEUS_OPTIMISE_REMOVE_ISTEXTURE)
-    glBindTexture(GL_TEXTURE_2D, m_texID);
+    ERR_CHECK(glBindTexture(GL_TEXTURE_2D, m_texID));
     lastTextureID = m_texID;
-    ERR_CHECK();
+    //ERR_CHECK();
 
 #else
     // Else bind
@@ -253,7 +253,7 @@ void prTexture::Load(s32 extra)
             if (glGetError() != GL_NO_ERROR)
             {
                 prTrace(prLogLevel::LogError, "Failed to generate texture: %s\n", Filename());
-                prOpenGLErrorCheck(__FILE__, __FUNCTION__, __LINE__);
+                prOpenGLErrorCheck("Texture load", __FILE__, __FUNCTION__, __LINE__);
                 PRSAFE_DELETE_ARRAY(pTextureData);
                 PRSAFE_DELETE(file);
                 m_width  = 0;
@@ -263,12 +263,12 @@ void prTexture::Load(s32 extra)
             }            
 
             // select our current texture
-            glBindTexture(GL_TEXTURE_2D, m_texID);
+            ERR_CHECK(glBindTexture(GL_TEXTURE_2D, m_texID));
             lastTextureID = m_texID;
-            ERR_CHECK();
+            //ERR_CHECK();
 
-            glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-            ERR_CHECK();
+            ERR_CHECK(glPixelStorei(GL_UNPACK_ALIGNMENT, 1));
+            //ERR_CHECK();
 
             // Extra Settings
             if (extra == TEXTRA_ANTIALIAS)
@@ -290,14 +290,14 @@ void prTexture::Load(s32 extra)
                 #if defined(PLATFORM_PC)
                     PRPANIC("Compressed textures not supported by this platform");
                 #else
-                    glCompressedTexImage2D(GL_TEXTURE_2D, 0, internalFormat, header->dwWidth, header->dwHeight, 0, size - sizeof(prPVRTextureHeader), ((u8*)header + sizeof(prPVRTextureHeader)));
-                    ERR_CHECK();
+                    ERR_CHECK(glCompressedTexImage2D(GL_TEXTURE_2D, 0, internalFormat, header->dwWidth, header->dwHeight, 0, size - sizeof(prPVRTextureHeader), ((u8*)header + sizeof(prPVRTextureHeader))));
+                    //ERR_CHECK();
                 #endif
                 }
                 else
                 {
-                    glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, header->dwWidth, header->dwHeight, 0, format, type, ((u8*)header + sizeof(prPVRTextureHeader)));
-                    ERR_CHECK();
+                    ERR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, header->dwWidth, header->dwHeight, 0, format, type, ((u8*)header + sizeof(prPVRTextureHeader))));
+                    //ERR_CHECK();
                 }
             }
             else
@@ -325,12 +325,12 @@ void prTexture::Unload()
 {
     if (m_texID != 0xFFFFFFFF)
     {
-        GLboolean result = glIsTexture(m_texID);
-        ERR_CHECK();
+        ERR_CHECK(GLboolean result = glIsTexture(m_texID));
+        //ERR_CHECK();
         if (result)
         {
-            glDeleteTextures(1, &m_texID);
-            ERR_CHECK();
+            ERR_CHECK(glDeleteTextures(1, &m_texID));
+            //ERR_CHECK();
         }
     }
 
@@ -398,23 +398,23 @@ void prTexture::LoadFromMemory(void *pData, u32 size)
             }            
 
             // select our current texture
-            glBindTexture(GL_TEXTURE_2D, m_texID);
+            ERR_CHECK(glBindTexture(GL_TEXTURE_2D, m_texID));
             lastTextureID = m_texID;
-            ERR_CHECK();
+            //ERR_CHECK();
 
             // Settings
-            glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-            ERR_CHECK();
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-            ERR_CHECK();
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-            ERR_CHECK();
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            ERR_CHECK();
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            ERR_CHECK();
-            glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-            ERR_CHECK();
+            ERR_CHECK(glPixelStorei(GL_UNPACK_ALIGNMENT, 1));
+            //ERR_CHECK();
+            ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
+            //ERR_CHECK();
+            ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
+            //ERR_CHECK();
+            ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+            //ERR_CHECK();
+            ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+            //ERR_CHECK();
+            ERR_CHECK(glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE));
+            //ERR_CHECK();
 
             // Create texture
             int internalFormat, format, type;
@@ -426,14 +426,14 @@ void prTexture::LoadFromMemory(void *pData, u32 size)
                 #if defined(PLATFORM_PC)
                     PRPANIC("Compressed textures not supported by this platform");
                 #else
-                    glCompressedTexImage2D(GL_TEXTURE_2D, 0, internalFormat, header->dwWidth, header->dwHeight, 0, size - sizeof(prPVRTextureHeader), ((u8*)header + sizeof(prPVRTextureHeader)));
-                    ERR_CHECK();
+                    ERR_CHECK(glCompressedTexImage2D(GL_TEXTURE_2D, 0, internalFormat, header->dwWidth, header->dwHeight, 0, size - sizeof(prPVRTextureHeader), ((u8*)header + sizeof(prPVRTextureHeader))));
+                    //ERR_CHECK();
                 #endif
                 }
                 else
                 {
-                    glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, header->dwWidth, header->dwHeight, 0, format, type, ((u8*)header + sizeof(prPVRTextureHeader)));
-                    ERR_CHECK();
+                    ERR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, header->dwWidth, header->dwHeight, 0, format, type, ((u8*)header + sizeof(prPVRTextureHeader))));
+                    //ERR_CHECK();
                 }
             }
             else
@@ -497,31 +497,31 @@ void prTexture::LoadFromRaw(void *pData, u32 size, u32 width, u32 height)
         }            
 
         // select our current texture
-        glBindTexture(GL_TEXTURE_2D, m_texID);
+        ERR_CHECK(glBindTexture(GL_TEXTURE_2D, m_texID));
         lastTextureID = m_texID;
-        ERR_CHECK();
+        //ERR_CHECK();
 
         // Settings
-        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-        ERR_CHECK();
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        ERR_CHECK();
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        ERR_CHECK();
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        ERR_CHECK();
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        ERR_CHECK();
-        glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-        ERR_CHECK();
+        ERR_CHECK(glPixelStorei(GL_UNPACK_ALIGNMENT, 1));
+        //ERR_CHECK();
+        ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
+        //ERR_CHECK();
+        ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
+        //ERR_CHECK();
+        ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+        //ERR_CHECK();
+        ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+        //ERR_CHECK();
+        ERR_CHECK(glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE));
+        //ERR_CHECK();
 
         // Create texture
         int internalFormat, format, type;
         bool compressed;
         if (GetTextureFormat(TEX_FMT_OGL8888_BMP_YN, internalFormat, format, type, compressed))
         {
-            glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, pData);
-            ERR_CHECK();
+            ERR_CHECK(glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, format, type, pData));
+            //ERR_CHECK();
         }
         else
         {
@@ -577,17 +577,17 @@ bool prTexture::ValidateHeader(prPVRTextureHeader *header)
 /// ---------------------------------------------------------------------------
 void prTexture::SetAliasParameters()
 {
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    ERR_CHECK();
+    ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT));
+    //ERR_CHECK();
     
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);    
-    ERR_CHECK();
+    ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT));
+    //ERR_CHECK();
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    ERR_CHECK();
+    ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST));
+    //ERR_CHECK();
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    ERR_CHECK();
+    ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST));
+    //ERR_CHECK();
 }
 
 
@@ -607,17 +607,17 @@ void prTexture::SetAntiAliasParameters()
       #endif
     #endif
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    ERR_CHECK();
+    ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+    //ERR_CHECK();
     
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);    
-    ERR_CHECK();
+    ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+    //ERR_CHECK();
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    ERR_CHECK();
+    ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+    //ERR_CHECK();
 
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    ERR_CHECK();
+    ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+    //ERR_CHECK();
 }
 
 

@@ -20,9 +20,6 @@
 #include "../prConfig.h"
 
 
-//#define TEMP_DEFINE	1
-
-
 #if defined(PLATFORM_PC)
   #include <Windows.h>
 #if defined(ALLOW_GLEW)
@@ -37,10 +34,6 @@
   #include <GL/glu.h>
   #include "../core/prWindow_PC.h"
   #include "../linux/prLinux.h"
-
-  #ifdef TEMP_DEFINE
-  #undef TEMP_DEFINE
-  #endif
 
 #elif defined(PLATFORM_MAC)
   #include <OpenGL/gl.h>
@@ -96,121 +89,84 @@ namespace Display {
         PRASSERT(vertexSrc && *vertexSrc);
         PRASSERT(fragmentSrc && *fragmentSrc);
 
-
         // Create the shaders
-        GLuint vertexShader;
-        vertexShader = glCreateShader(GL_VERTEX_SHADER);
-        ERR_CHECK();
-
-        GLuint fragmentShader;
-        fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-        ERR_CHECK();
+        GLuint vertexShader, fragmentShader;
+        ERR_CHECK(vertexShader = glCreateShader(GL_VERTEX_SHADER));
+        ERR_CHECK(fragmentShader = glCreateShader(GL_FRAGMENT_SHADER));
 
         if (vertexShader == 0 || fragmentShader == 0)
         {
             prTrace(prLogLevel::LogError, "Failed to create shaders\n");
-            glDeleteShader(vertexShader);
-            ERR_CHECK();
-            glDeleteShader(fragmentShader);
-            ERR_CHECK();
+            ERR_CHECK(glDeleteShader(vertexShader));
+            ERR_CHECK(glDeleteShader(fragmentShader));
             return false;
         }
-
 
         // Set the shaders source
         SetSource(vertexShader, vertexSrc);
         SetSource(fragmentShader, fragmentSrc);
 
-
         // Compile the shaders
-        glCompileShader(vertexShader);
-        ERR_CHECK();
+        ERR_CHECK(glCompileShader(vertexShader));
         CheckCompileErrors(vertexShader, "VERTEX");
-
-        glCompileShader(fragmentShader);
-        ERR_CHECK();
+        ERR_CHECK(glCompileShader(fragmentShader));
         CheckCompileErrors(fragmentShader, "FRAGMENT");
-
 
         // Test for errors
         GLint val;
-        glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &val);
-        ERR_CHECK();
+        ERR_CHECK(glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &val));
         if (val == GL_FALSE)
         {
             prTrace(prLogLevel::LogError, "Error found in vertex shader\n");
             //ShaderInfoLog(vertexShader);
-            glDeleteShader(vertexShader);
-            ERR_CHECK();
-            glDeleteShader(fragmentShader);
-            ERR_CHECK();
+            ERR_CHECK(glDeleteShader(vertexShader));
+            ERR_CHECK(glDeleteShader(fragmentShader));
             return false;
         }
 
-        glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &val);
-        ERR_CHECK();
+        ERR_CHECK(glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &val));
         if (val == GL_FALSE)
         {
             prTrace(prLogLevel::LogError, "Error found in fragment shader\n");
             //ShaderInfoLog(fragmentShader);
-            glDeleteShader(vertexShader);
-            ERR_CHECK();
-            glDeleteShader(fragmentShader);
-            ERR_CHECK();
+            ERR_CHECK(glDeleteShader(vertexShader));
+            ERR_CHECK(glDeleteShader(fragmentShader));
             return false;
         }
 
-
         // Create, attach and link program. This assumes it all worked!
-        id = glCreateProgram();
-        ERR_CHECK();
-        glAttachShader(id, vertexShader);
-        ERR_CHECK();
-        glAttachShader(id, fragmentShader);
-        ERR_CHECK();
-        glLinkProgram(id);
-        ERR_CHECK();
+        ERR_CHECK(id = glCreateProgram());
+        ERR_CHECK(glAttachShader(id, vertexShader));
+        ERR_CHECK(glAttachShader(id, fragmentShader));
+        ERR_CHECK(glLinkProgram(id));
         CheckCompileErrors(id, "PROGRAM");
 
-
         // These are no longer needed
-        glDeleteShader(vertexShader);
-        ERR_CHECK();
-        glDeleteShader(fragmentShader);
-        ERR_CHECK();
-
+        ERR_CHECK(glDeleteShader(vertexShader));
+        ERR_CHECK(glDeleteShader(fragmentShader));
 
         // Check program linked
-        glGetProgramiv(id, GL_LINK_STATUS, &val);
-        ERR_CHECK();
+        ERR_CHECK(glGetProgramiv(id, GL_LINK_STATUS, &val));
         if (val == GL_FALSE)
         {
             //ProgramInfoLog(id);
-            glDeleteProgram(id);
-            ERR_CHECK();
+            ERR_CHECK(glDeleteProgram(id));
             return false;
         }
         //ProgramInfoLog(id);
-
-    //#endif
 
         return true;
     }
 
 
-    /// ---------------------------------------------------------------------------
-    /// // Sets the source for a memory based shader
-    /// ---------------------------------------------------------------------------
+    // Sets the source for a memory based shader
     void prShader::SetSource(u32 shader, const char* src)
     {
         PRASSERT(src && *src);
-        //#ifdef TEMP_DEFINE
 
         GLchar* stringPtr[] = { (GLchar*)src };
 
-        glShaderSource(shader, 1, (const GLchar * *)stringPtr, NULL);
-        ERR_CHECK();
-        //#endif
+        ERR_CHECK(glShaderSource(shader, 1, (const GLchar **)stringPtr, NULL));
     }
 
 
@@ -219,7 +175,7 @@ namespace Display {
     /// ---------------------------------------------------------------------------
     /*void prShader::ShaderInfoLog(u32 shader)
     {
-    #ifdef TEMP_DEFINE
+    //#ifdef TEMP_DEFINE
 
         GLint logLength;
 
@@ -238,7 +194,7 @@ namespace Display {
             free(log);
         }
 
-    #endif
+   // #endif
     }//*/
 
 

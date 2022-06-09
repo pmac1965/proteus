@@ -21,26 +21,16 @@
 #include "prWindow.h"
 
 
-/// ---------------------------------------------------------------------------
-/// Ctor
-/// ---------------------------------------------------------------------------
+// Ctor
 prWindow::prWindow()
+    : m_width     (0)
+    , m_height    (0)
+    , m_bits      (0)
+    , m_minWidth  (0xFFFFFFFF)
+    , m_minHeight (0xFFFFFFFF)
+    , m_fullScreen(false)
+    , m_active    (true)
+    , m_exp0      (false)
+    , m_exp1      (false)
 {
-    m_width       = 0;
-    m_height      = 0;
-    m_bits        = 0;
-    m_fullScreen  = false;
-    m_active      = true;
-    m_exp0        = false;
-    m_exp1        = false;
-    m_minWidth    = 0xFFFFFFFF; 
-    m_minHeight   = 0xFFFFFFFF;
 }
-
-
-///// ---------------------------------------------------------------------------
-///// Dtor
-///// ---------------------------------------------------------------------------
-//prWindow::~prWindow()
-//{
-//}

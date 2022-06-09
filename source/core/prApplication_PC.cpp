@@ -76,14 +76,14 @@ namespace Core {
         #else
             m_pCW = nullptr;
 
-            if (reg)
-            {
-                if (prStringCompare(reg->GetValue("Console"), "true") == CMP_EQUALTO)
-                {
-                    m_pCW = new prConsoleWindow("Debug console", 40, 80);
-                    prDebugRegisterConsoleWindow(m_pCW);
-                }
-            }
+            //if (reg)
+            //{
+            //    if (prStringCompare(reg->GetValue("Console"), "true") == CMP_EQUALTO)
+            //    {
+            //        m_pCW = new prConsoleWindow("Debug console", 40, 80);
+            //        prDebugRegisterConsoleWindow(m_pCW);
+            //    }
+            //}
 
         #endif
 

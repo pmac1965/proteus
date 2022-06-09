@@ -29,7 +29,7 @@
 // External code
 #include "Box2D/Box2D.h"
 #include "tinyxml/tinyxml.h"
-#include "tool/AntTweakBar.h"
+//#include "tool/AntTweakBar.h"
 #include "zlib/zlib.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_win32.h"
@@ -259,6 +259,8 @@
     // Tools
     #if defined(PROTEUS_USE_ANT_TWEAK_BAR)
         #pragma comment(lib, "AntTweakBar.lib")
+    //#else
+    //    TODO("AntTeakBar Removed")
     #endif
 
     // Engine libs

@@ -82,14 +82,14 @@
 // ----------------------------------------------------------------------------
 // Use these defines to configure the engine setup
 // ----------------------------------------------------------------------------
-#define SOUND_ALLOW                                     // Use the sound system. Can be removed for debugging.
+//#define SOUND_ALLOW                                     // Use the sound system. Can be removed for debugging.
 //#define HIDE_MESSAGES                                   // Allows the TODO messages to be displayed by the compiler.
-#define PROTEUS_ALLOW_CONSOLE                           // Allows the debug console to be optionally removed. (PC only)
+//#define PROTEUS_ALLOW_CONSOLE                           // Allows the debug console to be optionally removed. (PC only)
 #define PROTEUS_ALLOW_AT                                // Allows the AT define to exist
 //#define PROTEUS_IAP_TEST                                // Allows the in app purchase test code
 //#define ALLOW_STEAM                                     // Allows the steam code
-#define ALLOW_FREETYPE                                  // For builds that need freetype
-#define ALLOW_IMGUI                                     // For imgui UI
+//#define ALLOW_FREETYPE                                  // For builds that need freetype
+//#define ALLOW_IMGUI                                     // For imgui UI
 #define REMOVE_EXCEPTIONS                               // Allows try/catch code to be removed.
 #define ALLOW_GLEW                                      // Allows glew to be used
 #define STATIC_GLEW                                     // for glew static library
@@ -119,7 +119,7 @@
 
 // PC Config
 #if defined(PLATFORM_PC)
-  #define PROTEUS_USE_ANT_TWEAK_BAR                     // Use AntTweakBar?
+  //#define PROTEUS_USE_ANT_TWEAK_BAR                     // Use AntTweakBar?
 #endif
 
 

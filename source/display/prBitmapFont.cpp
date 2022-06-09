@@ -628,16 +628,16 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
 
 
         // Render init
-        glEnable(GL_BLEND);
-        ERR_CHECK();
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        ERR_CHECK();
+        ERR_CHECK(glEnable(GL_BLEND));
+        //ERR_CHECK();
+        ERR_CHECK(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+        //ERR_CHECK();
 
         // Set states
         //glEnableClientState(GL_VERTEX_ARRAY);
         //ERR_CHECK();
-	    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-        ERR_CHECK();
+        ERR_CHECK(glEnableClientState(GL_TEXTURE_COORD_ARRAY));
+        //ERR_CHECK();
 
 
         f32 xbak = x;
@@ -783,17 +783,17 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
                         float v1 = v0 + (height * h);
 
 
-                        glPushMatrix();
-                        ERR_CHECK();
+                        ERR_CHECK(glPushMatrix());
+                        //ERR_CHECK();
 
                         float px = pCharInfo->xoffset + (width  / 2) + imp.GetKerning(character, message[index]) + dist;
                         float py = pCharInfo->yoffset + (height / 2);
 
-                        glTranslatef(px * scale, (py * scale) + ya, 0);
-                        ERR_CHECK();
+                        ERR_CHECK(glTranslatef(px * scale, (py * scale) + ya, 0));
+                        //ERR_CHECK();
 
-                        glScalef(scale * width, scale * height, 1);
-                        ERR_CHECK();
+                        ERR_CHECK(glScalef(scale * width, scale * height, 1));
+                        //ERR_CHECK();
 
                         QuadData quadData[] =
                         {
@@ -803,17 +803,17 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
                             { 0.5f, -0.5f, u1, v1, },
                         };
 
-	                    glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->x);
-                        ERR_CHECK();
+                        ERR_CHECK(glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->x));
+                        //ERR_CHECK();
 
-	                    glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->u);
-                        ERR_CHECK();
+                        ERR_CHECK(glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->u));
+                        //ERR_CHECK();
 
-	                    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-                        ERR_CHECK();
+                        ERR_CHECK(glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
+                        //ERR_CHECK();
                     
-                        glPopMatrix();
-                        ERR_CHECK();
+                        ERR_CHECK(glPopMatrix());
+                        //ERR_CHECK();
 
                         PRUNUSED(quadData->v);
                     }
@@ -830,17 +830,17 @@ void prBitmapFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignmen
 
 
         // Reset states
-        glPopMatrix();
-        ERR_CHECK();
+        ERR_CHECK(glPopMatrix());
+        //ERR_CHECK();
 
-	    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-        ERR_CHECK();
+        ERR_CHECK(glDisableClientState(GL_TEXTURE_COORD_ARRAY));
+        //ERR_CHECK();
 
         //glDisableClientState(GL_VERTEX_ARRAY);
         //ERR_CHECK();
 
-        glDisable(GL_BLEND);
-        ERR_CHECK();
+        ERR_CHECK(glDisable(GL_BLEND));
+        //ERR_CHECK();
     }
 }
 

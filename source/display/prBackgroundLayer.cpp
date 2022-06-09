@@ -124,11 +124,11 @@ void prBackgroundLayer::Draw()
         s32 tile = 0;
         //f32 posX;
 
-        glEnable(GL_BLEND);
-        ERR_CHECK();
+        ERR_CHECK(glEnable(GL_BLEND));
+        //ERR_CHECK();
 
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        ERR_CHECK();
+        ERR_CHECK(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+        //ERR_CHECK();
 
    //         glPushMatrix();
      //       ERR_CHECK();
@@ -171,15 +171,15 @@ void prBackgroundLayer::Draw()
                     prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
                     if (pRenderer)
                     {
-                        glPushMatrix();
-                        ERR_CHECK();
+                        ERR_CHECK(glPushMatrix());
+                        //ERR_CHECK();
 
             // translate to quad center, then translate for position
-            glTranslatef((GLfloat)(mTileWidth >> 1), (GLfloat)(mTileHeight >> 1), 0);
-            ERR_CHECK();
+            ERR_CHECK(glTranslatef((GLfloat)(mTileWidth >> 1), (GLfloat)(mTileHeight >> 1), 0));
+            //ERR_CHECK();
 
-            glTranslatef(0, 28, 0);
-            ERR_CHECK();
+            ERR_CHECK(glTranslatef(0, 28, 0));
+            //ERR_CHECK();
 
                         glTranslatef((GLfloat)mTileWidth * x, (GLfloat)mTileHeight * y, 0.f);
                         glScalef((GLfloat)mTileWidth, (GLfloat)mTileHeight, 0);
@@ -189,8 +189,8 @@ void prBackgroundLayer::Draw()
     //                    prTrace(LogError, "Tile size %i, %i\n", mTileWidth , mTileHeight);
     //                    prTrace(LogError, "Tile %i, at (%i,  %i)\n", tile, mTileWidth * x, mTileHeight * y);
                 
-                        glPopMatrix();
-                        ERR_CHECK();
+                        ERR_CHECK(glPopMatrix());
+                        //ERR_CHECK();
                     }
 
 
@@ -203,8 +203,8 @@ void prBackgroundLayer::Draw()
 //            glPopMatrix();
   //          ERR_CHECK();
 
-        glDisable(GL_BLEND);
-        ERR_CHECK();
+        ERR_CHECK(glDisable(GL_BLEND));
+        //ERR_CHECK();
 
     }
 }

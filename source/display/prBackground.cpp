@@ -216,20 +216,20 @@ void prBackground::Draw()
                 f32 width  = (f32)(m_scrnWidth  / 2);
                 f32 height = (f32)(m_scrnHeight / 2);
 
-                glPushMatrix();
-                ERR_CHECK();
+                ERR_CHECK(glPushMatrix());
+                //ERR_CHECK();
 
                 // Translate to center
-                glTranslatef(width, height, 0);
-                ERR_CHECK();
+                ERR_CHECK(glTranslatef(width, height, 0));
+                //ERR_CHECK();
 
                 // Move to offset
-                glTranslatef(pos.x, pos.y, 0);
-                ERR_CHECK();
+                ERR_CHECK(glTranslatef(pos.x, pos.y, 0));
+                //ERR_CHECK();
 
                 // Set scale
-                glScalef(m_scrnWidth, m_scrnHeight, 0);
-                ERR_CHECK();
+                ERR_CHECK(glScalef(m_scrnWidth, m_scrnHeight, 0));
+                //ERR_CHECK();
 
                 if (m_texture->Bind())
                 {
@@ -240,8 +240,8 @@ void prBackground::Draw()
                     }
                 }
 
-                glPopMatrix();
-                ERR_CHECK();
+                ERR_CHECK(glPopMatrix());
+                //ERR_CHECK();
             }
         }
         else

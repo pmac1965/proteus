@@ -86,40 +86,31 @@ static const TCHAR *g_ClassName = TEXT("Proteus Class");
                              PR_MAXIMIZEBOX)
 
 
-/// ---------------------------------------------------------------------------
-/// Ctor
-/// ---------------------------------------------------------------------------
-prWindow_PC::prWindow_PC() : prWindow()
-                           , m_glrc  (NULL)
-{
-    m_hwnd        = NULL;
-   // m_glrc        = NULL; // Only this line triggered cppcheck?
-    m_hdc         = NULL;
-    m_title       = NULL;
-
+// Ctor
+prWindow_PC::prWindow_PC()  : prWindow()
+                            , m_glrc (nullptr)
+                            , m_hwnd (nullptr)
+                            , m_hdc  (nullptr)
+                            , m_title(nullptr)
 #ifdef ALLOW_IMGUI
-    m_guiContext = nullptr;
+                            , m_guiContext(nullptr)
 #endif
+{
 }
 
 
-/// ---------------------------------------------------------------------------
-/// Dtor
-/// ---------------------------------------------------------------------------
+// Dtor
 prWindow_PC::~prWindow_PC()
 {
     Destroy();
 }
 
 
-/// ---------------------------------------------------------------------------
-/// Creates the application window.
-/// ---------------------------------------------------------------------------
+// Creates the application window.
 bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
 {
     // Ensure the previous window is destroyed.
     Destroy();
-
 
     // Init data
     m_fullScreen = fullScreen;
@@ -127,7 +118,6 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
     m_width      = width;
     m_height     = height;
     m_bits       = bits;
-
 
     // Fullscreen?
     if (fullScreen)
@@ -138,13 +128,11 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
         }
     }
 
-
     // Create the window.
     if (CreateOpenGLWindow(0, 0) == false)
     {
         return false;
     }
-
 
     // Get a device context to our window
     PRASSERT(m_hwnd);
@@ -157,13 +145,11 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
         return false;
     }
 
-
     // Set pixel format.
     if (SetOpenGLPixelFormat() == false)
     {
         return false;
     }
-
 
     // Create rendering context.
     m_glrc = wglCreateContext(m_hdc);
@@ -175,7 +161,6 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
         return false;
     }
 
-
     // Activate rendering context.
     if (!wglMakeCurrent(m_hdc, m_glrc))
     {
@@ -185,7 +170,6 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
         return false;
     }
 
-
     // Show the window.
     ShowWindow(m_hwnd, SW_SHOW);
     SetForegroundWindow(m_hwnd);
@@ -194,7 +178,6 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
 
     // Set up our perspective.
     Resize(width, height);
-
 
     // Init glew
 #if defined(ALLOW_GLEW)
@@ -221,7 +204,6 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
         }
     }
 #endif
-
 
     // Store a pointer to the window class in the windows user data.
 #ifdef _WIN64
@@ -260,6 +242,7 @@ bool prWindow_PC::Create(u32 width, u32 height, u32 bits, bool fullScreen)
     m_guiContext = ImGui::CreateContext();
     ImGui::SetCurrentContext(m_guiContext);
     ImGui_ImplWin32_Init(m_hwnd);
+    ImGui::StyleColorsDark();
 #endif
 
     return true;
@@ -460,14 +443,11 @@ void prWindow_PC::Resize(u32 width, u32 height)
         height = 1;
 
     // Reset the current viewport
-    glViewport(0, 0, width, height);
-    ERR_CHECK();
+    ERR_CHECK(glViewport(0, 0, width, height));
 
     // Select the projection matrix and reset it.
-    glMatrixMode(GL_PROJECTION);
-    ERR_CHECK();
-    glLoadIdentity();
-    ERR_CHECK();
+    ERR_CHECK(glMatrixMode(GL_PROJECTION));
+    ERR_CHECK(glLoadIdentity());
 
     // Tool builds have resizeable windows
     #if defined(PROTEUS_TOOL)
@@ -484,14 +464,11 @@ void prWindow_PC::Resize(u32 width, u32 height)
     #endif
 
     // Calculate the aspect ratio of the window
-    gluPerspective(45.0f, (GLfloat)width/(GLfloat)height, 0.1f, 1000.0f);
-    ERR_CHECK();
+    ERR_CHECK(gluPerspective(45.0f, (GLfloat)width/(GLfloat)height, 0.1f, 1000.0f));
 
     // Select the modelview matrix and reset it.
-    glMatrixMode(GL_MODELVIEW);
-    ERR_CHECK();
-    glLoadIdentity();
-    ERR_CHECK();
+    ERR_CHECK(glMatrixMode(GL_MODELVIEW));
+    ERR_CHECK(glLoadIdentity());
 }
 
 

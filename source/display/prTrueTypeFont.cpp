@@ -188,7 +188,7 @@ typedef struct TrueTypeFontImplementation
         if (glGetError() != GL_NO_ERROR)
         {
             prTrace(prLogLevel::LogError, "Failed to generate texture for TTF font\n");
-            prOpenGLErrorCheck(__FILE__, __FUNCTION__, __LINE__);
+            prOpenGLErrorCheck("Font generate character", __FILE__, __FUNCTION__, __LINE__);
             PRSAFE_DELETE_ARRAY(texData);
             FT_Done_Glyph(glyph);
             return;
@@ -206,15 +206,15 @@ typedef struct TrueTypeFontImplementation
         #endif
 
 	    // Now we just setup some texture paramaters.
-        glBindTexture(GL_TEXTURE_2D, texID);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        ERR_CHECK();    
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);    
-        ERR_CHECK();
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        ERR_CHECK();
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        ERR_CHECK();
+        ERR_CHECK(glBindTexture(GL_TEXTURE_2D, texID));
+        ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE));
+        //ERR_CHECK();    
+        ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE));
+        //ERR_CHECK();
+        ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+        //ERR_CHECK();
+        ERR_CHECK(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+        //ERR_CHECK();
 
 	    // Here we actually create the texture itself, notice that we are using GL_LUMINANCE_ALPHA to indicate that we are using 2 channel data.
         glTexImage2D(GL_TEXTURE_2D, 0, GL_LUMINANCE_ALPHA, width, height, 0, GL_LUMINANCE_ALPHA, GL_UNSIGNED_BYTE, texData);
@@ -574,14 +574,14 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
         glScalef(scale, scale, 0.0f);
 
         // Enable blending
-        glEnable(GL_BLEND);
-        ERR_CHECK();
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        ERR_CHECK();
+        ERR_CHECK(glEnable(GL_BLEND));
+        //ERR_CHECK();
+        ERR_CHECK(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+        //ERR_CHECK();
 
         // Set states
-        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-        ERR_CHECK();
+        ERR_CHECK(glEnableClientState(GL_TEXTURE_COORD_ARRAY));
+        //ERR_CHECK();
 		    
         // Draw
         s32 len = (s32)strlen(message);
@@ -641,13 +641,13 @@ void prTrueTypeFont::Draw(f32 x, f32 y, float scale, prColour colour, s32 alignm
         }
 
         // Reset states
-        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-        ERR_CHECK();
-        glDisable(GL_BLEND);
-        ERR_CHECK();
+        ERR_CHECK(glDisableClientState(GL_TEXTURE_COORD_ARRAY));
+        //ERR_CHECK();
+        ERR_CHECK(glDisable(GL_BLEND));
+        ///ERR_CHECK();
 
-		glPopMatrix();
-        ERR_CHECK();
+        ERR_CHECK(glPopMatrix());
+        //ERR_CHECK();
     }
     
     // Clear texture systems last used ID

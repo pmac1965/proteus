@@ -222,14 +222,14 @@ void prGLFont::SetOrthographicProjection(float w, float h)
 /// ---------------------------------------------------------------------------
 void prGLFont::ResetPerspectiveProjection() 
 {
-    glMatrixMode(GL_PROJECTION);
-    ERR_CHECK();
+    ERR_CHECK(glMatrixMode(GL_PROJECTION));
+    //ERR_CHECK();
     
-    glPopMatrix();
-    ERR_CHECK();
+    ERR_CHECK(glPopMatrix());
+    //ERR_CHECK();
 
-    glMatrixMode(GL_MODELVIEW);
-    ERR_CHECK();
+    ERR_CHECK(glMatrixMode(GL_MODELVIEW));
+    //ERR_CHECK();
 }
 
 

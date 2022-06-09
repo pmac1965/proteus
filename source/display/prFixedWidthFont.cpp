@@ -184,18 +184,18 @@ void prFixedWidthFont::Draw(f32 x, f32 y, const char *fmt, ...)
 
 
         // Enable blending
-        glEnable(GL_BLEND);
-        ERR_CHECK();
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        ERR_CHECK();
+        ERR_CHECK(glEnable(GL_BLEND));
+        //ERR_CHECK();
+        ERR_CHECK(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+        //ERR_CHECK();
 
         // Set states
         //glEnableClientState(GL_VERTEX_ARRAY);
         //ERR_CHECK();
-        glEnableClientState(GL_COLOR_ARRAY);
-        ERR_CHECK();
-        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-        ERR_CHECK();
+        ERR_CHECK(glEnableClientState(GL_COLOR_ARRAY));
+        //ERR_CHECK();
+        ERR_CHECK(glEnableClientState(GL_TEXTURE_COORD_ARRAY));
+        //ERR_CHECK();
 
         // Check alignment
         if (m_alignment == FW_ALIGN_RIGHT)
@@ -233,19 +233,19 @@ void prFixedWidthFont::Draw(f32 x, f32 y, const char *fmt, ...)
                 m_v0 = 1.0f - ((ypos * m_fh) + m_fh);
                 m_v1 = m_v0 + m_fh;
 
-                glPushMatrix();
-                ERR_CHECK();
+                ERR_CHECK(glPushMatrix());
+                //ERR_CHECK();
             
                 // translate to quad center, the translate for position
-                glTranslatef((float)(m_frameWidth >> 1), (float)(m_frameHeight >> 1), 0);
-                ERR_CHECK();
-                glTranslatef(x + dist, y, 0);
-                ERR_CHECK();
+                ERR_CHECK(glTranslatef((float)(m_frameWidth >> 1), (float)(m_frameHeight >> 1), 0));
+                //ERR_CHECK();
+                ERR_CHECK(glTranslatef(x + dist, y, 0));
+                //ERR_CHECK();
 
                 dist += (float)m_offset * m_scale;
 
-                glScalef((float)m_frameWidth * m_scale, (float)m_frameHeight * m_scale, 0);
-                ERR_CHECK();
+                ERR_CHECK(glScalef((float)m_frameWidth * m_scale, (float)m_frameHeight * m_scale, 0));
+                //ERR_CHECK();
 
                 prRenderer *pRenderer = static_cast<prRenderer *>(prCoreGetComponent(PRSYSTEM_RENDERER));
                 if (pRenderer)
@@ -253,24 +253,24 @@ void prFixedWidthFont::Draw(f32 x, f32 y, const char *fmt, ...)
                     pRenderer->BatchDrawQuad(m_u0, m_v0, m_u1, m_v1, prColour::White);
                 }
             
-                glPopMatrix();
-                ERR_CHECK();
+                ERR_CHECK(glPopMatrix());
+                //ERR_CHECK();
             }
         }
         while(c != '\0');
 
 
         // Reset states
-        glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-        ERR_CHECK();
-        glDisableClientState(GL_COLOR_ARRAY);
-        ERR_CHECK();
+        ERR_CHECK(glDisableClientState(GL_TEXTURE_COORD_ARRAY));
+        //ERR_CHECK();
+        ERR_CHECK(glDisableClientState(GL_COLOR_ARRAY));
+        //ERR_CHECK();
         //glDisableClientState(GL_VERTEX_ARRAY);
         //ERR_CHECK();
 
         // Disable blending
-        glDisable(GL_BLEND);
-        ERR_CHECK();
+        ERR_CHECK(glDisable(GL_BLEND));
+        //ERR_CHECK();
 
         //glDisable(GL_TEXTURE_2D);
     }

@@ -104,12 +104,12 @@ void prCube::Draw()
 {
 // Base PC version?
 #if defined(PROGL_VERSION_11)
-    glPushMatrix();
-    ERR_CHECK();
+    ERR_CHECK(glPushMatrix());
+    //ERR_CHECK();
 
     // Translate
 //    glTranslatef(position.x, position.y, position.z);
-    ERR_CHECK();
+    //ERR_CHECK();
 
     // Roate
 //    glRotatef(rotation.x, 1, 0, 0);
@@ -118,7 +118,7 @@ void prCube::Draw()
 
     // Scale
 //    glScalef(scale.x, scale.y, scale.z);
-    ERR_CHECK();
+    //ERR_CHECK();
 #endif
 
         // Base class draw
@@ -132,8 +132,8 @@ void prCube::Draw()
 //        glColor4f(colour.red, colour.green, colour.blue, colour.alpha);
 //        ERR_CHECK();
 
-        glVertexPointer(3, GL_FLOAT, 0, vertices);
-        ERR_CHECK();
+        ERR_CHECK(glVertexPointer(3, GL_FLOAT, 0, vertices));
+        //ERR_CHECK();
 
 //        glColorPointer(3, GL_FLOAT, 0,  colours);
 //        ERR_CHECK();
@@ -143,8 +143,8 @@ void prCube::Draw()
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
         // Draw
-        glDrawArrays(GL_TRIANGLES, 0, PRARRAY_SIZE(vertices) / 3);
-        ERR_CHECK();
+        ERR_CHECK(glDrawArrays(GL_TRIANGLES, 0, PRARRAY_SIZE(vertices) / 3));
+        //ERR_CHECK();
 
 //            glDisableClientState(GL_COLOR_ARRAY);
 //            ERR_CHECK();
@@ -174,7 +174,7 @@ void prCube::Draw()
         glDisable(GL_BLEND);
 
 #if defined(PROGL_VERSION_11)
-    glPopMatrix();
-    ERR_CHECK();
+    ERR_CHECK(glPopMatrix());
+    //ERR_CHECK();
 #endif
 }

@@ -137,27 +137,27 @@ void prOutputString(prLogLevel level, const char *text)
         switch(level)
         {
         case prLogLevel::LogVerbose:
-            if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightCyan, prConsoleWindow::ConsoleColourBlack); }
+            //if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightCyan, prConsoleWindow::ConsoleColourBlack); }
             fprintf(stderr, "%s", text);
             break;
 
         case prLogLevel::LogDebug:
-            if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightWhite, prConsoleWindow::ConsoleColourBlack); }
+            //if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightWhite, prConsoleWindow::ConsoleColourBlack); }
             fprintf(stderr, "%s", text);
             break;
 
         case prLogLevel::LogInformation:
-            if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightGreen, prConsoleWindow::ConsoleColourBlack); }
+            //if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightGreen, prConsoleWindow::ConsoleColourBlack); }
             fprintf(stderr, "%s", text);
             break;
 
         case prLogLevel::LogWarning:
-            if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightYellow, prConsoleWindow::ConsoleColourBlack); }
+            //if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightYellow, prConsoleWindow::ConsoleColourBlack); }
             fprintf(stderr, "%s", text);
             break;
 
         case prLogLevel::LogError:
-            if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightRed, prConsoleWindow::ConsoleColourBlack); }
+            //if (pConsole) { pConsole->SetConsoleColours(prConsoleWindow::ConsoleColourLightRed, prConsoleWindow::ConsoleColourBlack); }
             fprintf(stderr, "%s", text);
             break;
         }

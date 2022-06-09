@@ -67,35 +67,35 @@ namespace
 
 void EmbeddedShadersInit()
 {
-	GLuint vs = glCreateShader(GL_VERTEX_SHADER);
-	ERR_CHECK();
+	ERR_CHECK(GLuint vs = glCreateShader(GL_VERTEX_SHADER));
+	//ERR_CHECK();
 
-	glShaderSource(vs, 1, &vertex_shader, nullptr);
-	ERR_CHECK();
-	glCompileShader(vs);
-	ERR_CHECK();
+	ERR_CHECK(glShaderSource(vs, 1, &vertex_shader, nullptr));
+	//ERR_CHECK();
+	ERR_CHECK(glCompileShader(vs));
+	//ERR_CHECK();
 
-	GLuint fs = glCreateShader(GL_FRAGMENT_SHADER);
-	ERR_CHECK();
-	glShaderSource(fs, 1, &fragment_shader, nullptr);
-	ERR_CHECK();
-	glCompileShader(fs);
-	ERR_CHECK();
+	ERR_CHECK(GLuint fs = glCreateShader(GL_FRAGMENT_SHADER));
+	//ERR_CHECK();
+	ERR_CHECK(glShaderSource(fs, 1, &fragment_shader, nullptr));
+	//ERR_CHECK();
+	ERR_CHECK(glCompileShader(fs));
+	//ERR_CHECK();
 
-	shader_prg = glCreateProgram();
-	ERR_CHECK();
-	glAttachShader(shader_prg, fs);
-	ERR_CHECK();
-	glAttachShader(shader_prg, vs);
-	ERR_CHECK();
-	glLinkProgram(shader_prg);
-	ERR_CHECK();
+	ERR_CHECK(shader_prg = glCreateProgram());
+	//ERR_CHECK();
+	ERR_CHECK(glAttachShader(shader_prg, fs));
+	//ERR_CHECK();
+	ERR_CHECK(glAttachShader(shader_prg, vs));
+	//ERR_CHECK();
+	ERR_CHECK(glLinkProgram(shader_prg));
+	//ERR_CHECK();
 }
 
 
 void EmbeddedShadersUsePrg()
 {
-	glUseProgram(shader_prg);
-	ERR_CHECK();
+	ERR_CHECK(glUseProgram(shader_prg));
+	//ERR_CHECK();
 }
 

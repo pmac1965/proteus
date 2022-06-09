@@ -31,10 +31,8 @@
 #include "../debug/prAssert.h"
 
 
-// ----------------------------------------------------------------------------
 // Console handler - stops a whole bunch of leaks if the user uses the console 
 //                   window to close the app.
-// ----------------------------------------------------------------------------
 BOOL HandlerRoutine(DWORD dwCtrlType)
 {
     PRUNUSED(dwCtrlType);
@@ -42,9 +40,7 @@ BOOL HandlerRoutine(DWORD dwCtrlType)
 }
 
 
-/// ---------------------------------------------------------------------------
-/// Constructor.
-/// ---------------------------------------------------------------------------
+// Constructor. (Needs updated)
 prConsoleWindow::prConsoleWindow(const char *name, int width, int height)
 {
     PRASSERT(name && *name);
@@ -131,9 +127,7 @@ prConsoleWindow::prConsoleWindow(const char *name, int width, int height)
 }
 
 
-/// ---------------------------------------------------------------------------
-/// Destructor.
-/// ---------------------------------------------------------------------------
+// Destructor.
 prConsoleWindow::~prConsoleWindow()
 {
     if (SetConsoleCtrlHandler((PHANDLER_ROUTINE)HandlerRoutine, false) == 0)
@@ -146,9 +140,7 @@ prConsoleWindow::~prConsoleWindow()
 }
 
 
-/// ---------------------------------------------------------------------------
-/// Sets the console text and background colours
-/// ---------------------------------------------------------------------------
+// Sets the console text and background colours
 void prConsoleWindow::SetConsoleColours(prConsoleColour foreground, prConsoleColour background)
 {
     if (scrbuf != INVALID_HANDLE_VALUE)

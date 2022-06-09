@@ -31,7 +31,10 @@ class prTexture;
 extern f32 PRGL_VERSION;
 
 
-/// Gets some basic info about opengl
+// Clears any unhandled opengl errors
+void prOpenGlClearErrors();
+
+// Gets some basic info about opengl
 void prOpenGLInit();
 
 // Function: prOpenGLShowExtensions
@@ -52,12 +55,14 @@ void prDrawWaterMark(prTexture *pTexture);
 //      file - A char pointer to the file name
 //      func - A char pointer to the functions name
 //      line - Line number of the function that caused error
-void prOpenGLErrorCheck(const char *file, const char *func, int line);
+void prOpenGLErrorCheck(const char* cmd, const char *file, const char *func, int line);
 
 
 // Removeable calls
 #if (defined(_DEBUG) || defined(DEBUG)) && defined(OPENGL_CHECK_CALLS)
-    #define ERR_CHECK()     prOpenGLErrorCheck(__FILE__, __FUNCTION__, __LINE__)
+    #define ERR_CHECK(x)    prOpenGlClearErrors();                                  \
+                            x;                                                      \
+                            prOpenGLErrorCheck(#x, __FILE__, __FUNCTION__, __LINE__)
 #else
-    #define ERR_CHECK()
+    #define ERR_CHECK(x)
 #endif

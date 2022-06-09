@@ -17,27 +17,27 @@
  */
 
 
-#include "../prConfig.h"
+//#include "../prConfig.h"
 #include <cstdio>
 #include "prVersion.h"
-#include "../debug/prDebug.h"
+//#include "../debug/prDebug.h"
 #include "../debug/prAssert.h"
 
 
 namespace Proteus {
 namespace Core {
 
-    const s32 VERSION_YEAR   = 2022;
-    const s32 VERSION_MONTH  = 4;
-    const s32 VERSION_DAY    = 24;
+    const s32 VERSION_YEAR  = 2022;
+    const s32 VERSION_MONTH = 4;
+    const s32 VERSION_DAY   = 24;
 
 
     // Acquire engine version number.
     void prGetVersion(s32 &year, s32 &month, s32 &day)
     {
-        year    = VERSION_YEAR;
-        month   = VERSION_MONTH;
-        day     = VERSION_DAY;
+        year  = VERSION_YEAR;
+        month = VERSION_MONTH;
+        day   = VERSION_DAY;
     }
 
 

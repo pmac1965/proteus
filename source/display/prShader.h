@@ -84,7 +84,6 @@ namespace Display {
         // Shows the program info log
         //void ProgramInfoLog(u32 shader);
 
-
     private:
         u32 id;     // Shaders id
     };

@@ -161,21 +161,21 @@ void prSprite::Draw()
     PRASSERT(m_pTexture);
     if (m_visible)
     {
-        glEnable(GL_BLEND);
-        ERR_CHECK();
+        ERR_CHECK(glEnable(GL_BLEND));
+        //ERR_CHECK();
 
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        ERR_CHECK();
+        ERR_CHECK(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+        //ERR_CHECK();
 
-            glPushMatrix();
-            ERR_CHECK();
+            ERR_CHECK(glPushMatrix());
+            //ERR_CHECK();
             
             // translate to quad center, then translate for position
             //glTranslatef((float)(m_frameWidth >> 1), (float)(m_frameHeight >> 1), 0);
             //ERR_CHECK();
             //glTranslatef(pos.x, pos.y, 0);
-            glTranslatef(pos.x + (float)(m_frameWidth >> 1), pos.y + (float)(m_frameHeight >> 1), 0);
-            ERR_CHECK();
+            ERR_CHECK(glTranslatef(pos.x + (float)(m_frameWidth >> 1), pos.y + (float)(m_frameHeight >> 1), 0));
+            //ERR_CHECK();
 
             float width  = (GLfloat)(m_frameWidth  * m_scaleX);
             float height = (GLfloat)(m_frameHeight * m_scaleY);
@@ -191,21 +191,21 @@ void prSprite::Draw()
                 height = -height;
             }
 
-            glRotatef(m_rotation, 0.0f, 0.0f, 1.0f);
-            ERR_CHECK();
-            glScalef(width, height, 0);
-            ERR_CHECK();
+            ERR_CHECK(glRotatef(m_rotation, 0.0f, 0.0f, 1.0f));
+            //ERR_CHECK();
+            ERR_CHECK(glScalef(width, height, 0));
+            //ERR_CHECK();
 
             m_pTexture->Bind();
 
             PRASSERT(mpRenderer)
             mpRenderer->DrawQuad(m_u0, m_v0, m_u1, m_v1, m_colour);
             
-            glPopMatrix();
-            ERR_CHECK();
+            ERR_CHECK(glPopMatrix());
+            //ERR_CHECK();
 
-        glDisable(GL_BLEND);
-        ERR_CHECK();
+        ERR_CHECK(glDisable(GL_BLEND));
+        //ERR_CHECK();
     }
 }
 
@@ -266,14 +266,14 @@ void prSprite::BatchDraw()
         }
         else
         {
-            glPushMatrix();
-            ERR_CHECK();
+            ERR_CHECK(glPushMatrix());
+            //ERR_CHECK();
             
                 // translate to quad center, the translate for position
                 //glTranslatef((float)(m_frameWidth >> 1), (float)(m_frameHeight >> 1), 0);
                 //ERR_CHECK();
-                glTranslatef(pos.x + (float)(m_frameWidth >> 1), pos.y + (float)(m_frameHeight >> 1), 0);
-                ERR_CHECK();
+                ERR_CHECK(glTranslatef(pos.x + (float)(m_frameWidth >> 1), pos.y + (float)(m_frameHeight >> 1), 0));
+                //ERR_CHECK();
 
                 float width  = (GLfloat)(m_frameWidth  * m_scaleX);
                 float height = (GLfloat)(m_frameHeight * m_scaleY);
@@ -289,17 +289,17 @@ void prSprite::BatchDraw()
                     height = -height;
                 }
 
-                glRotatef(m_rotation, 0.0f, 0.0f, 1.0f);
-                ERR_CHECK();
-                glScalef(width, height, 0);
-                ERR_CHECK();
+                ERR_CHECK(glRotatef(m_rotation, 0.0f, 0.0f, 1.0f));
+                //ERR_CHECK();
+                ERR_CHECK(glScalef(width, height, 0));
+                //ERR_CHECK();
 
                 // Render - Using old method
                 PRASSERT(mpRenderer)
                 mpRenderer->BatchDrawQuad(m_u0, m_v0, m_u1, m_v1, m_colour);
             
-            glPopMatrix();
-            ERR_CHECK();
+            ERR_CHECK(glPopMatrix());
+            //ERR_CHECK();
         }
     }
 }

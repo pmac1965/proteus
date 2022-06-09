@@ -20,9 +20,7 @@
 #include "../prConfig.h"
 
 
-// ----------------------------------------------------------------------------
 // Platform specifics.
-// ----------------------------------------------------------------------------
 #if defined(PLATFORM_PC)
   #include <windows.h>
   #include <gl/gl.h>
@@ -64,9 +62,6 @@
 #include "prTexture.h"
 
 
-//using namespace Proteus::Core;
-
-
 // Private data
 namespace
 {
@@ -78,9 +73,14 @@ namespace
 f32 PRGL_VERSION  = 0.0f;
 
 
-/// ---------------------------------------------------------------------------
-/// Gets some basic info about opengl
-/// ---------------------------------------------------------------------------
+// Clears any unhandled opengl errors
+void prOpenGlClearErrors()
+{
+    while (glGetError() != GL_NO_ERROR);
+}
+
+
+// Gets some basic info about opengl
 void prOpenGLInit()
 {
     if (initialised == false)
@@ -93,9 +93,7 @@ void prOpenGLInit()
 }
 
 
-/// ---------------------------------------------------------------------------
-/// Shows the opengl extensions available for the current platform.
-/// ---------------------------------------------------------------------------
+// Shows the opengl extensions available for the current platform.
 void prOpenGLShowExtensions()
 {
     // Show GL details
@@ -123,7 +121,6 @@ void prOpenGLShowExtensions()
             {
                 i = 0;
                 prTrace(prLogLevel::LogError, "Extension: %s\n", buffer);
-                //OnScreenLogger::GetInstance()->Add(buffer);
             }
         }
         else
@@ -140,9 +137,7 @@ void prOpenGLShowExtensions()
 }
 
 
-/// ---------------------------------------------------------------------------
-/// Draws the engine water mark.
-/// ---------------------------------------------------------------------------
+// Draws the engine water mark.
 void prDrawWaterMark(prTexture *pTexture)
 {
     if (pTexture)
@@ -177,16 +172,13 @@ void prDrawWaterMark(prTexture *pTexture)
 }
 
 
-/// ---------------------------------------------------------------------------
-/// Checks if the previous action caused an error, If so its displayed
-/// ---------------------------------------------------------------------------
-void prOpenGLErrorCheck(const char *file, const char *func, int line)
+// Checks if the previous action caused an error, If so its displayed
+void prOpenGLErrorCheck(const char* cmd, const char *file, const char *func, int line)
 {
 #if defined(_DEBUG) || defined(DEBUG)
 
     PRASSERT(file && *file);
     PRASSERT(func && *func);
-
 
     // Don't print error messages if game is exiting
     prRegistry *pReg = static_cast<prRegistry *>(prCoreGetComponent(PRSYSTEM_REGISTRY));
@@ -203,14 +195,12 @@ void prOpenGLErrorCheck(const char *file, const char *func, int line)
         return;
     }
 
-
-    // Write message
-    GLenum error = glGetError();
-    if (error != GL_NO_ERROR)
+    // Write error message
+    while (GLenum error = glGetError())
     {
-        const char *err = nullptr;
+        const char* err = nullptr;
 
-        switch(error)
+        switch (error)
         {
         case GL_INVALID_ENUM:
             err = "GL_INVALID_ENUM";
@@ -241,15 +231,13 @@ void prOpenGLErrorCheck(const char *file, const char *func, int line)
             break;
         }
 
-        prTrace(prLogLevel::LogError, "prRenderer error: %s\n", err); 
+        prTrace(prLogLevel::LogError, "OpenGL error: %s\nInstruction %s\n", err, cmd);
         prTrace(prLogLevel::LogError, "File: %s\nFunc: %s\nLine: %i\n", file, func, line);
     }
 
 #else
-
     PRUNUSED(file);
     PRUNUSED(func);
     PRUNUSED(line);
-
 #endif
 }

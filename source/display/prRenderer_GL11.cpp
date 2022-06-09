@@ -114,45 +114,45 @@ prRenderer_GL11::~prRenderer_GL11()
 void prRenderer_GL11::Init()
 {
     // Init OpenGL
-    glShadeModel(GL_SMOOTH);                            // Enables smooth shading
-    ERR_CHECK();
+    ERR_CHECK(glShadeModel(GL_SMOOTH));                            // Enables smooth shading
+    //ERR_CHECK();
 
-    glEnable(GL_TEXTURE_2D);                            // Enable Texture Mapping
-    ERR_CHECK();
+    ERR_CHECK(glEnable(GL_TEXTURE_2D));                            // Enable Texture Mapping
+    //ERR_CHECK();
     
     // Colour
-    glClearColor(0.0f, 0.0f, 0.2f, 0.0f);               // Clear colour
-    ERR_CHECK();
+    ERR_CHECK(glClearColor(0.0f, 0.0f, 0.2f, 0.0f));               // Clear colour
+    //ERR_CHECK();
     
     // Depth buffer setup
 #if defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS)
-    glClearDepthf(1.0f);
-    ERR_CHECK();
+    ERR_CHECK(glClearDepthf(1.0f));
+    //ERR_CHECK();
 
-    glDisable(GL_DITHER);
-    ERR_CHECK();
+    ERR_CHECK(glDisable(GL_DITHER));
+    //ERR_CHECK();
 
 #else
-    glClearDepth(1.0f);
-    ERR_CHECK();
+    ERR_CHECK(glClearDepth(1.0f));
+    //ERR_CHECK();
 #endif
 
-    glEnable(GL_DEPTH_TEST);                            // Enables depth testing
-    ERR_CHECK();    
-    glDepthFunc(GL_LEQUAL);                             // The type of depth test to do
-    ERR_CHECK();
+    ERR_CHECK(glEnable(GL_DEPTH_TEST));                            // Enables depth testing
+    //ERR_CHECK();    
+    ERR_CHECK(glDepthFunc(GL_LEQUAL));                             // The type of depth test to do
+    //ERR_CHECK();
 
 
     // Enable culling
-    glEnable(GL_CULL_FACE);
-    ERR_CHECK();
-    glCullFace(GL_BACK);
-    ERR_CHECK();
+    ERR_CHECK(glEnable(GL_CULL_FACE));
+    //ERR_CHECK();
+    ERR_CHECK(glCullFace(GL_BACK));
+    //ERR_CHECK();
 
 
     // Really nice perspective calculations
-    glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
-    ERR_CHECK();
+    ERR_CHECK(glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST));
+    //ERR_CHECK();
 
 
     // We at least need to enable vertex arrays
@@ -197,25 +197,25 @@ void prRenderer_GL11::Destroy()
 void prRenderer_GL11::Begin()
 {
     // Clear screen and depth buffer.
-    glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-    ERR_CHECK();
+    ERR_CHECK(glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT));
+    //ERR_CHECK();
 
     // Enable depth testing
-    glEnable(GL_DEPTH_TEST);
-    ERR_CHECK();
+    ERR_CHECK(glEnable(GL_DEPTH_TEST));
+    //ERR_CHECK();
 
     // Enabled culling
-    glEnable(GL_CULL_FACE);
-    ERR_CHECK();
-    glCullFace(GL_BACK);
-    ERR_CHECK();
+    ERR_CHECK(glEnable(GL_CULL_FACE));
+    //ERR_CHECK();
+    ERR_CHECK(glCullFace(GL_BACK));
+    //ERR_CHECK();
 
     // Reset the current modelview matrix.
-    glMatrixMode(GL_MODELVIEW);
-    ERR_CHECK();
+    ERR_CHECK(glMatrixMode(GL_MODELVIEW));
+    //ERR_CHECK();
 
-    glLoadIdentity();
-    ERR_CHECK();
+    ERR_CHECK(glLoadIdentity());
+    //ERR_CHECK();
 }
 
 
@@ -265,34 +265,34 @@ void prRenderer_GL11::SetOrthographicView()
     PRASSERT(m_pWindow);
     //if (m_pWindow)
     {
-        glMatrixMode(GL_PROJECTION);
-        ERR_CHECK();
+        ERR_CHECK(glMatrixMode(GL_PROJECTION));
+        //ERR_CHECK();
         
-        glPushMatrix();
-        ERR_CHECK();
+        ERR_CHECK(glPushMatrix());
+        //ERR_CHECK();
 
-        glLoadIdentity();
-        ERR_CHECK();
+        ERR_CHECK(glLoadIdentity());
+        //ERR_CHECK();
         
 #if defined(PLATFORM_ANDROID) || defined(PLATFORM_IOS)
-        glOrthof(0, m_pWindow->GetWidth(), m_pWindow->GetHeight(), 0, 0, 1);
-        ERR_CHECK();
+        ERR_CHECK(glOrthof(0, m_pWindow->GetWidth(), m_pWindow->GetHeight(), 0, 0, 1));
+        //ERR_CHECK();
 #else
-        glOrtho(0, m_pWindow->GetWidth(), m_pWindow->GetHeight(), 0, 0, 1);
-        ERR_CHECK();
+        ERR_CHECK(glOrtho(0, m_pWindow->GetWidth(), m_pWindow->GetHeight(), 0, 0, 1));
+        //ERR_CHECK();
 #endif
 
-        glMatrixMode(GL_MODELVIEW);
-        ERR_CHECK();
+        ERR_CHECK(glMatrixMode(GL_MODELVIEW));
+        //ERR_CHECK();
 
-        glLoadIdentity();
-        ERR_CHECK();
+        ERR_CHECK(glLoadIdentity());
+        //ERR_CHECK();
 
-        glDisable(GL_DEPTH_TEST);
-        ERR_CHECK();
+        ERR_CHECK(glDisable(GL_DEPTH_TEST));
+        //ERR_CHECK();
 
-        glDisable(GL_CULL_FACE);
-        ERR_CHECK();
+        ERR_CHECK(glDisable(GL_CULL_FACE));
+        //ERR_CHECK();
     }
 }
 
@@ -305,23 +305,23 @@ void prRenderer_GL11::RestorePerspectiveView()
     PRASSERT(m_pWindow);
     //if (m_pWindow)
     {
-        glMatrixMode(GL_PROJECTION);
-        ERR_CHECK();
+        ERR_CHECK(glMatrixMode(GL_PROJECTION));
+        //ERR_CHECK();
 
-        glPopMatrix();
-        ERR_CHECK();
+        ERR_CHECK(glPopMatrix());
+        //ERR_CHECK();
 
-        glMatrixMode(GL_MODELVIEW);
-        ERR_CHECK();
+        ERR_CHECK(glMatrixMode(GL_MODELVIEW));
+        //ERR_CHECK();
 
-        glEnable(GL_DEPTH_TEST);
-        ERR_CHECK();
+        ERR_CHECK(glEnable(GL_DEPTH_TEST));
+        //ERR_CHECK();
 
         // Enabled culling
-        glEnable(GL_CULL_FACE);
-        ERR_CHECK();
-        glCullFace(GL_BACK);
-        ERR_CHECK();
+        ERR_CHECK(glEnable(GL_CULL_FACE));
+        //ERR_CHECK();
+        ERR_CHECK(glCullFace(GL_BACK));
+        //ERR_CHECK();
     }
 }
 
@@ -365,11 +365,11 @@ void prRenderer_GL11::DrawLine(f32 x1, f32 y1, f32 x2, f32 y2)
         {x2, y2},
     };
 
-    glVertexPointer(2, GL_FLOAT, 0, vertices);
-    ERR_CHECK();
+    ERR_CHECK(glVertexPointer(2, GL_FLOAT, 0, vertices));
+    //ERR_CHECK();
 
-    glDrawArrays(GL_LINES, 0, 2);
-    ERR_CHECK();
+    ERR_CHECK(glDrawArrays(GL_LINES, 0, 2));
+    //ERR_CHECK();
 }
 
 
@@ -384,11 +384,11 @@ void prRenderer_GL11::DrawLine(Proteus::Math::prVector3 &from, Proteus::Math::pr
         {to.x,   to.y,   to.z},
     };
 
-    glVertexPointer(3, GL_FLOAT, 0, vertices);
-    ERR_CHECK();
+    ERR_CHECK(glVertexPointer(3, GL_FLOAT, 0, vertices));
+    //ERR_CHECK();
 
-    glDrawArrays(GL_LINES, 0, 2);
-    ERR_CHECK();
+    ERR_CHECK(glDrawArrays(GL_LINES, 0, 2));
+    //ERR_CHECK();
 }
 
 
@@ -403,11 +403,11 @@ void prRenderer_GL11::DrawLine(const Proteus::Math::prVector3 &from, const Prote
         {to.x,   to.y,   to.z},
     };
 
-    glVertexPointer(3, GL_FLOAT, 0, vertices);
-    ERR_CHECK();
+    ERR_CHECK(glVertexPointer(3, GL_FLOAT, 0, vertices));
+    //ERR_CHECK();
 
-    glDrawArrays(GL_LINES, 0, 2);
-    ERR_CHECK();
+    ERR_CHECK(glDrawArrays(GL_LINES, 0, 2));
+    //ERR_CHECK();
 }
 
 
@@ -424,11 +424,11 @@ void prRenderer_GL11::DrawRect(f32 x1, f32 y1, f32 x2, f32 y2)
         {x1, y2},
     };
     
-    glVertexPointer(2, GL_FLOAT, 0, vertices);
-    ERR_CHECK();
+    ERR_CHECK(glVertexPointer(2, GL_FLOAT, 0, vertices));
+    //ERR_CHECK();
 
-    glDrawArrays(GL_LINE_LOOP, 0, 4);
-    ERR_CHECK();
+    ERR_CHECK(glDrawArrays(GL_LINE_LOOP, 0, 4));
+    //ERR_CHECK();
 }
 
 
@@ -447,11 +447,11 @@ void prRenderer_GL11::DrawFilledRect(f32 x1, f32 y1, f32 x2, f32 y2)
         {x1, y1},
     };
     
-    glVertexPointer(2, GL_FLOAT, 0, vertices);
-    ERR_CHECK();
+    ERR_CHECK(glVertexPointer(2, GL_FLOAT, 0, vertices));
+    //ERR_CHECK();
 
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
-    ERR_CHECK();
+    ERR_CHECK(glDrawArrays(GL_TRIANGLE_STRIP, 0, 6));
+    //ERR_CHECK();
 }
 
 
@@ -470,11 +470,11 @@ void prRenderer_GL11::DrawCircle(f32 x, f32 y, f32 radius)
         vertices[i].y = y + sinf(theta) * radius;
     }
 
-    glVertexPointer(2, GL_FLOAT, 0, vertices);
-    ERR_CHECK();
+    ERR_CHECK(glVertexPointer(2, GL_FLOAT, 0, vertices));
+    //ERR_CHECK();
 
-    glDrawArrays(GL_LINE_LOOP, 0, VERTICES);
-    ERR_CHECK();
+    ERR_CHECK(glDrawArrays(GL_LINE_LOOP, 0, VERTICES));
+    //ERR_CHECK();
 }
 
 
@@ -493,11 +493,11 @@ void prRenderer_GL11::DrawFilledCircle(f32 x, f32 y, f32 radius)
         vertices[i].y = y + sinf(theta) * radius;
     }
 
-    glVertexPointer(2, GL_FLOAT, 0, vertices);
-    ERR_CHECK();
+    ERR_CHECK(glVertexPointer(2, GL_FLOAT, 0, vertices));
+    //ERR_CHECK();
 
-    glDrawArrays(GL_TRIANGLE_FAN, 0, VERTICES);
-    ERR_CHECK();
+    ERR_CHECK(glDrawArrays(GL_TRIANGLE_FAN, 0, VERTICES));
+    //ERR_CHECK();
 }
 
 
@@ -509,11 +509,11 @@ void prRenderer_GL11::DrawPolygon(prVertex2D *vertices, s32 count)
     PRASSERT(vertices);
     PRASSERT(count > 0);
 
-    glVertexPointer(2, GL_FLOAT, 0, vertices);
-    ERR_CHECK();
+    ERR_CHECK(glVertexPointer(2, GL_FLOAT, 0, vertices));
+    //ERR_CHECK();
 
-    glDrawArrays(GL_LINE_STRIP, 0, count);
-    ERR_CHECK();
+    ERR_CHECK(glDrawArrays(GL_LINE_STRIP, 0, count));
+    //ERR_CHECK();
 }
 
 
@@ -526,11 +526,11 @@ void prRenderer_GL11::DrawFilledPolygon(prVertex2D *vertices, s32 count)
     PRASSERT(count > 0);
 
 
-    glVertexPointer(2, GL_FLOAT, 0, vertices);
-    ERR_CHECK();
+    ERR_CHECK(glVertexPointer(2, GL_FLOAT, 0, vertices));
+    //ERR_CHECK();
 
-    glDrawArrays(GL_LINE_LOOP, 0, count);
-    ERR_CHECK();
+    ERR_CHECK(glDrawArrays(GL_LINE_LOOP, 0, count));
+    //ERR_CHECK();
 }
 
 
@@ -539,8 +539,8 @@ void prRenderer_GL11::DrawFilledPolygon(prVertex2D *vertices, s32 count)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL11::SetColour(const prColour &colour)
 {
-    glColor4f(colour.red, colour.green, colour.blue, colour.alpha);
-    ERR_CHECK();
+    ERR_CHECK(glColor4f(colour.red, colour.green, colour.blue, colour.alpha));
+    //ERR_CHECK();
 }
 
 
@@ -549,8 +549,8 @@ void prRenderer_GL11::SetColour(const prColour &colour)
 /// ---------------------------------------------------------------------------
 void prRenderer_GL11::SetClearColour(const prColour &colour)
 {
-    glClearColor(colour.red, colour.green, colour.blue, colour.alpha);
-    ERR_CHECK();
+    ERR_CHECK(glClearColor(colour.red, colour.green, colour.blue, colour.alpha));
+    //ERR_CHECK();
 }
 
 
@@ -590,21 +590,21 @@ void prRenderer_GL11::DrawQuad(float u0, float v0, float u1, float v1)
     PRUNUSED(quadData->v);
 
     // Set states
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    ERR_CHECK();
+    ERR_CHECK(glEnableClientState(GL_TEXTURE_COORD_ARRAY));
+    //ERR_CHECK();
 
-        glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->x);
-        ERR_CHECK();
+        ERR_CHECK(glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->x));
+        //ERR_CHECK();
 
-        glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->u);
-        ERR_CHECK();
+        ERR_CHECK(glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->u));
+        //ERR_CHECK();
 
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-        ERR_CHECK();
+        ERR_CHECK(glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
+        //ERR_CHECK();
 
     // Reset states
-    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-    ERR_CHECK();
+    ERR_CHECK(glDisableClientState(GL_TEXTURE_COORD_ARRAY));
+    //ERR_CHECK();
 }
 
 
@@ -631,28 +631,28 @@ void prRenderer_GL11::DrawQuad(float u0, float v0, float u1, float v1, prColour 
 
 
     // Set states
-    glEnableClientState(GL_COLOR_ARRAY);
-    ERR_CHECK();
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    ERR_CHECK();
+    ERR_CHECK(glEnableClientState(GL_COLOR_ARRAY));
+    //ERR_CHECK();
+    ERR_CHECK(glEnableClientState(GL_TEXTURE_COORD_ARRAY));
+    //ERR_CHECK();
 
-        glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->x);
-        ERR_CHECK();
+        ERR_CHECK(glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->x));
+        //ERR_CHECK();
         
-        glColorPointer(4, GL_FLOAT, 0,  Colors);
-        ERR_CHECK();
+        ERR_CHECK(glColorPointer(4, GL_FLOAT, 0,  Colors));
+        //ERR_CHECK();
 
-        glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->u);
-        ERR_CHECK();
+        ERR_CHECK(glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->u));
+        //ERR_CHECK();
 
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-        ERR_CHECK();
+        ERR_CHECK(glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
+        //ERR_CHECK();
 
     // Reset states
-    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-    ERR_CHECK();
-    glDisableClientState(GL_COLOR_ARRAY);
-    ERR_CHECK();
+    ERR_CHECK(glDisableClientState(GL_TEXTURE_COORD_ARRAY));
+    //ERR_CHECK();
+    ERR_CHECK(glDisableClientState(GL_COLOR_ARRAY));
+    //ERR_CHECK();
 }
 
 
@@ -677,14 +677,14 @@ void prRenderer_GL11::BatchDrawQuad(float u0, float v0, float u1, float v1, prCo
         { 0.5f, -0.5f, u1, v1, },
     };
 
-    glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->x);
-    ERR_CHECK();        
-    glColorPointer(4, GL_FLOAT, 0,  Colors);
-    ERR_CHECK();
-    glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->u);
-    ERR_CHECK();
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    ERR_CHECK();
+    ERR_CHECK(glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->x));
+    //ERR_CHECK();        
+    ERR_CHECK(glColorPointer(4, GL_FLOAT, 0,  Colors));
+    //ERR_CHECK();
+    ERR_CHECK(glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->u));
+    //ERR_CHECK();
+    ERR_CHECK(glDrawArrays(GL_TRIANGLE_STRIP, 0, 4));
+    //ERR_CHECK();
 }
 
 
@@ -695,14 +695,14 @@ void prRenderer_GL11::TexturesEnabled(bool state)
 {
     if (state)
     {
-        glEnable(GL_TEXTURE_2D);
+        ERR_CHECK(glEnable(GL_TEXTURE_2D));
     }
     else
     {
-        glDisable(GL_TEXTURE_2D);
+        ERR_CHECK(glDisable(GL_TEXTURE_2D));
     }
 
-    ERR_CHECK();
+    //ERR_CHECK();
 }
 
 
@@ -713,16 +713,16 @@ void prRenderer_GL11::BlendEnabled(bool state)
 {
     if (state)
     {
-        glEnable(GL_BLEND);
-        ERR_CHECK();
+        ERR_CHECK(glEnable(GL_BLEND));
+        //ERR_CHECK();
 
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-        ERR_CHECK();
+        ERR_CHECK(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+        //ERR_CHECK();
     }
     else
     {
-        glDisable(GL_BLEND);
-        ERR_CHECK();
+        ERR_CHECK(glDisable(GL_BLEND));
+        //ERR_CHECK();
     }
 }
 

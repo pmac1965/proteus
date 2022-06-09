@@ -122,10 +122,10 @@ public:
 		prOpenGLShowExtensions();
 		#endif
 
-		glEnable(GL_DEPTH_TEST);                            // Enables depth testing
-		ERR_CHECK();
-		glDepthFunc(GL_LESS);// GL_LEQUAL);                             // The type of depth test to do
-		ERR_CHECK();
+        ERR_CHECK(glEnable(GL_DEPTH_TEST));                            // Enables depth testing
+		//ERR_CHECK();
+        ERR_CHECK(glDepthFunc(GL_LESS));// GL_LEQUAL);                             // The type of depth test to do
+		//ERR_CHECK();
 
 		prOpenGLInit();
 
@@ -206,11 +206,11 @@ void prRenderer_GL4::Destroy()
 /// ---------------------------------------------------------------------------
 void prRenderer_GL4::Begin()
 {
-	glClearColor(0.2f, 0.2f, 0.5f, 0.0f);
-	ERR_CHECK();
+    ERR_CHECK(glClearColor(0.2f, 0.2f, 0.5f, 0.0f));
+	//ERR_CHECK();
 
-	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
-	ERR_CHECK();
+    ERR_CHECK(glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT));
+	//ERR_CHECK();
 
 /*	EmbeddedShadersUsePrg();
 	ERR_CHECK();

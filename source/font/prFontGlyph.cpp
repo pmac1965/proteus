@@ -116,16 +116,16 @@ void prFontGlyph::Draw()
     glTranslatef(mOffset.x, mOffset.y, 0);
 
     // Bind texture for character
-    glBindTexture(GL_TEXTURE_2D, mTextureID);
-    ERR_CHECK();
+    ERR_CHECK(glBindTexture(GL_TEXTURE_2D, mTextureID));
+    //ERR_CHECK();
 
     // Draw
-    glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->x);
-    ERR_CHECK();
-    glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->u);
-    ERR_CHECK();
-    glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
-    ERR_CHECK();
+    ERR_CHECK(glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->x));
+    //ERR_CHECK();
+    ERR_CHECK(glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &quadData->u));
+    //ERR_CHECK();
+    ERR_CHECK(glDrawArrays(GL_TRIANGLE_STRIP, 0, 6));
+    //ERR_CHECK();
 
     // Undo offset
     glTranslatef(-mOffset.x, -mOffset.y, 0);

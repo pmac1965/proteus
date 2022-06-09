@@ -126,7 +126,6 @@ public:
     //      Gets the PC applications device context.
     HDC  GetDeviceContext() { return m_hdc; }
 
-
 private:
     void CenterWindow(HWND hwnd);
     bool ChangeToFullScreen();
@@ -134,12 +133,11 @@ private:
     bool RegisterWindowClass(u32 menuID, u32 iconID);
     bool SetOpenGLPixelFormat();
 
-
 private:
     HGLRC           m_glrc;         // Handle to the OpenGL rendering context.
     HWND            m_hwnd;         // Handle to the window.
     HDC             m_hdc;          // Handle to a device context.
-    const TCHAR    *m_title;        // Text displayed in the title bar.
+    const TCHAR*    m_title;        // Text displayed in the title bar.
 
 #ifdef ALLOW_IMGUI
     ImGuiContext*   m_guiContext;   //

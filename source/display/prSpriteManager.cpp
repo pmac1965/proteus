@@ -351,8 +351,8 @@ void prSpriteManager::BatchBegin(prSprite *pSprite, s32 batchSize)
         m_numQuadsAdded = 0;
         //PRLOGD("Starting batch size %i\n", (sizeof(QuadData) *  4) * batchSize);
 
-        glPushMatrix();
-        ERR_CHECK();
+        ERR_CHECK(glPushMatrix());
+        //ERR_CHECK();
 
         // translate to quad center, the translate for position
         //glTranslatef((float)(m_frameWidth >> 1), (float)(m_frameHeight >> 1), 0);
@@ -363,20 +363,20 @@ void prSpriteManager::BatchBegin(prSprite *pSprite, s32 batchSize)
 
 
     // Enable blending
-    glEnable(GL_BLEND);
-    ERR_CHECK();
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    ERR_CHECK();
+    ERR_CHECK(glEnable(GL_BLEND));
+    //ERR_CHECK();
+    ERR_CHECK(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA));
+    //ERR_CHECK();
 
 
     // Bind the texture for the batch
     pSprite->m_pTexture->Bind();
 
     // Set states
-    glEnableClientState(GL_COLOR_ARRAY);
-    ERR_CHECK();
-    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    ERR_CHECK();
+    ERR_CHECK(glEnableClientState(GL_COLOR_ARRAY));
+    //ERR_CHECK();
+    ERR_CHECK(glEnableClientState(GL_TEXTURE_COORD_ARRAY));
+    //ERR_CHECK();
 }
 
 
@@ -392,15 +392,15 @@ void prSpriteManager::BatchEnd()
         {
             //m_numQuadsAdded = 1;
 
-            glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &m_pBatchQuads->x);
-            ERR_CHECK();        
-            glColorPointer(4, GL_FLOAT, 0,  m_pBatchColours);
-            ERR_CHECK();
-            glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &m_pBatchQuads->u);
-            ERR_CHECK();
+            ERR_CHECK(glVertexPointer(2, GL_FLOAT, sizeof(QuadData), &m_pBatchQuads->x));
+           // ERR_CHECK();        
+            ERR_CHECK(glColorPointer(4, GL_FLOAT, 0,  m_pBatchColours));
+          //  ERR_CHECK();
+            ERR_CHECK(glTexCoordPointer(2, GL_FLOAT, sizeof(QuadData), &m_pBatchQuads->u));
+        //    ERR_CHECK();
 //            glDrawArrays(GL_QUADS, 0, 4 * m_numQuadsAdded);
-            glDrawArrays(GL_TRIANGLES, 0, 4 * m_numQuadsAdded);
-            ERR_CHECK();
+            ERR_CHECK(glDrawArrays(GL_TRIANGLES, 0, 4 * m_numQuadsAdded));
+            //ERR_CHECK();
         }
 
         //PRLOGD("Batch end %i - %i\n", m_numQuadsAdded, 4 * m_numQuadsAdded);
@@ -410,19 +410,19 @@ void prSpriteManager::BatchEnd()
         m_numQuads      = 0;
         m_numQuadsAdded = 0;
 
-        glPopMatrix();
-        ERR_CHECK();
+        ERR_CHECK(glPopMatrix());
+        //ERR_CHECK();
     }
 
     // Reset states
-    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-    ERR_CHECK();
-    glDisableClientState(GL_COLOR_ARRAY);
-    ERR_CHECK();
+    ERR_CHECK(glDisableClientState(GL_TEXTURE_COORD_ARRAY));
+    //ERR_CHECK();
+    ERR_CHECK(glDisableClientState(GL_COLOR_ARRAY));
+    //ERR_CHECK();
 
     // Disable blending
-    glDisable(GL_BLEND);
-    ERR_CHECK();
+    ERR_CHECK(glDisable(GL_BLEND));
+    //ERR_CHECK();
 }
 
 
