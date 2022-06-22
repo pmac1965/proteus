@@ -214,6 +214,9 @@
     <Filter Include="source\imgui">
       <UniqueIdentifier>{fb953c37-686c-4032-ad6c-a76090bc1c42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="External">
+      <UniqueIdentifier>{339fdccd-52f6-470a-8fd2-0a3ab94fc228}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\source\proteus.h">
